@@ -334,7 +334,7 @@ type CodepipelineInitParameters struct {
 
 type CodepipelineObservation struct {
 
-	// Codepipeline ARN.
+	// CodePipeline ARN.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// One or more artifact_store blocks. Artifact stores are documented below.
@@ -343,7 +343,7 @@ type CodepipelineObservation struct {
 	// The method that the pipeline will use to handle multiple executions. The default mode is SUPERSEDED. For value values, refer to the AWS documentation.
 	ExecutionMode *string `json:"executionMode,omitempty" tf:"execution_mode,omitempty"`
 
-	// Codepipeline ID.
+	// CodePipeline ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Type of the pipeline. Possible values are: V1 and V2. Default value is V1.

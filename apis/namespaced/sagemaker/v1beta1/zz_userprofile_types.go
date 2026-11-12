@@ -743,7 +743,7 @@ type UserSettingsInitParameters struct {
 	// The settings for assigning a custom file system to a user profile. Permitted users can access this file system in Amazon SageMaker AI Studio. See Custom File System Config below.
 	CustomFileSystemConfig []UserSettingsCustomFileSystemConfigInitParameters `json:"customFileSystemConfig,omitempty" tf:"custom_file_system_config,omitempty"`
 
-	// Details about the POSIX identity that is used for file system operations. See Custom Posix User Config below.
+	// Details about the POSIX identity that is used for file system operations. See Custom POSIX User Config below.
 	CustomPosixUserConfig *UserSettingsCustomPosixUserConfigInitParameters `json:"customPosixUserConfig,omitempty" tf:"custom_posix_user_config,omitempty"`
 
 	// The default experience that the user is directed to when accessing the domain. The supported values are: studio::: Indicates that Studio is the default experience. This value can only be passed if StudioWebPortal is set to ENABLED. app:JupyterServer:: Indicates that Studio Classic is the default experience.
@@ -1363,7 +1363,7 @@ type UserSettingsObservation struct {
 	// The settings for assigning a custom file system to a user profile. Permitted users can access this file system in Amazon SageMaker AI Studio. See Custom File System Config below.
 	CustomFileSystemConfig []UserSettingsCustomFileSystemConfigObservation `json:"customFileSystemConfig,omitempty" tf:"custom_file_system_config,omitempty"`
 
-	// Details about the POSIX identity that is used for file system operations. See Custom Posix User Config below.
+	// Details about the POSIX identity that is used for file system operations. See Custom POSIX User Config below.
 	CustomPosixUserConfig *UserSettingsCustomPosixUserConfigObservation `json:"customPosixUserConfig,omitempty" tf:"custom_posix_user_config,omitempty"`
 
 	// The default experience that the user is directed to when accessing the domain. The supported values are: studio::: Indicates that Studio is the default experience. This value can only be passed if StudioWebPortal is set to ENABLED. app:JupyterServer:: Indicates that Studio Classic is the default experience.
@@ -1425,7 +1425,7 @@ type UserSettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	CustomFileSystemConfig []UserSettingsCustomFileSystemConfigParameters `json:"customFileSystemConfig,omitempty" tf:"custom_file_system_config,omitempty"`
 
-	// Details about the POSIX identity that is used for file system operations. See Custom Posix User Config below.
+	// Details about the POSIX identity that is used for file system operations. See Custom POSIX User Config below.
 	// +kubebuilder:validation:Optional
 	CustomPosixUserConfig *UserSettingsCustomPosixUserConfigParameters `json:"customPosixUserConfig,omitempty" tf:"custom_posix_user_config,omitempty"`
 

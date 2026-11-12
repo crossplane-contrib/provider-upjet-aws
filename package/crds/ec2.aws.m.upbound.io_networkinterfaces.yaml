@@ -59,6 +59,29 @@ spec:
             properties:
               forProvider:
                 properties:
+                  connectionTrackingSpecification:
+                    description: Configures the connection tracking timeouts for the
+                      network interface. See Connection Tracking Specification below
+                      for more details.
+                    properties:
+                      tcpEstablishedTimeout:
+                        description: 'Timeout (in seconds) for idle TCP connections
+                          in an established state. Min: 60 seconds. Max: 432000 seconds
+                          (5 days). Recommended: Less than 432000 seconds.'
+                        type: number
+                      udpStreamTimeout:
+                        description: 'Timeout (in seconds) for idle UDP flows classified
+                          as streams which have seen more than one request-response
+                          transaction. Min: 60 seconds. Max: 180 seconds (3 minutes).
+                          Default: 180 seconds.'
+                        type: number
+                      udpTimeout:
+                        description: 'Timeout (in seconds) for idle UDP flows that
+                          have seen traffic only in a single direction or a single
+                          request-response transaction. Min: 30 seconds. Max: 60 seconds.
+                          Default: 30 seconds.'
+                        type: number
+                    type: object
                   description:
                     description: Description for the network interface.
                     type: string
@@ -167,7 +190,7 @@ spec:
                   privateIpsCount:
                     description: Number of secondary private IPs to assign to the
                       ENI. The total number of private IPs will be 1 + private_ips_count,
-                      as a primary private IP will be assiged to an ENI by default.
+                      as a primary private IP will be assigned to an ENI by default.
                     type: number
                   region:
                     description: |-
@@ -373,6 +396,29 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  connectionTrackingSpecification:
+                    description: Configures the connection tracking timeouts for the
+                      network interface. See Connection Tracking Specification below
+                      for more details.
+                    properties:
+                      tcpEstablishedTimeout:
+                        description: 'Timeout (in seconds) for idle TCP connections
+                          in an established state. Min: 60 seconds. Max: 432000 seconds
+                          (5 days). Recommended: Less than 432000 seconds.'
+                        type: number
+                      udpStreamTimeout:
+                        description: 'Timeout (in seconds) for idle UDP flows classified
+                          as streams which have seen more than one request-response
+                          transaction. Min: 60 seconds. Max: 180 seconds (3 minutes).
+                          Default: 180 seconds.'
+                        type: number
+                      udpTimeout:
+                        description: 'Timeout (in seconds) for idle UDP flows that
+                          have seen traffic only in a single direction or a single
+                          request-response transaction. Min: 30 seconds. Max: 60 seconds.
+                          Default: 30 seconds.'
+                        type: number
+                    type: object
                   description:
                     description: Description for the network interface.
                     type: string
@@ -481,7 +527,7 @@ spec:
                   privateIpsCount:
                     description: Number of secondary private IPs to assign to the
                       ENI. The total number of private IPs will be 1 + private_ips_count,
-                      as a primary private IP will be assiged to an ENI by default.
+                      as a primary private IP will be assigned to an ENI by default.
                     type: number
                   securityGroupRefs:
                     description: References to SecurityGroup in ec2 to populate securityGroups.
@@ -754,6 +800,29 @@ spec:
                           type: number
                       type: object
                     type: array
+                  connectionTrackingSpecification:
+                    description: Configures the connection tracking timeouts for the
+                      network interface. See Connection Tracking Specification below
+                      for more details.
+                    properties:
+                      tcpEstablishedTimeout:
+                        description: 'Timeout (in seconds) for idle TCP connections
+                          in an established state. Min: 60 seconds. Max: 432000 seconds
+                          (5 days). Recommended: Less than 432000 seconds.'
+                        type: number
+                      udpStreamTimeout:
+                        description: 'Timeout (in seconds) for idle UDP flows classified
+                          as streams which have seen more than one request-response
+                          transaction. Min: 60 seconds. Max: 180 seconds (3 minutes).
+                          Default: 180 seconds.'
+                        type: number
+                      udpTimeout:
+                        description: 'Timeout (in seconds) for idle UDP flows that
+                          have seen traffic only in a single direction or a single
+                          request-response transaction. Min: 30 seconds. Max: 60 seconds.
+                          Default: 30 seconds.'
+                        type: number
+                    type: object
                   description:
                     description: Description for the network interface.
                     type: string
@@ -877,7 +946,7 @@ spec:
                   privateIpsCount:
                     description: Number of secondary private IPs to assign to the
                       ENI. The total number of private IPs will be 1 + private_ips_count,
-                      as a primary private IP will be assiged to an ENI by default.
+                      as a primary private IP will be assigned to an ENI by default.
                     type: number
                   region:
                     description: |-

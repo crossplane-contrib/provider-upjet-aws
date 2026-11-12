@@ -38,7 +38,7 @@ spec:
     dbName: baz
     engine: mysql
     engineVersion: 5.6.21
-    instanceClass: db.t2.micro
+    instanceClass: db.t4g.micro
     maintenanceWindow: Fri:09:00-Fri:09:30
     parameterGroupNameSelector:
       matchLabels:

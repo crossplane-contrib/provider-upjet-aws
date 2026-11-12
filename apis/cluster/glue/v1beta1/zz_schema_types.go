@@ -15,16 +15,16 @@ import (
 
 type SchemaInitParameters struct {
 
-	// The compatibility mode of the schema. Values values are: NONE, DISABLED, BACKWARD, BACKWARD_ALL, FORWARD, FORWARD_ALL, FULL, and FULL_ALL.
+	// Compatibility mode of the schema. Values values are: NONE, DISABLED, BACKWARD, BACKWARD_ALL, FORWARD, FORWARD_ALL, FULL, and FULL_ALL.
 	Compatibility *string `json:"compatibility,omitempty" tf:"compatibility,omitempty"`
 
-	// The data format of the schema definition. Valid values are AVRO, JSON and PROTOBUF.
+	// Data format of the schema definition. Valid values are AVRO, JSON and PROTOBUF.
 	DataFormat *string `json:"dataFormat,omitempty" tf:"data_format,omitempty"`
 
-	// A description of the schema.
+	// Description of the schema.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The ARN of the Glue Registry to create the schema in.
+	// ARN of the Glue Registry to create the schema in.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/glue/v1beta1.Registry
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	RegistryArn *string `json:"registryArn,omitempty" tf:"registry_arn,omitempty"`
@@ -37,10 +37,10 @@ type SchemaInitParameters struct {
 	// +kubebuilder:validation:Optional
 	RegistryArnSelector *v2.Selector `json:"registryArnSelector,omitempty" tf:"-"`
 
-	// The schema definition using the data_format setting for schema_name.
+	// Schema definition using the data_format setting for schema_name.
 	SchemaDefinition *string `json:"schemaDefinition,omitempty" tf:"schema_definition,omitempty"`
 
-	// The Name of the schema.
+	// Name of the schema.
 	SchemaName *string `json:"schemaName,omitempty" tf:"schema_name,omitempty"`
 
 	// Key-value map of resource tags.
@@ -53,63 +53,63 @@ type SchemaObservation struct {
 	// ARN of the schema.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The compatibility mode of the schema. Values values are: NONE, DISABLED, BACKWARD, BACKWARD_ALL, FORWARD, FORWARD_ALL, FULL, and FULL_ALL.
+	// Compatibility mode of the schema. Values values are: NONE, DISABLED, BACKWARD, BACKWARD_ALL, FORWARD, FORWARD_ALL, FULL, and FULL_ALL.
 	Compatibility *string `json:"compatibility,omitempty" tf:"compatibility,omitempty"`
 
-	// The data format of the schema definition. Valid values are AVRO, JSON and PROTOBUF.
+	// Data format of the schema definition. Valid values are AVRO, JSON and PROTOBUF.
 	DataFormat *string `json:"dataFormat,omitempty" tf:"data_format,omitempty"`
 
-	// A description of the schema.
+	// Description of the schema.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// ARN of the schema.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The latest version of the schema associated with the returned schema definition.
+	// Latest version of the schema associated with the returned schema definition.
 	LatestSchemaVersion *float64 `json:"latestSchemaVersion,omitempty" tf:"latest_schema_version,omitempty"`
 
-	// The next version of the schema associated with the returned schema definition.
+	// Next version of the schema associated with the returned schema definition.
 	NextSchemaVersion *float64 `json:"nextSchemaVersion,omitempty" tf:"next_schema_version,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The ARN of the Glue Registry to create the schema in.
+	// ARN of the Glue Registry to create the schema in.
 	RegistryArn *string `json:"registryArn,omitempty" tf:"registry_arn,omitempty"`
 
-	// The name of the Glue Registry.
+	// Name of the Glue Registry.
 	RegistryName *string `json:"registryName,omitempty" tf:"registry_name,omitempty"`
 
-	// The version number of the checkpoint (the last time the compatibility mode was changed).
+	// Version number of the checkpoint (the last time the compatibility mode was changed).
 	SchemaCheckpoint *float64 `json:"schemaCheckpoint,omitempty" tf:"schema_checkpoint,omitempty"`
 
-	// The schema definition using the data_format setting for schema_name.
+	// Schema definition using the data_format setting for schema_name.
 	SchemaDefinition *string `json:"schemaDefinition,omitempty" tf:"schema_definition,omitempty"`
 
-	// The Name of the schema.
+	// Name of the schema.
 	SchemaName *string `json:"schemaName,omitempty" tf:"schema_name,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type SchemaParameters struct {
 
-	// The compatibility mode of the schema. Values values are: NONE, DISABLED, BACKWARD, BACKWARD_ALL, FORWARD, FORWARD_ALL, FULL, and FULL_ALL.
+	// Compatibility mode of the schema. Values values are: NONE, DISABLED, BACKWARD, BACKWARD_ALL, FORWARD, FORWARD_ALL, FULL, and FULL_ALL.
 	// +kubebuilder:validation:Optional
 	Compatibility *string `json:"compatibility,omitempty" tf:"compatibility,omitempty"`
 
-	// The data format of the schema definition. Valid values are AVRO, JSON and PROTOBUF.
+	// Data format of the schema definition. Valid values are AVRO, JSON and PROTOBUF.
 	// +kubebuilder:validation:Optional
 	DataFormat *string `json:"dataFormat,omitempty" tf:"data_format,omitempty"`
 
-	// A description of the schema.
+	// Description of the schema.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
@@ -118,7 +118,7 @@ type SchemaParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// The ARN of the Glue Registry to create the schema in.
+	// ARN of the Glue Registry to create the schema in.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/glue/v1beta1.Registry
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -132,11 +132,11 @@ type SchemaParameters struct {
 	// +kubebuilder:validation:Optional
 	RegistryArnSelector *v2.Selector `json:"registryArnSelector,omitempty" tf:"-"`
 
-	// The schema definition using the data_format setting for schema_name.
+	// Schema definition using the data_format setting for schema_name.
 	// +kubebuilder:validation:Optional
 	SchemaDefinition *string `json:"schemaDefinition,omitempty" tf:"schema_definition,omitempty"`
 
-	// The Name of the schema.
+	// Name of the schema.
 	// +kubebuilder:validation:Optional
 	SchemaName *string `json:"schemaName,omitempty" tf:"schema_name,omitempty"`
 

@@ -561,21 +561,21 @@ spec:
                     type: string
                   createTableDefaultPermission:
                     description: Creates a set of default permissions on the table
-                      for principals. See create_table_default_permission below.
+                      for principals. See create_table_default_permission Block below.
                     items:
                       properties:
                         permissions:
-                          description: The permissions that are granted to the principal.
+                          description: Permissions that are granted to the principal.
                           items:
                             type: string
                           type: array
                           x-kubernetes-list-type: set
                         principal:
-                          description: The principal who is granted permissions..
-                            See principal below.
+                          description: Principal who is granted permissions.. See
+                            principal Block below.
                           properties:
                             dataLakePrincipalIdentifier:
-                              description: An identifier for the Lake Formation principal.
+                              description: Identifier for the Lake Formation principal.
                               type: string
                           type: object
                       type: object
@@ -585,7 +585,7 @@ spec:
                     type: string
                   federatedDatabase:
                     description: Configuration block that references an entity outside
-                      the AWS Glue Data Catalog. See federated_database below.
+                      the AWS Glue Data Catalog. See federated_database Block below.
                     properties:
                       connectionName:
                         description: Name of the connection to the external metastore.
@@ -617,7 +617,7 @@ spec:
                     x-kubernetes-map-type: granular
                   targetDatabase:
                     description: Configuration block for a target database for resource
-                      linking. See target_database below.
+                      linking. See target_database Block below.
                     properties:
                       catalogId:
                         description: ID of the Data Catalog in which the database
@@ -651,21 +651,21 @@ spec:
                 properties:
                   createTableDefaultPermission:
                     description: Creates a set of default permissions on the table
-                      for principals. See create_table_default_permission below.
+                      for principals. See create_table_default_permission Block below.
                     items:
                       properties:
                         permissions:
-                          description: The permissions that are granted to the principal.
+                          description: Permissions that are granted to the principal.
                           items:
                             type: string
                           type: array
                           x-kubernetes-list-type: set
                         principal:
-                          description: The principal who is granted permissions..
-                            See principal below.
+                          description: Principal who is granted permissions.. See
+                            principal Block below.
                           properties:
                             dataLakePrincipalIdentifier:
-                              description: An identifier for the Lake Formation principal.
+                              description: Identifier for the Lake Formation principal.
                               type: string
                           type: object
                       type: object
@@ -675,7 +675,7 @@ spec:
                     type: string
                   federatedDatabase:
                     description: Configuration block that references an entity outside
-                      the AWS Glue Data Catalog. See federated_database below.
+                      the AWS Glue Data Catalog. See federated_database Block below.
                     properties:
                       connectionName:
                         description: Name of the connection to the external metastore.
@@ -702,7 +702,7 @@ spec:
                     x-kubernetes-map-type: granular
                   targetDatabase:
                     description: Configuration block for a target database for resource
-                      linking. See target_database below.
+                      linking. See target_database Block below.
                     properties:
                       databaseName:
                         description: Name of the catalog database.
@@ -809,21 +809,21 @@ spec:
                     type: string
                   createTableDefaultPermission:
                     description: Creates a set of default permissions on the table
-                      for principals. See create_table_default_permission below.
+                      for principals. See create_table_default_permission Block below.
                     items:
                       properties:
                         permissions:
-                          description: The permissions that are granted to the principal.
+                          description: Permissions that are granted to the principal.
                           items:
                             type: string
                           type: array
                           x-kubernetes-list-type: set
                         principal:
-                          description: The principal who is granted permissions..
-                            See principal below.
+                          description: Principal who is granted permissions.. See
+                            principal Block below.
                           properties:
                             dataLakePrincipalIdentifier:
-                              description: An identifier for the Lake Formation principal.
+                              description: Identifier for the Lake Formation principal.
                               type: string
                           type: object
                       type: object
@@ -833,7 +833,7 @@ spec:
                     type: string
                   federatedDatabase:
                     description: Configuration block that references an entity outside
-                      the AWS Glue Data Catalog. See federated_database below.
+                      the AWS Glue Data Catalog. See federated_database Block below.
                     properties:
                       connectionName:
                         description: Name of the connection to the external metastore.
@@ -869,14 +869,13 @@ spec:
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                     x-kubernetes-map-type: granular
                   targetDatabase:
                     description: Configuration block for a target database for resource
-                      linking. See target_database below.
+                      linking. See target_database Block below.
                     properties:
                       catalogId:
                         description: ID of the Data Catalog in which the database

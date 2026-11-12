@@ -3065,7 +3065,7 @@ spec:
                     type: string
                   instances:
                     description: List of information about allocated brokers (both
-                      active & standby).
+                      active & standby). See instances Block for details.
                     items:
                       properties:
                         consoleUrl:
@@ -3073,12 +3073,8 @@ spec:
                             Management UI depending on engine_type.
                           type: string
                         endpoints:
-                          description: Broker's wire-level protocol endpoints referenceable
-                            e.g., as instances.0.endpoints.0. Known endpoints are
-                            returned in the deterministic order below, based on protocol
-                            prefix and port number; any additional endpoint types
-                            introduced in the future are appended afterward in the
-                            order returned by the API.
+                          description: Broker's wire-level protocol endpoints, referenceable
+                            e.g., as instances.0.endpoints.0.
                           items:
                             type: string
                           type: array
@@ -3193,7 +3189,8 @@ spec:
                     x-kubernetes-list-type: set
                   sharedResources:
                     description: List of resources shared with the broker via resource_share_arns.
-                      Only populated for engine_type of RabbitMQ.
+                      Only populated for engine_type of RabbitMQ. See shared_resources
+                      Block for details.
                     items:
                       properties:
                         dnsNames:

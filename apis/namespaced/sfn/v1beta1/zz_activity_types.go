@@ -15,7 +15,7 @@ import (
 
 type ActivityInitParameters struct {
 
-	// Defines what encryption configuration is used to encrypt data in the Activity. For more information see the section Data at rest encyption in the AWS Step Functions User Guide.
+	// Defines what encryption configuration is used to encrypt data in the Activity. For more information see the section Data at rest encryption in the AWS Step Functions User Guide.
 	EncryptionConfiguration *EncryptionConfigurationInitParameters `json:"encryptionConfiguration,omitempty" tf:"encryption_configuration,omitempty"`
 
 	// Key-value map of resource tags.
@@ -31,7 +31,7 @@ type ActivityObservation struct {
 	// Date the activity was created.
 	CreationDate *string `json:"creationDate,omitempty" tf:"creation_date,omitempty"`
 
-	// Defines what encryption configuration is used to encrypt data in the Activity. For more information see the section Data at rest encyption in the AWS Step Functions User Guide.
+	// Defines what encryption configuration is used to encrypt data in the Activity. For more information see the section Data at rest encryption in the AWS Step Functions User Guide.
 	EncryptionConfiguration *EncryptionConfigurationObservation `json:"encryptionConfiguration,omitempty" tf:"encryption_configuration,omitempty"`
 
 	// ARN of the activity.
@@ -52,7 +52,7 @@ type ActivityObservation struct {
 
 type ActivityParameters struct {
 
-	// Defines what encryption configuration is used to encrypt data in the Activity. For more information see the section Data at rest encyption in the AWS Step Functions User Guide.
+	// Defines what encryption configuration is used to encrypt data in the Activity. For more information see the section Data at rest encryption in the AWS Step Functions User Guide.
 	// +kubebuilder:validation:Optional
 	EncryptionConfiguration *EncryptionConfigurationParameters `json:"encryptionConfiguration,omitempty" tf:"encryption_configuration,omitempty"`
 

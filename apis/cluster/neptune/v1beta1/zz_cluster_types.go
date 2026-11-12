@@ -170,6 +170,9 @@ type ClusterInitParameters struct {
 	// +crossplane:generate:reference:selectorFieldName=VPCSecurityGroupIDSelector
 	// +listType=set
 	VPCSecurityGroupIds []*string `json:"vpcSecurityGroupIds,omitempty" tf:"vpc_security_group_ids,omitempty"`
+
+	// Network type of the Neptune cluster. Valid values: IPV4, DUAL. Default: IPV4. Specifying DUAL enables dual-stack IPv4/IPv6 connectivity. The Neptune DB subnet group associated with the cluster must be backed by IPv6-capable subnets. See the Neptune dual-stack documentation for prerequisites.
+	NetworkType *string `json:"networkType,omitempty" tf:"network_type,omitempty"`
 }
 
 type ClusterObservation struct {
@@ -292,6 +295,9 @@ type ClusterObservation struct {
 	// List of VPC security groups to associate with the Cluster
 	// +listType=set
 	VPCSecurityGroupIds []*string `json:"vpcSecurityGroupIds,omitempty" tf:"vpc_security_group_ids,omitempty"`
+
+	// Network type of the Neptune cluster. Valid values: IPV4, DUAL. Default: IPV4. Specifying DUAL enables dual-stack IPv4/IPv6 connectivity. The Neptune DB subnet group associated with the cluster must be backed by IPv6-capable subnets. See the Neptune dual-stack documentation for prerequisites.
+	NetworkType *string `json:"networkType,omitempty" tf:"network_type,omitempty"`
 }
 
 type ClusterParameters struct {
@@ -484,6 +490,10 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	VPCSecurityGroupIds []*string `json:"vpcSecurityGroupIds,omitempty" tf:"vpc_security_group_ids,omitempty"`
+
+	// Network type of the Neptune cluster. Valid values: IPV4, DUAL. Default: IPV4. Specifying DUAL enables dual-stack IPv4/IPv6 connectivity. The Neptune DB subnet group associated with the cluster must be backed by IPv6-capable subnets. See the Neptune dual-stack documentation for prerequisites.
+	// +kubebuilder:validation:Optional
+	NetworkType *string `json:"networkType,omitempty" tf:"network_type,omitempty"`
 }
 
 type ServerlessV2ScalingConfigurationInitParameters struct {

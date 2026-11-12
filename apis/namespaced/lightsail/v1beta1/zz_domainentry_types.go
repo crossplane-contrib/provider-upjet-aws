@@ -27,7 +27,7 @@ type DomainEntryObservation struct {
 	// Name of the Lightsail domain in which to create the entry.
 	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
 
-	// Combination of attributes to create a unique id: name,domain_name,type,target.
+	// Combination of attributes to create a unique ID: name,domain_name,type,target.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Whether the entry should be an alias. Default: false.

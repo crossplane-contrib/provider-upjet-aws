@@ -47,6 +47,46 @@ func (mg *IdentityProvider) SetWriteConnectionSecretToReference(r *xpv2.LocalSec
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
+// GetCondition of this LogDeliveryConfiguration.
+func (mg *LogDeliveryConfiguration) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetManagementPolicies of this LogDeliveryConfiguration.
+func (mg *LogDeliveryConfiguration) GetManagementPolicies() xpv2.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this LogDeliveryConfiguration.
+func (mg *LogDeliveryConfiguration) GetProviderConfigReference() *xpv2.ProviderConfigReference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetWriteConnectionSecretToReference of this LogDeliveryConfiguration.
+func (mg *LogDeliveryConfiguration) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this LogDeliveryConfiguration.
+func (mg *LogDeliveryConfiguration) SetConditions(c ...xpv2.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetManagementPolicies of this LogDeliveryConfiguration.
+func (mg *LogDeliveryConfiguration) SetManagementPolicies(r xpv2.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this LogDeliveryConfiguration.
+func (mg *LogDeliveryConfiguration) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetWriteConnectionSecretToReference of this LogDeliveryConfiguration.
+func (mg *LogDeliveryConfiguration) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this ResourceServer.
 func (mg *ResourceServer) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)

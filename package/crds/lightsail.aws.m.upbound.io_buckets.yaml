@@ -62,7 +62,7 @@ spec:
                   bundleId:
                     description: Bundle ID to use for the bucket. A bucket bundle
                       specifies the monthly cost, storage space, and data transfer
-                      quota for a bucket. Use the get-bucket-bundles cli command to
+                      quota for a bucket. Use the get-bucket-bundles CLI command to
                       get a list of bundle IDs that you can specify.
                     type: string
                   forceDelete:
@@ -101,7 +101,7 @@ spec:
                   bundleId:
                     description: Bundle ID to use for the bucket. A bucket bundle
                       specifies the monthly cost, storage space, and data transfer
-                      quota for a bucket. Use the get-bucket-bundles cli command to
+                      quota for a bucket. Use the get-bucket-bundles CLI command to
                       get a list of bundle IDs that you can specify.
                     type: string
                   forceDelete:
@@ -195,7 +195,7 @@ spec:
                   bundleId:
                     description: Bundle ID to use for the bucket. A bucket bundle
                       specifies the monthly cost, storage space, and data transfer
-                      quota for a bucket. Use the get-bucket-bundles cli command to
+                      quota for a bucket. Use the get-bucket-bundles CLI command to
                       get a list of bundle IDs that you can specify.
                     type: string
                   createdAt:

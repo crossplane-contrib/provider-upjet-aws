@@ -75,7 +75,7 @@ spec:
               forProvider:
                 properties:
                   loggingConfig:
-                    description: The logging configuration values to set. See logging_config
+                    description: Logging configuration values to set. See logging_config
                       Block for details.
                     properties:
                       cloudwatchConfig:
@@ -250,7 +250,7 @@ spec:
                                 type: object
                             type: object
                           roleArn:
-                            description: The role ARN.
+                            description: Role ARN.
                             type: string
                           roleArnRef:
                             description: Reference to a Role in iam to populate roleArn.
@@ -328,11 +328,11 @@ spec:
                             type: object
                         type: object
                       embeddingDataDeliveryEnabled:
-                        description: Set to include embeddings data in the log delivery.
-                          Defaults to true.
+                        description: Whether to include embeddings data in the log
+                          delivery. Defaults to true.
                         type: boolean
                       imageDataDeliveryEnabled:
-                        description: Set to include image data in the log delivery.
+                        description: Whether to include image data in the log delivery.
                           Defaults to true.
                         type: boolean
                       s3Config:
@@ -421,11 +421,11 @@ spec:
                             type: string
                         type: object
                       textDataDeliveryEnabled:
-                        description: Set to include text data in the log delivery.
+                        description: Whether to include text data in the log delivery.
                           Defaults to true.
                         type: boolean
                       videoDataDeliveryEnabled:
-                        description: Set to include text data in the log delivery.
+                        description: Whether to include video data in the log delivery.
                           Defaults to true.
                         type: boolean
                     type: object
@@ -451,7 +451,7 @@ spec:
                   autoscaler.
                 properties:
                   loggingConfig:
-                    description: The logging configuration values to set. See logging_config
+                    description: Logging configuration values to set. See logging_config
                       Block for details.
                     properties:
                       cloudwatchConfig:
@@ -626,7 +626,7 @@ spec:
                                 type: object
                             type: object
                           roleArn:
-                            description: The role ARN.
+                            description: Role ARN.
                             type: string
                           roleArnRef:
                             description: Reference to a Role in iam to populate roleArn.
@@ -704,11 +704,11 @@ spec:
                             type: object
                         type: object
                       embeddingDataDeliveryEnabled:
-                        description: Set to include embeddings data in the log delivery.
-                          Defaults to true.
+                        description: Whether to include embeddings data in the log
+                          delivery. Defaults to true.
                         type: boolean
                       imageDataDeliveryEnabled:
-                        description: Set to include image data in the log delivery.
+                        description: Whether to include image data in the log delivery.
                           Defaults to true.
                         type: boolean
                       s3Config:
@@ -797,11 +797,11 @@ spec:
                             type: string
                         type: object
                       textDataDeliveryEnabled:
-                        description: Set to include text data in the log delivery.
+                        description: Whether to include text data in the log delivery.
                           Defaults to true.
                         type: boolean
                       videoDataDeliveryEnabled:
-                        description: Set to include text data in the log delivery.
+                        description: Whether to include video data in the log delivery.
                           Defaults to true.
                         type: boolean
                     type: object
@@ -899,10 +899,10 @@ spec:
               atProvider:
                 properties:
                   id:
-                    description: AWS Region in which logging is configured.
+                    description: (Deprecated) AWS Region in which logging is configured.
                     type: string
                   loggingConfig:
-                    description: The logging configuration values to set. See logging_config
+                    description: Logging configuration values to set. See logging_config
                       Block for details.
                     properties:
                       cloudwatchConfig:
@@ -925,15 +925,15 @@ spec:
                             description: Log group name.
                             type: string
                           roleArn:
-                            description: The role ARN.
+                            description: Role ARN.
                             type: string
                         type: object
                       embeddingDataDeliveryEnabled:
-                        description: Set to include embeddings data in the log delivery.
-                          Defaults to true.
+                        description: Whether to include embeddings data in the log
+                          delivery. Defaults to true.
                         type: boolean
                       imageDataDeliveryEnabled:
-                        description: Set to include image data in the log delivery.
+                        description: Whether to include image data in the log delivery.
                           Defaults to true.
                         type: boolean
                       s3Config:
@@ -948,11 +948,11 @@ spec:
                             type: string
                         type: object
                       textDataDeliveryEnabled:
-                        description: Set to include text data in the log delivery.
+                        description: Whether to include text data in the log delivery.
                           Defaults to true.
                         type: boolean
                       videoDataDeliveryEnabled:
-                        description: Set to include text data in the log delivery.
+                        description: Whether to include video data in the log delivery.
                           Defaults to true.
                         type: boolean
                     type: object

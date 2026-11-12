@@ -146,6 +146,8 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	//
 	// us-west-2_abc123/3ho4ek12345678909nh3fmhpko
 	"aws_cognito_user_pool_client": cognitoUserPoolClient(),
+	// import Cognito IDP (Identity Provider) Log Delivery Configuration using the user_pool_id
+	"aws_cognito_log_delivery_configuration": frameworkParameterAsIdentifier("user_pool_id"),
 
 	// cloudfront
 	//
@@ -164,6 +166,15 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	"aws_cloudwatch_log_delivery_destination_policy": frameworkParameterAsIdentifier("delivery_destination_name"),
 	// CloudWatch Logs Delivery Source can be imported using the name
 	"aws_cloudwatch_log_delivery_source": frameworkParameterAsIdentifier("name"),
+
+	// devopsagent
+	//
+	// DevOps Agent Space can be imported using the agent_space_id
+	"aws_devopsagent_agent_space": config.FrameworkResourceWithComputedIdentifier("agent_space_id", "00000000-0000-0000-0000-000000000000"),
+	// imported via agent_space_id,asset_id. agent_space_id is already a
+	// required spec field, so only the provider-assigned asset_id (a UUID) is
+	// used as the external name.
+	"aws_devopsagent_asset": config.FrameworkResourceWithComputedIdentifier("asset_id", "00000000-0000-0000-0000-000000000000"),
 
 	// dsql
 	//
@@ -343,6 +354,26 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	"aws_s3files_file_system_policy": frameworkParameterAsIdentifier("file_system_id"),
 	// S3 Files Synchronization Configuration can be imported using the file system ID
 	"aws_s3files_synchronization_configuration": s3filesSynchronizationConfig("file_system_id"),
+
+	// s3tables
+	//
+	// S3 Tables Namespace can be imported using the table_bucket_arn and the
+	// value of namespace, separated by a semicolon (;)
+	"aws_s3tables_namespace": s3tablesNamespace(),
+	// S3 Tables Table can be imported using the table_bucket_arn, the value of
+	// namespace, and the value of name, separated by a semicolon (;)
+	"aws_s3tables_table": s3tablesTable(),
+	// S3 Tables Table Bucket can be imported using the arn
+	"aws_s3tables_table_bucket": s3tablesTableBucket("arn"),
+	// S3 Tables Table Bucket Policy can be imported using the table_bucket_arn
+	"aws_s3tables_table_bucket_policy": s3tablesPolicyIdentifier("table_bucket_arn"),
+	// S3 Tables Table Bucket Replication can be imported using the table_bucket_arn
+	"aws_s3tables_table_bucket_replication": s3tablesPolicyIdentifier("table_bucket_arn"),
+	// S3 Tables Table Policy can be imported using the table_bucket_arn, the value of
+	// namespace, and the value of name, separated by a semicolon (;)
+	"aws_s3tables_table_policy": s3tablesTable(),
+	// S3 Tables Table Replication can be imported using the table_arn
+	"aws_s3tables_table_replication": s3tablesPolicyIdentifier("table_arn"),
 
 	// s3vectors
 	//
@@ -3276,6 +3307,124 @@ func s3vectorsComputedARNIdentifier(identifier, resourcePath string) config.Exte
 	return frameworkComputedARNIdentifier("s3vectors", identifier, resourcePath)
 }
 
+func s3tablesNamespace() config.ExternalName { //nolint:gocyclo // easier to follow as a unit
+	return config.NewExternalNameFrom(config.IdentifierFromProvider,
+		config.WithSetIdentifierArgumentsFn(func(fn config.SetIdentifierArgumentsFn, base map[string]any, externalName string) {
+			if externalName == "" {
+				return
+			}
+			separatedExternalName := strings.Split(externalName, ";")
+			if len(separatedExternalName) != 2 {
+				return
+			}
+			if arn, ok := base["table_bucket_arn"].(string); !ok || arn == "" {
+				base["table_bucket_arn"] = separatedExternalName[0]
+			}
+			if ns, ok := base["namespace"].(string); !ok || ns == "" {
+				base["namespace"] = separatedExternalName[1]
+			}
+		}),
+		config.WithGetExternalNameFn(func(fn config.GetExternalNameFn, tfState map[string]any) (string, error) {
+			var tbaStr, nsStr string
+			if tba, ok := tfState["table_bucket_arn"]; ok {
+				tbaStr = fmt.Sprintf("%v", tba)
+				if len(tbaStr) < 1 {
+					return "", errors.New("table bucket arn cannot be empty")
+				}
+			}
+			if ns, ok := tfState["namespace"]; ok {
+				nsStr = fmt.Sprintf("%v", ns)
+				if len(nsStr) < 1 {
+					return "", errors.New("namespace cannot be empty")
+				}
+			}
+			return fmt.Sprintf("%s;%s", tbaStr, nsStr), nil
+		}),
+	)
+}
+
+func s3tablesTable() config.ExternalName { //nolint:gocyclo // easier to follow as a unit
+	return config.NewExternalNameFrom(config.IdentifierFromProvider,
+		config.WithSetIdentifierArgumentsFn(func(fn config.SetIdentifierArgumentsFn, base map[string]any, externalName string) {
+			if externalName == "" {
+				return
+			}
+			separatedExternalName := strings.Split(externalName, ";")
+			if len(separatedExternalName) != 3 {
+				return
+			}
+			if arn, ok := base["table_bucket_arn"].(string); !ok || arn == "" {
+				base["table_bucket_arn"] = separatedExternalName[0]
+			}
+			if ns, ok := base["namespace"].(string); !ok || ns == "" {
+				base["namespace"] = separatedExternalName[1]
+			}
+			if n, ok := base["name"].(string); !ok || n == "" {
+				base["name"] = separatedExternalName[2]
+			}
+		}),
+		config.WithGetExternalNameFn(func(fn config.GetExternalNameFn, tfState map[string]any) (string, error) {
+			var tbaStr, nsStr, nStr string
+			if tba, ok := tfState["table_bucket_arn"]; ok {
+				tbaStr = fmt.Sprintf("%v", tba)
+				if len(tbaStr) < 1 {
+					return "", errors.New("table bucket arn cannot be empty")
+				}
+			}
+			if ns, ok := tfState["namespace"]; ok {
+				nsStr = fmt.Sprintf("%v", ns)
+				if len(nsStr) < 1 {
+					return "", errors.New("namespace cannot be empty")
+				}
+			}
+			if n, ok := tfState["name"]; ok {
+				nStr = fmt.Sprintf("%v", n)
+				if len(nStr) < 1 {
+					return "", errors.New("name cannot be empty")
+				}
+			}
+			return fmt.Sprintf("%s;%s;%s", tbaStr, nsStr, nStr), nil
+		}),
+	)
+}
+
+func s3tablesTableBucket(identifier string) config.ExternalName {
+	en := config.NewExternalNameFrom(config.IdentifierFromProvider,
+		config.WithSetIdentifierArgumentsFn(func(fn config.SetIdentifierArgumentsFn, base map[string]any, externalName string) {
+			if _, ok := base[identifier]; ok {
+				return
+			}
+			if externalName != "" {
+				base[identifier] = externalName
+				return
+			}
+			base[identifier] = ""
+		}),
+		config.WithGetExternalNameFn(func(fn config.GetExternalNameFn, tfState map[string]any) (string, error) {
+			if id, ok := tfState[identifier]; ok {
+				idStr := fmt.Sprintf("%v", id)
+				if len(idStr) > 0 {
+					return idStr, nil
+				}
+			}
+			return "", errors.Errorf("cannot find attribute %q in tfstate", identifier)
+		}),
+	)
+	en.TFPluginFrameworkOptions.ComputedIdentifierAttributes = []string{identifier}
+	en.IsNotFoundDiagnosticFn = func(diags []*tfprotov6.Diagnostic) bool {
+		for _, d := range diags {
+			if d.Severity != tfprotov6.DiagnosticSeverityError {
+				continue
+			}
+			if strings.Contains(d.Summary, "input member tableBucketARN must not be empty") || strings.Contains(d.Detail, "input member tableBucketARN must not be empty") {
+				return true
+			}
+		}
+		return false
+	}
+	return en
+}
+
 // networkFirewallContainerAssociation configures the external name for
 // aws_networkfirewall_container_association. The external name is the
 // AWS-assigned container_association_arn, the only identifier the
@@ -3346,6 +3495,40 @@ func s3vectorsPolicyIdentifier() config.ExternalName {
 				}
 			}
 			return "", errors.Errorf("cannot find attribute %q in tfstate", "vector_bucket_arn")
+		}),
+	)
+}
+
+// s3tablesPolicyIdentifier handles S3 Tables resources (TableBucketPolicy,
+// TableBucketReplication, TableReplication) where the identifying ARN field
+// (table_bucket_arn or table_arn) is Required -- resolved via a reference
+// selector before the first reconcile -- and also serves as the resource's
+// identity. Unlike s3tablesTableBucket (whose "arn" is genuinely provider-
+// computed), it does NOT set ComputedIdentifierAttributes, so the field
+// stays in the CRD spec and is not stripped from the config sent to
+// Create/Update. It also needs no stub-based existence probe or
+// IsNotFoundDiagnosticFn: since the parent ARN is already known from the
+// first reconcile, a not-yet-created policy/replication config on an
+// existing parent resource is reported by the API as a clean
+// NotFoundException, which the Terraform provider already maps to "resource
+// not found" on its own.
+func s3tablesPolicyIdentifier(identifier string) config.ExternalName {
+	return config.NewExternalNameFrom(config.IdentifierFromProvider,
+		config.WithSetIdentifierArgumentsFn(func(fn config.SetIdentifierArgumentsFn, base map[string]any, externalName string) {
+			if externalName != "" {
+				if arn, ok := base[identifier].(string); !ok || arn == "" {
+					base[identifier] = externalName
+				}
+			}
+		}),
+		config.WithGetExternalNameFn(func(fn config.GetExternalNameFn, tfState map[string]any) (string, error) {
+			if id, ok := tfState[identifier]; ok {
+				idStr := fmt.Sprintf("%v", id)
+				if len(idStr) > 0 {
+					return idStr, nil
+				}
+			}
+			return "", errors.Errorf("cannot find attribute %q in tfstate", identifier)
 		}),
 	)
 }

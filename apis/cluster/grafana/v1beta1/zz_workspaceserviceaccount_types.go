@@ -15,13 +15,13 @@ import (
 
 type WorkspaceServiceAccountInitParameters struct {
 
-	// The permission level to use for this service account. For more information about the roles and the permissions each has, see the User roles documentation.
+	// Permission level to use for this service account. For more information about the roles and the permissions each has, see the User roles documentation.
 	GrafanaRole *string `json:"grafanaRole,omitempty" tf:"grafana_role,omitempty"`
 
-	// A name for the service account. The name must be unique within the workspace, as it determines the ID associated with the service account.
+	// Name for the service account. The name must be unique within the workspace, as it determines the ID associated with the service account.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The Grafana workspace with which the service account is associated.
+	// Grafana workspace with which the service account is associated.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/grafana/v1beta2.Workspace
 	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`
 
@@ -36,12 +36,12 @@ type WorkspaceServiceAccountInitParameters struct {
 
 type WorkspaceServiceAccountObservation struct {
 
-	// The permission level to use for this service account. For more information about the roles and the permissions each has, see the User roles documentation.
+	// Permission level to use for this service account. For more information about the roles and the permissions each has, see the User roles documentation.
 	GrafanaRole *string `json:"grafanaRole,omitempty" tf:"grafana_role,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// A name for the service account. The name must be unique within the workspace, as it determines the ID associated with the service account.
+	// Name for the service account. The name must be unique within the workspace, as it determines the ID associated with the service account.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -51,17 +51,17 @@ type WorkspaceServiceAccountObservation struct {
 	// Identifier of the service account in the given Grafana workspace
 	ServiceAccountID *string `json:"serviceAccountId,omitempty" tf:"service_account_id,omitempty"`
 
-	// The Grafana workspace with which the service account is associated.
+	// Grafana workspace with which the service account is associated.
 	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`
 }
 
 type WorkspaceServiceAccountParameters struct {
 
-	// The permission level to use for this service account. For more information about the roles and the permissions each has, see the User roles documentation.
+	// Permission level to use for this service account. For more information about the roles and the permissions each has, see the User roles documentation.
 	// +kubebuilder:validation:Optional
 	GrafanaRole *string `json:"grafanaRole,omitempty" tf:"grafana_role,omitempty"`
 
-	// A name for the service account. The name must be unique within the workspace, as it determines the ID associated with the service account.
+	// Name for the service account. The name must be unique within the workspace, as it determines the ID associated with the service account.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -70,7 +70,7 @@ type WorkspaceServiceAccountParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// The Grafana workspace with which the service account is associated.
+	// Grafana workspace with which the service account is associated.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/grafana/v1beta2.Workspace
 	// +kubebuilder:validation:Optional
 	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`

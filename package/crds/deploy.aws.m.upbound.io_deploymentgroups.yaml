@@ -185,7 +185,7 @@ spec:
                         x-kubernetes-list-type: set
                     type: object
                   autoscalingGroups:
-                    description: Autoscaling groups associated with the deployment
+                    description: Auto Scaling groups associated with the deployment
                       group.
                     items:
                       type: string
@@ -1086,7 +1086,7 @@ spec:
                         x-kubernetes-list-type: set
                     type: object
                   autoscalingGroups:
-                    description: Autoscaling groups associated with the deployment
+                    description: Auto Scaling groups associated with the deployment
                       group.
                     items:
                       type: string
@@ -2036,7 +2036,7 @@ spec:
                         x-kubernetes-list-type: set
                     type: object
                   autoscalingGroups:
-                    description: Autoscaling groups associated with the deployment
+                    description: Auto Scaling groups associated with the deployment
                       group.
                     items:
                       type: string

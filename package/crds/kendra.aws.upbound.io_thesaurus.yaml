@@ -1046,10 +1046,10 @@ spec:
               forProvider:
                 properties:
                   description:
-                    description: The description for a thesaurus.
+                    description: Description for a thesaurus.
                     type: string
                   indexId:
-                    description: The identifier of the index for a thesaurus.
+                    description: Identifier of the index for a thesaurus.
                     type: string
                   indexIdRef:
                     description: Reference to a Index in kendra to populate indexId.
@@ -1126,7 +1126,7 @@ spec:
                         type: object
                     type: object
                   name:
-                    description: The name for the thesaurus.
+                    description: Name for the thesaurus.
                     type: string
                   region:
                     description: |-
@@ -1134,8 +1134,8 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   roleArn:
-                    description: The IAM (Identity and Access Management) role used
-                      to access the thesaurus file in S3.
+                    description: IAM (Identity and Access Management) role used to
+                      access the thesaurus file in S3.
                     type: string
                   roleArnRef:
                     description: Reference to a Role in iam to populate roleArn.
@@ -1212,11 +1212,11 @@ spec:
                         type: object
                     type: object
                   sourceS3Path:
-                    description: The S3 path where your thesaurus file sits in S3.
-                      Detailed below.
+                    description: S3 path where your thesaurus file sits in S3. Detailed
+                      below.
                     properties:
                       bucket:
-                        description: The name of the S3 bucket that contains the file.
+                        description: Name of the S3 bucket that contains the file.
                         type: string
                       bucketRef:
                         description: Reference to a Bucket in s3 to populate bucket.
@@ -1293,7 +1293,7 @@ spec:
                             type: object
                         type: object
                       key:
-                        description: The name of the file.
+                        description: Name of the file.
                         type: string
                       keyRef:
                         description: Reference to a Object in s3 to populate key.
@@ -1373,9 +1373,7 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
-                    description: Key-value map of resource tags. If configured with
-                      a provider default_tags configuration block present, tags with
-                      matching keys will overwrite those defined at the provider-level.
+                    description: Key-value map of resource tags.
                     type: object
                     x-kubernetes-map-type: granular
                 required:
@@ -1395,10 +1393,10 @@ spec:
                   autoscaler.
                 properties:
                   description:
-                    description: The description for a thesaurus.
+                    description: Description for a thesaurus.
                     type: string
                   indexId:
-                    description: The identifier of the index for a thesaurus.
+                    description: Identifier of the index for a thesaurus.
                     type: string
                   indexIdRef:
                     description: Reference to a Index in kendra to populate indexId.
@@ -1475,11 +1473,11 @@ spec:
                         type: object
                     type: object
                   name:
-                    description: The name for the thesaurus.
+                    description: Name for the thesaurus.
                     type: string
                   roleArn:
-                    description: The IAM (Identity and Access Management) role used
-                      to access the thesaurus file in S3.
+                    description: IAM (Identity and Access Management) role used to
+                      access the thesaurus file in S3.
                     type: string
                   roleArnRef:
                     description: Reference to a Role in iam to populate roleArn.
@@ -1556,11 +1554,11 @@ spec:
                         type: object
                     type: object
                   sourceS3Path:
-                    description: The S3 path where your thesaurus file sits in S3.
-                      Detailed below.
+                    description: S3 path where your thesaurus file sits in S3. Detailed
+                      below.
                     properties:
                       bucket:
-                        description: The name of the S3 bucket that contains the file.
+                        description: Name of the S3 bucket that contains the file.
                         type: string
                       bucketRef:
                         description: Reference to a Bucket in s3 to populate bucket.
@@ -1637,7 +1635,7 @@ spec:
                             type: object
                         type: object
                       key:
-                        description: The name of the file.
+                        description: Name of the file.
                         type: string
                       keyRef:
                         description: Reference to a Object in s3 to populate key.
@@ -1717,9 +1715,7 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
-                    description: Key-value map of resource tags. If configured with
-                      a provider default_tags configuration block present, tags with
-                      matching keys will overwrite those defined at the provider-level.
+                    description: Key-value map of resource tags.
                     type: object
                     x-kubernetes-map-type: granular
                 type: object
@@ -1827,17 +1823,17 @@ spec:
                     description: ARN of the thesaurus.
                     type: string
                   description:
-                    description: The description for a thesaurus.
+                    description: Description for a thesaurus.
                     type: string
                   id:
-                    description: The unique identifiers of the thesaurus and index
-                      separated by a slash (/).
+                    description: Unique identifiers of the thesaurus and index separated
+                      by a slash (/).
                     type: string
                   indexId:
-                    description: The identifier of the index for a thesaurus.
+                    description: Identifier of the index for a thesaurus.
                     type: string
                   name:
-                    description: The name for the thesaurus.
+                    description: Name for the thesaurus.
                     type: string
                   region:
                     description: |-
@@ -1845,42 +1841,38 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   roleArn:
-                    description: The IAM (Identity and Access Management) role used
-                      to access the thesaurus file in S3.
+                    description: IAM (Identity and Access Management) role used to
+                      access the thesaurus file in S3.
                     type: string
                   sourceS3Path:
-                    description: The S3 path where your thesaurus file sits in S3.
-                      Detailed below.
+                    description: S3 path where your thesaurus file sits in S3. Detailed
+                      below.
                     properties:
                       bucket:
-                        description: The name of the S3 bucket that contains the file.
+                        description: Name of the S3 bucket that contains the file.
                         type: string
                       key:
-                        description: The name of the file.
+                        description: Name of the file.
                         type: string
                     type: object
                   status:
-                    description: The current status of the thesaurus.
+                    description: Current status of the thesaurus.
                     type: string
                   tags:
                     additionalProperties:
                       type: string
-                    description: Key-value map of resource tags. If configured with
-                      a provider default_tags configuration block present, tags with
-                      matching keys will overwrite those defined at the provider-level.
+                    description: Key-value map of resource tags.
                     type: object
                     x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                     x-kubernetes-map-type: granular
                   thesaurusId:
-                    description: The unique identifiers of the thesaurus and index
-                      separated by a slash (/).
+                    description: Unique identifier of the thesaurus.
                     type: string
                 type: object
               conditions:

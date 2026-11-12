@@ -28,7 +28,7 @@ type ScriptInitParameters struct {
 	// Version that is associated with this script.
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 
-	// A data object containing your Realtime scripts and dependencies as a zip  file. The zip file can have one or multiple files. Maximum size of a zip file is 5 MB.
+	// Data object containing your Realtime scripts and dependencies as a zip  file. The zip file can have one or multiple files. Maximum size of a zip file is 5 MB.
 	ZipFile *string `json:"zipFile,omitempty" tf:"zip_file,omitempty"`
 }
 
@@ -54,14 +54,14 @@ type ScriptObservation struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Version that is associated with this script.
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 
-	// A data object containing your Realtime scripts and dependencies as a zip  file. The zip file can have one or multiple files. Maximum size of a zip file is 5 MB.
+	// Data object containing your Realtime scripts and dependencies as a zip  file. The zip file can have one or multiple files. Maximum size of a zip file is 5 MB.
 	ZipFile *string `json:"zipFile,omitempty" tf:"zip_file,omitempty"`
 }
 
@@ -89,7 +89,7 @@ type ScriptParameters struct {
 	// +kubebuilder:validation:Optional
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 
-	// A data object containing your Realtime scripts and dependencies as a zip  file. The zip file can have one or multiple files. Maximum size of a zip file is 5 MB.
+	// Data object containing your Realtime scripts and dependencies as a zip  file. The zip file can have one or multiple files. Maximum size of a zip file is 5 MB.
 	// +kubebuilder:validation:Optional
 	ZipFile *string `json:"zipFile,omitempty" tf:"zip_file,omitempty"`
 }
@@ -121,7 +121,7 @@ type ScriptStorageLocationInitParameters struct {
 	// +kubebuilder:validation:Optional
 	KeySelector *v2.Selector `json:"keySelector,omitempty" tf:"-"`
 
-	// A specific version of the file. If not set, the latest version of the file is retrieved.
+	// Specific version of the file. If not set, the latest version of the file is retrieved.
 	ObjectVersion *string `json:"objectVersion,omitempty" tf:"object_version,omitempty"`
 
 	// ARN of the access role that allows Amazon GameLift to access your S3 bucket.
@@ -146,7 +146,7 @@ type ScriptStorageLocationObservation struct {
 	// Name of the zip file containing your script files.
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
-	// A specific version of the file. If not set, the latest version of the file is retrieved.
+	// Specific version of the file. If not set, the latest version of the file is retrieved.
 	ObjectVersion *string `json:"objectVersion,omitempty" tf:"object_version,omitempty"`
 
 	// ARN of the access role that allows Amazon GameLift to access your S3 bucket.
@@ -182,7 +182,7 @@ type ScriptStorageLocationParameters struct {
 	// +kubebuilder:validation:Optional
 	KeySelector *v2.Selector `json:"keySelector,omitempty" tf:"-"`
 
-	// A specific version of the file. If not set, the latest version of the file is retrieved.
+	// Specific version of the file. If not set, the latest version of the file is retrieved.
 	// +kubebuilder:validation:Optional
 	ObjectVersion *string `json:"objectVersion,omitempty" tf:"object_version,omitempty"`
 

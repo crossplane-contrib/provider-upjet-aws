@@ -47,10 +47,10 @@ type QuerySuggestionsBlockListInitParameters struct {
 	// +kubebuilder:validation:Optional
 	RoleArnSelector *v2.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
 
-	// S3 path where your block list text file is located. See details below.
+	// S3 path where your block list text file is located. See source_s3_path Block for details.
 	SourceS3Path *SourceS3PathInitParameters `json:"sourceS3Path,omitempty" tf:"source_s3_path,omitempty"`
 
-	// Key-value map of resource tags. If configured with a provider default_tags configuration block, tags with matching keys will overwrite those defined at the provider-level.
+	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
@@ -81,12 +81,13 @@ type QuerySuggestionsBlockListObservation struct {
 	// IAM (Identity and Access Management) role used to access the block list text file in S3.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
-	// S3 path where your block list text file is located. See details below.
+	// S3 path where your block list text file is located. See source_s3_path Block for details.
 	SourceS3Path *SourceS3PathObservation `json:"sourceS3Path,omitempty" tf:"source_s3_path,omitempty"`
 
+	// Current status of the block list.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
-	// Key-value map of resource tags. If configured with a provider default_tags configuration block, tags with matching keys will overwrite those defined at the provider-level.
+	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
@@ -138,11 +139,11 @@ type QuerySuggestionsBlockListParameters struct {
 	// +kubebuilder:validation:Optional
 	RoleArnSelector *v2.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
 
-	// S3 path where your block list text file is located. See details below.
+	// S3 path where your block list text file is located. See source_s3_path Block for details.
 	// +kubebuilder:validation:Optional
 	SourceS3Path *SourceS3PathParameters `json:"sourceS3Path,omitempty" tf:"source_s3_path,omitempty"`
 
-	// Key-value map of resource tags. If configured with a provider default_tags configuration block, tags with matching keys will overwrite those defined at the provider-level.
+	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`

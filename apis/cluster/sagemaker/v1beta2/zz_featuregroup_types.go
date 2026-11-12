@@ -304,7 +304,7 @@ type OnlineStoreConfigInitParameters struct {
 	// Option for different tiers of low latency storage for real-time data retrieval. Valid values are Standard, or InMemory.
 	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
 
-	// Time to live duration, where the record is hard deleted after the expiration time is reached; ExpiresAt = EventTime + TtlDuration.. See TTl Duration Below.
+	// Time to live duration, where the record is hard deleted after the expiration time is reached; ExpiresAt = EventTime + TtlDuration.. See TTL Duration Below.
 	TTLDuration *TTLDurationInitParameters `json:"ttlDuration,omitempty" tf:"ttl_duration,omitempty"`
 }
 
@@ -319,7 +319,7 @@ type OnlineStoreConfigObservation struct {
 	// Option for different tiers of low latency storage for real-time data retrieval. Valid values are Standard, or InMemory.
 	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
 
-	// Time to live duration, where the record is hard deleted after the expiration time is reached; ExpiresAt = EventTime + TtlDuration.. See TTl Duration Below.
+	// Time to live duration, where the record is hard deleted after the expiration time is reached; ExpiresAt = EventTime + TtlDuration.. See TTL Duration Below.
 	TTLDuration *TTLDurationObservation `json:"ttlDuration,omitempty" tf:"ttl_duration,omitempty"`
 }
 
@@ -337,7 +337,7 @@ type OnlineStoreConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
 
-	// Time to live duration, where the record is hard deleted after the expiration time is reached; ExpiresAt = EventTime + TtlDuration.. See TTl Duration Below.
+	// Time to live duration, where the record is hard deleted after the expiration time is reached; ExpiresAt = EventTime + TtlDuration.. See TTL Duration Below.
 	// +kubebuilder:validation:Optional
 	TTLDuration *TTLDurationParameters `json:"ttlDuration,omitempty" tf:"ttl_duration,omitempty"`
 }

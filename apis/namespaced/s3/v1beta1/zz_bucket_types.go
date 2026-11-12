@@ -279,7 +279,7 @@ type GrantInitParameters struct {
 
 type GrantObservation struct {
 
-	// Canonical user id to grant for. Used only when type is CanonicalUser.
+	// Canonical user ID to grant for. Used only when type is CanonicalUser.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// List of permissions to apply for grantee. Valid values are READ, WRITE, READ_ACP, WRITE_ACP, FULL_CONTROL.
@@ -289,7 +289,7 @@ type GrantObservation struct {
 	// Type of grantee to apply for. Valid values are CanonicalUser and Group. AmazonCustomerByEmail is not supported.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
-	// Uri address to grant for. Used only when type is Group.
+	// URI address to grant for. Used only when type is Group.
 	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
 }
 
@@ -572,7 +572,7 @@ type WebsiteObservation struct {
 	// Absolute path to the document to return in case of a 4XX error.
 	ErrorDocument *string `json:"errorDocument,omitempty" tf:"error_document,omitempty"`
 
-	// Amazon S3 returns this index document when requests are made to the root domain or any of the subfolders.
+	// Amazon S3 returns this index document when requests are made to the root domain or any of the subfolders. Required unless using redirect_all_requests_to.
 	IndexDocument *string `json:"indexDocument,omitempty" tf:"index_document,omitempty"`
 
 	// Hostname to redirect all website requests for this bucket to. Hostname can optionally be prefixed with a protocol (http:// or https://) to use when redirecting requests. The default is the protocol that is used in the original request.

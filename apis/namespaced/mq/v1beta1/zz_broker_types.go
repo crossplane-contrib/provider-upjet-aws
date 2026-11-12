@@ -162,7 +162,7 @@ type BrokerObservation struct {
 	// Unique ID that Amazon MQ generates for the broker.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// List of information about allocated brokers (both active & standby).
+	// List of information about allocated brokers (both active & standby). See instances Block for details.
 	Instances []InstancesObservation `json:"instances,omitempty" tf:"instances,omitempty"`
 
 	// Configuration block for the LDAP server used to authenticate and authorize connections. Not supported for engine_type RabbitMQ. Detailed below.
@@ -192,7 +192,7 @@ type BrokerObservation struct {
 	// +listType=set
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
-	// List of resources shared with the broker via resource_share_arns. Only populated for engine_type of RabbitMQ.
+	// List of resources shared with the broker via resource_share_arns. Only populated for engine_type of RabbitMQ. See shared_resources Block for details.
 	SharedResources []SharedResourcesObservation `json:"sharedResources,omitempty" tf:"shared_resources,omitempty"`
 
 	// Storage type of the broker. For engine_type ActiveMQ, valid values are efs and ebs (AWS-default is efs). For engine_type RabbitMQ, only ebs is supported. When using ebs, only the mq.m5 broker instance type family is supported.
@@ -432,7 +432,7 @@ type InstancesObservation struct {
 	// URL of the ActiveMQ Web Console or the RabbitMQ Management UI depending on engine_type.
 	ConsoleURL *string `json:"consoleUrl,omitempty" tf:"console_url,omitempty"`
 
-	// Broker's wire-level protocol endpoints referenceable e.g., as instances.0.endpoints.0. Known endpoints are returned in the deterministic order below, based on protocol prefix and port number; any additional endpoint types introduced in the future are appended afterward in the order returned by the API.
+	// Broker's wire-level protocol endpoints, referenceable e.g., as instances.0.endpoints.0.
 	Endpoints []*string `json:"endpoints,omitempty" tf:"endpoints,omitempty"`
 
 	// IP Address of the broker.

@@ -256,7 +256,7 @@ spec:
                         type: string
                     type: object
                   quickConnectIds:
-                    description: Specifies a list of quick connects ids that determine
+                    description: Specifies a list of quick connects IDs that determine
                       the quick connects available to agents who are working the queue.
                     items:
                       type: string
@@ -490,7 +490,7 @@ spec:
                         type: string
                     type: object
                   quickConnectIds:
-                    description: Specifies a list of quick connects ids that determine
+                    description: Specifies a list of quick connects IDs that determine
                       the quick connects available to agents who are working the queue.
                     items:
                       type: string
@@ -620,7 +620,7 @@ spec:
                     description: The identifier for the Queue.
                     type: string
                   quickConnectIds:
-                    description: Specifies a list of quick connects ids that determine
+                    description: Specifies a list of quick connects IDs that determine
                       the quick connects available to agents who are working the queue.
                     items:
                       type: string

@@ -395,7 +395,7 @@ type LaunchTemplateConfigLaunchTemplateSpecificationInitParameters struct {
 	// The name of the launch template. Conflicts with id.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Template version. Unlike the autoscaling equivalent, does not support $Latest or $Default, so use the launch_template resource's attribute, e.g., "${aws_launch_template.foo.latest_version}". It will use the default version if omitted.
+	// Template version. Unlike the AutoScaling equivalent, does not support $Latest or $Default, so use the launch_template resource's attribute, e.g., "${aws_launch_template.foo.latest_version}". It will use the default version if omitted.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.LaunchTemplate
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("latest_version",true)
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
@@ -417,7 +417,7 @@ type LaunchTemplateConfigLaunchTemplateSpecificationObservation struct {
 	// The name of the launch template. Conflicts with id.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Template version. Unlike the autoscaling equivalent, does not support $Latest or $Default, so use the launch_template resource's attribute, e.g., "${aws_launch_template.foo.latest_version}". It will use the default version if omitted.
+	// Template version. Unlike the AutoScaling equivalent, does not support $Latest or $Default, so use the launch_template resource's attribute, e.g., "${aws_launch_template.foo.latest_version}". It will use the default version if omitted.
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
 
@@ -441,7 +441,7 @@ type LaunchTemplateConfigLaunchTemplateSpecificationParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Template version. Unlike the autoscaling equivalent, does not support $Latest or $Default, so use the launch_template resource's attribute, e.g., "${aws_launch_template.foo.latest_version}". It will use the default version if omitted.
+	// Template version. Unlike the AutoScaling equivalent, does not support $Latest or $Default, so use the launch_template resource's attribute, e.g., "${aws_launch_template.foo.latest_version}". It will use the default version if omitted.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.LaunchTemplate
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("latest_version",true)
 	// +kubebuilder:validation:Optional
@@ -576,7 +576,7 @@ type OverridesInstanceRequirementsInitParameters struct {
 	// +listType=set
 	AcceleratorManufacturers []*string `json:"acceleratorManufacturers,omitempty" tf:"accelerator_manufacturers,omitempty"`
 
-	// List of accelerator names. Default is any acclerator.
+	// List of accelerator names. Default is any accelerator.
 	// +listType=set
 	AcceleratorNames []*string `json:"acceleratorNames,omitempty" tf:"accelerator_names,omitempty"`
 
@@ -591,7 +591,7 @@ type OverridesInstanceRequirementsInitParameters struct {
 	// +listType=set
 	AllowedInstanceTypes []*string `json:"allowedInstanceTypes,omitempty" tf:"allowed_instance_types,omitempty"`
 
-	// Indicate whether bare metal instace types should be included, excluded, or required. Default is excluded.
+	// Indicate whether bare metal instance types should be included, excluded, or required. Default is excluded.
 	BareMetal *string `json:"bareMetal,omitempty" tf:"bare_metal,omitempty"`
 
 	// Block describing the minimum and maximum baseline EBS bandwidth, in Mbps. Default is no minimum or maximum.
@@ -772,7 +772,7 @@ type OverridesInstanceRequirementsObservation struct {
 	// +listType=set
 	AcceleratorManufacturers []*string `json:"acceleratorManufacturers,omitempty" tf:"accelerator_manufacturers,omitempty"`
 
-	// List of accelerator names. Default is any acclerator.
+	// List of accelerator names. Default is any accelerator.
 	// +listType=set
 	AcceleratorNames []*string `json:"acceleratorNames,omitempty" tf:"accelerator_names,omitempty"`
 
@@ -787,7 +787,7 @@ type OverridesInstanceRequirementsObservation struct {
 	// +listType=set
 	AllowedInstanceTypes []*string `json:"allowedInstanceTypes,omitempty" tf:"allowed_instance_types,omitempty"`
 
-	// Indicate whether bare metal instace types should be included, excluded, or required. Default is excluded.
+	// Indicate whether bare metal instance types should be included, excluded, or required. Default is excluded.
 	BareMetal *string `json:"bareMetal,omitempty" tf:"bare_metal,omitempty"`
 
 	// Block describing the minimum and maximum baseline EBS bandwidth, in Mbps. Default is no minimum or maximum.
@@ -854,7 +854,7 @@ type OverridesInstanceRequirementsParameters struct {
 	// +listType=set
 	AcceleratorManufacturers []*string `json:"acceleratorManufacturers,omitempty" tf:"accelerator_manufacturers,omitempty"`
 
-	// List of accelerator names. Default is any acclerator.
+	// List of accelerator names. Default is any accelerator.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	AcceleratorNames []*string `json:"acceleratorNames,omitempty" tf:"accelerator_names,omitempty"`
@@ -873,7 +873,7 @@ type OverridesInstanceRequirementsParameters struct {
 	// +listType=set
 	AllowedInstanceTypes []*string `json:"allowedInstanceTypes,omitempty" tf:"allowed_instance_types,omitempty"`
 
-	// Indicate whether bare metal instace types should be included, excluded, or required. Default is excluded.
+	// Indicate whether bare metal instance types should be included, excluded, or required. Default is excluded.
 	// +kubebuilder:validation:Optional
 	BareMetal *string `json:"bareMetal,omitempty" tf:"bare_metal,omitempty"`
 

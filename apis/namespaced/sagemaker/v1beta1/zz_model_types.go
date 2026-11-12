@@ -42,12 +42,34 @@ type AdditionalModelDataSourceParameters struct {
 	S3DataSource []S3DataSourceParameters `json:"s3DataSource" tf:"s3_data_source,omitempty"`
 }
 
+type AdditionalModelDataSourceS3DataSourceHubAccessConfigInitParameters struct {
+
+	// Versioned ARN of the private hub content to deploy, such as the versioned_hub_content_arn of an aws_sagemaker_hub_content_reference. s3_uri must match the hub content's hosting artifact URI.
+	HubContentArn *string `json:"hubContentArn,omitempty" tf:"hub_content_arn,omitempty"`
+}
+
+type AdditionalModelDataSourceS3DataSourceHubAccessConfigObservation struct {
+
+	// Versioned ARN of the private hub content to deploy, such as the versioned_hub_content_arn of an aws_sagemaker_hub_content_reference. s3_uri must match the hub content's hosting artifact URI.
+	HubContentArn *string `json:"hubContentArn,omitempty" tf:"hub_content_arn,omitempty"`
+}
+
+type AdditionalModelDataSourceS3DataSourceHubAccessConfigParameters struct {
+
+	// Versioned ARN of the private hub content to deploy, such as the versioned_hub_content_arn of an aws_sagemaker_hub_content_reference. s3_uri must match the hub content's hosting artifact URI.
+	// +kubebuilder:validation:Optional
+	HubContentArn *string `json:"hubContentArn" tf:"hub_content_arn,omitempty"`
+}
+
 type AdditionalModelDataSourceS3DataSourceInitParameters struct {
 
 	// How the model data is prepared. Allowed values are: None and Gzip.
 	CompressionType *string `json:"compressionType,omitempty" tf:"compression_type,omitempty"`
 
-	// Specifies the access configuration file for the ML model. You can explicitly accept the model end-user license agreement (EULA) within the [model_access_config configuration block]. See Model Access Config.
+	// Configuration for deploying a model from a SageMaker JumpStart private hub. See Hub Access Config.
+	HubAccessConfig *AdditionalModelDataSourceS3DataSourceHubAccessConfigInitParameters `json:"hubAccessConfig,omitempty" tf:"hub_access_config,omitempty"`
+
+	// Specifies the access configuration file for the ML model. You can explicitly accept the model end-user license agreement (EULA) within the model_access_config configuration block. See Model Access Config.
 	ModelAccessConfig *AdditionalModelDataSourceS3DataSourceModelAccessConfigInitParameters `json:"modelAccessConfig,omitempty" tf:"model_access_config,omitempty"`
 
 	// Type of model data to deploy. Allowed values are: S3Object and S3Prefix.
@@ -81,7 +103,10 @@ type AdditionalModelDataSourceS3DataSourceObservation struct {
 	// How the model data is prepared. Allowed values are: None and Gzip.
 	CompressionType *string `json:"compressionType,omitempty" tf:"compression_type,omitempty"`
 
-	// Specifies the access configuration file for the ML model. You can explicitly accept the model end-user license agreement (EULA) within the [model_access_config configuration block]. See Model Access Config.
+	// Configuration for deploying a model from a SageMaker JumpStart private hub. See Hub Access Config.
+	HubAccessConfig *AdditionalModelDataSourceS3DataSourceHubAccessConfigObservation `json:"hubAccessConfig,omitempty" tf:"hub_access_config,omitempty"`
+
+	// Specifies the access configuration file for the ML model. You can explicitly accept the model end-user license agreement (EULA) within the model_access_config configuration block. See Model Access Config.
 	ModelAccessConfig *AdditionalModelDataSourceS3DataSourceModelAccessConfigObservation `json:"modelAccessConfig,omitempty" tf:"model_access_config,omitempty"`
 
 	// Type of model data to deploy. Allowed values are: S3Object and S3Prefix.
@@ -97,7 +122,11 @@ type AdditionalModelDataSourceS3DataSourceParameters struct {
 	// +kubebuilder:validation:Optional
 	CompressionType *string `json:"compressionType" tf:"compression_type,omitempty"`
 
-	// Specifies the access configuration file for the ML model. You can explicitly accept the model end-user license agreement (EULA) within the [model_access_config configuration block]. See Model Access Config.
+	// Configuration for deploying a model from a SageMaker JumpStart private hub. See Hub Access Config.
+	// +kubebuilder:validation:Optional
+	HubAccessConfig *AdditionalModelDataSourceS3DataSourceHubAccessConfigParameters `json:"hubAccessConfig,omitempty" tf:"hub_access_config,omitempty"`
+
+	// Specifies the access configuration file for the ML model. You can explicitly accept the model end-user license agreement (EULA) within the model_access_config configuration block. See Model Access Config.
 	// +kubebuilder:validation:Optional
 	ModelAccessConfig *AdditionalModelDataSourceS3DataSourceModelAccessConfigParameters `json:"modelAccessConfig,omitempty" tf:"model_access_config,omitempty"`
 
@@ -235,6 +264,25 @@ type ContainerParameters struct {
 	MultiModelConfig *MultiModelConfigParameters `json:"multiModelConfig,omitempty" tf:"multi_model_config,omitempty"`
 }
 
+type HubAccessConfigInitParameters struct {
+
+	// Versioned ARN of the private hub content to deploy, such as the versioned_hub_content_arn of an aws_sagemaker_hub_content_reference. s3_uri must match the hub content's hosting artifact URI.
+	HubContentArn *string `json:"hubContentArn,omitempty" tf:"hub_content_arn,omitempty"`
+}
+
+type HubAccessConfigObservation struct {
+
+	// Versioned ARN of the private hub content to deploy, such as the versioned_hub_content_arn of an aws_sagemaker_hub_content_reference. s3_uri must match the hub content's hosting artifact URI.
+	HubContentArn *string `json:"hubContentArn,omitempty" tf:"hub_content_arn,omitempty"`
+}
+
+type HubAccessConfigParameters struct {
+
+	// Versioned ARN of the private hub content to deploy, such as the versioned_hub_content_arn of an aws_sagemaker_hub_content_reference. s3_uri must match the hub content's hosting artifact URI.
+	// +kubebuilder:validation:Optional
+	HubContentArn *string `json:"hubContentArn" tf:"hub_content_arn,omitempty"`
+}
+
 type ImageConfigInitParameters struct {
 
 	// Whether the model container is in Amazon ECR or a private Docker registry accessible from your VPC. Allowed values are: Platform and Vpc.
@@ -340,12 +388,34 @@ type ModelDataSourceParameters struct {
 	S3DataSource []ModelDataSourceS3DataSourceParameters `json:"s3DataSource" tf:"s3_data_source,omitempty"`
 }
 
+type ModelDataSourceS3DataSourceHubAccessConfigInitParameters struct {
+
+	// Versioned ARN of the private hub content to deploy, such as the versioned_hub_content_arn of an aws_sagemaker_hub_content_reference. s3_uri must match the hub content's hosting artifact URI.
+	HubContentArn *string `json:"hubContentArn,omitempty" tf:"hub_content_arn,omitempty"`
+}
+
+type ModelDataSourceS3DataSourceHubAccessConfigObservation struct {
+
+	// Versioned ARN of the private hub content to deploy, such as the versioned_hub_content_arn of an aws_sagemaker_hub_content_reference. s3_uri must match the hub content's hosting artifact URI.
+	HubContentArn *string `json:"hubContentArn,omitempty" tf:"hub_content_arn,omitempty"`
+}
+
+type ModelDataSourceS3DataSourceHubAccessConfigParameters struct {
+
+	// Versioned ARN of the private hub content to deploy, such as the versioned_hub_content_arn of an aws_sagemaker_hub_content_reference. s3_uri must match the hub content's hosting artifact URI.
+	// +kubebuilder:validation:Optional
+	HubContentArn *string `json:"hubContentArn" tf:"hub_content_arn,omitempty"`
+}
+
 type ModelDataSourceS3DataSourceInitParameters struct {
 
 	// How the model data is prepared. Allowed values are: None and Gzip.
 	CompressionType *string `json:"compressionType,omitempty" tf:"compression_type,omitempty"`
 
-	// Specifies the access configuration file for the ML model. You can explicitly accept the model end-user license agreement (EULA) within the [model_access_config configuration block]. See Model Access Config.
+	// Configuration for deploying a model from a SageMaker JumpStart private hub. See Hub Access Config.
+	HubAccessConfig *S3DataSourceHubAccessConfigInitParameters `json:"hubAccessConfig,omitempty" tf:"hub_access_config,omitempty"`
+
+	// Specifies the access configuration file for the ML model. You can explicitly accept the model end-user license agreement (EULA) within the model_access_config configuration block. See Model Access Config.
 	ModelAccessConfig *S3DataSourceModelAccessConfigInitParameters `json:"modelAccessConfig,omitempty" tf:"model_access_config,omitempty"`
 
 	// Type of model data to deploy. Allowed values are: S3Object and S3Prefix.
@@ -379,7 +449,10 @@ type ModelDataSourceS3DataSourceObservation struct {
 	// How the model data is prepared. Allowed values are: None and Gzip.
 	CompressionType *string `json:"compressionType,omitempty" tf:"compression_type,omitempty"`
 
-	// Specifies the access configuration file for the ML model. You can explicitly accept the model end-user license agreement (EULA) within the [model_access_config configuration block]. See Model Access Config.
+	// Configuration for deploying a model from a SageMaker JumpStart private hub. See Hub Access Config.
+	HubAccessConfig *S3DataSourceHubAccessConfigObservation `json:"hubAccessConfig,omitempty" tf:"hub_access_config,omitempty"`
+
+	// Specifies the access configuration file for the ML model. You can explicitly accept the model end-user license agreement (EULA) within the model_access_config configuration block. See Model Access Config.
 	ModelAccessConfig *S3DataSourceModelAccessConfigObservation `json:"modelAccessConfig,omitempty" tf:"model_access_config,omitempty"`
 
 	// Type of model data to deploy. Allowed values are: S3Object and S3Prefix.
@@ -395,7 +468,11 @@ type ModelDataSourceS3DataSourceParameters struct {
 	// +kubebuilder:validation:Optional
 	CompressionType *string `json:"compressionType" tf:"compression_type,omitempty"`
 
-	// Specifies the access configuration file for the ML model. You can explicitly accept the model end-user license agreement (EULA) within the [model_access_config configuration block]. See Model Access Config.
+	// Configuration for deploying a model from a SageMaker JumpStart private hub. See Hub Access Config.
+	// +kubebuilder:validation:Optional
+	HubAccessConfig *S3DataSourceHubAccessConfigParameters `json:"hubAccessConfig,omitempty" tf:"hub_access_config,omitempty"`
+
+	// Specifies the access configuration file for the ML model. You can explicitly accept the model end-user license agreement (EULA) within the model_access_config configuration block. See Model Access Config.
 	// +kubebuilder:validation:Optional
 	ModelAccessConfig *S3DataSourceModelAccessConfigParameters `json:"modelAccessConfig,omitempty" tf:"model_access_config,omitempty"`
 
@@ -667,7 +744,10 @@ type PrimaryContainerModelDataSourceS3DataSourceInitParameters struct {
 	// How the model data is prepared. Allowed values are: None and Gzip.
 	CompressionType *string `json:"compressionType,omitempty" tf:"compression_type,omitempty"`
 
-	// Specifies the access configuration file for the ML model. You can explicitly accept the model end-user license agreement (EULA) within the [model_access_config configuration block]. See Model Access Config.
+	// Configuration for deploying a model from a SageMaker JumpStart private hub. See Hub Access Config.
+	HubAccessConfig *ModelDataSourceS3DataSourceHubAccessConfigInitParameters `json:"hubAccessConfig,omitempty" tf:"hub_access_config,omitempty"`
+
+	// Specifies the access configuration file for the ML model. You can explicitly accept the model end-user license agreement (EULA) within the model_access_config configuration block. See Model Access Config.
 	ModelAccessConfig *ModelDataSourceS3DataSourceModelAccessConfigInitParameters `json:"modelAccessConfig,omitempty" tf:"model_access_config,omitempty"`
 
 	// Type of model data to deploy. Allowed values are: S3Object and S3Prefix.
@@ -682,7 +762,10 @@ type PrimaryContainerModelDataSourceS3DataSourceObservation struct {
 	// How the model data is prepared. Allowed values are: None and Gzip.
 	CompressionType *string `json:"compressionType,omitempty" tf:"compression_type,omitempty"`
 
-	// Specifies the access configuration file for the ML model. You can explicitly accept the model end-user license agreement (EULA) within the [model_access_config configuration block]. See Model Access Config.
+	// Configuration for deploying a model from a SageMaker JumpStart private hub. See Hub Access Config.
+	HubAccessConfig *ModelDataSourceS3DataSourceHubAccessConfigObservation `json:"hubAccessConfig,omitempty" tf:"hub_access_config,omitempty"`
+
+	// Specifies the access configuration file for the ML model. You can explicitly accept the model end-user license agreement (EULA) within the model_access_config configuration block. See Model Access Config.
 	ModelAccessConfig *ModelDataSourceS3DataSourceModelAccessConfigObservation `json:"modelAccessConfig,omitempty" tf:"model_access_config,omitempty"`
 
 	// Type of model data to deploy. Allowed values are: S3Object and S3Prefix.
@@ -698,7 +781,11 @@ type PrimaryContainerModelDataSourceS3DataSourceParameters struct {
 	// +kubebuilder:validation:Optional
 	CompressionType *string `json:"compressionType" tf:"compression_type,omitempty"`
 
-	// Specifies the access configuration file for the ML model. You can explicitly accept the model end-user license agreement (EULA) within the [model_access_config configuration block]. See Model Access Config.
+	// Configuration for deploying a model from a SageMaker JumpStart private hub. See Hub Access Config.
+	// +kubebuilder:validation:Optional
+	HubAccessConfig *ModelDataSourceS3DataSourceHubAccessConfigParameters `json:"hubAccessConfig,omitempty" tf:"hub_access_config,omitempty"`
+
+	// Specifies the access configuration file for the ML model. You can explicitly accept the model end-user license agreement (EULA) within the model_access_config configuration block. See Model Access Config.
 	// +kubebuilder:validation:Optional
 	ModelAccessConfig *ModelDataSourceS3DataSourceModelAccessConfigParameters `json:"modelAccessConfig,omitempty" tf:"model_access_config,omitempty"`
 
@@ -836,12 +923,34 @@ type RepositoryAuthConfigParameters struct {
 	RepositoryCredentialsProviderArn *string `json:"repositoryCredentialsProviderArn" tf:"repository_credentials_provider_arn,omitempty"`
 }
 
+type S3DataSourceHubAccessConfigInitParameters struct {
+
+	// Versioned ARN of the private hub content to deploy, such as the versioned_hub_content_arn of an aws_sagemaker_hub_content_reference. s3_uri must match the hub content's hosting artifact URI.
+	HubContentArn *string `json:"hubContentArn,omitempty" tf:"hub_content_arn,omitempty"`
+}
+
+type S3DataSourceHubAccessConfigObservation struct {
+
+	// Versioned ARN of the private hub content to deploy, such as the versioned_hub_content_arn of an aws_sagemaker_hub_content_reference. s3_uri must match the hub content's hosting artifact URI.
+	HubContentArn *string `json:"hubContentArn,omitempty" tf:"hub_content_arn,omitempty"`
+}
+
+type S3DataSourceHubAccessConfigParameters struct {
+
+	// Versioned ARN of the private hub content to deploy, such as the versioned_hub_content_arn of an aws_sagemaker_hub_content_reference. s3_uri must match the hub content's hosting artifact URI.
+	// +kubebuilder:validation:Optional
+	HubContentArn *string `json:"hubContentArn" tf:"hub_content_arn,omitempty"`
+}
+
 type S3DataSourceInitParameters struct {
 
 	// How the model data is prepared. Allowed values are: None and Gzip.
 	CompressionType *string `json:"compressionType,omitempty" tf:"compression_type,omitempty"`
 
-	// Specifies the access configuration file for the ML model. You can explicitly accept the model end-user license agreement (EULA) within the [model_access_config configuration block]. See Model Access Config.
+	// Configuration for deploying a model from a SageMaker JumpStart private hub. See Hub Access Config.
+	HubAccessConfig *HubAccessConfigInitParameters `json:"hubAccessConfig,omitempty" tf:"hub_access_config,omitempty"`
+
+	// Specifies the access configuration file for the ML model. You can explicitly accept the model end-user license agreement (EULA) within the model_access_config configuration block. See Model Access Config.
 	ModelAccessConfig *ModelAccessConfigInitParameters `json:"modelAccessConfig,omitempty" tf:"model_access_config,omitempty"`
 
 	// Type of model data to deploy. Allowed values are: S3Object and S3Prefix.
@@ -875,7 +984,10 @@ type S3DataSourceObservation struct {
 	// How the model data is prepared. Allowed values are: None and Gzip.
 	CompressionType *string `json:"compressionType,omitempty" tf:"compression_type,omitempty"`
 
-	// Specifies the access configuration file for the ML model. You can explicitly accept the model end-user license agreement (EULA) within the [model_access_config configuration block]. See Model Access Config.
+	// Configuration for deploying a model from a SageMaker JumpStart private hub. See Hub Access Config.
+	HubAccessConfig *HubAccessConfigObservation `json:"hubAccessConfig,omitempty" tf:"hub_access_config,omitempty"`
+
+	// Specifies the access configuration file for the ML model. You can explicitly accept the model end-user license agreement (EULA) within the model_access_config configuration block. See Model Access Config.
 	ModelAccessConfig *ModelAccessConfigObservation `json:"modelAccessConfig,omitempty" tf:"model_access_config,omitempty"`
 
 	// Type of model data to deploy. Allowed values are: S3Object and S3Prefix.
@@ -891,7 +1003,11 @@ type S3DataSourceParameters struct {
 	// +kubebuilder:validation:Optional
 	CompressionType *string `json:"compressionType" tf:"compression_type,omitempty"`
 
-	// Specifies the access configuration file for the ML model. You can explicitly accept the model end-user license agreement (EULA) within the [model_access_config configuration block]. See Model Access Config.
+	// Configuration for deploying a model from a SageMaker JumpStart private hub. See Hub Access Config.
+	// +kubebuilder:validation:Optional
+	HubAccessConfig *HubAccessConfigParameters `json:"hubAccessConfig,omitempty" tf:"hub_access_config,omitempty"`
+
+	// Specifies the access configuration file for the ML model. You can explicitly accept the model end-user license agreement (EULA) within the model_access_config configuration block. See Model Access Config.
 	// +kubebuilder:validation:Optional
 	ModelAccessConfig *ModelAccessConfigParameters `json:"modelAccessConfig,omitempty" tf:"model_access_config,omitempty"`
 

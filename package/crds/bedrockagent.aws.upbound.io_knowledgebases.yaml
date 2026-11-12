@@ -34,7 +34,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: KnowledgeBase is the Schema for the KnowledgeBases API.
+        description: KnowledgeBase is the Schema for the KnowledgeBases API. Manages
+          an AWS Agents for Amazon Bedrock Knowledge Base.
         properties:
           apiVersion:
             description: |-
@@ -77,11 +78,11 @@ spec:
                     type: string
                   knowledgeBaseConfiguration:
                     description: Details about the embeddings configuration of the
-                      knowledge base. See knowledge_base_configuration block for details.
+                      knowledge base. See knowledge_base_configuration Block for details.
                     properties:
                       kendraKnowledgeBaseConfiguration:
                         description: Settings for an Amazon Kendra knowledge base.
-                          See kendra_knowledge_base_configuration block for details.
+                          See kendra_knowledge_base_configuration Block for details.
                         properties:
                           kendraIndexArn:
                             description: ARN of the Amazon Kendra index.
@@ -166,31 +167,31 @@ spec:
                       managedKnowledgeBaseConfiguration:
                         description: Settings for a managed knowledge base where Amazon
                           Bedrock manages the vector store. See managed_knowledge_base_configuration
-                          block for details.
+                          Block for details.
                         properties:
                           embeddingModelArn:
                             description: ARN of the model used to create vector embeddings
                               for the knowledge base.
                             type: string
                           embeddingModelConfiguration:
-                            description: The embeddings model configuration details
-                              for the vector model used in Knowledge Base.  See embedding_model_configuration
-                              block for details.
+                            description: Embeddings model configuration details for
+                              the vector model used in the knowledge base. See embedding_model_configuration
+                              Block for details.
                             properties:
                               bedrockEmbeddingModelConfiguration:
-                                description: The vector configuration details on the
-                                  Bedrock embeddings model.  See bedrock_embedding_model_configuration
-                                  block for details.
+                                description: Vector configuration details for the
+                                  Bedrock embeddings model. See bedrock_embedding_model_configuration
+                                  Block for details.
                                 properties:
                                   audio:
                                     description: Configuration for processing audio
                                       content in multimodal knowledge bases. See audio
-                                      block for details.
+                                      Block for details.
                                     properties:
                                       segmentationConfiguration:
                                         description: Configuration for segmenting
                                           video content during processing. See segmentation_configuration
-                                          block for details.
+                                          Block for details.
                                         properties:
                                           fixedLengthDuration:
                                             description: Duration in seconds for each
@@ -207,18 +208,18 @@ spec:
                                     description: Data type for the vectors when using
                                       a model to convert text into vector embeddings.
                                       The model must support the specified data type
-                                      for vector embeddings.  Valid values are FLOAT32
+                                      for vector embeddings. Valid values are FLOAT32
                                       and BINARY.
                                     type: string
                                   video:
                                     description: Configuration for processing video
                                       content in multimodal knowledge bases. See video
-                                      block for details.
+                                      Block for details.
                                     properties:
                                       segmentationConfiguration:
                                         description: Configuration for segmenting
                                           video content during processing. See segmentation_configuration
-                                          block for details.
+                                          Block for details.
                                         properties:
                                           fixedLengthDuration:
                                             description: Duration in seconds for each
@@ -237,7 +238,7 @@ spec:
                           serverSideEncryptionConfiguration:
                             description: Server-side encryption configuration for
                               the managed knowledge base. See server_side_encryption_configuration
-                              block for details.
+                              Block for details.
                             properties:
                               kmsKeyArn:
                                 description: ARN of the KMS key used to encrypt the
@@ -324,26 +325,27 @@ spec:
                       sqlKnowledgeBaseConfiguration:
                         description: Configurations for a knowledge base connected
                           to an SQL database. See sql_knowledge_base_configuration
-                          block for details.
+                          Block for details.
                         properties:
                           redshiftConfiguration:
                             description: Configurations for storage in Amazon Redshift.
-                              See redshift_configuration block for details.
+                              See knowledge_base_configuration.sql_knowledge_base_configuration.redshift_configuration.storage_configuration.redshift_configuration
+                              Block for details.
                             properties:
                               queryEngineConfiguration:
                                 description: Configurations for an Amazon Redshift
-                                  query engine. See query_engine_configuration block
+                                  query engine. See query_engine_configuration Block
                                   for details.
                                 properties:
                                   provisionedConfiguration:
                                     description: Configurations for a provisioned
                                       Amazon Redshift query engine. See provisioned_configuration
-                                      block for details.
+                                      Block for details.
                                     properties:
                                       authConfiguration:
                                         description: Configurations for authentication
-                                          to Amazon Redshift. See auth_configuration
-                                          block for details.
+                                          to Amazon Redshift. See knowledge_base_configuration.sql_knowledge_base_configuration.redshift_configuration.query_engine_configuration.provisioned_configuration.auth_configuration
+                                          Block for details.
                                         properties:
                                           databaseUser:
                                             description: Database username for authentication
@@ -443,12 +445,12 @@ spec:
                                   serverlessConfiguration:
                                     description: Configurations for a serverless Amazon
                                       Redshift query engine. See serverless_configuration
-                                      block for details.
+                                      Block for details.
                                     properties:
                                       authConfiguration:
                                         description: Configurations for authentication
-                                          to Amazon Redshift. See auth_configuration
-                                          block for details.
+                                          to Amazon Redshift. See knowledge_base_configuration.sql_knowledge_base_configuration.redshift_configuration.query_engine_configuration.provisioned_configuration.auth_configuration
+                                          Block for details.
                                         properties:
                                           type:
                                             description: Storage service used for
@@ -471,7 +473,7 @@ spec:
                                 type: object
                               queryGenerationConfiguration:
                                 description: Configurations for generating queries.
-                                  See query_generation_configuration block for details.
+                                  See query_generation_configuration Block for details.
                                 properties:
                                   executionTimeoutSeconds:
                                     description: Time after which query generation
@@ -480,12 +482,12 @@ spec:
                                   generationContext:
                                     description: Configurations for context to use
                                       during query generation. See generation_context
-                                      block for details.
+                                      Block for details.
                                     properties:
                                       curatedQuery:
                                         description: Information about example queries
                                           to help the query engine generate appropriate
-                                          SQL queries. See curated_query block for
+                                          SQL queries. See curated_query Block for
                                           details.
                                         items:
                                           properties:
@@ -500,12 +502,12 @@ spec:
                                         type: array
                                       table:
                                         description: Information about a table in
-                                          the database. See table block for details.
+                                          the database. See table Block for details.
                                         items:
                                           properties:
                                             column:
                                               description: Information about a column
-                                                in the table. See column block for
+                                                in the table. See column Block for
                                                 details.
                                               items:
                                                 properties:
@@ -549,12 +551,12 @@ spec:
                               storageConfiguration:
                                 description: Details about the storage configuration
                                   of the knowledge base. See storage_configuration
-                                  block for details.
+                                  Block for details.
                                 properties:
                                   awsDataCatalogConfiguration:
                                     description: Configurations for storage in AWS
                                       Glue Data Catalog. See aws_data_catalog_configuration
-                                      block for details.
+                                      Block for details.
                                     properties:
                                       tableNames:
                                         description: List of names of the tables to
@@ -566,12 +568,12 @@ spec:
                                     type: object
                                   redshiftConfiguration:
                                     description: Configurations for storage in Amazon
-                                      Redshift. See redshift_configuration block for
-                                      details.
+                                      Redshift. See knowledge_base_configuration.sql_knowledge_base_configuration.redshift_configuration.storage_configuration.redshift_configuration
+                                      Block for details.
                                     properties:
                                       databaseName:
-                                        description: –  The name of the database in
-                                          the MongoDB Atlas database.
+                                        description: Name of the database in the MongoDB
+                                          Atlas database.
                                         type: string
                                     type: object
                                   type:
@@ -593,31 +595,31 @@ spec:
                       vectorKnowledgeBaseConfiguration:
                         description: Details about the model that's used to convert
                           the data source into vector embeddings. See vector_knowledge_base_configuration
-                          block for details.
+                          Block for details.
                         properties:
                           embeddingModelArn:
                             description: ARN of the model used to create vector embeddings
                               for the knowledge base.
                             type: string
                           embeddingModelConfiguration:
-                            description: The embeddings model configuration details
-                              for the vector model used in Knowledge Base.  See embedding_model_configuration
-                              block for details.
+                            description: Embeddings model configuration details for
+                              the vector model used in the knowledge base. See embedding_model_configuration
+                              Block for details.
                             properties:
                               bedrockEmbeddingModelConfiguration:
-                                description: The vector configuration details on the
-                                  Bedrock embeddings model.  See bedrock_embedding_model_configuration
-                                  block for details.
+                                description: Vector configuration details for the
+                                  Bedrock embeddings model. See bedrock_embedding_model_configuration
+                                  Block for details.
                                 properties:
                                   audio:
                                     description: Configuration for processing audio
                                       content in multimodal knowledge bases. See audio
-                                      block for details.
+                                      Block for details.
                                     properties:
                                       segmentationConfiguration:
                                         description: Configuration for segmenting
                                           video content during processing. See segmentation_configuration
-                                          block for details.
+                                          Block for details.
                                         properties:
                                           fixedLengthDuration:
                                             description: Duration in seconds for each
@@ -634,18 +636,18 @@ spec:
                                     description: Data type for the vectors when using
                                       a model to convert text into vector embeddings.
                                       The model must support the specified data type
-                                      for vector embeddings.  Valid values are FLOAT32
+                                      for vector embeddings. Valid values are FLOAT32
                                       and BINARY.
                                     type: string
                                   video:
                                     description: Configuration for processing video
                                       content in multimodal knowledge bases. See video
-                                      block for details.
+                                      Block for details.
                                     properties:
                                       segmentationConfiguration:
                                         description: Configuration for segmenting
                                           video content during processing. See segmentation_configuration
-                                          block for details.
+                                          Block for details.
                                         properties:
                                           fixedLengthDuration:
                                             description: Duration in seconds for each
@@ -656,18 +658,19 @@ spec:
                                 type: object
                             type: object
                           supplementalDataStorageConfiguration:
-                            description: supplemental_data_storage_configuration.  See
-                              supplemental_data_storage_configuration block for details.
+                            description: Supplemental data storage configuration for
+                              images extracted from multimodal documents. See supplemental_data_storage_configuration
+                              Block for details.
                             properties:
                               storageLocation:
-                                description: A storage location specification for
-                                  images extracted from multimodal documents in your
-                                  data source.  See storage_location block for details.
+                                description: Storage location specification for images
+                                  extracted from multimodal documents in your data
+                                  source. See storage_location Block for details.
                                 properties:
                                   s3Location:
-                                    description: Contains information about the Amazon
-                                      S3 location for the extracted images.  See s3_location
-                                      block for details.
+                                    description: Information about the Amazon S3 location
+                                      for the extracted images. See s3_location Block
+                                      for details.
                                     properties:
                                       uri:
                                         description: URI of the location.
@@ -769,79 +772,78 @@ spec:
                     type: object
                   storageConfiguration:
                     description: Details about the storage configuration of the knowledge
-                      base. See storage_configuration block for details.
+                      base. See storage_configuration Block for details.
                     properties:
                       mongoDbAtlasConfiguration:
-                        description: –  The storage configuration of the knowledge
-                          base in MongoDB Atlas. See mongo_db_atlas_configuration
-                          block for details.
+                        description: Storage configuration of the knowledge base in
+                          MongoDB Atlas. See mongo_db_atlas_configuration Block for
+                          details.
                         properties:
                           collectionName:
-                            description: –  The name of the collection in the MongoDB
-                              Atlas database.
-                            type: string
-                          credentialsSecretArn:
-                            description: –  The ARN of the secret that you created
-                              in AWS Secrets Manager that is linked to your MongoDB
-                              Atlas database.
-                            type: string
-                          databaseName:
-                            description: –  The name of the database in the MongoDB
-                              Atlas database.
-                            type: string
-                          endpoint:
-                            description: –  The endpoint URL of the MongoDB Atlas
+                            description: Name of the collection in the MongoDB Atlas
                               database.
                             type: string
+                          credentialsSecretArn:
+                            description: ARN of the secret that you created in AWS
+                              Secrets Manager that is linked to your MongoDB Atlas
+                              database.
+                            type: string
+                          databaseName:
+                            description: Name of the database in the MongoDB Atlas
+                              database.
+                            type: string
+                          endpoint:
+                            description: Endpoint URL of the MongoDB Atlas database.
+                            type: string
                           endpointServiceName:
-                            description: –  The name of the service that hosts the
-                              MongoDB Atlas database.
+                            description: Name of the VPC endpoint service in your
+                              account that is connected to your MongoDB Atlas cluster.
                             type: string
                           fieldMapping:
-                            description: –  Contains the names of the fields to which
-                              to map information about the vector store.
+                            description: Names of the fields to which to map information
+                              about the vector store. See storage_configuration.mongo_db_atlas_configuration.field_mapping
+                              Block for details.
                             properties:
                               metadataField:
-                                description: –  The name of the field in which Amazon
-                                  Bedrock stores metadata about the vector store.
+                                description: Name of the field in which Amazon Bedrock
+                                  stores metadata about the vector store.
                                 type: string
                               textField:
-                                description: –  The name of the field in which Amazon
-                                  Bedrock stores the raw text from your data. The
-                                  text is split according to the chunking strategy
-                                  you choose.
+                                description: Name of the field in which Amazon Bedrock
+                                  stores the raw text from your data. The text is
+                                  split according to the chunking strategy you choose.
                                 type: string
                               vectorField:
-                                description: –  The name of the field in which Amazon
-                                  Bedrock stores the vector embeddings for your data
-                                  sources.
+                                description: Name of the field in which Amazon Bedrock
+                                  stores the vector embeddings for your data sources.
                                 type: string
                             type: object
                           textIndexName:
-                            description: –  The name of the vector index.
+                            description: Name of the text search index in the MongoDB
+                              collection. Required for hybrid search.
                             type: string
                           vectorIndexName:
-                            description: –  The name of the vector index.
+                            description: Name of the vector index.
                             type: string
                         type: object
                       neptuneAnalyticsConfiguration:
-                        description: –  The storage configuration of the knowledge
-                          base in Amazon Neptune Analytics. See neptune_analytics_configuration
-                          block for details.
+                        description: Storage configuration of the knowledge base in
+                          Amazon Neptune Analytics. See neptune_analytics_configuration
+                          Block for details.
                         properties:
                           fieldMapping:
-                            description: –  Contains the names of the fields to which
-                              to map information about the vector store.
+                            description: Names of the fields to which to map information
+                              about the vector store. See storage_configuration.mongo_db_atlas_configuration.field_mapping
+                              Block for details.
                             properties:
                               metadataField:
-                                description: –  The name of the field in which Amazon
-                                  Bedrock stores metadata about the vector store.
+                                description: Name of the field in which Amazon Bedrock
+                                  stores metadata about the vector store.
                                 type: string
                               textField:
-                                description: –  The name of the field in which Amazon
-                                  Bedrock stores the raw text from your data. The
-                                  text is split according to the chunking strategy
-                                  you choose.
+                                description: Name of the field in which Amazon Bedrock
+                                  stores the raw text from your data. The text is
+                                  split according to the chunking strategy you choose.
                                 type: string
                             type: object
                           graphArn:
@@ -849,9 +851,9 @@ spec:
                             type: string
                         type: object
                       opensearchManagedClusterConfiguration:
-                        description: The storage configuration of the knowledge base
-                          in Amazon OpenSearch Service Managed Cluster. See opensearch_managed_cluster_configuration
-                          block for details.
+                        description: Storage configuration of the knowledge base in
+                          Amazon OpenSearch Service Managed Cluster. See opensearch_managed_cluster_configuration
+                          Block for details.
                         properties:
                           domainArn:
                             description: ARN of the OpenSearch domain.
@@ -936,33 +938,32 @@ spec:
                             description: Endpoint URL of the OpenSearch domain.
                             type: string
                           fieldMapping:
-                            description: –  Contains the names of the fields to which
-                              to map information about the vector store.
+                            description: Names of the fields to which to map information
+                              about the vector store. See storage_configuration.mongo_db_atlas_configuration.field_mapping
+                              Block for details.
                             properties:
                               metadataField:
-                                description: –  The name of the field in which Amazon
-                                  Bedrock stores metadata about the vector store.
+                                description: Name of the field in which Amazon Bedrock
+                                  stores metadata about the vector store.
                                 type: string
                               textField:
-                                description: –  The name of the field in which Amazon
-                                  Bedrock stores the raw text from your data. The
-                                  text is split according to the chunking strategy
-                                  you choose.
+                                description: Name of the field in which Amazon Bedrock
+                                  stores the raw text from your data. The text is
+                                  split according to the chunking strategy you choose.
                                 type: string
                               vectorField:
-                                description: –  The name of the field in which Amazon
-                                  Bedrock stores the vector embeddings for your data
-                                  sources.
+                                description: Name of the field in which Amazon Bedrock
+                                  stores the vector embeddings for your data sources.
                                 type: string
                             type: object
                           vectorIndexName:
-                            description: –  The name of the vector index.
+                            description: Name of the vector index.
                             type: string
                         type: object
                       opensearchServerlessConfiguration:
-                        description: The storage configuration of the knowledge base
-                          in Amazon OpenSearch Service Serverless. See opensearch_serverless_configuration
-                          block for details.
+                        description: Storage configuration of the knowledge base in
+                          Amazon OpenSearch Service Serverless. See opensearch_serverless_configuration
+                          Block for details.
                         properties:
                           collectionArn:
                             description: ARN of the OpenSearch Service vector store.
@@ -1044,54 +1045,53 @@ spec:
                                 type: object
                             type: object
                           fieldMapping:
-                            description: –  Contains the names of the fields to which
-                              to map information about the vector store.
+                            description: Names of the fields to which to map information
+                              about the vector store. See storage_configuration.mongo_db_atlas_configuration.field_mapping
+                              Block for details.
                             properties:
                               metadataField:
-                                description: –  The name of the field in which Amazon
-                                  Bedrock stores metadata about the vector store.
+                                description: Name of the field in which Amazon Bedrock
+                                  stores metadata about the vector store.
                                 type: string
                               textField:
-                                description: –  The name of the field in which Amazon
-                                  Bedrock stores the raw text from your data. The
-                                  text is split according to the chunking strategy
-                                  you choose.
+                                description: Name of the field in which Amazon Bedrock
+                                  stores the raw text from your data. The text is
+                                  split according to the chunking strategy you choose.
                                 type: string
                               vectorField:
-                                description: –  The name of the field in which Amazon
-                                  Bedrock stores the vector embeddings for your data
-                                  sources.
+                                description: Name of the field in which Amazon Bedrock
+                                  stores the vector embeddings for your data sources.
                                 type: string
                             type: object
                           vectorIndexName:
-                            description: –  The name of the vector index.
+                            description: Name of the vector index.
                             type: string
                         type: object
                       pineconeConfiguration:
-                        description: The storage configuration of the knowledge base
-                          in Pinecone. See pinecone_configuration block for details.
+                        description: Storage configuration of the knowledge base in
+                          Pinecone. See pinecone_configuration Block for details.
                         properties:
                           connectionString:
                             description: Endpoint URL for your index management page.
                             type: string
                           credentialsSecretArn:
-                            description: –  The ARN of the secret that you created
-                              in AWS Secrets Manager that is linked to your MongoDB
-                              Atlas database.
+                            description: ARN of the secret that you created in AWS
+                              Secrets Manager that is linked to your MongoDB Atlas
+                              database.
                             type: string
                           fieldMapping:
-                            description: –  Contains the names of the fields to which
-                              to map information about the vector store.
+                            description: Names of the fields to which to map information
+                              about the vector store. See storage_configuration.mongo_db_atlas_configuration.field_mapping
+                              Block for details.
                             properties:
                               metadataField:
-                                description: –  The name of the field in which Amazon
-                                  Bedrock stores metadata about the vector store.
+                                description: Name of the field in which Amazon Bedrock
+                                  stores metadata about the vector store.
                                 type: string
                               textField:
-                                description: –  The name of the field in which Amazon
-                                  Bedrock stores the raw text from your data. The
-                                  text is split according to the chunking strategy
-                                  you choose.
+                                description: Name of the field in which Amazon Bedrock
+                                  stores the raw text from your data. The text is
+                                  split according to the chunking strategy you choose.
                                 type: string
                             type: object
                           namespace:
@@ -1103,12 +1103,12 @@ spec:
                         description: Details about the storage configuration of the
                           knowledge base in Amazon RDS. For more information, see
                           Create a vector index in Amazon RDS. See rds_configuration
-                          block for details.
+                          Block for details.
                         properties:
                           credentialsSecretArn:
-                            description: –  The ARN of the secret that you created
-                              in AWS Secrets Manager that is linked to your MongoDB
-                              Atlas database.
+                            description: ARN of the secret that you created in AWS
+                              Secrets Manager that is linked to your MongoDB Atlas
+                              database.
                             type: string
                           credentialsSecretArnRef:
                             description: Reference to a Secret in secretsmanager to
@@ -1187,12 +1187,13 @@ spec:
                                 type: object
                             type: object
                           databaseName:
-                            description: –  The name of the database in the MongoDB
-                              Atlas database.
+                            description: Name of the database in the MongoDB Atlas
+                              database.
                             type: string
                           fieldMapping:
-                            description: –  Contains the names of the fields to which
-                              to map information about the vector store.
+                            description: Names of the fields to which to map information
+                              about the vector store. See storage_configuration.mongo_db_atlas_configuration.field_mapping
+                              Block for details.
                             properties:
                               customMetadataField:
                                 description: Name for the universal metadata field
@@ -1200,23 +1201,21 @@ spec:
                                   from your data source.
                                 type: string
                               metadataField:
-                                description: –  The name of the field in which Amazon
-                                  Bedrock stores metadata about the vector store.
+                                description: Name of the field in which Amazon Bedrock
+                                  stores metadata about the vector store.
                                 type: string
                               primaryKeyField:
                                 description: Name of the field in which Amazon Bedrock
                                   stores the ID for each entry.
                                 type: string
                               textField:
-                                description: –  The name of the field in which Amazon
-                                  Bedrock stores the raw text from your data. The
-                                  text is split according to the chunking strategy
-                                  you choose.
+                                description: Name of the field in which Amazon Bedrock
+                                  stores the raw text from your data. The text is
+                                  split according to the chunking strategy you choose.
                                 type: string
                               vectorField:
-                                description: –  The name of the field in which Amazon
-                                  Bedrock stores the vector embeddings for your data
-                                  sources.
+                                description: Name of the field in which Amazon Bedrock
+                                  stores the vector embeddings for your data sources.
                                 type: string
                             type: object
                           resourceArn:
@@ -1303,47 +1302,45 @@ spec:
                             type: string
                         type: object
                       redisEnterpriseCloudConfiguration:
-                        description: The storage configuration of the knowledge base
-                          in Redis Enterprise Cloud. See redis_enterprise_cloud_configuration
-                          block for details.
+                        description: Storage configuration of the knowledge base in
+                          Redis Enterprise Cloud. See redis_enterprise_cloud_configuration
+                          Block for details.
                         properties:
                           credentialsSecretArn:
-                            description: –  The ARN of the secret that you created
-                              in AWS Secrets Manager that is linked to your MongoDB
-                              Atlas database.
-                            type: string
-                          endpoint:
-                            description: –  The endpoint URL of the MongoDB Atlas
+                            description: ARN of the secret that you created in AWS
+                              Secrets Manager that is linked to your MongoDB Atlas
                               database.
                             type: string
+                          endpoint:
+                            description: Endpoint URL of the MongoDB Atlas database.
+                            type: string
                           fieldMapping:
-                            description: –  Contains the names of the fields to which
-                              to map information about the vector store.
+                            description: Names of the fields to which to map information
+                              about the vector store. See storage_configuration.mongo_db_atlas_configuration.field_mapping
+                              Block for details.
                             properties:
                               metadataField:
-                                description: –  The name of the field in which Amazon
-                                  Bedrock stores metadata about the vector store.
+                                description: Name of the field in which Amazon Bedrock
+                                  stores metadata about the vector store.
                                 type: string
                               textField:
-                                description: –  The name of the field in which Amazon
-                                  Bedrock stores the raw text from your data. The
-                                  text is split according to the chunking strategy
-                                  you choose.
+                                description: Name of the field in which Amazon Bedrock
+                                  stores the raw text from your data. The text is
+                                  split according to the chunking strategy you choose.
                                 type: string
                               vectorField:
-                                description: –  The name of the field in which Amazon
-                                  Bedrock stores the vector embeddings for your data
-                                  sources.
+                                description: Name of the field in which Amazon Bedrock
+                                  stores the vector embeddings for your data sources.
                                 type: string
                             type: object
                           vectorIndexName:
-                            description: –  The name of the vector index.
+                            description: Name of the vector index.
                             type: string
                         type: object
                       s3VectorsConfiguration:
-                        description: The storage configuration of the knowledge base
-                          in Amazon S3 Vectors. See s3_vectors_configuration block
-                          for details.
+                        description: Storage configuration of the knowledge base in
+                          Amazon S3 Vectors. See s3_vectors_configuration Block for
+                          details.
                         properties:
                           indexArn:
                             description: ARN of the S3 Vectors index. Conflicts with
@@ -1542,11 +1539,11 @@ spec:
                     type: string
                   knowledgeBaseConfiguration:
                     description: Details about the embeddings configuration of the
-                      knowledge base. See knowledge_base_configuration block for details.
+                      knowledge base. See knowledge_base_configuration Block for details.
                     properties:
                       kendraKnowledgeBaseConfiguration:
                         description: Settings for an Amazon Kendra knowledge base.
-                          See kendra_knowledge_base_configuration block for details.
+                          See kendra_knowledge_base_configuration Block for details.
                         properties:
                           kendraIndexArn:
                             description: ARN of the Amazon Kendra index.
@@ -1631,31 +1628,31 @@ spec:
                       managedKnowledgeBaseConfiguration:
                         description: Settings for a managed knowledge base where Amazon
                           Bedrock manages the vector store. See managed_knowledge_base_configuration
-                          block for details.
+                          Block for details.
                         properties:
                           embeddingModelArn:
                             description: ARN of the model used to create vector embeddings
                               for the knowledge base.
                             type: string
                           embeddingModelConfiguration:
-                            description: The embeddings model configuration details
-                              for the vector model used in Knowledge Base.  See embedding_model_configuration
-                              block for details.
+                            description: Embeddings model configuration details for
+                              the vector model used in the knowledge base. See embedding_model_configuration
+                              Block for details.
                             properties:
                               bedrockEmbeddingModelConfiguration:
-                                description: The vector configuration details on the
-                                  Bedrock embeddings model.  See bedrock_embedding_model_configuration
-                                  block for details.
+                                description: Vector configuration details for the
+                                  Bedrock embeddings model. See bedrock_embedding_model_configuration
+                                  Block for details.
                                 properties:
                                   audio:
                                     description: Configuration for processing audio
                                       content in multimodal knowledge bases. See audio
-                                      block for details.
+                                      Block for details.
                                     properties:
                                       segmentationConfiguration:
                                         description: Configuration for segmenting
                                           video content during processing. See segmentation_configuration
-                                          block for details.
+                                          Block for details.
                                         properties:
                                           fixedLengthDuration:
                                             description: Duration in seconds for each
@@ -1672,18 +1669,18 @@ spec:
                                     description: Data type for the vectors when using
                                       a model to convert text into vector embeddings.
                                       The model must support the specified data type
-                                      for vector embeddings.  Valid values are FLOAT32
+                                      for vector embeddings. Valid values are FLOAT32
                                       and BINARY.
                                     type: string
                                   video:
                                     description: Configuration for processing video
                                       content in multimodal knowledge bases. See video
-                                      block for details.
+                                      Block for details.
                                     properties:
                                       segmentationConfiguration:
                                         description: Configuration for segmenting
                                           video content during processing. See segmentation_configuration
-                                          block for details.
+                                          Block for details.
                                         properties:
                                           fixedLengthDuration:
                                             description: Duration in seconds for each
@@ -1702,7 +1699,7 @@ spec:
                           serverSideEncryptionConfiguration:
                             description: Server-side encryption configuration for
                               the managed knowledge base. See server_side_encryption_configuration
-                              block for details.
+                              Block for details.
                             properties:
                               kmsKeyArn:
                                 description: ARN of the KMS key used to encrypt the
@@ -1789,26 +1786,27 @@ spec:
                       sqlKnowledgeBaseConfiguration:
                         description: Configurations for a knowledge base connected
                           to an SQL database. See sql_knowledge_base_configuration
-                          block for details.
+                          Block for details.
                         properties:
                           redshiftConfiguration:
                             description: Configurations for storage in Amazon Redshift.
-                              See redshift_configuration block for details.
+                              See knowledge_base_configuration.sql_knowledge_base_configuration.redshift_configuration.storage_configuration.redshift_configuration
+                              Block for details.
                             properties:
                               queryEngineConfiguration:
                                 description: Configurations for an Amazon Redshift
-                                  query engine. See query_engine_configuration block
+                                  query engine. See query_engine_configuration Block
                                   for details.
                                 properties:
                                   provisionedConfiguration:
                                     description: Configurations for a provisioned
                                       Amazon Redshift query engine. See provisioned_configuration
-                                      block for details.
+                                      Block for details.
                                     properties:
                                       authConfiguration:
                                         description: Configurations for authentication
-                                          to Amazon Redshift. See auth_configuration
-                                          block for details.
+                                          to Amazon Redshift. See knowledge_base_configuration.sql_knowledge_base_configuration.redshift_configuration.query_engine_configuration.provisioned_configuration.auth_configuration
+                                          Block for details.
                                         properties:
                                           databaseUser:
                                             description: Database username for authentication
@@ -1908,12 +1906,12 @@ spec:
                                   serverlessConfiguration:
                                     description: Configurations for a serverless Amazon
                                       Redshift query engine. See serverless_configuration
-                                      block for details.
+                                      Block for details.
                                     properties:
                                       authConfiguration:
                                         description: Configurations for authentication
-                                          to Amazon Redshift. See auth_configuration
-                                          block for details.
+                                          to Amazon Redshift. See knowledge_base_configuration.sql_knowledge_base_configuration.redshift_configuration.query_engine_configuration.provisioned_configuration.auth_configuration
+                                          Block for details.
                                         properties:
                                           type:
                                             description: Storage service used for
@@ -1936,7 +1934,7 @@ spec:
                                 type: object
                               queryGenerationConfiguration:
                                 description: Configurations for generating queries.
-                                  See query_generation_configuration block for details.
+                                  See query_generation_configuration Block for details.
                                 properties:
                                   executionTimeoutSeconds:
                                     description: Time after which query generation
@@ -1945,12 +1943,12 @@ spec:
                                   generationContext:
                                     description: Configurations for context to use
                                       during query generation. See generation_context
-                                      block for details.
+                                      Block for details.
                                     properties:
                                       curatedQuery:
                                         description: Information about example queries
                                           to help the query engine generate appropriate
-                                          SQL queries. See curated_query block for
+                                          SQL queries. See curated_query Block for
                                           details.
                                         items:
                                           properties:
@@ -1965,12 +1963,12 @@ spec:
                                         type: array
                                       table:
                                         description: Information about a table in
-                                          the database. See table block for details.
+                                          the database. See table Block for details.
                                         items:
                                           properties:
                                             column:
                                               description: Information about a column
-                                                in the table. See column block for
+                                                in the table. See column Block for
                                                 details.
                                               items:
                                                 properties:
@@ -2014,12 +2012,12 @@ spec:
                               storageConfiguration:
                                 description: Details about the storage configuration
                                   of the knowledge base. See storage_configuration
-                                  block for details.
+                                  Block for details.
                                 properties:
                                   awsDataCatalogConfiguration:
                                     description: Configurations for storage in AWS
                                       Glue Data Catalog. See aws_data_catalog_configuration
-                                      block for details.
+                                      Block for details.
                                     properties:
                                       tableNames:
                                         description: List of names of the tables to
@@ -2031,12 +2029,12 @@ spec:
                                     type: object
                                   redshiftConfiguration:
                                     description: Configurations for storage in Amazon
-                                      Redshift. See redshift_configuration block for
-                                      details.
+                                      Redshift. See knowledge_base_configuration.sql_knowledge_base_configuration.redshift_configuration.storage_configuration.redshift_configuration
+                                      Block for details.
                                     properties:
                                       databaseName:
-                                        description: –  The name of the database in
-                                          the MongoDB Atlas database.
+                                        description: Name of the database in the MongoDB
+                                          Atlas database.
                                         type: string
                                     type: object
                                   type:
@@ -2058,31 +2056,31 @@ spec:
                       vectorKnowledgeBaseConfiguration:
                         description: Details about the model that's used to convert
                           the data source into vector embeddings. See vector_knowledge_base_configuration
-                          block for details.
+                          Block for details.
                         properties:
                           embeddingModelArn:
                             description: ARN of the model used to create vector embeddings
                               for the knowledge base.
                             type: string
                           embeddingModelConfiguration:
-                            description: The embeddings model configuration details
-                              for the vector model used in Knowledge Base.  See embedding_model_configuration
-                              block for details.
+                            description: Embeddings model configuration details for
+                              the vector model used in the knowledge base. See embedding_model_configuration
+                              Block for details.
                             properties:
                               bedrockEmbeddingModelConfiguration:
-                                description: The vector configuration details on the
-                                  Bedrock embeddings model.  See bedrock_embedding_model_configuration
-                                  block for details.
+                                description: Vector configuration details for the
+                                  Bedrock embeddings model. See bedrock_embedding_model_configuration
+                                  Block for details.
                                 properties:
                                   audio:
                                     description: Configuration for processing audio
                                       content in multimodal knowledge bases. See audio
-                                      block for details.
+                                      Block for details.
                                     properties:
                                       segmentationConfiguration:
                                         description: Configuration for segmenting
                                           video content during processing. See segmentation_configuration
-                                          block for details.
+                                          Block for details.
                                         properties:
                                           fixedLengthDuration:
                                             description: Duration in seconds for each
@@ -2099,18 +2097,18 @@ spec:
                                     description: Data type for the vectors when using
                                       a model to convert text into vector embeddings.
                                       The model must support the specified data type
-                                      for vector embeddings.  Valid values are FLOAT32
+                                      for vector embeddings. Valid values are FLOAT32
                                       and BINARY.
                                     type: string
                                   video:
                                     description: Configuration for processing video
                                       content in multimodal knowledge bases. See video
-                                      block for details.
+                                      Block for details.
                                     properties:
                                       segmentationConfiguration:
                                         description: Configuration for segmenting
                                           video content during processing. See segmentation_configuration
-                                          block for details.
+                                          Block for details.
                                         properties:
                                           fixedLengthDuration:
                                             description: Duration in seconds for each
@@ -2121,18 +2119,19 @@ spec:
                                 type: object
                             type: object
                           supplementalDataStorageConfiguration:
-                            description: supplemental_data_storage_configuration.  See
-                              supplemental_data_storage_configuration block for details.
+                            description: Supplemental data storage configuration for
+                              images extracted from multimodal documents. See supplemental_data_storage_configuration
+                              Block for details.
                             properties:
                               storageLocation:
-                                description: A storage location specification for
-                                  images extracted from multimodal documents in your
-                                  data source.  See storage_location block for details.
+                                description: Storage location specification for images
+                                  extracted from multimodal documents in your data
+                                  source. See storage_location Block for details.
                                 properties:
                                   s3Location:
-                                    description: Contains information about the Amazon
-                                      S3 location for the extracted images.  See s3_location
-                                      block for details.
+                                    description: Information about the Amazon S3 location
+                                      for the extracted images. See s3_location Block
+                                      for details.
                                     properties:
                                       uri:
                                         description: URI of the location.
@@ -2229,79 +2228,78 @@ spec:
                     type: object
                   storageConfiguration:
                     description: Details about the storage configuration of the knowledge
-                      base. See storage_configuration block for details.
+                      base. See storage_configuration Block for details.
                     properties:
                       mongoDbAtlasConfiguration:
-                        description: –  The storage configuration of the knowledge
-                          base in MongoDB Atlas. See mongo_db_atlas_configuration
-                          block for details.
+                        description: Storage configuration of the knowledge base in
+                          MongoDB Atlas. See mongo_db_atlas_configuration Block for
+                          details.
                         properties:
                           collectionName:
-                            description: –  The name of the collection in the MongoDB
-                              Atlas database.
-                            type: string
-                          credentialsSecretArn:
-                            description: –  The ARN of the secret that you created
-                              in AWS Secrets Manager that is linked to your MongoDB
-                              Atlas database.
-                            type: string
-                          databaseName:
-                            description: –  The name of the database in the MongoDB
-                              Atlas database.
-                            type: string
-                          endpoint:
-                            description: –  The endpoint URL of the MongoDB Atlas
+                            description: Name of the collection in the MongoDB Atlas
                               database.
                             type: string
+                          credentialsSecretArn:
+                            description: ARN of the secret that you created in AWS
+                              Secrets Manager that is linked to your MongoDB Atlas
+                              database.
+                            type: string
+                          databaseName:
+                            description: Name of the database in the MongoDB Atlas
+                              database.
+                            type: string
+                          endpoint:
+                            description: Endpoint URL of the MongoDB Atlas database.
+                            type: string
                           endpointServiceName:
-                            description: –  The name of the service that hosts the
-                              MongoDB Atlas database.
+                            description: Name of the VPC endpoint service in your
+                              account that is connected to your MongoDB Atlas cluster.
                             type: string
                           fieldMapping:
-                            description: –  Contains the names of the fields to which
-                              to map information about the vector store.
+                            description: Names of the fields to which to map information
+                              about the vector store. See storage_configuration.mongo_db_atlas_configuration.field_mapping
+                              Block for details.
                             properties:
                               metadataField:
-                                description: –  The name of the field in which Amazon
-                                  Bedrock stores metadata about the vector store.
+                                description: Name of the field in which Amazon Bedrock
+                                  stores metadata about the vector store.
                                 type: string
                               textField:
-                                description: –  The name of the field in which Amazon
-                                  Bedrock stores the raw text from your data. The
-                                  text is split according to the chunking strategy
-                                  you choose.
+                                description: Name of the field in which Amazon Bedrock
+                                  stores the raw text from your data. The text is
+                                  split according to the chunking strategy you choose.
                                 type: string
                               vectorField:
-                                description: –  The name of the field in which Amazon
-                                  Bedrock stores the vector embeddings for your data
-                                  sources.
+                                description: Name of the field in which Amazon Bedrock
+                                  stores the vector embeddings for your data sources.
                                 type: string
                             type: object
                           textIndexName:
-                            description: –  The name of the vector index.
+                            description: Name of the text search index in the MongoDB
+                              collection. Required for hybrid search.
                             type: string
                           vectorIndexName:
-                            description: –  The name of the vector index.
+                            description: Name of the vector index.
                             type: string
                         type: object
                       neptuneAnalyticsConfiguration:
-                        description: –  The storage configuration of the knowledge
-                          base in Amazon Neptune Analytics. See neptune_analytics_configuration
-                          block for details.
+                        description: Storage configuration of the knowledge base in
+                          Amazon Neptune Analytics. See neptune_analytics_configuration
+                          Block for details.
                         properties:
                           fieldMapping:
-                            description: –  Contains the names of the fields to which
-                              to map information about the vector store.
+                            description: Names of the fields to which to map information
+                              about the vector store. See storage_configuration.mongo_db_atlas_configuration.field_mapping
+                              Block for details.
                             properties:
                               metadataField:
-                                description: –  The name of the field in which Amazon
-                                  Bedrock stores metadata about the vector store.
+                                description: Name of the field in which Amazon Bedrock
+                                  stores metadata about the vector store.
                                 type: string
                               textField:
-                                description: –  The name of the field in which Amazon
-                                  Bedrock stores the raw text from your data. The
-                                  text is split according to the chunking strategy
-                                  you choose.
+                                description: Name of the field in which Amazon Bedrock
+                                  stores the raw text from your data. The text is
+                                  split according to the chunking strategy you choose.
                                 type: string
                             type: object
                           graphArn:
@@ -2309,9 +2307,9 @@ spec:
                             type: string
                         type: object
                       opensearchManagedClusterConfiguration:
-                        description: The storage configuration of the knowledge base
-                          in Amazon OpenSearch Service Managed Cluster. See opensearch_managed_cluster_configuration
-                          block for details.
+                        description: Storage configuration of the knowledge base in
+                          Amazon OpenSearch Service Managed Cluster. See opensearch_managed_cluster_configuration
+                          Block for details.
                         properties:
                           domainArn:
                             description: ARN of the OpenSearch domain.
@@ -2396,33 +2394,32 @@ spec:
                             description: Endpoint URL of the OpenSearch domain.
                             type: string
                           fieldMapping:
-                            description: –  Contains the names of the fields to which
-                              to map information about the vector store.
+                            description: Names of the fields to which to map information
+                              about the vector store. See storage_configuration.mongo_db_atlas_configuration.field_mapping
+                              Block for details.
                             properties:
                               metadataField:
-                                description: –  The name of the field in which Amazon
-                                  Bedrock stores metadata about the vector store.
+                                description: Name of the field in which Amazon Bedrock
+                                  stores metadata about the vector store.
                                 type: string
                               textField:
-                                description: –  The name of the field in which Amazon
-                                  Bedrock stores the raw text from your data. The
-                                  text is split according to the chunking strategy
-                                  you choose.
+                                description: Name of the field in which Amazon Bedrock
+                                  stores the raw text from your data. The text is
+                                  split according to the chunking strategy you choose.
                                 type: string
                               vectorField:
-                                description: –  The name of the field in which Amazon
-                                  Bedrock stores the vector embeddings for your data
-                                  sources.
+                                description: Name of the field in which Amazon Bedrock
+                                  stores the vector embeddings for your data sources.
                                 type: string
                             type: object
                           vectorIndexName:
-                            description: –  The name of the vector index.
+                            description: Name of the vector index.
                             type: string
                         type: object
                       opensearchServerlessConfiguration:
-                        description: The storage configuration of the knowledge base
-                          in Amazon OpenSearch Service Serverless. See opensearch_serverless_configuration
-                          block for details.
+                        description: Storage configuration of the knowledge base in
+                          Amazon OpenSearch Service Serverless. See opensearch_serverless_configuration
+                          Block for details.
                         properties:
                           collectionArn:
                             description: ARN of the OpenSearch Service vector store.
@@ -2504,54 +2501,53 @@ spec:
                                 type: object
                             type: object
                           fieldMapping:
-                            description: –  Contains the names of the fields to which
-                              to map information about the vector store.
+                            description: Names of the fields to which to map information
+                              about the vector store. See storage_configuration.mongo_db_atlas_configuration.field_mapping
+                              Block for details.
                             properties:
                               metadataField:
-                                description: –  The name of the field in which Amazon
-                                  Bedrock stores metadata about the vector store.
+                                description: Name of the field in which Amazon Bedrock
+                                  stores metadata about the vector store.
                                 type: string
                               textField:
-                                description: –  The name of the field in which Amazon
-                                  Bedrock stores the raw text from your data. The
-                                  text is split according to the chunking strategy
-                                  you choose.
+                                description: Name of the field in which Amazon Bedrock
+                                  stores the raw text from your data. The text is
+                                  split according to the chunking strategy you choose.
                                 type: string
                               vectorField:
-                                description: –  The name of the field in which Amazon
-                                  Bedrock stores the vector embeddings for your data
-                                  sources.
+                                description: Name of the field in which Amazon Bedrock
+                                  stores the vector embeddings for your data sources.
                                 type: string
                             type: object
                           vectorIndexName:
-                            description: –  The name of the vector index.
+                            description: Name of the vector index.
                             type: string
                         type: object
                       pineconeConfiguration:
-                        description: The storage configuration of the knowledge base
-                          in Pinecone. See pinecone_configuration block for details.
+                        description: Storage configuration of the knowledge base in
+                          Pinecone. See pinecone_configuration Block for details.
                         properties:
                           connectionString:
                             description: Endpoint URL for your index management page.
                             type: string
                           credentialsSecretArn:
-                            description: –  The ARN of the secret that you created
-                              in AWS Secrets Manager that is linked to your MongoDB
-                              Atlas database.
+                            description: ARN of the secret that you created in AWS
+                              Secrets Manager that is linked to your MongoDB Atlas
+                              database.
                             type: string
                           fieldMapping:
-                            description: –  Contains the names of the fields to which
-                              to map information about the vector store.
+                            description: Names of the fields to which to map information
+                              about the vector store. See storage_configuration.mongo_db_atlas_configuration.field_mapping
+                              Block for details.
                             properties:
                               metadataField:
-                                description: –  The name of the field in which Amazon
-                                  Bedrock stores metadata about the vector store.
+                                description: Name of the field in which Amazon Bedrock
+                                  stores metadata about the vector store.
                                 type: string
                               textField:
-                                description: –  The name of the field in which Amazon
-                                  Bedrock stores the raw text from your data. The
-                                  text is split according to the chunking strategy
-                                  you choose.
+                                description: Name of the field in which Amazon Bedrock
+                                  stores the raw text from your data. The text is
+                                  split according to the chunking strategy you choose.
                                 type: string
                             type: object
                           namespace:
@@ -2563,12 +2559,12 @@ spec:
                         description: Details about the storage configuration of the
                           knowledge base in Amazon RDS. For more information, see
                           Create a vector index in Amazon RDS. See rds_configuration
-                          block for details.
+                          Block for details.
                         properties:
                           credentialsSecretArn:
-                            description: –  The ARN of the secret that you created
-                              in AWS Secrets Manager that is linked to your MongoDB
-                              Atlas database.
+                            description: ARN of the secret that you created in AWS
+                              Secrets Manager that is linked to your MongoDB Atlas
+                              database.
                             type: string
                           credentialsSecretArnRef:
                             description: Reference to a Secret in secretsmanager to
@@ -2647,12 +2643,13 @@ spec:
                                 type: object
                             type: object
                           databaseName:
-                            description: –  The name of the database in the MongoDB
-                              Atlas database.
+                            description: Name of the database in the MongoDB Atlas
+                              database.
                             type: string
                           fieldMapping:
-                            description: –  Contains the names of the fields to which
-                              to map information about the vector store.
+                            description: Names of the fields to which to map information
+                              about the vector store. See storage_configuration.mongo_db_atlas_configuration.field_mapping
+                              Block for details.
                             properties:
                               customMetadataField:
                                 description: Name for the universal metadata field
@@ -2660,23 +2657,21 @@ spec:
                                   from your data source.
                                 type: string
                               metadataField:
-                                description: –  The name of the field in which Amazon
-                                  Bedrock stores metadata about the vector store.
+                                description: Name of the field in which Amazon Bedrock
+                                  stores metadata about the vector store.
                                 type: string
                               primaryKeyField:
                                 description: Name of the field in which Amazon Bedrock
                                   stores the ID for each entry.
                                 type: string
                               textField:
-                                description: –  The name of the field in which Amazon
-                                  Bedrock stores the raw text from your data. The
-                                  text is split according to the chunking strategy
-                                  you choose.
+                                description: Name of the field in which Amazon Bedrock
+                                  stores the raw text from your data. The text is
+                                  split according to the chunking strategy you choose.
                                 type: string
                               vectorField:
-                                description: –  The name of the field in which Amazon
-                                  Bedrock stores the vector embeddings for your data
-                                  sources.
+                                description: Name of the field in which Amazon Bedrock
+                                  stores the vector embeddings for your data sources.
                                 type: string
                             type: object
                           resourceArn:
@@ -2763,47 +2758,45 @@ spec:
                             type: string
                         type: object
                       redisEnterpriseCloudConfiguration:
-                        description: The storage configuration of the knowledge base
-                          in Redis Enterprise Cloud. See redis_enterprise_cloud_configuration
-                          block for details.
+                        description: Storage configuration of the knowledge base in
+                          Redis Enterprise Cloud. See redis_enterprise_cloud_configuration
+                          Block for details.
                         properties:
                           credentialsSecretArn:
-                            description: –  The ARN of the secret that you created
-                              in AWS Secrets Manager that is linked to your MongoDB
-                              Atlas database.
-                            type: string
-                          endpoint:
-                            description: –  The endpoint URL of the MongoDB Atlas
+                            description: ARN of the secret that you created in AWS
+                              Secrets Manager that is linked to your MongoDB Atlas
                               database.
                             type: string
+                          endpoint:
+                            description: Endpoint URL of the MongoDB Atlas database.
+                            type: string
                           fieldMapping:
-                            description: –  Contains the names of the fields to which
-                              to map information about the vector store.
+                            description: Names of the fields to which to map information
+                              about the vector store. See storage_configuration.mongo_db_atlas_configuration.field_mapping
+                              Block for details.
                             properties:
                               metadataField:
-                                description: –  The name of the field in which Amazon
-                                  Bedrock stores metadata about the vector store.
+                                description: Name of the field in which Amazon Bedrock
+                                  stores metadata about the vector store.
                                 type: string
                               textField:
-                                description: –  The name of the field in which Amazon
-                                  Bedrock stores the raw text from your data. The
-                                  text is split according to the chunking strategy
-                                  you choose.
+                                description: Name of the field in which Amazon Bedrock
+                                  stores the raw text from your data. The text is
+                                  split according to the chunking strategy you choose.
                                 type: string
                               vectorField:
-                                description: –  The name of the field in which Amazon
-                                  Bedrock stores the vector embeddings for your data
-                                  sources.
+                                description: Name of the field in which Amazon Bedrock
+                                  stores the vector embeddings for your data sources.
                                 type: string
                             type: object
                           vectorIndexName:
-                            description: –  The name of the vector index.
+                            description: Name of the vector index.
                             type: string
                         type: object
                       s3VectorsConfiguration:
-                        description: The storage configuration of the knowledge base
-                          in Amazon S3 Vectors. See s3_vectors_configuration block
-                          for details.
+                        description: Storage configuration of the knowledge base in
+                          Amazon S3 Vectors. See s3_vectors_configuration Block for
+                          details.
                         properties:
                           indexArn:
                             description: ARN of the S3 Vectors index. Conflicts with
@@ -3088,6 +3081,8 @@ spec:
                     description: Description of the knowledge base.
                     type: string
                   failureReasons:
+                    description: List of failure reasons reported when the knowledge
+                      base is in a failed state.
                     items:
                       type: string
                     type: array
@@ -3096,11 +3091,11 @@ spec:
                     type: string
                   knowledgeBaseConfiguration:
                     description: Details about the embeddings configuration of the
-                      knowledge base. See knowledge_base_configuration block for details.
+                      knowledge base. See knowledge_base_configuration Block for details.
                     properties:
                       kendraKnowledgeBaseConfiguration:
                         description: Settings for an Amazon Kendra knowledge base.
-                          See kendra_knowledge_base_configuration block for details.
+                          See kendra_knowledge_base_configuration Block for details.
                         properties:
                           kendraIndexArn:
                             description: ARN of the Amazon Kendra index.
@@ -3109,31 +3104,31 @@ spec:
                       managedKnowledgeBaseConfiguration:
                         description: Settings for a managed knowledge base where Amazon
                           Bedrock manages the vector store. See managed_knowledge_base_configuration
-                          block for details.
+                          Block for details.
                         properties:
                           embeddingModelArn:
                             description: ARN of the model used to create vector embeddings
                               for the knowledge base.
                             type: string
                           embeddingModelConfiguration:
-                            description: The embeddings model configuration details
-                              for the vector model used in Knowledge Base.  See embedding_model_configuration
-                              block for details.
+                            description: Embeddings model configuration details for
+                              the vector model used in the knowledge base. See embedding_model_configuration
+                              Block for details.
                             properties:
                               bedrockEmbeddingModelConfiguration:
-                                description: The vector configuration details on the
-                                  Bedrock embeddings model.  See bedrock_embedding_model_configuration
-                                  block for details.
+                                description: Vector configuration details for the
+                                  Bedrock embeddings model. See bedrock_embedding_model_configuration
+                                  Block for details.
                                 properties:
                                   audio:
                                     description: Configuration for processing audio
                                       content in multimodal knowledge bases. See audio
-                                      block for details.
+                                      Block for details.
                                     properties:
                                       segmentationConfiguration:
                                         description: Configuration for segmenting
                                           video content during processing. See segmentation_configuration
-                                          block for details.
+                                          Block for details.
                                         properties:
                                           fixedLengthDuration:
                                             description: Duration in seconds for each
@@ -3150,18 +3145,18 @@ spec:
                                     description: Data type for the vectors when using
                                       a model to convert text into vector embeddings.
                                       The model must support the specified data type
-                                      for vector embeddings.  Valid values are FLOAT32
+                                      for vector embeddings. Valid values are FLOAT32
                                       and BINARY.
                                     type: string
                                   video:
                                     description: Configuration for processing video
                                       content in multimodal knowledge bases. See video
-                                      block for details.
+                                      Block for details.
                                     properties:
                                       segmentationConfiguration:
                                         description: Configuration for segmenting
                                           video content during processing. See segmentation_configuration
-                                          block for details.
+                                          Block for details.
                                         properties:
                                           fixedLengthDuration:
                                             description: Duration in seconds for each
@@ -3180,7 +3175,7 @@ spec:
                           serverSideEncryptionConfiguration:
                             description: Server-side encryption configuration for
                               the managed knowledge base. See server_side_encryption_configuration
-                              block for details.
+                              Block for details.
                             properties:
                               kmsKeyArn:
                                 description: ARN of the KMS key used to encrypt the
@@ -3191,26 +3186,27 @@ spec:
                       sqlKnowledgeBaseConfiguration:
                         description: Configurations for a knowledge base connected
                           to an SQL database. See sql_knowledge_base_configuration
-                          block for details.
+                          Block for details.
                         properties:
                           redshiftConfiguration:
                             description: Configurations for storage in Amazon Redshift.
-                              See redshift_configuration block for details.
+                              See knowledge_base_configuration.sql_knowledge_base_configuration.redshift_configuration.storage_configuration.redshift_configuration
+                              Block for details.
                             properties:
                               queryEngineConfiguration:
                                 description: Configurations for an Amazon Redshift
-                                  query engine. See query_engine_configuration block
+                                  query engine. See query_engine_configuration Block
                                   for details.
                                 properties:
                                   provisionedConfiguration:
                                     description: Configurations for a provisioned
                                       Amazon Redshift query engine. See provisioned_configuration
-                                      block for details.
+                                      Block for details.
                                     properties:
                                       authConfiguration:
                                         description: Configurations for authentication
-                                          to Amazon Redshift. See auth_configuration
-                                          block for details.
+                                          to Amazon Redshift. See knowledge_base_configuration.sql_knowledge_base_configuration.redshift_configuration.query_engine_configuration.provisioned_configuration.auth_configuration
+                                          Block for details.
                                         properties:
                                           databaseUser:
                                             description: Database username for authentication
@@ -3234,12 +3230,12 @@ spec:
                                   serverlessConfiguration:
                                     description: Configurations for a serverless Amazon
                                       Redshift query engine. See serverless_configuration
-                                      block for details.
+                                      Block for details.
                                     properties:
                                       authConfiguration:
                                         description: Configurations for authentication
-                                          to Amazon Redshift. See auth_configuration
-                                          block for details.
+                                          to Amazon Redshift. See knowledge_base_configuration.sql_knowledge_base_configuration.redshift_configuration.query_engine_configuration.provisioned_configuration.auth_configuration
+                                          Block for details.
                                         properties:
                                           type:
                                             description: Storage service used for
@@ -3262,7 +3258,7 @@ spec:
                                 type: object
                               queryGenerationConfiguration:
                                 description: Configurations for generating queries.
-                                  See query_generation_configuration block for details.
+                                  See query_generation_configuration Block for details.
                                 properties:
                                   executionTimeoutSeconds:
                                     description: Time after which query generation
@@ -3271,12 +3267,12 @@ spec:
                                   generationContext:
                                     description: Configurations for context to use
                                       during query generation. See generation_context
-                                      block for details.
+                                      Block for details.
                                     properties:
                                       curatedQuery:
                                         description: Information about example queries
                                           to help the query engine generate appropriate
-                                          SQL queries. See curated_query block for
+                                          SQL queries. See curated_query Block for
                                           details.
                                         items:
                                           properties:
@@ -3291,12 +3287,12 @@ spec:
                                         type: array
                                       table:
                                         description: Information about a table in
-                                          the database. See table block for details.
+                                          the database. See table Block for details.
                                         items:
                                           properties:
                                             column:
                                               description: Information about a column
-                                                in the table. See column block for
+                                                in the table. See column Block for
                                                 details.
                                               items:
                                                 properties:
@@ -3340,12 +3336,12 @@ spec:
                               storageConfiguration:
                                 description: Details about the storage configuration
                                   of the knowledge base. See storage_configuration
-                                  block for details.
+                                  Block for details.
                                 properties:
                                   awsDataCatalogConfiguration:
                                     description: Configurations for storage in AWS
                                       Glue Data Catalog. See aws_data_catalog_configuration
-                                      block for details.
+                                      Block for details.
                                     properties:
                                       tableNames:
                                         description: List of names of the tables to
@@ -3357,12 +3353,12 @@ spec:
                                     type: object
                                   redshiftConfiguration:
                                     description: Configurations for storage in Amazon
-                                      Redshift. See redshift_configuration block for
-                                      details.
+                                      Redshift. See knowledge_base_configuration.sql_knowledge_base_configuration.redshift_configuration.storage_configuration.redshift_configuration
+                                      Block for details.
                                     properties:
                                       databaseName:
-                                        description: –  The name of the database in
-                                          the MongoDB Atlas database.
+                                        description: Name of the database in the MongoDB
+                                          Atlas database.
                                         type: string
                                     type: object
                                   type:
@@ -3384,31 +3380,31 @@ spec:
                       vectorKnowledgeBaseConfiguration:
                         description: Details about the model that's used to convert
                           the data source into vector embeddings. See vector_knowledge_base_configuration
-                          block for details.
+                          Block for details.
                         properties:
                           embeddingModelArn:
                             description: ARN of the model used to create vector embeddings
                               for the knowledge base.
                             type: string
                           embeddingModelConfiguration:
-                            description: The embeddings model configuration details
-                              for the vector model used in Knowledge Base.  See embedding_model_configuration
-                              block for details.
+                            description: Embeddings model configuration details for
+                              the vector model used in the knowledge base. See embedding_model_configuration
+                              Block for details.
                             properties:
                               bedrockEmbeddingModelConfiguration:
-                                description: The vector configuration details on the
-                                  Bedrock embeddings model.  See bedrock_embedding_model_configuration
-                                  block for details.
+                                description: Vector configuration details for the
+                                  Bedrock embeddings model. See bedrock_embedding_model_configuration
+                                  Block for details.
                                 properties:
                                   audio:
                                     description: Configuration for processing audio
                                       content in multimodal knowledge bases. See audio
-                                      block for details.
+                                      Block for details.
                                     properties:
                                       segmentationConfiguration:
                                         description: Configuration for segmenting
                                           video content during processing. See segmentation_configuration
-                                          block for details.
+                                          Block for details.
                                         properties:
                                           fixedLengthDuration:
                                             description: Duration in seconds for each
@@ -3425,18 +3421,18 @@ spec:
                                     description: Data type for the vectors when using
                                       a model to convert text into vector embeddings.
                                       The model must support the specified data type
-                                      for vector embeddings.  Valid values are FLOAT32
+                                      for vector embeddings. Valid values are FLOAT32
                                       and BINARY.
                                     type: string
                                   video:
                                     description: Configuration for processing video
                                       content in multimodal knowledge bases. See video
-                                      block for details.
+                                      Block for details.
                                     properties:
                                       segmentationConfiguration:
                                         description: Configuration for segmenting
                                           video content during processing. See segmentation_configuration
-                                          block for details.
+                                          Block for details.
                                         properties:
                                           fixedLengthDuration:
                                             description: Duration in seconds for each
@@ -3447,18 +3443,19 @@ spec:
                                 type: object
                             type: object
                           supplementalDataStorageConfiguration:
-                            description: supplemental_data_storage_configuration.  See
-                              supplemental_data_storage_configuration block for details.
+                            description: Supplemental data storage configuration for
+                              images extracted from multimodal documents. See supplemental_data_storage_configuration
+                              Block for details.
                             properties:
                               storageLocation:
-                                description: A storage location specification for
-                                  images extracted from multimodal documents in your
-                                  data source.  See storage_location block for details.
+                                description: Storage location specification for images
+                                  extracted from multimodal documents in your data
+                                  source. See storage_location Block for details.
                                 properties:
                                   s3Location:
-                                    description: Contains information about the Amazon
-                                      S3 location for the extracted images.  See s3_location
-                                      block for details.
+                                    description: Information about the Amazon S3 location
+                                      for the extracted images. See s3_location Block
+                                      for details.
                                     properties:
                                       uri:
                                         description: URI of the location.
@@ -3486,79 +3483,78 @@ spec:
                     type: string
                   storageConfiguration:
                     description: Details about the storage configuration of the knowledge
-                      base. See storage_configuration block for details.
+                      base. See storage_configuration Block for details.
                     properties:
                       mongoDbAtlasConfiguration:
-                        description: –  The storage configuration of the knowledge
-                          base in MongoDB Atlas. See mongo_db_atlas_configuration
-                          block for details.
+                        description: Storage configuration of the knowledge base in
+                          MongoDB Atlas. See mongo_db_atlas_configuration Block for
+                          details.
                         properties:
                           collectionName:
-                            description: –  The name of the collection in the MongoDB
-                              Atlas database.
-                            type: string
-                          credentialsSecretArn:
-                            description: –  The ARN of the secret that you created
-                              in AWS Secrets Manager that is linked to your MongoDB
-                              Atlas database.
-                            type: string
-                          databaseName:
-                            description: –  The name of the database in the MongoDB
-                              Atlas database.
-                            type: string
-                          endpoint:
-                            description: –  The endpoint URL of the MongoDB Atlas
+                            description: Name of the collection in the MongoDB Atlas
                               database.
                             type: string
+                          credentialsSecretArn:
+                            description: ARN of the secret that you created in AWS
+                              Secrets Manager that is linked to your MongoDB Atlas
+                              database.
+                            type: string
+                          databaseName:
+                            description: Name of the database in the MongoDB Atlas
+                              database.
+                            type: string
+                          endpoint:
+                            description: Endpoint URL of the MongoDB Atlas database.
+                            type: string
                           endpointServiceName:
-                            description: –  The name of the service that hosts the
-                              MongoDB Atlas database.
+                            description: Name of the VPC endpoint service in your
+                              account that is connected to your MongoDB Atlas cluster.
                             type: string
                           fieldMapping:
-                            description: –  Contains the names of the fields to which
-                              to map information about the vector store.
+                            description: Names of the fields to which to map information
+                              about the vector store. See storage_configuration.mongo_db_atlas_configuration.field_mapping
+                              Block for details.
                             properties:
                               metadataField:
-                                description: –  The name of the field in which Amazon
-                                  Bedrock stores metadata about the vector store.
+                                description: Name of the field in which Amazon Bedrock
+                                  stores metadata about the vector store.
                                 type: string
                               textField:
-                                description: –  The name of the field in which Amazon
-                                  Bedrock stores the raw text from your data. The
-                                  text is split according to the chunking strategy
-                                  you choose.
+                                description: Name of the field in which Amazon Bedrock
+                                  stores the raw text from your data. The text is
+                                  split according to the chunking strategy you choose.
                                 type: string
                               vectorField:
-                                description: –  The name of the field in which Amazon
-                                  Bedrock stores the vector embeddings for your data
-                                  sources.
+                                description: Name of the field in which Amazon Bedrock
+                                  stores the vector embeddings for your data sources.
                                 type: string
                             type: object
                           textIndexName:
-                            description: –  The name of the vector index.
+                            description: Name of the text search index in the MongoDB
+                              collection. Required for hybrid search.
                             type: string
                           vectorIndexName:
-                            description: –  The name of the vector index.
+                            description: Name of the vector index.
                             type: string
                         type: object
                       neptuneAnalyticsConfiguration:
-                        description: –  The storage configuration of the knowledge
-                          base in Amazon Neptune Analytics. See neptune_analytics_configuration
-                          block for details.
+                        description: Storage configuration of the knowledge base in
+                          Amazon Neptune Analytics. See neptune_analytics_configuration
+                          Block for details.
                         properties:
                           fieldMapping:
-                            description: –  Contains the names of the fields to which
-                              to map information about the vector store.
+                            description: Names of the fields to which to map information
+                              about the vector store. See storage_configuration.mongo_db_atlas_configuration.field_mapping
+                              Block for details.
                             properties:
                               metadataField:
-                                description: –  The name of the field in which Amazon
-                                  Bedrock stores metadata about the vector store.
+                                description: Name of the field in which Amazon Bedrock
+                                  stores metadata about the vector store.
                                 type: string
                               textField:
-                                description: –  The name of the field in which Amazon
-                                  Bedrock stores the raw text from your data. The
-                                  text is split according to the chunking strategy
-                                  you choose.
+                                description: Name of the field in which Amazon Bedrock
+                                  stores the raw text from your data. The text is
+                                  split according to the chunking strategy you choose.
                                 type: string
                             type: object
                           graphArn:
@@ -3566,9 +3562,9 @@ spec:
                             type: string
                         type: object
                       opensearchManagedClusterConfiguration:
-                        description: The storage configuration of the knowledge base
-                          in Amazon OpenSearch Service Managed Cluster. See opensearch_managed_cluster_configuration
-                          block for details.
+                        description: Storage configuration of the knowledge base in
+                          Amazon OpenSearch Service Managed Cluster. See opensearch_managed_cluster_configuration
+                          Block for details.
                         properties:
                           domainArn:
                             description: ARN of the OpenSearch domain.
@@ -3577,86 +3573,84 @@ spec:
                             description: Endpoint URL of the OpenSearch domain.
                             type: string
                           fieldMapping:
-                            description: –  Contains the names of the fields to which
-                              to map information about the vector store.
+                            description: Names of the fields to which to map information
+                              about the vector store. See storage_configuration.mongo_db_atlas_configuration.field_mapping
+                              Block for details.
                             properties:
                               metadataField:
-                                description: –  The name of the field in which Amazon
-                                  Bedrock stores metadata about the vector store.
+                                description: Name of the field in which Amazon Bedrock
+                                  stores metadata about the vector store.
                                 type: string
                               textField:
-                                description: –  The name of the field in which Amazon
-                                  Bedrock stores the raw text from your data. The
-                                  text is split according to the chunking strategy
-                                  you choose.
+                                description: Name of the field in which Amazon Bedrock
+                                  stores the raw text from your data. The text is
+                                  split according to the chunking strategy you choose.
                                 type: string
                               vectorField:
-                                description: –  The name of the field in which Amazon
-                                  Bedrock stores the vector embeddings for your data
-                                  sources.
+                                description: Name of the field in which Amazon Bedrock
+                                  stores the vector embeddings for your data sources.
                                 type: string
                             type: object
                           vectorIndexName:
-                            description: –  The name of the vector index.
+                            description: Name of the vector index.
                             type: string
                         type: object
                       opensearchServerlessConfiguration:
-                        description: The storage configuration of the knowledge base
-                          in Amazon OpenSearch Service Serverless. See opensearch_serverless_configuration
-                          block for details.
+                        description: Storage configuration of the knowledge base in
+                          Amazon OpenSearch Service Serverless. See opensearch_serverless_configuration
+                          Block for details.
                         properties:
                           collectionArn:
                             description: ARN of the OpenSearch Service vector store.
                             type: string
                           fieldMapping:
-                            description: –  Contains the names of the fields to which
-                              to map information about the vector store.
+                            description: Names of the fields to which to map information
+                              about the vector store. See storage_configuration.mongo_db_atlas_configuration.field_mapping
+                              Block for details.
                             properties:
                               metadataField:
-                                description: –  The name of the field in which Amazon
-                                  Bedrock stores metadata about the vector store.
+                                description: Name of the field in which Amazon Bedrock
+                                  stores metadata about the vector store.
                                 type: string
                               textField:
-                                description: –  The name of the field in which Amazon
-                                  Bedrock stores the raw text from your data. The
-                                  text is split according to the chunking strategy
-                                  you choose.
+                                description: Name of the field in which Amazon Bedrock
+                                  stores the raw text from your data. The text is
+                                  split according to the chunking strategy you choose.
                                 type: string
                               vectorField:
-                                description: –  The name of the field in which Amazon
-                                  Bedrock stores the vector embeddings for your data
-                                  sources.
+                                description: Name of the field in which Amazon Bedrock
+                                  stores the vector embeddings for your data sources.
                                 type: string
                             type: object
                           vectorIndexName:
-                            description: –  The name of the vector index.
+                            description: Name of the vector index.
                             type: string
                         type: object
                       pineconeConfiguration:
-                        description: The storage configuration of the knowledge base
-                          in Pinecone. See pinecone_configuration block for details.
+                        description: Storage configuration of the knowledge base in
+                          Pinecone. See pinecone_configuration Block for details.
                         properties:
                           connectionString:
                             description: Endpoint URL for your index management page.
                             type: string
                           credentialsSecretArn:
-                            description: –  The ARN of the secret that you created
-                              in AWS Secrets Manager that is linked to your MongoDB
-                              Atlas database.
+                            description: ARN of the secret that you created in AWS
+                              Secrets Manager that is linked to your MongoDB Atlas
+                              database.
                             type: string
                           fieldMapping:
-                            description: –  Contains the names of the fields to which
-                              to map information about the vector store.
+                            description: Names of the fields to which to map information
+                              about the vector store. See storage_configuration.mongo_db_atlas_configuration.field_mapping
+                              Block for details.
                             properties:
                               metadataField:
-                                description: –  The name of the field in which Amazon
-                                  Bedrock stores metadata about the vector store.
+                                description: Name of the field in which Amazon Bedrock
+                                  stores metadata about the vector store.
                                 type: string
                               textField:
-                                description: –  The name of the field in which Amazon
-                                  Bedrock stores the raw text from your data. The
-                                  text is split according to the chunking strategy
-                                  you choose.
+                                description: Name of the field in which Amazon Bedrock
+                                  stores the raw text from your data. The text is
+                                  split according to the chunking strategy you choose.
                                 type: string
                             type: object
                           namespace:
@@ -3668,20 +3662,21 @@ spec:
                         description: Details about the storage configuration of the
                           knowledge base in Amazon RDS. For more information, see
                           Create a vector index in Amazon RDS. See rds_configuration
-                          block for details.
+                          Block for details.
                         properties:
                           credentialsSecretArn:
-                            description: –  The ARN of the secret that you created
-                              in AWS Secrets Manager that is linked to your MongoDB
-                              Atlas database.
+                            description: ARN of the secret that you created in AWS
+                              Secrets Manager that is linked to your MongoDB Atlas
+                              database.
                             type: string
                           databaseName:
-                            description: –  The name of the database in the MongoDB
-                              Atlas database.
+                            description: Name of the database in the MongoDB Atlas
+                              database.
                             type: string
                           fieldMapping:
-                            description: –  Contains the names of the fields to which
-                              to map information about the vector store.
+                            description: Names of the fields to which to map information
+                              about the vector store. See storage_configuration.mongo_db_atlas_configuration.field_mapping
+                              Block for details.
                             properties:
                               customMetadataField:
                                 description: Name for the universal metadata field
@@ -3689,23 +3684,21 @@ spec:
                                   from your data source.
                                 type: string
                               metadataField:
-                                description: –  The name of the field in which Amazon
-                                  Bedrock stores metadata about the vector store.
+                                description: Name of the field in which Amazon Bedrock
+                                  stores metadata about the vector store.
                                 type: string
                               primaryKeyField:
                                 description: Name of the field in which Amazon Bedrock
                                   stores the ID for each entry.
                                 type: string
                               textField:
-                                description: –  The name of the field in which Amazon
-                                  Bedrock stores the raw text from your data. The
-                                  text is split according to the chunking strategy
-                                  you choose.
+                                description: Name of the field in which Amazon Bedrock
+                                  stores the raw text from your data. The text is
+                                  split according to the chunking strategy you choose.
                                 type: string
                               vectorField:
-                                description: –  The name of the field in which Amazon
-                                  Bedrock stores the vector embeddings for your data
-                                  sources.
+                                description: Name of the field in which Amazon Bedrock
+                                  stores the vector embeddings for your data sources.
                                 type: string
                             type: object
                           resourceArn:
@@ -3716,47 +3709,45 @@ spec:
                             type: string
                         type: object
                       redisEnterpriseCloudConfiguration:
-                        description: The storage configuration of the knowledge base
-                          in Redis Enterprise Cloud. See redis_enterprise_cloud_configuration
-                          block for details.
+                        description: Storage configuration of the knowledge base in
+                          Redis Enterprise Cloud. See redis_enterprise_cloud_configuration
+                          Block for details.
                         properties:
                           credentialsSecretArn:
-                            description: –  The ARN of the secret that you created
-                              in AWS Secrets Manager that is linked to your MongoDB
-                              Atlas database.
-                            type: string
-                          endpoint:
-                            description: –  The endpoint URL of the MongoDB Atlas
+                            description: ARN of the secret that you created in AWS
+                              Secrets Manager that is linked to your MongoDB Atlas
                               database.
                             type: string
+                          endpoint:
+                            description: Endpoint URL of the MongoDB Atlas database.
+                            type: string
                           fieldMapping:
-                            description: –  Contains the names of the fields to which
-                              to map information about the vector store.
+                            description: Names of the fields to which to map information
+                              about the vector store. See storage_configuration.mongo_db_atlas_configuration.field_mapping
+                              Block for details.
                             properties:
                               metadataField:
-                                description: –  The name of the field in which Amazon
-                                  Bedrock stores metadata about the vector store.
+                                description: Name of the field in which Amazon Bedrock
+                                  stores metadata about the vector store.
                                 type: string
                               textField:
-                                description: –  The name of the field in which Amazon
-                                  Bedrock stores the raw text from your data. The
-                                  text is split according to the chunking strategy
-                                  you choose.
+                                description: Name of the field in which Amazon Bedrock
+                                  stores the raw text from your data. The text is
+                                  split according to the chunking strategy you choose.
                                 type: string
                               vectorField:
-                                description: –  The name of the field in which Amazon
-                                  Bedrock stores the vector embeddings for your data
-                                  sources.
+                                description: Name of the field in which Amazon Bedrock
+                                  stores the vector embeddings for your data sources.
                                 type: string
                             type: object
                           vectorIndexName:
-                            description: –  The name of the vector index.
+                            description: Name of the vector index.
                             type: string
                         type: object
                       s3VectorsConfiguration:
-                        description: The storage configuration of the knowledge base
-                          in Amazon S3 Vectors. See s3_vectors_configuration block
-                          for details.
+                        description: Storage configuration of the knowledge base in
+                          Amazon S3 Vectors. See s3_vectors_configuration Block for
+                          details.
                         properties:
                           indexArn:
                             description: ARN of the S3 Vectors index. Conflicts with

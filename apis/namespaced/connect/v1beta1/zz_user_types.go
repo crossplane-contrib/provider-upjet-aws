@@ -108,7 +108,7 @@ type UserInitParameters struct {
 	// +kubebuilder:validation:Optional
 	RoutingProfileIDSelector *v2.NamespacedSelector `json:"routingProfileIdSelector,omitempty" tf:"-"`
 
-	// A list of identifiers for the security profiles for the user. Specify a minimum of 1 and maximum of 10 security profile ids. For more information, see Best Practices for Security Profiles in the Amazon Connect Administrator Guide.
+	// A list of identifiers for the security profiles for the user. Specify a minimum of 1 and maximum of 10 security profile IDs. For more information, see Best Practices for Security Profiles in the Amazon Connect Administrator Guide.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/connect/v1beta1.SecurityProfile
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("security_profile_id",true)
 	// +listType=set
@@ -161,7 +161,7 @@ type UserObservation struct {
 	// The identifier of the routing profile for the user.
 	RoutingProfileID *string `json:"routingProfileId,omitempty" tf:"routing_profile_id,omitempty"`
 
-	// A list of identifiers for the security profiles for the user. Specify a minimum of 1 and maximum of 10 security profile ids. For more information, see Best Practices for Security Profiles in the Amazon Connect Administrator Guide.
+	// A list of identifiers for the security profiles for the user. Specify a minimum of 1 and maximum of 10 security profile IDs. For more information, see Best Practices for Security Profiles in the Amazon Connect Administrator Guide.
 	// +listType=set
 	SecurityProfileIds []*string `json:"securityProfileIds,omitempty" tf:"security_profile_ids,omitempty"`
 
@@ -236,7 +236,7 @@ type UserParameters struct {
 	// +kubebuilder:validation:Optional
 	RoutingProfileIDSelector *v2.NamespacedSelector `json:"routingProfileIdSelector,omitempty" tf:"-"`
 
-	// A list of identifiers for the security profiles for the user. Specify a minimum of 1 and maximum of 10 security profile ids. For more information, see Best Practices for Security Profiles in the Amazon Connect Administrator Guide.
+	// A list of identifiers for the security profiles for the user. Specify a minimum of 1 and maximum of 10 security profile IDs. For more information, see Best Practices for Security Profiles in the Amazon Connect Administrator Guide.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/connect/v1beta1.SecurityProfile
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("security_profile_id",true)
 	// +kubebuilder:validation:Optional

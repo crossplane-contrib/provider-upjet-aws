@@ -22,10 +22,10 @@ type ContainerInitParameters struct {
 
 type ContainerObservation struct {
 
-	// The ARN of the container.
+	// ARN of the container.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The DNS endpoint of the container.
+	// DNS endpoint of the container.
 	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -38,7 +38,7 @@ type ContainerObservation struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }

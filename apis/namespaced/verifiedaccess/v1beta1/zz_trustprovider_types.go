@@ -15,204 +15,247 @@ import (
 
 type DeviceOptionsInitParameters struct {
 
-	// The ID of the AWS Verified Access trust provider.
+	// ID of the tenant application with the device-identity provider.
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
 }
 
 type DeviceOptionsObservation struct {
 
-	// The ID of the AWS Verified Access trust provider.
+	// ID of the tenant application with the device-identity provider.
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
 }
 
 type DeviceOptionsParameters struct {
 
-	// The ID of the AWS Verified Access trust provider.
+	// ID of the tenant application with the device-identity provider.
 	// +kubebuilder:validation:Optional
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
 }
 
 type NativeApplicationOidcOptionsInitParameters struct {
+
+	// OIDC authorization endpoint.
 	AuthorizationEndpoint *string `json:"authorizationEndpoint,omitempty" tf:"authorization_endpoint,omitempty"`
 
-	// The ID of the AWS Verified Access trust provider.
+	// OAuth 2.0 client identifier.
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
+	// OAuth 2.0 client secret.
 	ClientSecretSecretRef v2.LocalSecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
 
+	// OIDC issuer identifier of the IdP.
 	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
 
+	// OIDC public signing key endpoint.
 	PublicSigningKeyEndpoint *string `json:"publicSigningKeyEndpoint,omitempty" tf:"public_signing_key_endpoint,omitempty"`
 
+	// OpenID Connect (OIDC) scope specified.
 	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
 
+	// OIDC token endpoint.
 	TokenEndpoint *string `json:"tokenEndpoint,omitempty" tf:"token_endpoint,omitempty"`
 
+	// OIDC user info endpoint.
 	UserInfoEndpoint *string `json:"userInfoEndpoint,omitempty" tf:"user_info_endpoint,omitempty"`
 }
 
 type NativeApplicationOidcOptionsObservation struct {
+
+	// OIDC authorization endpoint.
 	AuthorizationEndpoint *string `json:"authorizationEndpoint,omitempty" tf:"authorization_endpoint,omitempty"`
 
-	// The ID of the AWS Verified Access trust provider.
+	// OAuth 2.0 client identifier.
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
+	// OIDC issuer identifier of the IdP.
 	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
 
+	// OIDC public signing key endpoint.
 	PublicSigningKeyEndpoint *string `json:"publicSigningKeyEndpoint,omitempty" tf:"public_signing_key_endpoint,omitempty"`
 
+	// OpenID Connect (OIDC) scope specified.
 	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
 
+	// OIDC token endpoint.
 	TokenEndpoint *string `json:"tokenEndpoint,omitempty" tf:"token_endpoint,omitempty"`
 
+	// OIDC user info endpoint.
 	UserInfoEndpoint *string `json:"userInfoEndpoint,omitempty" tf:"user_info_endpoint,omitempty"`
 }
 
 type NativeApplicationOidcOptionsParameters struct {
 
+	// OIDC authorization endpoint.
 	// +kubebuilder:validation:Optional
 	AuthorizationEndpoint *string `json:"authorizationEndpoint,omitempty" tf:"authorization_endpoint,omitempty"`
 
-	// The ID of the AWS Verified Access trust provider.
+	// OAuth 2.0 client identifier.
 	// +kubebuilder:validation:Optional
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
+	// OAuth 2.0 client secret.
 	// +kubebuilder:validation:Optional
 	ClientSecretSecretRef v2.LocalSecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
 
+	// OIDC issuer identifier of the IdP.
 	// +kubebuilder:validation:Optional
 	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
 
+	// OIDC public signing key endpoint.
 	// +kubebuilder:validation:Optional
 	PublicSigningKeyEndpoint *string `json:"publicSigningKeyEndpoint,omitempty" tf:"public_signing_key_endpoint,omitempty"`
 
+	// OpenID Connect (OIDC) scope specified.
 	// +kubebuilder:validation:Optional
 	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
 
+	// OIDC token endpoint.
 	// +kubebuilder:validation:Optional
 	TokenEndpoint *string `json:"tokenEndpoint,omitempty" tf:"token_endpoint,omitempty"`
 
+	// OIDC user info endpoint.
 	// +kubebuilder:validation:Optional
 	UserInfoEndpoint *string `json:"userInfoEndpoint,omitempty" tf:"user_info_endpoint,omitempty"`
 }
 
 type OidcOptionsInitParameters struct {
+
+	// OIDC authorization endpoint.
 	AuthorizationEndpoint *string `json:"authorizationEndpoint,omitempty" tf:"authorization_endpoint,omitempty"`
 
-	// The ID of the AWS Verified Access trust provider.
+	// OAuth 2.0 client identifier.
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
+	// OAuth 2.0 client secret.
 	ClientSecretSecretRef v2.LocalSecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
 
+	// OIDC issuer identifier of the IdP.
 	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
 
+	// OpenID Connect (OIDC) scope specified.
 	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
 
+	// OIDC token endpoint.
 	TokenEndpoint *string `json:"tokenEndpoint,omitempty" tf:"token_endpoint,omitempty"`
 
+	// OIDC user info endpoint.
 	UserInfoEndpoint *string `json:"userInfoEndpoint,omitempty" tf:"user_info_endpoint,omitempty"`
 }
 
 type OidcOptionsObservation struct {
+
+	// OIDC authorization endpoint.
 	AuthorizationEndpoint *string `json:"authorizationEndpoint,omitempty" tf:"authorization_endpoint,omitempty"`
 
-	// The ID of the AWS Verified Access trust provider.
+	// OAuth 2.0 client identifier.
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
+	// OIDC issuer identifier of the IdP.
 	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
 
+	// OpenID Connect (OIDC) scope specified.
 	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
 
+	// OIDC token endpoint.
 	TokenEndpoint *string `json:"tokenEndpoint,omitempty" tf:"token_endpoint,omitempty"`
 
+	// OIDC user info endpoint.
 	UserInfoEndpoint *string `json:"userInfoEndpoint,omitempty" tf:"user_info_endpoint,omitempty"`
 }
 
 type OidcOptionsParameters struct {
 
+	// OIDC authorization endpoint.
 	// +kubebuilder:validation:Optional
 	AuthorizationEndpoint *string `json:"authorizationEndpoint,omitempty" tf:"authorization_endpoint,omitempty"`
 
-	// The ID of the AWS Verified Access trust provider.
+	// OAuth 2.0 client identifier.
 	// +kubebuilder:validation:Optional
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
+	// OAuth 2.0 client secret.
 	// +kubebuilder:validation:Optional
 	ClientSecretSecretRef v2.LocalSecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
 
+	// OIDC issuer identifier of the IdP.
 	// +kubebuilder:validation:Optional
 	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
 
+	// OpenID Connect (OIDC) scope specified.
 	// +kubebuilder:validation:Optional
 	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
 
+	// OIDC token endpoint.
 	// +kubebuilder:validation:Optional
 	TokenEndpoint *string `json:"tokenEndpoint,omitempty" tf:"token_endpoint,omitempty"`
 
+	// OIDC user info endpoint.
 	// +kubebuilder:validation:Optional
 	UserInfoEndpoint *string `json:"userInfoEndpoint,omitempty" tf:"user_info_endpoint,omitempty"`
 }
 
 type TrustProviderInitParameters struct {
 
-	// A description for the AWS Verified Access trust provider.
+	// Description for the AWS Verified Access trust provider.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// A block of options for device identity based trust providers.
+	// Block of options for device identity based trust providers. See below.
 	DeviceOptions *DeviceOptionsInitParameters `json:"deviceOptions,omitempty" tf:"device_options,omitempty"`
 
-	// based trust provider.
+	// Type of device-based trust provider.
 	DeviceTrustProviderType *string `json:"deviceTrustProviderType,omitempty" tf:"device_trust_provider_type,omitempty"`
 
-	// The OpenID Connect details for an Native Application OIDC, user-identity based trust provider.
+	// OpenID Connect details for a Native Application OIDC, user-identity based trust provider. See below.
 	NativeApplicationOidcOptions *NativeApplicationOidcOptionsInitParameters `json:"nativeApplicationOidcOptions,omitempty" tf:"native_application_oidc_options,omitempty"`
 
-	// The OpenID Connect details for an oidc-type, user-identity based trust provider.
+	// OpenID Connect details for an oidc-type, user-identity based trust provider. See below.
 	OidcOptions *OidcOptionsInitParameters `json:"oidcOptions,omitempty" tf:"oidc_options,omitempty"`
 
-	// The identifier to be used when working with policy rules.
+	// Identifier to be used when working with policy rules.
 	PolicyReferenceName *string `json:"policyReferenceName,omitempty" tf:"policy_reference_name,omitempty"`
 
+	// Block of options in use for server side encryption. See below.
 	SseSpecification *TrustProviderSseSpecificationInitParameters `json:"sseSpecification,omitempty" tf:"sse_specification,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The type of trust provider can be either user or device-based.
+	// Type of trust provider can be either user or device-based.
 	TrustProviderType *string `json:"trustProviderType,omitempty" tf:"trust_provider_type,omitempty"`
 
-	// The type of user-based trust provider.
+	// Type of user-based trust provider.
 	UserTrustProviderType *string `json:"userTrustProviderType,omitempty" tf:"user_trust_provider_type,omitempty"`
 }
 
 type TrustProviderObservation struct {
 
-	// A description for the AWS Verified Access trust provider.
+	// Description for the AWS Verified Access trust provider.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// A block of options for device identity based trust providers.
+	// Block of options for device identity based trust providers. See below.
 	DeviceOptions *DeviceOptionsObservation `json:"deviceOptions,omitempty" tf:"device_options,omitempty"`
 
-	// based trust provider.
+	// Type of device-based trust provider.
 	DeviceTrustProviderType *string `json:"deviceTrustProviderType,omitempty" tf:"device_trust_provider_type,omitempty"`
 
-	// The ID of the AWS Verified Access trust provider.
+	// ID of the AWS Verified Access trust provider.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The OpenID Connect details for an Native Application OIDC, user-identity based trust provider.
+	// OpenID Connect details for a Native Application OIDC, user-identity based trust provider. See below.
 	NativeApplicationOidcOptions *NativeApplicationOidcOptionsObservation `json:"nativeApplicationOidcOptions,omitempty" tf:"native_application_oidc_options,omitempty"`
 
-	// The OpenID Connect details for an oidc-type, user-identity based trust provider.
+	// OpenID Connect details for an oidc-type, user-identity based trust provider. See below.
 	OidcOptions *OidcOptionsObservation `json:"oidcOptions,omitempty" tf:"oidc_options,omitempty"`
 
-	// The identifier to be used when working with policy rules.
+	// Identifier to be used when working with policy rules.
 	PolicyReferenceName *string `json:"policyReferenceName,omitempty" tf:"policy_reference_name,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
+	// Block of options in use for server side encryption. See below.
 	SseSpecification *TrustProviderSseSpecificationObservation `json:"sseSpecification,omitempty" tf:"sse_specification,omitempty"`
 
 	// Key-value map of resource tags.
@@ -222,36 +265,36 @@ type TrustProviderObservation struct {
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// The type of trust provider can be either user or device-based.
+	// Type of trust provider can be either user or device-based.
 	TrustProviderType *string `json:"trustProviderType,omitempty" tf:"trust_provider_type,omitempty"`
 
-	// The type of user-based trust provider.
+	// Type of user-based trust provider.
 	UserTrustProviderType *string `json:"userTrustProviderType,omitempty" tf:"user_trust_provider_type,omitempty"`
 }
 
 type TrustProviderParameters struct {
 
-	// A description for the AWS Verified Access trust provider.
+	// Description for the AWS Verified Access trust provider.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// A block of options for device identity based trust providers.
+	// Block of options for device identity based trust providers. See below.
 	// +kubebuilder:validation:Optional
 	DeviceOptions *DeviceOptionsParameters `json:"deviceOptions,omitempty" tf:"device_options,omitempty"`
 
-	// based trust provider.
+	// Type of device-based trust provider.
 	// +kubebuilder:validation:Optional
 	DeviceTrustProviderType *string `json:"deviceTrustProviderType,omitempty" tf:"device_trust_provider_type,omitempty"`
 
-	// The OpenID Connect details for an Native Application OIDC, user-identity based trust provider.
+	// OpenID Connect details for a Native Application OIDC, user-identity based trust provider. See below.
 	// +kubebuilder:validation:Optional
 	NativeApplicationOidcOptions *NativeApplicationOidcOptionsParameters `json:"nativeApplicationOidcOptions,omitempty" tf:"native_application_oidc_options,omitempty"`
 
-	// The OpenID Connect details for an oidc-type, user-identity based trust provider.
+	// OpenID Connect details for an oidc-type, user-identity based trust provider. See below.
 	// +kubebuilder:validation:Optional
 	OidcOptions *OidcOptionsParameters `json:"oidcOptions,omitempty" tf:"oidc_options,omitempty"`
 
-	// The identifier to be used when working with policy rules.
+	// Identifier to be used when working with policy rules.
 	// +kubebuilder:validation:Optional
 	PolicyReferenceName *string `json:"policyReferenceName,omitempty" tf:"policy_reference_name,omitempty"`
 
@@ -260,6 +303,7 @@ type TrustProviderParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
+	// Block of options in use for server side encryption. See below.
 	// +kubebuilder:validation:Optional
 	SseSpecification *TrustProviderSseSpecificationParameters `json:"sseSpecification,omitempty" tf:"sse_specification,omitempty"`
 
@@ -268,32 +312,40 @@ type TrustProviderParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The type of trust provider can be either user or device-based.
+	// Type of trust provider can be either user or device-based.
 	// +kubebuilder:validation:Optional
 	TrustProviderType *string `json:"trustProviderType,omitempty" tf:"trust_provider_type,omitempty"`
 
-	// The type of user-based trust provider.
+	// Type of user-based trust provider.
 	// +kubebuilder:validation:Optional
 	UserTrustProviderType *string `json:"userTrustProviderType,omitempty" tf:"user_trust_provider_type,omitempty"`
 }
 
 type TrustProviderSseSpecificationInitParameters struct {
+
+	// Whether a customer managed key is in use.
 	CustomerManagedKeyEnabled *bool `json:"customerManagedKeyEnabled,omitempty" tf:"customer_managed_key_enabled,omitempty"`
 
+	// ARN of the KMS key.
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 }
 
 type TrustProviderSseSpecificationObservation struct {
+
+	// Whether a customer managed key is in use.
 	CustomerManagedKeyEnabled *bool `json:"customerManagedKeyEnabled,omitempty" tf:"customer_managed_key_enabled,omitempty"`
 
+	// ARN of the KMS key.
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 }
 
 type TrustProviderSseSpecificationParameters struct {
 
+	// Whether a customer managed key is in use.
 	// +kubebuilder:validation:Optional
 	CustomerManagedKeyEnabled *bool `json:"customerManagedKeyEnabled,omitempty" tf:"customer_managed_key_enabled,omitempty"`
 
+	// ARN of the KMS key.
 	// +kubebuilder:validation:Optional
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 }

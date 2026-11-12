@@ -1276,7 +1276,7 @@ type RouteParameters struct {
 
 type RouteSpecInitParameters struct {
 
-	// GRPC routing information for the route. See spec.grpc_route Block for details.
+	// gRPC routing information for the route. See spec.grpc_route Block for details.
 	GRPCRoute *SpecGRPCRouteInitParameters `json:"grpcRoute,omitempty" tf:"grpc_route,omitempty"`
 
 	// HTTP routing information for the route. See spec.http_route Block for details.
@@ -1294,7 +1294,7 @@ type RouteSpecInitParameters struct {
 
 type RouteSpecObservation struct {
 
-	// GRPC routing information for the route. See spec.grpc_route Block for details.
+	// gRPC routing information for the route. See spec.grpc_route Block for details.
 	GRPCRoute *SpecGRPCRouteObservation `json:"grpcRoute,omitempty" tf:"grpc_route,omitempty"`
 
 	// HTTP routing information for the route. See spec.http_route Block for details.
@@ -1312,7 +1312,7 @@ type RouteSpecObservation struct {
 
 type RouteSpecParameters struct {
 
-	// GRPC routing information for the route. See spec.grpc_route Block for details.
+	// gRPC routing information for the route. See spec.grpc_route Block for details.
 	// +kubebuilder:validation:Optional
 	GRPCRoute *SpecGRPCRouteParameters `json:"grpcRoute,omitempty" tf:"grpc_route,omitempty"`
 

@@ -53,6 +53,45 @@ type EnaSrdSpecificationEnaSrdUDPSpecificationParameters struct {
 	EnaSrdUDPEnabled *bool `json:"enaSrdUdpEnabled,omitempty" tf:"ena_srd_udp_enabled,omitempty"`
 }
 
+type NetworkInterfaceConnectionTrackingSpecificationInitParameters struct {
+
+	// Timeout (in seconds) for idle TCP connections in an established state. Min: 60 seconds. Max: 432000 seconds (5 days). Recommended: Less than 432000 seconds.
+	TCPEstablishedTimeout *float64 `json:"tcpEstablishedTimeout,omitempty" tf:"tcp_established_timeout,omitempty"`
+
+	// Timeout (in seconds) for idle UDP flows classified as streams which have seen more than one request-response transaction. Min: 60 seconds. Max: 180 seconds (3 minutes). Default: 180 seconds.
+	UDPStreamTimeout *float64 `json:"udpStreamTimeout,omitempty" tf:"udp_stream_timeout,omitempty"`
+
+	// Timeout (in seconds) for idle UDP flows that have seen traffic only in a single direction or a single request-response transaction. Min: 30 seconds. Max: 60 seconds. Default: 30 seconds.
+	UDPTimeout *float64 `json:"udpTimeout,omitempty" tf:"udp_timeout,omitempty"`
+}
+
+type NetworkInterfaceConnectionTrackingSpecificationObservation struct {
+
+	// Timeout (in seconds) for idle TCP connections in an established state. Min: 60 seconds. Max: 432000 seconds (5 days). Recommended: Less than 432000 seconds.
+	TCPEstablishedTimeout *float64 `json:"tcpEstablishedTimeout,omitempty" tf:"tcp_established_timeout,omitempty"`
+
+	// Timeout (in seconds) for idle UDP flows classified as streams which have seen more than one request-response transaction. Min: 60 seconds. Max: 180 seconds (3 minutes). Default: 180 seconds.
+	UDPStreamTimeout *float64 `json:"udpStreamTimeout,omitempty" tf:"udp_stream_timeout,omitempty"`
+
+	// Timeout (in seconds) for idle UDP flows that have seen traffic only in a single direction or a single request-response transaction. Min: 30 seconds. Max: 60 seconds. Default: 30 seconds.
+	UDPTimeout *float64 `json:"udpTimeout,omitempty" tf:"udp_timeout,omitempty"`
+}
+
+type NetworkInterfaceConnectionTrackingSpecificationParameters struct {
+
+	// Timeout (in seconds) for idle TCP connections in an established state. Min: 60 seconds. Max: 432000 seconds (5 days). Recommended: Less than 432000 seconds.
+	// +kubebuilder:validation:Optional
+	TCPEstablishedTimeout *float64 `json:"tcpEstablishedTimeout,omitempty" tf:"tcp_established_timeout,omitempty"`
+
+	// Timeout (in seconds) for idle UDP flows classified as streams which have seen more than one request-response transaction. Min: 60 seconds. Max: 180 seconds (3 minutes). Default: 180 seconds.
+	// +kubebuilder:validation:Optional
+	UDPStreamTimeout *float64 `json:"udpStreamTimeout,omitempty" tf:"udp_stream_timeout,omitempty"`
+
+	// Timeout (in seconds) for idle UDP flows that have seen traffic only in a single direction or a single request-response transaction. Min: 30 seconds. Max: 60 seconds. Default: 30 seconds.
+	// +kubebuilder:validation:Optional
+	UDPTimeout *float64 `json:"udpTimeout,omitempty" tf:"udp_timeout,omitempty"`
+}
+
 type NetworkInterfaceEnaSrdSpecificationInitParameters struct {
 
 	// Indicates whether ENA Express is enabled for the network interface.
@@ -83,6 +122,9 @@ type NetworkInterfaceEnaSrdSpecificationParameters struct {
 }
 
 type NetworkInterfaceInitParameters_2 struct {
+
+	// Configures the connection tracking timeouts for the network interface. See Connection Tracking Specification below for more details.
+	ConnectionTrackingSpecification *NetworkInterfaceConnectionTrackingSpecificationInitParameters `json:"connectionTrackingSpecification,omitempty" tf:"connection_tracking_specification,omitempty"`
 
 	// Description for the network interface.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
@@ -135,7 +177,7 @@ type NetworkInterfaceInitParameters_2 struct {
 	// +listType=set
 	PrivateIps []*string `json:"privateIps,omitempty" tf:"private_ips,omitempty"`
 
-	// Number of secondary private IPs to assign to the ENI. The total number of private IPs will be 1 + private_ips_count, as a primary private IP will be assiged to an ENI by default.
+	// Number of secondary private IPs to assign to the ENI. The total number of private IPs will be 1 + private_ips_count, as a primary private IP will be assigned to an ENI by default.
 	PrivateIpsCount *float64 `json:"privateIpsCount,omitempty" tf:"private_ips_count,omitempty"`
 
 	// References to SecurityGroup in ec2 to populate securityGroups.
@@ -180,6 +222,9 @@ type NetworkInterfaceObservation_2 struct {
 
 	// Configuration block to define the attachment of the ENI. See Attachment below for more details!
 	Attachment []AttachmentObservation `json:"attachment,omitempty" tf:"attachment,omitempty"`
+
+	// Configures the connection tracking timeouts for the network interface. See Connection Tracking Specification below for more details.
+	ConnectionTrackingSpecification *NetworkInterfaceConnectionTrackingSpecificationObservation `json:"connectionTrackingSpecification,omitempty" tf:"connection_tracking_specification,omitempty"`
 
 	// Description for the network interface.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
@@ -247,7 +292,7 @@ type NetworkInterfaceObservation_2 struct {
 	// +listType=set
 	PrivateIps []*string `json:"privateIps,omitempty" tf:"private_ips,omitempty"`
 
-	// Number of secondary private IPs to assign to the ENI. The total number of private IPs will be 1 + private_ips_count, as a primary private IP will be assiged to an ENI by default.
+	// Number of secondary private IPs to assign to the ENI. The total number of private IPs will be 1 + private_ips_count, as a primary private IP will be assigned to an ENI by default.
 	PrivateIpsCount *float64 `json:"privateIpsCount,omitempty" tf:"private_ips_count,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -274,6 +319,10 @@ type NetworkInterfaceObservation_2 struct {
 }
 
 type NetworkInterfaceParameters_2 struct {
+
+	// Configures the connection tracking timeouts for the network interface. See Connection Tracking Specification below for more details.
+	// +kubebuilder:validation:Optional
+	ConnectionTrackingSpecification *NetworkInterfaceConnectionTrackingSpecificationParameters `json:"connectionTrackingSpecification,omitempty" tf:"connection_tracking_specification,omitempty"`
 
 	// Description for the network interface.
 	// +kubebuilder:validation:Optional
@@ -342,7 +391,7 @@ type NetworkInterfaceParameters_2 struct {
 	// +listType=set
 	PrivateIps []*string `json:"privateIps,omitempty" tf:"private_ips,omitempty"`
 
-	// Number of secondary private IPs to assign to the ENI. The total number of private IPs will be 1 + private_ips_count, as a primary private IP will be assiged to an ENI by default.
+	// Number of secondary private IPs to assign to the ENI. The total number of private IPs will be 1 + private_ips_count, as a primary private IP will be assigned to an ENI by default.
 	// +kubebuilder:validation:Optional
 	PrivateIpsCount *float64 `json:"privateIpsCount,omitempty" tf:"private_ips_count,omitempty"`
 

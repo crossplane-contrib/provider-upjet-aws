@@ -25,7 +25,7 @@ type MethodInitParameters struct {
 	// +listType=set
 	AuthorizationScopes []*string `json:"authorizationScopes,omitempty" tf:"authorization_scopes,omitempty"`
 
-	// Authorizer id to be used when the authorization is CUSTOM or COGNITO_USER_POOLS
+	// Authorizer ID to be used when the authorization is CUSTOM or COGNITO_USER_POOLS
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/apigateway/v1beta1.Authorizer
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	AuthorizerID *string `json:"authorizerId,omitempty" tf:"authorizer_id,omitempty"`
@@ -94,7 +94,7 @@ type MethodObservation struct {
 	// +listType=set
 	AuthorizationScopes []*string `json:"authorizationScopes,omitempty" tf:"authorization_scopes,omitempty"`
 
-	// Authorizer id to be used when the authorization is CUSTOM or COGNITO_USER_POOLS
+	// Authorizer ID to be used when the authorization is CUSTOM or COGNITO_USER_POOLS
 	AuthorizerID *string `json:"authorizerId,omitempty" tf:"authorizer_id,omitempty"`
 
 	// HTTP Method (GET, POST, PUT, DELETE, HEAD, OPTIONS, ANY)
@@ -142,7 +142,7 @@ type MethodParameters struct {
 	// +listType=set
 	AuthorizationScopes []*string `json:"authorizationScopes,omitempty" tf:"authorization_scopes,omitempty"`
 
-	// Authorizer id to be used when the authorization is CUSTOM or COGNITO_USER_POOLS
+	// Authorizer ID to be used when the authorization is CUSTOM or COGNITO_USER_POOLS
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/apigateway/v1beta1.Authorizer
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional

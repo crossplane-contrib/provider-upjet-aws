@@ -345,13 +345,13 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The ARN of the subnet group.
+                    description: ARN of the subnet group.
                     type: string
                   description:
                     description: Description for the subnet group.
                     type: string
                   id:
-                    description: The name of the subnet group.
+                    description: Name of the subnet group.
                     type: string
                   region:
                     description: |-
@@ -374,13 +374,12 @@ spec:
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                     x-kubernetes-map-type: granular
                   vpcId:
-                    description: The VPC in which the subnet group exists.
+                    description: VPC in which the subnet group exists.
                     type: string
                 type: object
               conditions:

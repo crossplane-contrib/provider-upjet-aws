@@ -15,19 +15,19 @@ import (
 
 type AudioInitParameters struct {
 
-	// Configuration for segmenting video content during processing. See segmentation_configuration block for details.
+	// Configuration for segmenting video content during processing. See segmentation_configuration Block for details.
 	SegmentationConfiguration *SegmentationConfigurationInitParameters `json:"segmentationConfiguration,omitempty" tf:"segmentation_configuration,omitempty"`
 }
 
 type AudioObservation struct {
 
-	// Configuration for segmenting video content during processing. See segmentation_configuration block for details.
+	// Configuration for segmenting video content during processing. See segmentation_configuration Block for details.
 	SegmentationConfiguration *SegmentationConfigurationObservation `json:"segmentationConfiguration,omitempty" tf:"segmentation_configuration,omitempty"`
 }
 
 type AudioParameters struct {
 
-	// Configuration for segmenting video content during processing. See segmentation_configuration block for details.
+	// Configuration for segmenting video content during processing. See segmentation_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	SegmentationConfiguration *SegmentationConfigurationParameters `json:"segmentationConfiguration,omitempty" tf:"segmentation_configuration,omitempty"`
 }
@@ -114,56 +114,56 @@ type AwsDataCatalogConfigurationParameters struct {
 
 type BedrockEmbeddingModelConfigurationAudioInitParameters struct {
 
-	// Configuration for segmenting video content during processing. See segmentation_configuration block for details.
+	// Configuration for segmenting video content during processing. See segmentation_configuration Block for details.
 	SegmentationConfiguration *AudioSegmentationConfigurationInitParameters `json:"segmentationConfiguration,omitempty" tf:"segmentation_configuration,omitempty"`
 }
 
 type BedrockEmbeddingModelConfigurationAudioObservation struct {
 
-	// Configuration for segmenting video content during processing. See segmentation_configuration block for details.
+	// Configuration for segmenting video content during processing. See segmentation_configuration Block for details.
 	SegmentationConfiguration *AudioSegmentationConfigurationObservation `json:"segmentationConfiguration,omitempty" tf:"segmentation_configuration,omitempty"`
 }
 
 type BedrockEmbeddingModelConfigurationAudioParameters struct {
 
-	// Configuration for segmenting video content during processing. See segmentation_configuration block for details.
+	// Configuration for segmenting video content during processing. See segmentation_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	SegmentationConfiguration *AudioSegmentationConfigurationParameters `json:"segmentationConfiguration,omitempty" tf:"segmentation_configuration,omitempty"`
 }
 
 type BedrockEmbeddingModelConfigurationInitParameters struct {
 
-	// Configuration for processing audio content in multimodal knowledge bases. See audio block for details.
+	// Configuration for processing audio content in multimodal knowledge bases. See audio Block for details.
 	Audio *AudioInitParameters `json:"audio,omitempty" tf:"audio,omitempty"`
 
 	// Dimension details for the vector configuration used on the Bedrock embeddings model.
 	Dimensions *float64 `json:"dimensions,omitempty" tf:"dimensions,omitempty"`
 
-	// Data type for the vectors when using a model to convert text into vector embeddings. The model must support the specified data type for vector embeddings.  Valid values are FLOAT32 and BINARY.
+	// Data type for the vectors when using a model to convert text into vector embeddings. The model must support the specified data type for vector embeddings. Valid values are FLOAT32 and BINARY.
 	EmbeddingDataType *string `json:"embeddingDataType,omitempty" tf:"embedding_data_type,omitempty"`
 
-	// Configuration for processing video content in multimodal knowledge bases. See video block for details.
+	// Configuration for processing video content in multimodal knowledge bases. See video Block for details.
 	Video *VideoInitParameters `json:"video,omitempty" tf:"video,omitempty"`
 }
 
 type BedrockEmbeddingModelConfigurationObservation struct {
 
-	// Configuration for processing audio content in multimodal knowledge bases. See audio block for details.
+	// Configuration for processing audio content in multimodal knowledge bases. See audio Block for details.
 	Audio *AudioObservation `json:"audio,omitempty" tf:"audio,omitempty"`
 
 	// Dimension details for the vector configuration used on the Bedrock embeddings model.
 	Dimensions *float64 `json:"dimensions,omitempty" tf:"dimensions,omitempty"`
 
-	// Data type for the vectors when using a model to convert text into vector embeddings. The model must support the specified data type for vector embeddings.  Valid values are FLOAT32 and BINARY.
+	// Data type for the vectors when using a model to convert text into vector embeddings. The model must support the specified data type for vector embeddings. Valid values are FLOAT32 and BINARY.
 	EmbeddingDataType *string `json:"embeddingDataType,omitempty" tf:"embedding_data_type,omitempty"`
 
-	// Configuration for processing video content in multimodal knowledge bases. See video block for details.
+	// Configuration for processing video content in multimodal knowledge bases. See video Block for details.
 	Video *VideoObservation `json:"video,omitempty" tf:"video,omitempty"`
 }
 
 type BedrockEmbeddingModelConfigurationParameters struct {
 
-	// Configuration for processing audio content in multimodal knowledge bases. See audio block for details.
+	// Configuration for processing audio content in multimodal knowledge bases. See audio Block for details.
 	// +kubebuilder:validation:Optional
 	Audio *AudioParameters `json:"audio,omitempty" tf:"audio,omitempty"`
 
@@ -171,30 +171,30 @@ type BedrockEmbeddingModelConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	Dimensions *float64 `json:"dimensions,omitempty" tf:"dimensions,omitempty"`
 
-	// Data type for the vectors when using a model to convert text into vector embeddings. The model must support the specified data type for vector embeddings.  Valid values are FLOAT32 and BINARY.
+	// Data type for the vectors when using a model to convert text into vector embeddings. The model must support the specified data type for vector embeddings. Valid values are FLOAT32 and BINARY.
 	// +kubebuilder:validation:Optional
 	EmbeddingDataType *string `json:"embeddingDataType,omitempty" tf:"embedding_data_type,omitempty"`
 
-	// Configuration for processing video content in multimodal knowledge bases. See video block for details.
+	// Configuration for processing video content in multimodal knowledge bases. See video Block for details.
 	// +kubebuilder:validation:Optional
 	Video *VideoParameters `json:"video,omitempty" tf:"video,omitempty"`
 }
 
 type BedrockEmbeddingModelConfigurationVideoInitParameters struct {
 
-	// Configuration for segmenting video content during processing. See segmentation_configuration block for details.
+	// Configuration for segmenting video content during processing. See segmentation_configuration Block for details.
 	SegmentationConfiguration *BedrockEmbeddingModelConfigurationVideoSegmentationConfigurationInitParameters `json:"segmentationConfiguration,omitempty" tf:"segmentation_configuration,omitempty"`
 }
 
 type BedrockEmbeddingModelConfigurationVideoObservation struct {
 
-	// Configuration for segmenting video content during processing. See segmentation_configuration block for details.
+	// Configuration for segmenting video content during processing. See segmentation_configuration Block for details.
 	SegmentationConfiguration *BedrockEmbeddingModelConfigurationVideoSegmentationConfigurationObservation `json:"segmentationConfiguration,omitempty" tf:"segmentation_configuration,omitempty"`
 }
 
 type BedrockEmbeddingModelConfigurationVideoParameters struct {
 
-	// Configuration for segmenting video content during processing. See segmentation_configuration block for details.
+	// Configuration for segmenting video content during processing. See segmentation_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	SegmentationConfiguration *BedrockEmbeddingModelConfigurationVideoSegmentationConfigurationParameters `json:"segmentationConfiguration,omitempty" tf:"segmentation_configuration,omitempty"`
 }
@@ -288,37 +288,37 @@ type CuratedQueryParameters struct {
 
 type EmbeddingModelConfigurationBedrockEmbeddingModelConfigurationInitParameters struct {
 
-	// Configuration for processing audio content in multimodal knowledge bases. See audio block for details.
+	// Configuration for processing audio content in multimodal knowledge bases. See audio Block for details.
 	Audio *BedrockEmbeddingModelConfigurationAudioInitParameters `json:"audio,omitempty" tf:"audio,omitempty"`
 
 	// Dimension details for the vector configuration used on the Bedrock embeddings model.
 	Dimensions *float64 `json:"dimensions,omitempty" tf:"dimensions,omitempty"`
 
-	// Data type for the vectors when using a model to convert text into vector embeddings. The model must support the specified data type for vector embeddings.  Valid values are FLOAT32 and BINARY.
+	// Data type for the vectors when using a model to convert text into vector embeddings. The model must support the specified data type for vector embeddings. Valid values are FLOAT32 and BINARY.
 	EmbeddingDataType *string `json:"embeddingDataType,omitempty" tf:"embedding_data_type,omitempty"`
 
-	// Configuration for processing video content in multimodal knowledge bases. See video block for details.
+	// Configuration for processing video content in multimodal knowledge bases. See video Block for details.
 	Video *BedrockEmbeddingModelConfigurationVideoInitParameters `json:"video,omitempty" tf:"video,omitempty"`
 }
 
 type EmbeddingModelConfigurationBedrockEmbeddingModelConfigurationObservation struct {
 
-	// Configuration for processing audio content in multimodal knowledge bases. See audio block for details.
+	// Configuration for processing audio content in multimodal knowledge bases. See audio Block for details.
 	Audio *BedrockEmbeddingModelConfigurationAudioObservation `json:"audio,omitempty" tf:"audio,omitempty"`
 
 	// Dimension details for the vector configuration used on the Bedrock embeddings model.
 	Dimensions *float64 `json:"dimensions,omitempty" tf:"dimensions,omitempty"`
 
-	// Data type for the vectors when using a model to convert text into vector embeddings. The model must support the specified data type for vector embeddings.  Valid values are FLOAT32 and BINARY.
+	// Data type for the vectors when using a model to convert text into vector embeddings. The model must support the specified data type for vector embeddings. Valid values are FLOAT32 and BINARY.
 	EmbeddingDataType *string `json:"embeddingDataType,omitempty" tf:"embedding_data_type,omitempty"`
 
-	// Configuration for processing video content in multimodal knowledge bases. See video block for details.
+	// Configuration for processing video content in multimodal knowledge bases. See video Block for details.
 	Video *BedrockEmbeddingModelConfigurationVideoObservation `json:"video,omitempty" tf:"video,omitempty"`
 }
 
 type EmbeddingModelConfigurationBedrockEmbeddingModelConfigurationParameters struct {
 
-	// Configuration for processing audio content in multimodal knowledge bases. See audio block for details.
+	// Configuration for processing audio content in multimodal knowledge bases. See audio Block for details.
 	// +kubebuilder:validation:Optional
 	Audio *BedrockEmbeddingModelConfigurationAudioParameters `json:"audio,omitempty" tf:"audio,omitempty"`
 
@@ -326,98 +326,98 @@ type EmbeddingModelConfigurationBedrockEmbeddingModelConfigurationParameters str
 	// +kubebuilder:validation:Optional
 	Dimensions *float64 `json:"dimensions,omitempty" tf:"dimensions,omitempty"`
 
-	// Data type for the vectors when using a model to convert text into vector embeddings. The model must support the specified data type for vector embeddings.  Valid values are FLOAT32 and BINARY.
+	// Data type for the vectors when using a model to convert text into vector embeddings. The model must support the specified data type for vector embeddings. Valid values are FLOAT32 and BINARY.
 	// +kubebuilder:validation:Optional
 	EmbeddingDataType *string `json:"embeddingDataType,omitempty" tf:"embedding_data_type,omitempty"`
 
-	// Configuration for processing video content in multimodal knowledge bases. See video block for details.
+	// Configuration for processing video content in multimodal knowledge bases. See video Block for details.
 	// +kubebuilder:validation:Optional
 	Video *BedrockEmbeddingModelConfigurationVideoParameters `json:"video,omitempty" tf:"video,omitempty"`
 }
 
 type EmbeddingModelConfigurationInitParameters struct {
 
-	// The vector configuration details on the Bedrock embeddings model.  See bedrock_embedding_model_configuration block for details.
+	// Vector configuration details for the Bedrock embeddings model. See bedrock_embedding_model_configuration Block for details.
 	BedrockEmbeddingModelConfiguration *BedrockEmbeddingModelConfigurationInitParameters `json:"bedrockEmbeddingModelConfiguration,omitempty" tf:"bedrock_embedding_model_configuration,omitempty"`
 }
 
 type EmbeddingModelConfigurationObservation struct {
 
-	// The vector configuration details on the Bedrock embeddings model.  See bedrock_embedding_model_configuration block for details.
+	// Vector configuration details for the Bedrock embeddings model. See bedrock_embedding_model_configuration Block for details.
 	BedrockEmbeddingModelConfiguration *BedrockEmbeddingModelConfigurationObservation `json:"bedrockEmbeddingModelConfiguration,omitempty" tf:"bedrock_embedding_model_configuration,omitempty"`
 }
 
 type EmbeddingModelConfigurationParameters struct {
 
-	// The vector configuration details on the Bedrock embeddings model.  See bedrock_embedding_model_configuration block for details.
+	// Vector configuration details for the Bedrock embeddings model. See bedrock_embedding_model_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	BedrockEmbeddingModelConfiguration *BedrockEmbeddingModelConfigurationParameters `json:"bedrockEmbeddingModelConfiguration,omitempty" tf:"bedrock_embedding_model_configuration,omitempty"`
 }
 
 type FieldMappingInitParameters struct {
 
-	// –  The name of the field in which Amazon Bedrock stores metadata about the vector store.
+	// Name of the field in which Amazon Bedrock stores metadata about the vector store.
 	MetadataField *string `json:"metadataField,omitempty" tf:"metadata_field,omitempty"`
 
-	// –  The name of the field in which Amazon Bedrock stores the raw text from your data. The text is split according to the chunking strategy you choose.
+	// Name of the field in which Amazon Bedrock stores the raw text from your data. The text is split according to the chunking strategy you choose.
 	TextField *string `json:"textField,omitempty" tf:"text_field,omitempty"`
 
-	// –  The name of the field in which Amazon Bedrock stores the vector embeddings for your data sources.
+	// Name of the field in which Amazon Bedrock stores the vector embeddings for your data sources.
 	VectorField *string `json:"vectorField,omitempty" tf:"vector_field,omitempty"`
 }
 
 type FieldMappingObservation struct {
 
-	// –  The name of the field in which Amazon Bedrock stores metadata about the vector store.
+	// Name of the field in which Amazon Bedrock stores metadata about the vector store.
 	MetadataField *string `json:"metadataField,omitempty" tf:"metadata_field,omitempty"`
 
-	// –  The name of the field in which Amazon Bedrock stores the raw text from your data. The text is split according to the chunking strategy you choose.
+	// Name of the field in which Amazon Bedrock stores the raw text from your data. The text is split according to the chunking strategy you choose.
 	TextField *string `json:"textField,omitempty" tf:"text_field,omitempty"`
 
-	// –  The name of the field in which Amazon Bedrock stores the vector embeddings for your data sources.
+	// Name of the field in which Amazon Bedrock stores the vector embeddings for your data sources.
 	VectorField *string `json:"vectorField,omitempty" tf:"vector_field,omitempty"`
 }
 
 type FieldMappingParameters struct {
 
-	// –  The name of the field in which Amazon Bedrock stores metadata about the vector store.
+	// Name of the field in which Amazon Bedrock stores metadata about the vector store.
 	// +kubebuilder:validation:Optional
 	MetadataField *string `json:"metadataField" tf:"metadata_field,omitempty"`
 
-	// –  The name of the field in which Amazon Bedrock stores the raw text from your data. The text is split according to the chunking strategy you choose.
+	// Name of the field in which Amazon Bedrock stores the raw text from your data. The text is split according to the chunking strategy you choose.
 	// +kubebuilder:validation:Optional
 	TextField *string `json:"textField" tf:"text_field,omitempty"`
 
-	// –  The name of the field in which Amazon Bedrock stores the vector embeddings for your data sources.
+	// Name of the field in which Amazon Bedrock stores the vector embeddings for your data sources.
 	// +kubebuilder:validation:Optional
 	VectorField *string `json:"vectorField" tf:"vector_field,omitempty"`
 }
 
 type GenerationContextInitParameters struct {
 
-	// Information about example queries to help the query engine generate appropriate SQL queries. See curated_query block for details.
+	// Information about example queries to help the query engine generate appropriate SQL queries. See curated_query Block for details.
 	CuratedQuery []CuratedQueryInitParameters `json:"curatedQuery,omitempty" tf:"curated_query,omitempty"`
 
-	// Information about a table in the database. See table block for details.
+	// Information about a table in the database. See table Block for details.
 	Table []TableInitParameters `json:"table,omitempty" tf:"table,omitempty"`
 }
 
 type GenerationContextObservation struct {
 
-	// Information about example queries to help the query engine generate appropriate SQL queries. See curated_query block for details.
+	// Information about example queries to help the query engine generate appropriate SQL queries. See curated_query Block for details.
 	CuratedQuery []CuratedQueryObservation `json:"curatedQuery,omitempty" tf:"curated_query,omitempty"`
 
-	// Information about a table in the database. See table block for details.
+	// Information about a table in the database. See table Block for details.
 	Table []TableObservation `json:"table,omitempty" tf:"table,omitempty"`
 }
 
 type GenerationContextParameters struct {
 
-	// Information about example queries to help the query engine generate appropriate SQL queries. See curated_query block for details.
+	// Information about example queries to help the query engine generate appropriate SQL queries. See curated_query Block for details.
 	// +kubebuilder:validation:Optional
 	CuratedQuery []CuratedQueryParameters `json:"curatedQuery,omitempty" tf:"curated_query,omitempty"`
 
-	// Information about a table in the database. See table block for details.
+	// Information about a table in the database. See table Block for details.
 	// +kubebuilder:validation:Optional
 	Table []TableParameters `json:"table,omitempty" tf:"table,omitempty"`
 }
@@ -463,51 +463,51 @@ type KendraKnowledgeBaseConfigurationParameters struct {
 
 type KnowledgeBaseConfigurationInitParameters struct {
 
-	// Settings for an Amazon Kendra knowledge base. See kendra_knowledge_base_configuration block for details.
+	// Settings for an Amazon Kendra knowledge base. See kendra_knowledge_base_configuration Block for details.
 	KendraKnowledgeBaseConfiguration *KendraKnowledgeBaseConfigurationInitParameters `json:"kendraKnowledgeBaseConfiguration,omitempty" tf:"kendra_knowledge_base_configuration,omitempty"`
 
-	// Settings for a managed knowledge base where Amazon Bedrock manages the vector store. See managed_knowledge_base_configuration block for details.
+	// Settings for a managed knowledge base where Amazon Bedrock manages the vector store. See managed_knowledge_base_configuration Block for details.
 	ManagedKnowledgeBaseConfiguration *ManagedKnowledgeBaseConfigurationInitParameters `json:"managedKnowledgeBaseConfiguration,omitempty" tf:"managed_knowledge_base_configuration,omitempty"`
 
-	// Configurations for a knowledge base connected to an SQL database. See sql_knowledge_base_configuration block for details.
+	// Configurations for a knowledge base connected to an SQL database. See sql_knowledge_base_configuration Block for details.
 	SQLKnowledgeBaseConfiguration *SQLKnowledgeBaseConfigurationInitParameters `json:"sqlKnowledgeBaseConfiguration,omitempty" tf:"sql_knowledge_base_configuration,omitempty"`
 
 	// Type of data that the data source is converted into for the knowledge base. Valid Values: VECTOR, KENDRA, SQL, MANAGED.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
-	// Details about the model that's used to convert the data source into vector embeddings. See vector_knowledge_base_configuration block for details.
+	// Details about the model that's used to convert the data source into vector embeddings. See vector_knowledge_base_configuration Block for details.
 	VectorKnowledgeBaseConfiguration *VectorKnowledgeBaseConfigurationInitParameters `json:"vectorKnowledgeBaseConfiguration,omitempty" tf:"vector_knowledge_base_configuration,omitempty"`
 }
 
 type KnowledgeBaseConfigurationObservation struct {
 
-	// Settings for an Amazon Kendra knowledge base. See kendra_knowledge_base_configuration block for details.
+	// Settings for an Amazon Kendra knowledge base. See kendra_knowledge_base_configuration Block for details.
 	KendraKnowledgeBaseConfiguration *KendraKnowledgeBaseConfigurationObservation `json:"kendraKnowledgeBaseConfiguration,omitempty" tf:"kendra_knowledge_base_configuration,omitempty"`
 
-	// Settings for a managed knowledge base where Amazon Bedrock manages the vector store. See managed_knowledge_base_configuration block for details.
+	// Settings for a managed knowledge base where Amazon Bedrock manages the vector store. See managed_knowledge_base_configuration Block for details.
 	ManagedKnowledgeBaseConfiguration *ManagedKnowledgeBaseConfigurationObservation `json:"managedKnowledgeBaseConfiguration,omitempty" tf:"managed_knowledge_base_configuration,omitempty"`
 
-	// Configurations for a knowledge base connected to an SQL database. See sql_knowledge_base_configuration block for details.
+	// Configurations for a knowledge base connected to an SQL database. See sql_knowledge_base_configuration Block for details.
 	SQLKnowledgeBaseConfiguration *SQLKnowledgeBaseConfigurationObservation `json:"sqlKnowledgeBaseConfiguration,omitempty" tf:"sql_knowledge_base_configuration,omitempty"`
 
 	// Type of data that the data source is converted into for the knowledge base. Valid Values: VECTOR, KENDRA, SQL, MANAGED.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
-	// Details about the model that's used to convert the data source into vector embeddings. See vector_knowledge_base_configuration block for details.
+	// Details about the model that's used to convert the data source into vector embeddings. See vector_knowledge_base_configuration Block for details.
 	VectorKnowledgeBaseConfiguration *VectorKnowledgeBaseConfigurationObservation `json:"vectorKnowledgeBaseConfiguration,omitempty" tf:"vector_knowledge_base_configuration,omitempty"`
 }
 
 type KnowledgeBaseConfigurationParameters struct {
 
-	// Settings for an Amazon Kendra knowledge base. See kendra_knowledge_base_configuration block for details.
+	// Settings for an Amazon Kendra knowledge base. See kendra_knowledge_base_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	KendraKnowledgeBaseConfiguration *KendraKnowledgeBaseConfigurationParameters `json:"kendraKnowledgeBaseConfiguration,omitempty" tf:"kendra_knowledge_base_configuration,omitempty"`
 
-	// Settings for a managed knowledge base where Amazon Bedrock manages the vector store. See managed_knowledge_base_configuration block for details.
+	// Settings for a managed knowledge base where Amazon Bedrock manages the vector store. See managed_knowledge_base_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	ManagedKnowledgeBaseConfiguration *ManagedKnowledgeBaseConfigurationParameters `json:"managedKnowledgeBaseConfiguration,omitempty" tf:"managed_knowledge_base_configuration,omitempty"`
 
-	// Configurations for a knowledge base connected to an SQL database. See sql_knowledge_base_configuration block for details.
+	// Configurations for a knowledge base connected to an SQL database. See sql_knowledge_base_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	SQLKnowledgeBaseConfiguration *SQLKnowledgeBaseConfigurationParameters `json:"sqlKnowledgeBaseConfiguration,omitempty" tf:"sql_knowledge_base_configuration,omitempty"`
 
@@ -515,7 +515,7 @@ type KnowledgeBaseConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
 
-	// Details about the model that's used to convert the data source into vector embeddings. See vector_knowledge_base_configuration block for details.
+	// Details about the model that's used to convert the data source into vector embeddings. See vector_knowledge_base_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	VectorKnowledgeBaseConfiguration *VectorKnowledgeBaseConfigurationParameters `json:"vectorKnowledgeBaseConfiguration,omitempty" tf:"vector_knowledge_base_configuration,omitempty"`
 }
@@ -525,7 +525,7 @@ type KnowledgeBaseInitParameters_2 struct {
 	// Description of the knowledge base.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Details about the embeddings configuration of the knowledge base. See knowledge_base_configuration block for details.
+	// Details about the embeddings configuration of the knowledge base. See knowledge_base_configuration Block for details.
 	KnowledgeBaseConfiguration *KnowledgeBaseConfigurationInitParameters `json:"knowledgeBaseConfiguration,omitempty" tf:"knowledge_base_configuration,omitempty"`
 
 	// Name of the knowledge base.
@@ -544,7 +544,7 @@ type KnowledgeBaseInitParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	RoleArnSelector *v2.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
-	// Details about the storage configuration of the knowledge base. See storage_configuration block for details.
+	// Details about the storage configuration of the knowledge base. See storage_configuration Block for details.
 	StorageConfiguration *KnowledgeBaseStorageConfigurationInitParameters `json:"storageConfiguration,omitempty" tf:"storage_configuration,omitempty"`
 
 	// Key-value map of resource tags.
@@ -563,12 +563,13 @@ type KnowledgeBaseObservation_2 struct {
 	// Description of the knowledge base.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// List of failure reasons reported when the knowledge base is in a failed state.
 	FailureReasons []*string `json:"failureReasons,omitempty" tf:"failure_reasons,omitempty"`
 
 	// Unique identifier of the knowledge base.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Details about the embeddings configuration of the knowledge base. See knowledge_base_configuration block for details.
+	// Details about the embeddings configuration of the knowledge base. See knowledge_base_configuration Block for details.
 	KnowledgeBaseConfiguration *KnowledgeBaseConfigurationObservation `json:"knowledgeBaseConfiguration,omitempty" tf:"knowledge_base_configuration,omitempty"`
 
 	// Name of the knowledge base.
@@ -581,7 +582,7 @@ type KnowledgeBaseObservation_2 struct {
 	// ARN of the IAM role with permissions to invoke API operations on the knowledge base.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
-	// Details about the storage configuration of the knowledge base. See storage_configuration block for details.
+	// Details about the storage configuration of the knowledge base. See storage_configuration Block for details.
 	StorageConfiguration *KnowledgeBaseStorageConfigurationObservation `json:"storageConfiguration,omitempty" tf:"storage_configuration,omitempty"`
 
 	// Key-value map of resource tags.
@@ -602,7 +603,7 @@ type KnowledgeBaseParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Details about the embeddings configuration of the knowledge base. See knowledge_base_configuration block for details.
+	// Details about the embeddings configuration of the knowledge base. See knowledge_base_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	KnowledgeBaseConfiguration *KnowledgeBaseConfigurationParameters `json:"knowledgeBaseConfiguration,omitempty" tf:"knowledge_base_configuration,omitempty"`
 
@@ -629,7 +630,7 @@ type KnowledgeBaseParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	RoleArnSelector *v2.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
-	// Details about the storage configuration of the knowledge base. See storage_configuration block for details.
+	// Details about the storage configuration of the knowledge base. See storage_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	StorageConfiguration *KnowledgeBaseStorageConfigurationParameters `json:"storageConfiguration,omitempty" tf:"storage_configuration,omitempty"`
 
@@ -641,28 +642,28 @@ type KnowledgeBaseParameters_2 struct {
 
 type KnowledgeBaseStorageConfigurationInitParameters struct {
 
-	// –  The storage configuration of the knowledge base in MongoDB Atlas. See mongo_db_atlas_configuration block for details.
+	// Storage configuration of the knowledge base in MongoDB Atlas. See mongo_db_atlas_configuration Block for details.
 	MongoDBAtlasConfiguration *MongoDBAtlasConfigurationInitParameters `json:"mongoDbAtlasConfiguration,omitempty" tf:"mongo_db_atlas_configuration,omitempty"`
 
-	// –  The storage configuration of the knowledge base in Amazon Neptune Analytics. See neptune_analytics_configuration block for details.
+	// Storage configuration of the knowledge base in Amazon Neptune Analytics. See neptune_analytics_configuration Block for details.
 	NeptuneAnalyticsConfiguration *NeptuneAnalyticsConfigurationInitParameters `json:"neptuneAnalyticsConfiguration,omitempty" tf:"neptune_analytics_configuration,omitempty"`
 
-	// The storage configuration of the knowledge base in Amazon OpenSearch Service Managed Cluster. See opensearch_managed_cluster_configuration block for details.
+	// Storage configuration of the knowledge base in Amazon OpenSearch Service Managed Cluster. See opensearch_managed_cluster_configuration Block for details.
 	OpensearchManagedClusterConfiguration *OpensearchManagedClusterConfigurationInitParameters `json:"opensearchManagedClusterConfiguration,omitempty" tf:"opensearch_managed_cluster_configuration,omitempty"`
 
-	// The storage configuration of the knowledge base in Amazon OpenSearch Service Serverless. See opensearch_serverless_configuration block for details.
+	// Storage configuration of the knowledge base in Amazon OpenSearch Service Serverless. See opensearch_serverless_configuration Block for details.
 	OpensearchServerlessConfiguration *OpensearchServerlessConfigurationInitParameters `json:"opensearchServerlessConfiguration,omitempty" tf:"opensearch_serverless_configuration,omitempty"`
 
-	// The storage configuration of the knowledge base in Pinecone. See pinecone_configuration block for details.
+	// Storage configuration of the knowledge base in Pinecone. See pinecone_configuration Block for details.
 	PineconeConfiguration *PineconeConfigurationInitParameters `json:"pineconeConfiguration,omitempty" tf:"pinecone_configuration,omitempty"`
 
-	// Details about the storage configuration of the knowledge base in Amazon RDS. For more information, see Create a vector index in Amazon RDS. See rds_configuration block for details.
+	// Details about the storage configuration of the knowledge base in Amazon RDS. For more information, see Create a vector index in Amazon RDS. See rds_configuration Block for details.
 	RDSConfiguration *RDSConfigurationInitParameters `json:"rdsConfiguration,omitempty" tf:"rds_configuration,omitempty"`
 
-	// The storage configuration of the knowledge base in Redis Enterprise Cloud. See redis_enterprise_cloud_configuration block for details.
+	// Storage configuration of the knowledge base in Redis Enterprise Cloud. See redis_enterprise_cloud_configuration Block for details.
 	RedisEnterpriseCloudConfiguration *RedisEnterpriseCloudConfigurationInitParameters `json:"redisEnterpriseCloudConfiguration,omitempty" tf:"redis_enterprise_cloud_configuration,omitempty"`
 
-	// The storage configuration of the knowledge base in Amazon S3 Vectors. See s3_vectors_configuration block for details.
+	// Storage configuration of the knowledge base in Amazon S3 Vectors. See s3_vectors_configuration Block for details.
 	S3VectorsConfiguration *S3VectorsConfigurationInitParameters `json:"s3VectorsConfiguration,omitempty" tf:"s3_vectors_configuration,omitempty"`
 
 	// Data storage service to use. Valid values: REDSHIFT, AWS_DATA_CATALOG.
@@ -671,28 +672,28 @@ type KnowledgeBaseStorageConfigurationInitParameters struct {
 
 type KnowledgeBaseStorageConfigurationObservation struct {
 
-	// –  The storage configuration of the knowledge base in MongoDB Atlas. See mongo_db_atlas_configuration block for details.
+	// Storage configuration of the knowledge base in MongoDB Atlas. See mongo_db_atlas_configuration Block for details.
 	MongoDBAtlasConfiguration *MongoDBAtlasConfigurationObservation `json:"mongoDbAtlasConfiguration,omitempty" tf:"mongo_db_atlas_configuration,omitempty"`
 
-	// –  The storage configuration of the knowledge base in Amazon Neptune Analytics. See neptune_analytics_configuration block for details.
+	// Storage configuration of the knowledge base in Amazon Neptune Analytics. See neptune_analytics_configuration Block for details.
 	NeptuneAnalyticsConfiguration *NeptuneAnalyticsConfigurationObservation `json:"neptuneAnalyticsConfiguration,omitempty" tf:"neptune_analytics_configuration,omitempty"`
 
-	// The storage configuration of the knowledge base in Amazon OpenSearch Service Managed Cluster. See opensearch_managed_cluster_configuration block for details.
+	// Storage configuration of the knowledge base in Amazon OpenSearch Service Managed Cluster. See opensearch_managed_cluster_configuration Block for details.
 	OpensearchManagedClusterConfiguration *OpensearchManagedClusterConfigurationObservation `json:"opensearchManagedClusterConfiguration,omitempty" tf:"opensearch_managed_cluster_configuration,omitempty"`
 
-	// The storage configuration of the knowledge base in Amazon OpenSearch Service Serverless. See opensearch_serverless_configuration block for details.
+	// Storage configuration of the knowledge base in Amazon OpenSearch Service Serverless. See opensearch_serverless_configuration Block for details.
 	OpensearchServerlessConfiguration *OpensearchServerlessConfigurationObservation `json:"opensearchServerlessConfiguration,omitempty" tf:"opensearch_serverless_configuration,omitempty"`
 
-	// The storage configuration of the knowledge base in Pinecone. See pinecone_configuration block for details.
+	// Storage configuration of the knowledge base in Pinecone. See pinecone_configuration Block for details.
 	PineconeConfiguration *PineconeConfigurationObservation `json:"pineconeConfiguration,omitempty" tf:"pinecone_configuration,omitempty"`
 
-	// Details about the storage configuration of the knowledge base in Amazon RDS. For more information, see Create a vector index in Amazon RDS. See rds_configuration block for details.
+	// Details about the storage configuration of the knowledge base in Amazon RDS. For more information, see Create a vector index in Amazon RDS. See rds_configuration Block for details.
 	RDSConfiguration *RDSConfigurationObservation `json:"rdsConfiguration,omitempty" tf:"rds_configuration,omitempty"`
 
-	// The storage configuration of the knowledge base in Redis Enterprise Cloud. See redis_enterprise_cloud_configuration block for details.
+	// Storage configuration of the knowledge base in Redis Enterprise Cloud. See redis_enterprise_cloud_configuration Block for details.
 	RedisEnterpriseCloudConfiguration *RedisEnterpriseCloudConfigurationObservation `json:"redisEnterpriseCloudConfiguration,omitempty" tf:"redis_enterprise_cloud_configuration,omitempty"`
 
-	// The storage configuration of the knowledge base in Amazon S3 Vectors. See s3_vectors_configuration block for details.
+	// Storage configuration of the knowledge base in Amazon S3 Vectors. See s3_vectors_configuration Block for details.
 	S3VectorsConfiguration *S3VectorsConfigurationObservation `json:"s3VectorsConfiguration,omitempty" tf:"s3_vectors_configuration,omitempty"`
 
 	// Data storage service to use. Valid values: REDSHIFT, AWS_DATA_CATALOG.
@@ -701,35 +702,35 @@ type KnowledgeBaseStorageConfigurationObservation struct {
 
 type KnowledgeBaseStorageConfigurationParameters struct {
 
-	// –  The storage configuration of the knowledge base in MongoDB Atlas. See mongo_db_atlas_configuration block for details.
+	// Storage configuration of the knowledge base in MongoDB Atlas. See mongo_db_atlas_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	MongoDBAtlasConfiguration *MongoDBAtlasConfigurationParameters `json:"mongoDbAtlasConfiguration,omitempty" tf:"mongo_db_atlas_configuration,omitempty"`
 
-	// –  The storage configuration of the knowledge base in Amazon Neptune Analytics. See neptune_analytics_configuration block for details.
+	// Storage configuration of the knowledge base in Amazon Neptune Analytics. See neptune_analytics_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	NeptuneAnalyticsConfiguration *NeptuneAnalyticsConfigurationParameters `json:"neptuneAnalyticsConfiguration,omitempty" tf:"neptune_analytics_configuration,omitempty"`
 
-	// The storage configuration of the knowledge base in Amazon OpenSearch Service Managed Cluster. See opensearch_managed_cluster_configuration block for details.
+	// Storage configuration of the knowledge base in Amazon OpenSearch Service Managed Cluster. See opensearch_managed_cluster_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	OpensearchManagedClusterConfiguration *OpensearchManagedClusterConfigurationParameters `json:"opensearchManagedClusterConfiguration,omitempty" tf:"opensearch_managed_cluster_configuration,omitempty"`
 
-	// The storage configuration of the knowledge base in Amazon OpenSearch Service Serverless. See opensearch_serverless_configuration block for details.
+	// Storage configuration of the knowledge base in Amazon OpenSearch Service Serverless. See opensearch_serverless_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	OpensearchServerlessConfiguration *OpensearchServerlessConfigurationParameters `json:"opensearchServerlessConfiguration,omitempty" tf:"opensearch_serverless_configuration,omitempty"`
 
-	// The storage configuration of the knowledge base in Pinecone. See pinecone_configuration block for details.
+	// Storage configuration of the knowledge base in Pinecone. See pinecone_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	PineconeConfiguration *PineconeConfigurationParameters `json:"pineconeConfiguration,omitempty" tf:"pinecone_configuration,omitempty"`
 
-	// Details about the storage configuration of the knowledge base in Amazon RDS. For more information, see Create a vector index in Amazon RDS. See rds_configuration block for details.
+	// Details about the storage configuration of the knowledge base in Amazon RDS. For more information, see Create a vector index in Amazon RDS. See rds_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	RDSConfiguration *RDSConfigurationParameters `json:"rdsConfiguration,omitempty" tf:"rds_configuration,omitempty"`
 
-	// The storage configuration of the knowledge base in Redis Enterprise Cloud. See redis_enterprise_cloud_configuration block for details.
+	// Storage configuration of the knowledge base in Redis Enterprise Cloud. See redis_enterprise_cloud_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	RedisEnterpriseCloudConfiguration *RedisEnterpriseCloudConfigurationParameters `json:"redisEnterpriseCloudConfiguration,omitempty" tf:"redis_enterprise_cloud_configuration,omitempty"`
 
-	// The storage configuration of the knowledge base in Amazon S3 Vectors. See s3_vectors_configuration block for details.
+	// Storage configuration of the knowledge base in Amazon S3 Vectors. See s3_vectors_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	S3VectorsConfiguration *S3VectorsConfigurationParameters `json:"s3VectorsConfiguration,omitempty" tf:"s3_vectors_configuration,omitempty"`
 
@@ -743,13 +744,13 @@ type ManagedKnowledgeBaseConfigurationInitParameters struct {
 	// ARN of the model used to create vector embeddings for the knowledge base.
 	EmbeddingModelArn *string `json:"embeddingModelArn,omitempty" tf:"embedding_model_arn,omitempty"`
 
-	// The embeddings model configuration details for the vector model used in Knowledge Base.  See embedding_model_configuration block for details.
+	// Embeddings model configuration details for the vector model used in the knowledge base. See embedding_model_configuration Block for details.
 	EmbeddingModelConfiguration *EmbeddingModelConfigurationInitParameters `json:"embeddingModelConfiguration,omitempty" tf:"embedding_model_configuration,omitempty"`
 
 	// Type of embedding model. Valid values: MANAGED, CUSTOM. When MANAGED, no model selection or configuration is required. When CUSTOM, embedding_model_arn and embedding_model_configuration are required. Defaults to MANAGED.
 	EmbeddingModelType *string `json:"embeddingModelType,omitempty" tf:"embedding_model_type,omitempty"`
 
-	// Server-side encryption configuration for the managed knowledge base. See server_side_encryption_configuration block for details.
+	// Server-side encryption configuration for the managed knowledge base. See server_side_encryption_configuration Block for details.
 	ServerSideEncryptionConfiguration *ManagedKnowledgeBaseConfigurationServerSideEncryptionConfigurationInitParameters `json:"serverSideEncryptionConfiguration,omitempty" tf:"server_side_encryption_configuration,omitempty"`
 }
 
@@ -758,13 +759,13 @@ type ManagedKnowledgeBaseConfigurationObservation struct {
 	// ARN of the model used to create vector embeddings for the knowledge base.
 	EmbeddingModelArn *string `json:"embeddingModelArn,omitempty" tf:"embedding_model_arn,omitempty"`
 
-	// The embeddings model configuration details for the vector model used in Knowledge Base.  See embedding_model_configuration block for details.
+	// Embeddings model configuration details for the vector model used in the knowledge base. See embedding_model_configuration Block for details.
 	EmbeddingModelConfiguration *EmbeddingModelConfigurationObservation `json:"embeddingModelConfiguration,omitempty" tf:"embedding_model_configuration,omitempty"`
 
 	// Type of embedding model. Valid values: MANAGED, CUSTOM. When MANAGED, no model selection or configuration is required. When CUSTOM, embedding_model_arn and embedding_model_configuration are required. Defaults to MANAGED.
 	EmbeddingModelType *string `json:"embeddingModelType,omitempty" tf:"embedding_model_type,omitempty"`
 
-	// Server-side encryption configuration for the managed knowledge base. See server_side_encryption_configuration block for details.
+	// Server-side encryption configuration for the managed knowledge base. See server_side_encryption_configuration Block for details.
 	ServerSideEncryptionConfiguration *ManagedKnowledgeBaseConfigurationServerSideEncryptionConfigurationObservation `json:"serverSideEncryptionConfiguration,omitempty" tf:"server_side_encryption_configuration,omitempty"`
 }
 
@@ -774,7 +775,7 @@ type ManagedKnowledgeBaseConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	EmbeddingModelArn *string `json:"embeddingModelArn,omitempty" tf:"embedding_model_arn,omitempty"`
 
-	// The embeddings model configuration details for the vector model used in Knowledge Base.  See embedding_model_configuration block for details.
+	// Embeddings model configuration details for the vector model used in the knowledge base. See embedding_model_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	EmbeddingModelConfiguration *EmbeddingModelConfigurationParameters `json:"embeddingModelConfiguration,omitempty" tf:"embedding_model_configuration,omitempty"`
 
@@ -782,7 +783,7 @@ type ManagedKnowledgeBaseConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	EmbeddingModelType *string `json:"embeddingModelType,omitempty" tf:"embedding_model_type,omitempty"`
 
-	// Server-side encryption configuration for the managed knowledge base. See server_side_encryption_configuration block for details.
+	// Server-side encryption configuration for the managed knowledge base. See server_side_encryption_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	ServerSideEncryptionConfiguration *ManagedKnowledgeBaseConfigurationServerSideEncryptionConfigurationParameters `json:"serverSideEncryptionConfiguration,omitempty" tf:"server_side_encryption_configuration,omitempty"`
 }
@@ -828,125 +829,125 @@ type ManagedKnowledgeBaseConfigurationServerSideEncryptionConfigurationParameter
 
 type MongoDBAtlasConfigurationInitParameters struct {
 
-	// –  The name of the collection in the MongoDB Atlas database.
+	// Name of the collection in the MongoDB Atlas database.
 	CollectionName *string `json:"collectionName,omitempty" tf:"collection_name,omitempty"`
 
-	// –  The ARN of the secret that you created in AWS Secrets Manager that is linked to your MongoDB Atlas database.
+	// ARN of the secret that you created in AWS Secrets Manager that is linked to your MongoDB Atlas database.
 	CredentialsSecretArn *string `json:"credentialsSecretArn,omitempty" tf:"credentials_secret_arn,omitempty"`
 
-	// –  The name of the database in the MongoDB Atlas database.
+	// Name of the database in the MongoDB Atlas database.
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 
-	// –  The endpoint URL of the MongoDB Atlas database.
+	// Endpoint URL of the MongoDB Atlas database.
 	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 
-	// –  The name of the service that hosts the MongoDB Atlas database.
+	// Name of the VPC endpoint service in your account that is connected to your MongoDB Atlas cluster.
 	EndpointServiceName *string `json:"endpointServiceName,omitempty" tf:"endpoint_service_name,omitempty"`
 
-	// –  Contains the names of the fields to which to map information about the vector store.
+	// Names of the fields to which to map information about the vector store. See storage_configuration.mongo_db_atlas_configuration.field_mapping Block for details.
 	FieldMapping *FieldMappingInitParameters `json:"fieldMapping,omitempty" tf:"field_mapping,omitempty"`
 
-	// –  The name of the vector index.
+	// Name of the text search index in the MongoDB collection. Required for hybrid search.
 	TextIndexName *string `json:"textIndexName,omitempty" tf:"text_index_name,omitempty"`
 
-	// –  The name of the vector index.
+	// Name of the vector index.
 	VectorIndexName *string `json:"vectorIndexName,omitempty" tf:"vector_index_name,omitempty"`
 }
 
 type MongoDBAtlasConfigurationObservation struct {
 
-	// –  The name of the collection in the MongoDB Atlas database.
+	// Name of the collection in the MongoDB Atlas database.
 	CollectionName *string `json:"collectionName,omitempty" tf:"collection_name,omitempty"`
 
-	// –  The ARN of the secret that you created in AWS Secrets Manager that is linked to your MongoDB Atlas database.
+	// ARN of the secret that you created in AWS Secrets Manager that is linked to your MongoDB Atlas database.
 	CredentialsSecretArn *string `json:"credentialsSecretArn,omitempty" tf:"credentials_secret_arn,omitempty"`
 
-	// –  The name of the database in the MongoDB Atlas database.
+	// Name of the database in the MongoDB Atlas database.
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 
-	// –  The endpoint URL of the MongoDB Atlas database.
+	// Endpoint URL of the MongoDB Atlas database.
 	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 
-	// –  The name of the service that hosts the MongoDB Atlas database.
+	// Name of the VPC endpoint service in your account that is connected to your MongoDB Atlas cluster.
 	EndpointServiceName *string `json:"endpointServiceName,omitempty" tf:"endpoint_service_name,omitempty"`
 
-	// –  Contains the names of the fields to which to map information about the vector store.
+	// Names of the fields to which to map information about the vector store. See storage_configuration.mongo_db_atlas_configuration.field_mapping Block for details.
 	FieldMapping *FieldMappingObservation `json:"fieldMapping,omitempty" tf:"field_mapping,omitempty"`
 
-	// –  The name of the vector index.
+	// Name of the text search index in the MongoDB collection. Required for hybrid search.
 	TextIndexName *string `json:"textIndexName,omitempty" tf:"text_index_name,omitempty"`
 
-	// –  The name of the vector index.
+	// Name of the vector index.
 	VectorIndexName *string `json:"vectorIndexName,omitempty" tf:"vector_index_name,omitempty"`
 }
 
 type MongoDBAtlasConfigurationParameters struct {
 
-	// –  The name of the collection in the MongoDB Atlas database.
+	// Name of the collection in the MongoDB Atlas database.
 	// +kubebuilder:validation:Optional
 	CollectionName *string `json:"collectionName" tf:"collection_name,omitempty"`
 
-	// –  The ARN of the secret that you created in AWS Secrets Manager that is linked to your MongoDB Atlas database.
+	// ARN of the secret that you created in AWS Secrets Manager that is linked to your MongoDB Atlas database.
 	// +kubebuilder:validation:Optional
 	CredentialsSecretArn *string `json:"credentialsSecretArn" tf:"credentials_secret_arn,omitempty"`
 
-	// –  The name of the database in the MongoDB Atlas database.
+	// Name of the database in the MongoDB Atlas database.
 	// +kubebuilder:validation:Optional
 	DatabaseName *string `json:"databaseName" tf:"database_name,omitempty"`
 
-	// –  The endpoint URL of the MongoDB Atlas database.
+	// Endpoint URL of the MongoDB Atlas database.
 	// +kubebuilder:validation:Optional
 	Endpoint *string `json:"endpoint" tf:"endpoint,omitempty"`
 
-	// –  The name of the service that hosts the MongoDB Atlas database.
+	// Name of the VPC endpoint service in your account that is connected to your MongoDB Atlas cluster.
 	// +kubebuilder:validation:Optional
 	EndpointServiceName *string `json:"endpointServiceName,omitempty" tf:"endpoint_service_name,omitempty"`
 
-	// –  Contains the names of the fields to which to map information about the vector store.
+	// Names of the fields to which to map information about the vector store. See storage_configuration.mongo_db_atlas_configuration.field_mapping Block for details.
 	// +kubebuilder:validation:Optional
 	FieldMapping *FieldMappingParameters `json:"fieldMapping,omitempty" tf:"field_mapping,omitempty"`
 
-	// –  The name of the vector index.
+	// Name of the text search index in the MongoDB collection. Required for hybrid search.
 	// +kubebuilder:validation:Optional
 	TextIndexName *string `json:"textIndexName,omitempty" tf:"text_index_name,omitempty"`
 
-	// –  The name of the vector index.
+	// Name of the vector index.
 	// +kubebuilder:validation:Optional
 	VectorIndexName *string `json:"vectorIndexName" tf:"vector_index_name,omitempty"`
 }
 
 type NeptuneAnalyticsConfigurationFieldMappingInitParameters struct {
 
-	// –  The name of the field in which Amazon Bedrock stores metadata about the vector store.
+	// Name of the field in which Amazon Bedrock stores metadata about the vector store.
 	MetadataField *string `json:"metadataField,omitempty" tf:"metadata_field,omitempty"`
 
-	// –  The name of the field in which Amazon Bedrock stores the raw text from your data. The text is split according to the chunking strategy you choose.
+	// Name of the field in which Amazon Bedrock stores the raw text from your data. The text is split according to the chunking strategy you choose.
 	TextField *string `json:"textField,omitempty" tf:"text_field,omitempty"`
 }
 
 type NeptuneAnalyticsConfigurationFieldMappingObservation struct {
 
-	// –  The name of the field in which Amazon Bedrock stores metadata about the vector store.
+	// Name of the field in which Amazon Bedrock stores metadata about the vector store.
 	MetadataField *string `json:"metadataField,omitempty" tf:"metadata_field,omitempty"`
 
-	// –  The name of the field in which Amazon Bedrock stores the raw text from your data. The text is split according to the chunking strategy you choose.
+	// Name of the field in which Amazon Bedrock stores the raw text from your data. The text is split according to the chunking strategy you choose.
 	TextField *string `json:"textField,omitempty" tf:"text_field,omitempty"`
 }
 
 type NeptuneAnalyticsConfigurationFieldMappingParameters struct {
 
-	// –  The name of the field in which Amazon Bedrock stores metadata about the vector store.
+	// Name of the field in which Amazon Bedrock stores metadata about the vector store.
 	// +kubebuilder:validation:Optional
 	MetadataField *string `json:"metadataField" tf:"metadata_field,omitempty"`
 
-	// –  The name of the field in which Amazon Bedrock stores the raw text from your data. The text is split according to the chunking strategy you choose.
+	// Name of the field in which Amazon Bedrock stores the raw text from your data. The text is split according to the chunking strategy you choose.
 	// +kubebuilder:validation:Optional
 	TextField *string `json:"textField" tf:"text_field,omitempty"`
 }
 
 type NeptuneAnalyticsConfigurationInitParameters struct {
 
-	// –  Contains the names of the fields to which to map information about the vector store.
+	// Names of the fields to which to map information about the vector store. See storage_configuration.mongo_db_atlas_configuration.field_mapping Block for details.
 	FieldMapping *NeptuneAnalyticsConfigurationFieldMappingInitParameters `json:"fieldMapping,omitempty" tf:"field_mapping,omitempty"`
 
 	// ARN of the Neptune Analytics vector store.
@@ -955,7 +956,7 @@ type NeptuneAnalyticsConfigurationInitParameters struct {
 
 type NeptuneAnalyticsConfigurationObservation struct {
 
-	// –  Contains the names of the fields to which to map information about the vector store.
+	// Names of the fields to which to map information about the vector store. See storage_configuration.mongo_db_atlas_configuration.field_mapping Block for details.
 	FieldMapping *NeptuneAnalyticsConfigurationFieldMappingObservation `json:"fieldMapping,omitempty" tf:"field_mapping,omitempty"`
 
 	// ARN of the Neptune Analytics vector store.
@@ -964,7 +965,7 @@ type NeptuneAnalyticsConfigurationObservation struct {
 
 type NeptuneAnalyticsConfigurationParameters struct {
 
-	// –  Contains the names of the fields to which to map information about the vector store.
+	// Names of the fields to which to map information about the vector store. See storage_configuration.mongo_db_atlas_configuration.field_mapping Block for details.
 	// +kubebuilder:validation:Optional
 	FieldMapping *NeptuneAnalyticsConfigurationFieldMappingParameters `json:"fieldMapping,omitempty" tf:"field_mapping,omitempty"`
 
@@ -975,39 +976,39 @@ type NeptuneAnalyticsConfigurationParameters struct {
 
 type OpensearchManagedClusterConfigurationFieldMappingInitParameters struct {
 
-	// –  The name of the field in which Amazon Bedrock stores metadata about the vector store.
+	// Name of the field in which Amazon Bedrock stores metadata about the vector store.
 	MetadataField *string `json:"metadataField,omitempty" tf:"metadata_field,omitempty"`
 
-	// –  The name of the field in which Amazon Bedrock stores the raw text from your data. The text is split according to the chunking strategy you choose.
+	// Name of the field in which Amazon Bedrock stores the raw text from your data. The text is split according to the chunking strategy you choose.
 	TextField *string `json:"textField,omitempty" tf:"text_field,omitempty"`
 
-	// –  The name of the field in which Amazon Bedrock stores the vector embeddings for your data sources.
+	// Name of the field in which Amazon Bedrock stores the vector embeddings for your data sources.
 	VectorField *string `json:"vectorField,omitempty" tf:"vector_field,omitempty"`
 }
 
 type OpensearchManagedClusterConfigurationFieldMappingObservation struct {
 
-	// –  The name of the field in which Amazon Bedrock stores metadata about the vector store.
+	// Name of the field in which Amazon Bedrock stores metadata about the vector store.
 	MetadataField *string `json:"metadataField,omitempty" tf:"metadata_field,omitempty"`
 
-	// –  The name of the field in which Amazon Bedrock stores the raw text from your data. The text is split according to the chunking strategy you choose.
+	// Name of the field in which Amazon Bedrock stores the raw text from your data. The text is split according to the chunking strategy you choose.
 	TextField *string `json:"textField,omitempty" tf:"text_field,omitempty"`
 
-	// –  The name of the field in which Amazon Bedrock stores the vector embeddings for your data sources.
+	// Name of the field in which Amazon Bedrock stores the vector embeddings for your data sources.
 	VectorField *string `json:"vectorField,omitempty" tf:"vector_field,omitempty"`
 }
 
 type OpensearchManagedClusterConfigurationFieldMappingParameters struct {
 
-	// –  The name of the field in which Amazon Bedrock stores metadata about the vector store.
+	// Name of the field in which Amazon Bedrock stores metadata about the vector store.
 	// +kubebuilder:validation:Optional
 	MetadataField *string `json:"metadataField" tf:"metadata_field,omitempty"`
 
-	// –  The name of the field in which Amazon Bedrock stores the raw text from your data. The text is split according to the chunking strategy you choose.
+	// Name of the field in which Amazon Bedrock stores the raw text from your data. The text is split according to the chunking strategy you choose.
 	// +kubebuilder:validation:Optional
 	TextField *string `json:"textField" tf:"text_field,omitempty"`
 
-	// –  The name of the field in which Amazon Bedrock stores the vector embeddings for your data sources.
+	// Name of the field in which Amazon Bedrock stores the vector embeddings for your data sources.
 	// +kubebuilder:validation:Optional
 	VectorField *string `json:"vectorField" tf:"vector_field,omitempty"`
 }
@@ -1030,10 +1031,10 @@ type OpensearchManagedClusterConfigurationInitParameters struct {
 	// Endpoint URL of the OpenSearch domain.
 	DomainEndpoint *string `json:"domainEndpoint,omitempty" tf:"domain_endpoint,omitempty"`
 
-	// –  Contains the names of the fields to which to map information about the vector store.
+	// Names of the fields to which to map information about the vector store. See storage_configuration.mongo_db_atlas_configuration.field_mapping Block for details.
 	FieldMapping *OpensearchManagedClusterConfigurationFieldMappingInitParameters `json:"fieldMapping,omitempty" tf:"field_mapping,omitempty"`
 
-	// –  The name of the vector index.
+	// Name of the vector index.
 	VectorIndexName *string `json:"vectorIndexName,omitempty" tf:"vector_index_name,omitempty"`
 }
 
@@ -1045,10 +1046,10 @@ type OpensearchManagedClusterConfigurationObservation struct {
 	// Endpoint URL of the OpenSearch domain.
 	DomainEndpoint *string `json:"domainEndpoint,omitempty" tf:"domain_endpoint,omitempty"`
 
-	// –  Contains the names of the fields to which to map information about the vector store.
+	// Names of the fields to which to map information about the vector store. See storage_configuration.mongo_db_atlas_configuration.field_mapping Block for details.
 	FieldMapping *OpensearchManagedClusterConfigurationFieldMappingObservation `json:"fieldMapping,omitempty" tf:"field_mapping,omitempty"`
 
-	// –  The name of the vector index.
+	// Name of the vector index.
 	VectorIndexName *string `json:"vectorIndexName,omitempty" tf:"vector_index_name,omitempty"`
 }
 
@@ -1072,50 +1073,50 @@ type OpensearchManagedClusterConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	DomainEndpoint *string `json:"domainEndpoint" tf:"domain_endpoint,omitempty"`
 
-	// –  Contains the names of the fields to which to map information about the vector store.
+	// Names of the fields to which to map information about the vector store. See storage_configuration.mongo_db_atlas_configuration.field_mapping Block for details.
 	// +kubebuilder:validation:Optional
 	FieldMapping *OpensearchManagedClusterConfigurationFieldMappingParameters `json:"fieldMapping,omitempty" tf:"field_mapping,omitempty"`
 
-	// –  The name of the vector index.
+	// Name of the vector index.
 	// +kubebuilder:validation:Optional
 	VectorIndexName *string `json:"vectorIndexName" tf:"vector_index_name,omitempty"`
 }
 
 type OpensearchServerlessConfigurationFieldMappingInitParameters struct {
 
-	// –  The name of the field in which Amazon Bedrock stores metadata about the vector store.
+	// Name of the field in which Amazon Bedrock stores metadata about the vector store.
 	MetadataField *string `json:"metadataField,omitempty" tf:"metadata_field,omitempty"`
 
-	// –  The name of the field in which Amazon Bedrock stores the raw text from your data. The text is split according to the chunking strategy you choose.
+	// Name of the field in which Amazon Bedrock stores the raw text from your data. The text is split according to the chunking strategy you choose.
 	TextField *string `json:"textField,omitempty" tf:"text_field,omitempty"`
 
-	// –  The name of the field in which Amazon Bedrock stores the vector embeddings for your data sources.
+	// Name of the field in which Amazon Bedrock stores the vector embeddings for your data sources.
 	VectorField *string `json:"vectorField,omitempty" tf:"vector_field,omitempty"`
 }
 
 type OpensearchServerlessConfigurationFieldMappingObservation struct {
 
-	// –  The name of the field in which Amazon Bedrock stores metadata about the vector store.
+	// Name of the field in which Amazon Bedrock stores metadata about the vector store.
 	MetadataField *string `json:"metadataField,omitempty" tf:"metadata_field,omitempty"`
 
-	// –  The name of the field in which Amazon Bedrock stores the raw text from your data. The text is split according to the chunking strategy you choose.
+	// Name of the field in which Amazon Bedrock stores the raw text from your data. The text is split according to the chunking strategy you choose.
 	TextField *string `json:"textField,omitempty" tf:"text_field,omitempty"`
 
-	// –  The name of the field in which Amazon Bedrock stores the vector embeddings for your data sources.
+	// Name of the field in which Amazon Bedrock stores the vector embeddings for your data sources.
 	VectorField *string `json:"vectorField,omitempty" tf:"vector_field,omitempty"`
 }
 
 type OpensearchServerlessConfigurationFieldMappingParameters struct {
 
-	// –  The name of the field in which Amazon Bedrock stores metadata about the vector store.
+	// Name of the field in which Amazon Bedrock stores metadata about the vector store.
 	// +kubebuilder:validation:Optional
 	MetadataField *string `json:"metadataField" tf:"metadata_field,omitempty"`
 
-	// –  The name of the field in which Amazon Bedrock stores the raw text from your data. The text is split according to the chunking strategy you choose.
+	// Name of the field in which Amazon Bedrock stores the raw text from your data. The text is split according to the chunking strategy you choose.
 	// +kubebuilder:validation:Optional
 	TextField *string `json:"textField" tf:"text_field,omitempty"`
 
-	// –  The name of the field in which Amazon Bedrock stores the vector embeddings for your data sources.
+	// Name of the field in which Amazon Bedrock stores the vector embeddings for your data sources.
 	// +kubebuilder:validation:Optional
 	VectorField *string `json:"vectorField" tf:"vector_field,omitempty"`
 }
@@ -1135,10 +1136,10 @@ type OpensearchServerlessConfigurationInitParameters struct {
 	// +kubebuilder:validation:Optional
 	CollectionArnSelector *v2.Selector `json:"collectionArnSelector,omitempty" tf:"-"`
 
-	// –  Contains the names of the fields to which to map information about the vector store.
+	// Names of the fields to which to map information about the vector store. See storage_configuration.mongo_db_atlas_configuration.field_mapping Block for details.
 	FieldMapping *OpensearchServerlessConfigurationFieldMappingInitParameters `json:"fieldMapping,omitempty" tf:"field_mapping,omitempty"`
 
-	// –  The name of the vector index.
+	// Name of the vector index.
 	VectorIndexName *string `json:"vectorIndexName,omitempty" tf:"vector_index_name,omitempty"`
 }
 
@@ -1147,10 +1148,10 @@ type OpensearchServerlessConfigurationObservation struct {
 	// ARN of the OpenSearch Service vector store.
 	CollectionArn *string `json:"collectionArn,omitempty" tf:"collection_arn,omitempty"`
 
-	// –  Contains the names of the fields to which to map information about the vector store.
+	// Names of the fields to which to map information about the vector store. See storage_configuration.mongo_db_atlas_configuration.field_mapping Block for details.
 	FieldMapping *OpensearchServerlessConfigurationFieldMappingObservation `json:"fieldMapping,omitempty" tf:"field_mapping,omitempty"`
 
-	// –  The name of the vector index.
+	// Name of the vector index.
 	VectorIndexName *string `json:"vectorIndexName,omitempty" tf:"vector_index_name,omitempty"`
 }
 
@@ -1170,40 +1171,40 @@ type OpensearchServerlessConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	CollectionArnSelector *v2.Selector `json:"collectionArnSelector,omitempty" tf:"-"`
 
-	// –  Contains the names of the fields to which to map information about the vector store.
+	// Names of the fields to which to map information about the vector store. See storage_configuration.mongo_db_atlas_configuration.field_mapping Block for details.
 	// +kubebuilder:validation:Optional
 	FieldMapping *OpensearchServerlessConfigurationFieldMappingParameters `json:"fieldMapping,omitempty" tf:"field_mapping,omitempty"`
 
-	// –  The name of the vector index.
+	// Name of the vector index.
 	// +kubebuilder:validation:Optional
 	VectorIndexName *string `json:"vectorIndexName" tf:"vector_index_name,omitempty"`
 }
 
 type PineconeConfigurationFieldMappingInitParameters struct {
 
-	// –  The name of the field in which Amazon Bedrock stores metadata about the vector store.
+	// Name of the field in which Amazon Bedrock stores metadata about the vector store.
 	MetadataField *string `json:"metadataField,omitempty" tf:"metadata_field,omitempty"`
 
-	// –  The name of the field in which Amazon Bedrock stores the raw text from your data. The text is split according to the chunking strategy you choose.
+	// Name of the field in which Amazon Bedrock stores the raw text from your data. The text is split according to the chunking strategy you choose.
 	TextField *string `json:"textField,omitempty" tf:"text_field,omitempty"`
 }
 
 type PineconeConfigurationFieldMappingObservation struct {
 
-	// –  The name of the field in which Amazon Bedrock stores metadata about the vector store.
+	// Name of the field in which Amazon Bedrock stores metadata about the vector store.
 	MetadataField *string `json:"metadataField,omitempty" tf:"metadata_field,omitempty"`
 
-	// –  The name of the field in which Amazon Bedrock stores the raw text from your data. The text is split according to the chunking strategy you choose.
+	// Name of the field in which Amazon Bedrock stores the raw text from your data. The text is split according to the chunking strategy you choose.
 	TextField *string `json:"textField,omitempty" tf:"text_field,omitempty"`
 }
 
 type PineconeConfigurationFieldMappingParameters struct {
 
-	// –  The name of the field in which Amazon Bedrock stores metadata about the vector store.
+	// Name of the field in which Amazon Bedrock stores metadata about the vector store.
 	// +kubebuilder:validation:Optional
 	MetadataField *string `json:"metadataField" tf:"metadata_field,omitempty"`
 
-	// –  The name of the field in which Amazon Bedrock stores the raw text from your data. The text is split according to the chunking strategy you choose.
+	// Name of the field in which Amazon Bedrock stores the raw text from your data. The text is split according to the chunking strategy you choose.
 	// +kubebuilder:validation:Optional
 	TextField *string `json:"textField" tf:"text_field,omitempty"`
 }
@@ -1213,10 +1214,10 @@ type PineconeConfigurationInitParameters struct {
 	// Endpoint URL for your index management page.
 	ConnectionString *string `json:"connectionString,omitempty" tf:"connection_string,omitempty"`
 
-	// –  The ARN of the secret that you created in AWS Secrets Manager that is linked to your MongoDB Atlas database.
+	// ARN of the secret that you created in AWS Secrets Manager that is linked to your MongoDB Atlas database.
 	CredentialsSecretArn *string `json:"credentialsSecretArn,omitempty" tf:"credentials_secret_arn,omitempty"`
 
-	// –  Contains the names of the fields to which to map information about the vector store.
+	// Names of the fields to which to map information about the vector store. See storage_configuration.mongo_db_atlas_configuration.field_mapping Block for details.
 	FieldMapping *PineconeConfigurationFieldMappingInitParameters `json:"fieldMapping,omitempty" tf:"field_mapping,omitempty"`
 
 	// Namespace to be used to write new data to your database.
@@ -1228,10 +1229,10 @@ type PineconeConfigurationObservation struct {
 	// Endpoint URL for your index management page.
 	ConnectionString *string `json:"connectionString,omitempty" tf:"connection_string,omitempty"`
 
-	// –  The ARN of the secret that you created in AWS Secrets Manager that is linked to your MongoDB Atlas database.
+	// ARN of the secret that you created in AWS Secrets Manager that is linked to your MongoDB Atlas database.
 	CredentialsSecretArn *string `json:"credentialsSecretArn,omitempty" tf:"credentials_secret_arn,omitempty"`
 
-	// –  Contains the names of the fields to which to map information about the vector store.
+	// Names of the fields to which to map information about the vector store. See storage_configuration.mongo_db_atlas_configuration.field_mapping Block for details.
 	FieldMapping *PineconeConfigurationFieldMappingObservation `json:"fieldMapping,omitempty" tf:"field_mapping,omitempty"`
 
 	// Namespace to be used to write new data to your database.
@@ -1244,11 +1245,11 @@ type PineconeConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	ConnectionString *string `json:"connectionString" tf:"connection_string,omitempty"`
 
-	// –  The ARN of the secret that you created in AWS Secrets Manager that is linked to your MongoDB Atlas database.
+	// ARN of the secret that you created in AWS Secrets Manager that is linked to your MongoDB Atlas database.
 	// +kubebuilder:validation:Optional
 	CredentialsSecretArn *string `json:"credentialsSecretArn" tf:"credentials_secret_arn,omitempty"`
 
-	// –  Contains the names of the fields to which to map information about the vector store.
+	// Names of the fields to which to map information about the vector store. See storage_configuration.mongo_db_atlas_configuration.field_mapping Block for details.
 	// +kubebuilder:validation:Optional
 	FieldMapping *PineconeConfigurationFieldMappingParameters `json:"fieldMapping,omitempty" tf:"field_mapping,omitempty"`
 
@@ -1259,7 +1260,7 @@ type PineconeConfigurationParameters struct {
 
 type ProvisionedConfigurationInitParameters struct {
 
-	// Configurations for authentication to Amazon Redshift. See auth_configuration block for details.
+	// Configurations for authentication to Amazon Redshift. See knowledge_base_configuration.sql_knowledge_base_configuration.redshift_configuration.query_engine_configuration.provisioned_configuration.auth_configuration Block for details.
 	AuthConfiguration *AuthConfigurationInitParameters `json:"authConfiguration,omitempty" tf:"auth_configuration,omitempty"`
 
 	// ID of the Amazon Redshift cluster.
@@ -1277,7 +1278,7 @@ type ProvisionedConfigurationInitParameters struct {
 
 type ProvisionedConfigurationObservation struct {
 
-	// Configurations for authentication to Amazon Redshift. See auth_configuration block for details.
+	// Configurations for authentication to Amazon Redshift. See knowledge_base_configuration.sql_knowledge_base_configuration.redshift_configuration.query_engine_configuration.provisioned_configuration.auth_configuration Block for details.
 	AuthConfiguration *AuthConfigurationObservation `json:"authConfiguration,omitempty" tf:"auth_configuration,omitempty"`
 
 	// ID of the Amazon Redshift cluster.
@@ -1286,7 +1287,7 @@ type ProvisionedConfigurationObservation struct {
 
 type ProvisionedConfigurationParameters struct {
 
-	// Configurations for authentication to Amazon Redshift. See auth_configuration block for details.
+	// Configurations for authentication to Amazon Redshift. See knowledge_base_configuration.sql_knowledge_base_configuration.redshift_configuration.query_engine_configuration.provisioned_configuration.auth_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	AuthConfiguration *AuthConfigurationParameters `json:"authConfiguration,omitempty" tf:"auth_configuration,omitempty"`
 
@@ -1306,10 +1307,10 @@ type ProvisionedConfigurationParameters struct {
 
 type QueryEngineConfigurationInitParameters struct {
 
-	// Configurations for a provisioned Amazon Redshift query engine. See provisioned_configuration block for details.
+	// Configurations for a provisioned Amazon Redshift query engine. See provisioned_configuration Block for details.
 	ProvisionedConfiguration *ProvisionedConfigurationInitParameters `json:"provisionedConfiguration,omitempty" tf:"provisioned_configuration,omitempty"`
 
-	// Configurations for a serverless Amazon Redshift query engine. See serverless_configuration block for details.
+	// Configurations for a serverless Amazon Redshift query engine. See serverless_configuration Block for details.
 	ServerlessConfiguration *ServerlessConfigurationInitParameters `json:"serverlessConfiguration,omitempty" tf:"serverless_configuration,omitempty"`
 
 	// Storage service used for this location. S3 is the only valid value.
@@ -1318,10 +1319,10 @@ type QueryEngineConfigurationInitParameters struct {
 
 type QueryEngineConfigurationObservation struct {
 
-	// Configurations for a provisioned Amazon Redshift query engine. See provisioned_configuration block for details.
+	// Configurations for a provisioned Amazon Redshift query engine. See provisioned_configuration Block for details.
 	ProvisionedConfiguration *ProvisionedConfigurationObservation `json:"provisionedConfiguration,omitempty" tf:"provisioned_configuration,omitempty"`
 
-	// Configurations for a serverless Amazon Redshift query engine. See serverless_configuration block for details.
+	// Configurations for a serverless Amazon Redshift query engine. See serverless_configuration Block for details.
 	ServerlessConfiguration *ServerlessConfigurationObservation `json:"serverlessConfiguration,omitempty" tf:"serverless_configuration,omitempty"`
 
 	// Storage service used for this location. S3 is the only valid value.
@@ -1330,11 +1331,11 @@ type QueryEngineConfigurationObservation struct {
 
 type QueryEngineConfigurationParameters struct {
 
-	// Configurations for a provisioned Amazon Redshift query engine. See provisioned_configuration block for details.
+	// Configurations for a provisioned Amazon Redshift query engine. See provisioned_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	ProvisionedConfiguration *ProvisionedConfigurationParameters `json:"provisionedConfiguration,omitempty" tf:"provisioned_configuration,omitempty"`
 
-	// Configurations for a serverless Amazon Redshift query engine. See serverless_configuration block for details.
+	// Configurations for a serverless Amazon Redshift query engine. See serverless_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	ServerlessConfiguration *ServerlessConfigurationParameters `json:"serverlessConfiguration,omitempty" tf:"serverless_configuration,omitempty"`
 
@@ -1348,7 +1349,7 @@ type QueryGenerationConfigurationInitParameters struct {
 	// Time after which query generation will time out.
 	ExecutionTimeoutSeconds *float64 `json:"executionTimeoutSeconds,omitempty" tf:"execution_timeout_seconds,omitempty"`
 
-	// Configurations for context to use during query generation. See generation_context block for details.
+	// Configurations for context to use during query generation. See generation_context Block for details.
 	GenerationContext *GenerationContextInitParameters `json:"generationContext,omitempty" tf:"generation_context,omitempty"`
 }
 
@@ -1357,7 +1358,7 @@ type QueryGenerationConfigurationObservation struct {
 	// Time after which query generation will time out.
 	ExecutionTimeoutSeconds *float64 `json:"executionTimeoutSeconds,omitempty" tf:"execution_timeout_seconds,omitempty"`
 
-	// Configurations for context to use during query generation. See generation_context block for details.
+	// Configurations for context to use during query generation. See generation_context Block for details.
 	GenerationContext *GenerationContextObservation `json:"generationContext,omitempty" tf:"generation_context,omitempty"`
 }
 
@@ -1367,7 +1368,7 @@ type QueryGenerationConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	ExecutionTimeoutSeconds *float64 `json:"executionTimeoutSeconds,omitempty" tf:"execution_timeout_seconds,omitempty"`
 
-	// Configurations for context to use during query generation. See generation_context block for details.
+	// Configurations for context to use during query generation. See generation_context Block for details.
 	// +kubebuilder:validation:Optional
 	GenerationContext *GenerationContextParameters `json:"generationContext,omitempty" tf:"generation_context,omitempty"`
 }
@@ -1377,16 +1378,16 @@ type RDSConfigurationFieldMappingInitParameters struct {
 	// Name for the universal metadata field where Amazon Bedrock will store any custom metadata from your data source.
 	CustomMetadataField *string `json:"customMetadataField,omitempty" tf:"custom_metadata_field,omitempty"`
 
-	// –  The name of the field in which Amazon Bedrock stores metadata about the vector store.
+	// Name of the field in which Amazon Bedrock stores metadata about the vector store.
 	MetadataField *string `json:"metadataField,omitempty" tf:"metadata_field,omitempty"`
 
 	// Name of the field in which Amazon Bedrock stores the ID for each entry.
 	PrimaryKeyField *string `json:"primaryKeyField,omitempty" tf:"primary_key_field,omitempty"`
 
-	// –  The name of the field in which Amazon Bedrock stores the raw text from your data. The text is split according to the chunking strategy you choose.
+	// Name of the field in which Amazon Bedrock stores the raw text from your data. The text is split according to the chunking strategy you choose.
 	TextField *string `json:"textField,omitempty" tf:"text_field,omitempty"`
 
-	// –  The name of the field in which Amazon Bedrock stores the vector embeddings for your data sources.
+	// Name of the field in which Amazon Bedrock stores the vector embeddings for your data sources.
 	VectorField *string `json:"vectorField,omitempty" tf:"vector_field,omitempty"`
 }
 
@@ -1395,16 +1396,16 @@ type RDSConfigurationFieldMappingObservation struct {
 	// Name for the universal metadata field where Amazon Bedrock will store any custom metadata from your data source.
 	CustomMetadataField *string `json:"customMetadataField,omitempty" tf:"custom_metadata_field,omitempty"`
 
-	// –  The name of the field in which Amazon Bedrock stores metadata about the vector store.
+	// Name of the field in which Amazon Bedrock stores metadata about the vector store.
 	MetadataField *string `json:"metadataField,omitempty" tf:"metadata_field,omitempty"`
 
 	// Name of the field in which Amazon Bedrock stores the ID for each entry.
 	PrimaryKeyField *string `json:"primaryKeyField,omitempty" tf:"primary_key_field,omitempty"`
 
-	// –  The name of the field in which Amazon Bedrock stores the raw text from your data. The text is split according to the chunking strategy you choose.
+	// Name of the field in which Amazon Bedrock stores the raw text from your data. The text is split according to the chunking strategy you choose.
 	TextField *string `json:"textField,omitempty" tf:"text_field,omitempty"`
 
-	// –  The name of the field in which Amazon Bedrock stores the vector embeddings for your data sources.
+	// Name of the field in which Amazon Bedrock stores the vector embeddings for your data sources.
 	VectorField *string `json:"vectorField,omitempty" tf:"vector_field,omitempty"`
 }
 
@@ -1414,7 +1415,7 @@ type RDSConfigurationFieldMappingParameters struct {
 	// +kubebuilder:validation:Optional
 	CustomMetadataField *string `json:"customMetadataField,omitempty" tf:"custom_metadata_field,omitempty"`
 
-	// –  The name of the field in which Amazon Bedrock stores metadata about the vector store.
+	// Name of the field in which Amazon Bedrock stores metadata about the vector store.
 	// +kubebuilder:validation:Optional
 	MetadataField *string `json:"metadataField" tf:"metadata_field,omitempty"`
 
@@ -1422,18 +1423,18 @@ type RDSConfigurationFieldMappingParameters struct {
 	// +kubebuilder:validation:Optional
 	PrimaryKeyField *string `json:"primaryKeyField" tf:"primary_key_field,omitempty"`
 
-	// –  The name of the field in which Amazon Bedrock stores the raw text from your data. The text is split according to the chunking strategy you choose.
+	// Name of the field in which Amazon Bedrock stores the raw text from your data. The text is split according to the chunking strategy you choose.
 	// +kubebuilder:validation:Optional
 	TextField *string `json:"textField" tf:"text_field,omitempty"`
 
-	// –  The name of the field in which Amazon Bedrock stores the vector embeddings for your data sources.
+	// Name of the field in which Amazon Bedrock stores the vector embeddings for your data sources.
 	// +kubebuilder:validation:Optional
 	VectorField *string `json:"vectorField" tf:"vector_field,omitempty"`
 }
 
 type RDSConfigurationInitParameters struct {
 
-	// –  The ARN of the secret that you created in AWS Secrets Manager that is linked to your MongoDB Atlas database.
+	// ARN of the secret that you created in AWS Secrets Manager that is linked to your MongoDB Atlas database.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/secretsmanager/v1beta1.Secret
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	CredentialsSecretArn *string `json:"credentialsSecretArn,omitempty" tf:"credentials_secret_arn,omitempty"`
@@ -1446,10 +1447,10 @@ type RDSConfigurationInitParameters struct {
 	// +kubebuilder:validation:Optional
 	CredentialsSecretArnSelector *v2.Selector `json:"credentialsSecretArnSelector,omitempty" tf:"-"`
 
-	// –  The name of the database in the MongoDB Atlas database.
+	// Name of the database in the MongoDB Atlas database.
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 
-	// –  Contains the names of the fields to which to map information about the vector store.
+	// Names of the fields to which to map information about the vector store. See storage_configuration.mongo_db_atlas_configuration.field_mapping Block for details.
 	FieldMapping *RDSConfigurationFieldMappingInitParameters `json:"fieldMapping,omitempty" tf:"field_mapping,omitempty"`
 
 	// ARN of the vector store.
@@ -1471,13 +1472,13 @@ type RDSConfigurationInitParameters struct {
 
 type RDSConfigurationObservation struct {
 
-	// –  The ARN of the secret that you created in AWS Secrets Manager that is linked to your MongoDB Atlas database.
+	// ARN of the secret that you created in AWS Secrets Manager that is linked to your MongoDB Atlas database.
 	CredentialsSecretArn *string `json:"credentialsSecretArn,omitempty" tf:"credentials_secret_arn,omitempty"`
 
-	// –  The name of the database in the MongoDB Atlas database.
+	// Name of the database in the MongoDB Atlas database.
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 
-	// –  Contains the names of the fields to which to map information about the vector store.
+	// Names of the fields to which to map information about the vector store. See storage_configuration.mongo_db_atlas_configuration.field_mapping Block for details.
 	FieldMapping *RDSConfigurationFieldMappingObservation `json:"fieldMapping,omitempty" tf:"field_mapping,omitempty"`
 
 	// ARN of the vector store.
@@ -1489,7 +1490,7 @@ type RDSConfigurationObservation struct {
 
 type RDSConfigurationParameters struct {
 
-	// –  The ARN of the secret that you created in AWS Secrets Manager that is linked to your MongoDB Atlas database.
+	// ARN of the secret that you created in AWS Secrets Manager that is linked to your MongoDB Atlas database.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/secretsmanager/v1beta1.Secret
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -1503,11 +1504,11 @@ type RDSConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	CredentialsSecretArnSelector *v2.Selector `json:"credentialsSecretArnSelector,omitempty" tf:"-"`
 
-	// –  The name of the database in the MongoDB Atlas database.
+	// Name of the database in the MongoDB Atlas database.
 	// +kubebuilder:validation:Optional
 	DatabaseName *string `json:"databaseName" tf:"database_name,omitempty"`
 
-	// –  Contains the names of the fields to which to map information about the vector store.
+	// Names of the fields to which to map information about the vector store. See storage_configuration.mongo_db_atlas_configuration.field_mapping Block for details.
 	// +kubebuilder:validation:Optional
 	FieldMapping *RDSConfigurationFieldMappingParameters `json:"fieldMapping,omitempty" tf:"field_mapping,omitempty"`
 
@@ -1532,127 +1533,127 @@ type RDSConfigurationParameters struct {
 
 type RedisEnterpriseCloudConfigurationFieldMappingInitParameters struct {
 
-	// –  The name of the field in which Amazon Bedrock stores metadata about the vector store.
+	// Name of the field in which Amazon Bedrock stores metadata about the vector store.
 	MetadataField *string `json:"metadataField,omitempty" tf:"metadata_field,omitempty"`
 
-	// –  The name of the field in which Amazon Bedrock stores the raw text from your data. The text is split according to the chunking strategy you choose.
+	// Name of the field in which Amazon Bedrock stores the raw text from your data. The text is split according to the chunking strategy you choose.
 	TextField *string `json:"textField,omitempty" tf:"text_field,omitempty"`
 
-	// –  The name of the field in which Amazon Bedrock stores the vector embeddings for your data sources.
+	// Name of the field in which Amazon Bedrock stores the vector embeddings for your data sources.
 	VectorField *string `json:"vectorField,omitempty" tf:"vector_field,omitempty"`
 }
 
 type RedisEnterpriseCloudConfigurationFieldMappingObservation struct {
 
-	// –  The name of the field in which Amazon Bedrock stores metadata about the vector store.
+	// Name of the field in which Amazon Bedrock stores metadata about the vector store.
 	MetadataField *string `json:"metadataField,omitempty" tf:"metadata_field,omitempty"`
 
-	// –  The name of the field in which Amazon Bedrock stores the raw text from your data. The text is split according to the chunking strategy you choose.
+	// Name of the field in which Amazon Bedrock stores the raw text from your data. The text is split according to the chunking strategy you choose.
 	TextField *string `json:"textField,omitempty" tf:"text_field,omitempty"`
 
-	// –  The name of the field in which Amazon Bedrock stores the vector embeddings for your data sources.
+	// Name of the field in which Amazon Bedrock stores the vector embeddings for your data sources.
 	VectorField *string `json:"vectorField,omitempty" tf:"vector_field,omitempty"`
 }
 
 type RedisEnterpriseCloudConfigurationFieldMappingParameters struct {
 
-	// –  The name of the field in which Amazon Bedrock stores metadata about the vector store.
+	// Name of the field in which Amazon Bedrock stores metadata about the vector store.
 	// +kubebuilder:validation:Optional
 	MetadataField *string `json:"metadataField,omitempty" tf:"metadata_field,omitempty"`
 
-	// –  The name of the field in which Amazon Bedrock stores the raw text from your data. The text is split according to the chunking strategy you choose.
+	// Name of the field in which Amazon Bedrock stores the raw text from your data. The text is split according to the chunking strategy you choose.
 	// +kubebuilder:validation:Optional
 	TextField *string `json:"textField,omitempty" tf:"text_field,omitempty"`
 
-	// –  The name of the field in which Amazon Bedrock stores the vector embeddings for your data sources.
+	// Name of the field in which Amazon Bedrock stores the vector embeddings for your data sources.
 	// +kubebuilder:validation:Optional
 	VectorField *string `json:"vectorField,omitempty" tf:"vector_field,omitempty"`
 }
 
 type RedisEnterpriseCloudConfigurationInitParameters struct {
 
-	// –  The ARN of the secret that you created in AWS Secrets Manager that is linked to your MongoDB Atlas database.
+	// ARN of the secret that you created in AWS Secrets Manager that is linked to your MongoDB Atlas database.
 	CredentialsSecretArn *string `json:"credentialsSecretArn,omitempty" tf:"credentials_secret_arn,omitempty"`
 
-	// –  The endpoint URL of the MongoDB Atlas database.
+	// Endpoint URL of the MongoDB Atlas database.
 	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 
-	// –  Contains the names of the fields to which to map information about the vector store.
+	// Names of the fields to which to map information about the vector store. See storage_configuration.mongo_db_atlas_configuration.field_mapping Block for details.
 	FieldMapping *RedisEnterpriseCloudConfigurationFieldMappingInitParameters `json:"fieldMapping,omitempty" tf:"field_mapping,omitempty"`
 
-	// –  The name of the vector index.
+	// Name of the vector index.
 	VectorIndexName *string `json:"vectorIndexName,omitempty" tf:"vector_index_name,omitempty"`
 }
 
 type RedisEnterpriseCloudConfigurationObservation struct {
 
-	// –  The ARN of the secret that you created in AWS Secrets Manager that is linked to your MongoDB Atlas database.
+	// ARN of the secret that you created in AWS Secrets Manager that is linked to your MongoDB Atlas database.
 	CredentialsSecretArn *string `json:"credentialsSecretArn,omitempty" tf:"credentials_secret_arn,omitempty"`
 
-	// –  The endpoint URL of the MongoDB Atlas database.
+	// Endpoint URL of the MongoDB Atlas database.
 	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 
-	// –  Contains the names of the fields to which to map information about the vector store.
+	// Names of the fields to which to map information about the vector store. See storage_configuration.mongo_db_atlas_configuration.field_mapping Block for details.
 	FieldMapping *RedisEnterpriseCloudConfigurationFieldMappingObservation `json:"fieldMapping,omitempty" tf:"field_mapping,omitempty"`
 
-	// –  The name of the vector index.
+	// Name of the vector index.
 	VectorIndexName *string `json:"vectorIndexName,omitempty" tf:"vector_index_name,omitempty"`
 }
 
 type RedisEnterpriseCloudConfigurationParameters struct {
 
-	// –  The ARN of the secret that you created in AWS Secrets Manager that is linked to your MongoDB Atlas database.
+	// ARN of the secret that you created in AWS Secrets Manager that is linked to your MongoDB Atlas database.
 	// +kubebuilder:validation:Optional
 	CredentialsSecretArn *string `json:"credentialsSecretArn" tf:"credentials_secret_arn,omitempty"`
 
-	// –  The endpoint URL of the MongoDB Atlas database.
+	// Endpoint URL of the MongoDB Atlas database.
 	// +kubebuilder:validation:Optional
 	Endpoint *string `json:"endpoint" tf:"endpoint,omitempty"`
 
-	// –  Contains the names of the fields to which to map information about the vector store.
+	// Names of the fields to which to map information about the vector store. See storage_configuration.mongo_db_atlas_configuration.field_mapping Block for details.
 	// +kubebuilder:validation:Optional
 	FieldMapping *RedisEnterpriseCloudConfigurationFieldMappingParameters `json:"fieldMapping,omitempty" tf:"field_mapping,omitempty"`
 
-	// –  The name of the vector index.
+	// Name of the vector index.
 	// +kubebuilder:validation:Optional
 	VectorIndexName *string `json:"vectorIndexName" tf:"vector_index_name,omitempty"`
 }
 
 type RedshiftConfigurationInitParameters struct {
 
-	// Configurations for an Amazon Redshift query engine. See query_engine_configuration block for details.
+	// Configurations for an Amazon Redshift query engine. See query_engine_configuration Block for details.
 	QueryEngineConfiguration *QueryEngineConfigurationInitParameters `json:"queryEngineConfiguration,omitempty" tf:"query_engine_configuration,omitempty"`
 
-	// Configurations for generating queries. See query_generation_configuration block for details.
+	// Configurations for generating queries. See query_generation_configuration Block for details.
 	QueryGenerationConfiguration *QueryGenerationConfigurationInitParameters `json:"queryGenerationConfiguration,omitempty" tf:"query_generation_configuration,omitempty"`
 
-	// Details about the storage configuration of the knowledge base. See storage_configuration block for details.
+	// Details about the storage configuration of the knowledge base. See storage_configuration Block for details.
 	StorageConfiguration *StorageConfigurationInitParameters `json:"storageConfiguration,omitempty" tf:"storage_configuration,omitempty"`
 }
 
 type RedshiftConfigurationObservation struct {
 
-	// Configurations for an Amazon Redshift query engine. See query_engine_configuration block for details.
+	// Configurations for an Amazon Redshift query engine. See query_engine_configuration Block for details.
 	QueryEngineConfiguration *QueryEngineConfigurationObservation `json:"queryEngineConfiguration,omitempty" tf:"query_engine_configuration,omitempty"`
 
-	// Configurations for generating queries. See query_generation_configuration block for details.
+	// Configurations for generating queries. See query_generation_configuration Block for details.
 	QueryGenerationConfiguration *QueryGenerationConfigurationObservation `json:"queryGenerationConfiguration,omitempty" tf:"query_generation_configuration,omitempty"`
 
-	// Details about the storage configuration of the knowledge base. See storage_configuration block for details.
+	// Details about the storage configuration of the knowledge base. See storage_configuration Block for details.
 	StorageConfiguration *StorageConfigurationObservation `json:"storageConfiguration,omitempty" tf:"storage_configuration,omitempty"`
 }
 
 type RedshiftConfigurationParameters struct {
 
-	// Configurations for an Amazon Redshift query engine. See query_engine_configuration block for details.
+	// Configurations for an Amazon Redshift query engine. See query_engine_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	QueryEngineConfiguration *QueryEngineConfigurationParameters `json:"queryEngineConfiguration,omitempty" tf:"query_engine_configuration,omitempty"`
 
-	// Configurations for generating queries. See query_generation_configuration block for details.
+	// Configurations for generating queries. See query_generation_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	QueryGenerationConfiguration *QueryGenerationConfigurationParameters `json:"queryGenerationConfiguration,omitempty" tf:"query_generation_configuration,omitempty"`
 
-	// Details about the storage configuration of the knowledge base. See storage_configuration block for details.
+	// Details about the storage configuration of the knowledge base. See storage_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	StorageConfiguration *StorageConfigurationParameters `json:"storageConfiguration,omitempty" tf:"storage_configuration,omitempty"`
 }
@@ -1738,7 +1739,7 @@ type S3VectorsConfigurationParameters struct {
 
 type SQLKnowledgeBaseConfigurationInitParameters struct {
 
-	// Configurations for storage in Amazon Redshift. See redshift_configuration block for details.
+	// Configurations for storage in Amazon Redshift. See knowledge_base_configuration.sql_knowledge_base_configuration.redshift_configuration.storage_configuration.redshift_configuration Block for details.
 	RedshiftConfiguration *RedshiftConfigurationInitParameters `json:"redshiftConfiguration,omitempty" tf:"redshift_configuration,omitempty"`
 
 	// Storage service used for this location. S3 is the only valid value.
@@ -1747,7 +1748,7 @@ type SQLKnowledgeBaseConfigurationInitParameters struct {
 
 type SQLKnowledgeBaseConfigurationObservation struct {
 
-	// Configurations for storage in Amazon Redshift. See redshift_configuration block for details.
+	// Configurations for storage in Amazon Redshift. See knowledge_base_configuration.sql_knowledge_base_configuration.redshift_configuration.storage_configuration.redshift_configuration Block for details.
 	RedshiftConfiguration *RedshiftConfigurationObservation `json:"redshiftConfiguration,omitempty" tf:"redshift_configuration,omitempty"`
 
 	// Storage service used for this location. S3 is the only valid value.
@@ -1756,7 +1757,7 @@ type SQLKnowledgeBaseConfigurationObservation struct {
 
 type SQLKnowledgeBaseConfigurationParameters struct {
 
-	// Configurations for storage in Amazon Redshift. See redshift_configuration block for details.
+	// Configurations for storage in Amazon Redshift. See knowledge_base_configuration.sql_knowledge_base_configuration.redshift_configuration.storage_configuration.redshift_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	RedshiftConfiguration *RedshiftConfigurationParameters `json:"redshiftConfiguration,omitempty" tf:"redshift_configuration,omitempty"`
 
@@ -1815,7 +1816,7 @@ type ServerlessConfigurationAuthConfigurationParameters struct {
 
 type ServerlessConfigurationInitParameters struct {
 
-	// Configurations for authentication to Amazon Redshift. See auth_configuration block for details.
+	// Configurations for authentication to Amazon Redshift. See knowledge_base_configuration.sql_knowledge_base_configuration.redshift_configuration.query_engine_configuration.provisioned_configuration.auth_configuration Block for details.
 	AuthConfiguration *ServerlessConfigurationAuthConfigurationInitParameters `json:"authConfiguration,omitempty" tf:"auth_configuration,omitempty"`
 
 	// ARN of the Amazon Redshift workgroup.
@@ -1824,7 +1825,7 @@ type ServerlessConfigurationInitParameters struct {
 
 type ServerlessConfigurationObservation struct {
 
-	// Configurations for authentication to Amazon Redshift. See auth_configuration block for details.
+	// Configurations for authentication to Amazon Redshift. See knowledge_base_configuration.sql_knowledge_base_configuration.redshift_configuration.query_engine_configuration.provisioned_configuration.auth_configuration Block for details.
 	AuthConfiguration *ServerlessConfigurationAuthConfigurationObservation `json:"authConfiguration,omitempty" tf:"auth_configuration,omitempty"`
 
 	// ARN of the Amazon Redshift workgroup.
@@ -1833,7 +1834,7 @@ type ServerlessConfigurationObservation struct {
 
 type ServerlessConfigurationParameters struct {
 
-	// Configurations for authentication to Amazon Redshift. See auth_configuration block for details.
+	// Configurations for authentication to Amazon Redshift. See knowledge_base_configuration.sql_knowledge_base_configuration.redshift_configuration.query_engine_configuration.provisioned_configuration.auth_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	AuthConfiguration *ServerlessConfigurationAuthConfigurationParameters `json:"authConfiguration,omitempty" tf:"auth_configuration,omitempty"`
 
@@ -1844,10 +1845,10 @@ type ServerlessConfigurationParameters struct {
 
 type StorageConfigurationInitParameters struct {
 
-	// Configurations for storage in AWS Glue Data Catalog. See aws_data_catalog_configuration block for details.
+	// Configurations for storage in AWS Glue Data Catalog. See aws_data_catalog_configuration Block for details.
 	AwsDataCatalogConfiguration *AwsDataCatalogConfigurationInitParameters `json:"awsDataCatalogConfiguration,omitempty" tf:"aws_data_catalog_configuration,omitempty"`
 
-	// Configurations for storage in Amazon Redshift. See redshift_configuration block for details.
+	// Configurations for storage in Amazon Redshift. See knowledge_base_configuration.sql_knowledge_base_configuration.redshift_configuration.storage_configuration.redshift_configuration Block for details.
 	RedshiftConfiguration *StorageConfigurationRedshiftConfigurationInitParameters `json:"redshiftConfiguration,omitempty" tf:"redshift_configuration,omitempty"`
 
 	// Storage service used for this location. S3 is the only valid value.
@@ -1856,10 +1857,10 @@ type StorageConfigurationInitParameters struct {
 
 type StorageConfigurationObservation struct {
 
-	// Configurations for storage in AWS Glue Data Catalog. See aws_data_catalog_configuration block for details.
+	// Configurations for storage in AWS Glue Data Catalog. See aws_data_catalog_configuration Block for details.
 	AwsDataCatalogConfiguration *AwsDataCatalogConfigurationObservation `json:"awsDataCatalogConfiguration,omitempty" tf:"aws_data_catalog_configuration,omitempty"`
 
-	// Configurations for storage in Amazon Redshift. See redshift_configuration block for details.
+	// Configurations for storage in Amazon Redshift. See knowledge_base_configuration.sql_knowledge_base_configuration.redshift_configuration.storage_configuration.redshift_configuration Block for details.
 	RedshiftConfiguration *StorageConfigurationRedshiftConfigurationObservation `json:"redshiftConfiguration,omitempty" tf:"redshift_configuration,omitempty"`
 
 	// Storage service used for this location. S3 is the only valid value.
@@ -1868,11 +1869,11 @@ type StorageConfigurationObservation struct {
 
 type StorageConfigurationParameters struct {
 
-	// Configurations for storage in AWS Glue Data Catalog. See aws_data_catalog_configuration block for details.
+	// Configurations for storage in AWS Glue Data Catalog. See aws_data_catalog_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	AwsDataCatalogConfiguration *AwsDataCatalogConfigurationParameters `json:"awsDataCatalogConfiguration,omitempty" tf:"aws_data_catalog_configuration,omitempty"`
 
-	// Configurations for storage in Amazon Redshift. See redshift_configuration block for details.
+	// Configurations for storage in Amazon Redshift. See knowledge_base_configuration.sql_knowledge_base_configuration.redshift_configuration.storage_configuration.redshift_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	RedshiftConfiguration *StorageConfigurationRedshiftConfigurationParameters `json:"redshiftConfiguration,omitempty" tf:"redshift_configuration,omitempty"`
 
@@ -1883,26 +1884,26 @@ type StorageConfigurationParameters struct {
 
 type StorageConfigurationRedshiftConfigurationInitParameters struct {
 
-	// –  The name of the database in the MongoDB Atlas database.
+	// Name of the database in the MongoDB Atlas database.
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 }
 
 type StorageConfigurationRedshiftConfigurationObservation struct {
 
-	// –  The name of the database in the MongoDB Atlas database.
+	// Name of the database in the MongoDB Atlas database.
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 }
 
 type StorageConfigurationRedshiftConfigurationParameters struct {
 
-	// –  The name of the database in the MongoDB Atlas database.
+	// Name of the database in the MongoDB Atlas database.
 	// +kubebuilder:validation:Optional
 	DatabaseName *string `json:"databaseName" tf:"database_name,omitempty"`
 }
 
 type StorageLocationInitParameters struct {
 
-	// Contains information about the Amazon S3 location for the extracted images.  See s3_location block for details.
+	// Information about the Amazon S3 location for the extracted images. See s3_location Block for details.
 	S3Location *StorageLocationS3LocationInitParameters `json:"s3Location,omitempty" tf:"s3_location,omitempty"`
 
 	// Storage service used for this location. S3 is the only valid value.
@@ -1911,7 +1912,7 @@ type StorageLocationInitParameters struct {
 
 type StorageLocationObservation struct {
 
-	// Contains information about the Amazon S3 location for the extracted images.  See s3_location block for details.
+	// Information about the Amazon S3 location for the extracted images. See s3_location Block for details.
 	S3Location *StorageLocationS3LocationObservation `json:"s3Location,omitempty" tf:"s3_location,omitempty"`
 
 	// Storage service used for this location. S3 is the only valid value.
@@ -1920,7 +1921,7 @@ type StorageLocationObservation struct {
 
 type StorageLocationParameters struct {
 
-	// Contains information about the Amazon S3 location for the extracted images.  See s3_location block for details.
+	// Information about the Amazon S3 location for the extracted images. See s3_location Block for details.
 	// +kubebuilder:validation:Optional
 	S3Location *StorageLocationS3LocationParameters `json:"s3Location,omitempty" tf:"s3_location,omitempty"`
 
@@ -1950,26 +1951,26 @@ type StorageLocationS3LocationParameters struct {
 
 type SupplementalDataStorageConfigurationInitParameters struct {
 
-	// A storage location specification for images extracted from multimodal documents in your data source.  See storage_location block for details.
+	// Storage location specification for images extracted from multimodal documents in your data source. See storage_location Block for details.
 	StorageLocation *StorageLocationInitParameters `json:"storageLocation,omitempty" tf:"storage_location,omitempty"`
 }
 
 type SupplementalDataStorageConfigurationObservation struct {
 
-	// A storage location specification for images extracted from multimodal documents in your data source.  See storage_location block for details.
+	// Storage location specification for images extracted from multimodal documents in your data source. See storage_location Block for details.
 	StorageLocation *StorageLocationObservation `json:"storageLocation,omitempty" tf:"storage_location,omitempty"`
 }
 
 type SupplementalDataStorageConfigurationParameters struct {
 
-	// A storage location specification for images extracted from multimodal documents in your data source.  See storage_location block for details.
+	// Storage location specification for images extracted from multimodal documents in your data source. See storage_location Block for details.
 	// +kubebuilder:validation:Optional
 	StorageLocation *StorageLocationParameters `json:"storageLocation,omitempty" tf:"storage_location,omitempty"`
 }
 
 type TableInitParameters struct {
 
-	// Information about a column in the table. See column block for details.
+	// Information about a column in the table. See column Block for details.
 	Column []ColumnInitParameters `json:"column,omitempty" tf:"column,omitempty"`
 
 	// Description of the table that helps the query engine understand the contents of the table.
@@ -1984,7 +1985,7 @@ type TableInitParameters struct {
 
 type TableObservation struct {
 
-	// Information about a column in the table. See column block for details.
+	// Information about a column in the table. See column Block for details.
 	Column []ColumnObservation `json:"column,omitempty" tf:"column,omitempty"`
 
 	// Description of the table that helps the query engine understand the contents of the table.
@@ -1999,7 +2000,7 @@ type TableObservation struct {
 
 type TableParameters struct {
 
-	// Information about a column in the table. See column block for details.
+	// Information about a column in the table. See column Block for details.
 	// +kubebuilder:validation:Optional
 	Column []ColumnParameters `json:"column,omitempty" tf:"column,omitempty"`
 
@@ -2018,19 +2019,19 @@ type TableParameters struct {
 
 type VectorKnowledgeBaseConfigurationEmbeddingModelConfigurationInitParameters struct {
 
-	// The vector configuration details on the Bedrock embeddings model.  See bedrock_embedding_model_configuration block for details.
+	// Vector configuration details for the Bedrock embeddings model. See bedrock_embedding_model_configuration Block for details.
 	BedrockEmbeddingModelConfiguration *EmbeddingModelConfigurationBedrockEmbeddingModelConfigurationInitParameters `json:"bedrockEmbeddingModelConfiguration,omitempty" tf:"bedrock_embedding_model_configuration,omitempty"`
 }
 
 type VectorKnowledgeBaseConfigurationEmbeddingModelConfigurationObservation struct {
 
-	// The vector configuration details on the Bedrock embeddings model.  See bedrock_embedding_model_configuration block for details.
+	// Vector configuration details for the Bedrock embeddings model. See bedrock_embedding_model_configuration Block for details.
 	BedrockEmbeddingModelConfiguration *EmbeddingModelConfigurationBedrockEmbeddingModelConfigurationObservation `json:"bedrockEmbeddingModelConfiguration,omitempty" tf:"bedrock_embedding_model_configuration,omitempty"`
 }
 
 type VectorKnowledgeBaseConfigurationEmbeddingModelConfigurationParameters struct {
 
-	// The vector configuration details on the Bedrock embeddings model.  See bedrock_embedding_model_configuration block for details.
+	// Vector configuration details for the Bedrock embeddings model. See bedrock_embedding_model_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	BedrockEmbeddingModelConfiguration *EmbeddingModelConfigurationBedrockEmbeddingModelConfigurationParameters `json:"bedrockEmbeddingModelConfiguration,omitempty" tf:"bedrock_embedding_model_configuration,omitempty"`
 }
@@ -2040,10 +2041,10 @@ type VectorKnowledgeBaseConfigurationInitParameters struct {
 	// ARN of the model used to create vector embeddings for the knowledge base.
 	EmbeddingModelArn *string `json:"embeddingModelArn,omitempty" tf:"embedding_model_arn,omitempty"`
 
-	// The embeddings model configuration details for the vector model used in Knowledge Base.  See embedding_model_configuration block for details.
+	// Embeddings model configuration details for the vector model used in the knowledge base. See embedding_model_configuration Block for details.
 	EmbeddingModelConfiguration *VectorKnowledgeBaseConfigurationEmbeddingModelConfigurationInitParameters `json:"embeddingModelConfiguration,omitempty" tf:"embedding_model_configuration,omitempty"`
 
-	// supplemental_data_storage_configuration.  See supplemental_data_storage_configuration block for details.
+	// Supplemental data storage configuration for images extracted from multimodal documents. See supplemental_data_storage_configuration Block for details.
 	SupplementalDataStorageConfiguration *SupplementalDataStorageConfigurationInitParameters `json:"supplementalDataStorageConfiguration,omitempty" tf:"supplemental_data_storage_configuration,omitempty"`
 }
 
@@ -2052,10 +2053,10 @@ type VectorKnowledgeBaseConfigurationObservation struct {
 	// ARN of the model used to create vector embeddings for the knowledge base.
 	EmbeddingModelArn *string `json:"embeddingModelArn,omitempty" tf:"embedding_model_arn,omitempty"`
 
-	// The embeddings model configuration details for the vector model used in Knowledge Base.  See embedding_model_configuration block for details.
+	// Embeddings model configuration details for the vector model used in the knowledge base. See embedding_model_configuration Block for details.
 	EmbeddingModelConfiguration *VectorKnowledgeBaseConfigurationEmbeddingModelConfigurationObservation `json:"embeddingModelConfiguration,omitempty" tf:"embedding_model_configuration,omitempty"`
 
-	// supplemental_data_storage_configuration.  See supplemental_data_storage_configuration block for details.
+	// Supplemental data storage configuration for images extracted from multimodal documents. See supplemental_data_storage_configuration Block for details.
 	SupplementalDataStorageConfiguration *SupplementalDataStorageConfigurationObservation `json:"supplementalDataStorageConfiguration,omitempty" tf:"supplemental_data_storage_configuration,omitempty"`
 }
 
@@ -2065,30 +2066,30 @@ type VectorKnowledgeBaseConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	EmbeddingModelArn *string `json:"embeddingModelArn" tf:"embedding_model_arn,omitempty"`
 
-	// The embeddings model configuration details for the vector model used in Knowledge Base.  See embedding_model_configuration block for details.
+	// Embeddings model configuration details for the vector model used in the knowledge base. See embedding_model_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	EmbeddingModelConfiguration *VectorKnowledgeBaseConfigurationEmbeddingModelConfigurationParameters `json:"embeddingModelConfiguration,omitempty" tf:"embedding_model_configuration,omitempty"`
 
-	// supplemental_data_storage_configuration.  See supplemental_data_storage_configuration block for details.
+	// Supplemental data storage configuration for images extracted from multimodal documents. See supplemental_data_storage_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	SupplementalDataStorageConfiguration *SupplementalDataStorageConfigurationParameters `json:"supplementalDataStorageConfiguration,omitempty" tf:"supplemental_data_storage_configuration,omitempty"`
 }
 
 type VideoInitParameters struct {
 
-	// Configuration for segmenting video content during processing. See segmentation_configuration block for details.
+	// Configuration for segmenting video content during processing. See segmentation_configuration Block for details.
 	SegmentationConfiguration *VideoSegmentationConfigurationInitParameters `json:"segmentationConfiguration,omitempty" tf:"segmentation_configuration,omitempty"`
 }
 
 type VideoObservation struct {
 
-	// Configuration for segmenting video content during processing. See segmentation_configuration block for details.
+	// Configuration for segmenting video content during processing. See segmentation_configuration Block for details.
 	SegmentationConfiguration *VideoSegmentationConfigurationObservation `json:"segmentationConfiguration,omitempty" tf:"segmentation_configuration,omitempty"`
 }
 
 type VideoParameters struct {
 
-	// Configuration for segmenting video content during processing. See segmentation_configuration block for details.
+	// Configuration for segmenting video content during processing. See segmentation_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	SegmentationConfiguration *VideoSegmentationConfigurationParameters `json:"segmentationConfiguration,omitempty" tf:"segmentation_configuration,omitempty"`
 }
@@ -2139,7 +2140,7 @@ type KnowledgeBaseStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// KnowledgeBase is the Schema for the KnowledgeBases API.
+// KnowledgeBase is the Schema for the KnowledgeBases API. Manages an AWS Agents for Amazon Bedrock Knowledge Base.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

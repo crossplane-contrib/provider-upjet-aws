@@ -76,7 +76,7 @@ type InstanceInitParameters struct {
 	// Whether to enable a customer-owned IP address (CoIP) for an RDS on Outposts DB instance. See CoIP for RDS on Outposts for more information.
 	CustomerOwnedIPEnabled *bool `json:"customerOwnedIpEnabled,omitempty" tf:"customer_owned_ip_enabled,omitempty"`
 
-	// Name of the database to create when the DB instance is created. If this parameter is not specified, no database is created in the DB instance. Note that this does not apply for Oracle or SQL Server engines. See the AWS documentation for more details on what applies for those engines. If you are providing an Oracle db name, it needs to be in all upper case. Cannot be specified for a replica.
+	// Name of the database to create when the DB instance is created. If this parameter is not specified, no database is created in the DB instance. Note that this does not apply for Oracle or SQL Server engines. See the AWS documentation for more details on what applies for those engines. If you are providing an Oracle DB name, it needs to be in all upper case. Cannot be specified for a replica.
 	DBName *string `json:"dbName,omitempty" tf:"db_name,omitempty"`
 
 	// Name of DB subnet group. DB instance will be created in the VPC associated with the DB subnet group. If unspecified, will be created in the default Subnet Group. When working with read replicas created in the same region, defaults to the Subnet Group Name of the source DB. When working with read replicas created in a different region, defaults to the default Subnet Group. See DBSubnetGroupName in API action CreateDBInstanceReadReplica for additional read replica constraints.
@@ -209,6 +209,9 @@ type InstanceInitParameters struct {
 	// Whether the RDS instance is multi-AZ.
 	MultiAz *bool `json:"multiAz,omitempty" tf:"multi_az,omitempty"`
 
+	// Whether to use the multi-tenant configuration of the Oracle CDB architecture. Only valid for RDS for Oracle CDB engines (oracle-ee-cdb and oracle-se2-cdb). Changing from false to true converts the instance in place and requires apply_immediately = true; RDS also applies any pending modifications at that time. Restored instances and read replicas are converted after creation. Conversion is irreversible, so changing from true to false forces a new resource. After conversion, RDS rejects changes to password, password_wo, and manage_master_user_password on the instance; manage master user credentials on the tenant database instead. Additional tenant databases are managed outside this resource. See the AWS documentation for details.
+	MultiTenant *bool `json:"multiTenant,omitempty" tf:"multi_tenant,omitempty"`
+
 	// National character set is used in the NCHAR, NVARCHAR2, and NCLOB data types for Oracle instances. This can't be changed. See Oracle Character Sets Supported in Amazon RDS.
 	NcharCharacterSetName *string `json:"ncharCharacterSetName,omitempty" tf:"nchar_character_set_name,omitempty"`
 
@@ -234,7 +237,7 @@ type InstanceInitParameters struct {
 	// Password for the master DB user. If you set autoGeneratePassword to true, the Secret referenced here will be created or updated with generated password if it does not already contain one.
 	PasswordSecretRef *v2.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
-	// Password for the master DB user. Note that this may show up in logs, and it will be stored in the state file. Cannot be set if manage_master_user_password is set to true. If set, requires password_wo_version to be set.
+	// Password for the master DB user. Note that this may show up in logs. Cannot be set if manage_master_user_password is set to true. If set, requires password_wo_version to be set.
 	PasswordWoSecretRef *v2.SecretKeySelector `json:"passwordWoSecretRef,omitempty" tf:"-"`
 
 	// Required when password_wo is set. Changing this value triggers an update to password_wo.
@@ -385,7 +388,7 @@ type InstanceObservation struct {
 	// Whether to enable a customer-owned IP address (CoIP) for an RDS on Outposts DB instance. See CoIP for RDS on Outposts for more information.
 	CustomerOwnedIPEnabled *bool `json:"customerOwnedIpEnabled,omitempty" tf:"customer_owned_ip_enabled,omitempty"`
 
-	// Name of the database to create when the DB instance is created. If this parameter is not specified, no database is created in the DB instance. Note that this does not apply for Oracle or SQL Server engines. See the AWS documentation for more details on what applies for those engines. If you are providing an Oracle db name, it needs to be in all upper case. Cannot be specified for a replica.
+	// Name of the database to create when the DB instance is created. If this parameter is not specified, no database is created in the DB instance. Note that this does not apply for Oracle or SQL Server engines. See the AWS documentation for more details on what applies for those engines. If you are providing an Oracle DB name, it needs to be in all upper case. Cannot be specified for a replica.
 	DBName *string `json:"dbName,omitempty" tf:"db_name,omitempty"`
 
 	// Name of DB subnet group. DB instance will be created in the VPC associated with the DB subnet group. If unspecified, will be created in the default Subnet Group. When working with read replicas created in the same region, defaults to the Subnet Group Name of the source DB. When working with read replicas created in a different region, defaults to the default Subnet Group. See DBSubnetGroupName in API action CreateDBInstanceReadReplica for additional read replica constraints.
@@ -473,7 +476,7 @@ type InstanceObservation struct {
 	// License model information for this DB instance. Valid values for this field are as follows: RDS for MariaDB: general-public-license; RDS for Microsoft SQL Server: license-included; RDS for MySQL: general-public-license; RDS for Oracle: bring-your-own-license | license-included; RDS for PostgreSQL: postgresql-license.
 	LicenseModel *string `json:"licenseModel,omitempty" tf:"license_model,omitempty"`
 
-	// Listener connection endpoint for SQL Server Always On. See Endpoint below.
+	// Listener connection endpoint for SQL Server Always On. See listener_endpoint Block below.
 	ListenerEndpoint []ListenerEndpointObservation `json:"listenerEndpoint,omitempty" tf:"listener_endpoint,omitempty"`
 
 	// Window to perform maintenance in. Syntax: "ddd:hh24:mi-ddd:hh24:mi". Eg: "Mon:00:00-Mon:03:00". See RDS Maintenance Window docs for more information.
@@ -499,6 +502,9 @@ type InstanceObservation struct {
 
 	// Whether the RDS instance is multi-AZ.
 	MultiAz *bool `json:"multiAz,omitempty" tf:"multi_az,omitempty"`
+
+	// Whether to use the multi-tenant configuration of the Oracle CDB architecture. Only valid for RDS for Oracle CDB engines (oracle-ee-cdb and oracle-se2-cdb). Changing from false to true converts the instance in place and requires apply_immediately = true; RDS also applies any pending modifications at that time. Restored instances and read replicas are converted after creation. Conversion is irreversible, so changing from true to false forces a new resource. After conversion, RDS rejects changes to password, password_wo, and manage_master_user_password on the instance; manage master user credentials on the tenant database instead. Additional tenant databases are managed outside this resource. See the AWS documentation for details.
+	MultiTenant *bool `json:"multiTenant,omitempty" tf:"multi_tenant,omitempty"`
 
 	// National character set is used in the NCHAR, NVARCHAR2, and NCLOB data types for Oracle instances. This can't be changed. See Oracle Character Sets Supported in Amazon RDS.
 	NcharCharacterSetName *string `json:"ncharCharacterSetName,omitempty" tf:"nchar_character_set_name,omitempty"`
@@ -663,7 +669,7 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	CustomerOwnedIPEnabled *bool `json:"customerOwnedIpEnabled,omitempty" tf:"customer_owned_ip_enabled,omitempty"`
 
-	// Name of the database to create when the DB instance is created. If this parameter is not specified, no database is created in the DB instance. Note that this does not apply for Oracle or SQL Server engines. See the AWS documentation for more details on what applies for those engines. If you are providing an Oracle db name, it needs to be in all upper case. Cannot be specified for a replica.
+	// Name of the database to create when the DB instance is created. If this parameter is not specified, no database is created in the DB instance. Note that this does not apply for Oracle or SQL Server engines. See the AWS documentation for more details on what applies for those engines. If you are providing an Oracle DB name, it needs to be in all upper case. Cannot be specified for a replica.
 	// +kubebuilder:validation:Optional
 	DBName *string `json:"dbName,omitempty" tf:"db_name,omitempty"`
 
@@ -827,6 +833,10 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	MultiAz *bool `json:"multiAz,omitempty" tf:"multi_az,omitempty"`
 
+	// Whether to use the multi-tenant configuration of the Oracle CDB architecture. Only valid for RDS for Oracle CDB engines (oracle-ee-cdb and oracle-se2-cdb). Changing from false to true converts the instance in place and requires apply_immediately = true; RDS also applies any pending modifications at that time. Restored instances and read replicas are converted after creation. Conversion is irreversible, so changing from true to false forces a new resource. After conversion, RDS rejects changes to password, password_wo, and manage_master_user_password on the instance; manage master user credentials on the tenant database instead. Additional tenant databases are managed outside this resource. See the AWS documentation for details.
+	// +kubebuilder:validation:Optional
+	MultiTenant *bool `json:"multiTenant,omitempty" tf:"multi_tenant,omitempty"`
+
 	// National character set is used in the NCHAR, NVARCHAR2, and NCLOB data types for Oracle instances. This can't be changed. See Oracle Character Sets Supported in Amazon RDS.
 	// +kubebuilder:validation:Optional
 	NcharCharacterSetName *string `json:"ncharCharacterSetName,omitempty" tf:"nchar_character_set_name,omitempty"`
@@ -857,7 +867,7 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	PasswordSecretRef *v2.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
-	// Password for the master DB user. Note that this may show up in logs, and it will be stored in the state file. Cannot be set if manage_master_user_password is set to true. If set, requires password_wo_version to be set.
+	// Password for the master DB user. Note that this may show up in logs. Cannot be set if manage_master_user_password is set to true. If set, requires password_wo_version to be set.
 	// +kubebuilder:validation:Optional
 	PasswordWoSecretRef *v2.SecretKeySelector `json:"passwordWoSecretRef,omitempty" tf:"-"`
 
@@ -990,13 +1000,13 @@ type ListenerEndpointInitParameters struct {
 
 type ListenerEndpointObservation struct {
 
-	// Hostname of the RDS instance. See also endpoint and port.
+	// DNS address of the DB instance.
 	Address *string `json:"address,omitempty" tf:"address,omitempty"`
 
-	// Canonical hosted zone ID of the DB instance (to be used in a Route 53 Alias record).
+	// ID that Amazon Route 53 assigns when you create a hosted zone.
 	HostedZoneID *string `json:"hostedZoneId,omitempty" tf:"hosted_zone_id,omitempty"`
 
-	// Port on which the DB accepts connections.
+	// Port that the database engine is listening on.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 }
 

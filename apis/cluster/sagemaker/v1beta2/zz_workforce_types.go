@@ -221,7 +221,7 @@ type WorkforceInitParameters struct {
 	// Use this parameter to configure a private workforce using your own OIDC Identity Provider. Conflicts with cognito_config. see OIDC Config details below.
 	OidcConfig *OidcConfigInitParameters `json:"oidcConfig,omitempty" tf:"oidc_config,omitempty"`
 
-	// A list of IP address ranges Used to create an allow list of IP addresses for a private workforce. By default, a workforce isn't restricted to specific IP addresses. see Source Ip Config details below.
+	// A list of IP address ranges Used to create an allow list of IP addresses for a private workforce. By default, a workforce isn't restricted to specific IP addresses. see Source IP Config details below.
 	SourceIPConfig *SourceIPConfigInitParameters `json:"sourceIpConfig,omitempty" tf:"source_ip_config,omitempty"`
 
 	// configure a workforce using VPC. see Workforce VPC Config details below.
@@ -246,7 +246,7 @@ type WorkforceObservation struct {
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// A list of IP address ranges Used to create an allow list of IP addresses for a private workforce. By default, a workforce isn't restricted to specific IP addresses. see Source Ip Config details below.
+	// A list of IP address ranges Used to create an allow list of IP addresses for a private workforce. By default, a workforce isn't restricted to specific IP addresses. see Source IP Config details below.
 	SourceIPConfig *SourceIPConfigObservation `json:"sourceIpConfig,omitempty" tf:"source_ip_config,omitempty"`
 
 	// The subdomain for your OIDC Identity Provider.
@@ -271,7 +271,7 @@ type WorkforceParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// A list of IP address ranges Used to create an allow list of IP addresses for a private workforce. By default, a workforce isn't restricted to specific IP addresses. see Source Ip Config details below.
+	// A list of IP address ranges Used to create an allow list of IP addresses for a private workforce. By default, a workforce isn't restricted to specific IP addresses. see Source IP Config details below.
 	// +kubebuilder:validation:Optional
 	SourceIPConfig *SourceIPConfigParameters `json:"sourceIpConfig,omitempty" tf:"source_ip_config,omitempty"`
 

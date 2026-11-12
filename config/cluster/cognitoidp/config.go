@@ -111,4 +111,9 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 			Extractor:     common.PathARNExtractor,
 		}
 	})
+	p.AddResourceConfigurator("aws_cognito_log_delivery_configuration", func(r *config.Resource) {
+		r.AddSingletonListConversion("log_configurations[*].cloud_watch_logs_configuration", "logConfigurations[*].cloudWatchLogsConfiguration")
+		r.AddSingletonListConversion("log_configurations[*].firehose_configuration", "logConfigurations[*].firehoseConfiguration")
+		r.AddSingletonListConversion("log_configurations[*].s3_configuration", "logConfigurations[*].s3Configuration")
+	})
 }

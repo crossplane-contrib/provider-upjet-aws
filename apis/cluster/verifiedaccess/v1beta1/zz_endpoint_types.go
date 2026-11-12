@@ -15,6 +15,7 @@ import (
 
 type CidrOptionsInitParameters struct {
 
+	// CIDR block to send traffic to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("cidr_block",false)
 	Cidr *string `json:"cidr,omitempty" tf:"cidr,omitempty"`
@@ -27,10 +28,13 @@ type CidrOptionsInitParameters struct {
 	// +kubebuilder:validation:Optional
 	CidrSelector *v2.Selector `json:"cidrSelector,omitempty" tf:"-"`
 
+	// Port ranges. See below.
 	PortRange []PortRangeInitParameters `json:"portRange,omitempty" tf:"port_range,omitempty"`
 
+	// Protocol. Currently tcp is supported.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
+	// IDs of the subnets.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.Subnet
 	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
@@ -45,18 +49,24 @@ type CidrOptionsInitParameters struct {
 }
 
 type CidrOptionsObservation struct {
+
+	// CIDR block to send traffic to.
 	Cidr *string `json:"cidr,omitempty" tf:"cidr,omitempty"`
 
+	// Port ranges. See below.
 	PortRange []PortRangeObservation `json:"portRange,omitempty" tf:"port_range,omitempty"`
 
+	// Protocol. Currently tcp is supported.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
+	// IDs of the subnets.
 	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 }
 
 type CidrOptionsParameters struct {
 
+	// CIDR block to send traffic to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("cidr_block",false)
 	// +kubebuilder:validation:Optional
@@ -70,12 +80,15 @@ type CidrOptionsParameters struct {
 	// +kubebuilder:validation:Optional
 	CidrSelector *v2.Selector `json:"cidrSelector,omitempty" tf:"-"`
 
+	// Port ranges. See below.
 	// +kubebuilder:validation:Optional
 	PortRange []PortRangeParameters `json:"portRange" tf:"port_range,omitempty"`
 
+	// Protocol. Currently tcp is supported.
 	// +kubebuilder:validation:Optional
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
+	// IDs of the subnets.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.Subnet
 	// +kubebuilder:validation:Optional
 	// +listType=set
@@ -92,19 +105,19 @@ type CidrOptionsParameters struct {
 
 type EndpointInitParameters struct {
 
-	// The DNS name for users to reach your application. This parameter is required if the endpoint type is load-balancer or network-interface.
+	// DNS name for users to reach your application. This parameter is required if the endpoint type is load-balancer or network-interface.
 	ApplicationDomain *string `json:"applicationDomain,omitempty" tf:"application_domain,omitempty"`
 
-	// The type of attachment. Currently, only vpc is supported.
+	// Type of attachment. Currently, only vpc is supported.
 	AttachmentType *string `json:"attachmentType,omitempty" tf:"attachment_type,omitempty"`
 
-	// The CIDR block details. This parameter is required if the endpoint type is cidr.
+	// CIDR block details. This parameter is required if the endpoint type is cidr. See below.
 	CidrOptions *CidrOptionsInitParameters `json:"cidrOptions,omitempty" tf:"cidr_options,omitempty"`
 
-	// A description for the Verified Access endpoint.
+	// Description for the Verified Access endpoint.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// - The ARN of the public TLS/SSL certificate in AWS Certificate Manager to associate with the endpoint. The CN in the certificate must match the DNS name your end users will use to reach your application. This parameter is required if the endpoint type is load-balancer or network-interface.
+	// ARN of the public TLS/SSL certificate in AWS Certificate Manager to associate with the endpoint. The CN in the certificate must match the DNS name your end users will use to reach your application. This parameter is required if the endpoint type is load-balancer or network-interface.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/acm/v1beta2.Certificate
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	DomainCertificateArn *string `json:"domainCertificateArn,omitempty" tf:"domain_certificate_arn,omitempty"`
@@ -117,21 +130,22 @@ type EndpointInitParameters struct {
 	// +kubebuilder:validation:Optional
 	DomainCertificateArnSelector *v2.Selector `json:"domainCertificateArnSelector,omitempty" tf:"-"`
 
-	// - A custom identifier that is prepended to the DNS name that is generated for the endpoint.
+	// Custom identifier that is prepended to the DNS name that is generated for the endpoint.
 	EndpointDomainPrefix *string `json:"endpointDomainPrefix,omitempty" tf:"endpoint_domain_prefix,omitempty"`
 
-	// - The type of Verified Access endpoint to create. Currently load-balancer or network-interface are supported.
+	// Type of Verified Access endpoint to create. Valid values are load-balancer, network-interface, cidr, and rds.
 	EndpointType *string `json:"endpointType,omitempty" tf:"endpoint_type,omitempty"`
 
-	// The load balancer details. This parameter is required if the endpoint type is load-balancer.
+	// Load balancer details. This parameter is required if the endpoint type is load-balancer. See below.
 	LoadBalancerOptions *LoadBalancerOptionsInitParameters `json:"loadBalancerOptions,omitempty" tf:"load_balancer_options,omitempty"`
 
-	// The network interface details. This parameter is required if the endpoint type is network-interface.
+	// Network interface details. This parameter is required if the endpoint type is network-interface. See below.
 	NetworkInterfaceOptions *NetworkInterfaceOptionsInitParameters `json:"networkInterfaceOptions,omitempty" tf:"network_interface_options,omitempty"`
 
-	// The policy document that is associated with this resource.
+	// Policy document that is associated with this resource.
 	PolicyDocument *string `json:"policyDocument,omitempty" tf:"policy_document,omitempty"`
 
+	// RDS details. This parameter is required if the endpoint type is rds. See below.
 	RDSOptions *RDSOptionsInitParameters `json:"rdsOptions,omitempty" tf:"rds_options,omitempty"`
 
 	// References to SecurityGroup in ec2 to populate securityGroupIds.
@@ -142,21 +156,21 @@ type EndpointInitParameters struct {
 	// +kubebuilder:validation:Optional
 	SecurityGroupIDSelector *v2.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 
-	// List of the the security groups IDs to associate with the Verified Access endpoint.
+	// List of the security groups IDs to associate with the Verified Access endpoint.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=SecurityGroupIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SecurityGroupIDSelector
 	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
-	// The options in use for server side encryption.
+	// Options in use for server side encryption. See below.
 	SseSpecification *SseSpecificationInitParameters `json:"sseSpecification,omitempty" tf:"sse_specification,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The ID of the Verified Access group to associate the endpoint with.
+	// ID of the Verified Access group to associate the endpoint with.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/verifiedaccess/v1beta1.Group
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	VerifiedAccessGroupID *string `json:"verifiedAccessGroupId,omitempty" tf:"verified_access_group_id,omitempty"`
@@ -172,56 +186,57 @@ type EndpointInitParameters struct {
 
 type EndpointObservation struct {
 
-	// The DNS name for users to reach your application. This parameter is required if the endpoint type is load-balancer or network-interface.
+	// DNS name for users to reach your application. This parameter is required if the endpoint type is load-balancer or network-interface.
 	ApplicationDomain *string `json:"applicationDomain,omitempty" tf:"application_domain,omitempty"`
 
-	// The type of attachment. Currently, only vpc is supported.
+	// Type of attachment. Currently, only vpc is supported.
 	AttachmentType *string `json:"attachmentType,omitempty" tf:"attachment_type,omitempty"`
 
-	// The CIDR block details. This parameter is required if the endpoint type is cidr.
+	// CIDR block details. This parameter is required if the endpoint type is cidr. See below.
 	CidrOptions *CidrOptionsObservation `json:"cidrOptions,omitempty" tf:"cidr_options,omitempty"`
 
-	// A description for the Verified Access endpoint.
+	// Description for the Verified Access endpoint.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Returned if endpoint has a device trust provider attached.
 	DeviceValidationDomain *string `json:"deviceValidationDomain,omitempty" tf:"device_validation_domain,omitempty"`
 
-	// - The ARN of the public TLS/SSL certificate in AWS Certificate Manager to associate with the endpoint. The CN in the certificate must match the DNS name your end users will use to reach your application. This parameter is required if the endpoint type is load-balancer or network-interface.
+	// ARN of the public TLS/SSL certificate in AWS Certificate Manager to associate with the endpoint. The CN in the certificate must match the DNS name your end users will use to reach your application. This parameter is required if the endpoint type is load-balancer or network-interface.
 	DomainCertificateArn *string `json:"domainCertificateArn,omitempty" tf:"domain_certificate_arn,omitempty"`
 
-	// A DNS name that is generated for the endpoint.
+	// DNS name that is generated for the endpoint.
 	EndpointDomain *string `json:"endpointDomain,omitempty" tf:"endpoint_domain,omitempty"`
 
-	// - A custom identifier that is prepended to the DNS name that is generated for the endpoint.
+	// Custom identifier that is prepended to the DNS name that is generated for the endpoint.
 	EndpointDomainPrefix *string `json:"endpointDomainPrefix,omitempty" tf:"endpoint_domain_prefix,omitempty"`
 
-	// - The type of Verified Access endpoint to create. Currently load-balancer or network-interface are supported.
+	// Type of Verified Access endpoint to create. Valid values are load-balancer, network-interface, cidr, and rds.
 	EndpointType *string `json:"endpointType,omitempty" tf:"endpoint_type,omitempty"`
 
-	// The ID of the AWS Verified Access endpoint.
+	// ID of the AWS Verified Access endpoint.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The load balancer details. This parameter is required if the endpoint type is load-balancer.
+	// Load balancer details. This parameter is required if the endpoint type is load-balancer. See below.
 	LoadBalancerOptions *LoadBalancerOptionsObservation `json:"loadBalancerOptions,omitempty" tf:"load_balancer_options,omitempty"`
 
-	// The network interface details. This parameter is required if the endpoint type is network-interface.
+	// Network interface details. This parameter is required if the endpoint type is network-interface. See below.
 	NetworkInterfaceOptions *NetworkInterfaceOptionsObservation `json:"networkInterfaceOptions,omitempty" tf:"network_interface_options,omitempty"`
 
-	// The policy document that is associated with this resource.
+	// Policy document that is associated with this resource.
 	PolicyDocument *string `json:"policyDocument,omitempty" tf:"policy_document,omitempty"`
 
+	// RDS details. This parameter is required if the endpoint type is rds. See below.
 	RDSOptions *RDSOptionsObservation `json:"rdsOptions,omitempty" tf:"rds_options,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// List of the the security groups IDs to associate with the Verified Access endpoint.
+	// List of the security groups IDs to associate with the Verified Access endpoint.
 	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
-	// The options in use for server side encryption.
+	// Options in use for server side encryption. See below.
 	SseSpecification *SseSpecificationObservation `json:"sseSpecification,omitempty" tf:"sse_specification,omitempty"`
 
 	// Key-value map of resource tags.
@@ -231,32 +246,32 @@ type EndpointObservation struct {
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// The ID of the Verified Access group to associate the endpoint with.
+	// ID of the Verified Access group to associate the endpoint with.
 	VerifiedAccessGroupID *string `json:"verifiedAccessGroupId,omitempty" tf:"verified_access_group_id,omitempty"`
 
-	// The ID of the AWS Verified Access endpoint.
+	// ID of the Verified Access instance.
 	VerifiedAccessInstanceID *string `json:"verifiedAccessInstanceId,omitempty" tf:"verified_access_instance_id,omitempty"`
 }
 
 type EndpointParameters struct {
 
-	// The DNS name for users to reach your application. This parameter is required if the endpoint type is load-balancer or network-interface.
+	// DNS name for users to reach your application. This parameter is required if the endpoint type is load-balancer or network-interface.
 	// +kubebuilder:validation:Optional
 	ApplicationDomain *string `json:"applicationDomain,omitempty" tf:"application_domain,omitempty"`
 
-	// The type of attachment. Currently, only vpc is supported.
+	// Type of attachment. Currently, only vpc is supported.
 	// +kubebuilder:validation:Optional
 	AttachmentType *string `json:"attachmentType,omitempty" tf:"attachment_type,omitempty"`
 
-	// The CIDR block details. This parameter is required if the endpoint type is cidr.
+	// CIDR block details. This parameter is required if the endpoint type is cidr. See below.
 	// +kubebuilder:validation:Optional
 	CidrOptions *CidrOptionsParameters `json:"cidrOptions,omitempty" tf:"cidr_options,omitempty"`
 
-	// A description for the Verified Access endpoint.
+	// Description for the Verified Access endpoint.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// - The ARN of the public TLS/SSL certificate in AWS Certificate Manager to associate with the endpoint. The CN in the certificate must match the DNS name your end users will use to reach your application. This parameter is required if the endpoint type is load-balancer or network-interface.
+	// ARN of the public TLS/SSL certificate in AWS Certificate Manager to associate with the endpoint. The CN in the certificate must match the DNS name your end users will use to reach your application. This parameter is required if the endpoint type is load-balancer or network-interface.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/acm/v1beta2.Certificate
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -270,26 +285,27 @@ type EndpointParameters struct {
 	// +kubebuilder:validation:Optional
 	DomainCertificateArnSelector *v2.Selector `json:"domainCertificateArnSelector,omitempty" tf:"-"`
 
-	// - A custom identifier that is prepended to the DNS name that is generated for the endpoint.
+	// Custom identifier that is prepended to the DNS name that is generated for the endpoint.
 	// +kubebuilder:validation:Optional
 	EndpointDomainPrefix *string `json:"endpointDomainPrefix,omitempty" tf:"endpoint_domain_prefix,omitempty"`
 
-	// - The type of Verified Access endpoint to create. Currently load-balancer or network-interface are supported.
+	// Type of Verified Access endpoint to create. Valid values are load-balancer, network-interface, cidr, and rds.
 	// +kubebuilder:validation:Optional
 	EndpointType *string `json:"endpointType,omitempty" tf:"endpoint_type,omitempty"`
 
-	// The load balancer details. This parameter is required if the endpoint type is load-balancer.
+	// Load balancer details. This parameter is required if the endpoint type is load-balancer. See below.
 	// +kubebuilder:validation:Optional
 	LoadBalancerOptions *LoadBalancerOptionsParameters `json:"loadBalancerOptions,omitempty" tf:"load_balancer_options,omitempty"`
 
-	// The network interface details. This parameter is required if the endpoint type is network-interface.
+	// Network interface details. This parameter is required if the endpoint type is network-interface. See below.
 	// +kubebuilder:validation:Optional
 	NetworkInterfaceOptions *NetworkInterfaceOptionsParameters `json:"networkInterfaceOptions,omitempty" tf:"network_interface_options,omitempty"`
 
-	// The policy document that is associated with this resource.
+	// Policy document that is associated with this resource.
 	// +kubebuilder:validation:Optional
 	PolicyDocument *string `json:"policyDocument,omitempty" tf:"policy_document,omitempty"`
 
+	// RDS details. This parameter is required if the endpoint type is rds. See below.
 	// +kubebuilder:validation:Optional
 	RDSOptions *RDSOptionsParameters `json:"rdsOptions,omitempty" tf:"rds_options,omitempty"`
 
@@ -306,7 +322,7 @@ type EndpointParameters struct {
 	// +kubebuilder:validation:Optional
 	SecurityGroupIDSelector *v2.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 
-	// List of the the security groups IDs to associate with the Verified Access endpoint.
+	// List of the security groups IDs to associate with the Verified Access endpoint.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=SecurityGroupIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SecurityGroupIDSelector
@@ -314,7 +330,7 @@ type EndpointParameters struct {
 	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
-	// The options in use for server side encryption.
+	// Options in use for server side encryption. See below.
 	// +kubebuilder:validation:Optional
 	SseSpecification *SseSpecificationParameters `json:"sseSpecification,omitempty" tf:"sse_specification,omitempty"`
 
@@ -323,7 +339,7 @@ type EndpointParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The ID of the Verified Access group to associate the endpoint with.
+	// ID of the Verified Access group to associate the endpoint with.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/verifiedaccess/v1beta1.Group
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -340,6 +356,7 @@ type EndpointParameters struct {
 
 type LoadBalancerOptionsInitParameters struct {
 
+	// ARN of the load balancer.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/elbv2/v1beta2.LB
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	LoadBalancerArn *string `json:"loadBalancerArn,omitempty" tf:"load_balancer_arn,omitempty"`
@@ -352,12 +369,16 @@ type LoadBalancerOptionsInitParameters struct {
 	// +kubebuilder:validation:Optional
 	LoadBalancerArnSelector *v2.Selector `json:"loadBalancerArnSelector,omitempty" tf:"-"`
 
+	// IP port number.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
+	// Port ranges. See below.
 	PortRange []LoadBalancerOptionsPortRangeInitParameters `json:"portRange,omitempty" tf:"port_range,omitempty"`
 
+	// IP protocol.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
+	// IDs of the subnets.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.Subnet
 	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
@@ -372,20 +393,27 @@ type LoadBalancerOptionsInitParameters struct {
 }
 
 type LoadBalancerOptionsObservation struct {
+
+	// ARN of the load balancer.
 	LoadBalancerArn *string `json:"loadBalancerArn,omitempty" tf:"load_balancer_arn,omitempty"`
 
+	// IP port number.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
+	// Port ranges. See below.
 	PortRange []LoadBalancerOptionsPortRangeObservation `json:"portRange,omitempty" tf:"port_range,omitempty"`
 
+	// IP protocol.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
+	// IDs of the subnets.
 	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 }
 
 type LoadBalancerOptionsParameters struct {
 
+	// ARN of the load balancer.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/elbv2/v1beta2.LB
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -399,15 +427,19 @@ type LoadBalancerOptionsParameters struct {
 	// +kubebuilder:validation:Optional
 	LoadBalancerArnSelector *v2.Selector `json:"loadBalancerArnSelector,omitempty" tf:"-"`
 
+	// IP port number.
 	// +kubebuilder:validation:Optional
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
+	// Port ranges. See below.
 	// +kubebuilder:validation:Optional
 	PortRange []LoadBalancerOptionsPortRangeParameters `json:"portRange,omitempty" tf:"port_range,omitempty"`
 
+	// IP protocol.
 	// +kubebuilder:validation:Optional
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
+	// IDs of the subnets.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.Subnet
 	// +kubebuilder:validation:Optional
 	// +listType=set
@@ -423,29 +455,37 @@ type LoadBalancerOptionsParameters struct {
 }
 
 type LoadBalancerOptionsPortRangeInitParameters struct {
+
+	// Start of the port range.
 	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
 
+	// End of the port range.
 	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
 }
 
 type LoadBalancerOptionsPortRangeObservation struct {
+
+	// Start of the port range.
 	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
 
+	// End of the port range.
 	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
 }
 
 type LoadBalancerOptionsPortRangeParameters struct {
 
+	// Start of the port range.
 	// +kubebuilder:validation:Optional
 	FromPort *float64 `json:"fromPort" tf:"from_port,omitempty"`
 
+	// End of the port range.
 	// +kubebuilder:validation:Optional
 	ToPort *float64 `json:"toPort" tf:"to_port,omitempty"`
 }
 
 type NetworkInterfaceOptionsInitParameters struct {
 
-	// The ID of the AWS Verified Access endpoint.
+	// ID of the network interface.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.NetworkInterface
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	NetworkInterfaceID *string `json:"networkInterfaceId,omitempty" tf:"network_interface_id,omitempty"`
@@ -458,28 +498,34 @@ type NetworkInterfaceOptionsInitParameters struct {
 	// +kubebuilder:validation:Optional
 	NetworkInterfaceIDSelector *v2.Selector `json:"networkInterfaceIdSelector,omitempty" tf:"-"`
 
+	// IP port number.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
+	// Port ranges. See below.
 	PortRange []NetworkInterfaceOptionsPortRangeInitParameters `json:"portRange,omitempty" tf:"port_range,omitempty"`
 
+	// IP protocol.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 }
 
 type NetworkInterfaceOptionsObservation struct {
 
-	// The ID of the AWS Verified Access endpoint.
+	// ID of the network interface.
 	NetworkInterfaceID *string `json:"networkInterfaceId,omitempty" tf:"network_interface_id,omitempty"`
 
+	// IP port number.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
+	// Port ranges. See below.
 	PortRange []NetworkInterfaceOptionsPortRangeObservation `json:"portRange,omitempty" tf:"port_range,omitempty"`
 
+	// IP protocol.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 }
 
 type NetworkInterfaceOptionsParameters struct {
 
-	// The ID of the AWS Verified Access endpoint.
+	// ID of the network interface.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.NetworkInterface
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -493,134 +539,184 @@ type NetworkInterfaceOptionsParameters struct {
 	// +kubebuilder:validation:Optional
 	NetworkInterfaceIDSelector *v2.Selector `json:"networkInterfaceIdSelector,omitempty" tf:"-"`
 
+	// IP port number.
 	// +kubebuilder:validation:Optional
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
+	// Port ranges. See below.
 	// +kubebuilder:validation:Optional
 	PortRange []NetworkInterfaceOptionsPortRangeParameters `json:"portRange,omitempty" tf:"port_range,omitempty"`
 
+	// IP protocol.
 	// +kubebuilder:validation:Optional
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 }
 
 type NetworkInterfaceOptionsPortRangeInitParameters struct {
+
+	// Start of the port range.
 	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
 
+	// End of the port range.
 	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
 }
 
 type NetworkInterfaceOptionsPortRangeObservation struct {
+
+	// Start of the port range.
 	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
 
+	// End of the port range.
 	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
 }
 
 type NetworkInterfaceOptionsPortRangeParameters struct {
 
+	// Start of the port range.
 	// +kubebuilder:validation:Optional
 	FromPort *float64 `json:"fromPort" tf:"from_port,omitempty"`
 
+	// End of the port range.
 	// +kubebuilder:validation:Optional
 	ToPort *float64 `json:"toPort" tf:"to_port,omitempty"`
 }
 
 type PortRangeInitParameters struct {
+
+	// Start of the port range.
 	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
 
+	// End of the port range.
 	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
 }
 
 type PortRangeObservation struct {
+
+	// Start of the port range.
 	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
 
+	// End of the port range.
 	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
 }
 
 type PortRangeParameters struct {
 
+	// Start of the port range.
 	// +kubebuilder:validation:Optional
 	FromPort *float64 `json:"fromPort" tf:"from_port,omitempty"`
 
+	// End of the port range.
 	// +kubebuilder:validation:Optional
 	ToPort *float64 `json:"toPort" tf:"to_port,omitempty"`
 }
 
 type RDSOptionsInitParameters struct {
+
+	// IP port number.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
+	// Protocol. Currently tcp is supported.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
+	// ARN of the RDS cluster.
 	RDSDBClusterArn *string `json:"rdsDbClusterArn,omitempty" tf:"rds_db_cluster_arn,omitempty"`
 
+	// ARN of the RDS instance.
 	RDSDBInstanceArn *string `json:"rdsDbInstanceArn,omitempty" tf:"rds_db_instance_arn,omitempty"`
 
+	// ARN of the RDS proxy.
 	RDSDBProxyArn *string `json:"rdsDbProxyArn,omitempty" tf:"rds_db_proxy_arn,omitempty"`
 
+	// RDS endpoint.
 	RDSEndpoint *string `json:"rdsEndpoint,omitempty" tf:"rds_endpoint,omitempty"`
 
+	// IDs of the subnets.
 	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 }
 
 type RDSOptionsObservation struct {
+
+	// IP port number.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
+	// Protocol. Currently tcp is supported.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
+	// ARN of the RDS cluster.
 	RDSDBClusterArn *string `json:"rdsDbClusterArn,omitempty" tf:"rds_db_cluster_arn,omitempty"`
 
+	// ARN of the RDS instance.
 	RDSDBInstanceArn *string `json:"rdsDbInstanceArn,omitempty" tf:"rds_db_instance_arn,omitempty"`
 
+	// ARN of the RDS proxy.
 	RDSDBProxyArn *string `json:"rdsDbProxyArn,omitempty" tf:"rds_db_proxy_arn,omitempty"`
 
+	// RDS endpoint.
 	RDSEndpoint *string `json:"rdsEndpoint,omitempty" tf:"rds_endpoint,omitempty"`
 
+	// IDs of the subnets.
 	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 }
 
 type RDSOptionsParameters struct {
 
+	// IP port number.
 	// +kubebuilder:validation:Optional
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
+	// Protocol. Currently tcp is supported.
 	// +kubebuilder:validation:Optional
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
+	// ARN of the RDS cluster.
 	// +kubebuilder:validation:Optional
 	RDSDBClusterArn *string `json:"rdsDbClusterArn,omitempty" tf:"rds_db_cluster_arn,omitempty"`
 
+	// ARN of the RDS instance.
 	// +kubebuilder:validation:Optional
 	RDSDBInstanceArn *string `json:"rdsDbInstanceArn,omitempty" tf:"rds_db_instance_arn,omitempty"`
 
+	// ARN of the RDS proxy.
 	// +kubebuilder:validation:Optional
 	RDSDBProxyArn *string `json:"rdsDbProxyArn,omitempty" tf:"rds_db_proxy_arn,omitempty"`
 
+	// RDS endpoint.
 	// +kubebuilder:validation:Optional
 	RDSEndpoint *string `json:"rdsEndpoint,omitempty" tf:"rds_endpoint,omitempty"`
 
+	// IDs of the subnets.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 }
 
 type SseSpecificationInitParameters struct {
+
+	// Whether to encrypt the policy using a customer managed key.
 	CustomerManagedKeyEnabled *bool `json:"customerManagedKeyEnabled,omitempty" tf:"customer_managed_key_enabled,omitempty"`
 
+	// ARN of the KMS key.
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 }
 
 type SseSpecificationObservation struct {
+
+	// Whether to encrypt the policy using a customer managed key.
 	CustomerManagedKeyEnabled *bool `json:"customerManagedKeyEnabled,omitempty" tf:"customer_managed_key_enabled,omitempty"`
 
+	// ARN of the KMS key.
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 }
 
 type SseSpecificationParameters struct {
 
+	// Whether to encrypt the policy using a customer managed key.
 	// +kubebuilder:validation:Optional
 	CustomerManagedKeyEnabled *bool `json:"customerManagedKeyEnabled,omitempty" tf:"customer_managed_key_enabled,omitempty"`
 
+	// ARN of the KMS key.
 	// +kubebuilder:validation:Optional
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 }

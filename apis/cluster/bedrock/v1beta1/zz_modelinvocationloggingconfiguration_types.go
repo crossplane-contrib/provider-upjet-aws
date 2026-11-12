@@ -30,7 +30,7 @@ type CloudwatchConfigInitParameters struct {
 	// +kubebuilder:validation:Optional
 	LogGroupNameSelector *v2.Selector `json:"logGroupNameSelector,omitempty" tf:"-"`
 
-	// The role ARN.
+	// Role ARN.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
@@ -52,7 +52,7 @@ type CloudwatchConfigObservation struct {
 	// Log group name.
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
 
-	// The role ARN.
+	// Role ARN.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 }
 
@@ -75,7 +75,7 @@ type CloudwatchConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	LogGroupNameSelector *v2.Selector `json:"logGroupNameSelector,omitempty" tf:"-"`
 
-	// The role ARN.
+	// Role ARN.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -142,19 +142,19 @@ type LoggingConfigInitParameters struct {
 	// CloudWatch logging configuration. See cloudwatch_config Block for details.
 	CloudwatchConfig *CloudwatchConfigInitParameters `json:"cloudwatchConfig,omitempty" tf:"cloudwatch_config,omitempty"`
 
-	// Set to include embeddings data in the log delivery. Defaults to true.
+	// Whether to include embeddings data in the log delivery. Defaults to true.
 	EmbeddingDataDeliveryEnabled *bool `json:"embeddingDataDeliveryEnabled,omitempty" tf:"embedding_data_delivery_enabled,omitempty"`
 
-	// Set to include image data in the log delivery. Defaults to true.
+	// Whether to include image data in the log delivery. Defaults to true.
 	ImageDataDeliveryEnabled *bool `json:"imageDataDeliveryEnabled,omitempty" tf:"image_data_delivery_enabled,omitempty"`
 
 	// S3 configuration for storing log data. See s3_config Block for details.
 	S3Config *S3ConfigInitParameters `json:"s3Config,omitempty" tf:"s3_config,omitempty"`
 
-	// Set to include text data in the log delivery. Defaults to true.
+	// Whether to include text data in the log delivery. Defaults to true.
 	TextDataDeliveryEnabled *bool `json:"textDataDeliveryEnabled,omitempty" tf:"text_data_delivery_enabled,omitempty"`
 
-	// Set to include text data in the log delivery. Defaults to true.
+	// Whether to include video data in the log delivery. Defaults to true.
 	VideoDataDeliveryEnabled *bool `json:"videoDataDeliveryEnabled,omitempty" tf:"video_data_delivery_enabled,omitempty"`
 }
 
@@ -163,19 +163,19 @@ type LoggingConfigObservation struct {
 	// CloudWatch logging configuration. See cloudwatch_config Block for details.
 	CloudwatchConfig *CloudwatchConfigObservation `json:"cloudwatchConfig,omitempty" tf:"cloudwatch_config,omitempty"`
 
-	// Set to include embeddings data in the log delivery. Defaults to true.
+	// Whether to include embeddings data in the log delivery. Defaults to true.
 	EmbeddingDataDeliveryEnabled *bool `json:"embeddingDataDeliveryEnabled,omitempty" tf:"embedding_data_delivery_enabled,omitempty"`
 
-	// Set to include image data in the log delivery. Defaults to true.
+	// Whether to include image data in the log delivery. Defaults to true.
 	ImageDataDeliveryEnabled *bool `json:"imageDataDeliveryEnabled,omitempty" tf:"image_data_delivery_enabled,omitempty"`
 
 	// S3 configuration for storing log data. See s3_config Block for details.
 	S3Config *S3ConfigObservation `json:"s3Config,omitempty" tf:"s3_config,omitempty"`
 
-	// Set to include text data in the log delivery. Defaults to true.
+	// Whether to include text data in the log delivery. Defaults to true.
 	TextDataDeliveryEnabled *bool `json:"textDataDeliveryEnabled,omitempty" tf:"text_data_delivery_enabled,omitempty"`
 
-	// Set to include text data in the log delivery. Defaults to true.
+	// Whether to include video data in the log delivery. Defaults to true.
 	VideoDataDeliveryEnabled *bool `json:"videoDataDeliveryEnabled,omitempty" tf:"video_data_delivery_enabled,omitempty"`
 }
 
@@ -185,11 +185,11 @@ type LoggingConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	CloudwatchConfig *CloudwatchConfigParameters `json:"cloudwatchConfig,omitempty" tf:"cloudwatch_config,omitempty"`
 
-	// Set to include embeddings data in the log delivery. Defaults to true.
+	// Whether to include embeddings data in the log delivery. Defaults to true.
 	// +kubebuilder:validation:Optional
 	EmbeddingDataDeliveryEnabled *bool `json:"embeddingDataDeliveryEnabled,omitempty" tf:"embedding_data_delivery_enabled,omitempty"`
 
-	// Set to include image data in the log delivery. Defaults to true.
+	// Whether to include image data in the log delivery. Defaults to true.
 	// +kubebuilder:validation:Optional
 	ImageDataDeliveryEnabled *bool `json:"imageDataDeliveryEnabled,omitempty" tf:"image_data_delivery_enabled,omitempty"`
 
@@ -197,27 +197,27 @@ type LoggingConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	S3Config *S3ConfigParameters `json:"s3Config,omitempty" tf:"s3_config,omitempty"`
 
-	// Set to include text data in the log delivery. Defaults to true.
+	// Whether to include text data in the log delivery. Defaults to true.
 	// +kubebuilder:validation:Optional
 	TextDataDeliveryEnabled *bool `json:"textDataDeliveryEnabled,omitempty" tf:"text_data_delivery_enabled,omitempty"`
 
-	// Set to include text data in the log delivery. Defaults to true.
+	// Whether to include video data in the log delivery. Defaults to true.
 	// +kubebuilder:validation:Optional
 	VideoDataDeliveryEnabled *bool `json:"videoDataDeliveryEnabled,omitempty" tf:"video_data_delivery_enabled,omitempty"`
 }
 
 type ModelInvocationLoggingConfigurationInitParameters struct {
 
-	// The logging configuration values to set. See logging_config Block for details.
+	// Logging configuration values to set. See logging_config Block for details.
 	LoggingConfig *LoggingConfigInitParameters `json:"loggingConfig,omitempty" tf:"logging_config,omitempty"`
 }
 
 type ModelInvocationLoggingConfigurationObservation struct {
 
-	// AWS Region in which logging is configured.
+	// (Deprecated) AWS Region in which logging is configured.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The logging configuration values to set. See logging_config Block for details.
+	// Logging configuration values to set. See logging_config Block for details.
 	LoggingConfig *LoggingConfigObservation `json:"loggingConfig,omitempty" tf:"logging_config,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -227,7 +227,7 @@ type ModelInvocationLoggingConfigurationObservation struct {
 
 type ModelInvocationLoggingConfigurationParameters struct {
 
-	// The logging configuration values to set. See logging_config Block for details.
+	// Logging configuration values to set. See logging_config Block for details.
 	// +kubebuilder:validation:Optional
 	LoggingConfig *LoggingConfigParameters `json:"loggingConfig,omitempty" tf:"logging_config,omitempty"`
 

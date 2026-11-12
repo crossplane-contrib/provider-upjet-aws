@@ -92,7 +92,7 @@ type QueueInitParameters struct {
 	// A block that defines the outbound caller ID name, number, and outbound whisper flow. The Outbound Caller Config block is documented below.
 	OutboundCallerConfig *OutboundCallerConfigInitParameters `json:"outboundCallerConfig,omitempty" tf:"outbound_caller_config,omitempty"`
 
-	// Specifies a list of quick connects ids that determine the quick connects available to agents who are working the queue.
+	// Specifies a list of quick connects IDs that determine the quick connects available to agents who are working the queue.
 	// +listType=set
 	QuickConnectIds []*string `json:"quickConnectIds,omitempty" tf:"quick_connect_ids,omitempty"`
 
@@ -133,7 +133,7 @@ type QueueObservation struct {
 	// The identifier for the Queue.
 	QueueID *string `json:"queueId,omitempty" tf:"queue_id,omitempty"`
 
-	// Specifies a list of quick connects ids that determine the quick connects available to agents who are working the queue.
+	// Specifies a list of quick connects IDs that determine the quick connects available to agents who are working the queue.
 	// +listType=set
 	QuickConnectIds []*string `json:"quickConnectIds,omitempty" tf:"quick_connect_ids,omitempty"`
 
@@ -199,7 +199,7 @@ type QueueParameters struct {
 	// +kubebuilder:validation:Optional
 	OutboundCallerConfig *OutboundCallerConfigParameters `json:"outboundCallerConfig,omitempty" tf:"outbound_caller_config,omitempty"`
 
-	// Specifies a list of quick connects ids that determine the quick connects available to agents who are working the queue.
+	// Specifies a list of quick connects IDs that determine the quick connects available to agents who are working the queue.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	QuickConnectIds []*string `json:"quickConnectIds,omitempty" tf:"quick_connect_ids,omitempty"`

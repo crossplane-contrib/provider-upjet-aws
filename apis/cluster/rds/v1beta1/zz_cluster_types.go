@@ -292,6 +292,9 @@ type ClusterInitParameters struct {
 	// Set of RDS event categories (for example failure, maintenance) to check for after create and update operations. Has no effect if unset; see DescribeEvents and the aws_rds_events data source for the source of these events. Requires the rds:DescribeEvents IAM permission when set.
 	// +listType=set
 	WarningEventCategories []*string `json:"warningEventCategories,omitempty" tf:"warning_event_categories,omitempty"`
+
+	// Whether the DB cluster is publicly accessible. Valid only for Multi-AZ DB clusters. If not specified, defaults to true when db_subnet_group_name is not set or is default, and false otherwise. If true, the VPC of the DB subnet group must have an internet gateway attached. Cannot be used with s3_import.
+	PubliclyAccessible *bool `json:"publiclyAccessible,omitempty" tf:"publicly_accessible,omitempty"`
 }
 
 type ClusterObservation struct {
@@ -532,6 +535,9 @@ type ClusterObservation struct {
 	// Set of RDS event categories (for example failure, maintenance) to check for after create and update operations. Has no effect if unset; see DescribeEvents and the aws_rds_events data source for the source of these events. Requires the rds:DescribeEvents IAM permission when set.
 	// +listType=set
 	WarningEventCategories []*string `json:"warningEventCategories,omitempty" tf:"warning_event_categories,omitempty"`
+
+	// Whether the DB cluster is publicly accessible. Valid only for Multi-AZ DB clusters. If not specified, defaults to true when db_subnet_group_name is not set or is default, and false otherwise. If true, the VPC of the DB subnet group must have an internet gateway attached. Cannot be used with s3_import.
+	PubliclyAccessible *bool `json:"publiclyAccessible,omitempty" tf:"publicly_accessible,omitempty"`
 }
 
 type ClusterParameters struct {
@@ -886,6 +892,10 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	WarningEventCategories []*string `json:"warningEventCategories,omitempty" tf:"warning_event_categories,omitempty"`
+
+	// Whether the DB cluster is publicly accessible. Valid only for Multi-AZ DB clusters. If not specified, defaults to true when db_subnet_group_name is not set or is default, and false otherwise. If true, the VPC of the DB subnet group must have an internet gateway attached. Cannot be used with s3_import.
+	// +kubebuilder:validation:Optional
+	PubliclyAccessible *bool `json:"publiclyAccessible,omitempty" tf:"publicly_accessible,omitempty"`
 }
 
 type ClusterMasterUserSecretInitParameters struct {

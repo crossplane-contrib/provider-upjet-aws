@@ -1972,7 +1972,7 @@ spec:
                     items:
                       properties:
                         cloudwatchLogGroupArn:
-                          description: ARN of the Cloudwatch log group to which log
+                          description: ARN of the CloudWatch log group to which log
                             needs to be published.
                           type: string
                         cloudwatchLogGroupArnRef:
@@ -2473,7 +2473,7 @@ spec:
                     items:
                       properties:
                         cloudwatchLogGroupArn:
-                          description: ARN of the Cloudwatch log group to which log
+                          description: ARN of the CloudWatch log group to which log
                             needs to be published.
                           type: string
                         cloudwatchLogGroupArnRef:
@@ -3030,7 +3030,7 @@ spec:
                   id:
                     type: string
                   kibanaEndpoint:
-                    description: Domain-specific endpoint for kibana without https
+                    description: Domain-specific endpoint for kibana without HTTPS
                       scheme.
                     type: string
                   logPublishingOptions:
@@ -3041,7 +3041,7 @@ spec:
                     items:
                       properties:
                         cloudwatchLogGroupArn:
-                          description: ARN of the Cloudwatch log group to which log
+                          description: ARN of the CloudWatch log group to which log
                             needs to be published.
                           type: string
                         enabled:

@@ -1327,7 +1327,7 @@ spec:
                     type: boolean
                   availabilityZoneMapping:
                     description: Required when creating a transit gateway-attached
-                      firewall. Set of configuration blocks describing the avaiability
+                      firewall. Set of configuration blocks describing the availability
                       availability where you want to create firewall endpoints for
                       a transit gateway-attached firewall.
                     items:
@@ -1754,7 +1754,7 @@ spec:
                     type: boolean
                   availabilityZoneMapping:
                     description: Required when creating a transit gateway-attached
-                      firewall. Set of configuration blocks describing the avaiability
+                      firewall. Set of configuration blocks describing the availability
                       availability where you want to create firewall endpoints for
                       a transit gateway-attached firewall.
                     items:
@@ -2260,7 +2260,7 @@ spec:
                     type: boolean
                   availabilityZoneMapping:
                     description: Required when creating a transit gateway-attached
-                      firewall. Set of configuration blocks describing the avaiability
+                      firewall. Set of configuration blocks describing the availability
                       availability where you want to create firewall endpoints for
                       a transit gateway-attached firewall.
                     items:

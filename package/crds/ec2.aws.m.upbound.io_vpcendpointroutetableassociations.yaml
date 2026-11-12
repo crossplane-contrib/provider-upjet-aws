@@ -483,7 +483,7 @@ spec:
               atProvider:
                 properties:
                   id:
-                    description: A hash of the EC2 Route Table and VPC Endpoint identifiers.
+                    description: Hash of the EC2 Route Table and VPC Endpoint identifiers.
                     type: string
                   region:
                     description: |-

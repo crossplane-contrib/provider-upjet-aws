@@ -1,0 +1,86 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
+apiVersion: s3tables.aws.m.upbound.io/v1beta1
+kind: TablePolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s3tables/v1beta1/tablepolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    nameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+    namespaceSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+    region: us-west-1
+    resourcePolicy: ${data.aws_iam_policy_document.example.json}
+    tableBucketArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+
+---
+
+apiVersion: s3tables.aws.m.upbound.io/v1beta1
+kind: S3TablesNamespace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s3tables/v1beta1/tablepolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    namespace:
+    - example-namespace
+    region: us-west-1
+    tableBucketArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: s3tables.aws.m.upbound.io/v1beta1
+kind: Table
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s3tables/v1beta1/tablepolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    format: ICEBERG
+    name: example_table
+    namespaceSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    region: us-west-1
+    tableBucketArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: s3tables.aws.m.upbound.io/v1beta1
+kind: TableBucket
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s3tables/v1beta1/tablepolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    name: example-bucket
+    region: us-west-1

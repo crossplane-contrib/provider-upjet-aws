@@ -15,7 +15,7 @@ import (
 
 type WorkerConfigurationInitParameters_2 struct {
 
-	// A summary description of the worker configuration.
+	// Summary description of the worker configuration.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Contents of connect-distributed.properties file. The value can be either base64 encoded or in raw format.
@@ -31,7 +31,7 @@ type WorkerConfigurationObservation_2 struct {
 	// the ARN of the worker configuration.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// A summary description of the worker configuration.
+	// Summary description of the worker configuration.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -39,7 +39,7 @@ type WorkerConfigurationObservation_2 struct {
 	// an ID of the latest successfully created revision of the worker configuration.
 	LatestRevision *float64 `json:"latestRevision,omitempty" tf:"latest_revision,omitempty"`
 
-	// The name of the worker configuration.
+	// Name of the worker configuration.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Contents of connect-distributed.properties file. The value can be either base64 encoded or in raw format.
@@ -53,18 +53,18 @@ type WorkerConfigurationObservation_2 struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type WorkerConfigurationParameters_2 struct {
 
-	// A summary description of the worker configuration.
+	// Summary description of the worker configuration.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The name of the worker configuration.
+	// Name of the worker configuration.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 

@@ -15,7 +15,7 @@ import (
 
 type KeyspaceInitParameters struct {
 
-	// The replication specification of the keyspace.
+	// Replication specification of the keyspace. See below.
 	ReplicationSpecification *ReplicationSpecificationInitParameters `json:"replicationSpecification,omitempty" tf:"replication_specification,omitempty"`
 
 	// Key-value map of resource tags.
@@ -25,24 +25,24 @@ type KeyspaceInitParameters struct {
 
 type KeyspaceObservation struct {
 
-	// The ARN of the keyspace.
+	// ARN of the keyspace.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The name of the keyspace.
+	// Name of the keyspace.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The replication specification of the keyspace.
+	// Replication specification of the keyspace. See below.
 	ReplicationSpecification *ReplicationSpecificationObservation `json:"replicationSpecification,omitempty" tf:"replication_specification,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
@@ -54,7 +54,7 @@ type KeyspaceParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// The replication specification of the keyspace.
+	// Replication specification of the keyspace. See below.
 	// +kubebuilder:validation:Optional
 	ReplicationSpecification *ReplicationSpecificationParameters `json:"replicationSpecification,omitempty" tf:"replication_specification,omitempty"`
 

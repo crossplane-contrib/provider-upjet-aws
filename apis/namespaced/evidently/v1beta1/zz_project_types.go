@@ -103,7 +103,7 @@ type ProjectObservation struct {
 	// The number of features currently in the project.
 	FeatureCount *float64 `json:"featureCount,omitempty" tf:"feature_count,omitempty"`
 
-	// The ID has the same value as the arn of the project.
+	// The ID has the same value as the ARN of the project.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The date and time that the project was most recently updated.

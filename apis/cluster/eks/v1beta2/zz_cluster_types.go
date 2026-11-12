@@ -649,7 +649,7 @@ type KubernetesNetworkConfigObservation struct {
 	// The CIDR block to assign Kubernetes pod and service IP addresses from. If you don't specify a block, Kubernetes assigns addresses from either the 10.100.0.0/16 or 172.20.0.0/16 CIDR blocks. We recommend that you specify a block that does not overlap with resources in other networks that are peered or connected to your VPC. You can only specify a custom CIDR block when you create a cluster, changing this value will force a new cluster to be created. The block must meet the following requirements:
 	ServiceIPv4Cidr *string `json:"serviceIpv4Cidr,omitempty" tf:"service_ipv4_cidr,omitempty"`
 
-	// (Computed) The CIDR block that Kubernetes pod and service IP addresses are assigned from if you specify ipv6 for ip_family when you create the cluster. Kubernetes assigns service addresses from the unique local address range (fc00::/7) because you can't specify a custom IPv6 CIDR block when you create the cluster.
+	// (Read-Only) The CIDR block that Kubernetes pod and service IP addresses are assigned from if you specify ipv6 for ip_family when you create the cluster. Kubernetes assigns service addresses from the unique local address range (fc00::/7) because you can't specify a custom IPv6 CIDR block when you create the cluster.
 	ServiceIPv6Cidr *string `json:"serviceIpv6Cidr,omitempty" tf:"service_ipv6_cidr,omitempty"`
 }
 
@@ -1051,7 +1051,7 @@ type VPCConfigInitParameters struct {
 
 type VPCConfigObservation struct {
 
-	// (Computed) Cluster security group that is created by Amazon EKS for the cluster. Managed node groups use this security group for control-plane-to-data-plane communication.
+	// (Read-Only) Cluster security group that is created by Amazon EKS for the cluster. Managed node groups use this security group for control-plane-to-data-plane communication.
 	ClusterSecurityGroupID *string `json:"clusterSecurityGroupId,omitempty" tf:"cluster_security_group_id,omitempty"`
 
 	// Egress mode for the EKS control plane. Valid values are AWS_MANAGED and CUSTOMER_ROUTED. Defaults to AWS_MANAGED. Changing from CUSTOMER_ROUTED back to AWS_MANAGED forces a new resource.
@@ -1075,7 +1075,7 @@ type VPCConfigObservation struct {
 	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
-	// (Computed) ID of the VPC associated with your cluster.
+	// (Read-Only) ID of the VPC associated with your cluster.
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 }
 

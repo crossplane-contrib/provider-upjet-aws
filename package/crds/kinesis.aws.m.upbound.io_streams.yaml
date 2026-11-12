@@ -60,20 +60,20 @@ spec:
               forProvider:
                 properties:
                   encryptionType:
-                    description: The encryption type to use. The only acceptable values
+                    description: Encryption type to use. The only acceptable values
                       are NONE or KMS. The default value is NONE.
                     type: string
                   enforceConsumerDeletion:
-                    description: A boolean that indicates all registered consumers
-                      should be deregistered from the stream so that the stream can
-                      be destroyed without error. The default value is false.
+                    description: Whether to deregister all registered consumers from
+                      the stream so that the stream can be destroyed without error.
+                      The default value is false.
                     type: boolean
                   kmsKeyId:
-                    description: The identifier for the customer-managed KMS key to
-                      use for encryption. This can be a Key ID (UUID), a Key ARN,
-                      an Alias Name (prefixed with alias/), or an Alias ARN. You can
-                      also use a master key owned by Kinesis Data Streams by specifying
-                      the alias aws/kinesis.
+                    description: Identifier for the customer-managed KMS key to use
+                      for encryption. This can be a Key ID (UUID), a Key ARN, an Alias
+                      Name (prefixed with alias/), or an Alias ARN. You can also use
+                      a master key owned by Kinesis Data Streams by specifying the
+                      alias aws/kinesis.
                     type: string
                   kmsKeyIdRef:
                     description: Reference to a Key in kms to populate kmsKeyId.
@@ -156,8 +156,8 @@ spec:
                         type: object
                     type: object
                   maxRecordSizeInKib:
-                    description: The maximum size for a single data record in KiB.
-                      The minimum value is 1024. The maximum value is 10240.
+                    description: Maximum size for a single data record in KiB. The
+                      minimum value is 1024. The maximum value is 10240.
                     type: number
                   region:
                     description: |-
@@ -171,14 +171,14 @@ spec:
                       is 24.
                     type: number
                   shardCount:
-                    description: The number of shards that the stream will use. If
-                      the stream_mode is PROVISIONED, this field is required. Amazon
-                      has guidelines for specifying the Stream size that should be
-                      referenced when creating a Kinesis stream. See Amazon Kinesis
-                      Streams for more.
+                    description: Number of shards that the stream will use. If the
+                      stream_mode is PROVISIONED, this field is required. Amazon has
+                      guidelines for specifying the Stream size that should be referenced
+                      when creating a Kinesis stream. See Amazon Kinesis Streams for
+                      more.
                     type: number
                   shardLevelMetrics:
-                    description: A list of shard-level CloudWatch metrics which can
+                    description: List of shard-level CloudWatch metrics which can
                       be enabled for the stream. See Monitoring with CloudWatch for
                       more. Note that the value ALL should not be used; instead you
                       should provide an explicit list of metrics you wish to enable.
@@ -187,12 +187,11 @@ spec:
                     type: array
                     x-kubernetes-list-type: set
                   streamModeDetails:
-                    description: Indicates the capacity mode of the data stream. Detailed
-                      below.
+                    description: Capacity mode of the data stream. Detailed below.
                     properties:
                       streamMode:
-                        description: Specifies the capacity mode of the stream. Must
-                          be either PROVISIONED or ON_DEMAND.
+                        description: Capacity mode of the stream. Must be either PROVISIONED
+                          or ON_DEMAND.
                         type: string
                     type: object
                   tags:
@@ -222,20 +221,20 @@ spec:
                   autoscaler.
                 properties:
                   encryptionType:
-                    description: The encryption type to use. The only acceptable values
+                    description: Encryption type to use. The only acceptable values
                       are NONE or KMS. The default value is NONE.
                     type: string
                   enforceConsumerDeletion:
-                    description: A boolean that indicates all registered consumers
-                      should be deregistered from the stream so that the stream can
-                      be destroyed without error. The default value is false.
+                    description: Whether to deregister all registered consumers from
+                      the stream so that the stream can be destroyed without error.
+                      The default value is false.
                     type: boolean
                   kmsKeyId:
-                    description: The identifier for the customer-managed KMS key to
-                      use for encryption. This can be a Key ID (UUID), a Key ARN,
-                      an Alias Name (prefixed with alias/), or an Alias ARN. You can
-                      also use a master key owned by Kinesis Data Streams by specifying
-                      the alias aws/kinesis.
+                    description: Identifier for the customer-managed KMS key to use
+                      for encryption. This can be a Key ID (UUID), a Key ARN, an Alias
+                      Name (prefixed with alias/), or an Alias ARN. You can also use
+                      a master key owned by Kinesis Data Streams by specifying the
+                      alias aws/kinesis.
                     type: string
                   kmsKeyIdRef:
                     description: Reference to a Key in kms to populate kmsKeyId.
@@ -318,8 +317,8 @@ spec:
                         type: object
                     type: object
                   maxRecordSizeInKib:
-                    description: The maximum size for a single data record in KiB.
-                      The minimum value is 1024. The maximum value is 10240.
+                    description: Maximum size for a single data record in KiB. The
+                      minimum value is 1024. The maximum value is 10240.
                     type: number
                   retentionPeriod:
                     description: Length of time data records are accessible after
@@ -328,14 +327,14 @@ spec:
                       is 24.
                     type: number
                   shardCount:
-                    description: The number of shards that the stream will use. If
-                      the stream_mode is PROVISIONED, this field is required. Amazon
-                      has guidelines for specifying the Stream size that should be
-                      referenced when creating a Kinesis stream. See Amazon Kinesis
-                      Streams for more.
+                    description: Number of shards that the stream will use. If the
+                      stream_mode is PROVISIONED, this field is required. Amazon has
+                      guidelines for specifying the Stream size that should be referenced
+                      when creating a Kinesis stream. See Amazon Kinesis Streams for
+                      more.
                     type: number
                   shardLevelMetrics:
-                    description: A list of shard-level CloudWatch metrics which can
+                    description: List of shard-level CloudWatch metrics which can
                       be enabled for the stream. See Monitoring with CloudWatch for
                       more. Note that the value ALL should not be used; instead you
                       should provide an explicit list of metrics you wish to enable.
@@ -344,12 +343,11 @@ spec:
                     type: array
                     x-kubernetes-list-type: set
                   streamModeDetails:
-                    description: Indicates the capacity mode of the data stream. Detailed
-                      below.
+                    description: Capacity mode of the data stream. Detailed below.
                     properties:
                       streamMode:
-                        description: Specifies the capacity mode of the stream. Must
-                          be either PROVISIONED or ON_DEMAND.
+                        description: Capacity mode of the stream. Must be either PROVISIONED
+                          or ON_DEMAND.
                         type: string
                     type: object
                   tags:
@@ -430,27 +428,27 @@ spec:
                     description: ARN specifying the stream (same as id).
                     type: string
                   encryptionType:
-                    description: The encryption type to use. The only acceptable values
+                    description: Encryption type to use. The only acceptable values
                       are NONE or KMS. The default value is NONE.
                     type: string
                   enforceConsumerDeletion:
-                    description: A boolean that indicates all registered consumers
-                      should be deregistered from the stream so that the stream can
-                      be destroyed without error. The default value is false.
+                    description: Whether to deregister all registered consumers from
+                      the stream so that the stream can be destroyed without error.
+                      The default value is false.
                     type: boolean
                   id:
-                    description: The unique stream ID.
+                    description: Unique stream ID.
                     type: string
                   kmsKeyId:
-                    description: The identifier for the customer-managed KMS key to
-                      use for encryption. This can be a Key ID (UUID), a Key ARN,
-                      an Alias Name (prefixed with alias/), or an Alias ARN. You can
-                      also use a master key owned by Kinesis Data Streams by specifying
-                      the alias aws/kinesis.
+                    description: Identifier for the customer-managed KMS key to use
+                      for encryption. This can be a Key ID (UUID), a Key ARN, an Alias
+                      Name (prefixed with alias/), or an Alias ARN. You can also use
+                      a master key owned by Kinesis Data Streams by specifying the
+                      alias aws/kinesis.
                     type: string
                   maxRecordSizeInKib:
-                    description: The maximum size for a single data record in KiB.
-                      The minimum value is 1024. The maximum value is 10240.
+                    description: Maximum size for a single data record in KiB. The
+                      minimum value is 1024. The maximum value is 10240.
                     type: number
                   region:
                     description: |-
@@ -464,14 +462,14 @@ spec:
                       is 24.
                     type: number
                   shardCount:
-                    description: The number of shards that the stream will use. If
-                      the stream_mode is PROVISIONED, this field is required. Amazon
-                      has guidelines for specifying the Stream size that should be
-                      referenced when creating a Kinesis stream. See Amazon Kinesis
-                      Streams for more.
+                    description: Number of shards that the stream will use. If the
+                      stream_mode is PROVISIONED, this field is required. Amazon has
+                      guidelines for specifying the Stream size that should be referenced
+                      when creating a Kinesis stream. See Amazon Kinesis Streams for
+                      more.
                     type: number
                   shardLevelMetrics:
-                    description: A list of shard-level CloudWatch metrics which can
+                    description: List of shard-level CloudWatch metrics which can
                       be enabled for the stream. See Monitoring with CloudWatch for
                       more. Note that the value ALL should not be used; instead you
                       should provide an explicit list of metrics you wish to enable.
@@ -480,12 +478,11 @@ spec:
                     type: array
                     x-kubernetes-list-type: set
                   streamModeDetails:
-                    description: Indicates the capacity mode of the data stream. Detailed
-                      below.
+                    description: Capacity mode of the data stream. Detailed below.
                     properties:
                       streamMode:
-                        description: Specifies the capacity mode of the stream. Must
-                          be either PROVISIONED or ON_DEMAND.
+                        description: Capacity mode of the stream. Must be either PROVISIONED
+                          or ON_DEMAND.
                         type: string
                     type: object
                   tags:
@@ -497,9 +494,8 @@ spec:
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                     x-kubernetes-map-type: granular
                   warmThroughputMibPs:

@@ -15,10 +15,10 @@ import (
 
 type GroupInitParameters struct {
 
-	// The filter expression defining criteria by which to group traces. more info can be found in official docs.
+	// Filter expression defining criteria by which to group traces. More info can be found in official docs.
 	FilterExpression *string `json:"filterExpression,omitempty" tf:"filter_expression,omitempty"`
 
-	// The name of the group.
+	// Name of the group.
 	GroupName *string `json:"groupName,omitempty" tf:"group_name,omitempty"`
 
 	// Configuration options for enabling insights.
@@ -31,16 +31,16 @@ type GroupInitParameters struct {
 
 type GroupObservation struct {
 
-	// The ARN of the Group.
+	// ARN of the Group.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The filter expression defining criteria by which to group traces. more info can be found in official docs.
+	// Filter expression defining criteria by which to group traces. More info can be found in official docs.
 	FilterExpression *string `json:"filterExpression,omitempty" tf:"filter_expression,omitempty"`
 
-	// The name of the group.
+	// Name of the group.
 	GroupName *string `json:"groupName,omitempty" tf:"group_name,omitempty"`
 
-	// The ARN of the Group.
+	// ARN of the Group.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Configuration options for enabling insights.
@@ -54,18 +54,18 @@ type GroupObservation struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type GroupParameters struct {
 
-	// The filter expression defining criteria by which to group traces. more info can be found in official docs.
+	// Filter expression defining criteria by which to group traces. More info can be found in official docs.
 	// +kubebuilder:validation:Optional
 	FilterExpression *string `json:"filterExpression,omitempty" tf:"filter_expression,omitempty"`
 
-	// The name of the group.
+	// Name of the group.
 	// +kubebuilder:validation:Optional
 	GroupName *string `json:"groupName,omitempty" tf:"group_name,omitempty"`
 
@@ -86,29 +86,29 @@ type GroupParameters struct {
 
 type InsightsConfigurationInitParameters struct {
 
-	// Specifies whether insights are enabled.
+	// Whether insights are enabled.
 	InsightsEnabled *bool `json:"insightsEnabled,omitempty" tf:"insights_enabled,omitempty"`
 
-	// Specifies whether insight notifications are enabled.
+	// Whether insight notifications are enabled.
 	NotificationsEnabled *bool `json:"notificationsEnabled,omitempty" tf:"notifications_enabled,omitempty"`
 }
 
 type InsightsConfigurationObservation struct {
 
-	// Specifies whether insights are enabled.
+	// Whether insights are enabled.
 	InsightsEnabled *bool `json:"insightsEnabled,omitempty" tf:"insights_enabled,omitempty"`
 
-	// Specifies whether insight notifications are enabled.
+	// Whether insight notifications are enabled.
 	NotificationsEnabled *bool `json:"notificationsEnabled,omitempty" tf:"notifications_enabled,omitempty"`
 }
 
 type InsightsConfigurationParameters struct {
 
-	// Specifies whether insights are enabled.
+	// Whether insights are enabled.
 	// +kubebuilder:validation:Optional
 	InsightsEnabled *bool `json:"insightsEnabled" tf:"insights_enabled,omitempty"`
 
-	// Specifies whether insight notifications are enabled.
+	// Whether insight notifications are enabled.
 	// +kubebuilder:validation:Optional
 	NotificationsEnabled *bool `json:"notificationsEnabled,omitempty" tf:"notifications_enabled,omitempty"`
 }

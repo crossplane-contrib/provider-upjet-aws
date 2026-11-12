@@ -96,7 +96,7 @@ type CanarySettingsParameters struct {
 
 type StageInitParameters struct {
 
-	// Enables access logs for the API stage. See Access Log Settings below.
+	// Enables access logs for the API stage. See access_log_settings Block below.
 	AccessLogSettings *AccessLogSettingsInitParameters `json:"accessLogSettings,omitempty" tf:"access_log_settings,omitempty"`
 
 	// Whether a cache cluster is enabled for the stage
@@ -105,7 +105,7 @@ type StageInitParameters struct {
 	// Size of the cache cluster for the stage, if enabled. Allowed values include 0.5, 1.6, 6.1, 13.5, 28.4, 58.2, 118 and 237.
 	CacheClusterSize *string `json:"cacheClusterSize,omitempty" tf:"cache_cluster_size,omitempty"`
 
-	// Configuration settings of a canary deployment. See Canary Settings below.
+	// Configuration settings of a canary deployment. See canary_settings Block below.
 	CanarySettings *CanarySettingsInitParameters `json:"canarySettings,omitempty" tf:"canary_settings,omitempty"`
 
 	// Identifier of a client certificate for the stage.
@@ -160,7 +160,7 @@ type StageInitParameters struct {
 
 type StageObservation struct {
 
-	// Enables access logs for the API stage. See Access Log Settings below.
+	// Enables access logs for the API stage. See access_log_settings Block below.
 	AccessLogSettings *AccessLogSettingsObservation `json:"accessLogSettings,omitempty" tf:"access_log_settings,omitempty"`
 
 	// ARN
@@ -172,7 +172,7 @@ type StageObservation struct {
 	// Size of the cache cluster for the stage, if enabled. Allowed values include 0.5, 1.6, 6.1, 13.5, 28.4, 58.2, 118 and 237.
 	CacheClusterSize *string `json:"cacheClusterSize,omitempty" tf:"cache_cluster_size,omitempty"`
 
-	// Configuration settings of a canary deployment. See Canary Settings below.
+	// Configuration settings of a canary deployment. See canary_settings Block below.
 	CanarySettings *CanarySettingsObservation `json:"canarySettings,omitempty" tf:"canary_settings,omitempty"`
 
 	// Identifier of a client certificate for the stage.
@@ -227,7 +227,7 @@ type StageObservation struct {
 
 type StageParameters struct {
 
-	// Enables access logs for the API stage. See Access Log Settings below.
+	// Enables access logs for the API stage. See access_log_settings Block below.
 	// +kubebuilder:validation:Optional
 	AccessLogSettings *AccessLogSettingsParameters `json:"accessLogSettings,omitempty" tf:"access_log_settings,omitempty"`
 
@@ -239,7 +239,7 @@ type StageParameters struct {
 	// +kubebuilder:validation:Optional
 	CacheClusterSize *string `json:"cacheClusterSize,omitempty" tf:"cache_cluster_size,omitempty"`
 
-	// Configuration settings of a canary deployment. See Canary Settings below.
+	// Configuration settings of a canary deployment. See canary_settings Block below.
 	// +kubebuilder:validation:Optional
 	CanarySettings *CanarySettingsParameters `json:"canarySettings,omitempty" tf:"canary_settings,omitempty"`
 

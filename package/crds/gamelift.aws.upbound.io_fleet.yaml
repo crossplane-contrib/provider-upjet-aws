@@ -1132,8 +1132,8 @@ spec:
                       for the fleet. See certificate_configuration.
                     properties:
                       certificateType:
-                        description: Indicates whether a TLS/SSL certificate is generated
-                          for a fleet. Valid values are DISABLED and GENERATED. Default
+                        description: Whether a TLS/SSL certificate is generated for
+                          a fleet. Valid values are DISABLED and GENERATED. Default
                           value is DISABLED.
                         type: string
                     type: object
@@ -1259,7 +1259,7 @@ spec:
                       type: string
                     type: array
                   name:
-                    description: The name of the fleet.
+                    description: Name of the fleet.
                     type: string
                   newGameSessionProtectionPolicy:
                     description: Game session protection policy to apply to all instances
@@ -1428,8 +1428,8 @@ spec:
                       for the fleet. See certificate_configuration.
                     properties:
                       certificateType:
-                        description: Indicates whether a TLS/SSL certificate is generated
-                          for a fleet. Valid values are DISABLED and GENERATED. Default
+                        description: Whether a TLS/SSL certificate is generated for
+                          a fleet. Valid values are DISABLED and GENERATED. Default
                           value is DISABLED.
                         type: string
                     type: object
@@ -1555,7 +1555,7 @@ spec:
                       type: string
                     type: array
                   name:
-                    description: The name of the fleet.
+                    description: Name of the fleet.
                     type: string
                   newGameSessionProtectionPolicy:
                     description: Game session protection policy to apply to all instances
@@ -1736,8 +1736,8 @@ spec:
                       for the fleet. See certificate_configuration.
                     properties:
                       certificateType:
-                        description: Indicates whether a TLS/SSL certificate is generated
-                          for a fleet. Valid values are DISABLED and GENERATED. Default
+                        description: Whether a TLS/SSL certificate is generated for
+                          a fleet. Valid values are DISABLED and GENERATED. Default
                           value is DISABLED.
                         type: string
                     type: object
@@ -1785,6 +1785,7 @@ spec:
                       assume.
                     type: string
                   logPaths:
+                    description: List of paths from which the fleet captures logs.
                     items:
                       type: string
                     type: array
@@ -1796,7 +1797,7 @@ spec:
                       type: string
                     type: array
                   name:
-                    description: The name of the fleet.
+                    description: Name of the fleet.
                     type: string
                   newGameSessionProtectionPolicy:
                     description: Game session protection policy to apply to all instances
@@ -1875,9 +1876,8 @@ spec:
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                     x-kubernetes-map-type: granular
                 type: object

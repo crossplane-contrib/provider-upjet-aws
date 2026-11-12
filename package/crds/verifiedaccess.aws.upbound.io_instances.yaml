@@ -73,13 +73,13 @@ spec:
               forProvider:
                 properties:
                   cidrEndpointsCustomSubdomain:
-                    description: The custom subdomain for the CIDR endpoints.
+                    description: Custom subdomain for the CIDR endpoints.
                     type: string
                   description:
-                    description: A description for the AWS Verified Access Instance.
+                    description: Description for the AWS Verified Access Instance.
                     type: string
                   fipsEnabled:
-                    description: Enable or disable support for Federal Information
+                    description: Whether to enable support for Federal Information
                       Processing Standards (FIPS) on the AWS Verified Access Instance.
                     type: boolean
                   region:
@@ -110,13 +110,13 @@ spec:
                   autoscaler.
                 properties:
                   cidrEndpointsCustomSubdomain:
-                    description: The custom subdomain for the CIDR endpoints.
+                    description: Custom subdomain for the CIDR endpoints.
                     type: string
                   description:
-                    description: A description for the AWS Verified Access Instance.
+                    description: Description for the AWS Verified Access Instance.
                     type: string
                   fipsEnabled:
-                    description: Enable or disable support for Federal Information
+                    description: Whether to enable support for Federal Information
                       Processing Standards (FIPS) on the AWS Verified Access Instance.
                     type: boolean
                   tags:
@@ -218,26 +218,27 @@ spec:
               atProvider:
                 properties:
                   cidrEndpointsCustomSubdomain:
-                    description: The custom subdomain for the CIDR endpoints.
+                    description: Custom subdomain for the CIDR endpoints.
                     type: string
                   creationTime:
-                    description: The time that the Verified Access Instance was created.
+                    description: Time that the Verified Access Instance was created.
                     type: string
                   description:
-                    description: A description for the AWS Verified Access Instance.
+                    description: Description for the AWS Verified Access Instance.
                     type: string
                   fipsEnabled:
-                    description: Enable or disable support for Federal Information
+                    description: Whether to enable support for Federal Information
                       Processing Standards (FIPS) on the AWS Verified Access Instance.
                     type: boolean
                   id:
-                    description: The ID of the AWS Verified Access Instance.
+                    description: ID of the AWS Verified Access Instance.
                     type: string
                   lastUpdatedTime:
-                    description: The time that the Verified Access Instance was last
-                      updated.
+                    description: Time that the Verified Access Instance was last updated.
                     type: string
                   nameServers:
+                    description: List of DNS names servers that clients can use to
+                      connect to the Verified Access Instance.
                     items:
                       type: string
                     type: array
@@ -259,25 +260,25 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   verifiedAccessTrustProviders:
-                    description: One or more blocks of providing information about
-                      the AWS Verified Access Trust Providers. See verified_access_trust_providers
-                      below for details.One or more blocks
+                    description: One or more blocks providing information about the
+                      AWS Verified Access Trust Providers. See verified_access_trust_providers
+                      below for details.
                     items:
                       properties:
                         description:
-                          description: The description of trust provider.
+                          description: Description of trust provider.
                           type: string
                         deviceTrustProviderType:
-                          description: The type of device-based trust provider.
+                          description: Type of device-based trust provider.
                           type: string
                         trustProviderType:
-                          description: The type of trust provider (user- or device-based).
+                          description: Type of trust provider (user- or device-based).
                           type: string
                         userTrustProviderType:
-                          description: The type of user-based trust provider.
+                          description: Type of user-based trust provider.
                           type: string
                         verifiedAccessTrustProviderId:
-                          description: The ID of the trust provider.
+                          description: ID of the trust provider.
                           type: string
                       type: object
                     type: array

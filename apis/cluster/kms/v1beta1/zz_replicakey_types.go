@@ -15,26 +15,22 @@ import (
 
 type ReplicaKeyInitParameters struct {
 
-	// A flag to indicate whether to bypass the key policy lockout safety check.
-	// Setting this value to true increases the risk that the KMS key becomes unmanageable. Do not set this value to true indiscriminately.
-	// For more information, refer to the scenario in the Default Key Policy section in the AWS KMS Developer Guide.
-	// The default value is false.
+	// Whether to bypass the key policy lockout safety check. Setting this value to true increases the risk that the KMS key becomes unmanageable. Do not set this value to true indiscriminately. For more information, refer to the scenario in the Default Key Policy section in the AWS KMS Developer Guide. The default value is false.
 	BypassPolicyLockoutSafetyCheck *bool `json:"bypassPolicyLockoutSafetyCheck,omitempty" tf:"bypass_policy_lockout_safety_check,omitempty"`
 
-	// The waiting period, specified in number of days. After the waiting period ends, AWS KMS deletes the KMS key.
-	// If you specify a value, it must be between 7 and 30, inclusive. If you do not specify a value, it defaults to 30.
+	// Waiting period, specified in number of days. After the waiting period ends, AWS KMS deletes the KMS key. If you specify a value, it must be between 7 and 30, inclusive. If you do not specify a value, it defaults to 30.
 	DeletionWindowInDays *float64 `json:"deletionWindowInDays,omitempty" tf:"deletion_window_in_days,omitempty"`
 
-	// A description of the KMS key.
+	// Description of the KMS key.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Specifies whether the replica key is enabled. Disabled KMS keys cannot be used in cryptographic operations. The default value is true.
+	// Whether the replica key is enabled. Disabled KMS keys cannot be used in cryptographic operations. The default value is true.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The key policy to attach to the KMS key. If you do not specify a key policy, AWS KMS attaches the default key policy to the KMS key.
+	// Key policy to attach to the KMS key. If you do not specify a key policy, AWS KMS attaches the default key policy to the KMS key.
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
-	// The ARN of the multi-Region primary key to replicate. The primary key must be in a different AWS Region of the same AWS Partition. You can create only one replica of a given primary key in each AWS Region.
+	// ARN of the multi-Region primary key to replicate. The primary key must be in a different AWS Region of the same AWS Partition. You can create only one replica of a given primary key in each AWS Region.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kms/v1beta1.Key
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	PrimaryKeyArn *string `json:"primaryKeyArn,omitempty" tf:"primary_key_arn,omitempty"`
@@ -57,40 +53,36 @@ type ReplicaKeyObservation struct {
 	// ARN of the replica key. The key ARNs of related multi-Region keys differ only in the Region value.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// A flag to indicate whether to bypass the key policy lockout safety check.
-	// Setting this value to true increases the risk that the KMS key becomes unmanageable. Do not set this value to true indiscriminately.
-	// For more information, refer to the scenario in the Default Key Policy section in the AWS KMS Developer Guide.
-	// The default value is false.
+	// Whether to bypass the key policy lockout safety check. Setting this value to true increases the risk that the KMS key becomes unmanageable. Do not set this value to true indiscriminately. For more information, refer to the scenario in the Default Key Policy section in the AWS KMS Developer Guide. The default value is false.
 	BypassPolicyLockoutSafetyCheck *bool `json:"bypassPolicyLockoutSafetyCheck,omitempty" tf:"bypass_policy_lockout_safety_check,omitempty"`
 
-	// The waiting period, specified in number of days. After the waiting period ends, AWS KMS deletes the KMS key.
-	// If you specify a value, it must be between 7 and 30, inclusive. If you do not specify a value, it defaults to 30.
+	// Waiting period, specified in number of days. After the waiting period ends, AWS KMS deletes the KMS key. If you specify a value, it must be between 7 and 30, inclusive. If you do not specify a value, it defaults to 30.
 	DeletionWindowInDays *float64 `json:"deletionWindowInDays,omitempty" tf:"deletion_window_in_days,omitempty"`
 
-	// A description of the KMS key.
+	// Description of the KMS key.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Specifies whether the replica key is enabled. Disabled KMS keys cannot be used in cryptographic operations. The default value is true.
+	// Whether the replica key is enabled. Disabled KMS keys cannot be used in cryptographic operations. The default value is true.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The key ID of the replica key. Related multi-Region keys have the same key ID.
+	// Key ID of the replica key. Related multi-Region keys have the same key ID.
 	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
 
-	// A Boolean value that specifies whether key rotation is enabled. This is a shared property of multi-Region keys.
+	// Boolean value that specifies whether key rotation is enabled. This is a shared property of multi-Region keys.
 	KeyRotationEnabled *bool `json:"keyRotationEnabled,omitempty" tf:"key_rotation_enabled,omitempty"`
 
-	// The type of key material in the KMS key. This is a shared property of multi-Region keys.
+	// Type of key material in the KMS key. This is a shared property of multi-Region keys.
 	KeySpec *string `json:"keySpec,omitempty" tf:"key_spec,omitempty"`
 
-	// The cryptographic operations for which you can use the KMS key. This is a shared property of multi-Region keys.
+	// Cryptographic operations for which you can use the KMS key. This is a shared property of multi-Region keys.
 	KeyUsage *string `json:"keyUsage,omitempty" tf:"key_usage,omitempty"`
 
-	// The key policy to attach to the KMS key. If you do not specify a key policy, AWS KMS attaches the default key policy to the KMS key.
+	// Key policy to attach to the KMS key. If you do not specify a key policy, AWS KMS attaches the default key policy to the KMS key.
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
-	// The ARN of the multi-Region primary key to replicate. The primary key must be in a different AWS Region of the same AWS Partition. You can create only one replica of a given primary key in each AWS Region.
+	// ARN of the multi-Region primary key to replicate. The primary key must be in a different AWS Region of the same AWS Partition. You can create only one replica of a given primary key in each AWS Region.
 	PrimaryKeyArn *string `json:"primaryKeyArn,omitempty" tf:"primary_key_arn,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -101,38 +93,34 @@ type ReplicaKeyObservation struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type ReplicaKeyParameters struct {
 
-	// A flag to indicate whether to bypass the key policy lockout safety check.
-	// Setting this value to true increases the risk that the KMS key becomes unmanageable. Do not set this value to true indiscriminately.
-	// For more information, refer to the scenario in the Default Key Policy section in the AWS KMS Developer Guide.
-	// The default value is false.
+	// Whether to bypass the key policy lockout safety check. Setting this value to true increases the risk that the KMS key becomes unmanageable. Do not set this value to true indiscriminately. For more information, refer to the scenario in the Default Key Policy section in the AWS KMS Developer Guide. The default value is false.
 	// +kubebuilder:validation:Optional
 	BypassPolicyLockoutSafetyCheck *bool `json:"bypassPolicyLockoutSafetyCheck,omitempty" tf:"bypass_policy_lockout_safety_check,omitempty"`
 
-	// The waiting period, specified in number of days. After the waiting period ends, AWS KMS deletes the KMS key.
-	// If you specify a value, it must be between 7 and 30, inclusive. If you do not specify a value, it defaults to 30.
+	// Waiting period, specified in number of days. After the waiting period ends, AWS KMS deletes the KMS key. If you specify a value, it must be between 7 and 30, inclusive. If you do not specify a value, it defaults to 30.
 	// +kubebuilder:validation:Optional
 	DeletionWindowInDays *float64 `json:"deletionWindowInDays,omitempty" tf:"deletion_window_in_days,omitempty"`
 
-	// A description of the KMS key.
+	// Description of the KMS key.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Specifies whether the replica key is enabled. Disabled KMS keys cannot be used in cryptographic operations. The default value is true.
+	// Whether the replica key is enabled. Disabled KMS keys cannot be used in cryptographic operations. The default value is true.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The key policy to attach to the KMS key. If you do not specify a key policy, AWS KMS attaches the default key policy to the KMS key.
+	// Key policy to attach to the KMS key. If you do not specify a key policy, AWS KMS attaches the default key policy to the KMS key.
 	// +kubebuilder:validation:Optional
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
-	// The ARN of the multi-Region primary key to replicate. The primary key must be in a different AWS Region of the same AWS Partition. You can create only one replica of a given primary key in each AWS Region.
+	// ARN of the multi-Region primary key to replicate. The primary key must be in a different AWS Region of the same AWS Partition. You can create only one replica of a given primary key in each AWS Region.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kms/v1beta1.Key
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional

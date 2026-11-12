@@ -62,8 +62,7 @@ spec:
                     description: Description of the verified access group.
                     type: string
                   policyDocument:
-                    description: The policy document that is associated with this
-                      resource.
+                    description: Policy document that is associated with this resource.
                     type: string
                   region:
                     description: |-
@@ -72,11 +71,10 @@ spec:
                     type: string
                   sseConfiguration:
                     description: Configuration block to use KMS keys for server-side
-                      encryption.
+                      encryption. See below.
                     properties:
                       customerManagedKeyEnabled:
-                        description: Boolean flag to indicate that the CMK should
-                          be used.
+                        description: Whether the CMK should be used.
                         type: boolean
                       kmsKeyArn:
                         description: ARN of the KMS key to use.
@@ -169,8 +167,8 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   verifiedaccessInstanceId:
-                    description: The id of the verified access instance this group
-                      is associated with.
+                    description: ID of the verified access instance this group is
+                      associated with.
                     type: string
                   verifiedaccessInstanceIdRef:
                     description: Reference to a Instance in verifiedaccess to populate
@@ -274,16 +272,14 @@ spec:
                     description: Description of the verified access group.
                     type: string
                   policyDocument:
-                    description: The policy document that is associated with this
-                      resource.
+                    description: Policy document that is associated with this resource.
                     type: string
                   sseConfiguration:
                     description: Configuration block to use KMS keys for server-side
-                      encryption.
+                      encryption. See below.
                     properties:
                       customerManagedKeyEnabled:
-                        description: Boolean flag to indicate that the CMK should
-                          be used.
+                        description: Whether the CMK should be used.
                         type: boolean
                       kmsKeyArn:
                         description: ARN of the KMS key to use.
@@ -376,8 +372,8 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   verifiedaccessInstanceId:
-                    description: The id of the verified access instance this group
-                      is associated with.
+                    description: ID of the verified access instance this group is
+                      associated with.
                     type: string
                   verifiedaccessInstanceIdRef:
                     description: Reference to a Instance in verifiedaccess to populate
@@ -543,8 +539,7 @@ spec:
                     description: AWS account number owning this resource.
                     type: string
                   policyDocument:
-                    description: The policy document that is associated with this
-                      resource.
+                    description: Policy document that is associated with this resource.
                     type: string
                   region:
                     description: |-
@@ -553,11 +548,10 @@ spec:
                     type: string
                   sseConfiguration:
                     description: Configuration block to use KMS keys for server-side
-                      encryption.
+                      encryption. See below.
                     properties:
                       customerManagedKeyEnabled:
-                        description: Boolean flag to indicate that the CMK should
-                          be used.
+                        description: Whether the CMK should be used.
                         type: boolean
                       kmsKeyArn:
                         description: ARN of the KMS key to use.
@@ -575,14 +569,14 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   verifiedaccessGroupArn:
-                    description: ARN of this verified acess group.
+                    description: ARN of this verified access group.
                     type: string
                   verifiedaccessGroupId:
                     description: ID of this verified access group.
                     type: string
                   verifiedaccessInstanceId:
-                    description: The id of the verified access instance this group
-                      is associated with.
+                    description: ID of the verified access instance this group is
+                      associated with.
                     type: string
                 type: object
               conditions:

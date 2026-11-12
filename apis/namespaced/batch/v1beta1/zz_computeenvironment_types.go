@@ -34,17 +34,17 @@ type ComputeEnvironmentInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ServiceRoleSelector *v2.NamespacedSelector `json:"serviceRoleSelector,omitempty" tf:"-"`
 
-	// The state of the compute environment. If the state is ENABLED, then the compute environment accepts jobs from a queue and can scale out automatically based on queues. Valid items are ENABLED or DISABLED. Defaults to ENABLED.
+	// State of the compute environment. If the state is ENABLED, then the compute environment accepts jobs from a queue and can scale out automatically based on queues. Valid items are ENABLED or DISABLED. Defaults to ENABLED.
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The type of the compute environment. Valid items are MANAGED or UNMANAGED.
+	// Type of the compute environment. Valid items are MANAGED or UNMANAGED.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
-	// Specifies the infrastructure update policy for the compute environment. See details below.
+	// Infrastructure update policy for the compute environment. See details below.
 	UpdatePolicy *UpdatePolicyInitParameters `json:"updatePolicy,omitempty" tf:"update_policy,omitempty"`
 }
 
@@ -71,27 +71,27 @@ type ComputeEnvironmentObservation struct {
 	// Full ARN of the IAM role that allows AWS Batch to make calls to other AWS services on your behalf.
 	ServiceRole *string `json:"serviceRole,omitempty" tf:"service_role,omitempty"`
 
-	// The state of the compute environment. If the state is ENABLED, then the compute environment accepts jobs from a queue and can scale out automatically based on queues. Valid items are ENABLED or DISABLED. Defaults to ENABLED.
+	// State of the compute environment. If the state is ENABLED, then the compute environment accepts jobs from a queue and can scale out automatically based on queues. Valid items are ENABLED or DISABLED. Defaults to ENABLED.
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 
-	// The current status of the compute environment (for example, CREATING or VALID).
+	// Current status of the compute environment (for example, CREATING or VALID).
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
-	// A short, human-readable string to provide additional details about the current status of the compute environment.
+	// Short, human-readable string to provide additional details about the current status of the compute environment.
 	StatusReason *string `json:"statusReason,omitempty" tf:"status_reason,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// The type of the compute environment. Valid items are MANAGED or UNMANAGED.
+	// Type of the compute environment. Valid items are MANAGED or UNMANAGED.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
-	// Specifies the infrastructure update policy for the compute environment. See details below.
+	// Infrastructure update policy for the compute environment. See details below.
 	UpdatePolicy *UpdatePolicyObservation `json:"updatePolicy,omitempty" tf:"update_policy,omitempty"`
 }
 
@@ -124,7 +124,7 @@ type ComputeEnvironmentParameters struct {
 	// +kubebuilder:validation:Optional
 	ServiceRoleSelector *v2.NamespacedSelector `json:"serviceRoleSelector,omitempty" tf:"-"`
 
-	// The state of the compute environment. If the state is ENABLED, then the compute environment accepts jobs from a queue and can scale out automatically based on queues. Valid items are ENABLED or DISABLED. Defaults to ENABLED.
+	// State of the compute environment. If the state is ENABLED, then the compute environment accepts jobs from a queue and can scale out automatically based on queues. Valid items are ENABLED or DISABLED. Defaults to ENABLED.
 	// +kubebuilder:validation:Optional
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 
@@ -133,36 +133,36 @@ type ComputeEnvironmentParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The type of the compute environment. Valid items are MANAGED or UNMANAGED.
+	// Type of the compute environment. Valid items are MANAGED or UNMANAGED.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
-	// Specifies the infrastructure update policy for the compute environment. See details below.
+	// Infrastructure update policy for the compute environment. See details below.
 	// +kubebuilder:validation:Optional
 	UpdatePolicy *UpdatePolicyParameters `json:"updatePolicy,omitempty" tf:"update_policy,omitempty"`
 }
 
 type ComputeResourcesInitParameters struct {
 
-	// The allocation strategy to use for the compute resource in case not enough instances of the best fitting instance type can be allocated. For valid values, refer to the AWS documentation. Defaults to BEST_FIT. This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified.
+	// Allocation strategy to use for the compute resource in case not enough instances of the best fitting instance type can be allocated. For valid values, refer to the AWS documentation. Defaults to BEST_FIT. This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified.
 	AllocationStrategy *string `json:"allocationStrategy,omitempty" tf:"allocation_strategy,omitempty"`
 
 	// Integer of maximum percentage that a Spot Instance price can be when compared with the On-Demand price for that instance type before instances are launched. For example, if your bid percentage is 20% (20), then the Spot price must be below 20% of the current On-Demand price for that EC2 instance. If you leave this field empty, the default value is 100% of the On-Demand price. This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified.
 	BidPercentage *float64 `json:"bidPercentage,omitempty" tf:"bid_percentage,omitempty"`
 
-	// The desired number of EC2 vCPUS in the compute environment. This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified.
+	// Desired number of EC2 vCPUS in the compute environment. This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified.
 	DesiredVcpus *float64 `json:"desiredVcpus,omitempty" tf:"desired_vcpus,omitempty"`
 
 	// Provides information used to select AMIs for EC2 instances in the compute environment. If Ec2Configuration isn't specified, the default is ECS_AL2. This parameter isn't applicable to jobs that are running on Fargate resources, and shouldn't be specified.
 	EC2Configuration []EC2ConfigurationInitParameters `json:"ec2Configuration,omitempty" tf:"ec2_configuration,omitempty"`
 
-	// The EC2 key pair that is used for instances launched in the compute environment. This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified.
+	// EC2 key pair that is used for instances launched in the compute environment. This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified.
 	EC2KeyPair *string `json:"ec2KeyPair,omitempty" tf:"ec2_key_pair,omitempty"`
 
 	// AMI ID used for instances launched in the compute environment. This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified. (Deprecated, use ec2_configuration image_id_override instead)
 	ImageID *string `json:"imageId,omitempty" tf:"image_id,omitempty"`
 
-	// The Amazon ECS instance role applied to Amazon EC2 instances in a compute environment. This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified.
+	// Amazon ECS instance role applied to Amazon EC2 instances in a compute environment. This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.InstanceProfile
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	InstanceRole *string `json:"instanceRole,omitempty" tf:"instance_role,omitempty"`
@@ -175,20 +175,20 @@ type ComputeResourcesInitParameters struct {
 	// +kubebuilder:validation:Optional
 	InstanceRoleSelector *v2.NamespacedSelector `json:"instanceRoleSelector,omitempty" tf:"-"`
 
-	// A list of instance types that may be launched. This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified.
+	// List of instance types that may be launched. This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified.
 	// +listType=set
 	InstanceType []*string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
-	// The launch template to use for your compute resources. See details below. This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified.
+	// Launch template to use for your compute resources. See details below. This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified.
 	LaunchTemplate *LaunchTemplateInitParameters `json:"launchTemplate,omitempty" tf:"launch_template,omitempty"`
 
-	// The maximum number of EC2 vCPUs that an environment can reach.
+	// Maximum number of EC2 vCPUs that an environment can reach.
 	MaxVcpus *float64 `json:"maxVcpus,omitempty" tf:"max_vcpus,omitempty"`
 
-	// The minimum number of EC2 vCPUs that an environment should maintain. For EC2 or SPOT compute environments, if the parameter is not explicitly defined, a 0 default value will be set. This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified.
+	// Minimum number of EC2 vCPUs that an environment should maintain. For EC2 or SPOT compute environments, if the parameter is not explicitly defined, a 0 default value will be set. This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified.
 	MinVcpus *float64 `json:"minVcpus,omitempty" tf:"min_vcpus,omitempty"`
 
-	// The Amazon EC2 placement group to associate with your compute resources.
+	// Amazon EC2 placement group to associate with your compute resources.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.PlacementGroup
 	PlacementGroup *string `json:"placementGroup,omitempty" tf:"placement_group,omitempty"`
 
@@ -200,7 +200,7 @@ type ComputeResourcesInitParameters struct {
 	// +kubebuilder:validation:Optional
 	PlacementGroupSelector *v2.NamespacedSelector `json:"placementGroupSelector,omitempty" tf:"-"`
 
-	// A list of EC2 security group that are associated with instances launched in the compute environment. This parameter is required for Fargate compute environments.
+	// List of EC2 security group that are associated with instances launched in the compute environment. This parameter is required for Fargate compute environments.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
 	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
@@ -216,7 +216,7 @@ type ComputeResourcesInitParameters struct {
 	// ARN of the Amazon EC2 Spot Fleet IAM role applied to a SPOT compute environment. This parameter is required for SPOT compute environments. This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified.
 	SpotIAMFleetRole *string `json:"spotIamFleetRole,omitempty" tf:"spot_iam_fleet_role,omitempty"`
 
-	// A list of VPC subnets into which the compute resources are launched.
+	// List of VPC subnets into which the compute resources are launched.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Subnet
 	// +listType=set
 	Subnets []*string `json:"subnets,omitempty" tf:"subnets,omitempty"`
@@ -233,57 +233,57 @@ type ComputeResourcesInitParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The type of compute environment. Valid items are EC2, SPOT, FARGATE or FARGATE_SPOT.
+	// Type of compute environment. Valid items are EC2, SPOT, FARGATE or FARGATE_SPOT.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type ComputeResourcesObservation struct {
 
-	// The allocation strategy to use for the compute resource in case not enough instances of the best fitting instance type can be allocated. For valid values, refer to the AWS documentation. Defaults to BEST_FIT. This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified.
+	// Allocation strategy to use for the compute resource in case not enough instances of the best fitting instance type can be allocated. For valid values, refer to the AWS documentation. Defaults to BEST_FIT. This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified.
 	AllocationStrategy *string `json:"allocationStrategy,omitempty" tf:"allocation_strategy,omitempty"`
 
 	// Integer of maximum percentage that a Spot Instance price can be when compared with the On-Demand price for that instance type before instances are launched. For example, if your bid percentage is 20% (20), then the Spot price must be below 20% of the current On-Demand price for that EC2 instance. If you leave this field empty, the default value is 100% of the On-Demand price. This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified.
 	BidPercentage *float64 `json:"bidPercentage,omitempty" tf:"bid_percentage,omitempty"`
 
-	// The desired number of EC2 vCPUS in the compute environment. This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified.
+	// Desired number of EC2 vCPUS in the compute environment. This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified.
 	DesiredVcpus *float64 `json:"desiredVcpus,omitempty" tf:"desired_vcpus,omitempty"`
 
 	// Provides information used to select AMIs for EC2 instances in the compute environment. If Ec2Configuration isn't specified, the default is ECS_AL2. This parameter isn't applicable to jobs that are running on Fargate resources, and shouldn't be specified.
 	EC2Configuration []EC2ConfigurationObservation `json:"ec2Configuration,omitempty" tf:"ec2_configuration,omitempty"`
 
-	// The EC2 key pair that is used for instances launched in the compute environment. This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified.
+	// EC2 key pair that is used for instances launched in the compute environment. This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified.
 	EC2KeyPair *string `json:"ec2KeyPair,omitempty" tf:"ec2_key_pair,omitempty"`
 
 	// AMI ID used for instances launched in the compute environment. This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified. (Deprecated, use ec2_configuration image_id_override instead)
 	ImageID *string `json:"imageId,omitempty" tf:"image_id,omitempty"`
 
-	// The Amazon ECS instance role applied to Amazon EC2 instances in a compute environment. This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified.
+	// Amazon ECS instance role applied to Amazon EC2 instances in a compute environment. This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified.
 	InstanceRole *string `json:"instanceRole,omitempty" tf:"instance_role,omitempty"`
 
-	// A list of instance types that may be launched. This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified.
+	// List of instance types that may be launched. This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified.
 	// +listType=set
 	InstanceType []*string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
-	// The launch template to use for your compute resources. See details below. This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified.
+	// Launch template to use for your compute resources. See details below. This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified.
 	LaunchTemplate *LaunchTemplateObservation `json:"launchTemplate,omitempty" tf:"launch_template,omitempty"`
 
-	// The maximum number of EC2 vCPUs that an environment can reach.
+	// Maximum number of EC2 vCPUs that an environment can reach.
 	MaxVcpus *float64 `json:"maxVcpus,omitempty" tf:"max_vcpus,omitempty"`
 
-	// The minimum number of EC2 vCPUs that an environment should maintain. For EC2 or SPOT compute environments, if the parameter is not explicitly defined, a 0 default value will be set. This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified.
+	// Minimum number of EC2 vCPUs that an environment should maintain. For EC2 or SPOT compute environments, if the parameter is not explicitly defined, a 0 default value will be set. This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified.
 	MinVcpus *float64 `json:"minVcpus,omitempty" tf:"min_vcpus,omitempty"`
 
-	// The Amazon EC2 placement group to associate with your compute resources.
+	// Amazon EC2 placement group to associate with your compute resources.
 	PlacementGroup *string `json:"placementGroup,omitempty" tf:"placement_group,omitempty"`
 
-	// A list of EC2 security group that are associated with instances launched in the compute environment. This parameter is required for Fargate compute environments.
+	// List of EC2 security group that are associated with instances launched in the compute environment. This parameter is required for Fargate compute environments.
 	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// ARN of the Amazon EC2 Spot Fleet IAM role applied to a SPOT compute environment. This parameter is required for SPOT compute environments. This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified.
 	SpotIAMFleetRole *string `json:"spotIamFleetRole,omitempty" tf:"spot_iam_fleet_role,omitempty"`
 
-	// A list of VPC subnets into which the compute resources are launched.
+	// List of VPC subnets into which the compute resources are launched.
 	// +listType=set
 	Subnets []*string `json:"subnets,omitempty" tf:"subnets,omitempty"`
 
@@ -291,13 +291,13 @@ type ComputeResourcesObservation struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The type of compute environment. Valid items are EC2, SPOT, FARGATE or FARGATE_SPOT.
+	// Type of compute environment. Valid items are EC2, SPOT, FARGATE or FARGATE_SPOT.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type ComputeResourcesParameters struct {
 
-	// The allocation strategy to use for the compute resource in case not enough instances of the best fitting instance type can be allocated. For valid values, refer to the AWS documentation. Defaults to BEST_FIT. This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified.
+	// Allocation strategy to use for the compute resource in case not enough instances of the best fitting instance type can be allocated. For valid values, refer to the AWS documentation. Defaults to BEST_FIT. This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified.
 	// +kubebuilder:validation:Optional
 	AllocationStrategy *string `json:"allocationStrategy,omitempty" tf:"allocation_strategy,omitempty"`
 
@@ -305,7 +305,7 @@ type ComputeResourcesParameters struct {
 	// +kubebuilder:validation:Optional
 	BidPercentage *float64 `json:"bidPercentage,omitempty" tf:"bid_percentage,omitempty"`
 
-	// The desired number of EC2 vCPUS in the compute environment. This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified.
+	// Desired number of EC2 vCPUS in the compute environment. This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified.
 	// +kubebuilder:validation:Optional
 	DesiredVcpus *float64 `json:"desiredVcpus,omitempty" tf:"desired_vcpus,omitempty"`
 
@@ -313,7 +313,7 @@ type ComputeResourcesParameters struct {
 	// +kubebuilder:validation:Optional
 	EC2Configuration []EC2ConfigurationParameters `json:"ec2Configuration,omitempty" tf:"ec2_configuration,omitempty"`
 
-	// The EC2 key pair that is used for instances launched in the compute environment. This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified.
+	// EC2 key pair that is used for instances launched in the compute environment. This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified.
 	// +kubebuilder:validation:Optional
 	EC2KeyPair *string `json:"ec2KeyPair,omitempty" tf:"ec2_key_pair,omitempty"`
 
@@ -321,7 +321,7 @@ type ComputeResourcesParameters struct {
 	// +kubebuilder:validation:Optional
 	ImageID *string `json:"imageId,omitempty" tf:"image_id,omitempty"`
 
-	// The Amazon ECS instance role applied to Amazon EC2 instances in a compute environment. This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified.
+	// Amazon ECS instance role applied to Amazon EC2 instances in a compute environment. This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.InstanceProfile
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -335,24 +335,24 @@ type ComputeResourcesParameters struct {
 	// +kubebuilder:validation:Optional
 	InstanceRoleSelector *v2.NamespacedSelector `json:"instanceRoleSelector,omitempty" tf:"-"`
 
-	// A list of instance types that may be launched. This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified.
+	// List of instance types that may be launched. This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	InstanceType []*string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
-	// The launch template to use for your compute resources. See details below. This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified.
+	// Launch template to use for your compute resources. See details below. This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified.
 	// +kubebuilder:validation:Optional
 	LaunchTemplate *LaunchTemplateParameters `json:"launchTemplate,omitempty" tf:"launch_template,omitempty"`
 
-	// The maximum number of EC2 vCPUs that an environment can reach.
+	// Maximum number of EC2 vCPUs that an environment can reach.
 	// +kubebuilder:validation:Optional
 	MaxVcpus *float64 `json:"maxVcpus" tf:"max_vcpus,omitempty"`
 
-	// The minimum number of EC2 vCPUs that an environment should maintain. For EC2 or SPOT compute environments, if the parameter is not explicitly defined, a 0 default value will be set. This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified.
+	// Minimum number of EC2 vCPUs that an environment should maintain. For EC2 or SPOT compute environments, if the parameter is not explicitly defined, a 0 default value will be set. This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified.
 	// +kubebuilder:validation:Optional
 	MinVcpus *float64 `json:"minVcpus,omitempty" tf:"min_vcpus,omitempty"`
 
-	// The Amazon EC2 placement group to associate with your compute resources.
+	// Amazon EC2 placement group to associate with your compute resources.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.PlacementGroup
 	// +kubebuilder:validation:Optional
 	PlacementGroup *string `json:"placementGroup,omitempty" tf:"placement_group,omitempty"`
@@ -365,7 +365,7 @@ type ComputeResourcesParameters struct {
 	// +kubebuilder:validation:Optional
 	PlacementGroupSelector *v2.NamespacedSelector `json:"placementGroupSelector,omitempty" tf:"-"`
 
-	// A list of EC2 security group that are associated with instances launched in the compute environment. This parameter is required for Fargate compute environments.
+	// List of EC2 security group that are associated with instances launched in the compute environment. This parameter is required for Fargate compute environments.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
 	// +kubebuilder:validation:Optional
 	// +listType=set
@@ -383,7 +383,7 @@ type ComputeResourcesParameters struct {
 	// +kubebuilder:validation:Optional
 	SpotIAMFleetRole *string `json:"spotIamFleetRole,omitempty" tf:"spot_iam_fleet_role,omitempty"`
 
-	// A list of VPC subnets into which the compute resources are launched.
+	// List of VPC subnets into which the compute resources are launched.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Subnet
 	// +kubebuilder:validation:Optional
 	// +listType=set
@@ -402,46 +402,46 @@ type ComputeResourcesParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The type of compute environment. Valid items are EC2, SPOT, FARGATE or FARGATE_SPOT.
+	// Type of compute environment. Valid items are EC2, SPOT, FARGATE or FARGATE_SPOT.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type EC2ConfigurationInitParameters struct {
 
-	// The AMI ID used for instances launched in the compute environment that match the image type. This setting overrides the image_id argument in the compute_resources block.
+	// AMI ID used for instances launched in the compute environment that match the image type. This setting overrides the image_id argument in the compute_resources block.
 	ImageIDOverride *string `json:"imageIdOverride,omitempty" tf:"image_id_override,omitempty"`
 
-	// The Kubernetes version for the compute environment. If you don't specify a value, the latest version that AWS Batch supports is used. See Supported Kubernetes versions for the list of Kubernetes versions supported by AWS Batch on Amazon EKS.
+	// Kubernetes version for the compute environment. If you don't specify a value, the latest version that AWS Batch supports is used. See Supported Kubernetes versions for the list of Kubernetes versions supported by AWS Batch on Amazon EKS.
 	ImageKubernetesVersion *string `json:"imageKubernetesVersion,omitempty" tf:"image_kubernetes_version,omitempty"`
 
-	// The image type to match with the instance type to select an AMI. If the image_id_override parameter isn't specified, then a recent Amazon ECS-optimized Amazon Linux 2 AMI (ECS_AL2) is used.
+	// Image type to match with the instance type to select an AMI. If the image_id_override parameter isn't specified, then a recent Amazon ECS-optimized Amazon Linux 2 AMI (ECS_AL2) is used.
 	ImageType *string `json:"imageType,omitempty" tf:"image_type,omitempty"`
 }
 
 type EC2ConfigurationObservation struct {
 
-	// The AMI ID used for instances launched in the compute environment that match the image type. This setting overrides the image_id argument in the compute_resources block.
+	// AMI ID used for instances launched in the compute environment that match the image type. This setting overrides the image_id argument in the compute_resources block.
 	ImageIDOverride *string `json:"imageIdOverride,omitempty" tf:"image_id_override,omitempty"`
 
-	// The Kubernetes version for the compute environment. If you don't specify a value, the latest version that AWS Batch supports is used. See Supported Kubernetes versions for the list of Kubernetes versions supported by AWS Batch on Amazon EKS.
+	// Kubernetes version for the compute environment. If you don't specify a value, the latest version that AWS Batch supports is used. See Supported Kubernetes versions for the list of Kubernetes versions supported by AWS Batch on Amazon EKS.
 	ImageKubernetesVersion *string `json:"imageKubernetesVersion,omitempty" tf:"image_kubernetes_version,omitempty"`
 
-	// The image type to match with the instance type to select an AMI. If the image_id_override parameter isn't specified, then a recent Amazon ECS-optimized Amazon Linux 2 AMI (ECS_AL2) is used.
+	// Image type to match with the instance type to select an AMI. If the image_id_override parameter isn't specified, then a recent Amazon ECS-optimized Amazon Linux 2 AMI (ECS_AL2) is used.
 	ImageType *string `json:"imageType,omitempty" tf:"image_type,omitempty"`
 }
 
 type EC2ConfigurationParameters struct {
 
-	// The AMI ID used for instances launched in the compute environment that match the image type. This setting overrides the image_id argument in the compute_resources block.
+	// AMI ID used for instances launched in the compute environment that match the image type. This setting overrides the image_id argument in the compute_resources block.
 	// +kubebuilder:validation:Optional
 	ImageIDOverride *string `json:"imageIdOverride,omitempty" tf:"image_id_override,omitempty"`
 
-	// The Kubernetes version for the compute environment. If you don't specify a value, the latest version that AWS Batch supports is used. See Supported Kubernetes versions for the list of Kubernetes versions supported by AWS Batch on Amazon EKS.
+	// Kubernetes version for the compute environment. If you don't specify a value, the latest version that AWS Batch supports is used. See Supported Kubernetes versions for the list of Kubernetes versions supported by AWS Batch on Amazon EKS.
 	// +kubebuilder:validation:Optional
 	ImageKubernetesVersion *string `json:"imageKubernetesVersion,omitempty" tf:"image_kubernetes_version,omitempty"`
 
-	// The image type to match with the instance type to select an AMI. If the image_id_override parameter isn't specified, then a recent Amazon ECS-optimized Amazon Linux 2 AMI (ECS_AL2) is used.
+	// Image type to match with the instance type to select an AMI. If the image_id_override parameter isn't specified, then a recent Amazon ECS-optimized Amazon Linux 2 AMI (ECS_AL2) is used.
 	// +kubebuilder:validation:Optional
 	ImageType *string `json:"imageType,omitempty" tf:"image_type,omitempty"`
 }
@@ -451,7 +451,7 @@ type EksConfigurationInitParameters struct {
 	// ARN of the Amazon EKS cluster.
 	EksClusterArn *string `json:"eksClusterArn,omitempty" tf:"eks_cluster_arn,omitempty"`
 
-	// The namespace of the Amazon EKS cluster. AWS Batch manages pods in this namespace.
+	// Namespace of the Amazon EKS cluster. AWS Batch manages pods in this namespace.
 	KubernetesNamespace *string `json:"kubernetesNamespace,omitempty" tf:"kubernetes_namespace,omitempty"`
 }
 
@@ -460,7 +460,7 @@ type EksConfigurationObservation struct {
 	// ARN of the Amazon EKS cluster.
 	EksClusterArn *string `json:"eksClusterArn,omitempty" tf:"eks_cluster_arn,omitempty"`
 
-	// The namespace of the Amazon EKS cluster. AWS Batch manages pods in this namespace.
+	// Namespace of the Amazon EKS cluster. AWS Batch manages pods in this namespace.
 	KubernetesNamespace *string `json:"kubernetesNamespace,omitempty" tf:"kubernetes_namespace,omitempty"`
 }
 
@@ -470,7 +470,7 @@ type EksConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	EksClusterArn *string `json:"eksClusterArn" tf:"eks_cluster_arn,omitempty"`
 
-	// The namespace of the Amazon EKS cluster. AWS Batch manages pods in this namespace.
+	// Namespace of the Amazon EKS cluster. AWS Batch manages pods in this namespace.
 	// +kubebuilder:validation:Optional
 	KubernetesNamespace *string `json:"kubernetesNamespace" tf:"kubernetes_namespace,omitempty"`
 }
@@ -483,7 +483,7 @@ type LaunchTemplateInitParameters struct {
 	// Name of the launch template.
 	LaunchTemplateName *string `json:"launchTemplateName,omitempty" tf:"launch_template_name,omitempty"`
 
-	// The version number of the launch template. Default: The default version of the launch template.
+	// Version number of the launch template. Default: The default version of the launch template.
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
 
@@ -495,7 +495,7 @@ type LaunchTemplateObservation struct {
 	// Name of the launch template.
 	LaunchTemplateName *string `json:"launchTemplateName,omitempty" tf:"launch_template_name,omitempty"`
 
-	// The version number of the launch template. Default: The default version of the launch template.
+	// Version number of the launch template. Default: The default version of the launch template.
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
 
@@ -509,36 +509,36 @@ type LaunchTemplateParameters struct {
 	// +kubebuilder:validation:Optional
 	LaunchTemplateName *string `json:"launchTemplateName,omitempty" tf:"launch_template_name,omitempty"`
 
-	// The version number of the launch template. Default: The default version of the launch template.
+	// Version number of the launch template. Default: The default version of the launch template.
 	// +kubebuilder:validation:Optional
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
 
 type UpdatePolicyInitParameters struct {
 
-	// Specifies the job timeout (in minutes) when the compute environment infrastructure is updated.
+	// Job timeout (in minutes) when the compute environment infrastructure is updated.
 	JobExecutionTimeoutMinutes *float64 `json:"jobExecutionTimeoutMinutes,omitempty" tf:"job_execution_timeout_minutes,omitempty"`
 
-	// Specifies whether jobs are automatically terminated when the compute environment infrastructure is updated.
+	// Whether jobs are automatically terminated when the compute environment infrastructure is updated.
 	TerminateJobsOnUpdate *bool `json:"terminateJobsOnUpdate,omitempty" tf:"terminate_jobs_on_update,omitempty"`
 }
 
 type UpdatePolicyObservation struct {
 
-	// Specifies the job timeout (in minutes) when the compute environment infrastructure is updated.
+	// Job timeout (in minutes) when the compute environment infrastructure is updated.
 	JobExecutionTimeoutMinutes *float64 `json:"jobExecutionTimeoutMinutes,omitempty" tf:"job_execution_timeout_minutes,omitempty"`
 
-	// Specifies whether jobs are automatically terminated when the compute environment infrastructure is updated.
+	// Whether jobs are automatically terminated when the compute environment infrastructure is updated.
 	TerminateJobsOnUpdate *bool `json:"terminateJobsOnUpdate,omitempty" tf:"terminate_jobs_on_update,omitempty"`
 }
 
 type UpdatePolicyParameters struct {
 
-	// Specifies the job timeout (in minutes) when the compute environment infrastructure is updated.
+	// Job timeout (in minutes) when the compute environment infrastructure is updated.
 	// +kubebuilder:validation:Optional
 	JobExecutionTimeoutMinutes *float64 `json:"jobExecutionTimeoutMinutes,omitempty" tf:"job_execution_timeout_minutes,omitempty"`
 
-	// Specifies whether jobs are automatically terminated when the compute environment infrastructure is updated.
+	// Whether jobs are automatically terminated when the compute environment infrastructure is updated.
 	// +kubebuilder:validation:Optional
 	TerminateJobsOnUpdate *bool `json:"terminateJobsOnUpdate,omitempty" tf:"terminate_jobs_on_update,omitempty"`
 }

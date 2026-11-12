@@ -74,30 +74,30 @@ spec:
               forProvider:
                 properties:
                   description:
-                    description: description for the multi-region cluster.
+                    description: Description for the multi-region cluster.
                     type: string
                   engine:
-                    description: The name of the engine to be used for the multi-region
+                    description: Name of the engine to be used for the multi-region
                       cluster. Valid values are redis and valkey.
                     type: string
                   engineVersion:
-                    description: The version of the engine to be used for the multi-region
+                    description: Version of the engine to be used for the multi-region
                       cluster. Downgrades are not supported.
                     type: string
                   multiRegionClusterNameSuffix:
-                    description: A suffix to be added to the multi-region cluster
-                      name. An AWS generated prefix is automatically applied to the
-                      multi-region cluster name when it is created.
+                    description: Suffix to be added to the multi-region cluster name.
+                      An AWS generated prefix is automatically applied to the multi-region
+                      cluster name when it is created.
                     type: string
                   multiRegionParameterGroupName:
-                    description: The name of the multi-region parameter group to be
-                      associated with the cluster.
+                    description: Name of the multi-region parameter group to be associated
+                      with the cluster.
                     type: string
                   nodeType:
-                    description: The node type to be used for the multi-region cluster.
+                    description: Node type to be used for the multi-region cluster.
                     type: string
                   numShards:
-                    description: The number of shards for the multi-region cluster.
+                    description: Number of shards for the multi-region cluster.
                     type: number
                   region:
                     description: |-
@@ -111,9 +111,11 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   tlsEnabled:
-                    description: A flag to enable in-transit encryption on the cluster.
+                    description: Whether to enable in-transit encryption on the cluster.
                     type: boolean
                   updateStrategy:
+                    description: Strategy to use for the multi-region cluster update.
+                      Valid values are coordinated and uncoordinated.
                     type: string
                 required:
                 - region
@@ -132,30 +134,30 @@ spec:
                   autoscaler.
                 properties:
                   description:
-                    description: description for the multi-region cluster.
+                    description: Description for the multi-region cluster.
                     type: string
                   engine:
-                    description: The name of the engine to be used for the multi-region
+                    description: Name of the engine to be used for the multi-region
                       cluster. Valid values are redis and valkey.
                     type: string
                   engineVersion:
-                    description: The version of the engine to be used for the multi-region
+                    description: Version of the engine to be used for the multi-region
                       cluster. Downgrades are not supported.
                     type: string
                   multiRegionClusterNameSuffix:
-                    description: A suffix to be added to the multi-region cluster
-                      name. An AWS generated prefix is automatically applied to the
-                      multi-region cluster name when it is created.
+                    description: Suffix to be added to the multi-region cluster name.
+                      An AWS generated prefix is automatically applied to the multi-region
+                      cluster name when it is created.
                     type: string
                   multiRegionParameterGroupName:
-                    description: The name of the multi-region parameter group to be
-                      associated with the cluster.
+                    description: Name of the multi-region parameter group to be associated
+                      with the cluster.
                     type: string
                   nodeType:
-                    description: The node type to be used for the multi-region cluster.
+                    description: Node type to be used for the multi-region cluster.
                     type: string
                   numShards:
-                    description: The number of shards for the multi-region cluster.
+                    description: Number of shards for the multi-region cluster.
                     type: number
                   tags:
                     additionalProperties:
@@ -164,9 +166,11 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   tlsEnabled:
-                    description: A flag to enable in-transit encryption on the cluster.
+                    description: Whether to enable in-transit encryption on the cluster.
                     type: boolean
                   updateStrategy:
+                    description: Strategy to use for the multi-region cluster update.
+                      Valid values are coordinated and uncoordinated.
                     type: string
                 type: object
               managementPolicies:
@@ -271,38 +275,38 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The ARN of the multi-region cluster.
+                    description: ARN of the multi-region cluster.
                     type: string
                   description:
-                    description: description for the multi-region cluster.
+                    description: Description for the multi-region cluster.
                     type: string
                   engine:
-                    description: The name of the engine to be used for the multi-region
+                    description: Name of the engine to be used for the multi-region
                       cluster. Valid values are redis and valkey.
                     type: string
                   engineVersion:
-                    description: The version of the engine to be used for the multi-region
+                    description: Version of the engine to be used for the multi-region
                       cluster. Downgrades are not supported.
                     type: string
                   id:
                     type: string
                   multiRegionClusterName:
-                    description: The name of the multi-region cluster.
+                    description: Name of the multi-region cluster.
                     type: string
                   multiRegionClusterNameSuffix:
-                    description: A suffix to be added to the multi-region cluster
-                      name. An AWS generated prefix is automatically applied to the
-                      multi-region cluster name when it is created.
+                    description: Suffix to be added to the multi-region cluster name.
+                      An AWS generated prefix is automatically applied to the multi-region
+                      cluster name when it is created.
                     type: string
                   multiRegionParameterGroupName:
-                    description: The name of the multi-region parameter group to be
-                      associated with the cluster.
+                    description: Name of the multi-region parameter group to be associated
+                      with the cluster.
                     type: string
                   nodeType:
-                    description: The node type to be used for the multi-region cluster.
+                    description: Node type to be used for the multi-region cluster.
                     type: string
                   numShards:
-                    description: The number of shards for the multi-region cluster.
+                    description: Number of shards for the multi-region cluster.
                     type: number
                   region:
                     description: |-
@@ -310,6 +314,7 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   status:
+                    description: Status of the multi-region cluster.
                     type: string
                   tags:
                     additionalProperties:
@@ -320,15 +325,16 @@ spec:
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                     x-kubernetes-map-type: granular
                   tlsEnabled:
-                    description: A flag to enable in-transit encryption on the cluster.
+                    description: Whether to enable in-transit encryption on the cluster.
                     type: boolean
                   updateStrategy:
+                    description: Strategy to use for the multi-region cluster update.
+                      Valid values are coordinated and uncoordinated.
                     type: string
                 type: object
               conditions:

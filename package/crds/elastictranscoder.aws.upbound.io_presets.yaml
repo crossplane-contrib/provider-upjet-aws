@@ -1379,7 +1379,7 @@ spec:
                           type: string
                         id:
                           description: A unique identifier for the settings for one
-                            watermark. The value of Id can be up to 40 characters
+                            watermark. The value of ID can be up to 40 characters
                             long. You can specify settings for up to four watermarks.
                           type: string
                         maxHeight:
@@ -1659,7 +1659,7 @@ spec:
                           type: string
                         id:
                           description: A unique identifier for the settings for one
-                            watermark. The value of Id can be up to 40 characters
+                            watermark. The value of ID can be up to 40 characters
                             long. You can specify settings for up to four watermarks.
                           type: string
                         maxHeight:
@@ -1865,7 +1865,7 @@ spec:
                     type: string
                   id:
                     description: A unique identifier for the settings for one watermark.
-                      The value of Id can be up to 40 characters long. You can specify
+                      The value of ID can be up to 40 characters long. You can specify
                       settings for up to four watermarks.
                     type: string
                   name:
@@ -2033,7 +2033,7 @@ spec:
                           type: string
                         id:
                           description: A unique identifier for the settings for one
-                            watermark. The value of Id can be up to 40 characters
+                            watermark. The value of ID can be up to 40 characters
                             long. You can specify settings for up to four watermarks.
                           type: string
                         maxHeight:

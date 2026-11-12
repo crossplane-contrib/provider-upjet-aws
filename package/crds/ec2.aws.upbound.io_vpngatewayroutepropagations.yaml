@@ -81,8 +81,7 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   routeTableId:
-                    description: The id of the aws_route_table to propagate routes
-                      into.
+                    description: ID of the aws_route_table to propagate routes into.
                     type: string
                   routeTableIdRef:
                     description: Reference to a RouteTable in ec2 to populate routeTableId.
@@ -159,8 +158,7 @@ spec:
                         type: object
                     type: object
                   vpnGatewayId:
-                    description: The id of the aws_vpn_gateway to propagate routes
-                      from.
+                    description: ID of the aws_vpn_gateway to propagate routes from.
                     type: string
                   vpnGatewayIdRef:
                     description: Reference to a VPNGateway in ec2 to populate vpnGatewayId.
@@ -253,8 +251,7 @@ spec:
                   autoscaler.
                 properties:
                   routeTableId:
-                    description: The id of the aws_route_table to propagate routes
-                      into.
+                    description: ID of the aws_route_table to propagate routes into.
                     type: string
                   routeTableIdRef:
                     description: Reference to a RouteTable in ec2 to populate routeTableId.
@@ -331,8 +328,7 @@ spec:
                         type: object
                     type: object
                   vpnGatewayId:
-                    description: The id of the aws_vpn_gateway to propagate routes
-                      from.
+                    description: ID of the aws_vpn_gateway to propagate routes from.
                     type: string
                   vpnGatewayIdRef:
                     description: Reference to a VPNGateway in ec2 to populate vpnGatewayId.
@@ -509,12 +505,10 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   routeTableId:
-                    description: The id of the aws_route_table to propagate routes
-                      into.
+                    description: ID of the aws_route_table to propagate routes into.
                     type: string
                   vpnGatewayId:
-                    description: The id of the aws_vpn_gateway to propagate routes
-                      from.
+                    description: ID of the aws_vpn_gateway to propagate routes from.
                     type: string
                 type: object
               conditions:

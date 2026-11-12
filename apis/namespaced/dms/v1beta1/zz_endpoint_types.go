@@ -159,7 +159,7 @@ type EndpointInitParameters struct {
 	// Host name of the server.
 	ServerName *string `json:"serverName,omitempty" tf:"server_name,omitempty"`
 
-	// ARN used by the service access IAM role for dynamodb endpoints.
+	// ARN used by the service access IAM role for DynamoDB endpoints.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	ServiceAccessRole *string `json:"serviceAccessRole,omitempty" tf:"service_access_role,omitempty"`
@@ -253,7 +253,7 @@ type EndpointObservation struct {
 	// Host name of the server.
 	ServerName *string `json:"serverName,omitempty" tf:"server_name,omitempty"`
 
-	// ARN used by the service access IAM role for dynamodb endpoints.
+	// ARN used by the service access IAM role for DynamoDB endpoints.
 	ServiceAccessRole *string `json:"serviceAccessRole,omitempty" tf:"service_access_role,omitempty"`
 
 	// Key-value map of resource tags.
@@ -382,7 +382,7 @@ type EndpointParameters struct {
 	// +kubebuilder:validation:Optional
 	ServerName *string `json:"serverName,omitempty" tf:"server_name,omitempty"`
 
-	// ARN used by the service access IAM role for dynamodb endpoints.
+	// ARN used by the service access IAM role for DynamoDB endpoints.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -1545,7 +1545,7 @@ type RedshiftSettingsInitParameters struct {
 	// The server-side encryption mode that you want to encrypt your intermediate .csv object files copied to S3. Defaults to SSE_S3. Valid values are SSE_S3 and SSE_KMS.
 	EncryptionMode *string `json:"encryptionMode,omitempty" tf:"encryption_mode,omitempty"`
 
-	// ARN or Id of KMS Key to use when encryption_mode is SSE_KMS.
+	// ARN or ID of KMS Key to use when encryption_mode is SSE_KMS.
 	ServerSideEncryptionKMSKeyID *string `json:"serverSideEncryptionKmsKeyId,omitempty" tf:"server_side_encryption_kms_key_id,omitempty"`
 
 	// ARN of the IAM Role with permissions to read from or write to the S3 Bucket for intermediate storage.
@@ -1563,7 +1563,7 @@ type RedshiftSettingsObservation struct {
 	// The server-side encryption mode that you want to encrypt your intermediate .csv object files copied to S3. Defaults to SSE_S3. Valid values are SSE_S3 and SSE_KMS.
 	EncryptionMode *string `json:"encryptionMode,omitempty" tf:"encryption_mode,omitempty"`
 
-	// ARN or Id of KMS Key to use when encryption_mode is SSE_KMS.
+	// ARN or ID of KMS Key to use when encryption_mode is SSE_KMS.
 	ServerSideEncryptionKMSKeyID *string `json:"serverSideEncryptionKmsKeyId,omitempty" tf:"server_side_encryption_kms_key_id,omitempty"`
 
 	// ARN of the IAM Role with permissions to read from or write to the S3 Bucket for intermediate storage.
@@ -1584,7 +1584,7 @@ type RedshiftSettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	EncryptionMode *string `json:"encryptionMode,omitempty" tf:"encryption_mode,omitempty"`
 
-	// ARN or Id of KMS Key to use when encryption_mode is SSE_KMS.
+	// ARN or ID of KMS Key to use when encryption_mode is SSE_KMS.
 	// +kubebuilder:validation:Optional
 	ServerSideEncryptionKMSKeyID *string `json:"serverSideEncryptionKmsKeyId,omitempty" tf:"server_side_encryption_kms_key_id,omitempty"`
 

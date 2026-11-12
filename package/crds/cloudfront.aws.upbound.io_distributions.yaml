@@ -3729,7 +3729,7 @@ spec:
                             type: array
                         type: object
                       functionAssociation:
-                        description: A config block that triggers a cloudfront function
+                        description: A config block that triggers a CloudFront function
                           with specific actions (maximum 2).
                         items:
                           properties:
@@ -3744,7 +3744,7 @@ spec:
                           type: object
                         type: array
                       grpcConfig:
-                        description: A config block that sets the grpc config.
+                        description: A config block that sets the gRPC config.
                         properties:
                           enabled:
                             description: Whether the distribution is enabled to accept
@@ -3960,7 +3960,7 @@ spec:
                               type: array
                           type: object
                         functionAssociation:
-                          description: A config block that triggers a cloudfront function
+                          description: A config block that triggers a CloudFront function
                             with specific actions (maximum 2).
                           items:
                             properties:
@@ -4051,7 +4051,7 @@ spec:
                             type: object
                           type: array
                         grpcConfig:
-                          description: A config block that sets the grpc config.
+                          description: A config block that sets the gRPC config.
                           properties:
                             enabled:
                               description: Whether the distribution is enabled to
@@ -4842,7 +4842,7 @@ spec:
                             type: array
                         type: object
                       functionAssociation:
-                        description: A config block that triggers a cloudfront function
+                        description: A config block that triggers a CloudFront function
                           with specific actions (maximum 2).
                         items:
                           properties:
@@ -4857,7 +4857,7 @@ spec:
                           type: object
                         type: array
                       grpcConfig:
-                        description: A config block that sets the grpc config.
+                        description: A config block that sets the gRPC config.
                         properties:
                           enabled:
                             description: Whether the distribution is enabled to accept
@@ -5073,7 +5073,7 @@ spec:
                               type: array
                           type: object
                         functionAssociation:
-                          description: A config block that triggers a cloudfront function
+                          description: A config block that triggers a CloudFront function
                             with specific actions (maximum 2).
                           items:
                             properties:
@@ -5164,7 +5164,7 @@ spec:
                             type: object
                           type: array
                         grpcConfig:
-                          description: A config block that sets the grpc config.
+                          description: A config block that sets the gRPC config.
                           properties:
                             enabled:
                               description: Whether the distribution is enabled to
@@ -6062,7 +6062,7 @@ spec:
                             type: array
                         type: object
                       functionAssociation:
-                        description: A config block that triggers a cloudfront function
+                        description: A config block that triggers a CloudFront function
                           with specific actions (maximum 2).
                         items:
                           properties:
@@ -6077,7 +6077,7 @@ spec:
                           type: object
                         type: array
                       grpcConfig:
-                        description: A config block that sets the grpc config.
+                        description: A config block that sets the gRPC config.
                         properties:
                           enabled:
                             description: Whether the distribution is enabled to accept
@@ -6319,7 +6319,7 @@ spec:
                               type: array
                           type: object
                         functionAssociation:
-                          description: A config block that triggers a cloudfront function
+                          description: A config block that triggers a CloudFront function
                             with specific actions (maximum 2).
                           items:
                             properties:
@@ -6334,7 +6334,7 @@ spec:
                             type: object
                           type: array
                         grpcConfig:
-                          description: A config block that sets the grpc config.
+                          description: A config block that sets the gRPC config.
                           properties:
                             enabled:
                               description: Whether the distribution is enabled to

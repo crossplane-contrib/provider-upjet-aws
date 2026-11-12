@@ -241,6 +241,7 @@ spec:
                     description: ARN that uniquely identifies the cluster.
                     type: string
                   currentVersion:
+                    description: Current version of the policy.
                     type: string
                   id:
                     description: Same as cluster_arn.

@@ -18,7 +18,7 @@ type ParameterGroupInitParameters struct {
 	// Description for the parameter group.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The engine version that the parameter group can be used with.
+	// Engine version that the parameter group can be used with.
 	Family *string `json:"family,omitempty" tf:"family,omitempty"`
 
 	// Set of MemoryDB parameters to apply. Any parameters not specified will fall back to their family defaults. Detailed below.
@@ -31,13 +31,13 @@ type ParameterGroupInitParameters struct {
 
 type ParameterGroupObservation struct {
 
-	// The ARN of the parameter group.
+	// ARN of the parameter group.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Description for the parameter group.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The engine version that the parameter group can be used with.
+	// Engine version that the parameter group can be used with.
 	Family *string `json:"family,omitempty" tf:"family,omitempty"`
 
 	// Same as name.
@@ -54,7 +54,7 @@ type ParameterGroupObservation struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
@@ -65,7 +65,7 @@ type ParameterGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The engine version that the parameter group can be used with.
+	// Engine version that the parameter group can be used with.
 	// +kubebuilder:validation:Optional
 	Family *string `json:"family,omitempty" tf:"family,omitempty"`
 
@@ -86,29 +86,29 @@ type ParameterGroupParameters struct {
 
 type ParameterInitParameters struct {
 
-	// The name of the parameter.
+	// Name of the parameter.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The value of the parameter.
+	// Value of the parameter.
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type ParameterObservation struct {
 
-	// The name of the parameter.
+	// Name of the parameter.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The value of the parameter.
+	// Value of the parameter.
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type ParameterParameters struct {
 
-	// The name of the parameter.
+	// Name of the parameter.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// The value of the parameter.
+	// Value of the parameter.
 	// +kubebuilder:validation:Optional
 	Value *string `json:"value" tf:"value,omitempty"`
 }

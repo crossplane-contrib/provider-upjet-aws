@@ -21,13 +21,13 @@ type ClusterConfigurationObservation struct {
 	// Description for the cluster.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The engine that will run on cluster nodes.
+	// Engine that will run on cluster nodes.
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
 
 	// Version number of the engine used by the cluster.
 	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
 
-	// The weekly time range during which maintenance on the cluster is performed.
+	// Weekly time range during which maintenance on the cluster is performed.
 	MaintenanceWindow *string `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
 	// Name of the snapshot. Conflicts with name_prefix.
@@ -48,7 +48,7 @@ type ClusterConfigurationObservation struct {
 	// Number of days for which MemoryDB retains automatic snapshots before deleting them.
 	SnapshotRetentionLimit *float64 `json:"snapshotRetentionLimit,omitempty" tf:"snapshot_retention_limit,omitempty"`
 
-	// The daily time range (in UTC) during which MemoryDB begins taking a daily snapshot of the shard.
+	// Daily time range (in UTC) during which MemoryDB begins taking a daily snapshot of the shard.
 	SnapshotWindow *string `json:"snapshotWindow,omitempty" tf:"snapshot_window,omitempty"`
 
 	// Name of the subnet group used by the cluster.
@@ -57,7 +57,7 @@ type ClusterConfigurationObservation struct {
 	// ARN of the SNS topic to which cluster notifications are sent.
 	TopicArn *string `json:"topicArn,omitempty" tf:"topic_arn,omitempty"`
 
-	// The VPC in which the cluster exists.
+	// VPC in which the cluster exists.
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 }
 
@@ -97,16 +97,16 @@ type SnapshotInitParameters struct {
 
 type SnapshotObservation struct {
 
-	// The ARN of the snapshot.
+	// ARN of the snapshot.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The configuration of the cluster from which the snapshot was taken.
+	// Configuration of the cluster from which the snapshot was taken.
 	ClusterConfiguration []ClusterConfigurationObservation `json:"clusterConfiguration,omitempty" tf:"cluster_configuration,omitempty"`
 
 	// Name of the MemoryDB cluster to take a snapshot of.
 	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
 
-	// The name of the snapshot.
+	// Name of the snapshot.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// ARN of the KMS key used to encrypt the snapshot at rest.
@@ -116,14 +116,14 @@ type SnapshotObservation struct {
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// Indicates whether the snapshot is from an automatic backup (automated) or was created manually (manual).
+	// Whether the snapshot is from an automatic backup (automated) or was created manually (manual).
 	Source *string `json:"source,omitempty" tf:"source,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }

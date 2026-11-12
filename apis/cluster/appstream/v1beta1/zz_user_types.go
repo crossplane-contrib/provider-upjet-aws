@@ -30,7 +30,7 @@ type UserInitParameters struct {
 
 type UserObservation struct {
 
-	// ARN of the appstream user.
+	// ARN of the AppStream user.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Authentication type for the user. You must specify USERPOOL. Valid values: API, SAML, USERPOOL
@@ -45,7 +45,7 @@ type UserObservation struct {
 	// First name, or given name, of the user.
 	FirstName *string `json:"firstName,omitempty" tf:"first_name,omitempty"`
 
-	// Unique ID of the appstream user.
+	// Unique ID of the AppStream user.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Last name, or surname, of the user.

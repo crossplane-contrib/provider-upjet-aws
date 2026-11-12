@@ -15,10 +15,10 @@ import (
 
 type VaultInitParameters struct {
 
-	// A boolean that indicates that all recovery points stored in the vault are deleted so that the vault can be destroyed without error.
+	// Whether to delete all recovery points stored in the vault so that the vault can be destroyed without error. Default value: false.
 	ForceDestroy *bool `json:"forceDestroy,omitempty" tf:"force_destroy,omitempty"`
 
-	// The server-side encryption key that is used to protect your backups.
+	// Server-side encryption key that is used to protect your backups.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kms/v1beta1.Key
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
@@ -38,19 +38,19 @@ type VaultInitParameters struct {
 
 type VaultObservation struct {
 
-	// The ARN of the vault.
+	// ARN of the vault.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// A boolean that indicates that all recovery points stored in the vault are deleted so that the vault can be destroyed without error.
+	// Whether to delete all recovery points stored in the vault so that the vault can be destroyed without error. Default value: false.
 	ForceDestroy *bool `json:"forceDestroy,omitempty" tf:"force_destroy,omitempty"`
 
-	// The name of the vault.
+	// Name of the vault.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The server-side encryption key that is used to protect your backups.
+	// Server-side encryption key that is used to protect your backups.
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 
-	// The number of recovery points that are stored in a backup vault.
+	// Number of recovery points that are stored in a backup vault.
 	RecoveryPoints *float64 `json:"recoveryPoints,omitempty" tf:"recovery_points,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -61,18 +61,18 @@ type VaultObservation struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type VaultParameters struct {
 
-	// A boolean that indicates that all recovery points stored in the vault are deleted so that the vault can be destroyed without error.
+	// Whether to delete all recovery points stored in the vault so that the vault can be destroyed without error. Default value: false.
 	// +kubebuilder:validation:Optional
 	ForceDestroy *bool `json:"forceDestroy,omitempty" tf:"force_destroy,omitempty"`
 
-	// The server-side encryption key that is used to protect your backups.
+	// Server-side encryption key that is used to protect your backups.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kms/v1beta1.Key
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	// +kubebuilder:validation:Optional

@@ -15,7 +15,7 @@ import (
 
 type ApacheKafkaClusterInitParameters struct {
 
-	// The bootstrap servers of the cluster.
+	// Bootstrap servers of the cluster.
 	BootstrapServers *string `json:"bootstrapServers,omitempty" tf:"bootstrap_servers,omitempty"`
 
 	// Details of an Amazon VPC which has network connectivity to the Apache Kafka cluster. See vpc Block for details.
@@ -24,7 +24,7 @@ type ApacheKafkaClusterInitParameters struct {
 
 type ApacheKafkaClusterObservation struct {
 
-	// The bootstrap servers of the cluster.
+	// Bootstrap servers of the cluster.
 	BootstrapServers *string `json:"bootstrapServers,omitempty" tf:"bootstrap_servers,omitempty"`
 
 	// Details of an Amazon VPC which has network connectivity to the Apache Kafka cluster. See vpc Block for details.
@@ -33,7 +33,7 @@ type ApacheKafkaClusterObservation struct {
 
 type ApacheKafkaClusterParameters struct {
 
-	// The bootstrap servers of the cluster.
+	// Bootstrap servers of the cluster.
 	// +kubebuilder:validation:Optional
 	BootstrapServers *string `json:"bootstrapServers" tf:"bootstrap_servers,omitempty"`
 
@@ -44,59 +44,59 @@ type ApacheKafkaClusterParameters struct {
 
 type AutoscalingInitParameters struct {
 
-	// The maximum number of workers allocated to the connector.
+	// Maximum number of workers allocated to the connector.
 	MaxWorkerCount *float64 `json:"maxWorkerCount,omitempty" tf:"max_worker_count,omitempty"`
 
-	// The number of microcontroller units (MCUs) allocated to each connector worker. Valid values: 1, 2, 4, 8. The default value is 1.
+	// Number of microcontroller units (MCUs) allocated to each connector worker. Valid values: 1, 2, 4, 8. The default value is 1.
 	McuCount *float64 `json:"mcuCount,omitempty" tf:"mcu_count,omitempty"`
 
-	// The minimum number of workers allocated to the connector.
+	// Minimum number of workers allocated to the connector.
 	MinWorkerCount *float64 `json:"minWorkerCount,omitempty" tf:"min_worker_count,omitempty"`
 
-	// The scale-in policy for the connector. See scale_in_policy Block for details.
+	// Scale-in policy for the connector. See scale_in_policy Block for details.
 	ScaleInPolicy *ScaleInPolicyInitParameters `json:"scaleInPolicy,omitempty" tf:"scale_in_policy,omitempty"`
 
-	// The scale-out policy for the connector. See scale_out_policy Block for details.
+	// Scale-out policy for the connector. See scale_out_policy Block for details.
 	ScaleOutPolicy *ScaleOutPolicyInitParameters `json:"scaleOutPolicy,omitempty" tf:"scale_out_policy,omitempty"`
 }
 
 type AutoscalingObservation struct {
 
-	// The maximum number of workers allocated to the connector.
+	// Maximum number of workers allocated to the connector.
 	MaxWorkerCount *float64 `json:"maxWorkerCount,omitempty" tf:"max_worker_count,omitempty"`
 
-	// The number of microcontroller units (MCUs) allocated to each connector worker. Valid values: 1, 2, 4, 8. The default value is 1.
+	// Number of microcontroller units (MCUs) allocated to each connector worker. Valid values: 1, 2, 4, 8. The default value is 1.
 	McuCount *float64 `json:"mcuCount,omitempty" tf:"mcu_count,omitempty"`
 
-	// The minimum number of workers allocated to the connector.
+	// Minimum number of workers allocated to the connector.
 	MinWorkerCount *float64 `json:"minWorkerCount,omitempty" tf:"min_worker_count,omitempty"`
 
-	// The scale-in policy for the connector. See scale_in_policy Block for details.
+	// Scale-in policy for the connector. See scale_in_policy Block for details.
 	ScaleInPolicy *ScaleInPolicyObservation `json:"scaleInPolicy,omitempty" tf:"scale_in_policy,omitempty"`
 
-	// The scale-out policy for the connector. See scale_out_policy Block for details.
+	// Scale-out policy for the connector. See scale_out_policy Block for details.
 	ScaleOutPolicy *ScaleOutPolicyObservation `json:"scaleOutPolicy,omitempty" tf:"scale_out_policy,omitempty"`
 }
 
 type AutoscalingParameters struct {
 
-	// The maximum number of workers allocated to the connector.
+	// Maximum number of workers allocated to the connector.
 	// +kubebuilder:validation:Optional
 	MaxWorkerCount *float64 `json:"maxWorkerCount" tf:"max_worker_count,omitempty"`
 
-	// The number of microcontroller units (MCUs) allocated to each connector worker. Valid values: 1, 2, 4, 8. The default value is 1.
+	// Number of microcontroller units (MCUs) allocated to each connector worker. Valid values: 1, 2, 4, 8. The default value is 1.
 	// +kubebuilder:validation:Optional
 	McuCount *float64 `json:"mcuCount,omitempty" tf:"mcu_count,omitempty"`
 
-	// The minimum number of workers allocated to the connector.
+	// Minimum number of workers allocated to the connector.
 	// +kubebuilder:validation:Optional
 	MinWorkerCount *float64 `json:"minWorkerCount" tf:"min_worker_count,omitempty"`
 
-	// The scale-in policy for the connector. See scale_in_policy Block for details.
+	// Scale-in policy for the connector. See scale_in_policy Block for details.
 	// +kubebuilder:validation:Optional
 	ScaleInPolicy *ScaleInPolicyParameters `json:"scaleInPolicy,omitempty" tf:"scale_in_policy,omitempty"`
 
-	// The scale-out policy for the connector. See scale_out_policy Block for details.
+	// Scale-out policy for the connector. See scale_out_policy Block for details.
 	// +kubebuilder:validation:Optional
 	ScaleOutPolicy *ScaleOutPolicyParameters `json:"scaleOutPolicy,omitempty" tf:"scale_out_policy,omitempty"`
 }
@@ -135,7 +135,7 @@ type CloudwatchLogsInitParameters struct {
 	// Whether log delivery to Amazon CloudWatch Logs is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The name of the CloudWatch log group that is the destination for log delivery.
+	// Name of the CloudWatch log group that is the destination for log delivery.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/cloudwatchlogs/v1beta1.Group
 	LogGroup *string `json:"logGroup,omitempty" tf:"log_group,omitempty"`
 
@@ -153,7 +153,7 @@ type CloudwatchLogsObservation struct {
 	// Whether log delivery to Amazon CloudWatch Logs is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The name of the CloudWatch log group that is the destination for log delivery.
+	// Name of the CloudWatch log group that is the destination for log delivery.
 	LogGroup *string `json:"logGroup,omitempty" tf:"log_group,omitempty"`
 }
 
@@ -163,7 +163,7 @@ type CloudwatchLogsParameters struct {
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 
-	// The name of the CloudWatch log group that is the destination for log delivery.
+	// Name of the CloudWatch log group that is the destination for log delivery.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/cloudwatchlogs/v1beta1.Group
 	// +kubebuilder:validation:Optional
 	LogGroup *string `json:"logGroup,omitempty" tf:"log_group,omitempty"`
@@ -182,14 +182,14 @@ type ConnectorInitParameters struct {
 	// Information about the capacity allocated to the connector. See capacity Block for details.
 	Capacity *CapacityInitParameters `json:"capacity,omitempty" tf:"capacity,omitempty"`
 
-	// A map of keys to values that represent the configuration for the connector.
+	// Map of keys to values that represent the configuration for the connector.
 	// +mapType=granular
 	ConnectorConfiguration map[string]*string `json:"connectorConfiguration,omitempty" tf:"connector_configuration,omitempty"`
 
-	// A summary description of the connector.
+	// Summary description of the connector.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Specifies which Apache Kafka cluster to connect to. See kafka_cluster Block for details.
+	// Apache Kafka cluster to connect to. See kafka_cluster Block for details.
 	KafkaCluster *KafkaClusterInitParameters `json:"kafkaCluster,omitempty" tf:"kafka_cluster,omitempty"`
 
 	// Details of the client authentication used by the Apache Kafka cluster. See kafka_cluster_client_authentication Block for details.
@@ -198,13 +198,13 @@ type ConnectorInitParameters struct {
 	// Details of encryption in transit to the Apache Kafka cluster. See kafka_cluster_encryption_in_transit Block for details.
 	KafkaClusterEncryptionInTransit *KafkaClusterEncryptionInTransitInitParameters `json:"kafkaClusterEncryptionInTransit,omitempty" tf:"kafka_cluster_encryption_in_transit,omitempty"`
 
-	// The version of Kafka Connect. It has to be compatible with both the Apache Kafka cluster's version and the plugins.
+	// Version of Kafka Connect. It has to be compatible with both the Apache Kafka cluster's version and the plugins.
 	KafkaconnectVersion *string `json:"kafkaconnectVersion,omitempty" tf:"kafkaconnect_version,omitempty"`
 
 	// Details about log delivery. See log_delivery Block for details.
 	LogDelivery *LogDeliveryInitParameters `json:"logDelivery,omitempty" tf:"log_delivery,omitempty"`
 
-	// Specifies which plugins to use for the connector. See plugin Block for details.
+	// Plugins to use for the connector. See plugin Block for details.
 	Plugin []PluginInitParameters `json:"plugin,omitempty" tf:"plugin,omitempty"`
 
 	// ARN of the IAM role used by the connector to access the Amazon Web Services resources that it needs. The types of resources depends on the logic of the connector. For example, a connector that has Amazon S3 as a destination must have permissions that allow it to write to the S3 destination bucket.
@@ -224,7 +224,7 @@ type ConnectorInitParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Specifies which worker configuration to use with the connector. See worker_configuration Block for details.
+	// Worker configuration to use with the connector. See worker_configuration Block for details.
 	WorkerConfiguration *WorkerConfigurationInitParameters `json:"workerConfiguration,omitempty" tf:"worker_configuration,omitempty"`
 }
 
@@ -236,16 +236,16 @@ type ConnectorObservation struct {
 	// Information about the capacity allocated to the connector. See capacity Block for details.
 	Capacity *CapacityObservation `json:"capacity,omitempty" tf:"capacity,omitempty"`
 
-	// A map of keys to values that represent the configuration for the connector.
+	// Map of keys to values that represent the configuration for the connector.
 	// +mapType=granular
 	ConnectorConfiguration map[string]*string `json:"connectorConfiguration,omitempty" tf:"connector_configuration,omitempty"`
 
-	// A summary description of the connector.
+	// Summary description of the connector.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Specifies which Apache Kafka cluster to connect to. See kafka_cluster Block for details.
+	// Apache Kafka cluster to connect to. See kafka_cluster Block for details.
 	KafkaCluster *KafkaClusterObservation `json:"kafkaCluster,omitempty" tf:"kafka_cluster,omitempty"`
 
 	// Details of the client authentication used by the Apache Kafka cluster. See kafka_cluster_client_authentication Block for details.
@@ -254,16 +254,16 @@ type ConnectorObservation struct {
 	// Details of encryption in transit to the Apache Kafka cluster. See kafka_cluster_encryption_in_transit Block for details.
 	KafkaClusterEncryptionInTransit *KafkaClusterEncryptionInTransitObservation `json:"kafkaClusterEncryptionInTransit,omitempty" tf:"kafka_cluster_encryption_in_transit,omitempty"`
 
-	// The version of Kafka Connect. It has to be compatible with both the Apache Kafka cluster's version and the plugins.
+	// Version of Kafka Connect. It has to be compatible with both the Apache Kafka cluster's version and the plugins.
 	KafkaconnectVersion *string `json:"kafkaconnectVersion,omitempty" tf:"kafkaconnect_version,omitempty"`
 
 	// Details about log delivery. See log_delivery Block for details.
 	LogDelivery *LogDeliveryObservation `json:"logDelivery,omitempty" tf:"log_delivery,omitempty"`
 
-	// The name of the connector.
+	// Name of the connector.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Specifies which plugins to use for the connector. See plugin Block for details.
+	// Plugins to use for the connector. See plugin Block for details.
 	Plugin []PluginObservation `json:"plugin,omitempty" tf:"plugin,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -277,14 +277,14 @@ type ConnectorObservation struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// The current version of the connector.
+	// Current version of the connector.
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 
-	// Specifies which worker configuration to use with the connector. See worker_configuration Block for details.
+	// Worker configuration to use with the connector. See worker_configuration Block for details.
 	WorkerConfiguration *WorkerConfigurationObservation `json:"workerConfiguration,omitempty" tf:"worker_configuration,omitempty"`
 }
 
@@ -294,16 +294,16 @@ type ConnectorParameters struct {
 	// +kubebuilder:validation:Optional
 	Capacity *CapacityParameters `json:"capacity,omitempty" tf:"capacity,omitempty"`
 
-	// A map of keys to values that represent the configuration for the connector.
+	// Map of keys to values that represent the configuration for the connector.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	ConnectorConfiguration map[string]*string `json:"connectorConfiguration,omitempty" tf:"connector_configuration,omitempty"`
 
-	// A summary description of the connector.
+	// Summary description of the connector.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Specifies which Apache Kafka cluster to connect to. See kafka_cluster Block for details.
+	// Apache Kafka cluster to connect to. See kafka_cluster Block for details.
 	// +kubebuilder:validation:Optional
 	KafkaCluster *KafkaClusterParameters `json:"kafkaCluster,omitempty" tf:"kafka_cluster,omitempty"`
 
@@ -315,7 +315,7 @@ type ConnectorParameters struct {
 	// +kubebuilder:validation:Optional
 	KafkaClusterEncryptionInTransit *KafkaClusterEncryptionInTransitParameters `json:"kafkaClusterEncryptionInTransit,omitempty" tf:"kafka_cluster_encryption_in_transit,omitempty"`
 
-	// The version of Kafka Connect. It has to be compatible with both the Apache Kafka cluster's version and the plugins.
+	// Version of Kafka Connect. It has to be compatible with both the Apache Kafka cluster's version and the plugins.
 	// +kubebuilder:validation:Optional
 	KafkaconnectVersion *string `json:"kafkaconnectVersion,omitempty" tf:"kafkaconnect_version,omitempty"`
 
@@ -323,11 +323,11 @@ type ConnectorParameters struct {
 	// +kubebuilder:validation:Optional
 	LogDelivery *LogDeliveryParameters `json:"logDelivery,omitempty" tf:"log_delivery,omitempty"`
 
-	// The name of the connector.
+	// Name of the connector.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// Specifies which plugins to use for the connector. See plugin Block for details.
+	// Plugins to use for the connector. See plugin Block for details.
 	// +kubebuilder:validation:Optional
 	Plugin []PluginParameters `json:"plugin,omitempty" tf:"plugin,omitempty"`
 
@@ -355,7 +355,7 @@ type ConnectorParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Specifies which worker configuration to use with the connector. See worker_configuration Block for details.
+	// Worker configuration to use with the connector. See worker_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	WorkerConfiguration *WorkerConfigurationParameters `json:"workerConfiguration,omitempty" tf:"worker_configuration,omitempty"`
 }
@@ -375,7 +375,7 @@ type CustomPluginInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ArnSelector *v2.NamespacedSelector `json:"arnSelector,omitempty" tf:"-"`
 
-	// The revision of the custom plugin.
+	// Revision of the custom plugin.
 	Revision *float64 `json:"revision,omitempty" tf:"revision,omitempty"`
 }
 
@@ -384,7 +384,7 @@ type CustomPluginObservation struct {
 	// ARN of the custom plugin.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The revision of the custom plugin.
+	// Revision of the custom plugin.
 	Revision *float64 `json:"revision,omitempty" tf:"revision,omitempty"`
 }
 
@@ -404,14 +404,14 @@ type CustomPluginParameters struct {
 	// +kubebuilder:validation:Optional
 	ArnSelector *v2.NamespacedSelector `json:"arnSelector,omitempty" tf:"-"`
 
-	// The revision of the custom plugin.
+	// Revision of the custom plugin.
 	// +kubebuilder:validation:Optional
 	Revision *float64 `json:"revision" tf:"revision,omitempty"`
 }
 
 type FirehoseInitParameters struct {
 
-	// The name of the Kinesis Data Firehose delivery stream that is the destination for log delivery.
+	// Name of the Kinesis Data Firehose delivery stream that is the destination for log delivery.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/firehose/v1beta1.DeliveryStream
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",true)
 	DeliveryStream *string `json:"deliveryStream,omitempty" tf:"delivery_stream,omitempty"`
@@ -424,22 +424,22 @@ type FirehoseInitParameters struct {
 	// +kubebuilder:validation:Optional
 	DeliveryStreamSelector *v2.NamespacedSelector `json:"deliveryStreamSelector,omitempty" tf:"-"`
 
-	// Specifies whether connector logs get sent to the specified Amazon S3 destination.
+	// Whether connector logs get sent to the specified Amazon S3 destination.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 }
 
 type FirehoseObservation struct {
 
-	// The name of the Kinesis Data Firehose delivery stream that is the destination for log delivery.
+	// Name of the Kinesis Data Firehose delivery stream that is the destination for log delivery.
 	DeliveryStream *string `json:"deliveryStream,omitempty" tf:"delivery_stream,omitempty"`
 
-	// Specifies whether connector logs get sent to the specified Amazon S3 destination.
+	// Whether connector logs get sent to the specified Amazon S3 destination.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 }
 
 type FirehoseParameters struct {
 
-	// The name of the Kinesis Data Firehose delivery stream that is the destination for log delivery.
+	// Name of the Kinesis Data Firehose delivery stream that is the destination for log delivery.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/firehose/v1beta1.DeliveryStream
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",true)
 	// +kubebuilder:validation:Optional
@@ -453,83 +453,83 @@ type FirehoseParameters struct {
 	// +kubebuilder:validation:Optional
 	DeliveryStreamSelector *v2.NamespacedSelector `json:"deliveryStreamSelector,omitempty" tf:"-"`
 
-	// Specifies whether connector logs get sent to the specified Amazon S3 destination.
+	// Whether connector logs get sent to the specified Amazon S3 destination.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 }
 
 type KafkaClusterClientAuthenticationInitParameters struct {
 
-	// The type of client authentication used to connect to the Apache Kafka cluster. Valid values: IAM, NONE. A value of NONE means that no client authentication is used. The default value is NONE.
+	// Type of client authentication used to connect to the Apache Kafka cluster. Valid values: IAM, NONE. A value of NONE means that no client authentication is used. The default value is NONE.
 	AuthenticationType *string `json:"authenticationType,omitempty" tf:"authentication_type,omitempty"`
 }
 
 type KafkaClusterClientAuthenticationObservation struct {
 
-	// The type of client authentication used to connect to the Apache Kafka cluster. Valid values: IAM, NONE. A value of NONE means that no client authentication is used. The default value is NONE.
+	// Type of client authentication used to connect to the Apache Kafka cluster. Valid values: IAM, NONE. A value of NONE means that no client authentication is used. The default value is NONE.
 	AuthenticationType *string `json:"authenticationType,omitempty" tf:"authentication_type,omitempty"`
 }
 
 type KafkaClusterClientAuthenticationParameters struct {
 
-	// The type of client authentication used to connect to the Apache Kafka cluster. Valid values: IAM, NONE. A value of NONE means that no client authentication is used. The default value is NONE.
+	// Type of client authentication used to connect to the Apache Kafka cluster. Valid values: IAM, NONE. A value of NONE means that no client authentication is used. The default value is NONE.
 	// +kubebuilder:validation:Optional
 	AuthenticationType *string `json:"authenticationType,omitempty" tf:"authentication_type,omitempty"`
 }
 
 type KafkaClusterEncryptionInTransitInitParameters struct {
 
-	// The type of encryption in transit to the Apache Kafka cluster. Valid values: PLAINTEXT, TLS. The default values is PLAINTEXT.
+	// Type of encryption in transit to the Apache Kafka cluster. Valid values: PLAINTEXT, TLS. The default values is PLAINTEXT.
 	EncryptionType *string `json:"encryptionType,omitempty" tf:"encryption_type,omitempty"`
 }
 
 type KafkaClusterEncryptionInTransitObservation struct {
 
-	// The type of encryption in transit to the Apache Kafka cluster. Valid values: PLAINTEXT, TLS. The default values is PLAINTEXT.
+	// Type of encryption in transit to the Apache Kafka cluster. Valid values: PLAINTEXT, TLS. The default values is PLAINTEXT.
 	EncryptionType *string `json:"encryptionType,omitempty" tf:"encryption_type,omitempty"`
 }
 
 type KafkaClusterEncryptionInTransitParameters struct {
 
-	// The type of encryption in transit to the Apache Kafka cluster. Valid values: PLAINTEXT, TLS. The default values is PLAINTEXT.
+	// Type of encryption in transit to the Apache Kafka cluster. Valid values: PLAINTEXT, TLS. The default values is PLAINTEXT.
 	// +kubebuilder:validation:Optional
 	EncryptionType *string `json:"encryptionType,omitempty" tf:"encryption_type,omitempty"`
 }
 
 type KafkaClusterInitParameters struct {
 
-	// The Apache Kafka cluster to which the connector is connected. See apache_kafka_cluster Block for details.
+	// Apache Kafka cluster to which the connector is connected. See apache_kafka_cluster Block for details.
 	ApacheKafkaCluster *ApacheKafkaClusterInitParameters `json:"apacheKafkaCluster,omitempty" tf:"apache_kafka_cluster,omitempty"`
 }
 
 type KafkaClusterObservation struct {
 
-	// The Apache Kafka cluster to which the connector is connected. See apache_kafka_cluster Block for details.
+	// Apache Kafka cluster to which the connector is connected. See apache_kafka_cluster Block for details.
 	ApacheKafkaCluster *ApacheKafkaClusterObservation `json:"apacheKafkaCluster,omitempty" tf:"apache_kafka_cluster,omitempty"`
 }
 
 type KafkaClusterParameters struct {
 
-	// The Apache Kafka cluster to which the connector is connected. See apache_kafka_cluster Block for details.
+	// Apache Kafka cluster to which the connector is connected. See apache_kafka_cluster Block for details.
 	// +kubebuilder:validation:Optional
 	ApacheKafkaCluster *ApacheKafkaClusterParameters `json:"apacheKafkaCluster" tf:"apache_kafka_cluster,omitempty"`
 }
 
 type LogDeliveryInitParameters struct {
 
-	// The workers can send worker logs to different destination types. This configuration specifies the details of these destinations. See worker_log_delivery Block for details.
+	// Workers can send worker logs to different destination types. This configuration specifies the details of these destinations. See worker_log_delivery Block for details.
 	WorkerLogDelivery *WorkerLogDeliveryInitParameters `json:"workerLogDelivery,omitempty" tf:"worker_log_delivery,omitempty"`
 }
 
 type LogDeliveryObservation struct {
 
-	// The workers can send worker logs to different destination types. This configuration specifies the details of these destinations. See worker_log_delivery Block for details.
+	// Workers can send worker logs to different destination types. This configuration specifies the details of these destinations. See worker_log_delivery Block for details.
 	WorkerLogDelivery *WorkerLogDeliveryObservation `json:"workerLogDelivery,omitempty" tf:"worker_log_delivery,omitempty"`
 }
 
 type LogDeliveryParameters struct {
 
-	// The workers can send worker logs to different destination types. This configuration specifies the details of these destinations. See worker_log_delivery Block for details.
+	// Workers can send worker logs to different destination types. This configuration specifies the details of these destinations. See worker_log_delivery Block for details.
 	// +kubebuilder:validation:Optional
 	WorkerLogDelivery *WorkerLogDeliveryParameters `json:"workerLogDelivery" tf:"worker_log_delivery,omitempty"`
 }
@@ -555,36 +555,36 @@ type PluginParameters struct {
 
 type ProvisionedCapacityInitParameters struct {
 
-	// The number of microcontroller units (MCUs) allocated to each connector worker. Valid values: 1, 2, 4, 8. The default value is 1.
+	// Number of microcontroller units (MCUs) allocated to each connector worker. Valid values: 1, 2, 4, 8. The default value is 1.
 	McuCount *float64 `json:"mcuCount,omitempty" tf:"mcu_count,omitempty"`
 
-	// The number of workers that are allocated to the connector.
+	// Number of workers that are allocated to the connector.
 	WorkerCount *float64 `json:"workerCount,omitempty" tf:"worker_count,omitempty"`
 }
 
 type ProvisionedCapacityObservation struct {
 
-	// The number of microcontroller units (MCUs) allocated to each connector worker. Valid values: 1, 2, 4, 8. The default value is 1.
+	// Number of microcontroller units (MCUs) allocated to each connector worker. Valid values: 1, 2, 4, 8. The default value is 1.
 	McuCount *float64 `json:"mcuCount,omitempty" tf:"mcu_count,omitempty"`
 
-	// The number of workers that are allocated to the connector.
+	// Number of workers that are allocated to the connector.
 	WorkerCount *float64 `json:"workerCount,omitempty" tf:"worker_count,omitempty"`
 }
 
 type ProvisionedCapacityParameters struct {
 
-	// The number of microcontroller units (MCUs) allocated to each connector worker. Valid values: 1, 2, 4, 8. The default value is 1.
+	// Number of microcontroller units (MCUs) allocated to each connector worker. Valid values: 1, 2, 4, 8. The default value is 1.
 	// +kubebuilder:validation:Optional
 	McuCount *float64 `json:"mcuCount,omitempty" tf:"mcu_count,omitempty"`
 
-	// The number of workers that are allocated to the connector.
+	// Number of workers that are allocated to the connector.
 	// +kubebuilder:validation:Optional
 	WorkerCount *float64 `json:"workerCount" tf:"worker_count,omitempty"`
 }
 
 type S3InitParameters struct {
 
-	// The name of the S3 bucket that is the destination for log delivery.
+	// Name of the S3 bucket that is the destination for log delivery.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/s3/v1beta1.Bucket
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
@@ -596,28 +596,28 @@ type S3InitParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketSelector *v2.NamespacedSelector `json:"bucketSelector,omitempty" tf:"-"`
 
-	// Specifies whether connector logs get sent to the specified Amazon S3 destination.
+	// Whether connector logs get sent to the specified Amazon S3 destination.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The S3 prefix that is the destination for log delivery.
+	// S3 prefix that is the destination for log delivery.
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 }
 
 type S3Observation struct {
 
-	// The name of the S3 bucket that is the destination for log delivery.
+	// Name of the S3 bucket that is the destination for log delivery.
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
-	// Specifies whether connector logs get sent to the specified Amazon S3 destination.
+	// Whether connector logs get sent to the specified Amazon S3 destination.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The S3 prefix that is the destination for log delivery.
+	// S3 prefix that is the destination for log delivery.
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 }
 
 type S3Parameters struct {
 
-	// The name of the S3 bucket that is the destination for log delivery.
+	// Name of the S3 bucket that is the destination for log delivery.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/s3/v1beta1.Bucket
 	// +kubebuilder:validation:Optional
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
@@ -630,49 +630,49 @@ type S3Parameters struct {
 	// +kubebuilder:validation:Optional
 	BucketSelector *v2.NamespacedSelector `json:"bucketSelector,omitempty" tf:"-"`
 
-	// Specifies whether connector logs get sent to the specified Amazon S3 destination.
+	// Whether connector logs get sent to the specified Amazon S3 destination.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 
-	// The S3 prefix that is the destination for log delivery.
+	// S3 prefix that is the destination for log delivery.
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 }
 
 type ScaleInPolicyInitParameters struct {
 
-	// Specifies the CPU utilization percentage threshold at which you want connector scale in to be triggered.
+	// CPU utilization percentage threshold at which you want connector scale in to be triggered.
 	CPUUtilizationPercentage *float64 `json:"cpuUtilizationPercentage,omitempty" tf:"cpu_utilization_percentage,omitempty"`
 }
 
 type ScaleInPolicyObservation struct {
 
-	// Specifies the CPU utilization percentage threshold at which you want connector scale in to be triggered.
+	// CPU utilization percentage threshold at which you want connector scale in to be triggered.
 	CPUUtilizationPercentage *float64 `json:"cpuUtilizationPercentage,omitempty" tf:"cpu_utilization_percentage,omitempty"`
 }
 
 type ScaleInPolicyParameters struct {
 
-	// Specifies the CPU utilization percentage threshold at which you want connector scale in to be triggered.
+	// CPU utilization percentage threshold at which you want connector scale in to be triggered.
 	// +kubebuilder:validation:Optional
 	CPUUtilizationPercentage *float64 `json:"cpuUtilizationPercentage,omitempty" tf:"cpu_utilization_percentage,omitempty"`
 }
 
 type ScaleOutPolicyInitParameters struct {
 
-	// The CPU utilization percentage threshold at which you want connector scale out to be triggered.
+	// CPU utilization percentage threshold at which you want connector scale out to be triggered.
 	CPUUtilizationPercentage *float64 `json:"cpuUtilizationPercentage,omitempty" tf:"cpu_utilization_percentage,omitempty"`
 }
 
 type ScaleOutPolicyObservation struct {
 
-	// The CPU utilization percentage threshold at which you want connector scale out to be triggered.
+	// CPU utilization percentage threshold at which you want connector scale out to be triggered.
 	CPUUtilizationPercentage *float64 `json:"cpuUtilizationPercentage,omitempty" tf:"cpu_utilization_percentage,omitempty"`
 }
 
 type ScaleOutPolicyParameters struct {
 
-	// The CPU utilization percentage threshold at which you want connector scale out to be triggered.
+	// CPU utilization percentage threshold at which you want connector scale out to be triggered.
 	// +kubebuilder:validation:Optional
 	CPUUtilizationPercentage *float64 `json:"cpuUtilizationPercentage,omitempty" tf:"cpu_utilization_percentage,omitempty"`
 }
@@ -687,7 +687,7 @@ type VPCInitParameters struct {
 	// +kubebuilder:validation:Optional
 	SecurityGroupSelector *v2.NamespacedSelector `json:"securityGroupSelector,omitempty" tf:"-"`
 
-	// The security groups for the connector.
+	// Security groups for the connector.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=SecurityGroupRefs
 	// +crossplane:generate:reference:selectorFieldName=SecurityGroupSelector
@@ -702,7 +702,7 @@ type VPCInitParameters struct {
 	// +kubebuilder:validation:Optional
 	SubnetSelector *v2.NamespacedSelector `json:"subnetSelector,omitempty" tf:"-"`
 
-	// The subnets for the connector.
+	// Subnets for the connector.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Subnet
 	// +crossplane:generate:reference:refFieldName=SubnetRefs
 	// +crossplane:generate:reference:selectorFieldName=SubnetSelector
@@ -712,11 +712,11 @@ type VPCInitParameters struct {
 
 type VPCObservation struct {
 
-	// The security groups for the connector.
+	// Security groups for the connector.
 	// +listType=set
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
-	// The subnets for the connector.
+	// Subnets for the connector.
 	// +listType=set
 	Subnets []*string `json:"subnets,omitempty" tf:"subnets,omitempty"`
 }
@@ -731,7 +731,7 @@ type VPCParameters struct {
 	// +kubebuilder:validation:Optional
 	SecurityGroupSelector *v2.NamespacedSelector `json:"securityGroupSelector,omitempty" tf:"-"`
 
-	// The security groups for the connector.
+	// Security groups for the connector.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=SecurityGroupRefs
 	// +crossplane:generate:reference:selectorFieldName=SecurityGroupSelector
@@ -747,7 +747,7 @@ type VPCParameters struct {
 	// +kubebuilder:validation:Optional
 	SubnetSelector *v2.NamespacedSelector `json:"subnetSelector,omitempty" tf:"-"`
 
-	// The subnets for the connector.
+	// Subnets for the connector.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Subnet
 	// +crossplane:generate:reference:refFieldName=SubnetRefs
 	// +crossplane:generate:reference:selectorFieldName=SubnetSelector
@@ -771,7 +771,7 @@ type WorkerConfigurationInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ArnSelector *v2.NamespacedSelector `json:"arnSelector,omitempty" tf:"-"`
 
-	// The revision of the worker configuration.
+	// Revision of the worker configuration.
 	Revision *float64 `json:"revision,omitempty" tf:"revision,omitempty"`
 }
 
@@ -780,7 +780,7 @@ type WorkerConfigurationObservation struct {
 	// ARN of the worker configuration.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The revision of the worker configuration.
+	// Revision of the worker configuration.
 	Revision *float64 `json:"revision,omitempty" tf:"revision,omitempty"`
 }
 
@@ -800,7 +800,7 @@ type WorkerConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	ArnSelector *v2.NamespacedSelector `json:"arnSelector,omitempty" tf:"-"`
 
-	// The revision of the worker configuration.
+	// Revision of the worker configuration.
 	// +kubebuilder:validation:Optional
 	Revision *float64 `json:"revision" tf:"revision,omitempty"`
 }

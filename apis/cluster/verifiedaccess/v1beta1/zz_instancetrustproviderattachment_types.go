@@ -15,7 +15,7 @@ import (
 
 type InstanceTrustProviderAttachmentInitParameters struct {
 
-	// The ID of the Verified Access instance to attach the Trust Provider to.
+	// ID of the Verified Access instance to attach the Trust Provider to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/verifiedaccess/v1beta1.Instance
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	VerifiedaccessInstanceID *string `json:"verifiedaccessInstanceId,omitempty" tf:"verifiedaccess_instance_id,omitempty"`
@@ -28,7 +28,7 @@ type InstanceTrustProviderAttachmentInitParameters struct {
 	// +kubebuilder:validation:Optional
 	VerifiedaccessInstanceIDSelector *v2.Selector `json:"verifiedaccessInstanceIdSelector,omitempty" tf:"-"`
 
-	// The ID of the Verified Access trust provider.
+	// ID of the Verified Access trust provider.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/verifiedaccess/v1beta1.TrustProvider
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	VerifiedaccessTrustProviderID *string `json:"verifiedaccessTrustProviderId,omitempty" tf:"verifiedaccess_trust_provider_id,omitempty"`
@@ -44,17 +44,17 @@ type InstanceTrustProviderAttachmentInitParameters struct {
 
 type InstanceTrustProviderAttachmentObservation struct {
 
-	// A combination of attributes, separated by a / to create a unique id: verifiedaccess_instance_id,verifiedaccess_trust_provider_id
+	// Combination of attributes, separated by a / to create a unique ID: verifiedaccess_instance_id,verifiedaccess_trust_provider_id
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The ID of the Verified Access instance to attach the Trust Provider to.
+	// ID of the Verified Access instance to attach the Trust Provider to.
 	VerifiedaccessInstanceID *string `json:"verifiedaccessInstanceId,omitempty" tf:"verifiedaccess_instance_id,omitempty"`
 
-	// The ID of the Verified Access trust provider.
+	// ID of the Verified Access trust provider.
 	VerifiedaccessTrustProviderID *string `json:"verifiedaccessTrustProviderId,omitempty" tf:"verifiedaccess_trust_provider_id,omitempty"`
 }
 
@@ -65,7 +65,7 @@ type InstanceTrustProviderAttachmentParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// The ID of the Verified Access instance to attach the Trust Provider to.
+	// ID of the Verified Access instance to attach the Trust Provider to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/verifiedaccess/v1beta1.Instance
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -79,7 +79,7 @@ type InstanceTrustProviderAttachmentParameters struct {
 	// +kubebuilder:validation:Optional
 	VerifiedaccessInstanceIDSelector *v2.Selector `json:"verifiedaccessInstanceIdSelector,omitempty" tf:"-"`
 
-	// The ID of the Verified Access trust provider.
+	// ID of the Verified Access trust provider.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/verifiedaccess/v1beta1.TrustProvider
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional

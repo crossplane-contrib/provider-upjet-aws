@@ -24,7 +24,7 @@ type UserStackAssociationObservation struct {
 	// Authentication type for the user.
 	AuthenticationType *string `json:"authenticationType,omitempty" tf:"authentication_type,omitempty"`
 
-	// Unique ID of the appstream User Stack association.
+	// Unique ID of the AppStream User Stack association.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.

@@ -75,8 +75,8 @@ spec:
                       when importing resources.
                     type: boolean
                   securityGroupId:
-                    description: The ID of the security group to be associated with
-                      the VPC endpoint.
+                    description: ID of the security group to be associated with the
+                      VPC endpoint.
                     type: string
                   securityGroupIdRef:
                     description: Reference to a SecurityGroup in ec2 to populate securityGroupId.
@@ -159,8 +159,8 @@ spec:
                         type: object
                     type: object
                   vpcEndpointId:
-                    description: The ID of the VPC endpoint with which the security
-                      group will be associated.
+                    description: ID of the VPC endpoint with which the security group
+                      will be associated.
                     type: string
                   vpcEndpointIdRef:
                     description: Reference to a VPCEndpoint in ec2 to populate vpcEndpointId.
@@ -267,8 +267,8 @@ spec:
                       when importing resources.
                     type: boolean
                   securityGroupId:
-                    description: The ID of the security group to be associated with
-                      the VPC endpoint.
+                    description: ID of the security group to be associated with the
+                      VPC endpoint.
                     type: string
                   securityGroupIdRef:
                     description: Reference to a SecurityGroup in ec2 to populate securityGroupId.
@@ -351,8 +351,8 @@ spec:
                         type: object
                     type: object
                   vpcEndpointId:
-                    description: The ID of the VPC endpoint with which the security
-                      group will be associated.
+                    description: ID of the VPC endpoint with which the security group
+                      will be associated.
                     type: string
                   vpcEndpointIdRef:
                     description: Reference to a VPCEndpoint in ec2 to populate vpcEndpointId.
@@ -500,7 +500,7 @@ spec:
               atProvider:
                 properties:
                   id:
-                    description: The ID of the association.
+                    description: ID of the association.
                     type: string
                   region:
                     description: |-
@@ -516,12 +516,12 @@ spec:
                       when importing resources.
                     type: boolean
                   securityGroupId:
-                    description: The ID of the security group to be associated with
-                      the VPC endpoint.
+                    description: ID of the security group to be associated with the
+                      VPC endpoint.
                     type: string
                   vpcEndpointId:
-                    description: The ID of the VPC endpoint with which the security
-                      group will be associated.
+                    description: ID of the VPC endpoint with which the security group
+                      will be associated.
                     type: string
                 type: object
               conditions:

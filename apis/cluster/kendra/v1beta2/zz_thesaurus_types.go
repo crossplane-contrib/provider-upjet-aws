@@ -15,10 +15,10 @@ import (
 
 type ThesaurusInitParameters struct {
 
-	// The description for a thesaurus.
+	// Description for a thesaurus.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The identifier of the index for a thesaurus.
+	// Identifier of the index for a thesaurus.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kendra/v1beta2.Index
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	IndexID *string `json:"indexId,omitempty" tf:"index_id,omitempty"`
@@ -31,10 +31,10 @@ type ThesaurusInitParameters struct {
 	// +kubebuilder:validation:Optional
 	IndexIDSelector *v2.Selector `json:"indexIdSelector,omitempty" tf:"-"`
 
-	// The name for the thesaurus.
+	// Name for the thesaurus.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The IAM (Identity and Access Management) role used to access the thesaurus file in S3.
+	// IAM (Identity and Access Management) role used to access the thesaurus file in S3.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
@@ -47,10 +47,10 @@ type ThesaurusInitParameters struct {
 	// +kubebuilder:validation:Optional
 	RoleArnSelector *v2.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
-	// The S3 path where your thesaurus file sits in S3. Detailed below.
+	// S3 path where your thesaurus file sits in S3. Detailed below.
 	SourceS3Path *ThesaurusSourceS3PathInitParameters `json:"sourceS3Path,omitempty" tf:"source_s3_path,omitempty"`
 
-	// Key-value map of resource tags. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
+	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
@@ -60,50 +60,50 @@ type ThesaurusObservation struct {
 	// ARN of the thesaurus.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The description for a thesaurus.
+	// Description for a thesaurus.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The unique identifiers of the thesaurus and index separated by a slash (/).
+	// Unique identifiers of the thesaurus and index separated by a slash (/).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The identifier of the index for a thesaurus.
+	// Identifier of the index for a thesaurus.
 	IndexID *string `json:"indexId,omitempty" tf:"index_id,omitempty"`
 
-	// The name for the thesaurus.
+	// Name for the thesaurus.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The IAM (Identity and Access Management) role used to access the thesaurus file in S3.
+	// IAM (Identity and Access Management) role used to access the thesaurus file in S3.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
-	// The S3 path where your thesaurus file sits in S3. Detailed below.
+	// S3 path where your thesaurus file sits in S3. Detailed below.
 	SourceS3Path *ThesaurusSourceS3PathObservation `json:"sourceS3Path,omitempty" tf:"source_s3_path,omitempty"`
 
-	// The current status of the thesaurus.
+	// Current status of the thesaurus.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
-	// Key-value map of resource tags. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
+	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// The unique identifiers of the thesaurus and index separated by a slash (/).
+	// Unique identifier of the thesaurus.
 	ThesaurusID *string `json:"thesaurusId,omitempty" tf:"thesaurus_id,omitempty"`
 }
 
 type ThesaurusParameters struct {
 
-	// The description for a thesaurus.
+	// Description for a thesaurus.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The identifier of the index for a thesaurus.
+	// Identifier of the index for a thesaurus.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kendra/v1beta2.Index
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -117,7 +117,7 @@ type ThesaurusParameters struct {
 	// +kubebuilder:validation:Optional
 	IndexIDSelector *v2.Selector `json:"indexIdSelector,omitempty" tf:"-"`
 
-	// The name for the thesaurus.
+	// Name for the thesaurus.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -126,7 +126,7 @@ type ThesaurusParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// The IAM (Identity and Access Management) role used to access the thesaurus file in S3.
+	// IAM (Identity and Access Management) role used to access the thesaurus file in S3.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -140,11 +140,11 @@ type ThesaurusParameters struct {
 	// +kubebuilder:validation:Optional
 	RoleArnSelector *v2.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
-	// The S3 path where your thesaurus file sits in S3. Detailed below.
+	// S3 path where your thesaurus file sits in S3. Detailed below.
 	// +kubebuilder:validation:Optional
 	SourceS3Path *ThesaurusSourceS3PathParameters `json:"sourceS3Path,omitempty" tf:"source_s3_path,omitempty"`
 
-	// Key-value map of resource tags. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
+	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -152,7 +152,7 @@ type ThesaurusParameters struct {
 
 type ThesaurusSourceS3PathInitParameters struct {
 
-	// The name of the S3 bucket that contains the file.
+	// Name of the S3 bucket that contains the file.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/s3/v1beta2.Bucket
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
@@ -165,7 +165,7 @@ type ThesaurusSourceS3PathInitParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketSelector *v2.Selector `json:"bucketSelector,omitempty" tf:"-"`
 
-	// The name of the file.
+	// Name of the file.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/s3/v1beta2.Object
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("key",false)
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
@@ -181,16 +181,16 @@ type ThesaurusSourceS3PathInitParameters struct {
 
 type ThesaurusSourceS3PathObservation struct {
 
-	// The name of the S3 bucket that contains the file.
+	// Name of the S3 bucket that contains the file.
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
-	// The name of the file.
+	// Name of the file.
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 }
 
 type ThesaurusSourceS3PathParameters struct {
 
-	// The name of the S3 bucket that contains the file.
+	// Name of the S3 bucket that contains the file.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/s3/v1beta2.Bucket
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -204,7 +204,7 @@ type ThesaurusSourceS3PathParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketSelector *v2.Selector `json:"bucketSelector,omitempty" tf:"-"`
 
-	// The name of the file.
+	// Name of the file.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/s3/v1beta2.Object
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("key",false)
 	// +kubebuilder:validation:Optional

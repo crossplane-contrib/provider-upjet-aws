@@ -22,7 +22,7 @@ type EventSubscriptionInitParameters struct {
 	// +listType=set
 	EventCategories []*string `json:"eventCategories,omitempty" tf:"event_categories,omitempty"`
 
-	// SNS topic arn to send events on.
+	// SNS topic ARN to send events on.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/sns/v1beta1.Topic
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	SnsTopicArn *string `json:"snsTopicArn,omitempty" tf:"sns_topic_arn,omitempty"`
@@ -35,7 +35,7 @@ type EventSubscriptionInitParameters struct {
 	// +kubebuilder:validation:Optional
 	SnsTopicArnSelector *v2.Selector `json:"snsTopicArnSelector,omitempty" tf:"-"`
 
-	// Ids of sources to listen to. If you don't specify a value, notifications are provided for all sources.
+	// IDs of sources to listen to. If you don't specify a value, notifications are provided for all sources.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/dms/v1beta1.ReplicationTask
 	// +listType=set
 	SourceIds []*string `json:"sourceIds,omitempty" tf:"source_ids,omitempty"`
@@ -74,10 +74,10 @@ type EventSubscriptionObservation struct {
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// SNS topic arn to send events on.
+	// SNS topic ARN to send events on.
 	SnsTopicArn *string `json:"snsTopicArn,omitempty" tf:"sns_topic_arn,omitempty"`
 
-	// Ids of sources to listen to. If you don't specify a value, notifications are provided for all sources.
+	// IDs of sources to listen to. If you don't specify a value, notifications are provided for all sources.
 	// +listType=set
 	SourceIds []*string `json:"sourceIds,omitempty" tf:"source_ids,omitempty"`
 
@@ -109,7 +109,7 @@ type EventSubscriptionParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// SNS topic arn to send events on.
+	// SNS topic ARN to send events on.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/sns/v1beta1.Topic
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -123,7 +123,7 @@ type EventSubscriptionParameters struct {
 	// +kubebuilder:validation:Optional
 	SnsTopicArnSelector *v2.Selector `json:"snsTopicArnSelector,omitempty" tf:"-"`
 
-	// Ids of sources to listen to. If you don't specify a value, notifications are provided for all sources.
+	// IDs of sources to listen to. If you don't specify a value, notifications are provided for all sources.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/dms/v1beta1.ReplicationTask
 	// +kubebuilder:validation:Optional
 	// +listType=set

@@ -245,7 +245,7 @@ spec:
                     description: A description for the data set.
                     type: string
                   id:
-                    description: The Id of the data set.
+                    description: The ID of the data set.
                     type: string
                   name:
                     description: The name of the data set.

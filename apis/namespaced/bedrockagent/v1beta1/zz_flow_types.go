@@ -33,68 +33,68 @@ type AutoParameters struct {
 
 type CachePointInitParameters struct {
 
-	// The data type of the output. If the output doesn’t match this type at runtime, a validation error will be thrown.
+	// Type of the cache point block. Valid values: default.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type CachePointObservation struct {
 
-	// The data type of the output. If the output doesn’t match this type at runtime, a validation error will be thrown.
+	// Type of the cache point block. Valid values: default.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type CachePointParameters struct {
 
-	// The data type of the output. If the output doesn’t match this type at runtime, a validation error will be thrown.
+	// Type of the cache point block. Valid values: default.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type ChatInitParameters struct {
 
-	// A list of variables in the prompt template. See Input Variable for more information.
+	// Variables in the prompt template. See definition.node.configuration.prompt.source_configuration.inline.template_configuration.chat.input_variable Block for details.
 	InputVariable []InputVariableInitParameters `json:"inputVariable,omitempty" tf:"input_variable,omitempty"`
 
-	// A list of messages in the chat for the prompt. See Message for more information.
+	// Messages in the chat for the prompt. See definition.node.configuration.prompt.source_configuration.inline.template_configuration.chat.message Block for details.
 	Message []MessageInitParameters `json:"message,omitempty" tf:"message,omitempty"`
 
-	// A list of system prompts to provide context to the model or to describe how it should behave. See System for more information.
+	// System prompts that provide context to the model or describe how it should behave. See definition.node.configuration.prompt.source_configuration.inline.template_configuration.chat.system Block for details.
 	System []SystemInitParameters `json:"system,omitempty" tf:"system,omitempty"`
 
-	// Configuration information for the tools that the model can use when generating a response. See Tool Configuration for more information.
+	// Configuration information for the tools that the model can use when generating a response. See definition.node.configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration Block for details.
 	ToolConfiguration *ToolConfigurationInitParameters `json:"toolConfiguration,omitempty" tf:"tool_configuration,omitempty"`
 }
 
 type ChatObservation struct {
 
-	// A list of variables in the prompt template. See Input Variable for more information.
+	// Variables in the prompt template. See definition.node.configuration.prompt.source_configuration.inline.template_configuration.chat.input_variable Block for details.
 	InputVariable []InputVariableObservation `json:"inputVariable,omitempty" tf:"input_variable,omitempty"`
 
-	// A list of messages in the chat for the prompt. See Message for more information.
+	// Messages in the chat for the prompt. See definition.node.configuration.prompt.source_configuration.inline.template_configuration.chat.message Block for details.
 	Message []MessageObservation `json:"message,omitempty" tf:"message,omitempty"`
 
-	// A list of system prompts to provide context to the model or to describe how it should behave. See System for more information.
+	// System prompts that provide context to the model or describe how it should behave. See definition.node.configuration.prompt.source_configuration.inline.template_configuration.chat.system Block for details.
 	System []SystemObservation `json:"system,omitempty" tf:"system,omitempty"`
 
-	// Configuration information for the tools that the model can use when generating a response. See Tool Configuration for more information.
+	// Configuration information for the tools that the model can use when generating a response. See definition.node.configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration Block for details.
 	ToolConfiguration *ToolConfigurationObservation `json:"toolConfiguration,omitempty" tf:"tool_configuration,omitempty"`
 }
 
 type ChatParameters struct {
 
-	// A list of variables in the prompt template. See Input Variable for more information.
+	// Variables in the prompt template. See definition.node.configuration.prompt.source_configuration.inline.template_configuration.chat.input_variable Block for details.
 	// +kubebuilder:validation:Optional
 	InputVariable []InputVariableParameters `json:"inputVariable,omitempty" tf:"input_variable,omitempty"`
 
-	// A list of messages in the chat for the prompt. See Message for more information.
+	// Messages in the chat for the prompt. See definition.node.configuration.prompt.source_configuration.inline.template_configuration.chat.message Block for details.
 	// +kubebuilder:validation:Optional
 	Message []MessageParameters `json:"message,omitempty" tf:"message,omitempty"`
 
-	// A list of system prompts to provide context to the model or to describe how it should behave. See System for more information.
+	// System prompts that provide context to the model or describe how it should behave. See definition.node.configuration.prompt.source_configuration.inline.template_configuration.chat.system Block for details.
 	// +kubebuilder:validation:Optional
 	System []SystemParameters `json:"system,omitempty" tf:"system,omitempty"`
 
-	// Configuration information for the tools that the model can use when generating a response. See Tool Configuration for more information.
+	// Configuration information for the tools that the model can use when generating a response. See definition.node.configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	ToolConfiguration *ToolConfigurationParameters `json:"toolConfiguration,omitempty" tf:"tool_configuration,omitempty"`
 }
@@ -110,67 +110,67 @@ type CollectorParameters struct {
 
 type ConditionConditionInitParameters struct {
 
-	// An expression that formats the input for the node. For an explanation of how to create expressions, see Expressions in Prompt flows in Amazon Bedrock.
+	// Expression that sets the condition. You must refer to at least one of the inputs in the condition. For more information, expand the Condition node section in Node types in prompt flows.
 	Expression *string `json:"expression,omitempty" tf:"expression,omitempty"`
 
-	// The name of the tool.
+	// Name for the condition that you can reference.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type ConditionConditionObservation struct {
 
-	// An expression that formats the input for the node. For an explanation of how to create expressions, see Expressions in Prompt flows in Amazon Bedrock.
+	// Expression that sets the condition. You must refer to at least one of the inputs in the condition. For more information, expand the Condition node section in Node types in prompt flows.
 	Expression *string `json:"expression,omitempty" tf:"expression,omitempty"`
 
-	// The name of the tool.
+	// Name for the condition that you can reference.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type ConditionConditionParameters struct {
 
-	// An expression that formats the input for the node. For an explanation of how to create expressions, see Expressions in Prompt flows in Amazon Bedrock.
+	// Expression that sets the condition. You must refer to at least one of the inputs in the condition. For more information, expand the Condition node section in Node types in prompt flows.
 	// +kubebuilder:validation:Optional
 	Expression *string `json:"expression,omitempty" tf:"expression,omitempty"`
 
-	// The name of the tool.
+	// Name for the condition that you can reference.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 }
 
 type ConditionInitParameters struct {
 
-	// Contains configurations for a Condition node in your flow. Defines conditions that lead to different branches of the flow. See Condition Node Configuration for more information.
+	// List of conditions. See definition.node.configuration.condition.condition Block for details.
 	Condition []ConditionConditionInitParameters `json:"condition,omitempty" tf:"condition,omitempty"`
 }
 
 type ConditionObservation struct {
 
-	// Contains configurations for a Condition node in your flow. Defines conditions that lead to different branches of the flow. See Condition Node Configuration for more information.
+	// List of conditions. See definition.node.configuration.condition.condition Block for details.
 	Condition []ConditionConditionObservation `json:"condition,omitempty" tf:"condition,omitempty"`
 }
 
 type ConditionParameters struct {
 
-	// Contains configurations for a Condition node in your flow. Defines conditions that lead to different branches of the flow. See Condition Node Configuration for more information.
+	// List of conditions. See definition.node.configuration.condition.condition Block for details.
 	// +kubebuilder:validation:Optional
 	Condition []ConditionConditionParameters `json:"condition,omitempty" tf:"condition,omitempty"`
 }
 
 type ConditionalInitParameters struct {
 
-	// Contains configurations for a Condition node in your flow. Defines conditions that lead to different branches of the flow. See Condition Node Configuration for more information.
+	// Condition that triggers this connection. For more information about how to write conditions, see the Condition node type in the Node types topic in the Amazon Bedrock User Guide.
 	Condition *string `json:"condition,omitempty" tf:"condition,omitempty"`
 }
 
 type ConditionalObservation struct {
 
-	// Contains configurations for a Condition node in your flow. Defines conditions that lead to different branches of the flow. See Condition Node Configuration for more information.
+	// Condition that triggers this connection. For more information about how to write conditions, see the Condition node type in the Node types topic in the Amazon Bedrock User Guide.
 	Condition *string `json:"condition,omitempty" tf:"condition,omitempty"`
 }
 
 type ConditionalParameters struct {
 
-	// Contains configurations for a Condition node in your flow. Defines conditions that lead to different branches of the flow. See Condition Node Configuration for more information.
+	// Condition that triggers this connection. For more information about how to write conditions, see the Condition node type in the Node types topic in the Amazon Bedrock User Guide.
 	// +kubebuilder:validation:Optional
 	Condition *string `json:"condition" tf:"condition,omitempty"`
 }
@@ -196,175 +196,175 @@ type ConfigurationAgentParameters struct {
 
 type ConfigurationInitParameters struct {
 
-	// The configuration of a connection originating from a Condition node. See Conditional Connection Configuration for more information.
+	// Configuration of a connection originating from a Condition node. See definition.connection.configuration.conditional Block for details.
 	Conditional *ConditionalInitParameters `json:"conditional,omitempty" tf:"conditional,omitempty"`
 
-	// The configuration of a connection originating from a node that isn’t a Condition node. See Data Connection Configuration for more information.
+	// Configuration of a connection originating from a node that isn't a Condition node. See definition.connection.configuration.data Block for details.
 	Data *DataInitParameters `json:"data,omitempty" tf:"data,omitempty"`
 }
 
 type ConfigurationObservation struct {
 
-	// The configuration of a connection originating from a Condition node. See Conditional Connection Configuration for more information.
+	// Configuration of a connection originating from a Condition node. See definition.connection.configuration.conditional Block for details.
 	Conditional *ConditionalObservation `json:"conditional,omitempty" tf:"conditional,omitempty"`
 
-	// The configuration of a connection originating from a node that isn’t a Condition node. See Data Connection Configuration for more information.
+	// Configuration of a connection originating from a node that isn't a Condition node. See definition.connection.configuration.data Block for details.
 	Data *DataObservation `json:"data,omitempty" tf:"data,omitempty"`
 }
 
 type ConfigurationParameters struct {
 
-	// The configuration of a connection originating from a Condition node. See Conditional Connection Configuration for more information.
+	// Configuration of a connection originating from a Condition node. See definition.connection.configuration.conditional Block for details.
 	// +kubebuilder:validation:Optional
 	Conditional *ConditionalParameters `json:"conditional,omitempty" tf:"conditional,omitempty"`
 
-	// The configuration of a connection originating from a node that isn’t a Condition node. See Data Connection Configuration for more information.
+	// Configuration of a connection originating from a node that isn't a Condition node. See definition.connection.configuration.data Block for details.
 	// +kubebuilder:validation:Optional
 	Data *DataParameters `json:"data,omitempty" tf:"data,omitempty"`
 }
 
 type ConnectionInitParameters struct {
 
-	// Configuration of the connection. See Connection Configuration for more information.
+	// Configuration of the connection. See definition.connection.configuration Block for details.
 	Configuration *ConfigurationInitParameters `json:"configuration,omitempty" tf:"configuration,omitempty"`
 
-	// A name for the connection that you can reference.
+	// Name for the connection that you can reference.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The node that the connection starts at.
+	// Node that the connection starts at.
 	Source *string `json:"source,omitempty" tf:"source,omitempty"`
 
-	// The node that the connection ends at.
+	// Node that the connection ends at.
 	Target *string `json:"target,omitempty" tf:"target,omitempty"`
 
-	// Whether the source node that the connection begins from is a condition node Conditional or not Data.
+	// Whether the source node that the connection begins from is a condition node (Conditional) or not (Data).
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type ConnectionObservation struct {
 
-	// Configuration of the connection. See Connection Configuration for more information.
+	// Configuration of the connection. See definition.connection.configuration Block for details.
 	Configuration *ConfigurationObservation `json:"configuration,omitempty" tf:"configuration,omitempty"`
 
-	// A name for the connection that you can reference.
+	// Name for the connection that you can reference.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The node that the connection starts at.
+	// Node that the connection starts at.
 	Source *string `json:"source,omitempty" tf:"source,omitempty"`
 
-	// The node that the connection ends at.
+	// Node that the connection ends at.
 	Target *string `json:"target,omitempty" tf:"target,omitempty"`
 
-	// Whether the source node that the connection begins from is a condition node Conditional or not Data.
+	// Whether the source node that the connection begins from is a condition node (Conditional) or not (Data).
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type ConnectionParameters struct {
 
-	// Configuration of the connection. See Connection Configuration for more information.
+	// Configuration of the connection. See definition.connection.configuration Block for details.
 	// +kubebuilder:validation:Optional
 	Configuration *ConfigurationParameters `json:"configuration,omitempty" tf:"configuration,omitempty"`
 
-	// A name for the connection that you can reference.
+	// Name for the connection that you can reference.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// The node that the connection starts at.
+	// Node that the connection starts at.
 	// +kubebuilder:validation:Optional
 	Source *string `json:"source" tf:"source,omitempty"`
 
-	// The node that the connection ends at.
+	// Node that the connection ends at.
 	// +kubebuilder:validation:Optional
 	Target *string `json:"target" tf:"target,omitempty"`
 
-	// Whether the source node that the connection begins from is a condition node Conditional or not Data.
+	// Whether the source node that the connection begins from is a condition node (Conditional) or not (Data).
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type ContentInitParameters struct {
 
-	// Creates a cache checkpoint within a tool designation. See Cache Point for more information.
+	// Cache checkpoint within a message. See definition.node.configuration.prompt.source_configuration.inline.template_configuration.chat.message.content.cache_point Block for details.
 	CachePoint *CachePointInitParameters `json:"cachePoint,omitempty" tf:"cache_point,omitempty"`
 
-	// The message for the prompt.
+	// Text in the message.
 	Text *string `json:"text,omitempty" tf:"text,omitempty"`
 }
 
 type ContentObservation struct {
 
-	// Creates a cache checkpoint within a tool designation. See Cache Point for more information.
+	// Cache checkpoint within a message. See definition.node.configuration.prompt.source_configuration.inline.template_configuration.chat.message.content.cache_point Block for details.
 	CachePoint *CachePointObservation `json:"cachePoint,omitempty" tf:"cache_point,omitempty"`
 
-	// The message for the prompt.
+	// Text in the message.
 	Text *string `json:"text,omitempty" tf:"text,omitempty"`
 }
 
 type ContentParameters struct {
 
-	// Creates a cache checkpoint within a tool designation. See Cache Point for more information.
+	// Cache checkpoint within a message. See definition.node.configuration.prompt.source_configuration.inline.template_configuration.chat.message.content.cache_point Block for details.
 	// +kubebuilder:validation:Optional
 	CachePoint *CachePointParameters `json:"cachePoint,omitempty" tf:"cache_point,omitempty"`
 
-	// The message for the prompt.
+	// Text in the message.
 	// +kubebuilder:validation:Optional
 	Text *string `json:"text,omitempty" tf:"text,omitempty"`
 }
 
 type DataInitParameters struct {
 
-	// The name of the output in the source node that the connection begins from.
+	// Name of the output in the source node that the connection begins from.
 	SourceOutput *string `json:"sourceOutput,omitempty" tf:"source_output,omitempty"`
 
-	// The name of the input in the target node that the connection ends at.
+	// Name of the input in the target node that the connection ends at.
 	TargetInput *string `json:"targetInput,omitempty" tf:"target_input,omitempty"`
 }
 
 type DataObservation struct {
 
-	// The name of the output in the source node that the connection begins from.
+	// Name of the output in the source node that the connection begins from.
 	SourceOutput *string `json:"sourceOutput,omitempty" tf:"source_output,omitempty"`
 
-	// The name of the input in the target node that the connection ends at.
+	// Name of the input in the target node that the connection ends at.
 	TargetInput *string `json:"targetInput,omitempty" tf:"target_input,omitempty"`
 }
 
 type DataParameters struct {
 
-	// The name of the output in the source node that the connection begins from.
+	// Name of the output in the source node that the connection begins from.
 	// +kubebuilder:validation:Optional
 	SourceOutput *string `json:"sourceOutput" tf:"source_output,omitempty"`
 
-	// The name of the input in the target node that the connection ends at.
+	// Name of the input in the target node that the connection ends at.
 	// +kubebuilder:validation:Optional
 	TargetInput *string `json:"targetInput" tf:"target_input,omitempty"`
 }
 
 type DefinitionInitParameters struct {
 
-	// A list of connection definitions in the flow. See Connection for more information.
+	// List of connection definitions in the flow. See definition.connection Block for details.
 	Connection []ConnectionInitParameters `json:"connection,omitempty" tf:"connection,omitempty"`
 
-	// A list of node definitions in the flow. See Node for more information.
+	// List of node definitions in the flow. See definition.node Block for details.
 	Node []NodeInitParameters `json:"node,omitempty" tf:"node,omitempty"`
 }
 
 type DefinitionObservation struct {
 
-	// A list of connection definitions in the flow. See Connection for more information.
+	// List of connection definitions in the flow. See definition.connection Block for details.
 	Connection []ConnectionObservation `json:"connection,omitempty" tf:"connection,omitempty"`
 
-	// A list of node definitions in the flow. See Node for more information.
+	// List of node definitions in the flow. See definition.node Block for details.
 	Node []NodeObservation `json:"node,omitempty" tf:"node,omitempty"`
 }
 
 type DefinitionParameters struct {
 
-	// A list of connection definitions in the flow. See Connection for more information.
+	// List of connection definitions in the flow. See definition.connection Block for details.
 	// +kubebuilder:validation:Optional
 	Connection []ConnectionParameters `json:"connection,omitempty" tf:"connection,omitempty"`
 
-	// A list of node definitions in the flow. See Node for more information.
+	// List of node definitions in the flow. See definition.node Block for details.
 	// +kubebuilder:validation:Optional
 	Node []NodeParameters `json:"node,omitempty" tf:"node,omitempty"`
 }
@@ -384,10 +384,10 @@ type FlowInitParameters struct {
 	// +kubebuilder:validation:Optional
 	CustomerEncryptionKeyArnSelector *v2.NamespacedSelector `json:"customerEncryptionKeyArnSelector,omitempty" tf:"-"`
 
-	// A definition of the nodes and connections between nodes in the flow. See Definition for more information.
+	// Nodes and connections between nodes in the flow. See definition Block for details.
 	Definition *DefinitionInitParameters `json:"definition,omitempty" tf:"definition,omitempty"`
 
-	// A description for the flow.
+	// Description for the flow.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// ARN of the service role with permissions to create and manage a flow. For more information, see Create a service role for flows in Amazon Bedrock in the Amazon Bedrock User Guide.
@@ -403,7 +403,7 @@ type FlowInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ExecutionRoleArnSelector *v2.NamespacedSelector `json:"executionRoleArnSelector,omitempty" tf:"-"`
 
-	// A name for the flow.
+	// Name for the flow.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Key-value map of resource tags.
@@ -416,46 +416,46 @@ type FlowObservation struct {
 	// ARN of the flow.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The time at which the flow was created.
+	// Time at which the flow was created.
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
 	// ARN of the KMS key to encrypt the flow.
 	CustomerEncryptionKeyArn *string `json:"customerEncryptionKeyArn,omitempty" tf:"customer_encryption_key_arn,omitempty"`
 
-	// A definition of the nodes and connections between nodes in the flow. See Definition for more information.
+	// Nodes and connections between nodes in the flow. See definition Block for details.
 	Definition *DefinitionObservation `json:"definition,omitempty" tf:"definition,omitempty"`
 
-	// A description for the flow.
+	// Description for the flow.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// ARN of the service role with permissions to create and manage a flow. For more information, see Create a service role for flows in Amazon Bedrock in the Amazon Bedrock User Guide.
 	ExecutionRoleArn *string `json:"executionRoleArn,omitempty" tf:"execution_role_arn,omitempty"`
 
-	// The unique identifier of the flow.
+	// Unique identifier of the flow.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// A name for the flow.
+	// Name for the flow.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The status of the flow.
+	// Status of the flow.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// The time at which the flow was last updated.
+	// Time at which the flow was last updated.
 	UpdatedAt *string `json:"updatedAt,omitempty" tf:"updated_at,omitempty"`
 
-	// The version of the flow.
+	// Version of the flow.
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
 
@@ -475,11 +475,11 @@ type FlowParameters struct {
 	// +kubebuilder:validation:Optional
 	CustomerEncryptionKeyArnSelector *v2.NamespacedSelector `json:"customerEncryptionKeyArnSelector,omitempty" tf:"-"`
 
-	// A definition of the nodes and connections between nodes in the flow. See Definition for more information.
+	// Nodes and connections between nodes in the flow. See definition Block for details.
 	// +kubebuilder:validation:Optional
 	Definition *DefinitionParameters `json:"definition,omitempty" tf:"definition,omitempty"`
 
-	// A description for the flow.
+	// Description for the flow.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
@@ -497,7 +497,7 @@ type FlowParameters struct {
 	// +kubebuilder:validation:Optional
 	ExecutionRoleArnSelector *v2.NamespacedSelector `json:"executionRoleArnSelector,omitempty" tf:"-"`
 
-	// A name for the flow.
+	// Name for the flow.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -517,7 +517,7 @@ type InferenceConfigurationTextInitParameters struct {
 	// Maximum number of tokens to return in the response.
 	MaxTokens *float64 `json:"maxTokens,omitempty" tf:"max_tokens,omitempty"`
 
-	// List of strings that define sequences after which the model will stop generating.
+	// List of strings that define sequences after which the model stops generating.
 	StopSequences []*string `json:"stopSequences,omitempty" tf:"stop_sequences,omitempty"`
 
 	// Controls the randomness of the response. Choose a lower value for more predictable outputs and a higher value for more surprising outputs.
@@ -532,7 +532,7 @@ type InferenceConfigurationTextObservation struct {
 	// Maximum number of tokens to return in the response.
 	MaxTokens *float64 `json:"maxTokens,omitempty" tf:"max_tokens,omitempty"`
 
-	// List of strings that define sequences after which the model will stop generating.
+	// List of strings that define sequences after which the model stops generating.
 	StopSequences []*string `json:"stopSequences,omitempty" tf:"stop_sequences,omitempty"`
 
 	// Controls the randomness of the response. Choose a lower value for more predictable outputs and a higher value for more surprising outputs.
@@ -548,7 +548,7 @@ type InferenceConfigurationTextParameters struct {
 	// +kubebuilder:validation:Optional
 	MaxTokens *float64 `json:"maxTokens,omitempty" tf:"max_tokens,omitempty"`
 
-	// List of strings that define sequences after which the model will stop generating.
+	// List of strings that define sequences after which the model stops generating.
 	// +kubebuilder:validation:Optional
 	StopSequences []*string `json:"stopSequences,omitempty" tf:"stop_sequences,omitempty"`
 
@@ -563,48 +563,48 @@ type InferenceConfigurationTextParameters struct {
 
 type InlineCodeInitParameters struct {
 
-	// The code that's executed in your inline code node.
+	// Code that's executed in your inline code node.
 	Code *string `json:"code,omitempty" tf:"code,omitempty"`
 
-	// The programming language used by your inline code node.
+	// Programming language used by your inline code node.
 	Language *string `json:"language,omitempty" tf:"language,omitempty"`
 }
 
 type InlineCodeObservation struct {
 
-	// The code that's executed in your inline code node.
+	// Code that's executed in your inline code node.
 	Code *string `json:"code,omitempty" tf:"code,omitempty"`
 
-	// The programming language used by your inline code node.
+	// Programming language used by your inline code node.
 	Language *string `json:"language,omitempty" tf:"language,omitempty"`
 }
 
 type InlineCodeParameters struct {
 
-	// The code that's executed in your inline code node.
+	// Code that's executed in your inline code node.
 	// +kubebuilder:validation:Optional
 	Code *string `json:"code" tf:"code,omitempty"`
 
-	// The programming language used by your inline code node.
+	// Programming language used by your inline code node.
 	// +kubebuilder:validation:Optional
 	Language *string `json:"language" tf:"language,omitempty"`
 }
 
 type InlineInferenceConfigurationInitParameters struct {
 
-	// The message for the prompt.
+	// Inference configurations for a text prompt. See definition.node.configuration.prompt.source_configuration.inline.inference_configuration.text Block for details.
 	Text *InferenceConfigurationTextInitParameters `json:"text,omitempty" tf:"text,omitempty"`
 }
 
 type InlineInferenceConfigurationObservation struct {
 
-	// The message for the prompt.
+	// Inference configurations for a text prompt. See definition.node.configuration.prompt.source_configuration.inline.inference_configuration.text Block for details.
 	Text *InferenceConfigurationTextObservation `json:"text,omitempty" tf:"text,omitempty"`
 }
 
 type InlineInferenceConfigurationParameters struct {
 
-	// The message for the prompt.
+	// Inference configurations for a text prompt. See definition.node.configuration.prompt.source_configuration.inline.inference_configuration.text Block for details.
 	// +kubebuilder:validation:Optional
 	Text *InferenceConfigurationTextParameters `json:"text,omitempty" tf:"text,omitempty"`
 }
@@ -614,16 +614,16 @@ type InlineInitParameters struct {
 	// Additional fields to be included in the model request for the Prompt node.
 	AdditionalModelRequestFields *string `json:"additionalModelRequestFields,omitempty" tf:"additional_model_request_fields,omitempty"`
 
-	// Configures model inference for knowledge base query and response generation. See Inference Configuration for more information.
+	// Inference configurations for the prompt. See definition.node.configuration.prompt.source_configuration.inline.inference_configuration Block for details.
 	InferenceConfiguration *InlineInferenceConfigurationInitParameters `json:"inferenceConfiguration,omitempty" tf:"inference_configuration,omitempty"`
 
-	// The unique identifier of the model or inference profile to use to generate a response from the query results. Omit this field if you want to return the retrieved results as an array.
+	// Unique identifier of the model or inference profile to run inference with.
 	ModelID *string `json:"modelId,omitempty" tf:"model_id,omitempty"`
 
-	// Contains a prompt and variables in the prompt that can be replaced with values at runtime. See Prompt Template Configuration for more information.
+	// Prompt and variables in the prompt that can be replaced with values at runtime. See definition.node.configuration.prompt.source_configuration.inline.template_configuration Block for details.
 	TemplateConfiguration *TemplateConfigurationInitParameters `json:"templateConfiguration,omitempty" tf:"template_configuration,omitempty"`
 
-	// The type of prompt template. Valid values: TEXT, CHAT.
+	// Type of prompt template. Valid values: TEXT, CHAT.
 	TemplateType *string `json:"templateType,omitempty" tf:"template_type,omitempty"`
 }
 
@@ -632,16 +632,16 @@ type InlineObservation struct {
 	// Additional fields to be included in the model request for the Prompt node.
 	AdditionalModelRequestFields *string `json:"additionalModelRequestFields,omitempty" tf:"additional_model_request_fields,omitempty"`
 
-	// Configures model inference for knowledge base query and response generation. See Inference Configuration for more information.
+	// Inference configurations for the prompt. See definition.node.configuration.prompt.source_configuration.inline.inference_configuration Block for details.
 	InferenceConfiguration *InlineInferenceConfigurationObservation `json:"inferenceConfiguration,omitempty" tf:"inference_configuration,omitempty"`
 
-	// The unique identifier of the model or inference profile to use to generate a response from the query results. Omit this field if you want to return the retrieved results as an array.
+	// Unique identifier of the model or inference profile to run inference with.
 	ModelID *string `json:"modelId,omitempty" tf:"model_id,omitempty"`
 
-	// Contains a prompt and variables in the prompt that can be replaced with values at runtime. See Prompt Template Configuration for more information.
+	// Prompt and variables in the prompt that can be replaced with values at runtime. See definition.node.configuration.prompt.source_configuration.inline.template_configuration Block for details.
 	TemplateConfiguration *TemplateConfigurationObservation `json:"templateConfiguration,omitempty" tf:"template_configuration,omitempty"`
 
-	// The type of prompt template. Valid values: TEXT, CHAT.
+	// Type of prompt template. Valid values: TEXT, CHAT.
 	TemplateType *string `json:"templateType,omitempty" tf:"template_type,omitempty"`
 }
 
@@ -651,19 +651,19 @@ type InlineParameters struct {
 	// +kubebuilder:validation:Optional
 	AdditionalModelRequestFields *string `json:"additionalModelRequestFields,omitempty" tf:"additional_model_request_fields,omitempty"`
 
-	// Configures model inference for knowledge base query and response generation. See Inference Configuration for more information.
+	// Inference configurations for the prompt. See definition.node.configuration.prompt.source_configuration.inline.inference_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	InferenceConfiguration *InlineInferenceConfigurationParameters `json:"inferenceConfiguration,omitempty" tf:"inference_configuration,omitempty"`
 
-	// The unique identifier of the model or inference profile to use to generate a response from the query results. Omit this field if you want to return the retrieved results as an array.
+	// Unique identifier of the model or inference profile to run inference with.
 	// +kubebuilder:validation:Optional
 	ModelID *string `json:"modelId" tf:"model_id,omitempty"`
 
-	// Contains a prompt and variables in the prompt that can be replaced with values at runtime. See Prompt Template Configuration for more information.
+	// Prompt and variables in the prompt that can be replaced with values at runtime. See definition.node.configuration.prompt.source_configuration.inline.template_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	TemplateConfiguration *TemplateConfigurationParameters `json:"templateConfiguration,omitempty" tf:"template_configuration,omitempty"`
 
-	// The type of prompt template. Valid values: TEXT, CHAT.
+	// Type of prompt template. Valid values: TEXT, CHAT.
 	// +kubebuilder:validation:Optional
 	TemplateType *string `json:"templateType" tf:"template_type,omitempty"`
 }
@@ -679,38 +679,38 @@ type InputParameters struct {
 
 type InputSchemaInitParameters struct {
 
-	// A JSON object defining the input schema for the tool.
+	// JSON object defining the input schema for the tool.
 	JSON *string `json:"json,omitempty" tf:"json,omitempty"`
 }
 
 type InputSchemaObservation struct {
 
-	// A JSON object defining the input schema for the tool.
+	// JSON object defining the input schema for the tool.
 	JSON *string `json:"json,omitempty" tf:"json,omitempty"`
 }
 
 type InputSchemaParameters struct {
 
-	// A JSON object defining the input schema for the tool.
+	// JSON object defining the input schema for the tool.
 	// +kubebuilder:validation:Optional
 	JSON *string `json:"json,omitempty" tf:"json,omitempty"`
 }
 
 type InputVariableInitParameters struct {
 
-	// The name of the tool.
+	// Name of the variable.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type InputVariableObservation struct {
 
-	// The name of the tool.
+	// Name of the variable.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type InputVariableParameters struct {
 
-	// The name of the tool.
+	// Name of the variable.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 }
@@ -726,61 +726,61 @@ type IteratorParameters struct {
 
 type KnowledgeBaseGuardrailConfigurationInitParameters struct {
 
-	// The unique identifier of the guardrail.
+	// Unique identifier of the guardrail.
 	GuardrailIdentifier *string `json:"guardrailIdentifier,omitempty" tf:"guardrail_identifier,omitempty"`
 
-	// The version of the guardrail.
+	// Version of the guardrail.
 	GuardrailVersion *string `json:"guardrailVersion,omitempty" tf:"guardrail_version,omitempty"`
 }
 
 type KnowledgeBaseGuardrailConfigurationObservation struct {
 
-	// The unique identifier of the guardrail.
+	// Unique identifier of the guardrail.
 	GuardrailIdentifier *string `json:"guardrailIdentifier,omitempty" tf:"guardrail_identifier,omitempty"`
 
-	// The version of the guardrail.
+	// Version of the guardrail.
 	GuardrailVersion *string `json:"guardrailVersion,omitempty" tf:"guardrail_version,omitempty"`
 }
 
 type KnowledgeBaseGuardrailConfigurationParameters struct {
 
-	// The unique identifier of the guardrail.
+	// Unique identifier of the guardrail.
 	// +kubebuilder:validation:Optional
 	GuardrailIdentifier *string `json:"guardrailIdentifier" tf:"guardrail_identifier,omitempty"`
 
-	// The version of the guardrail.
+	// Version of the guardrail.
 	// +kubebuilder:validation:Optional
 	GuardrailVersion *string `json:"guardrailVersion" tf:"guardrail_version,omitempty"`
 }
 
 type KnowledgeBaseInferenceConfigurationInitParameters struct {
 
-	// The message for the prompt.
+	// Inference configurations for a text prompt. See definition.node.configuration.knowledge_base.inference_configuration.text Block for details.
 	Text *TextInitParameters `json:"text,omitempty" tf:"text,omitempty"`
 }
 
 type KnowledgeBaseInferenceConfigurationObservation struct {
 
-	// The message for the prompt.
+	// Inference configurations for a text prompt. See definition.node.configuration.knowledge_base.inference_configuration.text Block for details.
 	Text *TextObservation `json:"text,omitempty" tf:"text,omitempty"`
 }
 
 type KnowledgeBaseInferenceConfigurationParameters struct {
 
-	// The message for the prompt.
+	// Inference configurations for a text prompt. See definition.node.configuration.knowledge_base.inference_configuration.text Block for details.
 	// +kubebuilder:validation:Optional
 	Text *TextParameters `json:"text,omitempty" tf:"text,omitempty"`
 }
 
 type KnowledgeBaseInitParameters struct {
 
-	// Configures a guardrail for prompt generation. See Guardrail Configuration for more information.
+	// Configuration of a guardrail for knowledge base query and response generation. See definition.node.configuration.knowledge_base.guardrail_configuration Block for details.
 	GuardrailConfiguration *KnowledgeBaseGuardrailConfigurationInitParameters `json:"guardrailConfiguration,omitempty" tf:"guardrail_configuration,omitempty"`
 
-	// Configures model inference for knowledge base query and response generation. See Inference Configuration for more information.
+	// Configuration of model inference for knowledge base query and response generation. See definition.node.configuration.knowledge_base.inference_configuration Block for details.
 	InferenceConfiguration *KnowledgeBaseInferenceConfigurationInitParameters `json:"inferenceConfiguration,omitempty" tf:"inference_configuration,omitempty"`
 
-	// The unique identifier of the knowledge base to query.
+	// Unique identifier of the knowledge base to query.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/bedrockagent/v1beta1.KnowledgeBase
 	KnowledgeBaseID *string `json:"knowledgeBaseId,omitempty" tf:"knowledge_base_id,omitempty"`
 
@@ -792,40 +792,42 @@ type KnowledgeBaseInitParameters struct {
 	// +kubebuilder:validation:Optional
 	KnowledgeBaseIDSelector *v2.NamespacedSelector `json:"knowledgeBaseIdSelector,omitempty" tf:"-"`
 
-	// The unique identifier of the model or inference profile to use to generate a response from the query results. Omit this field if you want to return the retrieved results as an array.
+	// Unique identifier of the model or inference profile to use to generate a response from the query results.
 	ModelID *string `json:"modelId,omitempty" tf:"model_id,omitempty"`
 
+	// Maximum number of results to retrieve from the knowledge base. Valid values are between 1 and 100.
 	NumberOfResults *float64 `json:"numberOfResults,omitempty" tf:"number_of_results,omitempty"`
 }
 
 type KnowledgeBaseObservation struct {
 
-	// Configures a guardrail for prompt generation. See Guardrail Configuration for more information.
+	// Configuration of a guardrail for knowledge base query and response generation. See definition.node.configuration.knowledge_base.guardrail_configuration Block for details.
 	GuardrailConfiguration *KnowledgeBaseGuardrailConfigurationObservation `json:"guardrailConfiguration,omitempty" tf:"guardrail_configuration,omitempty"`
 
-	// Configures model inference for knowledge base query and response generation. See Inference Configuration for more information.
+	// Configuration of model inference for knowledge base query and response generation. See definition.node.configuration.knowledge_base.inference_configuration Block for details.
 	InferenceConfiguration *KnowledgeBaseInferenceConfigurationObservation `json:"inferenceConfiguration,omitempty" tf:"inference_configuration,omitempty"`
 
-	// The unique identifier of the knowledge base to query.
+	// Unique identifier of the knowledge base to query.
 	KnowledgeBaseID *string `json:"knowledgeBaseId,omitempty" tf:"knowledge_base_id,omitempty"`
 
-	// The unique identifier of the model or inference profile to use to generate a response from the query results. Omit this field if you want to return the retrieved results as an array.
+	// Unique identifier of the model or inference profile to use to generate a response from the query results.
 	ModelID *string `json:"modelId,omitempty" tf:"model_id,omitempty"`
 
+	// Maximum number of results to retrieve from the knowledge base. Valid values are between 1 and 100.
 	NumberOfResults *float64 `json:"numberOfResults,omitempty" tf:"number_of_results,omitempty"`
 }
 
 type KnowledgeBaseParameters struct {
 
-	// Configures a guardrail for prompt generation. See Guardrail Configuration for more information.
+	// Configuration of a guardrail for knowledge base query and response generation. See definition.node.configuration.knowledge_base.guardrail_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	GuardrailConfiguration *KnowledgeBaseGuardrailConfigurationParameters `json:"guardrailConfiguration,omitempty" tf:"guardrail_configuration,omitempty"`
 
-	// Configures model inference for knowledge base query and response generation. See Inference Configuration for more information.
+	// Configuration of model inference for knowledge base query and response generation. See definition.node.configuration.knowledge_base.inference_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	InferenceConfiguration *KnowledgeBaseInferenceConfigurationParameters `json:"inferenceConfiguration,omitempty" tf:"inference_configuration,omitempty"`
 
-	// The unique identifier of the knowledge base to query.
+	// Unique identifier of the knowledge base to query.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/bedrockagent/v1beta1.KnowledgeBase
 	// +kubebuilder:validation:Optional
 	KnowledgeBaseID *string `json:"knowledgeBaseId,omitempty" tf:"knowledge_base_id,omitempty"`
@@ -838,10 +840,11 @@ type KnowledgeBaseParameters struct {
 	// +kubebuilder:validation:Optional
 	KnowledgeBaseIDSelector *v2.NamespacedSelector `json:"knowledgeBaseIdSelector,omitempty" tf:"-"`
 
-	// The unique identifier of the model or inference profile to use to generate a response from the query results. Omit this field if you want to return the retrieved results as an array.
+	// Unique identifier of the model or inference profile to use to generate a response from the query results.
 	// +kubebuilder:validation:Optional
 	ModelID *string `json:"modelId" tf:"model_id,omitempty"`
 
+	// Maximum number of results to retrieve from the knowledge base. Valid values are between 1 and 100.
 	// +kubebuilder:validation:Optional
 	NumberOfResults *float64 `json:"numberOfResults,omitempty" tf:"number_of_results,omitempty"`
 }
@@ -890,7 +893,7 @@ type LexInitParameters struct {
 	// ARN of the Amazon Lex bot alias to invoke.
 	BotAliasArn *string `json:"botAliasArn,omitempty" tf:"bot_alias_arn,omitempty"`
 
-	// The Region to invoke the Amazon Lex bot in
+	// Locale to use when invoking the Amazon Lex bot, such as en_US.
 	LocaleID *string `json:"localeId,omitempty" tf:"locale_id,omitempty"`
 }
 
@@ -899,7 +902,7 @@ type LexObservation struct {
 	// ARN of the Amazon Lex bot alias to invoke.
 	BotAliasArn *string `json:"botAliasArn,omitempty" tf:"bot_alias_arn,omitempty"`
 
-	// The Region to invoke the Amazon Lex bot in
+	// Locale to use when invoking the Amazon Lex bot, such as en_US.
 	LocaleID *string `json:"localeId,omitempty" tf:"locale_id,omitempty"`
 }
 
@@ -909,194 +912,194 @@ type LexParameters struct {
 	// +kubebuilder:validation:Optional
 	BotAliasArn *string `json:"botAliasArn" tf:"bot_alias_arn,omitempty"`
 
-	// The Region to invoke the Amazon Lex bot in
+	// Locale to use when invoking the Amazon Lex bot, such as en_US.
 	// +kubebuilder:validation:Optional
 	LocaleID *string `json:"localeId" tf:"locale_id,omitempty"`
 }
 
 type MessageInitParameters struct {
 
-	// Contains the content for the message you pass to, or receive from a model. See Message Content for more information.
+	// Content for the message you pass to, or receive from, a model. See definition.node.configuration.prompt.source_configuration.inline.template_configuration.chat.message.content Block for details.
 	Content []ContentInitParameters `json:"content,omitempty" tf:"content,omitempty"`
 
-	// The role that the message belongs to.
+	// Role that the message belongs to.
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
 }
 
 type MessageObservation struct {
 
-	// Contains the content for the message you pass to, or receive from a model. See Message Content for more information.
+	// Content for the message you pass to, or receive from, a model. See definition.node.configuration.prompt.source_configuration.inline.template_configuration.chat.message.content Block for details.
 	Content []ContentObservation `json:"content,omitempty" tf:"content,omitempty"`
 
-	// The role that the message belongs to.
+	// Role that the message belongs to.
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
 }
 
 type MessageParameters struct {
 
-	// Contains the content for the message you pass to, or receive from a model. See Message Content for more information.
+	// Content for the message you pass to, or receive from, a model. See definition.node.configuration.prompt.source_configuration.inline.template_configuration.chat.message.content Block for details.
 	// +kubebuilder:validation:Optional
 	Content []ContentParameters `json:"content,omitempty" tf:"content,omitempty"`
 
-	// The role that the message belongs to.
+	// Role that the message belongs to.
 	// +kubebuilder:validation:Optional
 	Role *string `json:"role" tf:"role,omitempty"`
 }
 
 type NodeConfigurationInitParameters struct {
 
-	// Contains configurations for an agent node in your flow. Invokes an alias of an agent and returns the response. See Agent Node Configuration for more information.
+	// Configurations for an agent node in your flow. Invokes an alias of an agent and returns the response. See definition.node.configuration.agent Block for details.
 	Agent *ConfigurationAgentInitParameters `json:"agent,omitempty" tf:"agent,omitempty"`
 
-	// Contains configurations for a collector node in your flow. Collects an iteration of inputs and consolidates them into an array of outputs. This object has no fields.
+	// Configurations for a collector node in your flow. Collects an iteration of inputs and consolidates them into an array of outputs. This block has no arguments.
 	Collector *CollectorInitParameters `json:"collector,omitempty" tf:"collector,omitempty"`
 
-	// Contains configurations for a Condition node in your flow. Defines conditions that lead to different branches of the flow. See Condition Node Configuration for more information.
+	// Configurations for a Condition node in your flow. Sets conditions that lead to different branches of the flow. See definition.node.configuration.condition Block for details.
 	Condition *ConditionInitParameters `json:"condition,omitempty" tf:"condition,omitempty"`
 
-	// Contains configurations for an inline code node in your flow. See Inline Code Node Configuration for more information.
+	// Configurations for an inline code node in your flow. See definition.node.configuration.inline_code Block for details.
 	InlineCode *InlineCodeInitParameters `json:"inlineCode,omitempty" tf:"inline_code,omitempty"`
 
-	// A list of objects containing information about an input into the node. See Node Input for more information.
+	// Configurations for an input flow node in your flow. The definition.node.input block can't be specified for this node. This block has no arguments.
 	Input *InputInitParameters `json:"input,omitempty" tf:"input,omitempty"`
 
-	// Contains configurations for an iterator node in your flow. Takes an input that is an array and iteratively sends each item of the array as an output to the following node. The size of the array is also returned in the output. The output flow node at the end of the flow iteration will return a response for each member of the array. To return only one response, you can include a collector node downstream from the iterator node. This block has no fields.
+	// Configurations for an iterator node in your flow. Takes an input that is an array and iteratively sends each item of the array as an output to the following node. The size of the array is also returned in the output. The output flow node at the end of the flow iteration returns a response for each member of the array. To return only one response, you can include a collector node downstream from the iterator node. This block has no arguments.
 	Iterator *IteratorInitParameters `json:"iterator,omitempty" tf:"iterator,omitempty"`
 
-	// Contains configurations for a knowledge base node in your flow. Queries a knowledge base and returns the retrieved results or generated response. See Knowledge Base Node Configuration for more information.
+	// Configurations for a knowledge base node in your flow. Queries a knowledge base and returns a response generated from the retrieved results. See definition.node.configuration.knowledge_base Block for details.
 	KnowledgeBase *KnowledgeBaseInitParameters `json:"knowledgeBase,omitempty" tf:"knowledge_base,omitempty"`
 
-	// Contains configurations for a Lambda function node in your flow. Invokes a Lambda function. See Lambda Function Node Configuration for more information.
+	// Configurations for a Lambda function node in your flow. Invokes a Lambda function. See definition.node.configuration.lambda_function Block for details.
 	LambdaFunction *LambdaFunctionInitParameters `json:"lambdaFunction,omitempty" tf:"lambda_function,omitempty"`
 
-	// Contains configurations for a Lex node in your flow. Invokes an Amazon Lex bot to identify the intent of the input and return the intent as the output. See Lex Node Configuration for more information.
+	// Configurations for a Lex node in your flow. Invokes an Amazon Lex bot to identify the intent of the input and return the intent as the output. See definition.node.configuration.lex Block for details.
 	Lex *LexInitParameters `json:"lex,omitempty" tf:"lex,omitempty"`
 
-	// A list of objects containing information about an output from the node. See Node Output for more information.
+	// Configurations for an output flow node in your flow. The definition.node.output block can't be specified for this node. This block has no arguments.
 	Output *OutputInitParameters `json:"output,omitempty" tf:"output,omitempty"`
 
-	// Contains configurations for a prompt node in your flow. Runs a prompt and generates the model response as the output. You can use a prompt from Prompt management or you can configure one in this node. See Prompt Node Configuration for more information.
+	// Configurations for a prompt node in your flow. Runs a prompt and generates the model response as the output. You can use a prompt from Prompt management or you can configure one in this node. See definition.node.configuration.prompt Block for details.
 	Prompt *PromptInitParameters `json:"prompt,omitempty" tf:"prompt,omitempty"`
 
-	// Contains configurations for a Retrieval node in your flow. Retrieves data from an Amazon S3 location and returns it as the output. See Retrieval Node Configuration for more information.
+	// Configurations for a Retrieval node in your flow. Retrieves data from an Amazon S3 location and returns it as the output. See definition.node.configuration.retrieval Block for details.
 	Retrieval *RetrievalInitParameters `json:"retrieval,omitempty" tf:"retrieval,omitempty"`
 
-	// Contains configurations for a Storage node in your flow. Stores an input in an Amazon S3 location. See Storage Node Configuration for more information.
+	// Configurations for a Storage node in your flow. Stores an input in an Amazon S3 location. See definition.node.configuration.storage Block for details.
 	Storage *StorageInitParameters `json:"storage,omitempty" tf:"storage,omitempty"`
 }
 
 type NodeConfigurationObservation struct {
 
-	// Contains configurations for an agent node in your flow. Invokes an alias of an agent and returns the response. See Agent Node Configuration for more information.
+	// Configurations for an agent node in your flow. Invokes an alias of an agent and returns the response. See definition.node.configuration.agent Block for details.
 	Agent *ConfigurationAgentObservation `json:"agent,omitempty" tf:"agent,omitempty"`
 
-	// Contains configurations for a collector node in your flow. Collects an iteration of inputs and consolidates them into an array of outputs. This object has no fields.
+	// Configurations for a collector node in your flow. Collects an iteration of inputs and consolidates them into an array of outputs. This block has no arguments.
 	Collector *CollectorParameters `json:"collector,omitempty" tf:"collector,omitempty"`
 
-	// Contains configurations for a Condition node in your flow. Defines conditions that lead to different branches of the flow. See Condition Node Configuration for more information.
+	// Configurations for a Condition node in your flow. Sets conditions that lead to different branches of the flow. See definition.node.configuration.condition Block for details.
 	Condition *ConditionObservation `json:"condition,omitempty" tf:"condition,omitempty"`
 
-	// Contains configurations for an inline code node in your flow. See Inline Code Node Configuration for more information.
+	// Configurations for an inline code node in your flow. See definition.node.configuration.inline_code Block for details.
 	InlineCode *InlineCodeObservation `json:"inlineCode,omitempty" tf:"inline_code,omitempty"`
 
-	// A list of objects containing information about an input into the node. See Node Input for more information.
+	// Configurations for an input flow node in your flow. The definition.node.input block can't be specified for this node. This block has no arguments.
 	Input *InputParameters `json:"input,omitempty" tf:"input,omitempty"`
 
-	// Contains configurations for an iterator node in your flow. Takes an input that is an array and iteratively sends each item of the array as an output to the following node. The size of the array is also returned in the output. The output flow node at the end of the flow iteration will return a response for each member of the array. To return only one response, you can include a collector node downstream from the iterator node. This block has no fields.
+	// Configurations for an iterator node in your flow. Takes an input that is an array and iteratively sends each item of the array as an output to the following node. The size of the array is also returned in the output. The output flow node at the end of the flow iteration returns a response for each member of the array. To return only one response, you can include a collector node downstream from the iterator node. This block has no arguments.
 	Iterator *IteratorParameters `json:"iterator,omitempty" tf:"iterator,omitempty"`
 
-	// Contains configurations for a knowledge base node in your flow. Queries a knowledge base and returns the retrieved results or generated response. See Knowledge Base Node Configuration for more information.
+	// Configurations for a knowledge base node in your flow. Queries a knowledge base and returns a response generated from the retrieved results. See definition.node.configuration.knowledge_base Block for details.
 	KnowledgeBase *KnowledgeBaseObservation `json:"knowledgeBase,omitempty" tf:"knowledge_base,omitempty"`
 
-	// Contains configurations for a Lambda function node in your flow. Invokes a Lambda function. See Lambda Function Node Configuration for more information.
+	// Configurations for a Lambda function node in your flow. Invokes a Lambda function. See definition.node.configuration.lambda_function Block for details.
 	LambdaFunction *LambdaFunctionObservation `json:"lambdaFunction,omitempty" tf:"lambda_function,omitempty"`
 
-	// Contains configurations for a Lex node in your flow. Invokes an Amazon Lex bot to identify the intent of the input and return the intent as the output. See Lex Node Configuration for more information.
+	// Configurations for a Lex node in your flow. Invokes an Amazon Lex bot to identify the intent of the input and return the intent as the output. See definition.node.configuration.lex Block for details.
 	Lex *LexObservation `json:"lex,omitempty" tf:"lex,omitempty"`
 
-	// A list of objects containing information about an output from the node. See Node Output for more information.
+	// Configurations for an output flow node in your flow. The definition.node.output block can't be specified for this node. This block has no arguments.
 	Output *OutputParameters `json:"output,omitempty" tf:"output,omitempty"`
 
-	// Contains configurations for a prompt node in your flow. Runs a prompt and generates the model response as the output. You can use a prompt from Prompt management or you can configure one in this node. See Prompt Node Configuration for more information.
+	// Configurations for a prompt node in your flow. Runs a prompt and generates the model response as the output. You can use a prompt from Prompt management or you can configure one in this node. See definition.node.configuration.prompt Block for details.
 	Prompt *PromptObservation `json:"prompt,omitempty" tf:"prompt,omitempty"`
 
-	// Contains configurations for a Retrieval node in your flow. Retrieves data from an Amazon S3 location and returns it as the output. See Retrieval Node Configuration for more information.
+	// Configurations for a Retrieval node in your flow. Retrieves data from an Amazon S3 location and returns it as the output. See definition.node.configuration.retrieval Block for details.
 	Retrieval *RetrievalObservation `json:"retrieval,omitempty" tf:"retrieval,omitempty"`
 
-	// Contains configurations for a Storage node in your flow. Stores an input in an Amazon S3 location. See Storage Node Configuration for more information.
+	// Configurations for a Storage node in your flow. Stores an input in an Amazon S3 location. See definition.node.configuration.storage Block for details.
 	Storage *StorageObservation `json:"storage,omitempty" tf:"storage,omitempty"`
 }
 
 type NodeConfigurationParameters struct {
 
-	// Contains configurations for an agent node in your flow. Invokes an alias of an agent and returns the response. See Agent Node Configuration for more information.
+	// Configurations for an agent node in your flow. Invokes an alias of an agent and returns the response. See definition.node.configuration.agent Block for details.
 	// +kubebuilder:validation:Optional
 	Agent *ConfigurationAgentParameters `json:"agent,omitempty" tf:"agent,omitempty"`
 
-	// Contains configurations for a collector node in your flow. Collects an iteration of inputs and consolidates them into an array of outputs. This object has no fields.
+	// Configurations for a collector node in your flow. Collects an iteration of inputs and consolidates them into an array of outputs. This block has no arguments.
 	// +kubebuilder:validation:Optional
 	Collector *CollectorParameters `json:"collector,omitempty" tf:"collector,omitempty"`
 
-	// Contains configurations for a Condition node in your flow. Defines conditions that lead to different branches of the flow. See Condition Node Configuration for more information.
+	// Configurations for a Condition node in your flow. Sets conditions that lead to different branches of the flow. See definition.node.configuration.condition Block for details.
 	// +kubebuilder:validation:Optional
 	Condition *ConditionParameters `json:"condition,omitempty" tf:"condition,omitempty"`
 
-	// Contains configurations for an inline code node in your flow. See Inline Code Node Configuration for more information.
+	// Configurations for an inline code node in your flow. See definition.node.configuration.inline_code Block for details.
 	// +kubebuilder:validation:Optional
 	InlineCode *InlineCodeParameters `json:"inlineCode,omitempty" tf:"inline_code,omitempty"`
 
-	// A list of objects containing information about an input into the node. See Node Input for more information.
+	// Configurations for an input flow node in your flow. The definition.node.input block can't be specified for this node. This block has no arguments.
 	// +kubebuilder:validation:Optional
 	Input *InputParameters `json:"input,omitempty" tf:"input,omitempty"`
 
-	// Contains configurations for an iterator node in your flow. Takes an input that is an array and iteratively sends each item of the array as an output to the following node. The size of the array is also returned in the output. The output flow node at the end of the flow iteration will return a response for each member of the array. To return only one response, you can include a collector node downstream from the iterator node. This block has no fields.
+	// Configurations for an iterator node in your flow. Takes an input that is an array and iteratively sends each item of the array as an output to the following node. The size of the array is also returned in the output. The output flow node at the end of the flow iteration returns a response for each member of the array. To return only one response, you can include a collector node downstream from the iterator node. This block has no arguments.
 	// +kubebuilder:validation:Optional
 	Iterator *IteratorParameters `json:"iterator,omitempty" tf:"iterator,omitempty"`
 
-	// Contains configurations for a knowledge base node in your flow. Queries a knowledge base and returns the retrieved results or generated response. See Knowledge Base Node Configuration for more information.
+	// Configurations for a knowledge base node in your flow. Queries a knowledge base and returns a response generated from the retrieved results. See definition.node.configuration.knowledge_base Block for details.
 	// +kubebuilder:validation:Optional
 	KnowledgeBase *KnowledgeBaseParameters `json:"knowledgeBase,omitempty" tf:"knowledge_base,omitempty"`
 
-	// Contains configurations for a Lambda function node in your flow. Invokes a Lambda function. See Lambda Function Node Configuration for more information.
+	// Configurations for a Lambda function node in your flow. Invokes a Lambda function. See definition.node.configuration.lambda_function Block for details.
 	// +kubebuilder:validation:Optional
 	LambdaFunction *LambdaFunctionParameters `json:"lambdaFunction,omitempty" tf:"lambda_function,omitempty"`
 
-	// Contains configurations for a Lex node in your flow. Invokes an Amazon Lex bot to identify the intent of the input and return the intent as the output. See Lex Node Configuration for more information.
+	// Configurations for a Lex node in your flow. Invokes an Amazon Lex bot to identify the intent of the input and return the intent as the output. See definition.node.configuration.lex Block for details.
 	// +kubebuilder:validation:Optional
 	Lex *LexParameters `json:"lex,omitempty" tf:"lex,omitempty"`
 
-	// A list of objects containing information about an output from the node. See Node Output for more information.
+	// Configurations for an output flow node in your flow. The definition.node.output block can't be specified for this node. This block has no arguments.
 	// +kubebuilder:validation:Optional
 	Output *OutputParameters `json:"output,omitempty" tf:"output,omitempty"`
 
-	// Contains configurations for a prompt node in your flow. Runs a prompt and generates the model response as the output. You can use a prompt from Prompt management or you can configure one in this node. See Prompt Node Configuration for more information.
+	// Configurations for a prompt node in your flow. Runs a prompt and generates the model response as the output. You can use a prompt from Prompt management or you can configure one in this node. See definition.node.configuration.prompt Block for details.
 	// +kubebuilder:validation:Optional
 	Prompt *PromptParameters `json:"prompt,omitempty" tf:"prompt,omitempty"`
 
-	// Contains configurations for a Retrieval node in your flow. Retrieves data from an Amazon S3 location and returns it as the output. See Retrieval Node Configuration for more information.
+	// Configurations for a Retrieval node in your flow. Retrieves data from an Amazon S3 location and returns it as the output. See definition.node.configuration.retrieval Block for details.
 	// +kubebuilder:validation:Optional
 	Retrieval *RetrievalParameters `json:"retrieval,omitempty" tf:"retrieval,omitempty"`
 
-	// Contains configurations for a Storage node in your flow. Stores an input in an Amazon S3 location. See Storage Node Configuration for more information.
+	// Configurations for a Storage node in your flow. Stores an input in an Amazon S3 location. See definition.node.configuration.storage Block for details.
 	// +kubebuilder:validation:Optional
 	Storage *StorageParameters `json:"storage,omitempty" tf:"storage,omitempty"`
 }
 
 type NodeInitParameters struct {
 
-	// Contains configurations for the node. See Node Configuration for more information.
+	// Configurations for the node. See definition.node.configuration Block for details.
 	Configuration *NodeConfigurationInitParameters `json:"configuration,omitempty" tf:"configuration,omitempty"`
 
-	// A list of objects containing information about an input into the node. See Node Input for more information.
+	// Information about an input into the node. See definition.node.input Block for details.
 	Input []NodeInputInitParameters `json:"input,omitempty" tf:"input,omitempty"`
 
-	// The name of the tool.
+	// Name for the node.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// A list of objects containing information about an output from the node. See Node Output for more information.
+	// Information about an output from the node. See definition.node.output Block for details.
 	Output []NodeOutputInitParameters `json:"output,omitempty" tf:"output,omitempty"`
 
-	// The data type of the output. If the output doesn’t match this type at runtime, a validation error will be thrown.
+	// Type of node. This value must match the name of the key you provide in configuration. Valid values: Agent, Collector, Condition, InlineCode, Input, Iterator, KnowledgeBase, LambdaFunction, Lex, Output, Prompt, Retrieval, Storage.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -1105,13 +1108,13 @@ type NodeInputInitParameters struct {
 	// How input data flows between iterations in a DoWhile loop.
 	Category *string `json:"category,omitempty" tf:"category,omitempty"`
 
-	// An expression that formats the input for the node. For an explanation of how to create expressions, see Expressions in Prompt flows in Amazon Bedrock.
+	// Expression that formats the input for the node. For an explanation of how to create expressions, see Expressions in Prompt flows in Amazon Bedrock.
 	Expression *string `json:"expression,omitempty" tf:"expression,omitempty"`
 
-	// The name of the tool.
+	// Name for the input that you can reference.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The data type of the output. If the output doesn’t match this type at runtime, a validation error will be thrown.
+	// Data type of the input. If the input doesn't match this type at runtime, a validation error is thrown.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -1120,13 +1123,13 @@ type NodeInputObservation struct {
 	// How input data flows between iterations in a DoWhile loop.
 	Category *string `json:"category,omitempty" tf:"category,omitempty"`
 
-	// An expression that formats the input for the node. For an explanation of how to create expressions, see Expressions in Prompt flows in Amazon Bedrock.
+	// Expression that formats the input for the node. For an explanation of how to create expressions, see Expressions in Prompt flows in Amazon Bedrock.
 	Expression *string `json:"expression,omitempty" tf:"expression,omitempty"`
 
-	// The name of the tool.
+	// Name for the input that you can reference.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The data type of the output. If the output doesn’t match this type at runtime, a validation error will be thrown.
+	// Data type of the input. If the input doesn't match this type at runtime, a validation error is thrown.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -1136,85 +1139,85 @@ type NodeInputParameters struct {
 	// +kubebuilder:validation:Optional
 	Category *string `json:"category,omitempty" tf:"category,omitempty"`
 
-	// An expression that formats the input for the node. For an explanation of how to create expressions, see Expressions in Prompt flows in Amazon Bedrock.
+	// Expression that formats the input for the node. For an explanation of how to create expressions, see Expressions in Prompt flows in Amazon Bedrock.
 	// +kubebuilder:validation:Optional
 	Expression *string `json:"expression" tf:"expression,omitempty"`
 
-	// The name of the tool.
+	// Name for the input that you can reference.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// The data type of the output. If the output doesn’t match this type at runtime, a validation error will be thrown.
+	// Data type of the input. If the input doesn't match this type at runtime, a validation error is thrown.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type NodeObservation struct {
 
-	// Contains configurations for the node. See Node Configuration for more information.
+	// Configurations for the node. See definition.node.configuration Block for details.
 	Configuration *NodeConfigurationObservation `json:"configuration,omitempty" tf:"configuration,omitempty"`
 
-	// A list of objects containing information about an input into the node. See Node Input for more information.
+	// Information about an input into the node. See definition.node.input Block for details.
 	Input []NodeInputObservation `json:"input,omitempty" tf:"input,omitempty"`
 
-	// The name of the tool.
+	// Name for the node.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// A list of objects containing information about an output from the node. See Node Output for more information.
+	// Information about an output from the node. See definition.node.output Block for details.
 	Output []NodeOutputObservation `json:"output,omitempty" tf:"output,omitempty"`
 
-	// The data type of the output. If the output doesn’t match this type at runtime, a validation error will be thrown.
+	// Type of node. This value must match the name of the key you provide in configuration. Valid values: Agent, Collector, Condition, InlineCode, Input, Iterator, KnowledgeBase, LambdaFunction, Lex, Output, Prompt, Retrieval, Storage.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type NodeOutputInitParameters struct {
 
-	// The name of the tool.
+	// Name for the output that you can reference.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The data type of the output. If the output doesn’t match this type at runtime, a validation error will be thrown.
+	// Data type of the output. If the output doesn't match this type at runtime, a validation error is thrown.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type NodeOutputObservation struct {
 
-	// The name of the tool.
+	// Name for the output that you can reference.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The data type of the output. If the output doesn’t match this type at runtime, a validation error will be thrown.
+	// Data type of the output. If the output doesn't match this type at runtime, a validation error is thrown.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type NodeOutputParameters struct {
 
-	// The name of the tool.
+	// Name for the output that you can reference.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// The data type of the output. If the output doesn’t match this type at runtime, a validation error will be thrown.
+	// Data type of the output. If the output doesn't match this type at runtime, a validation error is thrown.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type NodeParameters struct {
 
-	// Contains configurations for the node. See Node Configuration for more information.
+	// Configurations for the node. See definition.node.configuration Block for details.
 	// +kubebuilder:validation:Optional
 	Configuration *NodeConfigurationParameters `json:"configuration,omitempty" tf:"configuration,omitempty"`
 
-	// A list of objects containing information about an input into the node. See Node Input for more information.
+	// Information about an input into the node. See definition.node.input Block for details.
 	// +kubebuilder:validation:Optional
 	Input []NodeInputParameters `json:"input,omitempty" tf:"input,omitempty"`
 
-	// The name of the tool.
+	// Name for the node.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// A list of objects containing information about an output from the node. See Node Output for more information.
+	// Information about an output from the node. See definition.node.output Block for details.
 	// +kubebuilder:validation:Optional
 	Output []NodeOutputParameters `json:"output,omitempty" tf:"output,omitempty"`
 
-	// The data type of the output. If the output doesn’t match this type at runtime, a validation error will be thrown.
+	// Type of node. This value must match the name of the key you provide in configuration. Valid values: Agent, Collector, Condition, InlineCode, Input, Iterator, KnowledgeBase, LambdaFunction, Lex, Output, Prompt, Retrieval, Storage.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
 }
@@ -1230,87 +1233,87 @@ type OutputParameters struct {
 
 type PromptGuardrailConfigurationInitParameters struct {
 
-	// The unique identifier of the guardrail.
+	// Unique identifier of the guardrail.
 	GuardrailIdentifier *string `json:"guardrailIdentifier,omitempty" tf:"guardrail_identifier,omitempty"`
 
-	// The version of the guardrail.
+	// Version of the guardrail.
 	GuardrailVersion *string `json:"guardrailVersion,omitempty" tf:"guardrail_version,omitempty"`
 }
 
 type PromptGuardrailConfigurationObservation struct {
 
-	// The unique identifier of the guardrail.
+	// Unique identifier of the guardrail.
 	GuardrailIdentifier *string `json:"guardrailIdentifier,omitempty" tf:"guardrail_identifier,omitempty"`
 
-	// The version of the guardrail.
+	// Version of the guardrail.
 	GuardrailVersion *string `json:"guardrailVersion,omitempty" tf:"guardrail_version,omitempty"`
 }
 
 type PromptGuardrailConfigurationParameters struct {
 
-	// The unique identifier of the guardrail.
+	// Unique identifier of the guardrail.
 	// +kubebuilder:validation:Optional
 	GuardrailIdentifier *string `json:"guardrailIdentifier" tf:"guardrail_identifier,omitempty"`
 
-	// The version of the guardrail.
+	// Version of the guardrail.
 	// +kubebuilder:validation:Optional
 	GuardrailVersion *string `json:"guardrailVersion" tf:"guardrail_version,omitempty"`
 }
 
 type PromptInitParameters struct {
 
-	// Configures a guardrail for prompt generation. See Guardrail Configuration for more information.
+	// Configuration of a guardrail for prompt generation. See definition.node.configuration.prompt.guardrail_configuration Block for details.
 	GuardrailConfiguration *PromptGuardrailConfigurationInitParameters `json:"guardrailConfiguration,omitempty" tf:"guardrail_configuration,omitempty"`
 
-	// Configures the prompt source, either inline or from Prompt management. See Source Configuration for more information.
+	// Configuration of the prompt source, either inline or from Prompt management. See definition.node.configuration.prompt.source_configuration Block for details.
 	SourceConfiguration *PromptSourceConfigurationInitParameters `json:"sourceConfiguration,omitempty" tf:"source_configuration,omitempty"`
 }
 
 type PromptObservation struct {
 
-	// Configures a guardrail for prompt generation. See Guardrail Configuration for more information.
+	// Configuration of a guardrail for prompt generation. See definition.node.configuration.prompt.guardrail_configuration Block for details.
 	GuardrailConfiguration *PromptGuardrailConfigurationObservation `json:"guardrailConfiguration,omitempty" tf:"guardrail_configuration,omitempty"`
 
-	// Configures the prompt source, either inline or from Prompt management. See Source Configuration for more information.
+	// Configuration of the prompt source, either inline or from Prompt management. See definition.node.configuration.prompt.source_configuration Block for details.
 	SourceConfiguration *PromptSourceConfigurationObservation `json:"sourceConfiguration,omitempty" tf:"source_configuration,omitempty"`
 }
 
 type PromptParameters struct {
 
-	// Configures a guardrail for prompt generation. See Guardrail Configuration for more information.
+	// Configuration of a guardrail for prompt generation. See definition.node.configuration.prompt.guardrail_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	GuardrailConfiguration *PromptGuardrailConfigurationParameters `json:"guardrailConfiguration,omitempty" tf:"guardrail_configuration,omitempty"`
 
-	// Configures the prompt source, either inline or from Prompt management. See Source Configuration for more information.
+	// Configuration of the prompt source, either inline or from Prompt management. See definition.node.configuration.prompt.source_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	SourceConfiguration *PromptSourceConfigurationParameters `json:"sourceConfiguration,omitempty" tf:"source_configuration,omitempty"`
 }
 
 type PromptSourceConfigurationInitParameters struct {
 
-	// Contains configurations for a prompt that is defined inline. See Prompt Inline Configuration for more information.
+	// Configurations for a prompt that is defined inline. See definition.node.configuration.prompt.source_configuration.inline Block for details.
 	Inline *InlineInitParameters `json:"inline,omitempty" tf:"inline,omitempty"`
 
-	// Contains configurations for a prompt from Prompt management. See Prompt Resource Configuration for more information.
+	// Configurations for a prompt from Prompt management. See definition.node.configuration.prompt.source_configuration.resource Block for details.
 	Resource *ResourceInitParameters `json:"resource,omitempty" tf:"resource,omitempty"`
 }
 
 type PromptSourceConfigurationObservation struct {
 
-	// Contains configurations for a prompt that is defined inline. See Prompt Inline Configuration for more information.
+	// Configurations for a prompt that is defined inline. See definition.node.configuration.prompt.source_configuration.inline Block for details.
 	Inline *InlineObservation `json:"inline,omitempty" tf:"inline,omitempty"`
 
-	// Contains configurations for a prompt from Prompt management. See Prompt Resource Configuration for more information.
+	// Configurations for a prompt from Prompt management. See definition.node.configuration.prompt.source_configuration.resource Block for details.
 	Resource *ResourceObservation `json:"resource,omitempty" tf:"resource,omitempty"`
 }
 
 type PromptSourceConfigurationParameters struct {
 
-	// Contains configurations for a prompt that is defined inline. See Prompt Inline Configuration for more information.
+	// Configurations for a prompt that is defined inline. See definition.node.configuration.prompt.source_configuration.inline Block for details.
 	// +kubebuilder:validation:Optional
 	Inline *InlineParameters `json:"inline,omitempty" tf:"inline,omitempty"`
 
-	// Contains configurations for a prompt from Prompt management. See Prompt Resource Configuration for more information.
+	// Configurations for a prompt from Prompt management. See definition.node.configuration.prompt.source_configuration.resource Block for details.
 	// +kubebuilder:validation:Optional
 	Resource *ResourceParameters `json:"resource,omitempty" tf:"resource,omitempty"`
 }
@@ -1356,26 +1359,26 @@ type ResourceParameters struct {
 
 type RetrievalInitParameters struct {
 
-	// Contains configurations for a Storage node in your flow. Stores an input in an Amazon S3 location. See Storage Service Configuration for more information.
+	// Configurations for the service to use for retrieving data to return as the output from the node. See definition.node.configuration.retrieval.service_configuration Block for details.
 	ServiceConfiguration *ServiceConfigurationInitParameters `json:"serviceConfiguration,omitempty" tf:"service_configuration,omitempty"`
 }
 
 type RetrievalObservation struct {
 
-	// Contains configurations for a Storage node in your flow. Stores an input in an Amazon S3 location. See Storage Service Configuration for more information.
+	// Configurations for the service to use for retrieving data to return as the output from the node. See definition.node.configuration.retrieval.service_configuration Block for details.
 	ServiceConfiguration *ServiceConfigurationObservation `json:"serviceConfiguration,omitempty" tf:"service_configuration,omitempty"`
 }
 
 type RetrievalParameters struct {
 
-	// Contains configurations for a Storage node in your flow. Stores an input in an Amazon S3 location. See Storage Service Configuration for more information.
+	// Configurations for the service to use for retrieving data to return as the output from the node. See definition.node.configuration.retrieval.service_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	ServiceConfiguration *ServiceConfigurationParameters `json:"serviceConfiguration,omitempty" tf:"service_configuration,omitempty"`
 }
 
 type S3InitParameters struct {
 
-	// The name of the Amazon S3 bucket in which to store the input into the node.
+	// Name of the Amazon S3 bucket from which to retrieve data.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/s3/v1beta1.Bucket
 	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
 
@@ -1390,13 +1393,13 @@ type S3InitParameters struct {
 
 type S3Observation struct {
 
-	// The name of the Amazon S3 bucket in which to store the input into the node.
+	// Name of the Amazon S3 bucket from which to retrieve data.
 	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
 }
 
 type S3Parameters struct {
 
-	// The name of the Amazon S3 bucket in which to store the input into the node.
+	// Name of the Amazon S3 bucket from which to retrieve data.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/s3/v1beta1.Bucket
 	// +kubebuilder:validation:Optional
 	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
@@ -1412,26 +1415,26 @@ type S3Parameters struct {
 
 type ServiceConfigurationInitParameters struct {
 
-	// Contains configurations for the service to use for storing the input into the node. See Storage S3 Service Configuration for more information.
+	// Configurations for the Amazon S3 location from which to retrieve data to return as the output from the node. See definition.node.configuration.retrieval.service_configuration.s3 Block for details.
 	S3 *S3InitParameters `json:"s3,omitempty" tf:"s3,omitempty"`
 }
 
 type ServiceConfigurationObservation struct {
 
-	// Contains configurations for the service to use for storing the input into the node. See Storage S3 Service Configuration for more information.
+	// Configurations for the Amazon S3 location from which to retrieve data to return as the output from the node. See definition.node.configuration.retrieval.service_configuration.s3 Block for details.
 	S3 *S3Observation `json:"s3,omitempty" tf:"s3,omitempty"`
 }
 
 type ServiceConfigurationParameters struct {
 
-	// Contains configurations for the service to use for storing the input into the node. See Storage S3 Service Configuration for more information.
+	// Configurations for the Amazon S3 location from which to retrieve data to return as the output from the node. See definition.node.configuration.retrieval.service_configuration.s3 Block for details.
 	// +kubebuilder:validation:Optional
 	S3 *S3Parameters `json:"s3,omitempty" tf:"s3,omitempty"`
 }
 
 type ServiceConfigurationS3InitParameters struct {
 
-	// The name of the Amazon S3 bucket in which to store the input into the node.
+	// Name of the Amazon S3 bucket in which to store the input into the node.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/s3/v1beta1.Bucket
 	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
 
@@ -1446,13 +1449,13 @@ type ServiceConfigurationS3InitParameters struct {
 
 type ServiceConfigurationS3Observation struct {
 
-	// The name of the Amazon S3 bucket in which to store the input into the node.
+	// Name of the Amazon S3 bucket in which to store the input into the node.
 	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
 }
 
 type ServiceConfigurationS3Parameters struct {
 
-	// The name of the Amazon S3 bucket in which to store the input into the node.
+	// Name of the Amazon S3 bucket in which to store the input into the node.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/s3/v1beta1.Bucket
 	// +kubebuilder:validation:Optional
 	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
@@ -1468,173 +1471,173 @@ type ServiceConfigurationS3Parameters struct {
 
 type StorageInitParameters struct {
 
-	// Contains configurations for a Storage node in your flow. Stores an input in an Amazon S3 location. See Storage Service Configuration for more information.
+	// Configurations for the service to use for storing the input into the node. See definition.node.configuration.storage.service_configuration Block for details.
 	ServiceConfiguration *StorageServiceConfigurationInitParameters `json:"serviceConfiguration,omitempty" tf:"service_configuration,omitempty"`
 }
 
 type StorageObservation struct {
 
-	// Contains configurations for a Storage node in your flow. Stores an input in an Amazon S3 location. See Storage Service Configuration for more information.
+	// Configurations for the service to use for storing the input into the node. See definition.node.configuration.storage.service_configuration Block for details.
 	ServiceConfiguration *StorageServiceConfigurationObservation `json:"serviceConfiguration,omitempty" tf:"service_configuration,omitempty"`
 }
 
 type StorageParameters struct {
 
-	// Contains configurations for a Storage node in your flow. Stores an input in an Amazon S3 location. See Storage Service Configuration for more information.
+	// Configurations for the service to use for storing the input into the node. See definition.node.configuration.storage.service_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	ServiceConfiguration *StorageServiceConfigurationParameters `json:"serviceConfiguration,omitempty" tf:"service_configuration,omitempty"`
 }
 
 type StorageServiceConfigurationInitParameters struct {
 
-	// Contains configurations for the service to use for storing the input into the node. See Storage S3 Service Configuration for more information.
+	// Configurations for the Amazon S3 location in which to store the input into the node. See definition.node.configuration.storage.service_configuration.s3 Block for details.
 	S3 *ServiceConfigurationS3InitParameters `json:"s3,omitempty" tf:"s3,omitempty"`
 }
 
 type StorageServiceConfigurationObservation struct {
 
-	// Contains configurations for the service to use for storing the input into the node. See Storage S3 Service Configuration for more information.
+	// Configurations for the Amazon S3 location in which to store the input into the node. See definition.node.configuration.storage.service_configuration.s3 Block for details.
 	S3 *ServiceConfigurationS3Observation `json:"s3,omitempty" tf:"s3,omitempty"`
 }
 
 type StorageServiceConfigurationParameters struct {
 
-	// Contains configurations for the service to use for storing the input into the node. See Storage S3 Service Configuration for more information.
+	// Configurations for the Amazon S3 location in which to store the input into the node. See definition.node.configuration.storage.service_configuration.s3 Block for details.
 	// +kubebuilder:validation:Optional
 	S3 *ServiceConfigurationS3Parameters `json:"s3,omitempty" tf:"s3,omitempty"`
 }
 
 type SystemCachePointInitParameters struct {
 
-	// The data type of the output. If the output doesn’t match this type at runtime, a validation error will be thrown.
+	// Type of the cache point block. Valid values: default.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type SystemCachePointObservation struct {
 
-	// The data type of the output. If the output doesn’t match this type at runtime, a validation error will be thrown.
+	// Type of the cache point block. Valid values: default.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type SystemCachePointParameters struct {
 
-	// The data type of the output. If the output doesn’t match this type at runtime, a validation error will be thrown.
+	// Type of the cache point block. Valid values: default.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type SystemInitParameters struct {
 
-	// Creates a cache checkpoint within a tool designation. See Cache Point for more information.
+	// Cache checkpoint within the system prompt. See definition.node.configuration.prompt.source_configuration.inline.template_configuration.chat.system.cache_point Block for details.
 	CachePoint *SystemCachePointInitParameters `json:"cachePoint,omitempty" tf:"cache_point,omitempty"`
 
-	// The message for the prompt.
+	// Text in the system prompt.
 	Text *string `json:"text,omitempty" tf:"text,omitempty"`
 }
 
 type SystemObservation struct {
 
-	// Creates a cache checkpoint within a tool designation. See Cache Point for more information.
+	// Cache checkpoint within the system prompt. See definition.node.configuration.prompt.source_configuration.inline.template_configuration.chat.system.cache_point Block for details.
 	CachePoint *SystemCachePointObservation `json:"cachePoint,omitempty" tf:"cache_point,omitempty"`
 
-	// The message for the prompt.
+	// Text in the system prompt.
 	Text *string `json:"text,omitempty" tf:"text,omitempty"`
 }
 
 type SystemParameters struct {
 
-	// Creates a cache checkpoint within a tool designation. See Cache Point for more information.
+	// Cache checkpoint within the system prompt. See definition.node.configuration.prompt.source_configuration.inline.template_configuration.chat.system.cache_point Block for details.
 	// +kubebuilder:validation:Optional
 	CachePoint *SystemCachePointParameters `json:"cachePoint,omitempty" tf:"cache_point,omitempty"`
 
-	// The message for the prompt.
+	// Text in the system prompt.
 	// +kubebuilder:validation:Optional
 	Text *string `json:"text,omitempty" tf:"text,omitempty"`
 }
 
 type TemplateConfigurationInitParameters struct {
 
-	// Contains configurations to use the prompt in a conversational format. See Chat Template Configuration for more information.
+	// Configurations to use the prompt in a conversational format. See definition.node.configuration.prompt.source_configuration.inline.template_configuration.chat Block for details.
 	Chat *ChatInitParameters `json:"chat,omitempty" tf:"chat,omitempty"`
 
-	// The message for the prompt.
+	// Configurations for the text in a message for a prompt. See definition.node.configuration.prompt.source_configuration.inline.template_configuration.text Block for details.
 	Text *TemplateConfigurationTextInitParameters `json:"text,omitempty" tf:"text,omitempty"`
 }
 
 type TemplateConfigurationObservation struct {
 
-	// Contains configurations to use the prompt in a conversational format. See Chat Template Configuration for more information.
+	// Configurations to use the prompt in a conversational format. See definition.node.configuration.prompt.source_configuration.inline.template_configuration.chat Block for details.
 	Chat *ChatObservation `json:"chat,omitempty" tf:"chat,omitempty"`
 
-	// The message for the prompt.
+	// Configurations for the text in a message for a prompt. See definition.node.configuration.prompt.source_configuration.inline.template_configuration.text Block for details.
 	Text *TemplateConfigurationTextObservation `json:"text,omitempty" tf:"text,omitempty"`
 }
 
 type TemplateConfigurationParameters struct {
 
-	// Contains configurations to use the prompt in a conversational format. See Chat Template Configuration for more information.
+	// Configurations to use the prompt in a conversational format. See definition.node.configuration.prompt.source_configuration.inline.template_configuration.chat Block for details.
 	// +kubebuilder:validation:Optional
 	Chat *ChatParameters `json:"chat,omitempty" tf:"chat,omitempty"`
 
-	// The message for the prompt.
+	// Configurations for the text in a message for a prompt. See definition.node.configuration.prompt.source_configuration.inline.template_configuration.text Block for details.
 	// +kubebuilder:validation:Optional
 	Text *TemplateConfigurationTextParameters `json:"text,omitempty" tf:"text,omitempty"`
 }
 
 type TemplateConfigurationTextInitParameters struct {
 
-	// Creates a cache checkpoint within a tool designation. See Cache Point for more information.
+	// Cache checkpoint within a template configuration. See definition.node.configuration.prompt.source_configuration.inline.template_configuration.text.cache_point Block for details.
 	CachePoint *TextCachePointInitParameters `json:"cachePoint,omitempty" tf:"cache_point,omitempty"`
 
-	// A list of variables in the prompt template. See Input Variable for more information.
+	// Variables in the prompt template. See definition.node.configuration.prompt.source_configuration.inline.template_configuration.text.input_variable Block for details.
 	InputVariable []TextInputVariableInitParameters `json:"inputVariable,omitempty" tf:"input_variable,omitempty"`
 
-	// The message for the prompt.
+	// Message for the prompt.
 	Text *string `json:"text,omitempty" tf:"text,omitempty"`
 }
 
 type TemplateConfigurationTextObservation struct {
 
-	// Creates a cache checkpoint within a tool designation. See Cache Point for more information.
+	// Cache checkpoint within a template configuration. See definition.node.configuration.prompt.source_configuration.inline.template_configuration.text.cache_point Block for details.
 	CachePoint *TextCachePointObservation `json:"cachePoint,omitempty" tf:"cache_point,omitempty"`
 
-	// A list of variables in the prompt template. See Input Variable for more information.
+	// Variables in the prompt template. See definition.node.configuration.prompt.source_configuration.inline.template_configuration.text.input_variable Block for details.
 	InputVariable []TextInputVariableObservation `json:"inputVariable,omitempty" tf:"input_variable,omitempty"`
 
-	// The message for the prompt.
+	// Message for the prompt.
 	Text *string `json:"text,omitempty" tf:"text,omitempty"`
 }
 
 type TemplateConfigurationTextParameters struct {
 
-	// Creates a cache checkpoint within a tool designation. See Cache Point for more information.
+	// Cache checkpoint within a template configuration. See definition.node.configuration.prompt.source_configuration.inline.template_configuration.text.cache_point Block for details.
 	// +kubebuilder:validation:Optional
 	CachePoint *TextCachePointParameters `json:"cachePoint,omitempty" tf:"cache_point,omitempty"`
 
-	// A list of variables in the prompt template. See Input Variable for more information.
+	// Variables in the prompt template. See definition.node.configuration.prompt.source_configuration.inline.template_configuration.text.input_variable Block for details.
 	// +kubebuilder:validation:Optional
 	InputVariable []TextInputVariableParameters `json:"inputVariable,omitempty" tf:"input_variable,omitempty"`
 
-	// The message for the prompt.
+	// Message for the prompt.
 	// +kubebuilder:validation:Optional
 	Text *string `json:"text" tf:"text,omitempty"`
 }
 
 type TextCachePointInitParameters struct {
 
-	// The data type of the output. If the output doesn’t match this type at runtime, a validation error will be thrown.
+	// Type of the cache point block. Valid values: default.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type TextCachePointObservation struct {
 
-	// The data type of the output. If the output doesn’t match this type at runtime, a validation error will be thrown.
+	// Type of the cache point block. Valid values: default.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type TextCachePointParameters struct {
 
-	// The data type of the output. If the output doesn’t match this type at runtime, a validation error will be thrown.
+	// Type of the cache point block. Valid values: default.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
 }
@@ -1644,7 +1647,7 @@ type TextInitParameters struct {
 	// Maximum number of tokens to return in the response.
 	MaxTokens *float64 `json:"maxTokens,omitempty" tf:"max_tokens,omitempty"`
 
-	// List of strings that define sequences after which the model will stop generating.
+	// List of strings that define sequences after which the model stops generating.
 	StopSequences []*string `json:"stopSequences,omitempty" tf:"stop_sequences,omitempty"`
 
 	// Controls the randomness of the response. Choose a lower value for more predictable outputs and a higher value for more surprising outputs.
@@ -1656,19 +1659,19 @@ type TextInitParameters struct {
 
 type TextInputVariableInitParameters struct {
 
-	// The name of the tool.
+	// Name of the variable.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type TextInputVariableObservation struct {
 
-	// The name of the tool.
+	// Name of the variable.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type TextInputVariableParameters struct {
 
-	// The name of the tool.
+	// Name of the variable.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 }
@@ -1678,7 +1681,7 @@ type TextObservation struct {
 	// Maximum number of tokens to return in the response.
 	MaxTokens *float64 `json:"maxTokens,omitempty" tf:"max_tokens,omitempty"`
 
-	// List of strings that define sequences after which the model will stop generating.
+	// List of strings that define sequences after which the model stops generating.
 	StopSequences []*string `json:"stopSequences,omitempty" tf:"stop_sequences,omitempty"`
 
 	// Controls the randomness of the response. Choose a lower value for more predictable outputs and a higher value for more surprising outputs.
@@ -1694,7 +1697,7 @@ type TextParameters struct {
 	// +kubebuilder:validation:Optional
 	MaxTokens *float64 `json:"maxTokens,omitempty" tf:"max_tokens,omitempty"`
 
-	// List of strings that define sequences after which the model will stop generating.
+	// List of strings that define sequences after which the model stops generating.
 	// +kubebuilder:validation:Optional
 	StopSequences []*string `json:"stopSequences,omitempty" tf:"stop_sequences,omitempty"`
 
@@ -1709,174 +1712,174 @@ type TextParameters struct {
 
 type ToolCachePointInitParameters struct {
 
-	// The data type of the output. If the output doesn’t match this type at runtime, a validation error will be thrown.
+	// Type of the cache point block. Valid values: default.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type ToolCachePointObservation struct {
 
-	// The data type of the output. If the output doesn’t match this type at runtime, a validation error will be thrown.
+	// Type of the cache point block. Valid values: default.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type ToolCachePointParameters struct {
 
-	// The data type of the output. If the output doesn’t match this type at runtime, a validation error will be thrown.
+	// Type of the cache point block. Valid values: default.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type ToolChoiceInitParameters struct {
 
-	// Defines tools, at least one of which must be requested by the model. No text is generated but the results of tool use are sent back to the model to help generate a response. This block has no fields.
+	// Tools, at least one of which must be requested by the model. No text is generated but the results of tool use are sent back to the model to help generate a response. This block has no arguments.
 	Any *AnyInitParameters `json:"any,omitempty" tf:"any,omitempty"`
 
-	// Defines tools. The model automatically decides whether to call a tool or to generate text instead. This block has no fields.
+	// Tools. The model automatically decides whether to call a tool or to generate text instead. This block has no arguments.
 	Auto *AutoInitParameters `json:"auto,omitempty" tf:"auto,omitempty"`
 
-	// Defines a specific tool that the model must request. No text is generated but the results of tool use are sent back to the model to help generate a response. See Named Tool for more information.
+	// Specific tool that the model must request. No text is generated but the results of tool use are sent back to the model to help generate a response. See definition.node.configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tool_choice.tool Block for details.
 	Tool *ToolChoiceToolInitParameters `json:"tool,omitempty" tf:"tool,omitempty"`
 }
 
 type ToolChoiceObservation struct {
 
-	// Defines tools, at least one of which must be requested by the model. No text is generated but the results of tool use are sent back to the model to help generate a response. This block has no fields.
+	// Tools, at least one of which must be requested by the model. No text is generated but the results of tool use are sent back to the model to help generate a response. This block has no arguments.
 	Any *AnyParameters `json:"any,omitempty" tf:"any,omitempty"`
 
-	// Defines tools. The model automatically decides whether to call a tool or to generate text instead. This block has no fields.
+	// Tools. The model automatically decides whether to call a tool or to generate text instead. This block has no arguments.
 	Auto *AutoParameters `json:"auto,omitempty" tf:"auto,omitempty"`
 
-	// Defines a specific tool that the model must request. No text is generated but the results of tool use are sent back to the model to help generate a response. See Named Tool for more information.
+	// Specific tool that the model must request. No text is generated but the results of tool use are sent back to the model to help generate a response. See definition.node.configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tool_choice.tool Block for details.
 	Tool *ToolChoiceToolObservation `json:"tool,omitempty" tf:"tool,omitempty"`
 }
 
 type ToolChoiceParameters struct {
 
-	// Defines tools, at least one of which must be requested by the model. No text is generated but the results of tool use are sent back to the model to help generate a response. This block has no fields.
+	// Tools, at least one of which must be requested by the model. No text is generated but the results of tool use are sent back to the model to help generate a response. This block has no arguments.
 	// +kubebuilder:validation:Optional
 	Any *AnyParameters `json:"any,omitempty" tf:"any,omitempty"`
 
-	// Defines tools. The model automatically decides whether to call a tool or to generate text instead. This block has no fields.
+	// Tools. The model automatically decides whether to call a tool or to generate text instead. This block has no arguments.
 	// +kubebuilder:validation:Optional
 	Auto *AutoParameters `json:"auto,omitempty" tf:"auto,omitempty"`
 
-	// Defines a specific tool that the model must request. No text is generated but the results of tool use are sent back to the model to help generate a response. See Named Tool for more information.
+	// Specific tool that the model must request. No text is generated but the results of tool use are sent back to the model to help generate a response. See definition.node.configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tool_choice.tool Block for details.
 	// +kubebuilder:validation:Optional
 	Tool *ToolChoiceToolParameters `json:"tool,omitempty" tf:"tool,omitempty"`
 }
 
 type ToolChoiceToolInitParameters struct {
 
-	// The name of the tool.
+	// Name of the tool.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type ToolChoiceToolObservation struct {
 
-	// The name of the tool.
+	// Name of the tool.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type ToolChoiceToolParameters struct {
 
-	// The name of the tool.
+	// Name of the tool.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 }
 
 type ToolConfigurationInitParameters struct {
 
-	// Defines a specific tool that the model must request. No text is generated but the results of tool use are sent back to the model to help generate a response. See Named Tool for more information.
+	// Tools to pass to a model. See definition.node.configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tool Block for details.
 	Tool []ToolInitParameters `json:"tool,omitempty" tf:"tool,omitempty"`
 
-	// Defines which tools the model should request when invoked. See Tool Choice for more information.
+	// Which tools the model should request when invoked. See definition.node.configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tool_choice Block for details.
 	ToolChoice *ToolChoiceInitParameters `json:"toolChoice,omitempty" tf:"tool_choice,omitempty"`
 }
 
 type ToolConfigurationObservation struct {
 
-	// Defines a specific tool that the model must request. No text is generated but the results of tool use are sent back to the model to help generate a response. See Named Tool for more information.
+	// Tools to pass to a model. See definition.node.configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tool Block for details.
 	Tool []ToolObservation `json:"tool,omitempty" tf:"tool,omitempty"`
 
-	// Defines which tools the model should request when invoked. See Tool Choice for more information.
+	// Which tools the model should request when invoked. See definition.node.configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tool_choice Block for details.
 	ToolChoice *ToolChoiceObservation `json:"toolChoice,omitempty" tf:"tool_choice,omitempty"`
 }
 
 type ToolConfigurationParameters struct {
 
-	// Defines a specific tool that the model must request. No text is generated but the results of tool use are sent back to the model to help generate a response. See Named Tool for more information.
+	// Tools to pass to a model. See definition.node.configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tool Block for details.
 	// +kubebuilder:validation:Optional
 	Tool []ToolParameters `json:"tool,omitempty" tf:"tool,omitempty"`
 
-	// Defines which tools the model should request when invoked. See Tool Choice for more information.
+	// Which tools the model should request when invoked. See definition.node.configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tool_choice Block for details.
 	// +kubebuilder:validation:Optional
 	ToolChoice *ToolChoiceParameters `json:"toolChoice,omitempty" tf:"tool_choice,omitempty"`
 }
 
 type ToolInitParameters struct {
 
-	// Creates a cache checkpoint within a tool designation. See Cache Point for more information.
+	// Cache checkpoint within a tool designation. See definition.node.configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tool.cache_point Block for details.
 	CachePoint *ToolCachePointInitParameters `json:"cachePoint,omitempty" tf:"cache_point,omitempty"`
 
-	// The specification for the tool. See Tool Specification for more information.
+	// Specification for the tool. See definition.node.configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tool.tool_spec Block for details.
 	ToolSpec *ToolSpecInitParameters `json:"toolSpec,omitempty" tf:"tool_spec,omitempty"`
 }
 
 type ToolObservation struct {
 
-	// Creates a cache checkpoint within a tool designation. See Cache Point for more information.
+	// Cache checkpoint within a tool designation. See definition.node.configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tool.cache_point Block for details.
 	CachePoint *ToolCachePointObservation `json:"cachePoint,omitempty" tf:"cache_point,omitempty"`
 
-	// The specification for the tool. See Tool Specification for more information.
+	// Specification for the tool. See definition.node.configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tool.tool_spec Block for details.
 	ToolSpec *ToolSpecObservation `json:"toolSpec,omitempty" tf:"tool_spec,omitempty"`
 }
 
 type ToolParameters struct {
 
-	// Creates a cache checkpoint within a tool designation. See Cache Point for more information.
+	// Cache checkpoint within a tool designation. See definition.node.configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tool.cache_point Block for details.
 	// +kubebuilder:validation:Optional
 	CachePoint *ToolCachePointParameters `json:"cachePoint,omitempty" tf:"cache_point,omitempty"`
 
-	// The specification for the tool. See Tool Specification for more information.
+	// Specification for the tool. See definition.node.configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tool.tool_spec Block for details.
 	// +kubebuilder:validation:Optional
 	ToolSpec *ToolSpecParameters `json:"toolSpec,omitempty" tf:"tool_spec,omitempty"`
 }
 
 type ToolSpecInitParameters struct {
 
-	// The description of the tool.
+	// Description of the tool.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The input schema of the tool. See Tool Input Schema for more information.
+	// Input schema of the tool. See definition.node.configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tool.tool_spec.input_schema Block for details.
 	InputSchema *InputSchemaInitParameters `json:"inputSchema,omitempty" tf:"input_schema,omitempty"`
 
-	// The name of the tool.
+	// Name of the tool.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type ToolSpecObservation struct {
 
-	// The description of the tool.
+	// Description of the tool.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The input schema of the tool. See Tool Input Schema for more information.
+	// Input schema of the tool. See definition.node.configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tool.tool_spec.input_schema Block for details.
 	InputSchema *InputSchemaObservation `json:"inputSchema,omitempty" tf:"input_schema,omitempty"`
 
-	// The name of the tool.
+	// Name of the tool.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type ToolSpecParameters struct {
 
-	// The description of the tool.
+	// Description of the tool.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The input schema of the tool. See Tool Input Schema for more information.
+	// Input schema of the tool. See definition.node.configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tool.tool_spec.input_schema Block for details.
 	// +kubebuilder:validation:Optional
 	InputSchema *InputSchemaParameters `json:"inputSchema,omitempty" tf:"input_schema,omitempty"`
 
-	// The name of the tool.
+	// Name of the tool.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 }
@@ -1908,7 +1911,7 @@ type FlowStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// Flow is the Schema for the Flows API.
+// Flow is the Schema for the Flows API. Manages an AWS Bedrock Agents Flow.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

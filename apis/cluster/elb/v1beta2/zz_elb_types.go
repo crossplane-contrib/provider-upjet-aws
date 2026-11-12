@@ -89,7 +89,7 @@ type ELBInitParameters struct {
 	// The time in seconds that the connection is allowed to be idle. Default: 60
 	IdleTimeout *float64 `json:"idleTimeout,omitempty" tf:"idle_timeout,omitempty"`
 
-	// A list of instance ids to place in the ELB pool.
+	// A list of instance IDs to place in the ELB pool.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta2.Instance
 	// +listType=set
 	Instances []*string `json:"instances,omitempty" tf:"instances,omitempty"`
@@ -172,7 +172,7 @@ type ELBObservation struct {
 	// The time in seconds that the connection is allowed to be idle. Default: 60
 	IdleTimeout *float64 `json:"idleTimeout,omitempty" tf:"idle_timeout,omitempty"`
 
-	// A list of instance ids to place in the ELB pool.
+	// A list of instance IDs to place in the ELB pool.
 	// +listType=set
 	Instances []*string `json:"instances,omitempty" tf:"instances,omitempty"`
 
@@ -252,7 +252,7 @@ type ELBParameters struct {
 	// +kubebuilder:validation:Optional
 	IdleTimeout *float64 `json:"idleTimeout,omitempty" tf:"idle_timeout,omitempty"`
 
-	// A list of instance ids to place in the ELB pool.
+	// A list of instance IDs to place in the ELB pool.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta2.Instance
 	// +kubebuilder:validation:Optional
 	// +listType=set

@@ -130,7 +130,7 @@ type AMIObservation struct {
 	// kernel in created instances.
 	KernelID *string `json:"kernelId,omitempty" tf:"kernel_id,omitempty"`
 
-	// (Computed) Date and time, in ISO 8601 date-time format , when the AMI was last used to launch an EC2 instance. When the AMI is used to launch an instance, there is a 24-hour delay before that usage is reported. For more information, see the following AWS document.
+	// Date and time, in ISO 8601 date-time format , when the AMI was last used to launch an EC2 instance. When the AMI is used to launch an instance, there is a 24-hour delay before that usage is reported. For more information, see the following AWS document.
 	LastLaunchedTime *string `json:"lastLaunchedTime,omitempty" tf:"last_launched_time,omitempty"`
 
 	ManageEBSSnapshots *bool `json:"manageEbsSnapshots,omitempty" tf:"manage_ebs_snapshots,omitempty"`

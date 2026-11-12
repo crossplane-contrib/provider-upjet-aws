@@ -18,6 +18,10 @@ type WorkloadIdentityInitParameters struct {
 	// Set of allowed OAuth2 return URLs for resources associated with this workload identity. These URLs are used as valid redirect targets during OAuth2 authentication flows.
 	// +listType=set
 	AllowedResourceOauth2ReturnUrls []*string `json:"allowedResourceOauth2ReturnUrls,omitempty" tf:"allowed_resource_oauth2_return_urls,omitempty"`
+
+	// Key-value map of resource tags.
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type WorkloadIdentityObservation struct {
@@ -35,6 +39,14 @@ type WorkloadIdentityObservation struct {
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
+	// Key-value map of resource tags.
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
+	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
 	// ARN of the Workload Identity.
 	WorkloadIdentityArn *string `json:"workloadIdentityArn,omitempty" tf:"workload_identity_arn,omitempty"`
 }
@@ -50,6 +62,11 @@ type WorkloadIdentityParameters struct {
 	// Region is the region you'd like your resource to be created in.
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
+
+	// Key-value map of resource tags.
+	// +kubebuilder:validation:Optional
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 // WorkloadIdentitySpec defines the desired state of WorkloadIdentity

@@ -62,7 +62,7 @@ spec:
                 properties:
                   ami:
                     description: AMI to use for the instance. Required unless launch_template
-                      is specified and the Launch Template specifes an AMI. If an
+                      is specified and the Launch Template specifies an AMI. If an
                       AMI is specified in the Launch Template, setting ami will override
                       the AMI specified in the Launch Template.
                     type: string
@@ -607,15 +607,22 @@ spec:
                     type: array
                   placementGroup:
                     description: Placement Group to start the instance in. Conflicts
-                      with placement_group_id.
+                      with placement_group_id. Updating this argument stops and restarts
+                      the EC2 instance, except for Spot Instances and instances with
+                      disable_api_stop and force_destroy enabled, which are replaced.
                     type: string
                   placementGroupId:
                     description: Placement Group ID to start the instance in. Conflicts
-                      with placement_group.
+                      with placement_group. Updating this argument stops and restarts
+                      the EC2 instance, except for Spot Instances and instances with
+                      disable_api_stop and force_destroy enabled, which are replaced.
                     type: string
                   placementPartitionNumber:
                     description: Number of the partition the instance is in. Valid
-                      only if the  strategy argument is set to "partition".
+                      only if the  strategy argument is set to "partition". Updating
+                      this argument stops and restarts the EC2 instance, except for
+                      Spot Instances and instances with disable_api_stop and force_destroy
+                      enabled, which are replaced.
                     type: number
                   primaryNetworkInterface:
                     description: The primary network interface. See Primary Network
@@ -1160,7 +1167,7 @@ spec:
                 properties:
                   ami:
                     description: AMI to use for the instance. Required unless launch_template
-                      is specified and the Launch Template specifes an AMI. If an
+                      is specified and the Launch Template specifies an AMI. If an
                       AMI is specified in the Launch Template, setting ami will override
                       the AMI specified in the Launch Template.
                     type: string
@@ -1705,15 +1712,22 @@ spec:
                     type: array
                   placementGroup:
                     description: Placement Group to start the instance in. Conflicts
-                      with placement_group_id.
+                      with placement_group_id. Updating this argument stops and restarts
+                      the EC2 instance, except for Spot Instances and instances with
+                      disable_api_stop and force_destroy enabled, which are replaced.
                     type: string
                   placementGroupId:
                     description: Placement Group ID to start the instance in. Conflicts
-                      with placement_group.
+                      with placement_group. Updating this argument stops and restarts
+                      the EC2 instance, except for Spot Instances and instances with
+                      disable_api_stop and force_destroy enabled, which are replaced.
                     type: string
                   placementPartitionNumber:
                     description: Number of the partition the instance is in. Valid
-                      only if the  strategy argument is set to "partition".
+                      only if the  strategy argument is set to "partition". Updating
+                      this argument stops and restarts the EC2 instance, except for
+                      Spot Instances and instances with disable_api_stop and force_destroy
+                      enabled, which are replaced.
                     type: number
                   primaryNetworkInterface:
                     description: The primary network interface. See Primary Network
@@ -2301,7 +2315,7 @@ spec:
                 properties:
                   ami:
                     description: AMI to use for the instance. Required unless launch_template
-                      is specified and the Launch Template specifes an AMI. If an
+                      is specified and the Launch Template specifies an AMI. If an
                       AMI is specified in the Launch Template, setting ami will override
                       the AMI specified in the Launch Template.
                     type: string
@@ -2714,15 +2728,22 @@ spec:
                     type: string
                   placementGroup:
                     description: Placement Group to start the instance in. Conflicts
-                      with placement_group_id.
+                      with placement_group_id. Updating this argument stops and restarts
+                      the EC2 instance, except for Spot Instances and instances with
+                      disable_api_stop and force_destroy enabled, which are replaced.
                     type: string
                   placementGroupId:
                     description: Placement Group ID to start the instance in. Conflicts
-                      with placement_group.
+                      with placement_group. Updating this argument stops and restarts
+                      the EC2 instance, except for Spot Instances and instances with
+                      disable_api_stop and force_destroy enabled, which are replaced.
                     type: string
                   placementPartitionNumber:
                     description: Number of the partition the instance is in. Valid
-                      only if the  strategy argument is set to "partition".
+                      only if the  strategy argument is set to "partition". Updating
+                      this argument stops and restarts the EC2 instance, except for
+                      Spot Instances and instances with disable_api_stop and force_destroy
+                      enabled, which are replaced.
                     type: number
                   primaryNetworkInterface:
                     description: The primary network interface. See Primary Network

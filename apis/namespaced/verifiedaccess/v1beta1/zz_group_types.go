@@ -18,17 +18,17 @@ type GroupInitParameters struct {
 	// Description of the verified access group.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The policy document that is associated with this resource.
+	// Policy document that is associated with this resource.
 	PolicyDocument *string `json:"policyDocument,omitempty" tf:"policy_document,omitempty"`
 
-	// Configuration block to use KMS keys for server-side encryption.
+	// Configuration block to use KMS keys for server-side encryption. See below.
 	SseConfiguration *SseConfigurationInitParameters `json:"sseConfiguration,omitempty" tf:"sse_configuration,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The id of the verified access instance this group is associated with.
+	// ID of the verified access instance this group is associated with.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/verifiedaccess/v1beta1.Instance
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	VerifiedaccessInstanceID *string `json:"verifiedaccessInstanceId,omitempty" tf:"verifiedaccess_instance_id,omitempty"`
@@ -61,14 +61,14 @@ type GroupObservation struct {
 	// AWS account number owning this resource.
 	Owner *string `json:"owner,omitempty" tf:"owner,omitempty"`
 
-	// The policy document that is associated with this resource.
+	// Policy document that is associated with this resource.
 	PolicyDocument *string `json:"policyDocument,omitempty" tf:"policy_document,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// Configuration block to use KMS keys for server-side encryption.
+	// Configuration block to use KMS keys for server-side encryption. See below.
 	SseConfiguration *SseConfigurationObservation `json:"sseConfiguration,omitempty" tf:"sse_configuration,omitempty"`
 
 	// Key-value map of resource tags.
@@ -78,13 +78,13 @@ type GroupObservation struct {
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// ARN of this verified acess group.
+	// ARN of this verified access group.
 	VerifiedaccessGroupArn *string `json:"verifiedaccessGroupArn,omitempty" tf:"verifiedaccess_group_arn,omitempty"`
 
 	// ID of this verified access group.
 	VerifiedaccessGroupID *string `json:"verifiedaccessGroupId,omitempty" tf:"verifiedaccess_group_id,omitempty"`
 
-	// The id of the verified access instance this group is associated with.
+	// ID of the verified access instance this group is associated with.
 	VerifiedaccessInstanceID *string `json:"verifiedaccessInstanceId,omitempty" tf:"verifiedaccess_instance_id,omitempty"`
 }
 
@@ -94,7 +94,7 @@ type GroupParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The policy document that is associated with this resource.
+	// Policy document that is associated with this resource.
 	// +kubebuilder:validation:Optional
 	PolicyDocument *string `json:"policyDocument,omitempty" tf:"policy_document,omitempty"`
 
@@ -103,7 +103,7 @@ type GroupParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// Configuration block to use KMS keys for server-side encryption.
+	// Configuration block to use KMS keys for server-side encryption. See below.
 	// +kubebuilder:validation:Optional
 	SseConfiguration *SseConfigurationParameters `json:"sseConfiguration,omitempty" tf:"sse_configuration,omitempty"`
 
@@ -112,7 +112,7 @@ type GroupParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The id of the verified access instance this group is associated with.
+	// ID of the verified access instance this group is associated with.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/verifiedaccess/v1beta1.Instance
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -129,7 +129,7 @@ type GroupParameters struct {
 
 type SseConfigurationInitParameters struct {
 
-	// Boolean flag to indicate that the CMK should be used.
+	// Whether the CMK should be used.
 	CustomerManagedKeyEnabled *bool `json:"customerManagedKeyEnabled,omitempty" tf:"customer_managed_key_enabled,omitempty"`
 
 	// ARN of the KMS key to use.
@@ -148,7 +148,7 @@ type SseConfigurationInitParameters struct {
 
 type SseConfigurationObservation struct {
 
-	// Boolean flag to indicate that the CMK should be used.
+	// Whether the CMK should be used.
 	CustomerManagedKeyEnabled *bool `json:"customerManagedKeyEnabled,omitempty" tf:"customer_managed_key_enabled,omitempty"`
 
 	// ARN of the KMS key to use.
@@ -157,7 +157,7 @@ type SseConfigurationObservation struct {
 
 type SseConfigurationParameters struct {
 
-	// Boolean flag to indicate that the CMK should be used.
+	// Whether the CMK should be used.
 	// +kubebuilder:validation:Optional
 	CustomerManagedKeyEnabled *bool `json:"customerManagedKeyEnabled,omitempty" tf:"customer_managed_key_enabled,omitempty"`
 

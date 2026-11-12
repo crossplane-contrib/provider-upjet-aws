@@ -212,13 +212,13 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The ARN of the ACL.
+                    description: ARN of the ACL.
                     type: string
                   id:
                     description: Same as name.
                     type: string
                   minimumEngineVersion:
-                    description: The minimum engine version supported by the ACL.
+                    description: Minimum engine version supported by the ACL.
                     type: string
                   region:
                     description: |-
@@ -234,9 +234,8 @@ spec:
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                     x-kubernetes-map-type: granular
                   userNames:

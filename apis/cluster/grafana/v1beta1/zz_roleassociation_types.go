@@ -15,18 +15,18 @@ import (
 
 type RoleAssociationInitParameters struct {
 
-	// The AWS SSO group ids to be assigned the role given in role.
+	// AWS SSO group IDs to be assigned the role given in role.
 	// +listType=set
 	GroupIds []*string `json:"groupIds,omitempty" tf:"group_ids,omitempty"`
 
-	// The grafana role. Valid values can be found here.
+	// Grafana role. Valid values can be found here.
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
 
-	// The AWS SSO user ids to be assigned the role given in role.
+	// AWS SSO user IDs to be assigned the role given in role.
 	// +listType=set
 	UserIds []*string `json:"userIds,omitempty" tf:"user_ids,omitempty"`
 
-	// The workspace id.
+	// Workspace ID.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/grafana/v1beta2.Workspace
 	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`
 
@@ -41,7 +41,7 @@ type RoleAssociationInitParameters struct {
 
 type RoleAssociationObservation struct {
 
-	// The AWS SSO group ids to be assigned the role given in role.
+	// AWS SSO group IDs to be assigned the role given in role.
 	// +listType=set
 	GroupIds []*string `json:"groupIds,omitempty" tf:"group_ids,omitempty"`
 
@@ -51,20 +51,20 @@ type RoleAssociationObservation struct {
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The grafana role. Valid values can be found here.
+	// Grafana role. Valid values can be found here.
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
 
-	// The AWS SSO user ids to be assigned the role given in role.
+	// AWS SSO user IDs to be assigned the role given in role.
 	// +listType=set
 	UserIds []*string `json:"userIds,omitempty" tf:"user_ids,omitempty"`
 
-	// The workspace id.
+	// Workspace ID.
 	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`
 }
 
 type RoleAssociationParameters struct {
 
-	// The AWS SSO group ids to be assigned the role given in role.
+	// AWS SSO group IDs to be assigned the role given in role.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	GroupIds []*string `json:"groupIds,omitempty" tf:"group_ids,omitempty"`
@@ -74,16 +74,16 @@ type RoleAssociationParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// The grafana role. Valid values can be found here.
+	// Grafana role. Valid values can be found here.
 	// +kubebuilder:validation:Optional
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
 
-	// The AWS SSO user ids to be assigned the role given in role.
+	// AWS SSO user IDs to be assigned the role given in role.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	UserIds []*string `json:"userIds,omitempty" tf:"user_ids,omitempty"`
 
-	// The workspace id.
+	// Workspace ID.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/grafana/v1beta2.Workspace
 	// +kubebuilder:validation:Optional
 	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`

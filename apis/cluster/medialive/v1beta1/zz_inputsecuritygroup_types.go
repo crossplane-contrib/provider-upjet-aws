@@ -19,7 +19,7 @@ type InputSecurityGroupInitParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Whitelist rules. See Whitelist Rules for more details.
+	// Whitelist rules. See whitelist_rules Block for more details.
 	WhitelistRules []WhitelistRulesInitParameters `json:"whitelistRules,omitempty" tf:"whitelist_rules,omitempty"`
 }
 
@@ -28,10 +28,10 @@ type InputSecurityGroupObservation struct {
 	// ARN of the InputSecurityGroup.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// InputSecurityGroup Id.
+	// InputSecurityGroup ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The list of inputs currently using this InputSecurityGroup.
+	// List of inputs currently using this InputSecurityGroup.
 	Inputs []*string `json:"inputs,omitempty" tf:"inputs,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -45,7 +45,7 @@ type InputSecurityGroupObservation struct {
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// Whitelist rules. See Whitelist Rules for more details.
+	// Whitelist rules. See whitelist_rules Block for more details.
 	WhitelistRules []WhitelistRulesObservation `json:"whitelistRules,omitempty" tf:"whitelist_rules,omitempty"`
 }
 
@@ -61,26 +61,26 @@ type InputSecurityGroupParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Whitelist rules. See Whitelist Rules for more details.
+	// Whitelist rules. See whitelist_rules Block for more details.
 	// +kubebuilder:validation:Optional
 	WhitelistRules []WhitelistRulesParameters `json:"whitelistRules,omitempty" tf:"whitelist_rules,omitempty"`
 }
 
 type WhitelistRulesInitParameters struct {
 
-	// The IPv4 CIDR that's whitelisted.
+	// IPv4 CIDR that's whitelisted.
 	Cidr *string `json:"cidr,omitempty" tf:"cidr,omitempty"`
 }
 
 type WhitelistRulesObservation struct {
 
-	// The IPv4 CIDR that's whitelisted.
+	// IPv4 CIDR that's whitelisted.
 	Cidr *string `json:"cidr,omitempty" tf:"cidr,omitempty"`
 }
 
 type WhitelistRulesParameters struct {
 
-	// The IPv4 CIDR that's whitelisted.
+	// IPv4 CIDR that's whitelisted.
 	// +kubebuilder:validation:Optional
 	Cidr *string `json:"cidr" tf:"cidr,omitempty"`
 }

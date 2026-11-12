@@ -15,7 +15,7 @@ import (
 
 type CiphertextInitParameters struct {
 
-	// An optional mapping that makes up the encryption context.
+	// Mapping that makes up the encryption context.
 	// +mapType=granular
 	Context map[string]*string `json:"context,omitempty" tf:"context,omitempty"`
 
@@ -31,13 +31,13 @@ type CiphertextInitParameters struct {
 	// +kubebuilder:validation:Optional
 	KeyIDSelector *v2.NamespacedSelector `json:"keyIdSelector,omitempty" tf:"-"`
 
-	// (Exactly one of plaintext or plaintext_wo must be set) Data to be encrypted. Note that this may show up in logs, and it will be stored in the state file.
+	// Data to be encrypted. Note that this may show up in logs, and it will be stored in the state file.
 	PlaintextSecretRef *v2.LocalSecretKeySelector `json:"plaintextSecretRef,omitempty" tf:"-"`
 
-	// (Write-Only, Exactly one of plaintext or plaintext_wo must be set) Data to be encrypted. Note that this may show up in logs. It will not be stored in the state file.
+	// Data to be encrypted. Note that this may show up in logs. It will not be stored in the state file.
 	PlaintextWoSecretRef *v2.LocalSecretKeySelector `json:"plaintextWoSecretRef,omitempty" tf:"-"`
 
-	// Used together with plaintext_wo to trigger a replacement. Modify this value when a replacement is required.
+	// Triggers a replacement together with plaintext_wo. Modify this value when a replacement is required.
 	PlaintextWoVersion *string `json:"plaintextWoVersion,omitempty" tf:"plaintext_wo_version,omitempty"`
 }
 
@@ -46,7 +46,7 @@ type CiphertextObservation struct {
 	// Base64 encoded ciphertext
 	CiphertextBlob *string `json:"ciphertextBlob,omitempty" tf:"ciphertext_blob,omitempty"`
 
-	// An optional mapping that makes up the encryption context.
+	// Mapping that makes up the encryption context.
 	// +mapType=granular
 	Context map[string]*string `json:"context,omitempty" tf:"context,omitempty"`
 
@@ -55,7 +55,7 @@ type CiphertextObservation struct {
 	// Globally unique key ID for the customer master key.
 	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
 
-	// Used together with plaintext_wo to trigger a replacement. Modify this value when a replacement is required.
+	// Triggers a replacement together with plaintext_wo. Modify this value when a replacement is required.
 	PlaintextWoVersion *string `json:"plaintextWoVersion,omitempty" tf:"plaintext_wo_version,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -65,7 +65,7 @@ type CiphertextObservation struct {
 
 type CiphertextParameters struct {
 
-	// An optional mapping that makes up the encryption context.
+	// Mapping that makes up the encryption context.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Context map[string]*string `json:"context,omitempty" tf:"context,omitempty"`
@@ -83,15 +83,15 @@ type CiphertextParameters struct {
 	// +kubebuilder:validation:Optional
 	KeyIDSelector *v2.NamespacedSelector `json:"keyIdSelector,omitempty" tf:"-"`
 
-	// (Exactly one of plaintext or plaintext_wo must be set) Data to be encrypted. Note that this may show up in logs, and it will be stored in the state file.
+	// Data to be encrypted. Note that this may show up in logs, and it will be stored in the state file.
 	// +kubebuilder:validation:Optional
 	PlaintextSecretRef *v2.LocalSecretKeySelector `json:"plaintextSecretRef,omitempty" tf:"-"`
 
-	// (Write-Only, Exactly one of plaintext or plaintext_wo must be set) Data to be encrypted. Note that this may show up in logs. It will not be stored in the state file.
+	// Data to be encrypted. Note that this may show up in logs. It will not be stored in the state file.
 	// +kubebuilder:validation:Optional
 	PlaintextWoSecretRef *v2.LocalSecretKeySelector `json:"plaintextWoSecretRef,omitempty" tf:"-"`
 
-	// Used together with plaintext_wo to trigger a replacement. Modify this value when a replacement is required.
+	// Triggers a replacement together with plaintext_wo. Modify this value when a replacement is required.
 	// +kubebuilder:validation:Optional
 	PlaintextWoVersion *string `json:"plaintextWoVersion,omitempty" tf:"plaintext_wo_version,omitempty"`
 

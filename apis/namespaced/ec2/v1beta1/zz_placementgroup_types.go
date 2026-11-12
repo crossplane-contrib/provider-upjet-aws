@@ -15,16 +15,13 @@ import (
 
 type PlacementGroupInitParameters struct {
 
-	// The number of partitions to create in the
-	// placement group.  Can only be specified when the strategy is set to
-	// partition.  Must be at least 1. (default is 2).
+	// Number of partitions to create in the placement group. Can only be specified when the strategy is set to partition. Must be at least 1. (default is 2).
 	PartitionCount *float64 `json:"partitionCount,omitempty" tf:"partition_count,omitempty"`
 
-	// Determines how placement groups spread instances. Can only be used
-	// when the strategy is set to spread. Can be host or rack. host can only be used for Outpost placement groups. Defaults to rack.
+	// How placement groups spread instances. Can only be used when the strategy is set to spread. Can be host or rack. host can only be used for Outpost placement groups. Defaults to rack.
 	SpreadLevel *string `json:"spreadLevel,omitempty" tf:"spread_level,omitempty"`
 
-	// The placement strategy. Can be cluster, partition or spread.
+	// Placement strategy. Can be cluster, partition or spread.
 	Strategy *string `json:"strategy,omitempty" tf:"strategy,omitempty"`
 
 	// Key-value map of resource tags.
@@ -37,42 +34,37 @@ type PlacementGroupObservation struct {
 	// ARN of the placement group.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The name of the placement group.
+	// Name of the placement group.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The number of partitions to create in the
-	// placement group.  Can only be specified when the strategy is set to
-	// partition.  Must be at least 1. (default is 2).
+	// Number of partitions to create in the placement group. Can only be specified when the strategy is set to partition. Must be at least 1. (default is 2).
 	PartitionCount *float64 `json:"partitionCount,omitempty" tf:"partition_count,omitempty"`
 
-	// The ID of the placement group.
+	// ID of the placement group.
 	PlacementGroupID *string `json:"placementGroupId,omitempty" tf:"placement_group_id,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// Determines how placement groups spread instances. Can only be used
-	// when the strategy is set to spread. Can be host or rack. host can only be used for Outpost placement groups. Defaults to rack.
+	// How placement groups spread instances. Can only be used when the strategy is set to spread. Can be host or rack. host can only be used for Outpost placement groups. Defaults to rack.
 	SpreadLevel *string `json:"spreadLevel,omitempty" tf:"spread_level,omitempty"`
 
-	// The placement strategy. Can be cluster, partition or spread.
+	// Placement strategy. Can be cluster, partition or spread.
 	Strategy *string `json:"strategy,omitempty" tf:"strategy,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type PlacementGroupParameters struct {
 
-	// The number of partitions to create in the
-	// placement group.  Can only be specified when the strategy is set to
-	// partition.  Must be at least 1. (default is 2).
+	// Number of partitions to create in the placement group. Can only be specified when the strategy is set to partition. Must be at least 1. (default is 2).
 	// +kubebuilder:validation:Optional
 	PartitionCount *float64 `json:"partitionCount,omitempty" tf:"partition_count,omitempty"`
 
@@ -81,12 +73,11 @@ type PlacementGroupParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// Determines how placement groups spread instances. Can only be used
-	// when the strategy is set to spread. Can be host or rack. host can only be used for Outpost placement groups. Defaults to rack.
+	// How placement groups spread instances. Can only be used when the strategy is set to spread. Can be host or rack. host can only be used for Outpost placement groups. Defaults to rack.
 	// +kubebuilder:validation:Optional
 	SpreadLevel *string `json:"spreadLevel,omitempty" tf:"spread_level,omitempty"`
 
-	// The placement strategy. Can be cluster, partition or spread.
+	// Placement strategy. Can be cluster, partition or spread.
 	// +kubebuilder:validation:Optional
 	Strategy *string `json:"strategy,omitempty" tf:"strategy,omitempty"`
 

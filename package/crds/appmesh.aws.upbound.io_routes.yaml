@@ -3393,7 +3393,7 @@ spec:
                       details.
                     properties:
                       grpcRoute:
-                        description: GRPC routing information for the route. See spec.grpc_route
+                        description: gRPC routing information for the route. See spec.grpc_route
                           Block for details.
                         properties:
                           action:
@@ -4409,7 +4409,7 @@ spec:
                       details.
                     properties:
                       grpcRoute:
-                        description: GRPC routing information for the route. See spec.grpc_route
+                        description: gRPC routing information for the route. See spec.grpc_route
                           Block for details.
                         properties:
                           action:
@@ -5456,7 +5456,7 @@ spec:
                       details.
                     properties:
                       grpcRoute:
-                        description: GRPC routing information for the route. See spec.grpc_route
+                        description: gRPC routing information for the route. See spec.grpc_route
                           Block for details.
                         properties:
                           action:

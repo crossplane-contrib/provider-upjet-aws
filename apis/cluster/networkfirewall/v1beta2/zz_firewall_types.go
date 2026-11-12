@@ -81,7 +81,7 @@ type FirewallInitParameters struct {
 	// A setting indicating whether the firewall is protected against changes to its Availability Zone configuration. When set to true, you must first disable this protection before adding or removing Availability Zones.
 	AvailabilityZoneChangeProtection *bool `json:"availabilityZoneChangeProtection,omitempty" tf:"availability_zone_change_protection,omitempty"`
 
-	// Required when creating a transit gateway-attached firewall. Set of configuration blocks describing the avaiability availability where you want to create firewall endpoints for a transit gateway-attached firewall.
+	// Required when creating a transit gateway-attached firewall. Set of configuration blocks describing the availability availability where you want to create firewall endpoints for a transit gateway-attached firewall.
 	AvailabilityZoneMapping []AvailabilityZoneMappingInitParameters `json:"availabilityZoneMapping,omitempty" tf:"availability_zone_mapping,omitempty"`
 
 	// A flag indicating whether the firewall is protected against deletion. Use this setting to protect against accidentally deleting a firewall that is in use. Defaults to false.
@@ -160,7 +160,7 @@ type FirewallObservation struct {
 	// A setting indicating whether the firewall is protected against changes to its Availability Zone configuration. When set to true, you must first disable this protection before adding or removing Availability Zones.
 	AvailabilityZoneChangeProtection *bool `json:"availabilityZoneChangeProtection,omitempty" tf:"availability_zone_change_protection,omitempty"`
 
-	// Required when creating a transit gateway-attached firewall. Set of configuration blocks describing the avaiability availability where you want to create firewall endpoints for a transit gateway-attached firewall.
+	// Required when creating a transit gateway-attached firewall. Set of configuration blocks describing the availability availability where you want to create firewall endpoints for a transit gateway-attached firewall.
 	AvailabilityZoneMapping []AvailabilityZoneMappingObservation `json:"availabilityZoneMapping,omitempty" tf:"availability_zone_mapping,omitempty"`
 
 	// A flag indicating whether the firewall is protected against deletion. Use this setting to protect against accidentally deleting a firewall that is in use. Defaults to false.
@@ -228,7 +228,7 @@ type FirewallParameters struct {
 	// +kubebuilder:validation:Optional
 	AvailabilityZoneChangeProtection *bool `json:"availabilityZoneChangeProtection,omitempty" tf:"availability_zone_change_protection,omitempty"`
 
-	// Required when creating a transit gateway-attached firewall. Set of configuration blocks describing the avaiability availability where you want to create firewall endpoints for a transit gateway-attached firewall.
+	// Required when creating a transit gateway-attached firewall. Set of configuration blocks describing the availability availability where you want to create firewall endpoints for a transit gateway-attached firewall.
 	// +kubebuilder:validation:Optional
 	AvailabilityZoneMapping []AvailabilityZoneMappingParameters `json:"availabilityZoneMapping,omitempty" tf:"availability_zone_mapping,omitempty"`
 

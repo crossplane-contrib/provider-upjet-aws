@@ -15,7 +15,7 @@ import (
 
 type KeyPairInitParameters struct {
 
-	// The public key material.
+	// Public key material.
 	PublicKey *string `json:"publicKey,omitempty" tf:"public_key,omitempty"`
 
 	// Key-value map of resource tags.
@@ -25,22 +25,22 @@ type KeyPairInitParameters struct {
 
 type KeyPairObservation struct {
 
-	// The key pair ARN.
+	// Key pair ARN.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The MD5 public key fingerprint as specified in section 4 of RFC 4716.
+	// MD5 public key fingerprint as specified in section 4 of RFC 4716.
 	Fingerprint *string `json:"fingerprint,omitempty" tf:"fingerprint,omitempty"`
 
-	// The key pair name.
+	// Key pair name.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The key pair ID.
+	// Key pair ID.
 	KeyPairID *string `json:"keyPairId,omitempty" tf:"key_pair_id,omitempty"`
 
-	// The type of key pair.
+	// Type of key pair.
 	KeyType *string `json:"keyType,omitempty" tf:"key_type,omitempty"`
 
-	// The public key material.
+	// Public key material.
 	PublicKey *string `json:"publicKey,omitempty" tf:"public_key,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -51,14 +51,14 @@ type KeyPairObservation struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type KeyPairParameters struct {
 
-	// The public key material.
+	// Public key material.
 	// +kubebuilder:validation:Optional
 	PublicKey *string `json:"publicKey,omitempty" tf:"public_key,omitempty"`
 

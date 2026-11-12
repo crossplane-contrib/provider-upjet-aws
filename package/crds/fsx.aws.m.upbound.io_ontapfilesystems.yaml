@@ -1128,11 +1128,14 @@ spec:
                       properties:
                         intercluster:
                           description: Endpoint for managing your file system by setting
-                            up NetApp SnapMirror with other ONTAP systems. See Endpoint.
+                            up NetApp SnapMirror with other ONTAP systems. See endpoints.intercluster
+                            below.
                           items:
                             properties:
                               dnsName:
-                                description: DNS name for the file system.
+                                description: Domain Name Service (DNS) name for the
+                                  file system. You can mount your file system using
+                                  its DNS name.
                                 type: string
                               ipAddresses:
                                 description: IP addresses of the file system endpoint.
@@ -1144,11 +1147,14 @@ spec:
                           type: array
                         management:
                           description: Endpoint for managing your file system using
-                            the NetApp ONTAP CLI and NetApp ONTAP API. See Endpoint.
+                            the NetApp ONTAP CLI and NetApp ONTAP API. See endpoints.management
+                            below.
                           items:
                             properties:
                               dnsName:
-                                description: DNS name for the file system.
+                                description: Domain Name Service (DNS) name for the
+                                  file system. You can mount your file system using
+                                  its DNS name.
                                 type: string
                               ipAddresses:
                                 description: IP addresses of the file system endpoint.

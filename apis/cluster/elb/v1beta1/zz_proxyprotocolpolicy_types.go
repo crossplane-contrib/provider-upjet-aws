@@ -15,13 +15,11 @@ import (
 
 type ProxyProtocolPolicyInitParameters struct {
 
-	// List of instance ports to which the policy
-	// should be applied. This can be specified if the protocol is SSL or TCP.
+	// List of instance ports to which the policy should be applied. This can be specified if the protocol is SSL or TCP.
 	// +listType=set
 	InstancePorts []*string `json:"instancePorts,omitempty" tf:"instance_ports,omitempty"`
 
-	// The load balancer to which the policy
-	// should be attached.
+	// Load balancer to which the policy should be attached.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/elb/v1beta2.ELB
 	LoadBalancer *string `json:"loadBalancer,omitempty" tf:"load_balancer,omitempty"`
 
@@ -36,16 +34,14 @@ type ProxyProtocolPolicyInitParameters struct {
 
 type ProxyProtocolPolicyObservation struct {
 
-	// The ID of the policy.
+	// ID of the policy.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// List of instance ports to which the policy
-	// should be applied. This can be specified if the protocol is SSL or TCP.
+	// List of instance ports to which the policy should be applied. This can be specified if the protocol is SSL or TCP.
 	// +listType=set
 	InstancePorts []*string `json:"instancePorts,omitempty" tf:"instance_ports,omitempty"`
 
-	// The load balancer to which the policy
-	// should be attached.
+	// Load balancer to which the policy should be attached.
 	LoadBalancer *string `json:"loadBalancer,omitempty" tf:"load_balancer,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -55,14 +51,12 @@ type ProxyProtocolPolicyObservation struct {
 
 type ProxyProtocolPolicyParameters struct {
 
-	// List of instance ports to which the policy
-	// should be applied. This can be specified if the protocol is SSL or TCP.
+	// List of instance ports to which the policy should be applied. This can be specified if the protocol is SSL or TCP.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	InstancePorts []*string `json:"instancePorts,omitempty" tf:"instance_ports,omitempty"`
 
-	// The load balancer to which the policy
-	// should be attached.
+	// Load balancer to which the policy should be attached.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/elb/v1beta2.ELB
 	// +kubebuilder:validation:Optional
 	LoadBalancer *string `json:"loadBalancer,omitempty" tf:"load_balancer,omitempty"`

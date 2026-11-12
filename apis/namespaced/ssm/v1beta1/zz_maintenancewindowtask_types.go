@@ -189,7 +189,7 @@ type MaintenanceWindowTaskInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ServiceRoleArnSelector *v2.NamespacedSelector `json:"serviceRoleArnSelector,omitempty" tf:"-"`
 
-	// The targets (either instances or window target ids). Instances are specified using Key=InstanceIds,Values=instanceid1,instanceid2. Window target ids are specified using Key=WindowTargetIds,Values=window target id1, window target id2.
+	// The targets (either instances or window target IDs). Instances are specified using Key=InstanceIds,Values=instanceid1,instanceid2. Window target IDs are specified using Key=WindowTargetIds,Values=window target id1, window target id2.
 	Targets []MaintenanceWindowTaskTargetsInitParameters `json:"targets,omitempty" tf:"targets,omitempty"`
 
 	// The ARN of the task to execute.
@@ -211,7 +211,7 @@ type MaintenanceWindowTaskInitParameters struct {
 	// The type of task being registered. Valid values: AUTOMATION, LAMBDA, RUN_COMMAND or STEP_FUNCTIONS.
 	TaskType *string `json:"taskType,omitempty" tf:"task_type,omitempty"`
 
-	// The Id of the maintenance window to register the task with.
+	// The ID of the maintenance window to register the task with.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ssm/v1beta1.MaintenanceWindow
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	WindowID *string `json:"windowId,omitempty" tf:"window_id,omitempty"`
@@ -258,7 +258,7 @@ type MaintenanceWindowTaskObservation struct {
 	// The role that should be assumed when executing the task. If a role is not provided, Systems Manager uses your account's service-linked role. If no service-linked role for Systems Manager exists in your account, it is created for you.
 	ServiceRoleArn *string `json:"serviceRoleArn,omitempty" tf:"service_role_arn,omitempty"`
 
-	// The targets (either instances or window target ids). Instances are specified using Key=InstanceIds,Values=instanceid1,instanceid2. Window target ids are specified using Key=WindowTargetIds,Values=window target id1, window target id2.
+	// The targets (either instances or window target IDs). Instances are specified using Key=InstanceIds,Values=instanceid1,instanceid2. Window target IDs are specified using Key=WindowTargetIds,Values=window target id1, window target id2.
 	Targets []MaintenanceWindowTaskTargetsObservation `json:"targets,omitempty" tf:"targets,omitempty"`
 
 	// The ARN of the task to execute.
@@ -270,7 +270,7 @@ type MaintenanceWindowTaskObservation struct {
 	// The type of task being registered. Valid values: AUTOMATION, LAMBDA, RUN_COMMAND or STEP_FUNCTIONS.
 	TaskType *string `json:"taskType,omitempty" tf:"task_type,omitempty"`
 
-	// The Id of the maintenance window to register the task with.
+	// The ID of the maintenance window to register the task with.
 	WindowID *string `json:"windowId,omitempty" tf:"window_id,omitempty"`
 
 	// The ID of the maintenance window task.
@@ -322,7 +322,7 @@ type MaintenanceWindowTaskParameters struct {
 	// +kubebuilder:validation:Optional
 	ServiceRoleArnSelector *v2.NamespacedSelector `json:"serviceRoleArnSelector,omitempty" tf:"-"`
 
-	// The targets (either instances or window target ids). Instances are specified using Key=InstanceIds,Values=instanceid1,instanceid2. Window target ids are specified using Key=WindowTargetIds,Values=window target id1, window target id2.
+	// The targets (either instances or window target IDs). Instances are specified using Key=InstanceIds,Values=instanceid1,instanceid2. Window target IDs are specified using Key=WindowTargetIds,Values=window target id1, window target id2.
 	// +kubebuilder:validation:Optional
 	Targets []MaintenanceWindowTaskTargetsParameters `json:"targets,omitempty" tf:"targets,omitempty"`
 
@@ -348,7 +348,7 @@ type MaintenanceWindowTaskParameters struct {
 	// +kubebuilder:validation:Optional
 	TaskType *string `json:"taskType,omitempty" tf:"task_type,omitempty"`
 
-	// The Id of the maintenance window to register the task with.
+	// The ID of the maintenance window to register the task with.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ssm/v1beta1.MaintenanceWindow
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional

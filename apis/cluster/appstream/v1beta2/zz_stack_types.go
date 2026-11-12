@@ -120,7 +120,7 @@ type StackObservation struct {
 	// Settings for application settings persistence. See application_settings below.
 	ApplicationSettings *ApplicationSettingsObservation `json:"applicationSettings,omitempty" tf:"application_settings,omitempty"`
 
-	// ARN of the appstream stack.
+	// ARN of the AppStream stack.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Date and time, in UTC and extended RFC 3339 format, when the stack was created.
@@ -139,7 +139,7 @@ type StackObservation struct {
 	// URL that users are redirected to after they click the Send Feedback link. If no URL is specified, no Send Feedback link is displayed. .
 	FeedbackURL *string `json:"feedbackUrl,omitempty" tf:"feedback_url,omitempty"`
 
-	// Unique ID of the appstream stack.
+	// Unique ID of the AppStream stack.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Unique name for the AppStream stack.

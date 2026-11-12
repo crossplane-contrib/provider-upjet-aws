@@ -1208,7 +1208,7 @@ type JSONInitParameters struct {
 	// +listType=set
 	FailureValues []*string `json:"failureValues,omitempty" tf:"failure_values,omitempty"`
 
-	// Identifier for the value to match against in the JSON.
+	// Name of the username field.
 	// Identifier of the JSON field to inspect
 	Identifier *string `json:"identifier,omitempty" tf:"identifier,omitempty"`
 
@@ -1225,7 +1225,7 @@ type JSONObservation struct {
 	// +listType=set
 	FailureValues []*string `json:"failureValues,omitempty" tf:"failure_values,omitempty"`
 
-	// Identifier for the value to match against in the JSON.
+	// Name of the username field.
 	// Identifier of the JSON field to inspect
 	Identifier *string `json:"identifier,omitempty" tf:"identifier,omitempty"`
 
@@ -1243,7 +1243,7 @@ type JSONParameters struct {
 	// +listType=set
 	FailureValues []*string `json:"failureValues" tf:"failure_values,omitempty"`
 
-	// Identifier for the value to match against in the JSON.
+	// Name of the username field.
 	// Identifier of the JSON field to inspect
 	// +kubebuilder:validation:Optional
 	Identifier *string `json:"identifier" tf:"identifier,omitempty"`

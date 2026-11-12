@@ -152,7 +152,7 @@ type EcsTargetInitParameters struct {
 	// Specifies whether to propagate the tags from the task definition to the task. If no value is specified, the tags are not propagated. Tags can only be propagated to the task during task creation. The only valid value is: TASK_DEFINITION.
 	PropagateTags *string `json:"propagateTags,omitempty" tf:"propagate_tags,omitempty"`
 
-	// A map of tags to assign to ecs resources.
+	// A map of tags to assign to ECS resources.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
@@ -205,7 +205,7 @@ type EcsTargetObservation struct {
 	// Specifies whether to propagate the tags from the task definition to the task. If no value is specified, the tags are not propagated. Tags can only be propagated to the task during task creation. The only valid value is: TASK_DEFINITION.
 	PropagateTags *string `json:"propagateTags,omitempty" tf:"propagate_tags,omitempty"`
 
-	// A map of tags to assign to ecs resources.
+	// A map of tags to assign to ECS resources.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
@@ -258,7 +258,7 @@ type EcsTargetParameters struct {
 	// +kubebuilder:validation:Optional
 	PropagateTags *string `json:"propagateTags,omitempty" tf:"propagate_tags,omitempty"`
 
-	// A map of tags to assign to ecs resources.
+	// A map of tags to assign to ECS resources.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -782,7 +782,7 @@ type TargetInitParameters struct {
 	// Parameters used when you are using the rule to invoke an Amazon SQS Queue. Documented below. A maximum of 1 are allowed.
 	SqsTarget *SqsTargetInitParameters `json:"sqsTarget,omitempty" tf:"sqs_target,omitempty"`
 
-	// The unique target assignment ID. If missing, will generate a random, unique id.
+	// The unique target assignment ID. If missing, will generate a random, unique ID.
 	TargetID *string `json:"targetId,omitempty" tf:"target_id,omitempty"`
 }
 
@@ -852,7 +852,7 @@ type TargetObservation struct {
 	// Parameters used when you are using the rule to invoke an Amazon SQS Queue. Documented below. A maximum of 1 are allowed.
 	SqsTarget *SqsTargetObservation `json:"sqsTarget,omitempty" tf:"sqs_target,omitempty"`
 
-	// The unique target assignment ID. If missing, will generate a random, unique id.
+	// The unique target assignment ID. If missing, will generate a random, unique ID.
 	TargetID *string `json:"targetId,omitempty" tf:"target_id,omitempty"`
 }
 
@@ -968,7 +968,7 @@ type TargetParameters struct {
 	// +kubebuilder:validation:Optional
 	SqsTarget *SqsTargetParameters `json:"sqsTarget,omitempty" tf:"sqs_target,omitempty"`
 
-	// The unique target assignment ID. If missing, will generate a random, unique id.
+	// The unique target assignment ID. If missing, will generate a random, unique ID.
 	// +kubebuilder:validation:Optional
 	TargetID *string `json:"targetId,omitempty" tf:"target_id,omitempty"`
 }

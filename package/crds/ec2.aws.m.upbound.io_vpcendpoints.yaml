@@ -60,28 +60,26 @@ spec:
               forProvider:
                 properties:
                   autoAccept:
-                    description: Accept the VPC endpoint (the VPC endpoint and service
-                      need to be in the same AWS account).
+                    description: Whether to accept the VPC endpoint (the VPC endpoint
+                      and service need to be in the same AWS account).
                     type: boolean
                   dnsOptions:
-                    description: The DNS options for the endpoint. See dns_options
-                      below.
+                    description: DNS options for the endpoint. See dns_options below.
                     properties:
                       dnsRecordIpType:
-                        description: The DNS records created for the endpoint. Valid
-                          values are ipv4, dualstack, service-defined, and ipv6.
+                        description: DNS records created for the endpoint. Valid values
+                          are ipv4, dualstack, service-defined, and ipv6.
                         type: string
                       privateDnsOnlyForInboundResolverEndpoint:
-                        description: Boolean indicating whether to enable private
-                          DNS only for inbound endpoints. This option is available
-                          only for interface endpoints of services that support both
-                          gateway and interface endpoints. A gateway endpoint for
-                          the same service must be created before an interface endpoint
-                          is created. Traffic originating from the VPC is routed to
-                          the gateway endpoint, while traffic originating from on-premises
-                          is routed to the interface endpoint. Defaults to false.
-                          This argument can be specified only if private_dns_enabled
-                          is true.
+                        description: Whether to enable private DNS only for inbound
+                          endpoints. This option is available only for interface endpoints
+                          of services that support both gateway and interface endpoints.
+                          A gateway endpoint for the same service must be created
+                          before an interface endpoint is created. Traffic originating
+                          from the VPC is routed to the gateway endpoint, while traffic
+                          originating from on-premises is routed to the interface
+                          endpoint. Defaults to false. This argument can be specified
+                          only if private_dns_enabled is true.
                         type: boolean
                       privateDnsPreference:
                         description: Preference for which private domains have a private
@@ -104,19 +102,23 @@ spec:
                         x-kubernetes-list-type: set
                     type: object
                   ipAddressType:
-                    description: The IP address type for the endpoint. Valid values
-                      are ipv4, dualstack, and ipv6.
+                    description: IP address type for the endpoint. Valid values are
+                      ipv4, dualstack, and ipv6.
                     type: string
                   policy:
-                    description: A policy to attach to the endpoint that controls
-                      access to the service. This is a JSON formatted string. Defaults
-                      to full access. All Gateway and some Interface endpoints support
+                    description: Policy to attach to the endpoint that controls access
+                      to the service. This is a JSON formatted string. Defaults to
+                      full access. All Gateway and some Interface endpoints support
                       policies - see the relevant AWS documentation for more details.
                     type: string
                   privateDnsEnabled:
-                    description: |-
-                      Whether or not to associate a private hosted zone with the specified VPC. Applicable for endpoints of type Interface. Most users will want this enabled to allow services within the VPC to automatically use the endpoint.
-                      Defaults to false. If vpc_endpoint_type is anything other than Interface, changing this value forces a new resource to be created.
+                    description: Whether to associate a private hosted zone with the
+                      specified VPC. Available for AWS services and AWS Marketplace
+                      partner services only. Applicable for endpoints of type Interface.
+                      Most users will want this enabled to allow services within the
+                      VPC to automatically use the endpoint. Defaults to false. If
+                      vpc_endpoint_type is anything other than Interface, changing
+                      this value forces a new resource to be created.
                     type: boolean
                   region:
                     description: |-
@@ -124,9 +126,11 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   resourceConfigurationArn:
-                    description: The ARN of a Resource Configuration to connect this
-                      VPC Endpoint to. Exactly one of resource_configuration_arn,
-                      service_name or service_network_arn is required.
+                    description: ARN of a Resource Configuration to connect this VPC
+                      Endpoint to. Exactly one of resource_configuration_arn, service_name
+                      or service_network_arn is required. Applicable for endpoints
+                      of type Resource and Tunnel. For Tunnel endpoints, the resource
+                      configuration must be of type CIDR.
                     type: string
                   resourceConfigurationArnRef:
                     description: Reference to a ResourceConfiguration in vpclattice
@@ -211,11 +215,11 @@ spec:
                         type: object
                     type: object
                   serviceName:
-                    description: The service name. For AWS services the service name
-                      is usually in the form com.amazonaws.<region>.<service> (the
-                      SageMaker AI Notebook service is an exception to this rule,
-                      the service name is in the form aws.sagemaker.<region>.notebook).
-                      Exactly one of resource_configuration_arn, service_name or service_network_arn
+                    description: Service name. For AWS services the service name is
+                      usually in the form com.amazonaws.<region>.<service> (the SageMaker
+                      AI Notebook service is an exception to this rule, the service
+                      name is in the form aws.sagemaker.<region>.notebook). Exactly
+                      one of resource_configuration_arn, service_name or service_network_arn
                       is required.
                     type: string
                   serviceNameRef:
@@ -301,8 +305,8 @@ spec:
                         type: object
                     type: object
                   serviceNetworkArn:
-                    description: The ARN of a Service Network to connect this VPC
-                      Endpoint to. Exactly one of resource_configuration_arn, service_name
+                    description: ARN of a Service Network to connect this VPC Endpoint
+                      to. Exactly one of resource_configuration_arn, service_name
                       or service_network_arn is required.
                     type: string
                   serviceNetworkArnRef:
@@ -388,9 +392,9 @@ spec:
                         type: object
                     type: object
                   serviceRegion:
-                    description: '- The AWS region of the VPC Endpoint Service. If
-                      specified, the VPC endpoint will connect to the service in the
-                      provided region. Applicable for endpoints of type Interface.'
+                    description: AWS region of the VPC Endpoint Service. If specified,
+                      the VPC endpoint will connect to the service in the provided
+                      region. Applicable for endpoints of type Interface.
                     type: string
                   subnetConfiguration:
                     description: Subnet configuration for the endpoint, used to select
@@ -399,17 +403,17 @@ spec:
                     items:
                       properties:
                         ipv4:
-                          description: The IPv4 address to assign to the endpoint
-                            network interface in the subnet. You must provide an IPv4
-                            address if the VPC endpoint supports IPv4.
+                          description: IPv4 address to assign to the endpoint network
+                            interface in the subnet. You must provide an IPv4 address
+                            if the VPC endpoint supports IPv4.
                           type: string
                         ipv6:
-                          description: The IPv6 address to assign to the endpoint
-                            network interface in the subnet. You must provide an IPv6
-                            address if the VPC endpoint supports IPv6.
+                          description: IPv6 address to assign to the endpoint network
+                            interface in the subnet. You must provide an IPv6 address
+                            if the VPC endpoint supports IPv6.
                           type: string
                         subnetId:
-                          description: The ID of the subnet. Must have a corresponding
+                          description: ID of the subnet. Must have a corresponding
                             subnet in the subnet_ids argument.
                           type: string
                         subnetIdRef:
@@ -501,11 +505,11 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   vpcEndpointType:
-                    description: The VPC endpoint type, Gateway, GatewayLoadBalancer,Interface,
-                      Resource or ServiceNetwork. Defaults to Gateway.
+                    description: VPC endpoint type, Gateway, GatewayLoadBalancer,
+                      Interface, Resource, ServiceNetwork or Tunnel. Defaults to Gateway.
                     type: string
                   vpcId:
-                    description: The ID of the VPC in which the endpoint will be used.
+                    description: ID of the VPC in which the endpoint will be used.
                     type: string
                   vpcIdRef:
                     description: Reference to a VPC in ec2 to populate vpcId.
@@ -604,28 +608,26 @@ spec:
                   autoscaler.
                 properties:
                   autoAccept:
-                    description: Accept the VPC endpoint (the VPC endpoint and service
-                      need to be in the same AWS account).
+                    description: Whether to accept the VPC endpoint (the VPC endpoint
+                      and service need to be in the same AWS account).
                     type: boolean
                   dnsOptions:
-                    description: The DNS options for the endpoint. See dns_options
-                      below.
+                    description: DNS options for the endpoint. See dns_options below.
                     properties:
                       dnsRecordIpType:
-                        description: The DNS records created for the endpoint. Valid
-                          values are ipv4, dualstack, service-defined, and ipv6.
+                        description: DNS records created for the endpoint. Valid values
+                          are ipv4, dualstack, service-defined, and ipv6.
                         type: string
                       privateDnsOnlyForInboundResolverEndpoint:
-                        description: Boolean indicating whether to enable private
-                          DNS only for inbound endpoints. This option is available
-                          only for interface endpoints of services that support both
-                          gateway and interface endpoints. A gateway endpoint for
-                          the same service must be created before an interface endpoint
-                          is created. Traffic originating from the VPC is routed to
-                          the gateway endpoint, while traffic originating from on-premises
-                          is routed to the interface endpoint. Defaults to false.
-                          This argument can be specified only if private_dns_enabled
-                          is true.
+                        description: Whether to enable private DNS only for inbound
+                          endpoints. This option is available only for interface endpoints
+                          of services that support both gateway and interface endpoints.
+                          A gateway endpoint for the same service must be created
+                          before an interface endpoint is created. Traffic originating
+                          from the VPC is routed to the gateway endpoint, while traffic
+                          originating from on-premises is routed to the interface
+                          endpoint. Defaults to false. This argument can be specified
+                          only if private_dns_enabled is true.
                         type: boolean
                       privateDnsPreference:
                         description: Preference for which private domains have a private
@@ -648,24 +650,30 @@ spec:
                         x-kubernetes-list-type: set
                     type: object
                   ipAddressType:
-                    description: The IP address type for the endpoint. Valid values
-                      are ipv4, dualstack, and ipv6.
+                    description: IP address type for the endpoint. Valid values are
+                      ipv4, dualstack, and ipv6.
                     type: string
                   policy:
-                    description: A policy to attach to the endpoint that controls
-                      access to the service. This is a JSON formatted string. Defaults
-                      to full access. All Gateway and some Interface endpoints support
+                    description: Policy to attach to the endpoint that controls access
+                      to the service. This is a JSON formatted string. Defaults to
+                      full access. All Gateway and some Interface endpoints support
                       policies - see the relevant AWS documentation for more details.
                     type: string
                   privateDnsEnabled:
-                    description: |-
-                      Whether or not to associate a private hosted zone with the specified VPC. Applicable for endpoints of type Interface. Most users will want this enabled to allow services within the VPC to automatically use the endpoint.
-                      Defaults to false. If vpc_endpoint_type is anything other than Interface, changing this value forces a new resource to be created.
+                    description: Whether to associate a private hosted zone with the
+                      specified VPC. Available for AWS services and AWS Marketplace
+                      partner services only. Applicable for endpoints of type Interface.
+                      Most users will want this enabled to allow services within the
+                      VPC to automatically use the endpoint. Defaults to false. If
+                      vpc_endpoint_type is anything other than Interface, changing
+                      this value forces a new resource to be created.
                     type: boolean
                   resourceConfigurationArn:
-                    description: The ARN of a Resource Configuration to connect this
-                      VPC Endpoint to. Exactly one of resource_configuration_arn,
-                      service_name or service_network_arn is required.
+                    description: ARN of a Resource Configuration to connect this VPC
+                      Endpoint to. Exactly one of resource_configuration_arn, service_name
+                      or service_network_arn is required. Applicable for endpoints
+                      of type Resource and Tunnel. For Tunnel endpoints, the resource
+                      configuration must be of type CIDR.
                     type: string
                   resourceConfigurationArnRef:
                     description: Reference to a ResourceConfiguration in vpclattice
@@ -750,11 +758,11 @@ spec:
                         type: object
                     type: object
                   serviceName:
-                    description: The service name. For AWS services the service name
-                      is usually in the form com.amazonaws.<region>.<service> (the
-                      SageMaker AI Notebook service is an exception to this rule,
-                      the service name is in the form aws.sagemaker.<region>.notebook).
-                      Exactly one of resource_configuration_arn, service_name or service_network_arn
+                    description: Service name. For AWS services the service name is
+                      usually in the form com.amazonaws.<region>.<service> (the SageMaker
+                      AI Notebook service is an exception to this rule, the service
+                      name is in the form aws.sagemaker.<region>.notebook). Exactly
+                      one of resource_configuration_arn, service_name or service_network_arn
                       is required.
                     type: string
                   serviceNameRef:
@@ -840,8 +848,8 @@ spec:
                         type: object
                     type: object
                   serviceNetworkArn:
-                    description: The ARN of a Service Network to connect this VPC
-                      Endpoint to. Exactly one of resource_configuration_arn, service_name
+                    description: ARN of a Service Network to connect this VPC Endpoint
+                      to. Exactly one of resource_configuration_arn, service_name
                       or service_network_arn is required.
                     type: string
                   serviceNetworkArnRef:
@@ -927,9 +935,9 @@ spec:
                         type: object
                     type: object
                   serviceRegion:
-                    description: '- The AWS region of the VPC Endpoint Service. If
-                      specified, the VPC endpoint will connect to the service in the
-                      provided region. Applicable for endpoints of type Interface.'
+                    description: AWS region of the VPC Endpoint Service. If specified,
+                      the VPC endpoint will connect to the service in the provided
+                      region. Applicable for endpoints of type Interface.
                     type: string
                   subnetConfiguration:
                     description: Subnet configuration for the endpoint, used to select
@@ -938,17 +946,17 @@ spec:
                     items:
                       properties:
                         ipv4:
-                          description: The IPv4 address to assign to the endpoint
-                            network interface in the subnet. You must provide an IPv4
-                            address if the VPC endpoint supports IPv4.
+                          description: IPv4 address to assign to the endpoint network
+                            interface in the subnet. You must provide an IPv4 address
+                            if the VPC endpoint supports IPv4.
                           type: string
                         ipv6:
-                          description: The IPv6 address to assign to the endpoint
-                            network interface in the subnet. You must provide an IPv6
-                            address if the VPC endpoint supports IPv6.
+                          description: IPv6 address to assign to the endpoint network
+                            interface in the subnet. You must provide an IPv6 address
+                            if the VPC endpoint supports IPv6.
                           type: string
                         subnetId:
-                          description: The ID of the subnet. Must have a corresponding
+                          description: ID of the subnet. Must have a corresponding
                             subnet in the subnet_ids argument.
                           type: string
                         subnetIdRef:
@@ -1040,11 +1048,11 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   vpcEndpointType:
-                    description: The VPC endpoint type, Gateway, GatewayLoadBalancer,Interface,
-                      Resource or ServiceNetwork. Defaults to Gateway.
+                    description: VPC endpoint type, Gateway, GatewayLoadBalancer,
+                      Interface, Resource, ServiceNetwork or Tunnel. Defaults to Gateway.
                     type: string
                   vpcId:
-                    description: The ID of the VPC in which the endpoint will be used.
+                    description: ID of the VPC in which the endpoint will be used.
                     type: string
                   vpcIdRef:
                     description: Reference to a VPC in ec2 to populate vpcId.
@@ -1194,47 +1202,45 @@ spec:
                     description: ARN of the VPC endpoint.
                     type: string
                   autoAccept:
-                    description: Accept the VPC endpoint (the VPC endpoint and service
-                      need to be in the same AWS account).
+                    description: Whether to accept the VPC endpoint (the VPC endpoint
+                      and service need to be in the same AWS account).
                     type: boolean
                   cidrBlocks:
-                    description: The list of CIDR blocks for the exposed AWS service.
+                    description: List of CIDR blocks for the exposed AWS service.
                       Applicable for endpoints of type Gateway.
                     items:
                       type: string
                     type: array
                   dnsEntry:
-                    description: The DNS entries for the VPC Endpoint. Applicable
-                      for endpoints of type Interface. DNS blocks are documented below.
+                    description: DNS entries for the VPC Endpoint. Applicable for
+                      endpoints of type Interface. See dns_entry below.
                     items:
                       properties:
                         dnsName:
-                          description: The DNS name.
+                          description: DNS name.
                           type: string
                         hostedZoneId:
-                          description: The ID of the private hosted zone.
+                          description: ID of the private hosted zone.
                           type: string
                       type: object
                     type: array
                   dnsOptions:
-                    description: The DNS options for the endpoint. See dns_options
-                      below.
+                    description: DNS options for the endpoint. See dns_options below.
                     properties:
                       dnsRecordIpType:
-                        description: The DNS records created for the endpoint. Valid
-                          values are ipv4, dualstack, service-defined, and ipv6.
+                        description: DNS records created for the endpoint. Valid values
+                          are ipv4, dualstack, service-defined, and ipv6.
                         type: string
                       privateDnsOnlyForInboundResolverEndpoint:
-                        description: Boolean indicating whether to enable private
-                          DNS only for inbound endpoints. This option is available
-                          only for interface endpoints of services that support both
-                          gateway and interface endpoints. A gateway endpoint for
-                          the same service must be created before an interface endpoint
-                          is created. Traffic originating from the VPC is routed to
-                          the gateway endpoint, while traffic originating from on-premises
-                          is routed to the interface endpoint. Defaults to false.
-                          This argument can be specified only if private_dns_enabled
-                          is true.
+                        description: Whether to enable private DNS only for inbound
+                          endpoints. This option is available only for interface endpoints
+                          of services that support both gateway and interface endpoints.
+                          A gateway endpoint for the same service must be created
+                          before an interface endpoint is created. Traffic originating
+                          from the VPC is routed to the gateway endpoint, while traffic
+                          originating from on-premises is routed to the interface
+                          endpoint. Defaults to false. This argument can be specified
+                          only if private_dns_enabled is true.
                         type: boolean
                       privateDnsPreference:
                         description: Preference for which private domains have a private
@@ -1257,11 +1263,11 @@ spec:
                         x-kubernetes-list-type: set
                     type: object
                   id:
-                    description: The ID of the VPC endpoint.
+                    description: ID of the VPC endpoint.
                     type: string
                   ipAddressType:
-                    description: The IP address type for the endpoint. Valid values
-                      are ipv4, dualstack, and ipv6.
+                    description: IP address type for the endpoint. Valid values are
+                      ipv4, dualstack, and ipv6.
                     type: string
                   networkInterfaceIds:
                     description: One or more network interfaces for the VPC Endpoint.
@@ -1271,22 +1277,26 @@ spec:
                     type: array
                     x-kubernetes-list-type: set
                   ownerId:
-                    description: The ID of the AWS account that owns the VPC endpoint.
+                    description: ID of the AWS account that owns the VPC endpoint.
                     type: string
                   policy:
-                    description: A policy to attach to the endpoint that controls
-                      access to the service. This is a JSON formatted string. Defaults
-                      to full access. All Gateway and some Interface endpoints support
+                    description: Policy to attach to the endpoint that controls access
+                      to the service. This is a JSON formatted string. Defaults to
+                      full access. All Gateway and some Interface endpoints support
                       policies - see the relevant AWS documentation for more details.
                     type: string
                   prefixListId:
-                    description: The prefix list ID of the exposed AWS service. Applicable
+                    description: Prefix list ID of the exposed AWS service. Applicable
                       for endpoints of type Gateway.
                     type: string
                   privateDnsEnabled:
-                    description: |-
-                      Whether or not to associate a private hosted zone with the specified VPC. Applicable for endpoints of type Interface. Most users will want this enabled to allow services within the VPC to automatically use the endpoint.
-                      Defaults to false. If vpc_endpoint_type is anything other than Interface, changing this value forces a new resource to be created.
+                    description: Whether to associate a private hosted zone with the
+                      specified VPC. Available for AWS services and AWS Marketplace
+                      partner services only. Applicable for endpoints of type Interface.
+                      Most users will want this enabled to allow services within the
+                      VPC to automatically use the endpoint. Defaults to false. If
+                      vpc_endpoint_type is anything other than Interface, changing
+                      this value forces a new resource to be created.
                     type: boolean
                   region:
                     description: |-
@@ -1298,9 +1308,11 @@ spec:
                       by its service - true or false.
                     type: boolean
                   resourceConfigurationArn:
-                    description: The ARN of a Resource Configuration to connect this
-                      VPC Endpoint to. Exactly one of resource_configuration_arn,
-                      service_name or service_network_arn is required.
+                    description: ARN of a Resource Configuration to connect this VPC
+                      Endpoint to. Exactly one of resource_configuration_arn, service_name
+                      or service_network_arn is required. Applicable for endpoints
+                      of type Resource and Tunnel. For Tunnel endpoints, the resource
+                      configuration must be of type CIDR.
                     type: string
                   routeTableIds:
                     description: One or more route table IDs. Applicable for endpoints
@@ -1310,33 +1322,35 @@ spec:
                     type: array
                     x-kubernetes-list-type: set
                   securityGroupIds:
-                    description: |-
-                      The ID of one or more security groups to associate with the network interface. Applicable for endpoints of type Interface.
-                      If no security groups are specified, the VPC's default security group is associated with the endpoint.
+                    description: ID of one or more security groups to associate with
+                      the network interface. Applicable for endpoints of type Interface,
+                      Resource, ServiceNetwork, and Tunnel. If no security groups
+                      are specified, the VPC's default security group is associated
+                      with the endpoint.
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
                   serviceName:
-                    description: The service name. For AWS services the service name
-                      is usually in the form com.amazonaws.<region>.<service> (the
-                      SageMaker AI Notebook service is an exception to this rule,
-                      the service name is in the form aws.sagemaker.<region>.notebook).
-                      Exactly one of resource_configuration_arn, service_name or service_network_arn
+                    description: Service name. For AWS services the service name is
+                      usually in the form com.amazonaws.<region>.<service> (the SageMaker
+                      AI Notebook service is an exception to this rule, the service
+                      name is in the form aws.sagemaker.<region>.notebook). Exactly
+                      one of resource_configuration_arn, service_name or service_network_arn
                       is required.
                     type: string
                   serviceNetworkArn:
-                    description: The ARN of a Service Network to connect this VPC
-                      Endpoint to. Exactly one of resource_configuration_arn, service_name
+                    description: ARN of a Service Network to connect this VPC Endpoint
+                      to. Exactly one of resource_configuration_arn, service_name
                       or service_network_arn is required.
                     type: string
                   serviceRegion:
-                    description: '- The AWS region of the VPC Endpoint Service. If
-                      specified, the VPC endpoint will connect to the service in the
-                      provided region. Applicable for endpoints of type Interface.'
+                    description: AWS region of the VPC Endpoint Service. If specified,
+                      the VPC endpoint will connect to the service in the provided
+                      region. Applicable for endpoints of type Interface.
                     type: string
                   state:
-                    description: The state of the VPC endpoint.
+                    description: State of the VPC endpoint.
                     type: string
                   subnetConfiguration:
                     description: Subnet configuration for the endpoint, used to select
@@ -1345,26 +1359,29 @@ spec:
                     items:
                       properties:
                         ipv4:
-                          description: The IPv4 address to assign to the endpoint
-                            network interface in the subnet. You must provide an IPv4
-                            address if the VPC endpoint supports IPv4.
+                          description: IPv4 address to assign to the endpoint network
+                            interface in the subnet. You must provide an IPv4 address
+                            if the VPC endpoint supports IPv4.
                           type: string
                         ipv6:
-                          description: The IPv6 address to assign to the endpoint
-                            network interface in the subnet. You must provide an IPv6
-                            address if the VPC endpoint supports IPv6.
+                          description: IPv6 address to assign to the endpoint network
+                            interface in the subnet. You must provide an IPv6 address
+                            if the VPC endpoint supports IPv6.
                           type: string
                         subnetId:
-                          description: The ID of the subnet. Must have a corresponding
+                          description: ID of the subnet. Must have a corresponding
                             subnet in the subnet_ids argument.
                           type: string
                       type: object
                     type: array
                   subnetIds:
-                    description: The ID of one or more subnets in which to create
-                      a network interface for the endpoint. Applicable for endpoints
-                      of type GatewayLoadBalancer and Interface. Interface type endpoints
-                      cannot function without being assigned to a subnet.
+                    description: ID of one or more subnets in which to create a network
+                      interface for the endpoint. Applicable for endpoints of type
+                      GatewayLoadBalancer, Interface, Resource, ServiceNetwork, and
+                      Tunnel. Interface type endpoints cannot function without being
+                      assigned to a subnet. For Tunnel endpoints, the subnets must
+                      be in the Availability Zones of the resource gateway associated
+                      with the resource configuration.
                     items:
                       type: string
                     type: array
@@ -1378,17 +1395,16 @@ spec:
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                     x-kubernetes-map-type: granular
                   vpcEndpointType:
-                    description: The VPC endpoint type, Gateway, GatewayLoadBalancer,Interface,
-                      Resource or ServiceNetwork. Defaults to Gateway.
+                    description: VPC endpoint type, Gateway, GatewayLoadBalancer,
+                      Interface, Resource, ServiceNetwork or Tunnel. Defaults to Gateway.
                     type: string
                   vpcId:
-                    description: The ID of the VPC in which the endpoint will be used.
+                    description: ID of the VPC in which the endpoint will be used.
                     type: string
                 type: object
               conditions:

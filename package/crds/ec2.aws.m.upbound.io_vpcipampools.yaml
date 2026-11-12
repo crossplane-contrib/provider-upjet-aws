@@ -60,23 +60,23 @@ spec:
               forProvider:
                 properties:
                   addressFamily:
-                    description: The IP protocol assigned to this pool. You must choose
+                    description: IP protocol assigned to this pool. You must choose
                       either IPv4 or IPv6 protocol for a pool.
                     type: string
                   allocationDefaultNetmaskLength:
-                    description: A default netmask length for allocations added to
-                      this pool. If, for example, the CIDR assigned to this pool is
-                      10.0.0.0/8 and you enter 16 here, new allocations will default
-                      to 10.0.0.0/16 (unless you provide a different netmask value
-                      when you create the new allocation).
+                    description: Default netmask length for allocations added to this
+                      pool. If, for example, the CIDR assigned to this pool is 10.0.0.0/8
+                      and you enter 16 here, new allocations will default to 10.0.0.0/16
+                      (unless you provide a different netmask value when you create
+                      the new allocation).
                     type: number
                   allocationMaxNetmaskLength:
-                    description: The maximum netmask length that will be required
-                      for CIDR allocations in this pool.
+                    description: Maximum netmask length that will be required for
+                      CIDR allocations in this pool.
                     type: number
                   allocationMinNetmaskLength:
-                    description: The minimum netmask length that will be required
-                      for CIDR allocations in this pool.
+                    description: Minimum netmask length that will be required for
+                      CIDR allocations in this pool.
                     type: number
                   allocationResourceTags:
                     additionalProperties:
@@ -90,24 +90,23 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   autoImport:
-                    description: |-
-                      If you include this argument, IPAM automatically imports any VPCs you have in your scope that fall
-                      within the CIDR range in the pool.
+                    description: Whether to automatically import any VPCs you have
+                      in your scope that fall within the CIDR range in the pool.
                     type: boolean
                   awsService:
                     description: 'Limits which AWS service the pool can be used in.
                       Only useable on public scopes. Valid Values: ec2.'
                     type: string
                   cascade:
-                    description: Enables you to quickly delete an IPAM pool and all
-                      resources within that pool, including provisioned CIDRs, allocations,
+                    description: Whether to quickly delete an IPAM pool and all resources
+                      within that pool, including provisioned CIDRs, allocations,
                       and other pools.
                     type: boolean
                   description:
-                    description: A description for the IPAM pool.
+                    description: Description for the IPAM pool.
                     type: string
                   ipamScopeId:
-                    description: The ID of the scope in which you would like to create
+                    description: ID of the scope in which you would like to create
                       the IPAM pool.
                     type: string
                   ipamScopeIdRef:
@@ -191,26 +190,25 @@ spec:
                         type: object
                     type: object
                   locale:
-                    description: 'The locale in which you would like to create the
-                      IPAM pool. Locale is the Region where you want to make an IPAM
-                      pool available for allocations. You can only create pools with
-                      locales that match the operating Regions of the IPAM. You can
-                      only create VPCs from a pool whose locale matches the VPC''s
-                      Region. Possible values: Any AWS region, such as us-east-1.'
+                    description: 'Locale in which you would like to create the IPAM
+                      pool. Locale is the Region where you want to make an IPAM pool
+                      available for allocations. You can only create pools with locales
+                      that match the operating Regions of the IPAM. You can only create
+                      VPCs from a pool whose locale matches the VPC''s Region. Possible
+                      values: Any AWS region, such as us-east-1.'
                     type: string
                   publicIpSource:
-                    description: The IP address source for pools in the public scope.
+                    description: IP address source for pools in the public scope.
                       Only used for provisioning IP address CIDRs to pools in the
                       public scope. Valid values are byoip or amazon. Default is byoip.
                     type: string
                   publiclyAdvertisable:
-                    description: Defines whether or not IPv6 pool space is publicly
-                      advertisable over the internet. This argument is required if
-                      address_family = "ipv6" and public_ip_source = "byoip", default
-                      is false. This option is not available for IPv4 pool space or
-                      if public_ip_source = "amazon". Setting this argument to true
-                      when it is not available may result in erroneous differences
-                      being reported.
+                    description: Whether IPv6 pool space is publicly advertisable
+                      over the internet. This argument is required if address_family
+                      = "ipv6" and public_ip_source = "byoip", default is false. This
+                      option is not available for IPv4 pool space or if public_ip_source
+                      = "amazon". Setting this argument to true when it is not available
+                      may result in erroneous differences being reported.
                     type: boolean
                   region:
                     description: |-
@@ -218,8 +216,8 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   sourceIpamPoolId:
-                    description: The ID of the source IPAM pool. Use this argument
-                      to create a child pool within an existing pool.
+                    description: ID of the source IPAM pool. Use this argument to
+                      create a child pool within an existing pool.
                     type: string
                   sourceIpamPoolIdRef:
                     description: Reference to a VPCIpamPool in ec2 to populate sourceIpamPoolId.
@@ -304,7 +302,7 @@ spec:
                   sourceResource:
                     description: Resource to use to use to configure a resource planning
                       IPAM Pool. If configured, the locale of the parent pool must
-                      match the region that the vpc resides in.
+                      match the region that the VPC resides in.
                     properties:
                       resourceId:
                         description: ID of the resource.
@@ -423,23 +421,23 @@ spec:
                   autoscaler.
                 properties:
                   addressFamily:
-                    description: The IP protocol assigned to this pool. You must choose
+                    description: IP protocol assigned to this pool. You must choose
                       either IPv4 or IPv6 protocol for a pool.
                     type: string
                   allocationDefaultNetmaskLength:
-                    description: A default netmask length for allocations added to
-                      this pool. If, for example, the CIDR assigned to this pool is
-                      10.0.0.0/8 and you enter 16 here, new allocations will default
-                      to 10.0.0.0/16 (unless you provide a different netmask value
-                      when you create the new allocation).
+                    description: Default netmask length for allocations added to this
+                      pool. If, for example, the CIDR assigned to this pool is 10.0.0.0/8
+                      and you enter 16 here, new allocations will default to 10.0.0.0/16
+                      (unless you provide a different netmask value when you create
+                      the new allocation).
                     type: number
                   allocationMaxNetmaskLength:
-                    description: The maximum netmask length that will be required
-                      for CIDR allocations in this pool.
+                    description: Maximum netmask length that will be required for
+                      CIDR allocations in this pool.
                     type: number
                   allocationMinNetmaskLength:
-                    description: The minimum netmask length that will be required
-                      for CIDR allocations in this pool.
+                    description: Minimum netmask length that will be required for
+                      CIDR allocations in this pool.
                     type: number
                   allocationResourceTags:
                     additionalProperties:
@@ -453,24 +451,23 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   autoImport:
-                    description: |-
-                      If you include this argument, IPAM automatically imports any VPCs you have in your scope that fall
-                      within the CIDR range in the pool.
+                    description: Whether to automatically import any VPCs you have
+                      in your scope that fall within the CIDR range in the pool.
                     type: boolean
                   awsService:
                     description: 'Limits which AWS service the pool can be used in.
                       Only useable on public scopes. Valid Values: ec2.'
                     type: string
                   cascade:
-                    description: Enables you to quickly delete an IPAM pool and all
-                      resources within that pool, including provisioned CIDRs, allocations,
+                    description: Whether to quickly delete an IPAM pool and all resources
+                      within that pool, including provisioned CIDRs, allocations,
                       and other pools.
                     type: boolean
                   description:
-                    description: A description for the IPAM pool.
+                    description: Description for the IPAM pool.
                     type: string
                   ipamScopeId:
-                    description: The ID of the scope in which you would like to create
+                    description: ID of the scope in which you would like to create
                       the IPAM pool.
                     type: string
                   ipamScopeIdRef:
@@ -554,30 +551,29 @@ spec:
                         type: object
                     type: object
                   locale:
-                    description: 'The locale in which you would like to create the
-                      IPAM pool. Locale is the Region where you want to make an IPAM
-                      pool available for allocations. You can only create pools with
-                      locales that match the operating Regions of the IPAM. You can
-                      only create VPCs from a pool whose locale matches the VPC''s
-                      Region. Possible values: Any AWS region, such as us-east-1.'
+                    description: 'Locale in which you would like to create the IPAM
+                      pool. Locale is the Region where you want to make an IPAM pool
+                      available for allocations. You can only create pools with locales
+                      that match the operating Regions of the IPAM. You can only create
+                      VPCs from a pool whose locale matches the VPC''s Region. Possible
+                      values: Any AWS region, such as us-east-1.'
                     type: string
                   publicIpSource:
-                    description: The IP address source for pools in the public scope.
+                    description: IP address source for pools in the public scope.
                       Only used for provisioning IP address CIDRs to pools in the
                       public scope. Valid values are byoip or amazon. Default is byoip.
                     type: string
                   publiclyAdvertisable:
-                    description: Defines whether or not IPv6 pool space is publicly
-                      advertisable over the internet. This argument is required if
-                      address_family = "ipv6" and public_ip_source = "byoip", default
-                      is false. This option is not available for IPv4 pool space or
-                      if public_ip_source = "amazon". Setting this argument to true
-                      when it is not available may result in erroneous differences
-                      being reported.
+                    description: Whether IPv6 pool space is publicly advertisable
+                      over the internet. This argument is required if address_family
+                      = "ipv6" and public_ip_source = "byoip", default is false. This
+                      option is not available for IPv4 pool space or if public_ip_source
+                      = "amazon". Setting this argument to true when it is not available
+                      may result in erroneous differences being reported.
                     type: boolean
                   sourceIpamPoolId:
-                    description: The ID of the source IPAM pool. Use this argument
-                      to create a child pool within an existing pool.
+                    description: ID of the source IPAM pool. Use this argument to
+                      create a child pool within an existing pool.
                     type: string
                   sourceIpamPoolIdRef:
                     description: Reference to a VPCIpamPool in ec2 to populate sourceIpamPoolId.
@@ -662,7 +658,7 @@ spec:
                   sourceResource:
                     description: Resource to use to use to configure a resource planning
                       IPAM Pool. If configured, the locale of the parent pool must
-                      match the region that the vpc resides in.
+                      match the region that the VPC resides in.
                     properties:
                       resourceId:
                         description: ID of the resource.
@@ -834,23 +830,23 @@ spec:
               atProvider:
                 properties:
                   addressFamily:
-                    description: The IP protocol assigned to this pool. You must choose
+                    description: IP protocol assigned to this pool. You must choose
                       either IPv4 or IPv6 protocol for a pool.
                     type: string
                   allocationDefaultNetmaskLength:
-                    description: A default netmask length for allocations added to
-                      this pool. If, for example, the CIDR assigned to this pool is
-                      10.0.0.0/8 and you enter 16 here, new allocations will default
-                      to 10.0.0.0/16 (unless you provide a different netmask value
-                      when you create the new allocation).
+                    description: Default netmask length for allocations added to this
+                      pool. If, for example, the CIDR assigned to this pool is 10.0.0.0/8
+                      and you enter 16 here, new allocations will default to 10.0.0.0/16
+                      (unless you provide a different netmask value when you create
+                      the new allocation).
                     type: number
                   allocationMaxNetmaskLength:
-                    description: The maximum netmask length that will be required
-                      for CIDR allocations in this pool.
+                    description: Maximum netmask length that will be required for
+                      CIDR allocations in this pool.
                     type: number
                   allocationMinNetmaskLength:
-                    description: The minimum netmask length that will be required
-                      for CIDR allocations in this pool.
+                    description: Minimum netmask length that will be required for
+                      CIDR allocations in this pool.
                     type: number
                   allocationResourceTags:
                     additionalProperties:
@@ -867,54 +863,54 @@ spec:
                     description: ARN of IPAM
                     type: string
                   autoImport:
-                    description: |-
-                      If you include this argument, IPAM automatically imports any VPCs you have in your scope that fall
-                      within the CIDR range in the pool.
+                    description: Whether to automatically import any VPCs you have
+                      in your scope that fall within the CIDR range in the pool.
                     type: boolean
                   awsService:
                     description: 'Limits which AWS service the pool can be used in.
                       Only useable on public scopes. Valid Values: ec2.'
                     type: string
                   cascade:
-                    description: Enables you to quickly delete an IPAM pool and all
-                      resources within that pool, including provisioned CIDRs, allocations,
+                    description: Whether to quickly delete an IPAM pool and all resources
+                      within that pool, including provisioned CIDRs, allocations,
                       and other pools.
                     type: boolean
                   description:
-                    description: A description for the IPAM pool.
+                    description: Description for the IPAM pool.
                     type: string
                   id:
-                    description: The ID of the IPAM
+                    description: ID of the IPAM
                     type: string
                   ipamScopeId:
-                    description: The ID of the scope in which you would like to create
+                    description: ID of the scope in which you would like to create
                       the IPAM pool.
                     type: string
                   ipamScopeType:
+                    description: Type of the scope the pool belongs to.
                     type: string
                   locale:
-                    description: 'The locale in which you would like to create the
-                      IPAM pool. Locale is the Region where you want to make an IPAM
-                      pool available for allocations. You can only create pools with
-                      locales that match the operating Regions of the IPAM. You can
-                      only create VPCs from a pool whose locale matches the VPC''s
-                      Region. Possible values: Any AWS region, such as us-east-1.'
+                    description: 'Locale in which you would like to create the IPAM
+                      pool. Locale is the Region where you want to make an IPAM pool
+                      available for allocations. You can only create pools with locales
+                      that match the operating Regions of the IPAM. You can only create
+                      VPCs from a pool whose locale matches the VPC''s Region. Possible
+                      values: Any AWS region, such as us-east-1.'
                     type: string
                   poolDepth:
+                    description: Depth of pools in your IPAM pool.
                     type: number
                   publicIpSource:
-                    description: The IP address source for pools in the public scope.
+                    description: IP address source for pools in the public scope.
                       Only used for provisioning IP address CIDRs to pools in the
                       public scope. Valid values are byoip or amazon. Default is byoip.
                     type: string
                   publiclyAdvertisable:
-                    description: Defines whether or not IPv6 pool space is publicly
-                      advertisable over the internet. This argument is required if
-                      address_family = "ipv6" and public_ip_source = "byoip", default
-                      is false. This option is not available for IPv4 pool space or
-                      if public_ip_source = "amazon". Setting this argument to true
-                      when it is not available may result in erroneous differences
-                      being reported.
+                    description: Whether IPv6 pool space is publicly advertisable
+                      over the internet. This argument is required if address_family
+                      = "ipv6" and public_ip_source = "byoip", default is false. This
+                      option is not available for IPv4 pool space or if public_ip_source
+                      = "amazon". Setting this argument to true when it is not available
+                      may result in erroneous differences being reported.
                     type: boolean
                   region:
                     description: |-
@@ -922,13 +918,13 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   sourceIpamPoolId:
-                    description: The ID of the source IPAM pool. Use this argument
-                      to create a child pool within an existing pool.
+                    description: ID of the source IPAM pool. Use this argument to
+                      create a child pool within an existing pool.
                     type: string
                   sourceResource:
                     description: Resource to use to use to configure a resource planning
                       IPAM Pool. If configured, the locale of the parent pool must
-                      match the region that the vpc resides in.
+                      match the region that the VPC resides in.
                     properties:
                       resourceId:
                         description: ID of the resource.
@@ -945,7 +941,7 @@ spec:
                         type: string
                     type: object
                   state:
-                    description: The ID of the IPAM
+                    description: State of the IPAM pool.
                     type: string
                   tags:
                     additionalProperties:
@@ -956,9 +952,8 @@ spec:
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                     x-kubernetes-map-type: granular
                 type: object

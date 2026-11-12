@@ -278,6 +278,28 @@ func (mg *Function) ResolveReferences(ctx context.Context, c client.Reader) erro
 		mg.Spec.ForProvider.DeadLetterConfig.TargetArnRef = rsp.ResolvedReference
 
 	}
+	if mg.Spec.ForProvider.DurableConfig != nil {
+		{
+			m, l, err = apisresolver.GetManagedResource("kms.aws.m.upbound.io", "v1beta1", "Key", "KeyList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DurableConfig.KMSKeyArn),
+				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
+				Reference:    mg.Spec.ForProvider.DurableConfig.KMSKeyArnRef,
+				Selector:     mg.Spec.ForProvider.DurableConfig.KMSKeyArnSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.DurableConfig.KMSKeyArn")
+		}
+		mg.Spec.ForProvider.DurableConfig.KMSKeyArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.DurableConfig.KMSKeyArnRef = rsp.ResolvedReference
+
+	}
 	if mg.Spec.ForProvider.FileSystemConfig != nil {
 		{
 			m, l, err = apisresolver.GetManagedResource("efs.aws.m.upbound.io", "v1beta1", "AccessPoint", "AccessPointList")
@@ -486,6 +508,28 @@ func (mg *Function) ResolveReferences(ctx context.Context, c client.Reader) erro
 		}
 		mg.Spec.InitProvider.DeadLetterConfig.TargetArn = reference.ToPtrValue(rsp.ResolvedValue)
 		mg.Spec.InitProvider.DeadLetterConfig.TargetArnRef = rsp.ResolvedReference
+
+	}
+	if mg.Spec.InitProvider.DurableConfig != nil {
+		{
+			m, l, err = apisresolver.GetManagedResource("kms.aws.m.upbound.io", "v1beta1", "Key", "KeyList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DurableConfig.KMSKeyArn),
+				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
+				Reference:    mg.Spec.InitProvider.DurableConfig.KMSKeyArnRef,
+				Selector:     mg.Spec.InitProvider.DurableConfig.KMSKeyArnSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.DurableConfig.KMSKeyArn")
+		}
+		mg.Spec.InitProvider.DurableConfig.KMSKeyArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.DurableConfig.KMSKeyArnRef = rsp.ResolvedReference
 
 	}
 	if mg.Spec.InitProvider.FileSystemConfig != nil {

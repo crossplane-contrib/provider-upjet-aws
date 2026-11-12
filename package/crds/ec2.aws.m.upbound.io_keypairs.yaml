@@ -61,7 +61,7 @@ spec:
               forProvider:
                 properties:
                   publicKey:
-                    description: The public key material.
+                    description: Public key material.
                     type: string
                   region:
                     description: |-
@@ -91,7 +91,7 @@ spec:
                   autoscaler.
                 properties:
                   publicKey:
-                    description: The public key material.
+                    description: Public key material.
                     type: string
                   tags:
                     additionalProperties:
@@ -169,23 +169,23 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The key pair ARN.
+                    description: Key pair ARN.
                     type: string
                   fingerprint:
-                    description: The MD5 public key fingerprint as specified in section
+                    description: MD5 public key fingerprint as specified in section
                       4 of RFC 4716.
                     type: string
                   id:
-                    description: The key pair name.
+                    description: Key pair name.
                     type: string
                   keyPairId:
-                    description: The key pair ID.
+                    description: Key pair ID.
                     type: string
                   keyType:
-                    description: The type of key pair.
+                    description: Type of key pair.
                     type: string
                   publicKey:
-                    description: The public key material.
+                    description: Public key material.
                     type: string
                   region:
                     description: |-
@@ -201,9 +201,8 @@ spec:
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                     x-kubernetes-map-type: granular
                 type: object

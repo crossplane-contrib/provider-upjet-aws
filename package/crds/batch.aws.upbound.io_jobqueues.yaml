@@ -74,7 +74,7 @@ spec:
               forProvider:
                 properties:
                   computeEnvironmentOrder:
-                    description: The set of compute environments mapped to a job queue
+                    description: Set of compute environments mapped to a job queue
                       and their order relative to each other. The job scheduler uses
                       this parameter to determine which compute environment runs a
                       specific job. Compute environments must be in the VALID state
@@ -162,45 +162,45 @@ spec:
                               type: object
                           type: object
                         order:
-                          description: The order of the compute environment. Compute
-                            environments are tried in ascending order. For example,
-                            if two compute environments are associated with a job
-                            queue, the compute environment with a lower order integer
-                            value is tried for job placement first.
+                          description: Order of the compute environment. Compute environments
+                            are tried in ascending order. For example, if two compute
+                            environments are associated with a job queue, the compute
+                            environment with a lower order integer value is tried
+                            for job placement first.
                           type: number
                       type: object
                     type: array
                   jobStateTimeLimitAction:
-                    description: The set of job state time limit actions mapped to
-                      a job queue. Specifies an action that AWS Batch will take after
-                      the job has remained at the head of the queue in the specified
-                      state for longer than the specified time.
+                    description: Set of job state time limit actions mapped to a job
+                      queue. Specifies an action that AWS Batch will take after the
+                      job has remained at the head of the queue in the specified state
+                      for longer than the specified time.
                     items:
                       properties:
                         action:
-                          description: The action to take when a job is at the head
-                            of the job queue in the specified state for the specified
+                          description: Action to take when a job is at the head of
+                            the job queue in the specified state for the specified
                             period of time. Valid values include "CANCEL"
                           type: string
                         maxTimeSeconds:
-                          description: The approximate amount of time, in seconds,
-                            that must pass with the job in the specified state before
-                            the action is taken. Valid values include integers between
+                          description: Approximate amount of time, in seconds, that
+                            must pass with the job in the specified state before the
+                            action is taken. Valid values include integers between
                             600 & 86400
                           type: number
                         reason:
-                          description: The reason to log for the action being taken.
+                          description: Reason to log for the action being taken.
                           type: string
                         state:
-                          description: The state of the job needed to trigger the
-                            action. Valid values include "RUNNABLE".
+                          description: State of the job needed to trigger the action.
+                            Valid values include "RUNNABLE".
                           type: string
                       type: object
                     type: array
                   priority:
-                    description: |-
-                      The priority of the job queue. Job queues with a higher priority
-                      are evaluated first when associated with the same compute environment.
+                    description: Priority of the job queue. Job queues with a higher
+                      priority are evaluated first when associated with the same compute
+                      environment.
                     type: number
                   region:
                     description: |-
@@ -208,7 +208,7 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   schedulingPolicyArn:
-                    description: The ARN of the fair share scheduling policy. If this
+                    description: ARN of the fair share scheduling policy. If this
                       parameter is specified, the job queue uses a fair share scheduling
                       policy. If this parameter isn't specified, the job queue uses
                       a first in, first out (FIFO) scheduling policy. After a job
@@ -292,7 +292,7 @@ spec:
                         type: object
                     type: object
                   state:
-                    description: 'The state of the job queue. Must be one of: ENABLED
+                    description: 'State of the job queue. Must be one of: ENABLED
                       or DISABLED'
                     type: string
                   tags:
@@ -318,7 +318,7 @@ spec:
                   autoscaler.
                 properties:
                   computeEnvironmentOrder:
-                    description: The set of compute environments mapped to a job queue
+                    description: Set of compute environments mapped to a job queue
                       and their order relative to each other. The job scheduler uses
                       this parameter to determine which compute environment runs a
                       specific job. Compute environments must be in the VALID state
@@ -406,48 +406,48 @@ spec:
                               type: object
                           type: object
                         order:
-                          description: The order of the compute environment. Compute
-                            environments are tried in ascending order. For example,
-                            if two compute environments are associated with a job
-                            queue, the compute environment with a lower order integer
-                            value is tried for job placement first.
+                          description: Order of the compute environment. Compute environments
+                            are tried in ascending order. For example, if two compute
+                            environments are associated with a job queue, the compute
+                            environment with a lower order integer value is tried
+                            for job placement first.
                           type: number
                       type: object
                     type: array
                   jobStateTimeLimitAction:
-                    description: The set of job state time limit actions mapped to
-                      a job queue. Specifies an action that AWS Batch will take after
-                      the job has remained at the head of the queue in the specified
-                      state for longer than the specified time.
+                    description: Set of job state time limit actions mapped to a job
+                      queue. Specifies an action that AWS Batch will take after the
+                      job has remained at the head of the queue in the specified state
+                      for longer than the specified time.
                     items:
                       properties:
                         action:
-                          description: The action to take when a job is at the head
-                            of the job queue in the specified state for the specified
+                          description: Action to take when a job is at the head of
+                            the job queue in the specified state for the specified
                             period of time. Valid values include "CANCEL"
                           type: string
                         maxTimeSeconds:
-                          description: The approximate amount of time, in seconds,
-                            that must pass with the job in the specified state before
-                            the action is taken. Valid values include integers between
+                          description: Approximate amount of time, in seconds, that
+                            must pass with the job in the specified state before the
+                            action is taken. Valid values include integers between
                             600 & 86400
                           type: number
                         reason:
-                          description: The reason to log for the action being taken.
+                          description: Reason to log for the action being taken.
                           type: string
                         state:
-                          description: The state of the job needed to trigger the
-                            action. Valid values include "RUNNABLE".
+                          description: State of the job needed to trigger the action.
+                            Valid values include "RUNNABLE".
                           type: string
                       type: object
                     type: array
                   priority:
-                    description: |-
-                      The priority of the job queue. Job queues with a higher priority
-                      are evaluated first when associated with the same compute environment.
+                    description: Priority of the job queue. Job queues with a higher
+                      priority are evaluated first when associated with the same compute
+                      environment.
                     type: number
                   schedulingPolicyArn:
-                    description: The ARN of the fair share scheduling policy. If this
+                    description: ARN of the fair share scheduling policy. If this
                       parameter is specified, the job queue uses a fair share scheduling
                       policy. If this parameter isn't specified, the job queue uses
                       a first in, first out (FIFO) scheduling policy. After a job
@@ -531,7 +531,7 @@ spec:
                         type: object
                     type: object
                   state:
-                    description: 'The state of the job queue. Must be one of: ENABLED
+                    description: 'State of the job queue. Must be one of: ENABLED
                       or DISABLED'
                     type: string
                   tags:
@@ -645,7 +645,7 @@ spec:
                     description: ARN of the job queue.
                     type: string
                   computeEnvironmentOrder:
-                    description: The set of compute environments mapped to a job queue
+                    description: Set of compute environments mapped to a job queue
                       and their order relative to each other. The job scheduler uses
                       this parameter to determine which compute environment runs a
                       specific job. Compute environments must be in the VALID state
@@ -657,47 +657,47 @@ spec:
                           description: ARN of the compute environment.
                           type: string
                         order:
-                          description: The order of the compute environment. Compute
-                            environments are tried in ascending order. For example,
-                            if two compute environments are associated with a job
-                            queue, the compute environment with a lower order integer
-                            value is tried for job placement first.
+                          description: Order of the compute environment. Compute environments
+                            are tried in ascending order. For example, if two compute
+                            environments are associated with a job queue, the compute
+                            environment with a lower order integer value is tried
+                            for job placement first.
                           type: number
                       type: object
                     type: array
                   id:
                     type: string
                   jobStateTimeLimitAction:
-                    description: The set of job state time limit actions mapped to
-                      a job queue. Specifies an action that AWS Batch will take after
-                      the job has remained at the head of the queue in the specified
-                      state for longer than the specified time.
+                    description: Set of job state time limit actions mapped to a job
+                      queue. Specifies an action that AWS Batch will take after the
+                      job has remained at the head of the queue in the specified state
+                      for longer than the specified time.
                     items:
                       properties:
                         action:
-                          description: The action to take when a job is at the head
-                            of the job queue in the specified state for the specified
+                          description: Action to take when a job is at the head of
+                            the job queue in the specified state for the specified
                             period of time. Valid values include "CANCEL"
                           type: string
                         maxTimeSeconds:
-                          description: The approximate amount of time, in seconds,
-                            that must pass with the job in the specified state before
-                            the action is taken. Valid values include integers between
+                          description: Approximate amount of time, in seconds, that
+                            must pass with the job in the specified state before the
+                            action is taken. Valid values include integers between
                             600 & 86400
                           type: number
                         reason:
-                          description: The reason to log for the action being taken.
+                          description: Reason to log for the action being taken.
                           type: string
                         state:
-                          description: The state of the job needed to trigger the
-                            action. Valid values include "RUNNABLE".
+                          description: State of the job needed to trigger the action.
+                            Valid values include "RUNNABLE".
                           type: string
                       type: object
                     type: array
                   priority:
-                    description: |-
-                      The priority of the job queue. Job queues with a higher priority
-                      are evaluated first when associated with the same compute environment.
+                    description: Priority of the job queue. Job queues with a higher
+                      priority are evaluated first when associated with the same compute
+                      environment.
                     type: number
                   region:
                     description: |-
@@ -705,7 +705,7 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   schedulingPolicyArn:
-                    description: The ARN of the fair share scheduling policy. If this
+                    description: ARN of the fair share scheduling policy. If this
                       parameter is specified, the job queue uses a fair share scheduling
                       policy. If this parameter isn't specified, the job queue uses
                       a first in, first out (FIFO) scheduling policy. After a job
@@ -713,7 +713,7 @@ spec:
                       share scheduling policy.
                     type: string
                   state:
-                    description: 'The state of the job queue. Must be one of: ENABLED
+                    description: 'State of the job queue. Must be one of: ENABLED
                       or DISABLED'
                     type: string
                   tags:
@@ -725,9 +725,8 @@ spec:
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                     x-kubernetes-map-type: granular
                 type: object

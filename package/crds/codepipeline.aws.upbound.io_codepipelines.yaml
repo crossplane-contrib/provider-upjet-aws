@@ -4548,7 +4548,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: Codepipeline ARN.
+                    description: CodePipeline ARN.
                     type: string
                   artifactStore:
                     description: One or more artifact_store blocks. Artifact stores
@@ -4591,7 +4591,7 @@ spec:
                       refer to the AWS documentation.
                     type: string
                   id:
-                    description: Codepipeline ID.
+                    description: CodePipeline ID.
                     type: string
                   pipelineType:
                     description: 'Type of the pipeline. Possible values are: V1 and

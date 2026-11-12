@@ -15,49 +15,49 @@ import (
 
 type CloudwatchLogOptionsInitParameters struct {
 
-	// Enable or disable BGP logging feature. The default is false.
+	// Whether to enable the BGP logging feature. The default is false.
 	BGPLogEnabled *bool `json:"bgpLogEnabled,omitempty" tf:"bgp_log_enabled,omitempty"`
 
 	// ARN of the CloudWatch log group to send BGP logs to.
 	BGPLogGroupArn *string `json:"bgpLogGroupArn,omitempty" tf:"bgp_log_group_arn,omitempty"`
 
-	// Set BGP log format. Default format is json. Possible values are: json and text. The default is json.
+	// Set BGP log format. Default format is JSON. Possible values are: json and text. The default is json.
 	BGPLogOutputFormat *string `json:"bgpLogOutputFormat,omitempty" tf:"bgp_log_output_format,omitempty"`
 
-	// Enable or disable VPN tunnel logging feature. The default is false.
+	// Whether to enable the VPN tunnel logging feature. The default is false.
 	LogEnabled *bool `json:"logEnabled,omitempty" tf:"log_enabled,omitempty"`
 
 	// ARN of the CloudWatch log group to send logs to.
 	LogGroupArn *string `json:"logGroupArn,omitempty" tf:"log_group_arn,omitempty"`
 
-	// Set log format. Default format is json. Possible values are: json and text. The default is json.
+	// Set log format. Default format is JSON. Possible values are: json and text. The default is json.
 	LogOutputFormat *string `json:"logOutputFormat,omitempty" tf:"log_output_format,omitempty"`
 }
 
 type CloudwatchLogOptionsObservation struct {
 
-	// Enable or disable BGP logging feature. The default is false.
+	// Whether to enable the BGP logging feature. The default is false.
 	BGPLogEnabled *bool `json:"bgpLogEnabled,omitempty" tf:"bgp_log_enabled,omitempty"`
 
 	// ARN of the CloudWatch log group to send BGP logs to.
 	BGPLogGroupArn *string `json:"bgpLogGroupArn,omitempty" tf:"bgp_log_group_arn,omitempty"`
 
-	// Set BGP log format. Default format is json. Possible values are: json and text. The default is json.
+	// Set BGP log format. Default format is JSON. Possible values are: json and text. The default is json.
 	BGPLogOutputFormat *string `json:"bgpLogOutputFormat,omitempty" tf:"bgp_log_output_format,omitempty"`
 
-	// Enable or disable VPN tunnel logging feature. The default is false.
+	// Whether to enable the VPN tunnel logging feature. The default is false.
 	LogEnabled *bool `json:"logEnabled,omitempty" tf:"log_enabled,omitempty"`
 
 	// ARN of the CloudWatch log group to send logs to.
 	LogGroupArn *string `json:"logGroupArn,omitempty" tf:"log_group_arn,omitempty"`
 
-	// Set log format. Default format is json. Possible values are: json and text. The default is json.
+	// Set log format. Default format is JSON. Possible values are: json and text. The default is json.
 	LogOutputFormat *string `json:"logOutputFormat,omitempty" tf:"log_output_format,omitempty"`
 }
 
 type CloudwatchLogOptionsParameters struct {
 
-	// Enable or disable BGP logging feature. The default is false.
+	// Whether to enable the BGP logging feature. The default is false.
 	// +kubebuilder:validation:Optional
 	BGPLogEnabled *bool `json:"bgpLogEnabled,omitempty" tf:"bgp_log_enabled,omitempty"`
 
@@ -65,11 +65,11 @@ type CloudwatchLogOptionsParameters struct {
 	// +kubebuilder:validation:Optional
 	BGPLogGroupArn *string `json:"bgpLogGroupArn,omitempty" tf:"bgp_log_group_arn,omitempty"`
 
-	// Set BGP log format. Default format is json. Possible values are: json and text. The default is json.
+	// Set BGP log format. Default format is JSON. Possible values are: json and text. The default is json.
 	// +kubebuilder:validation:Optional
 	BGPLogOutputFormat *string `json:"bgpLogOutputFormat,omitempty" tf:"bgp_log_output_format,omitempty"`
 
-	// Enable or disable VPN tunnel logging feature. The default is false.
+	// Whether to enable the VPN tunnel logging feature. The default is false.
 	// +kubebuilder:validation:Optional
 	LogEnabled *bool `json:"logEnabled,omitempty" tf:"log_enabled,omitempty"`
 
@@ -77,7 +77,7 @@ type CloudwatchLogOptionsParameters struct {
 	// +kubebuilder:validation:Optional
 	LogGroupArn *string `json:"logGroupArn,omitempty" tf:"log_group_arn,omitempty"`
 
-	// Set log format. Default format is json. Possible values are: json and text. The default is json.
+	// Set log format. Default format is JSON. Possible values are: json and text. The default is json.
 	// +kubebuilder:validation:Optional
 	LogOutputFormat *string `json:"logOutputFormat,omitempty" tf:"log_output_format,omitempty"`
 }
@@ -87,13 +87,13 @@ type RoutesInitParameters struct {
 
 type RoutesObservation struct {
 
-	// The CIDR block associated with the local subnet of the customer data center.
+	// CIDR block associated with the local subnet of the customer data center.
 	DestinationCidrBlock *string `json:"destinationCidrBlock,omitempty" tf:"destination_cidr_block,omitempty"`
 
-	// Indicates how the routes were provided.
+	// How the routes were provided.
 	Source *string `json:"source,omitempty" tf:"source,omitempty"`
 
-	// The current state of the static route.
+	// Current state of the static route.
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 }
 
@@ -121,49 +121,49 @@ type Tunnel1LogOptionsParameters struct {
 
 type Tunnel2LogOptionsCloudwatchLogOptionsInitParameters struct {
 
-	// Enable or disable BGP logging feature. The default is false.
+	// Whether to enable the BGP logging feature. The default is false.
 	BGPLogEnabled *bool `json:"bgpLogEnabled,omitempty" tf:"bgp_log_enabled,omitempty"`
 
 	// ARN of the CloudWatch log group to send BGP logs to.
 	BGPLogGroupArn *string `json:"bgpLogGroupArn,omitempty" tf:"bgp_log_group_arn,omitempty"`
 
-	// Set BGP log format. Default format is json. Possible values are: json and text. The default is json.
+	// Set BGP log format. Default format is JSON. Possible values are: json and text. The default is json.
 	BGPLogOutputFormat *string `json:"bgpLogOutputFormat,omitempty" tf:"bgp_log_output_format,omitempty"`
 
-	// Enable or disable VPN tunnel logging feature. The default is false.
+	// Whether to enable the VPN tunnel logging feature. The default is false.
 	LogEnabled *bool `json:"logEnabled,omitempty" tf:"log_enabled,omitempty"`
 
 	// ARN of the CloudWatch log group to send logs to.
 	LogGroupArn *string `json:"logGroupArn,omitempty" tf:"log_group_arn,omitempty"`
 
-	// Set log format. Default format is json. Possible values are: json and text. The default is json.
+	// Set log format. Default format is JSON. Possible values are: json and text. The default is json.
 	LogOutputFormat *string `json:"logOutputFormat,omitempty" tf:"log_output_format,omitempty"`
 }
 
 type Tunnel2LogOptionsCloudwatchLogOptionsObservation struct {
 
-	// Enable or disable BGP logging feature. The default is false.
+	// Whether to enable the BGP logging feature. The default is false.
 	BGPLogEnabled *bool `json:"bgpLogEnabled,omitempty" tf:"bgp_log_enabled,omitempty"`
 
 	// ARN of the CloudWatch log group to send BGP logs to.
 	BGPLogGroupArn *string `json:"bgpLogGroupArn,omitempty" tf:"bgp_log_group_arn,omitempty"`
 
-	// Set BGP log format. Default format is json. Possible values are: json and text. The default is json.
+	// Set BGP log format. Default format is JSON. Possible values are: json and text. The default is json.
 	BGPLogOutputFormat *string `json:"bgpLogOutputFormat,omitempty" tf:"bgp_log_output_format,omitempty"`
 
-	// Enable or disable VPN tunnel logging feature. The default is false.
+	// Whether to enable the VPN tunnel logging feature. The default is false.
 	LogEnabled *bool `json:"logEnabled,omitempty" tf:"log_enabled,omitempty"`
 
 	// ARN of the CloudWatch log group to send logs to.
 	LogGroupArn *string `json:"logGroupArn,omitempty" tf:"log_group_arn,omitempty"`
 
-	// Set log format. Default format is json. Possible values are: json and text. The default is json.
+	// Set log format. Default format is JSON. Possible values are: json and text. The default is json.
 	LogOutputFormat *string `json:"logOutputFormat,omitempty" tf:"log_output_format,omitempty"`
 }
 
 type Tunnel2LogOptionsCloudwatchLogOptionsParameters struct {
 
-	// Enable or disable BGP logging feature. The default is false.
+	// Whether to enable the BGP logging feature. The default is false.
 	// +kubebuilder:validation:Optional
 	BGPLogEnabled *bool `json:"bgpLogEnabled,omitempty" tf:"bgp_log_enabled,omitempty"`
 
@@ -171,11 +171,11 @@ type Tunnel2LogOptionsCloudwatchLogOptionsParameters struct {
 	// +kubebuilder:validation:Optional
 	BGPLogGroupArn *string `json:"bgpLogGroupArn,omitempty" tf:"bgp_log_group_arn,omitempty"`
 
-	// Set BGP log format. Default format is json. Possible values are: json and text. The default is json.
+	// Set BGP log format. Default format is JSON. Possible values are: json and text. The default is json.
 	// +kubebuilder:validation:Optional
 	BGPLogOutputFormat *string `json:"bgpLogOutputFormat,omitempty" tf:"bgp_log_output_format,omitempty"`
 
-	// Enable or disable VPN tunnel logging feature. The default is false.
+	// Whether to enable the VPN tunnel logging feature. The default is false.
 	// +kubebuilder:validation:Optional
 	LogEnabled *bool `json:"logEnabled,omitempty" tf:"log_enabled,omitempty"`
 
@@ -183,7 +183,7 @@ type Tunnel2LogOptionsCloudwatchLogOptionsParameters struct {
 	// +kubebuilder:validation:Optional
 	LogGroupArn *string `json:"logGroupArn,omitempty" tf:"log_group_arn,omitempty"`
 
-	// Set log format. Default format is json. Possible values are: json and text. The default is json.
+	// Set log format. Default format is JSON. Possible values are: json and text. The default is json.
 	// +kubebuilder:validation:Optional
 	LogOutputFormat *string `json:"logOutputFormat,omitempty" tf:"log_output_format,omitempty"`
 }
@@ -209,7 +209,7 @@ type Tunnel2LogOptionsParameters struct {
 
 type VPNConnectionInitParameters struct {
 
-	// The ID of the customer gateway.
+	// ID of the customer gateway.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.CustomerGateway
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	CustomerGatewayID *string `json:"customerGatewayId,omitempty" tf:"customer_gateway_id,omitempty"`
@@ -222,25 +222,25 @@ type VPNConnectionInitParameters struct {
 	// +kubebuilder:validation:Optional
 	CustomerGatewayIDSelector *v2.Selector `json:"customerGatewayIdSelector,omitempty" tf:"-"`
 
-	// Indicate whether to enable acceleration for the VPN connection. Supports only EC2 Transit Gateway.
+	// Whether to enable acceleration for the VPN connection. Supports only EC2 Transit Gateway.
 	EnableAcceleration *bool `json:"enableAcceleration,omitempty" tf:"enable_acceleration,omitempty"`
 
-	// The IPv4 CIDR on the customer gateway (on-premises) side of the VPN connection.
+	// IPv4 CIDR on the customer gateway (on-premises) side of the VPN connection.
 	LocalIPv4NetworkCidr *string `json:"localIpv4NetworkCidr,omitempty" tf:"local_ipv4_network_cidr,omitempty"`
 
-	// The IPv6 CIDR on the customer gateway (on-premises) side of the VPN connection.
+	// IPv6 CIDR on the customer gateway (on-premises) side of the VPN connection.
 	LocalIPv6NetworkCidr *string `json:"localIpv6NetworkCidr,omitempty" tf:"local_ipv6_network_cidr,omitempty"`
 
-	// Indicates if a Public S2S VPN or Private S2S VPN over AWS Direct Connect. Valid values are PublicIpv4 | PrivateIpv4
+	// Type of VPN endpoint, either a public Site-to-Site VPN or a private Site-to-Site VPN over AWS Direct Connect. Valid values are PublicIpv4 | PrivateIpv4.
 	OutsideIPAddressType *string `json:"outsideIpAddressType,omitempty" tf:"outside_ip_address_type,omitempty"`
 
 	// Storage mode for the pre-shared key (PSK). Valid values are Standard (stored in the Site-to-Site VPN service) or SecretsManager (stored in AWS Secrets Manager).
 	PresharedKeyStorage *string `json:"presharedKeyStorage,omitempty" tf:"preshared_key_storage,omitempty"`
 
-	// The IPv4 CIDR on the AWS side of the VPN connection.
+	// IPv4 CIDR on the AWS side of the VPN connection.
 	RemoteIPv4NetworkCidr *string `json:"remoteIpv4NetworkCidr,omitempty" tf:"remote_ipv4_network_cidr,omitempty"`
 
-	// The IPv6 CIDR on the AWS side of the VPN connection.
+	// IPv6 CIDR on the AWS side of the VPN connection.
 	RemoteIPv6NetworkCidr *string `json:"remoteIpv6NetworkCidr,omitempty" tf:"remote_ipv6_network_cidr,omitempty"`
 
 	// Whether the VPN connection uses static routes exclusively. Static routes must be used for devices that don't support BGP.
@@ -250,7 +250,7 @@ type VPNConnectionInitParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The ID of the EC2 Transit Gateway.
+	// ID of the EC2 Transit Gateway.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.TransitGateway
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	TransitGatewayID *string `json:"transitGatewayId,omitempty" tf:"transit_gateway_id,omitempty"`
@@ -263,29 +263,29 @@ type VPNConnectionInitParameters struct {
 	// +kubebuilder:validation:Optional
 	TransitGatewayIDSelector *v2.Selector `json:"transitGatewayIdSelector,omitempty" tf:"-"`
 
-	// . The attachment ID of the Transit Gateway attachment to Direct Connect Gateway. The ID is obtained through a data source only.
+	// Attachment ID of the Transit Gateway attachment to Direct Connect Gateway. Required when outside_ip_address_type is set to PrivateIpv4. The ID is obtained through a data source only.
 	TransportTransitGatewayAttachmentID *string `json:"transportTransitGatewayAttachmentId,omitempty" tf:"transport_transit_gateway_attachment_id,omitempty"`
 
-	// The action to take after DPD timeout occurs for the first VPN tunnel. Specify restart to restart the IKE initiation. Specify clear to end the IKE session. Valid values are clear | none | restart.
+	// Action to take after DPD timeout occurs for the first VPN tunnel. Specify restart to restart the IKE initiation. Specify clear to end the IKE session. Valid values are clear | none | restart.
 	Tunnel1DpdTimeoutAction *string `json:"tunnel1DpdTimeoutAction,omitempty" tf:"tunnel1_dpd_timeout_action,omitempty"`
 
-	// The number of seconds after which a DPD timeout occurs for the first VPN tunnel. Valid value is equal or higher than 30.
+	// Number of seconds after which a DPD timeout occurs for the first VPN tunnel. Valid value is equal or higher than 30.
 	Tunnel1DpdTimeoutSeconds *float64 `json:"tunnel1DpdTimeoutSeconds,omitempty" tf:"tunnel1_dpd_timeout_seconds,omitempty"`
 
-	// Turn on or off tunnel endpoint lifecycle control feature for the first VPN tunnel. Valid values are true | false.
+	// Whether to enable the tunnel endpoint lifecycle control feature for the first VPN tunnel. Valid values are true | false.
 	Tunnel1EnableTunnelLifecycleControl *bool `json:"tunnel1EnableTunnelLifecycleControl,omitempty" tf:"tunnel1_enable_tunnel_lifecycle_control,omitempty"`
 
-	// The IKE versions that are permitted for the first VPN tunnel. Valid values are ikev1 | ikev2.
+	// IKE versions that are permitted for the first VPN tunnel. Valid values are ikev1 | ikev2.
 	// +listType=set
 	Tunnel1IkeVersions []*string `json:"tunnel1IkeVersions,omitempty" tf:"tunnel1_ike_versions,omitempty"`
 
-	// The CIDR block of the inside IP addresses for the first VPN tunnel. Valid value is a size /30 CIDR block from the 169.254.0.0/16 range.
+	// CIDR block of the inside IP addresses for the first VPN tunnel. Valid value is a size /30 CIDR block from the 169.254.0.0/16 range.
 	Tunnel1InsideCidr *string `json:"tunnel1InsideCidr,omitempty" tf:"tunnel1_inside_cidr,omitempty"`
 
-	// The range of inside IPv6 addresses for the first VPN tunnel. Supports only EC2 Transit Gateway. Valid value is a size /126 CIDR block from the local fd00::/8 range.
+	// Range of inside IPv6 addresses for the first VPN tunnel. Supports only EC2 Transit Gateway. Valid value is a size /126 CIDR block from the local fd00::/8 range.
 	Tunnel1InsideIPv6Cidr *string `json:"tunnel1InsideIpv6Cidr,omitempty" tf:"tunnel1_inside_ipv6_cidr,omitempty"`
 
-	// Options for logging VPN tunnel activity. See Log Options below for more details.
+	// Options for logging VPN tunnel activity. See tunnel1_log_options below for more details.
 	Tunnel1LogOptions *Tunnel1LogOptionsInitParameters `json:"tunnel1LogOptions,omitempty" tf:"tunnel1_log_options,omitempty"`
 
 	// List of one or more Diffie-Hellman group numbers that are permitted for the first VPN tunnel for phase 1 IKE negotiations. Valid values are  2 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24.
@@ -300,7 +300,7 @@ type VPNConnectionInitParameters struct {
 	// +listType=set
 	Tunnel1Phase1IntegrityAlgorithms []*string `json:"tunnel1Phase1IntegrityAlgorithms,omitempty" tf:"tunnel1_phase1_integrity_algorithms,omitempty"`
 
-	// The lifetime for phase 1 of the IKE negotiation for the first VPN tunnel, in seconds. Valid value is between 900 and 28800.
+	// Lifetime for phase 1 of the IKE negotiation for the first VPN tunnel, in seconds. Valid value is between 900 and 28800.
 	Tunnel1Phase1LifetimeSeconds *float64 `json:"tunnel1Phase1LifetimeSeconds,omitempty" tf:"tunnel1_phase1_lifetime_seconds,omitempty"`
 
 	// List of one or more Diffie-Hellman group numbers that are permitted for the first VPN tunnel for phase 2 IKE negotiations. Valid values are 2 | 5 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24.
@@ -315,44 +315,44 @@ type VPNConnectionInitParameters struct {
 	// +listType=set
 	Tunnel1Phase2IntegrityAlgorithms []*string `json:"tunnel1Phase2IntegrityAlgorithms,omitempty" tf:"tunnel1_phase2_integrity_algorithms,omitempty"`
 
-	// The lifetime for phase 2 of the IKE negotiation for the first VPN tunnel, in seconds. Valid value is between 900 and 3600.
+	// Lifetime for phase 2 of the IKE negotiation for the first VPN tunnel, in seconds. Valid value is between 900 and 3600.
 	Tunnel1Phase2LifetimeSeconds *float64 `json:"tunnel1Phase2LifetimeSeconds,omitempty" tf:"tunnel1_phase2_lifetime_seconds,omitempty"`
 
-	// The preshared key of the first VPN tunnel. The preshared key must be between 8 and 64 characters in length and cannot start with zero(0). Allowed characters are alphanumeric characters, periods(.) and underscores(_).
+	// Preshared key of the first VPN tunnel. The preshared key must be between 8 and 64 characters in length and cannot start with zero(0). Allowed characters are alphanumeric characters, periods(.) and underscores(_).
 	Tunnel1PresharedKeySecretRef *v2.SecretKeySelector `json:"tunnel1PresharedKeySecretRef,omitempty" tf:"-"`
 
-	// The percentage of the rekey window for the first VPN tunnel (determined by tunnel1_rekey_margin_time_seconds) during which the rekey time is randomly selected. Valid value is between 0 and 100.
+	// Percentage of the rekey window for the first VPN tunnel (determined by tunnel1_rekey_margin_time_seconds) during which the rekey time is randomly selected. Valid value is between 0 and 100.
 	Tunnel1RekeyFuzzPercentage *float64 `json:"tunnel1RekeyFuzzPercentage,omitempty" tf:"tunnel1_rekey_fuzz_percentage,omitempty"`
 
-	// The margin time, in seconds, before the phase 2 lifetime expires, during which the AWS side of the first VPN connection performs an IKE rekey. The exact time of the rekey is randomly selected based on the value for tunnel1_rekey_fuzz_percentage. Valid value is between 60 and half of tunnel1_phase2_lifetime_seconds.
+	// Margin time, in seconds, before the phase 2 lifetime expires, during which the AWS side of the first VPN connection performs an IKE rekey. The exact time of the rekey is randomly selected based on the value for tunnel1_rekey_fuzz_percentage. Valid value is between 60 and half of tunnel1_phase2_lifetime_seconds.
 	Tunnel1RekeyMarginTimeSeconds *float64 `json:"tunnel1RekeyMarginTimeSeconds,omitempty" tf:"tunnel1_rekey_margin_time_seconds,omitempty"`
 
-	// The number of packets in an IKE replay window for the first VPN tunnel. Valid value is between 64 and 2048.
+	// Number of packets in an IKE replay window for the first VPN tunnel. Valid value is between 64 and 2048.
 	Tunnel1ReplayWindowSize *float64 `json:"tunnel1ReplayWindowSize,omitempty" tf:"tunnel1_replay_window_size,omitempty"`
 
-	// The action to take when the establishing the tunnel for the first VPN connection. By default, your customer gateway device must initiate the IKE negotiation and bring up the tunnel. Specify start for AWS to initiate the IKE negotiation. Valid values are add | start.
+	// Action to take when the establishing the tunnel for the first VPN connection. By default, your customer gateway device must initiate the IKE negotiation and bring up the tunnel. Specify start for AWS to initiate the IKE negotiation. Valid values are add | start.
 	Tunnel1StartupAction *string `json:"tunnel1StartupAction,omitempty" tf:"tunnel1_startup_action,omitempty"`
 
-	// The action to take after DPD timeout occurs for the second VPN tunnel. Specify restart to restart the IKE initiation. Specify clear to end the IKE session. Valid values are clear | none | restart.
+	// Action to take after DPD timeout occurs for the second VPN tunnel. Specify restart to restart the IKE initiation. Specify clear to end the IKE session. Valid values are clear | none | restart.
 	Tunnel2DpdTimeoutAction *string `json:"tunnel2DpdTimeoutAction,omitempty" tf:"tunnel2_dpd_timeout_action,omitempty"`
 
-	// The number of seconds after which a DPD timeout occurs for the second VPN tunnel. Valid value is equal or higher than 30.
+	// Number of seconds after which a DPD timeout occurs for the second VPN tunnel. Valid value is equal or higher than 30.
 	Tunnel2DpdTimeoutSeconds *float64 `json:"tunnel2DpdTimeoutSeconds,omitempty" tf:"tunnel2_dpd_timeout_seconds,omitempty"`
 
-	// Turn on or off tunnel endpoint lifecycle control feature for the second VPN tunnel. Valid values are true | false.
+	// Whether to enable the tunnel endpoint lifecycle control feature for the second VPN tunnel. Valid values are true | false.
 	Tunnel2EnableTunnelLifecycleControl *bool `json:"tunnel2EnableTunnelLifecycleControl,omitempty" tf:"tunnel2_enable_tunnel_lifecycle_control,omitempty"`
 
-	// The IKE versions that are permitted for the second VPN tunnel. Valid values are ikev1 | ikev2.
+	// IKE versions that are permitted for the second VPN tunnel. Valid values are ikev1 | ikev2.
 	// +listType=set
 	Tunnel2IkeVersions []*string `json:"tunnel2IkeVersions,omitempty" tf:"tunnel2_ike_versions,omitempty"`
 
-	// The CIDR block of the inside IP addresses for the second VPN tunnel. Valid value is a size /30 CIDR block from the 169.254.0.0/16 range.
+	// CIDR block of the inside IP addresses for the second VPN tunnel. Valid value is a size /30 CIDR block from the 169.254.0.0/16 range.
 	Tunnel2InsideCidr *string `json:"tunnel2InsideCidr,omitempty" tf:"tunnel2_inside_cidr,omitempty"`
 
-	// The range of inside IPv6 addresses for the second VPN tunnel. Supports only EC2 Transit Gateway. Valid value is a size /126 CIDR block from the local fd00::/8 range.
+	// Range of inside IPv6 addresses for the second VPN tunnel. Supports only EC2 Transit Gateway. Valid value is a size /126 CIDR block from the local fd00::/8 range.
 	Tunnel2InsideIPv6Cidr *string `json:"tunnel2InsideIpv6Cidr,omitempty" tf:"tunnel2_inside_ipv6_cidr,omitempty"`
 
-	// Options for logging VPN tunnel activity. See Log Options below for more details.
+	// Options for logging VPN tunnel activity. See tunnel2_log_options below for more details.
 	Tunnel2LogOptions *Tunnel2LogOptionsInitParameters `json:"tunnel2LogOptions,omitempty" tf:"tunnel2_log_options,omitempty"`
 
 	// List of one or more Diffie-Hellman group numbers that are permitted for the second VPN tunnel for phase 1 IKE negotiations. Valid values are  2 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24.
@@ -367,7 +367,7 @@ type VPNConnectionInitParameters struct {
 	// +listType=set
 	Tunnel2Phase1IntegrityAlgorithms []*string `json:"tunnel2Phase1IntegrityAlgorithms,omitempty" tf:"tunnel2_phase1_integrity_algorithms,omitempty"`
 
-	// The lifetime for phase 1 of the IKE negotiation for the second VPN tunnel, in seconds. Valid value is between 900 and 28800.
+	// Lifetime for phase 1 of the IKE negotiation for the second VPN tunnel, in seconds. Valid value is between 900 and 28800.
 	Tunnel2Phase1LifetimeSeconds *float64 `json:"tunnel2Phase1LifetimeSeconds,omitempty" tf:"tunnel2_phase1_lifetime_seconds,omitempty"`
 
 	// List of one or more Diffie-Hellman group numbers that are permitted for the second VPN tunnel for phase 2 IKE negotiations. Valid values are 2 | 5 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24.
@@ -382,22 +382,22 @@ type VPNConnectionInitParameters struct {
 	// +listType=set
 	Tunnel2Phase2IntegrityAlgorithms []*string `json:"tunnel2Phase2IntegrityAlgorithms,omitempty" tf:"tunnel2_phase2_integrity_algorithms,omitempty"`
 
-	// The lifetime for phase 2 of the IKE negotiation for the second VPN tunnel, in seconds. Valid value is between 900 and 3600.
+	// Lifetime for phase 2 of the IKE negotiation for the second VPN tunnel, in seconds. Valid value is between 900 and 3600.
 	Tunnel2Phase2LifetimeSeconds *float64 `json:"tunnel2Phase2LifetimeSeconds,omitempty" tf:"tunnel2_phase2_lifetime_seconds,omitempty"`
 
-	// The preshared key of the second VPN tunnel. The preshared key must be between 8 and 64 characters in length and cannot start with zero(0). Allowed characters are alphanumeric characters, periods(.) and underscores(_).
+	// Preshared key of the second VPN tunnel. The preshared key must be between 8 and 64 characters in length and cannot start with zero(0). Allowed characters are alphanumeric characters, periods(.) and underscores(_).
 	Tunnel2PresharedKeySecretRef *v2.SecretKeySelector `json:"tunnel2PresharedKeySecretRef,omitempty" tf:"-"`
 
-	// The percentage of the rekey window for the second VPN tunnel (determined by tunnel2_rekey_margin_time_seconds) during which the rekey time is randomly selected. Valid value is between 0 and 100.
+	// Percentage of the rekey window for the second VPN tunnel (determined by tunnel2_rekey_margin_time_seconds) during which the rekey time is randomly selected. Valid value is between 0 and 100.
 	Tunnel2RekeyFuzzPercentage *float64 `json:"tunnel2RekeyFuzzPercentage,omitempty" tf:"tunnel2_rekey_fuzz_percentage,omitempty"`
 
-	// The margin time, in seconds, before the phase 2 lifetime expires, during which the AWS side of the second VPN connection performs an IKE rekey. The exact time of the rekey is randomly selected based on the value for tunnel2_rekey_fuzz_percentage. Valid value is between 60 and half of tunnel2_phase2_lifetime_seconds.
+	// Margin time, in seconds, before the phase 2 lifetime expires, during which the AWS side of the second VPN connection performs an IKE rekey. The exact time of the rekey is randomly selected based on the value for tunnel2_rekey_fuzz_percentage. Valid value is between 60 and half of tunnel2_phase2_lifetime_seconds.
 	Tunnel2RekeyMarginTimeSeconds *float64 `json:"tunnel2RekeyMarginTimeSeconds,omitempty" tf:"tunnel2_rekey_margin_time_seconds,omitempty"`
 
-	// The number of packets in an IKE replay window for the second VPN tunnel. Valid value is between 64 and 2048.
+	// Number of packets in an IKE replay window for the second VPN tunnel. Valid value is between 64 and 2048.
 	Tunnel2ReplayWindowSize *float64 `json:"tunnel2ReplayWindowSize,omitempty" tf:"tunnel2_replay_window_size,omitempty"`
 
-	// The action to take when the establishing the tunnel for the second VPN connection. By default, your customer gateway device must initiate the IKE negotiation and bring up the tunnel. Specify start for AWS to initiate the IKE negotiation. Valid values are add | start.
+	// Action to take when the establishing the tunnel for the second VPN connection. By default, your customer gateway device must initiate the IKE negotiation and bring up the tunnel. Specify start for AWS to initiate the IKE negotiation. Valid values are add | start.
 	Tunnel2StartupAction *string `json:"tunnel2StartupAction,omitempty" tf:"tunnel2_startup_action,omitempty"`
 
 	// Desired bandwidth specification for the VPN tunnel. Valid values are standard | large. standard supports up to 1.25 Gbps per tunnel, while large supports up to 5 Gbps per tunnel. Not supported when vpn_gateway_id is specified, or enable_acceleration is true.
@@ -406,7 +406,7 @@ type VPNConnectionInitParameters struct {
 	// Indicate whether the VPN tunnels process IPv4 or IPv6 traffic. Valid values are ipv4 | ipv6. ipv6 Supports only EC2 Transit Gateway.
 	TunnelInsideIPVersion *string `json:"tunnelInsideIpVersion,omitempty" tf:"tunnel_inside_ip_version,omitempty"`
 
-	// The type of VPN connection. The only type AWS supports at this time is "ipsec.1".
+	// Type of VPN connection. The only type AWS supports at this time is "ipsec.1".
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.CustomerGateway
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("type",false)
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
@@ -422,7 +422,7 @@ type VPNConnectionInitParameters struct {
 	// ID of the VPN concentrator to associate with the VPN connection.
 	VPNConcentratorID *string `json:"vpnConcentratorId,omitempty" tf:"vpn_concentrator_id,omitempty"`
 
-	// The ID of the Virtual Private Gateway.
+	// ID of the Virtual Private Gateway.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.VPNGateway
 	VPNGatewayID *string `json:"vpnGatewayId,omitempty" tf:"vpn_gateway_id,omitempty"`
 
@@ -440,28 +440,28 @@ type VPNConnectionObservation struct {
 	// ARN of the VPN Connection.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The ARN of the core network.
+	// ARN of the core network.
 	CoreNetworkArn *string `json:"coreNetworkArn,omitempty" tf:"core_network_arn,omitempty"`
 
-	// The ARN of the core network attachment.
+	// ARN of the core network attachment.
 	CoreNetworkAttachmentArn *string `json:"coreNetworkAttachmentArn,omitempty" tf:"core_network_attachment_arn,omitempty"`
 
-	// The ID of the customer gateway.
+	// ID of the customer gateway.
 	CustomerGatewayID *string `json:"customerGatewayId,omitempty" tf:"customer_gateway_id,omitempty"`
 
-	// Indicate whether to enable acceleration for the VPN connection. Supports only EC2 Transit Gateway.
+	// Whether to enable acceleration for the VPN connection. Supports only EC2 Transit Gateway.
 	EnableAcceleration *bool `json:"enableAcceleration,omitempty" tf:"enable_acceleration,omitempty"`
 
-	// The amazon-assigned ID of the VPN connection.
+	// Amazon-assigned ID of the VPN connection.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The IPv4 CIDR on the customer gateway (on-premises) side of the VPN connection.
+	// IPv4 CIDR on the customer gateway (on-premises) side of the VPN connection.
 	LocalIPv4NetworkCidr *string `json:"localIpv4NetworkCidr,omitempty" tf:"local_ipv4_network_cidr,omitempty"`
 
-	// The IPv6 CIDR on the customer gateway (on-premises) side of the VPN connection.
+	// IPv6 CIDR on the customer gateway (on-premises) side of the VPN connection.
 	LocalIPv6NetworkCidr *string `json:"localIpv6NetworkCidr,omitempty" tf:"local_ipv6_network_cidr,omitempty"`
 
-	// Indicates if a Public S2S VPN or Private S2S VPN over AWS Direct Connect. Valid values are PublicIpv4 | PrivateIpv4
+	// Type of VPN endpoint, either a public Site-to-Site VPN or a private Site-to-Site VPN over AWS Direct Connect. Valid values are PublicIpv4 | PrivateIpv4.
 	OutsideIPAddressType *string `json:"outsideIpAddressType,omitempty" tf:"outside_ip_address_type,omitempty"`
 
 	// ARN of the Secrets Manager secret storing the pre-shared key(s) for the VPN connection. Note that even if it returns a valid Secrets Manager ARN, the pre-shared key(s) will not be stored in Secrets Manager unless the preshared_key_storage argument is set to SecretsManager.
@@ -474,13 +474,13 @@ type VPNConnectionObservation struct {
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The IPv4 CIDR on the AWS side of the VPN connection.
+	// IPv4 CIDR on the AWS side of the VPN connection.
 	RemoteIPv4NetworkCidr *string `json:"remoteIpv4NetworkCidr,omitempty" tf:"remote_ipv4_network_cidr,omitempty"`
 
-	// The IPv6 CIDR on the AWS side of the VPN connection.
+	// IPv6 CIDR on the AWS side of the VPN connection.
 	RemoteIPv6NetworkCidr *string `json:"remoteIpv6NetworkCidr,omitempty" tf:"remote_ipv6_network_cidr,omitempty"`
 
-	// The static routes associated with the VPN connection. Detailed below.
+	// Static routes associated with the VPN connection. Detailed below.
 	Routes []RoutesObservation `json:"routes,omitempty" tf:"routes,omitempty"`
 
 	// Whether the VPN connection uses static routes exclusively. Static routes must be used for devices that don't support BGP.
@@ -490,51 +490,51 @@ type VPNConnectionObservation struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// When associated with an EC2 Transit Gateway (transit_gateway_id argument), the attachment ID. See also the aws_ec2_tag resource for tagging the EC2 Transit Gateway VPN Attachment.
 	TransitGatewayAttachmentID *string `json:"transitGatewayAttachmentId,omitempty" tf:"transit_gateway_attachment_id,omitempty"`
 
-	// The ID of the EC2 Transit Gateway.
+	// ID of the EC2 Transit Gateway.
 	TransitGatewayID *string `json:"transitGatewayId,omitempty" tf:"transit_gateway_id,omitempty"`
 
-	// . The attachment ID of the Transit Gateway attachment to Direct Connect Gateway. The ID is obtained through a data source only.
+	// Attachment ID of the Transit Gateway attachment to Direct Connect Gateway. Required when outside_ip_address_type is set to PrivateIpv4. The ID is obtained through a data source only.
 	TransportTransitGatewayAttachmentID *string `json:"transportTransitGatewayAttachmentId,omitempty" tf:"transport_transit_gateway_attachment_id,omitempty"`
 
-	// The public IP address of the first VPN tunnel.
+	// Public IP address of the first VPN tunnel.
 	Tunnel1Address *string `json:"tunnel1Address,omitempty" tf:"tunnel1_address,omitempty"`
 
-	// The bgp asn number of the first VPN tunnel.
+	// BGP ASN number of the first VPN tunnel.
 	Tunnel1BGPAsn *string `json:"tunnel1BgpAsn,omitempty" tf:"tunnel1_bgp_asn,omitempty"`
 
-	// The bgp holdtime of the first VPN tunnel.
+	// BGP holdtime of the first VPN tunnel.
 	Tunnel1BGPHoldtime *float64 `json:"tunnel1BgpHoldtime,omitempty" tf:"tunnel1_bgp_holdtime,omitempty"`
 
-	// The RFC 6890 link-local address of the first VPN tunnel (Customer Gateway Side).
+	// RFC 6890 link-local address of the first VPN tunnel (Customer Gateway Side).
 	Tunnel1CgwInsideAddress *string `json:"tunnel1CgwInsideAddress,omitempty" tf:"tunnel1_cgw_inside_address,omitempty"`
 
-	// The action to take after DPD timeout occurs for the first VPN tunnel. Specify restart to restart the IKE initiation. Specify clear to end the IKE session. Valid values are clear | none | restart.
+	// Action to take after DPD timeout occurs for the first VPN tunnel. Specify restart to restart the IKE initiation. Specify clear to end the IKE session. Valid values are clear | none | restart.
 	Tunnel1DpdTimeoutAction *string `json:"tunnel1DpdTimeoutAction,omitempty" tf:"tunnel1_dpd_timeout_action,omitempty"`
 
-	// The number of seconds after which a DPD timeout occurs for the first VPN tunnel. Valid value is equal or higher than 30.
+	// Number of seconds after which a DPD timeout occurs for the first VPN tunnel. Valid value is equal or higher than 30.
 	Tunnel1DpdTimeoutSeconds *float64 `json:"tunnel1DpdTimeoutSeconds,omitempty" tf:"tunnel1_dpd_timeout_seconds,omitempty"`
 
-	// Turn on or off tunnel endpoint lifecycle control feature for the first VPN tunnel. Valid values are true | false.
+	// Whether to enable the tunnel endpoint lifecycle control feature for the first VPN tunnel. Valid values are true | false.
 	Tunnel1EnableTunnelLifecycleControl *bool `json:"tunnel1EnableTunnelLifecycleControl,omitempty" tf:"tunnel1_enable_tunnel_lifecycle_control,omitempty"`
 
-	// The IKE versions that are permitted for the first VPN tunnel. Valid values are ikev1 | ikev2.
+	// IKE versions that are permitted for the first VPN tunnel. Valid values are ikev1 | ikev2.
 	// +listType=set
 	Tunnel1IkeVersions []*string `json:"tunnel1IkeVersions,omitempty" tf:"tunnel1_ike_versions,omitempty"`
 
-	// The CIDR block of the inside IP addresses for the first VPN tunnel. Valid value is a size /30 CIDR block from the 169.254.0.0/16 range.
+	// CIDR block of the inside IP addresses for the first VPN tunnel. Valid value is a size /30 CIDR block from the 169.254.0.0/16 range.
 	Tunnel1InsideCidr *string `json:"tunnel1InsideCidr,omitempty" tf:"tunnel1_inside_cidr,omitempty"`
 
-	// The range of inside IPv6 addresses for the first VPN tunnel. Supports only EC2 Transit Gateway. Valid value is a size /126 CIDR block from the local fd00::/8 range.
+	// Range of inside IPv6 addresses for the first VPN tunnel. Supports only EC2 Transit Gateway. Valid value is a size /126 CIDR block from the local fd00::/8 range.
 	Tunnel1InsideIPv6Cidr *string `json:"tunnel1InsideIpv6Cidr,omitempty" tf:"tunnel1_inside_ipv6_cidr,omitempty"`
 
-	// Options for logging VPN tunnel activity. See Log Options below for more details.
+	// Options for logging VPN tunnel activity. See tunnel1_log_options below for more details.
 	Tunnel1LogOptions *Tunnel1LogOptionsObservation `json:"tunnel1LogOptions,omitempty" tf:"tunnel1_log_options,omitempty"`
 
 	// List of one or more Diffie-Hellman group numbers that are permitted for the first VPN tunnel for phase 1 IKE negotiations. Valid values are  2 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24.
@@ -549,7 +549,7 @@ type VPNConnectionObservation struct {
 	// +listType=set
 	Tunnel1Phase1IntegrityAlgorithms []*string `json:"tunnel1Phase1IntegrityAlgorithms,omitempty" tf:"tunnel1_phase1_integrity_algorithms,omitempty"`
 
-	// The lifetime for phase 1 of the IKE negotiation for the first VPN tunnel, in seconds. Valid value is between 900 and 28800.
+	// Lifetime for phase 1 of the IKE negotiation for the first VPN tunnel, in seconds. Valid value is between 900 and 28800.
 	Tunnel1Phase1LifetimeSeconds *float64 `json:"tunnel1Phase1LifetimeSeconds,omitempty" tf:"tunnel1_phase1_lifetime_seconds,omitempty"`
 
 	// List of one or more Diffie-Hellman group numbers that are permitted for the first VPN tunnel for phase 2 IKE negotiations. Valid values are 2 | 5 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24.
@@ -564,56 +564,56 @@ type VPNConnectionObservation struct {
 	// +listType=set
 	Tunnel1Phase2IntegrityAlgorithms []*string `json:"tunnel1Phase2IntegrityAlgorithms,omitempty" tf:"tunnel1_phase2_integrity_algorithms,omitempty"`
 
-	// The lifetime for phase 2 of the IKE negotiation for the first VPN tunnel, in seconds. Valid value is between 900 and 3600.
+	// Lifetime for phase 2 of the IKE negotiation for the first VPN tunnel, in seconds. Valid value is between 900 and 3600.
 	Tunnel1Phase2LifetimeSeconds *float64 `json:"tunnel1Phase2LifetimeSeconds,omitempty" tf:"tunnel1_phase2_lifetime_seconds,omitempty"`
 
-	// The percentage of the rekey window for the first VPN tunnel (determined by tunnel1_rekey_margin_time_seconds) during which the rekey time is randomly selected. Valid value is between 0 and 100.
+	// Percentage of the rekey window for the first VPN tunnel (determined by tunnel1_rekey_margin_time_seconds) during which the rekey time is randomly selected. Valid value is between 0 and 100.
 	Tunnel1RekeyFuzzPercentage *float64 `json:"tunnel1RekeyFuzzPercentage,omitempty" tf:"tunnel1_rekey_fuzz_percentage,omitempty"`
 
-	// The margin time, in seconds, before the phase 2 lifetime expires, during which the AWS side of the first VPN connection performs an IKE rekey. The exact time of the rekey is randomly selected based on the value for tunnel1_rekey_fuzz_percentage. Valid value is between 60 and half of tunnel1_phase2_lifetime_seconds.
+	// Margin time, in seconds, before the phase 2 lifetime expires, during which the AWS side of the first VPN connection performs an IKE rekey. The exact time of the rekey is randomly selected based on the value for tunnel1_rekey_fuzz_percentage. Valid value is between 60 and half of tunnel1_phase2_lifetime_seconds.
 	Tunnel1RekeyMarginTimeSeconds *float64 `json:"tunnel1RekeyMarginTimeSeconds,omitempty" tf:"tunnel1_rekey_margin_time_seconds,omitempty"`
 
-	// The number of packets in an IKE replay window for the first VPN tunnel. Valid value is between 64 and 2048.
+	// Number of packets in an IKE replay window for the first VPN tunnel. Valid value is between 64 and 2048.
 	Tunnel1ReplayWindowSize *float64 `json:"tunnel1ReplayWindowSize,omitempty" tf:"tunnel1_replay_window_size,omitempty"`
 
-	// The action to take when the establishing the tunnel for the first VPN connection. By default, your customer gateway device must initiate the IKE negotiation and bring up the tunnel. Specify start for AWS to initiate the IKE negotiation. Valid values are add | start.
+	// Action to take when the establishing the tunnel for the first VPN connection. By default, your customer gateway device must initiate the IKE negotiation and bring up the tunnel. Specify start for AWS to initiate the IKE negotiation. Valid values are add | start.
 	Tunnel1StartupAction *string `json:"tunnel1StartupAction,omitempty" tf:"tunnel1_startup_action,omitempty"`
 
-	// The RFC 6890 link-local address of the first VPN tunnel (VPN Gateway Side).
+	// RFC 6890 link-local address of the first VPN tunnel (VPN Gateway Side).
 	Tunnel1VgwInsideAddress *string `json:"tunnel1VgwInsideAddress,omitempty" tf:"tunnel1_vgw_inside_address,omitempty"`
 
-	// The public IP address of the second VPN tunnel.
+	// Public IP address of the second VPN tunnel.
 	Tunnel2Address *string `json:"tunnel2Address,omitempty" tf:"tunnel2_address,omitempty"`
 
-	// The bgp asn number of the second VPN tunnel.
+	// BGP ASN number of the second VPN tunnel.
 	Tunnel2BGPAsn *string `json:"tunnel2BgpAsn,omitempty" tf:"tunnel2_bgp_asn,omitempty"`
 
-	// The bgp holdtime of the second VPN tunnel.
+	// BGP holdtime of the second VPN tunnel.
 	Tunnel2BGPHoldtime *float64 `json:"tunnel2BgpHoldtime,omitempty" tf:"tunnel2_bgp_holdtime,omitempty"`
 
-	// The RFC 6890 link-local address of the second VPN tunnel (Customer Gateway Side).
+	// RFC 6890 link-local address of the second VPN tunnel (Customer Gateway Side).
 	Tunnel2CgwInsideAddress *string `json:"tunnel2CgwInsideAddress,omitempty" tf:"tunnel2_cgw_inside_address,omitempty"`
 
-	// The action to take after DPD timeout occurs for the second VPN tunnel. Specify restart to restart the IKE initiation. Specify clear to end the IKE session. Valid values are clear | none | restart.
+	// Action to take after DPD timeout occurs for the second VPN tunnel. Specify restart to restart the IKE initiation. Specify clear to end the IKE session. Valid values are clear | none | restart.
 	Tunnel2DpdTimeoutAction *string `json:"tunnel2DpdTimeoutAction,omitempty" tf:"tunnel2_dpd_timeout_action,omitempty"`
 
-	// The number of seconds after which a DPD timeout occurs for the second VPN tunnel. Valid value is equal or higher than 30.
+	// Number of seconds after which a DPD timeout occurs for the second VPN tunnel. Valid value is equal or higher than 30.
 	Tunnel2DpdTimeoutSeconds *float64 `json:"tunnel2DpdTimeoutSeconds,omitempty" tf:"tunnel2_dpd_timeout_seconds,omitempty"`
 
-	// Turn on or off tunnel endpoint lifecycle control feature for the second VPN tunnel. Valid values are true | false.
+	// Whether to enable the tunnel endpoint lifecycle control feature for the second VPN tunnel. Valid values are true | false.
 	Tunnel2EnableTunnelLifecycleControl *bool `json:"tunnel2EnableTunnelLifecycleControl,omitempty" tf:"tunnel2_enable_tunnel_lifecycle_control,omitempty"`
 
-	// The IKE versions that are permitted for the second VPN tunnel. Valid values are ikev1 | ikev2.
+	// IKE versions that are permitted for the second VPN tunnel. Valid values are ikev1 | ikev2.
 	// +listType=set
 	Tunnel2IkeVersions []*string `json:"tunnel2IkeVersions,omitempty" tf:"tunnel2_ike_versions,omitempty"`
 
-	// The CIDR block of the inside IP addresses for the second VPN tunnel. Valid value is a size /30 CIDR block from the 169.254.0.0/16 range.
+	// CIDR block of the inside IP addresses for the second VPN tunnel. Valid value is a size /30 CIDR block from the 169.254.0.0/16 range.
 	Tunnel2InsideCidr *string `json:"tunnel2InsideCidr,omitempty" tf:"tunnel2_inside_cidr,omitempty"`
 
-	// The range of inside IPv6 addresses for the second VPN tunnel. Supports only EC2 Transit Gateway. Valid value is a size /126 CIDR block from the local fd00::/8 range.
+	// Range of inside IPv6 addresses for the second VPN tunnel. Supports only EC2 Transit Gateway. Valid value is a size /126 CIDR block from the local fd00::/8 range.
 	Tunnel2InsideIPv6Cidr *string `json:"tunnel2InsideIpv6Cidr,omitempty" tf:"tunnel2_inside_ipv6_cidr,omitempty"`
 
-	// Options for logging VPN tunnel activity. See Log Options below for more details.
+	// Options for logging VPN tunnel activity. See tunnel2_log_options below for more details.
 	Tunnel2LogOptions *Tunnel2LogOptionsObservation `json:"tunnel2LogOptions,omitempty" tf:"tunnel2_log_options,omitempty"`
 
 	// List of one or more Diffie-Hellman group numbers that are permitted for the second VPN tunnel for phase 1 IKE negotiations. Valid values are  2 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24.
@@ -628,7 +628,7 @@ type VPNConnectionObservation struct {
 	// +listType=set
 	Tunnel2Phase1IntegrityAlgorithms []*string `json:"tunnel2Phase1IntegrityAlgorithms,omitempty" tf:"tunnel2_phase1_integrity_algorithms,omitempty"`
 
-	// The lifetime for phase 1 of the IKE negotiation for the second VPN tunnel, in seconds. Valid value is between 900 and 28800.
+	// Lifetime for phase 1 of the IKE negotiation for the second VPN tunnel, in seconds. Valid value is between 900 and 28800.
 	Tunnel2Phase1LifetimeSeconds *float64 `json:"tunnel2Phase1LifetimeSeconds,omitempty" tf:"tunnel2_phase1_lifetime_seconds,omitempty"`
 
 	// List of one or more Diffie-Hellman group numbers that are permitted for the second VPN tunnel for phase 2 IKE negotiations. Valid values are 2 | 5 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24.
@@ -643,22 +643,22 @@ type VPNConnectionObservation struct {
 	// +listType=set
 	Tunnel2Phase2IntegrityAlgorithms []*string `json:"tunnel2Phase2IntegrityAlgorithms,omitempty" tf:"tunnel2_phase2_integrity_algorithms,omitempty"`
 
-	// The lifetime for phase 2 of the IKE negotiation for the second VPN tunnel, in seconds. Valid value is between 900 and 3600.
+	// Lifetime for phase 2 of the IKE negotiation for the second VPN tunnel, in seconds. Valid value is between 900 and 3600.
 	Tunnel2Phase2LifetimeSeconds *float64 `json:"tunnel2Phase2LifetimeSeconds,omitempty" tf:"tunnel2_phase2_lifetime_seconds,omitempty"`
 
-	// The percentage of the rekey window for the second VPN tunnel (determined by tunnel2_rekey_margin_time_seconds) during which the rekey time is randomly selected. Valid value is between 0 and 100.
+	// Percentage of the rekey window for the second VPN tunnel (determined by tunnel2_rekey_margin_time_seconds) during which the rekey time is randomly selected. Valid value is between 0 and 100.
 	Tunnel2RekeyFuzzPercentage *float64 `json:"tunnel2RekeyFuzzPercentage,omitempty" tf:"tunnel2_rekey_fuzz_percentage,omitempty"`
 
-	// The margin time, in seconds, before the phase 2 lifetime expires, during which the AWS side of the second VPN connection performs an IKE rekey. The exact time of the rekey is randomly selected based on the value for tunnel2_rekey_fuzz_percentage. Valid value is between 60 and half of tunnel2_phase2_lifetime_seconds.
+	// Margin time, in seconds, before the phase 2 lifetime expires, during which the AWS side of the second VPN connection performs an IKE rekey. The exact time of the rekey is randomly selected based on the value for tunnel2_rekey_fuzz_percentage. Valid value is between 60 and half of tunnel2_phase2_lifetime_seconds.
 	Tunnel2RekeyMarginTimeSeconds *float64 `json:"tunnel2RekeyMarginTimeSeconds,omitempty" tf:"tunnel2_rekey_margin_time_seconds,omitempty"`
 
-	// The number of packets in an IKE replay window for the second VPN tunnel. Valid value is between 64 and 2048.
+	// Number of packets in an IKE replay window for the second VPN tunnel. Valid value is between 64 and 2048.
 	Tunnel2ReplayWindowSize *float64 `json:"tunnel2ReplayWindowSize,omitempty" tf:"tunnel2_replay_window_size,omitempty"`
 
-	// The action to take when the establishing the tunnel for the second VPN connection. By default, your customer gateway device must initiate the IKE negotiation and bring up the tunnel. Specify start for AWS to initiate the IKE negotiation. Valid values are add | start.
+	// Action to take when the establishing the tunnel for the second VPN connection. By default, your customer gateway device must initiate the IKE negotiation and bring up the tunnel. Specify start for AWS to initiate the IKE negotiation. Valid values are add | start.
 	Tunnel2StartupAction *string `json:"tunnel2StartupAction,omitempty" tf:"tunnel2_startup_action,omitempty"`
 
-	// The RFC 6890 link-local address of the second VPN tunnel (VPN Gateway Side).
+	// RFC 6890 link-local address of the second VPN tunnel (VPN Gateway Side).
 	Tunnel2VgwInsideAddress *string `json:"tunnel2VgwInsideAddress,omitempty" tf:"tunnel2_vgw_inside_address,omitempty"`
 
 	// Desired bandwidth specification for the VPN tunnel. Valid values are standard | large. standard supports up to 1.25 Gbps per tunnel, while large supports up to 5 Gbps per tunnel. Not supported when vpn_gateway_id is specified, or enable_acceleration is true.
@@ -667,13 +667,13 @@ type VPNConnectionObservation struct {
 	// Indicate whether the VPN tunnels process IPv4 or IPv6 traffic. Valid values are ipv4 | ipv6. ipv6 Supports only EC2 Transit Gateway.
 	TunnelInsideIPVersion *string `json:"tunnelInsideIpVersion,omitempty" tf:"tunnel_inside_ip_version,omitempty"`
 
-	// The type of VPN connection. The only type AWS supports at this time is "ipsec.1".
+	// Type of VPN connection. The only type AWS supports at this time is "ipsec.1".
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
 	// ID of the VPN concentrator to associate with the VPN connection.
 	VPNConcentratorID *string `json:"vpnConcentratorId,omitempty" tf:"vpn_concentrator_id,omitempty"`
 
-	// The ID of the Virtual Private Gateway.
+	// ID of the Virtual Private Gateway.
 	VPNGatewayID *string `json:"vpnGatewayId,omitempty" tf:"vpn_gateway_id,omitempty"`
 
 	// Telemetry for the VPN tunnels. Detailed below.
@@ -682,7 +682,7 @@ type VPNConnectionObservation struct {
 
 type VPNConnectionParameters struct {
 
-	// The ID of the customer gateway.
+	// ID of the customer gateway.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.CustomerGateway
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -696,19 +696,19 @@ type VPNConnectionParameters struct {
 	// +kubebuilder:validation:Optional
 	CustomerGatewayIDSelector *v2.Selector `json:"customerGatewayIdSelector,omitempty" tf:"-"`
 
-	// Indicate whether to enable acceleration for the VPN connection. Supports only EC2 Transit Gateway.
+	// Whether to enable acceleration for the VPN connection. Supports only EC2 Transit Gateway.
 	// +kubebuilder:validation:Optional
 	EnableAcceleration *bool `json:"enableAcceleration,omitempty" tf:"enable_acceleration,omitempty"`
 
-	// The IPv4 CIDR on the customer gateway (on-premises) side of the VPN connection.
+	// IPv4 CIDR on the customer gateway (on-premises) side of the VPN connection.
 	// +kubebuilder:validation:Optional
 	LocalIPv4NetworkCidr *string `json:"localIpv4NetworkCidr,omitempty" tf:"local_ipv4_network_cidr,omitempty"`
 
-	// The IPv6 CIDR on the customer gateway (on-premises) side of the VPN connection.
+	// IPv6 CIDR on the customer gateway (on-premises) side of the VPN connection.
 	// +kubebuilder:validation:Optional
 	LocalIPv6NetworkCidr *string `json:"localIpv6NetworkCidr,omitempty" tf:"local_ipv6_network_cidr,omitempty"`
 
-	// Indicates if a Public S2S VPN or Private S2S VPN over AWS Direct Connect. Valid values are PublicIpv4 | PrivateIpv4
+	// Type of VPN endpoint, either a public Site-to-Site VPN or a private Site-to-Site VPN over AWS Direct Connect. Valid values are PublicIpv4 | PrivateIpv4.
 	// +kubebuilder:validation:Optional
 	OutsideIPAddressType *string `json:"outsideIpAddressType,omitempty" tf:"outside_ip_address_type,omitempty"`
 
@@ -721,11 +721,11 @@ type VPNConnectionParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// The IPv4 CIDR on the AWS side of the VPN connection.
+	// IPv4 CIDR on the AWS side of the VPN connection.
 	// +kubebuilder:validation:Optional
 	RemoteIPv4NetworkCidr *string `json:"remoteIpv4NetworkCidr,omitempty" tf:"remote_ipv4_network_cidr,omitempty"`
 
-	// The IPv6 CIDR on the AWS side of the VPN connection.
+	// IPv6 CIDR on the AWS side of the VPN connection.
 	// +kubebuilder:validation:Optional
 	RemoteIPv6NetworkCidr *string `json:"remoteIpv6NetworkCidr,omitempty" tf:"remote_ipv6_network_cidr,omitempty"`
 
@@ -738,7 +738,7 @@ type VPNConnectionParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The ID of the EC2 Transit Gateway.
+	// ID of the EC2 Transit Gateway.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.TransitGateway
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -752,36 +752,36 @@ type VPNConnectionParameters struct {
 	// +kubebuilder:validation:Optional
 	TransitGatewayIDSelector *v2.Selector `json:"transitGatewayIdSelector,omitempty" tf:"-"`
 
-	// . The attachment ID of the Transit Gateway attachment to Direct Connect Gateway. The ID is obtained through a data source only.
+	// Attachment ID of the Transit Gateway attachment to Direct Connect Gateway. Required when outside_ip_address_type is set to PrivateIpv4. The ID is obtained through a data source only.
 	// +kubebuilder:validation:Optional
 	TransportTransitGatewayAttachmentID *string `json:"transportTransitGatewayAttachmentId,omitempty" tf:"transport_transit_gateway_attachment_id,omitempty"`
 
-	// The action to take after DPD timeout occurs for the first VPN tunnel. Specify restart to restart the IKE initiation. Specify clear to end the IKE session. Valid values are clear | none | restart.
+	// Action to take after DPD timeout occurs for the first VPN tunnel. Specify restart to restart the IKE initiation. Specify clear to end the IKE session. Valid values are clear | none | restart.
 	// +kubebuilder:validation:Optional
 	Tunnel1DpdTimeoutAction *string `json:"tunnel1DpdTimeoutAction,omitempty" tf:"tunnel1_dpd_timeout_action,omitempty"`
 
-	// The number of seconds after which a DPD timeout occurs for the first VPN tunnel. Valid value is equal or higher than 30.
+	// Number of seconds after which a DPD timeout occurs for the first VPN tunnel. Valid value is equal or higher than 30.
 	// +kubebuilder:validation:Optional
 	Tunnel1DpdTimeoutSeconds *float64 `json:"tunnel1DpdTimeoutSeconds,omitempty" tf:"tunnel1_dpd_timeout_seconds,omitempty"`
 
-	// Turn on or off tunnel endpoint lifecycle control feature for the first VPN tunnel. Valid values are true | false.
+	// Whether to enable the tunnel endpoint lifecycle control feature for the first VPN tunnel. Valid values are true | false.
 	// +kubebuilder:validation:Optional
 	Tunnel1EnableTunnelLifecycleControl *bool `json:"tunnel1EnableTunnelLifecycleControl,omitempty" tf:"tunnel1_enable_tunnel_lifecycle_control,omitempty"`
 
-	// The IKE versions that are permitted for the first VPN tunnel. Valid values are ikev1 | ikev2.
+	// IKE versions that are permitted for the first VPN tunnel. Valid values are ikev1 | ikev2.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	Tunnel1IkeVersions []*string `json:"tunnel1IkeVersions,omitempty" tf:"tunnel1_ike_versions,omitempty"`
 
-	// The CIDR block of the inside IP addresses for the first VPN tunnel. Valid value is a size /30 CIDR block from the 169.254.0.0/16 range.
+	// CIDR block of the inside IP addresses for the first VPN tunnel. Valid value is a size /30 CIDR block from the 169.254.0.0/16 range.
 	// +kubebuilder:validation:Optional
 	Tunnel1InsideCidr *string `json:"tunnel1InsideCidr,omitempty" tf:"tunnel1_inside_cidr,omitempty"`
 
-	// The range of inside IPv6 addresses for the first VPN tunnel. Supports only EC2 Transit Gateway. Valid value is a size /126 CIDR block from the local fd00::/8 range.
+	// Range of inside IPv6 addresses for the first VPN tunnel. Supports only EC2 Transit Gateway. Valid value is a size /126 CIDR block from the local fd00::/8 range.
 	// +kubebuilder:validation:Optional
 	Tunnel1InsideIPv6Cidr *string `json:"tunnel1InsideIpv6Cidr,omitempty" tf:"tunnel1_inside_ipv6_cidr,omitempty"`
 
-	// Options for logging VPN tunnel activity. See Log Options below for more details.
+	// Options for logging VPN tunnel activity. See tunnel1_log_options below for more details.
 	// +kubebuilder:validation:Optional
 	Tunnel1LogOptions *Tunnel1LogOptionsParameters `json:"tunnel1LogOptions,omitempty" tf:"tunnel1_log_options,omitempty"`
 
@@ -800,7 +800,7 @@ type VPNConnectionParameters struct {
 	// +listType=set
 	Tunnel1Phase1IntegrityAlgorithms []*string `json:"tunnel1Phase1IntegrityAlgorithms,omitempty" tf:"tunnel1_phase1_integrity_algorithms,omitempty"`
 
-	// The lifetime for phase 1 of the IKE negotiation for the first VPN tunnel, in seconds. Valid value is between 900 and 28800.
+	// Lifetime for phase 1 of the IKE negotiation for the first VPN tunnel, in seconds. Valid value is between 900 and 28800.
 	// +kubebuilder:validation:Optional
 	Tunnel1Phase1LifetimeSeconds *float64 `json:"tunnel1Phase1LifetimeSeconds,omitempty" tf:"tunnel1_phase1_lifetime_seconds,omitempty"`
 
@@ -819,56 +819,56 @@ type VPNConnectionParameters struct {
 	// +listType=set
 	Tunnel1Phase2IntegrityAlgorithms []*string `json:"tunnel1Phase2IntegrityAlgorithms,omitempty" tf:"tunnel1_phase2_integrity_algorithms,omitempty"`
 
-	// The lifetime for phase 2 of the IKE negotiation for the first VPN tunnel, in seconds. Valid value is between 900 and 3600.
+	// Lifetime for phase 2 of the IKE negotiation for the first VPN tunnel, in seconds. Valid value is between 900 and 3600.
 	// +kubebuilder:validation:Optional
 	Tunnel1Phase2LifetimeSeconds *float64 `json:"tunnel1Phase2LifetimeSeconds,omitempty" tf:"tunnel1_phase2_lifetime_seconds,omitempty"`
 
-	// The preshared key of the first VPN tunnel. The preshared key must be between 8 and 64 characters in length and cannot start with zero(0). Allowed characters are alphanumeric characters, periods(.) and underscores(_).
+	// Preshared key of the first VPN tunnel. The preshared key must be between 8 and 64 characters in length and cannot start with zero(0). Allowed characters are alphanumeric characters, periods(.) and underscores(_).
 	// +kubebuilder:validation:Optional
 	Tunnel1PresharedKeySecretRef *v2.SecretKeySelector `json:"tunnel1PresharedKeySecretRef,omitempty" tf:"-"`
 
-	// The percentage of the rekey window for the first VPN tunnel (determined by tunnel1_rekey_margin_time_seconds) during which the rekey time is randomly selected. Valid value is between 0 and 100.
+	// Percentage of the rekey window for the first VPN tunnel (determined by tunnel1_rekey_margin_time_seconds) during which the rekey time is randomly selected. Valid value is between 0 and 100.
 	// +kubebuilder:validation:Optional
 	Tunnel1RekeyFuzzPercentage *float64 `json:"tunnel1RekeyFuzzPercentage,omitempty" tf:"tunnel1_rekey_fuzz_percentage,omitempty"`
 
-	// The margin time, in seconds, before the phase 2 lifetime expires, during which the AWS side of the first VPN connection performs an IKE rekey. The exact time of the rekey is randomly selected based on the value for tunnel1_rekey_fuzz_percentage. Valid value is between 60 and half of tunnel1_phase2_lifetime_seconds.
+	// Margin time, in seconds, before the phase 2 lifetime expires, during which the AWS side of the first VPN connection performs an IKE rekey. The exact time of the rekey is randomly selected based on the value for tunnel1_rekey_fuzz_percentage. Valid value is between 60 and half of tunnel1_phase2_lifetime_seconds.
 	// +kubebuilder:validation:Optional
 	Tunnel1RekeyMarginTimeSeconds *float64 `json:"tunnel1RekeyMarginTimeSeconds,omitempty" tf:"tunnel1_rekey_margin_time_seconds,omitempty"`
 
-	// The number of packets in an IKE replay window for the first VPN tunnel. Valid value is between 64 and 2048.
+	// Number of packets in an IKE replay window for the first VPN tunnel. Valid value is between 64 and 2048.
 	// +kubebuilder:validation:Optional
 	Tunnel1ReplayWindowSize *float64 `json:"tunnel1ReplayWindowSize,omitempty" tf:"tunnel1_replay_window_size,omitempty"`
 
-	// The action to take when the establishing the tunnel for the first VPN connection. By default, your customer gateway device must initiate the IKE negotiation and bring up the tunnel. Specify start for AWS to initiate the IKE negotiation. Valid values are add | start.
+	// Action to take when the establishing the tunnel for the first VPN connection. By default, your customer gateway device must initiate the IKE negotiation and bring up the tunnel. Specify start for AWS to initiate the IKE negotiation. Valid values are add | start.
 	// +kubebuilder:validation:Optional
 	Tunnel1StartupAction *string `json:"tunnel1StartupAction,omitempty" tf:"tunnel1_startup_action,omitempty"`
 
-	// The action to take after DPD timeout occurs for the second VPN tunnel. Specify restart to restart the IKE initiation. Specify clear to end the IKE session. Valid values are clear | none | restart.
+	// Action to take after DPD timeout occurs for the second VPN tunnel. Specify restart to restart the IKE initiation. Specify clear to end the IKE session. Valid values are clear | none | restart.
 	// +kubebuilder:validation:Optional
 	Tunnel2DpdTimeoutAction *string `json:"tunnel2DpdTimeoutAction,omitempty" tf:"tunnel2_dpd_timeout_action,omitempty"`
 
-	// The number of seconds after which a DPD timeout occurs for the second VPN tunnel. Valid value is equal or higher than 30.
+	// Number of seconds after which a DPD timeout occurs for the second VPN tunnel. Valid value is equal or higher than 30.
 	// +kubebuilder:validation:Optional
 	Tunnel2DpdTimeoutSeconds *float64 `json:"tunnel2DpdTimeoutSeconds,omitempty" tf:"tunnel2_dpd_timeout_seconds,omitempty"`
 
-	// Turn on or off tunnel endpoint lifecycle control feature for the second VPN tunnel. Valid values are true | false.
+	// Whether to enable the tunnel endpoint lifecycle control feature for the second VPN tunnel. Valid values are true | false.
 	// +kubebuilder:validation:Optional
 	Tunnel2EnableTunnelLifecycleControl *bool `json:"tunnel2EnableTunnelLifecycleControl,omitempty" tf:"tunnel2_enable_tunnel_lifecycle_control,omitempty"`
 
-	// The IKE versions that are permitted for the second VPN tunnel. Valid values are ikev1 | ikev2.
+	// IKE versions that are permitted for the second VPN tunnel. Valid values are ikev1 | ikev2.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	Tunnel2IkeVersions []*string `json:"tunnel2IkeVersions,omitempty" tf:"tunnel2_ike_versions,omitempty"`
 
-	// The CIDR block of the inside IP addresses for the second VPN tunnel. Valid value is a size /30 CIDR block from the 169.254.0.0/16 range.
+	// CIDR block of the inside IP addresses for the second VPN tunnel. Valid value is a size /30 CIDR block from the 169.254.0.0/16 range.
 	// +kubebuilder:validation:Optional
 	Tunnel2InsideCidr *string `json:"tunnel2InsideCidr,omitempty" tf:"tunnel2_inside_cidr,omitempty"`
 
-	// The range of inside IPv6 addresses for the second VPN tunnel. Supports only EC2 Transit Gateway. Valid value is a size /126 CIDR block from the local fd00::/8 range.
+	// Range of inside IPv6 addresses for the second VPN tunnel. Supports only EC2 Transit Gateway. Valid value is a size /126 CIDR block from the local fd00::/8 range.
 	// +kubebuilder:validation:Optional
 	Tunnel2InsideIPv6Cidr *string `json:"tunnel2InsideIpv6Cidr,omitempty" tf:"tunnel2_inside_ipv6_cidr,omitempty"`
 
-	// Options for logging VPN tunnel activity. See Log Options below for more details.
+	// Options for logging VPN tunnel activity. See tunnel2_log_options below for more details.
 	// +kubebuilder:validation:Optional
 	Tunnel2LogOptions *Tunnel2LogOptionsParameters `json:"tunnel2LogOptions,omitempty" tf:"tunnel2_log_options,omitempty"`
 
@@ -887,7 +887,7 @@ type VPNConnectionParameters struct {
 	// +listType=set
 	Tunnel2Phase1IntegrityAlgorithms []*string `json:"tunnel2Phase1IntegrityAlgorithms,omitempty" tf:"tunnel2_phase1_integrity_algorithms,omitempty"`
 
-	// The lifetime for phase 1 of the IKE negotiation for the second VPN tunnel, in seconds. Valid value is between 900 and 28800.
+	// Lifetime for phase 1 of the IKE negotiation for the second VPN tunnel, in seconds. Valid value is between 900 and 28800.
 	// +kubebuilder:validation:Optional
 	Tunnel2Phase1LifetimeSeconds *float64 `json:"tunnel2Phase1LifetimeSeconds,omitempty" tf:"tunnel2_phase1_lifetime_seconds,omitempty"`
 
@@ -906,27 +906,27 @@ type VPNConnectionParameters struct {
 	// +listType=set
 	Tunnel2Phase2IntegrityAlgorithms []*string `json:"tunnel2Phase2IntegrityAlgorithms,omitempty" tf:"tunnel2_phase2_integrity_algorithms,omitempty"`
 
-	// The lifetime for phase 2 of the IKE negotiation for the second VPN tunnel, in seconds. Valid value is between 900 and 3600.
+	// Lifetime for phase 2 of the IKE negotiation for the second VPN tunnel, in seconds. Valid value is between 900 and 3600.
 	// +kubebuilder:validation:Optional
 	Tunnel2Phase2LifetimeSeconds *float64 `json:"tunnel2Phase2LifetimeSeconds,omitempty" tf:"tunnel2_phase2_lifetime_seconds,omitempty"`
 
-	// The preshared key of the second VPN tunnel. The preshared key must be between 8 and 64 characters in length and cannot start with zero(0). Allowed characters are alphanumeric characters, periods(.) and underscores(_).
+	// Preshared key of the second VPN tunnel. The preshared key must be between 8 and 64 characters in length and cannot start with zero(0). Allowed characters are alphanumeric characters, periods(.) and underscores(_).
 	// +kubebuilder:validation:Optional
 	Tunnel2PresharedKeySecretRef *v2.SecretKeySelector `json:"tunnel2PresharedKeySecretRef,omitempty" tf:"-"`
 
-	// The percentage of the rekey window for the second VPN tunnel (determined by tunnel2_rekey_margin_time_seconds) during which the rekey time is randomly selected. Valid value is between 0 and 100.
+	// Percentage of the rekey window for the second VPN tunnel (determined by tunnel2_rekey_margin_time_seconds) during which the rekey time is randomly selected. Valid value is between 0 and 100.
 	// +kubebuilder:validation:Optional
 	Tunnel2RekeyFuzzPercentage *float64 `json:"tunnel2RekeyFuzzPercentage,omitempty" tf:"tunnel2_rekey_fuzz_percentage,omitempty"`
 
-	// The margin time, in seconds, before the phase 2 lifetime expires, during which the AWS side of the second VPN connection performs an IKE rekey. The exact time of the rekey is randomly selected based on the value for tunnel2_rekey_fuzz_percentage. Valid value is between 60 and half of tunnel2_phase2_lifetime_seconds.
+	// Margin time, in seconds, before the phase 2 lifetime expires, during which the AWS side of the second VPN connection performs an IKE rekey. The exact time of the rekey is randomly selected based on the value for tunnel2_rekey_fuzz_percentage. Valid value is between 60 and half of tunnel2_phase2_lifetime_seconds.
 	// +kubebuilder:validation:Optional
 	Tunnel2RekeyMarginTimeSeconds *float64 `json:"tunnel2RekeyMarginTimeSeconds,omitempty" tf:"tunnel2_rekey_margin_time_seconds,omitempty"`
 
-	// The number of packets in an IKE replay window for the second VPN tunnel. Valid value is between 64 and 2048.
+	// Number of packets in an IKE replay window for the second VPN tunnel. Valid value is between 64 and 2048.
 	// +kubebuilder:validation:Optional
 	Tunnel2ReplayWindowSize *float64 `json:"tunnel2ReplayWindowSize,omitempty" tf:"tunnel2_replay_window_size,omitempty"`
 
-	// The action to take when the establishing the tunnel for the second VPN connection. By default, your customer gateway device must initiate the IKE negotiation and bring up the tunnel. Specify start for AWS to initiate the IKE negotiation. Valid values are add | start.
+	// Action to take when the establishing the tunnel for the second VPN connection. By default, your customer gateway device must initiate the IKE negotiation and bring up the tunnel. Specify start for AWS to initiate the IKE negotiation. Valid values are add | start.
 	// +kubebuilder:validation:Optional
 	Tunnel2StartupAction *string `json:"tunnel2StartupAction,omitempty" tf:"tunnel2_startup_action,omitempty"`
 
@@ -938,7 +938,7 @@ type VPNConnectionParameters struct {
 	// +kubebuilder:validation:Optional
 	TunnelInsideIPVersion *string `json:"tunnelInsideIpVersion,omitempty" tf:"tunnel_inside_ip_version,omitempty"`
 
-	// The type of VPN connection. The only type AWS supports at this time is "ipsec.1".
+	// Type of VPN connection. The only type AWS supports at this time is "ipsec.1".
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.CustomerGateway
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("type",false)
 	// +kubebuilder:validation:Optional
@@ -956,7 +956,7 @@ type VPNConnectionParameters struct {
 	// +kubebuilder:validation:Optional
 	VPNConcentratorID *string `json:"vpnConcentratorId,omitempty" tf:"vpn_concentrator_id,omitempty"`
 
-	// The ID of the Virtual Private Gateway.
+	// ID of the Virtual Private Gateway.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.VPNGateway
 	// +kubebuilder:validation:Optional
 	VPNGatewayID *string `json:"vpnGatewayId,omitempty" tf:"vpn_gateway_id,omitempty"`
@@ -975,19 +975,19 @@ type VgwTelemetryInitParameters struct {
 
 type VgwTelemetryObservation struct {
 
-	// The number of accepted routes.
+	// Number of accepted routes.
 	AcceptedRouteCount *float64 `json:"acceptedRouteCount,omitempty" tf:"accepted_route_count,omitempty"`
 
 	// ARN of the VPN tunnel endpoint certificate.
 	CertificateArn *string `json:"certificateArn,omitempty" tf:"certificate_arn,omitempty"`
 
-	// The date and time of the last change in status.
+	// Date and time of the last change in status.
 	LastStatusChange *string `json:"lastStatusChange,omitempty" tf:"last_status_change,omitempty"`
 
-	// The Internet-routable IP address of the virtual private gateway's outside interface.
+	// Internet-routable IP address of the virtual private gateway's outside interface.
 	OutsideIPAddress *string `json:"outsideIpAddress,omitempty" tf:"outside_ip_address,omitempty"`
 
-	// The status of the VPN tunnel.
+	// Status of the VPN tunnel.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
 	// If an error occurs, a description of the error.

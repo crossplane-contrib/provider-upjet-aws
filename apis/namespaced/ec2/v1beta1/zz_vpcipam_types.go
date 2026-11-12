@@ -15,38 +15,38 @@ import (
 
 type OperatingRegionsInitParameters struct {
 
-	// The name of the Region you want to add to the IPAM.
+	// Name of the Region you want to add to the IPAM.
 	RegionName *string `json:"regionName,omitempty" tf:"region_name,omitempty"`
 }
 
 type OperatingRegionsObservation struct {
 
-	// The name of the Region you want to add to the IPAM.
+	// Name of the Region you want to add to the IPAM.
 	RegionName *string `json:"regionName,omitempty" tf:"region_name,omitempty"`
 }
 
 type OperatingRegionsParameters struct {
 
-	// The name of the Region you want to add to the IPAM.
+	// Name of the Region you want to add to the IPAM.
 	// +kubebuilder:validation:Optional
 	RegionName *string `json:"regionName" tf:"region_name,omitempty"`
 }
 
 type VPCIpamInitParameters struct {
 
-	// Enables you to quickly delete an IPAM, private scopes, pools in private scopes, and any allocations in the pools in private scopes.
+	// Whether to quickly delete an IPAM, private scopes, pools in private scopes, and any allocations in the pools in private scopes.
 	Cascade *bool `json:"cascade,omitempty" tf:"cascade,omitempty"`
 
-	// A description for the IPAM.
+	// Description for the IPAM.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Enable this option to use your own GUA ranges as private IPv6 addresses. Default: false.
+	// Whether to use your own GUA ranges as private IPv6 addresses. Default: false.
 	EnablePrivateGua *bool `json:"enablePrivateGua,omitempty" tf:"enable_private_gua,omitempty"`
 
 	// AWS account that is charged for active IP addresses managed in IPAM. Valid values are ipam-owner (default) and resource-owner.
 	MeteredAccount *string `json:"meteredAccount,omitempty" tf:"metered_account,omitempty"`
 
-	// Determines which locales can be chosen when you create pools. Locale is the Region where you want to make an IPAM pool available for allocations. You can only create pools with locales that match the operating Regions of the IPAM. You can only create VPCs from a pool whose locale matches the VPC's Region. You specify a region using the region_name parameter. You must set your provider block region as an operating_region.
+	// Locales that can be chosen when you create pools. Locale is the Region where you want to make an IPAM pool available for allocations. You can only create pools with locales that match the operating Regions of the IPAM. You can only create VPCs from a pool whose locale matches the VPC's Region. You specify a region using the region_name parameter. You must set your provider block region as an operating_region.
 	OperatingRegions []OperatingRegionsInitParameters `json:"operatingRegions,omitempty" tf:"operating_regions,omitempty"`
 
 	// Key-value map of resource tags.
@@ -62,49 +62,48 @@ type VPCIpamObservation struct {
 	// ARN of IPAM
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// Enables you to quickly delete an IPAM, private scopes, pools in private scopes, and any allocations in the pools in private scopes.
+	// Whether to quickly delete an IPAM, private scopes, pools in private scopes, and any allocations in the pools in private scopes.
 	Cascade *bool `json:"cascade,omitempty" tf:"cascade,omitempty"`
 
-	// The IPAM's default resource discovery association ID.
+	// IPAM's default resource discovery association ID.
 	DefaultResourceDiscoveryAssociationID *string `json:"defaultResourceDiscoveryAssociationId,omitempty" tf:"default_resource_discovery_association_id,omitempty"`
 
-	// The IPAM's default resource discovery ID.
+	// IPAM's default resource discovery ID.
 	DefaultResourceDiscoveryID *string `json:"defaultResourceDiscoveryId,omitempty" tf:"default_resource_discovery_id,omitempty"`
 
-	// A description for the IPAM.
+	// Description for the IPAM.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Enable this option to use your own GUA ranges as private IPv6 addresses. Default: false.
+	// Whether to use your own GUA ranges as private IPv6 addresses. Default: false.
 	EnablePrivateGua *bool `json:"enablePrivateGua,omitempty" tf:"enable_private_gua,omitempty"`
 
-	// The ID of the IPAM
+	// ID of the IPAM
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// AWS account that is charged for active IP addresses managed in IPAM. Valid values are ipam-owner (default) and resource-owner.
 	MeteredAccount *string `json:"meteredAccount,omitempty" tf:"metered_account,omitempty"`
 
-	// Determines which locales can be chosen when you create pools. Locale is the Region where you want to make an IPAM pool available for allocations. You can only create pools with locales that match the operating Regions of the IPAM. You can only create VPCs from a pool whose locale matches the VPC's Region. You specify a region using the region_name parameter. You must set your provider block region as an operating_region.
+	// Locales that can be chosen when you create pools. Locale is the Region where you want to make an IPAM pool available for allocations. You can only create pools with locales that match the operating Regions of the IPAM. You can only create VPCs from a pool whose locale matches the VPC's Region. You specify a region using the region_name parameter. You must set your provider block region as an operating_region.
 	OperatingRegions []OperatingRegionsObservation `json:"operatingRegions,omitempty" tf:"operating_regions,omitempty"`
 
-	// The ID of the IPAM's private scope. A scope is a top-level container in IPAM. Each scope represents an IP-independent network. Scopes enable you to represent networks where you have overlapping IP space. When you create an IPAM, IPAM automatically creates two scopes: public and private. The private scope is intended for private IP space. The public scope is intended for all internet-routable IP space.
+	// ID of the IPAM's private scope. A scope is a top-level container in IPAM. Each scope represents an IP-independent network. Scopes enable you to represent networks where you have overlapping IP space. When you create an IPAM, IPAM automatically creates two scopes: public and private. The private scope is intended for private IP space. The public scope is intended for all internet-routable IP space.
 	PrivateDefaultScopeID *string `json:"privateDefaultScopeId,omitempty" tf:"private_default_scope_id,omitempty"`
 
-	// The ID of the IPAM's public scope. A scope is a top-level container in IPAM. Each scope represents an IP-independent network. Scopes enable you to represent networks where you have overlapping IP space. When you create an IPAM, IPAM automatically creates two scopes: public and private. The private scope is intended for private
-	// IP space. The public scope is intended for all internet-routable IP space.
+	// ID of the IPAM's public scope. A scope is a top-level container in IPAM. Each scope represents an IP-independent network. Scopes enable you to represent networks where you have overlapping IP space. When you create an IPAM, IPAM automatically creates two scopes: public and private. The private scope is intended for private IP space. The public scope is intended for all internet-routable IP space.
 	PublicDefaultScopeID *string `json:"publicDefaultScopeId,omitempty" tf:"public_default_scope_id,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The number of scopes in the IPAM.
+	// Number of scopes in the IPAM.
 	ScopeCount *float64 `json:"scopeCount,omitempty" tf:"scope_count,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
@@ -114,15 +113,15 @@ type VPCIpamObservation struct {
 
 type VPCIpamParameters struct {
 
-	// Enables you to quickly delete an IPAM, private scopes, pools in private scopes, and any allocations in the pools in private scopes.
+	// Whether to quickly delete an IPAM, private scopes, pools in private scopes, and any allocations in the pools in private scopes.
 	// +kubebuilder:validation:Optional
 	Cascade *bool `json:"cascade,omitempty" tf:"cascade,omitempty"`
 
-	// A description for the IPAM.
+	// Description for the IPAM.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Enable this option to use your own GUA ranges as private IPv6 addresses. Default: false.
+	// Whether to use your own GUA ranges as private IPv6 addresses. Default: false.
 	// +kubebuilder:validation:Optional
 	EnablePrivateGua *bool `json:"enablePrivateGua,omitempty" tf:"enable_private_gua,omitempty"`
 
@@ -130,7 +129,7 @@ type VPCIpamParameters struct {
 	// +kubebuilder:validation:Optional
 	MeteredAccount *string `json:"meteredAccount,omitempty" tf:"metered_account,omitempty"`
 
-	// Determines which locales can be chosen when you create pools. Locale is the Region where you want to make an IPAM pool available for allocations. You can only create pools with locales that match the operating Regions of the IPAM. You can only create VPCs from a pool whose locale matches the VPC's Region. You specify a region using the region_name parameter. You must set your provider block region as an operating_region.
+	// Locales that can be chosen when you create pools. Locale is the Region where you want to make an IPAM pool available for allocations. You can only create pools with locales that match the operating Regions of the IPAM. You can only create VPCs from a pool whose locale matches the VPC's Region. You specify a region using the region_name parameter. You must set your provider block region as an operating_region.
 	// +kubebuilder:validation:Optional
 	OperatingRegions []OperatingRegionsParameters `json:"operatingRegions,omitempty" tf:"operating_regions,omitempty"`
 

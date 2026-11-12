@@ -15,7 +15,7 @@ import (
 
 type NotificationInitParameters struct {
 
-	// List of AutoScaling Group Names
+	// List of Auto Scaling group Names
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/autoscaling/v1beta3.AutoscalingGroup
 	// +listType=set
 	GroupNames []*string `json:"groupNames,omitempty" tf:"group_names,omitempty"`
@@ -49,7 +49,7 @@ type NotificationInitParameters struct {
 
 type NotificationObservation struct {
 
-	// List of AutoScaling Group Names
+	// List of Auto Scaling group Names
 	// +listType=set
 	GroupNames []*string `json:"groupNames,omitempty" tf:"group_names,omitempty"`
 
@@ -70,7 +70,7 @@ type NotificationObservation struct {
 
 type NotificationParameters struct {
 
-	// List of AutoScaling Group Names
+	// List of Auto Scaling group Names
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/autoscaling/v1beta3.AutoscalingGroup
 	// +kubebuilder:validation:Optional
 	// +listType=set

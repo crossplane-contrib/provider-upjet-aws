@@ -1,0 +1,137 @@
+# SPDX-FileCopyrightText: 2026 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: s3tables.aws.upbound.io/v1beta1
+kind: TableReplication
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s3tables/v1beta1/tablereplication
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    region: us-west-2
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    rule:
+      destination:
+      - destinationTableBucketArnSelector:
+          matchLabels:
+            testing.upbound.io/example-name: target
+    tableArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s3tables/v1beta1/tablereplication
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    assumeRolePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Action": "sts:AssumeRole",
+            "Effect": "Allow",
+            "Principal": {
+              "Service": "s3tables.amazonaws.com"
+            }
+          }
+        ]
+      }
+    inlinePolicy:
+    - name: s3tables-replication
+      policy: |
+        {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Action": [
+                "s3tables:*"
+              ],
+              "Resource": "*"
+            }
+          ]
+        }
+
+---
+
+apiVersion: s3tables.aws.upbound.io/v1beta1
+kind: Table
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s3tables/v1beta1/tablereplication
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    format: ICEBERG
+    name: example_table
+    namespaceSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    region: us-west-2
+    tableBucketArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: s3tables.aws.upbound.io/v1beta1
+kind: S3TablesNamespace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s3tables/v1beta1/tablereplication
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    namespace: example_namespace
+    region: us-west-2
+    tableBucketArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: s3tables.aws.upbound.io/v1beta1
+kind: TableBucket
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s3tables/v1beta1/tablereplication
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    name: example-${Rand.RFC1123Subdomain}
+    region: us-west-2
+
+---
+
+apiVersion: s3tables.aws.upbound.io/v1beta1
+kind: TableBucket
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s3tables/v1beta1/tablereplication
+  labels:
+    testing.upbound.io/example-name: target
+  name: target
+spec:
+  forProvider:
+    name: target-${Rand.RFC1123Subdomain}
+    region: us-west-2

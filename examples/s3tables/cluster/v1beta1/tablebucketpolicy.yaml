@@ -1,0 +1,49 @@
+# SPDX-FileCopyrightText: 2026 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: s3tables.aws.upbound.io/v1beta1
+kind: TableBucketPolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s3tables/v1beta1/tablebucketpolicy
+    upjet.upbound.io/manual-intervention: "The table bucket ARN in the resourcePolicy should be changed manually since it is only known after the referenced Table Bucket is created."
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    region: us-west-2
+    resourcePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Sid": "AllowAccountAccess",
+            "Effect": "Allow",
+            "Principal": {
+              "AWS": "arn:aws:iam::153891904029:root"
+            },
+            "Action": "s3tables:*",
+            "Resource": "arn:aws:s3tables:us-west-2:153891904029:bucket/example-<rand>"
+          }
+        ]
+      }
+    tableBucketArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: s3tables.aws.upbound.io/v1beta1
+kind: TableBucket
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s3tables/v1beta1/tablebucketpolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    name: example-${Rand.RFC1123Subdomain}
+    region: us-west-2

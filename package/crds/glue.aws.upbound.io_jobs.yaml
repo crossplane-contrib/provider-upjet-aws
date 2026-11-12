@@ -1200,14 +1200,16 @@ spec:
               forProvider:
                 properties:
                   command:
-                    description: The command of the job. Defined below.
+                    description: Command of the job. Defined below.
                     properties:
                       name:
-                        description: The name you assign to this job. It must be unique
-                          in your account.
+                        description: Name of the job command. Defaults to glueetl.
+                          Use pythonshell for Python Shell Job Type, glueray for Ray
+                          Job Type, or gluestreaming for Streaming Job Type. max_capacity
+                          needs to be set if pythonshell is chosen.
                         type: string
                       pythonVersion:
-                        description: The Python version being used to execute a Python
+                        description: Python version being used to execute a Python
                           shell job. Allowed values are 2, 3 or 3.9. Version 3 refers
                           to Python 3.11 when glue_version is set to 5.0.
                         type: string
@@ -1219,12 +1221,11 @@ spec:
                           Ray jobs in the Glue Developer Guide.
                         type: string
                       scriptLocation:
-                        description: Specifies the S3 path to a script that executes
-                          a job.
+                        description: S3 path to a script that executes a job.
                         type: string
                     type: object
                   connections:
-                    description: The list of connections used for this job.
+                    description: List of connections used for this job.
                     items:
                       type: string
                     type: array
@@ -1309,8 +1310,8 @@ spec:
                   defaultArguments:
                     additionalProperties:
                       type: string
-                    description: The map of default arguments for this job. You can
-                      specify arguments here that your own job-execution script consumes,
+                    description: Map of default arguments for this job. You can specify
+                      arguments here that your own job-execution script consumes,
                       as well as arguments that AWS Glue itself consumes. For information
                       about how to specify and consume your own Job arguments, see
                       the Calling AWS Glue APIs in Python topic in the developer guide.
@@ -1323,48 +1324,46 @@ spec:
                     description: Description of the job.
                     type: string
                   executionClass:
-                    description: 'Indicates whether the job is run with a standard
-                      or flexible execution class. The standard execution class is
-                      ideal for time-sensitive workloads that require fast job startup
-                      and dedicated resources. Valid value: FLEX, STANDARD.'
+                    description: 'Execution class for the job. The standard execution
+                      class is ideal for time-sensitive workloads that require fast
+                      job startup and dedicated resources. Valid value: FLEX, STANDARD.'
                     type: string
                   executionProperty:
                     description: Execution property of the job. Defined below.
                     properties:
                       maxConcurrentRuns:
-                        description: The maximum number of concurrent runs allowed
-                          for a job. The default is 1.
+                        description: Maximum number of concurrent runs allowed for
+                          a job. The default is 1.
                         type: number
                     type: object
                   glueVersion:
-                    description: The version of glue to use, for example "1.0". Ray
-                      jobs should set this to 4.0 or greater. For information about
-                      available versions, see the AWS Glue Release Notes.
+                    description: Version of glue to use, for example "1.0". Ray jobs
+                      should set this to 4.0 or greater. For information about available
+                      versions, see the AWS Glue Release Notes.
                     type: string
                   jobMode:
-                    description: Describes how a job was created. Valid values are
-                      SCRIPT, NOTEBOOK and VISUAL.
+                    description: How a job was created. Valid values are SCRIPT, NOTEBOOK
+                      and VISUAL.
                     type: string
                   jobRunQueuingEnabled:
-                    description: Specifies whether job run queuing is enabled for
-                      the job runs for this job. A value of true means job run queuing
-                      is enabled for the job runs. If false or not populated, the
-                      job runs will not be considered for queueing.
+                    description: Whether job run queuing is enabled for the job runs
+                      for this job. A value of true means job run queuing is enabled
+                      for the job runs. If false or not populated, the job runs will
+                      not be considered for queueing.
                     type: boolean
                   maintenanceWindow:
-                    description: Specifies the day of the week and hour for the maintenance
-                      window for streaming jobs.
+                    description: Day of the week and hour for the maintenance window
+                      for streaming jobs.
                     type: string
                   maxCapacity:
-                    description: The maximum number of AWS Glue data processing units
+                    description: Maximum number of AWS Glue data processing units
                       (DPUs) that can be allocated when this job runs. Required when
                       pythonshell is set, accept either 0.0625 or 1.0. Use number_of_workers
                       and worker_type arguments instead with glue_version 2.0 and
                       above.
                     type: number
                   maxRetries:
-                    description: The maximum number of times to retry this job if
-                      it fails.
+                    description: Maximum number of times to retry this job if it fails.
                     type: number
                   nonOverridableArguments:
                     additionalProperties:
@@ -1382,8 +1381,8 @@ spec:
                         type: number
                     type: object
                   numberOfWorkers:
-                    description: The number of workers of a defined workerType that
-                      are allocated when a job runs.
+                    description: Number of workers of a defined workerType that are
+                      allocated when a job runs.
                     type: number
                   region:
                     description: |-
@@ -1391,7 +1390,7 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   roleArn:
-                    description: The ARN of the IAM role associated with this job.
+                    description: ARN of the IAM role associated with this job.
                     type: string
                   roleArnRef:
                     description: Reference to a Role in iam to populate roleArn.
@@ -1468,22 +1467,22 @@ spec:
                         type: object
                     type: object
                   securityConfiguration:
-                    description: The name of the Security Configuration to be associated
+                    description: Name of the Security Configuration to be associated
                       with the job.
                     type: string
                   sourceControlDetails:
-                    description: The details for a source control configuration for
-                      a job, allowing synchronization of job artifacts to or from
-                      a remote repository. Defined below.
+                    description: Details for a source control configuration for a
+                      job, allowing synchronization of job artifacts to or from a
+                      remote repository. Defined below.
                     properties:
                       authStrategy:
-                        description: 'The type of authentication, which can be an
-                          authentication token stored in Amazon Web Services Secrets
-                          Manager, or a personal access token. Valid values are: PERSONAL_ACCESS_TOKEN
+                        description: 'Type of authentication, which can be an authentication
+                          token stored in Amazon Web Services Secrets Manager, or
+                          a personal access token. Valid values are: PERSONAL_ACCESS_TOKEN
                           and AWS_SECRETS_MANAGER.'
                         type: string
                       authTokenSecretRef:
-                        description: The value of an authorization token.
+                        description: Value of an authorization token.
                         properties:
                           key:
                             description: The key to select.
@@ -1500,26 +1499,25 @@ spec:
                         - namespace
                         type: object
                       branch:
-                        description: A branch in the remote repository.
+                        description: Branch in the remote repository.
                         type: string
                       folder:
-                        description: A folder in the remote repository.
+                        description: Folder in the remote repository.
                         type: string
                       lastCommitId:
-                        description: The last commit ID for a commit in the remote
-                          repository.
+                        description: Last commit ID for a commit in the remote repository.
                         type: string
                       owner:
-                        description: The owner of the remote repository that contains
+                        description: Owner of the remote repository that contains
                           the job artifacts.
                         type: string
                       provider:
-                        description: 'The provider for the remote repository. Valid
-                          values are: GITHUB, GITLAB, BITBUCKET, and AWS_CODE_COMMIT.'
+                        description: 'Provider for the remote repository. Valid values
+                          are: GITHUB, GITLAB, BITBUCKET, and AWS_CODE_COMMIT.'
                         type: string
                       repository:
-                        description: The name of the remote repository that contains
-                          the job artifacts.
+                        description: Name of the remote repository that contains the
+                          job artifacts.
                         type: string
                     type: object
                   tags:
@@ -1529,16 +1527,16 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   timeout:
-                    description: The job timeout in minutes. The default is 2880 minutes
+                    description: Job timeout in minutes. The default is 2880 minutes
                       (48 hours) for glueetl and pythonshell jobs, and 0 (unlimited)
-                      for gluestreaming jobs. Leave this attribute argumnet unconfigured
+                      for gluestreaming jobs. Leave this attribute argument unconfigured
                       for glueray jobs.
                     type: number
                   workerType:
-                    description: 'The type of predefined worker that is allocated
-                      when a job runs. Valid values: Standard, G.1X, G.2X, G.025X,
-                      G.4X, G.8X, G.12X, G.16X, R.1X, R.2X, R.4X, R.8X, Z.2X (Ray
-                      jobs). See the AWS documentation for details.'
+                    description: 'Type of predefined worker that is allocated when
+                      a job runs. Valid values: Standard, G.1X, G.2X, G.025X, G.4X,
+                      G.8X, G.12X, G.16X, R.1X, R.2X, R.4X, R.8X, Z.2X (Ray jobs).
+                      See the AWS documentation for details.'
                     type: string
                 required:
                 - region
@@ -1557,14 +1555,16 @@ spec:
                   autoscaler.
                 properties:
                   command:
-                    description: The command of the job. Defined below.
+                    description: Command of the job. Defined below.
                     properties:
                       name:
-                        description: The name you assign to this job. It must be unique
-                          in your account.
+                        description: Name of the job command. Defaults to glueetl.
+                          Use pythonshell for Python Shell Job Type, glueray for Ray
+                          Job Type, or gluestreaming for Streaming Job Type. max_capacity
+                          needs to be set if pythonshell is chosen.
                         type: string
                       pythonVersion:
-                        description: The Python version being used to execute a Python
+                        description: Python version being used to execute a Python
                           shell job. Allowed values are 2, 3 or 3.9. Version 3 refers
                           to Python 3.11 when glue_version is set to 5.0.
                         type: string
@@ -1576,12 +1576,11 @@ spec:
                           Ray jobs in the Glue Developer Guide.
                         type: string
                       scriptLocation:
-                        description: Specifies the S3 path to a script that executes
-                          a job.
+                        description: S3 path to a script that executes a job.
                         type: string
                     type: object
                   connections:
-                    description: The list of connections used for this job.
+                    description: List of connections used for this job.
                     items:
                       type: string
                     type: array
@@ -1666,8 +1665,8 @@ spec:
                   defaultArguments:
                     additionalProperties:
                       type: string
-                    description: The map of default arguments for this job. You can
-                      specify arguments here that your own job-execution script consumes,
+                    description: Map of default arguments for this job. You can specify
+                      arguments here that your own job-execution script consumes,
                       as well as arguments that AWS Glue itself consumes. For information
                       about how to specify and consume your own Job arguments, see
                       the Calling AWS Glue APIs in Python topic in the developer guide.
@@ -1680,48 +1679,46 @@ spec:
                     description: Description of the job.
                     type: string
                   executionClass:
-                    description: 'Indicates whether the job is run with a standard
-                      or flexible execution class. The standard execution class is
-                      ideal for time-sensitive workloads that require fast job startup
-                      and dedicated resources. Valid value: FLEX, STANDARD.'
+                    description: 'Execution class for the job. The standard execution
+                      class is ideal for time-sensitive workloads that require fast
+                      job startup and dedicated resources. Valid value: FLEX, STANDARD.'
                     type: string
                   executionProperty:
                     description: Execution property of the job. Defined below.
                     properties:
                       maxConcurrentRuns:
-                        description: The maximum number of concurrent runs allowed
-                          for a job. The default is 1.
+                        description: Maximum number of concurrent runs allowed for
+                          a job. The default is 1.
                         type: number
                     type: object
                   glueVersion:
-                    description: The version of glue to use, for example "1.0". Ray
-                      jobs should set this to 4.0 or greater. For information about
-                      available versions, see the AWS Glue Release Notes.
+                    description: Version of glue to use, for example "1.0". Ray jobs
+                      should set this to 4.0 or greater. For information about available
+                      versions, see the AWS Glue Release Notes.
                     type: string
                   jobMode:
-                    description: Describes how a job was created. Valid values are
-                      SCRIPT, NOTEBOOK and VISUAL.
+                    description: How a job was created. Valid values are SCRIPT, NOTEBOOK
+                      and VISUAL.
                     type: string
                   jobRunQueuingEnabled:
-                    description: Specifies whether job run queuing is enabled for
-                      the job runs for this job. A value of true means job run queuing
-                      is enabled for the job runs. If false or not populated, the
-                      job runs will not be considered for queueing.
+                    description: Whether job run queuing is enabled for the job runs
+                      for this job. A value of true means job run queuing is enabled
+                      for the job runs. If false or not populated, the job runs will
+                      not be considered for queueing.
                     type: boolean
                   maintenanceWindow:
-                    description: Specifies the day of the week and hour for the maintenance
-                      window for streaming jobs.
+                    description: Day of the week and hour for the maintenance window
+                      for streaming jobs.
                     type: string
                   maxCapacity:
-                    description: The maximum number of AWS Glue data processing units
+                    description: Maximum number of AWS Glue data processing units
                       (DPUs) that can be allocated when this job runs. Required when
                       pythonshell is set, accept either 0.0625 or 1.0. Use number_of_workers
                       and worker_type arguments instead with glue_version 2.0 and
                       above.
                     type: number
                   maxRetries:
-                    description: The maximum number of times to retry this job if
-                      it fails.
+                    description: Maximum number of times to retry this job if it fails.
                     type: number
                   nonOverridableArguments:
                     additionalProperties:
@@ -1739,11 +1736,11 @@ spec:
                         type: number
                     type: object
                   numberOfWorkers:
-                    description: The number of workers of a defined workerType that
-                      are allocated when a job runs.
+                    description: Number of workers of a defined workerType that are
+                      allocated when a job runs.
                     type: number
                   roleArn:
-                    description: The ARN of the IAM role associated with this job.
+                    description: ARN of the IAM role associated with this job.
                     type: string
                   roleArnRef:
                     description: Reference to a Role in iam to populate roleArn.
@@ -1820,22 +1817,22 @@ spec:
                         type: object
                     type: object
                   securityConfiguration:
-                    description: The name of the Security Configuration to be associated
+                    description: Name of the Security Configuration to be associated
                       with the job.
                     type: string
                   sourceControlDetails:
-                    description: The details for a source control configuration for
-                      a job, allowing synchronization of job artifacts to or from
-                      a remote repository. Defined below.
+                    description: Details for a source control configuration for a
+                      job, allowing synchronization of job artifacts to or from a
+                      remote repository. Defined below.
                     properties:
                       authStrategy:
-                        description: 'The type of authentication, which can be an
-                          authentication token stored in Amazon Web Services Secrets
-                          Manager, or a personal access token. Valid values are: PERSONAL_ACCESS_TOKEN
+                        description: 'Type of authentication, which can be an authentication
+                          token stored in Amazon Web Services Secrets Manager, or
+                          a personal access token. Valid values are: PERSONAL_ACCESS_TOKEN
                           and AWS_SECRETS_MANAGER.'
                         type: string
                       authTokenSecretRef:
-                        description: The value of an authorization token.
+                        description: Value of an authorization token.
                         properties:
                           key:
                             description: The key to select.
@@ -1852,26 +1849,25 @@ spec:
                         - namespace
                         type: object
                       branch:
-                        description: A branch in the remote repository.
+                        description: Branch in the remote repository.
                         type: string
                       folder:
-                        description: A folder in the remote repository.
+                        description: Folder in the remote repository.
                         type: string
                       lastCommitId:
-                        description: The last commit ID for a commit in the remote
-                          repository.
+                        description: Last commit ID for a commit in the remote repository.
                         type: string
                       owner:
-                        description: The owner of the remote repository that contains
+                        description: Owner of the remote repository that contains
                           the job artifacts.
                         type: string
                       provider:
-                        description: 'The provider for the remote repository. Valid
-                          values are: GITHUB, GITLAB, BITBUCKET, and AWS_CODE_COMMIT.'
+                        description: 'Provider for the remote repository. Valid values
+                          are: GITHUB, GITLAB, BITBUCKET, and AWS_CODE_COMMIT.'
                         type: string
                       repository:
-                        description: The name of the remote repository that contains
-                          the job artifacts.
+                        description: Name of the remote repository that contains the
+                          job artifacts.
                         type: string
                     type: object
                   tags:
@@ -1881,16 +1877,16 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   timeout:
-                    description: The job timeout in minutes. The default is 2880 minutes
+                    description: Job timeout in minutes. The default is 2880 minutes
                       (48 hours) for glueetl and pythonshell jobs, and 0 (unlimited)
-                      for gluestreaming jobs. Leave this attribute argumnet unconfigured
+                      for gluestreaming jobs. Leave this attribute argument unconfigured
                       for glueray jobs.
                     type: number
                   workerType:
-                    description: 'The type of predefined worker that is allocated
-                      when a job runs. Valid values: Standard, G.1X, G.2X, G.025X,
-                      G.4X, G.8X, G.12X, G.16X, R.1X, R.2X, R.4X, R.8X, Z.2X (Ray
-                      jobs). See the AWS documentation for details.'
+                    description: 'Type of predefined worker that is allocated when
+                      a job runs. Valid values: Standard, G.1X, G.2X, G.025X, G.4X,
+                      G.8X, G.12X, G.16X, R.1X, R.2X, R.4X, R.8X, Z.2X (Ray jobs).
+                      See the AWS documentation for details.'
                     type: string
                 type: object
               managementPolicies:
@@ -1993,14 +1989,16 @@ spec:
                     description: ARN of Glue Job
                     type: string
                   command:
-                    description: The command of the job. Defined below.
+                    description: Command of the job. Defined below.
                     properties:
                       name:
-                        description: The name you assign to this job. It must be unique
-                          in your account.
+                        description: Name of the job command. Defaults to glueetl.
+                          Use pythonshell for Python Shell Job Type, glueray for Ray
+                          Job Type, or gluestreaming for Streaming Job Type. max_capacity
+                          needs to be set if pythonshell is chosen.
                         type: string
                       pythonVersion:
-                        description: The Python version being used to execute a Python
+                        description: Python version being used to execute a Python
                           shell job. Allowed values are 2, 3 or 3.9. Version 3 refers
                           to Python 3.11 when glue_version is set to 5.0.
                         type: string
@@ -2012,20 +2010,19 @@ spec:
                           Ray jobs in the Glue Developer Guide.
                         type: string
                       scriptLocation:
-                        description: Specifies the S3 path to a script that executes
-                          a job.
+                        description: S3 path to a script that executes a job.
                         type: string
                     type: object
                   connections:
-                    description: The list of connections used for this job.
+                    description: List of connections used for this job.
                     items:
                       type: string
                     type: array
                   defaultArguments:
                     additionalProperties:
                       type: string
-                    description: The map of default arguments for this job. You can
-                      specify arguments here that your own job-execution script consumes,
+                    description: Map of default arguments for this job. You can specify
+                      arguments here that your own job-execution script consumes,
                       as well as arguments that AWS Glue itself consumes. For information
                       about how to specify and consume your own Job arguments, see
                       the Calling AWS Glue APIs in Python topic in the developer guide.
@@ -2038,51 +2035,49 @@ spec:
                     description: Description of the job.
                     type: string
                   executionClass:
-                    description: 'Indicates whether the job is run with a standard
-                      or flexible execution class. The standard execution class is
-                      ideal for time-sensitive workloads that require fast job startup
-                      and dedicated resources. Valid value: FLEX, STANDARD.'
+                    description: 'Execution class for the job. The standard execution
+                      class is ideal for time-sensitive workloads that require fast
+                      job startup and dedicated resources. Valid value: FLEX, STANDARD.'
                     type: string
                   executionProperty:
                     description: Execution property of the job. Defined below.
                     properties:
                       maxConcurrentRuns:
-                        description: The maximum number of concurrent runs allowed
-                          for a job. The default is 1.
+                        description: Maximum number of concurrent runs allowed for
+                          a job. The default is 1.
                         type: number
                     type: object
                   glueVersion:
-                    description: The version of glue to use, for example "1.0". Ray
-                      jobs should set this to 4.0 or greater. For information about
-                      available versions, see the AWS Glue Release Notes.
+                    description: Version of glue to use, for example "1.0". Ray jobs
+                      should set this to 4.0 or greater. For information about available
+                      versions, see the AWS Glue Release Notes.
                     type: string
                   id:
                     description: Job name
                     type: string
                   jobMode:
-                    description: Describes how a job was created. Valid values are
-                      SCRIPT, NOTEBOOK and VISUAL.
+                    description: How a job was created. Valid values are SCRIPT, NOTEBOOK
+                      and VISUAL.
                     type: string
                   jobRunQueuingEnabled:
-                    description: Specifies whether job run queuing is enabled for
-                      the job runs for this job. A value of true means job run queuing
-                      is enabled for the job runs. If false or not populated, the
-                      job runs will not be considered for queueing.
+                    description: Whether job run queuing is enabled for the job runs
+                      for this job. A value of true means job run queuing is enabled
+                      for the job runs. If false or not populated, the job runs will
+                      not be considered for queueing.
                     type: boolean
                   maintenanceWindow:
-                    description: Specifies the day of the week and hour for the maintenance
-                      window for streaming jobs.
+                    description: Day of the week and hour for the maintenance window
+                      for streaming jobs.
                     type: string
                   maxCapacity:
-                    description: The maximum number of AWS Glue data processing units
+                    description: Maximum number of AWS Glue data processing units
                       (DPUs) that can be allocated when this job runs. Required when
                       pythonshell is set, accept either 0.0625 or 1.0. Use number_of_workers
                       and worker_type arguments instead with glue_version 2.0 and
                       above.
                     type: number
                   maxRetries:
-                    description: The maximum number of times to retry this job if
-                      it fails.
+                    description: Maximum number of times to retry this job if it fails.
                     type: number
                   nonOverridableArguments:
                     additionalProperties:
@@ -2100,8 +2095,8 @@ spec:
                         type: number
                     type: object
                   numberOfWorkers:
-                    description: The number of workers of a defined workerType that
-                      are allocated when a job runs.
+                    description: Number of workers of a defined workerType that are
+                      allocated when a job runs.
                     type: number
                   region:
                     description: |-
@@ -2109,44 +2104,43 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   roleArn:
-                    description: The ARN of the IAM role associated with this job.
+                    description: ARN of the IAM role associated with this job.
                     type: string
                   securityConfiguration:
-                    description: The name of the Security Configuration to be associated
+                    description: Name of the Security Configuration to be associated
                       with the job.
                     type: string
                   sourceControlDetails:
-                    description: The details for a source control configuration for
-                      a job, allowing synchronization of job artifacts to or from
-                      a remote repository. Defined below.
+                    description: Details for a source control configuration for a
+                      job, allowing synchronization of job artifacts to or from a
+                      remote repository. Defined below.
                     properties:
                       authStrategy:
-                        description: 'The type of authentication, which can be an
-                          authentication token stored in Amazon Web Services Secrets
-                          Manager, or a personal access token. Valid values are: PERSONAL_ACCESS_TOKEN
+                        description: 'Type of authentication, which can be an authentication
+                          token stored in Amazon Web Services Secrets Manager, or
+                          a personal access token. Valid values are: PERSONAL_ACCESS_TOKEN
                           and AWS_SECRETS_MANAGER.'
                         type: string
                       branch:
-                        description: A branch in the remote repository.
+                        description: Branch in the remote repository.
                         type: string
                       folder:
-                        description: A folder in the remote repository.
+                        description: Folder in the remote repository.
                         type: string
                       lastCommitId:
-                        description: The last commit ID for a commit in the remote
-                          repository.
+                        description: Last commit ID for a commit in the remote repository.
                         type: string
                       owner:
-                        description: The owner of the remote repository that contains
+                        description: Owner of the remote repository that contains
                           the job artifacts.
                         type: string
                       provider:
-                        description: 'The provider for the remote repository. Valid
-                          values are: GITHUB, GITLAB, BITBUCKET, and AWS_CODE_COMMIT.'
+                        description: 'Provider for the remote repository. Valid values
+                          are: GITHUB, GITLAB, BITBUCKET, and AWS_CODE_COMMIT.'
                         type: string
                       repository:
-                        description: The name of the remote repository that contains
-                          the job artifacts.
+                        description: Name of the remote repository that contains the
+                          job artifacts.
                         type: string
                     type: object
                   tags:
@@ -2158,22 +2152,21 @@ spec:
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                     x-kubernetes-map-type: granular
                   timeout:
-                    description: The job timeout in minutes. The default is 2880 minutes
+                    description: Job timeout in minutes. The default is 2880 minutes
                       (48 hours) for glueetl and pythonshell jobs, and 0 (unlimited)
-                      for gluestreaming jobs. Leave this attribute argumnet unconfigured
+                      for gluestreaming jobs. Leave this attribute argument unconfigured
                       for glueray jobs.
                     type: number
                   workerType:
-                    description: 'The type of predefined worker that is allocated
-                      when a job runs. Valid values: Standard, G.1X, G.2X, G.025X,
-                      G.4X, G.8X, G.12X, G.16X, R.1X, R.2X, R.4X, R.8X, Z.2X (Ray
-                      jobs). See the AWS documentation for details.'
+                    description: 'Type of predefined worker that is allocated when
+                      a job runs. Valid values: Standard, G.1X, G.2X, G.025X, G.4X,
+                      G.8X, G.12X, G.16X, R.1X, R.2X, R.4X, R.8X, Z.2X (Ray jobs).
+                      See the AWS documentation for details.'
                     type: string
                 type: object
               conditions:

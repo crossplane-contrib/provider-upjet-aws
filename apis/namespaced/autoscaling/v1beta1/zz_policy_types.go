@@ -976,7 +976,7 @@ type PolicyObservation struct {
 	// ARN assigned by AWS to the scaling policy.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// Name of the autoscaling group.
+	// Name of the Auto Scaling group.
 	AutoscalingGroupName *string `json:"autoscalingGroupName,omitempty" tf:"autoscaling_group_name,omitempty"`
 
 	// Amount of time, in seconds, after a scaling activity completes and before the next scaling activity can start.
@@ -1024,7 +1024,7 @@ type PolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	AdjustmentType *string `json:"adjustmentType,omitempty" tf:"adjustment_type,omitempty"`
 
-	// Name of the autoscaling group.
+	// Name of the Auto Scaling group.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/autoscaling/v1beta1.AutoscalingGroup
 	// +kubebuilder:validation:Optional
 	AutoscalingGroupName *string `json:"autoscalingGroupName,omitempty" tf:"autoscaling_group_name,omitempty"`

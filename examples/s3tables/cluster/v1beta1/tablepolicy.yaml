@@ -1,0 +1,95 @@
+# SPDX-FileCopyrightText: 2026 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: s3tables.aws.upbound.io/v1beta1
+kind: TablePolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s3tables/v1beta1/tablepolicy
+    upjet.upbound.io/manual-intervention: "The table ARN in the resourcePolicy should be changed manually since it is only known after the referenced Table is created."
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    nameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    namespaceSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    region: us-west-2
+    resourcePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Sid": "AllowAccountAccess",
+            "Effect": "Allow",
+            "Principal": {
+              "AWS": "arn:aws:iam::${data.aws_account_id}:root"
+            },
+            "Action": "s3tables:*",
+            "Resource": "<table arn>"
+          }
+        ]
+      }
+    tableBucketArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: s3tables.aws.upbound.io/v1beta1
+kind: Table
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s3tables/v1beta1/tablepolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    format: ICEBERG
+    name: example_table
+    namespaceSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    region: us-west-2
+    tableBucketArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: s3tables.aws.upbound.io/v1beta1
+kind: S3TablesNamespace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s3tables/v1beta1/tablepolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    namespace: example_namespace
+    region: us-west-2
+    tableBucketArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: s3tables.aws.upbound.io/v1beta1
+kind: TableBucket
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s3tables/v1beta1/tablepolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    name: example-${Rand.RFC1123Subdomain}
+    region: us-west-2

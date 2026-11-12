@@ -254,6 +254,7 @@ import (
 	pool "github.com/upbound/provider-aws/v2/internal/controller/cluster/cognitoidentity/pool"
 	poolrolesattachment "github.com/upbound/provider-aws/v2/internal/controller/cluster/cognitoidentity/poolrolesattachment"
 	identityprovider "github.com/upbound/provider-aws/v2/internal/controller/cluster/cognitoidp/identityprovider"
+	logdeliveryconfiguration "github.com/upbound/provider-aws/v2/internal/controller/cluster/cognitoidp/logdeliveryconfiguration"
 	resourceserver "github.com/upbound/provider-aws/v2/internal/controller/cluster/cognitoidp/resourceserver"
 	riskconfiguration "github.com/upbound/provider-aws/v2/internal/controller/cluster/cognitoidp/riskconfiguration"
 	usercognitoidp "github.com/upbound/provider-aws/v2/internal/controller/cluster/cognitoidp/user"
@@ -306,6 +307,8 @@ import (
 	projectdevicefarm "github.com/upbound/provider-aws/v2/internal/controller/cluster/devicefarm/project"
 	testgridproject "github.com/upbound/provider-aws/v2/internal/controller/cluster/devicefarm/testgridproject"
 	upload "github.com/upbound/provider-aws/v2/internal/controller/cluster/devicefarm/upload"
+	agentspace "github.com/upbound/provider-aws/v2/internal/controller/cluster/devopsagent/agentspace"
+	asset "github.com/upbound/provider-aws/v2/internal/controller/cluster/devopsagent/asset"
 	bgppeer "github.com/upbound/provider-aws/v2/internal/controller/cluster/directconnect/bgppeer"
 	connectiondirectconnect "github.com/upbound/provider-aws/v2/internal/controller/cluster/directconnect/connection"
 	connectionassociation "github.com/upbound/provider-aws/v2/internal/controller/cluster/directconnect/connectionassociation"
@@ -899,6 +902,13 @@ import (
 	filesystempolicys3files "github.com/upbound/provider-aws/v2/internal/controller/cluster/s3files/filesystempolicy"
 	mounttargets3files "github.com/upbound/provider-aws/v2/internal/controller/cluster/s3files/mounttarget"
 	synchronizationconfiguration "github.com/upbound/provider-aws/v2/internal/controller/cluster/s3files/synchronizationconfiguration"
+	s3tablesnamespace "github.com/upbound/provider-aws/v2/internal/controller/cluster/s3tables/s3tablesnamespace"
+	tables3tables "github.com/upbound/provider-aws/v2/internal/controller/cluster/s3tables/table"
+	tablebucket "github.com/upbound/provider-aws/v2/internal/controller/cluster/s3tables/tablebucket"
+	tablebucketpolicy "github.com/upbound/provider-aws/v2/internal/controller/cluster/s3tables/tablebucketpolicy"
+	tablebucketreplication "github.com/upbound/provider-aws/v2/internal/controller/cluster/s3tables/tablebucketreplication"
+	tablepolicy "github.com/upbound/provider-aws/v2/internal/controller/cluster/s3tables/tablepolicy"
+	tablereplication "github.com/upbound/provider-aws/v2/internal/controller/cluster/s3tables/tablereplication"
 	indexs3vectors "github.com/upbound/provider-aws/v2/internal/controller/cluster/s3vectors/index"
 	vectorbucket "github.com/upbound/provider-aws/v2/internal/controller/cluster/s3vectors/vectorbucket"
 	vectorbucketpolicy "github.com/upbound/provider-aws/v2/internal/controller/cluster/s3vectors/vectorbucketpolicy"
@@ -1333,6 +1343,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		pool.Setup,
 		poolrolesattachment.Setup,
 		identityprovider.Setup,
+		logdeliveryconfiguration.Setup,
 		resourceserver.Setup,
 		riskconfiguration.Setup,
 		usercognitoidp.Setup,
@@ -1385,6 +1396,8 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		projectdevicefarm.Setup,
 		testgridproject.Setup,
 		upload.Setup,
+		agentspace.Setup,
+		asset.Setup,
 		bgppeer.Setup,
 		connectiondirectconnect.Setup,
 		connectionassociation.Setup,
@@ -1978,6 +1991,13 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		filesystempolicys3files.Setup,
 		mounttargets3files.Setup,
 		synchronizationconfiguration.Setup,
+		s3tablesnamespace.Setup,
+		tables3tables.Setup,
+		tablebucket.Setup,
+		tablebucketpolicy.Setup,
+		tablebucketreplication.Setup,
+		tablepolicy.Setup,
+		tablereplication.Setup,
 		indexs3vectors.Setup,
 		vectorbucket.Setup,
 		vectorbucketpolicy.Setup,
@@ -2418,6 +2438,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		pool.SetupGated,
 		poolrolesattachment.SetupGated,
 		identityprovider.SetupGated,
+		logdeliveryconfiguration.SetupGated,
 		resourceserver.SetupGated,
 		riskconfiguration.SetupGated,
 		usercognitoidp.SetupGated,
@@ -2470,6 +2491,8 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		projectdevicefarm.SetupGated,
 		testgridproject.SetupGated,
 		upload.SetupGated,
+		agentspace.SetupGated,
+		asset.SetupGated,
 		bgppeer.SetupGated,
 		connectiondirectconnect.SetupGated,
 		connectionassociation.SetupGated,
@@ -3063,6 +3086,13 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		filesystempolicys3files.SetupGated,
 		mounttargets3files.SetupGated,
 		synchronizationconfiguration.SetupGated,
+		s3tablesnamespace.SetupGated,
+		tables3tables.SetupGated,
+		tablebucket.SetupGated,
+		tablebucketpolicy.SetupGated,
+		tablebucketreplication.SetupGated,
+		tablepolicy.SetupGated,
+		tablereplication.SetupGated,
 		indexs3vectors.SetupGated,
 		vectorbucket.SetupGated,
 		vectorbucketpolicy.SetupGated,
@@ -3502,6 +3532,7 @@ func SetupWebhookWithManager_monolith(mgr ctrl.Manager) error {
 		pool.SetupWebhookWithManager,
 		poolrolesattachment.SetupWebhookWithManager,
 		identityprovider.SetupWebhookWithManager,
+		logdeliveryconfiguration.SetupWebhookWithManager,
 		resourceserver.SetupWebhookWithManager,
 		riskconfiguration.SetupWebhookWithManager,
 		usercognitoidp.SetupWebhookWithManager,
@@ -3554,6 +3585,8 @@ func SetupWebhookWithManager_monolith(mgr ctrl.Manager) error {
 		projectdevicefarm.SetupWebhookWithManager,
 		testgridproject.SetupWebhookWithManager,
 		upload.SetupWebhookWithManager,
+		agentspace.SetupWebhookWithManager,
+		asset.SetupWebhookWithManager,
 		bgppeer.SetupWebhookWithManager,
 		connectiondirectconnect.SetupWebhookWithManager,
 		connectionassociation.SetupWebhookWithManager,
@@ -4147,6 +4180,13 @@ func SetupWebhookWithManager_monolith(mgr ctrl.Manager) error {
 		filesystempolicys3files.SetupWebhookWithManager,
 		mounttargets3files.SetupWebhookWithManager,
 		synchronizationconfiguration.SetupWebhookWithManager,
+		s3tablesnamespace.SetupWebhookWithManager,
+		tables3tables.SetupWebhookWithManager,
+		tablebucket.SetupWebhookWithManager,
+		tablebucketpolicy.SetupWebhookWithManager,
+		tablebucketreplication.SetupWebhookWithManager,
+		tablepolicy.SetupWebhookWithManager,
+		tablereplication.SetupWebhookWithManager,
 		indexs3vectors.SetupWebhookWithManager,
 		vectorbucket.SetupWebhookWithManager,
 		vectorbucketpolicy.SetupWebhookWithManager,

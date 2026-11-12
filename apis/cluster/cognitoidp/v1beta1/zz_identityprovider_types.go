@@ -32,7 +32,7 @@ type IdentityProviderInitParameters struct {
 	// The provider type.  See AWS API for valid values
 	ProviderType *string `json:"providerType,omitempty" tf:"provider_type,omitempty"`
 
-	// The user pool id
+	// The user pool ID
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/cognitoidp/v1beta2.UserPool
 	UserPoolID *string `json:"userPoolId,omitempty" tf:"user_pool_id,omitempty"`
 
@@ -70,7 +70,7 @@ type IdentityProviderObservation struct {
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The user pool id
+	// The user pool ID
 	UserPoolID *string `json:"userPoolId,omitempty" tf:"user_pool_id,omitempty"`
 }
 
@@ -103,7 +103,7 @@ type IdentityProviderParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// The user pool id
+	// The user pool ID
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/cognitoidp/v1beta2.UserPool
 	// +kubebuilder:validation:Optional
 	UserPoolID *string `json:"userPoolId,omitempty" tf:"user_pool_id,omitempty"`

@@ -65,7 +65,7 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   vpcId:
-                    description: The ID of the VPC.
+                    description: ID of the VPC.
                     type: string
                   vpcIdRef:
                     description: Reference to a VPC in ec2 to populate vpcId.
@@ -148,7 +148,7 @@ spec:
                         type: object
                     type: object
                   vpnGatewayId:
-                    description: The ID of the Virtual Private Gateway.
+                    description: ID of the Virtual Private Gateway.
                     type: string
                   vpnGatewayIdRef:
                     description: Reference to a VPNGateway in ec2 to populate vpnGatewayId.
@@ -247,7 +247,7 @@ spec:
                   autoscaler.
                 properties:
                   vpcId:
-                    description: The ID of the VPC.
+                    description: ID of the VPC.
                     type: string
                   vpcIdRef:
                     description: Reference to a VPC in ec2 to populate vpcId.
@@ -330,7 +330,7 @@ spec:
                         type: object
                     type: object
                   vpnGatewayId:
-                    description: The ID of the Virtual Private Gateway.
+                    description: ID of the Virtual Private Gateway.
                     type: string
                   vpnGatewayIdRef:
                     description: Reference to a VPNGateway in ec2 to populate vpnGatewayId.
@@ -485,10 +485,10 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   vpcId:
-                    description: The ID of the VPC.
+                    description: ID of the VPC.
                     type: string
                   vpnGatewayId:
-                    description: The ID of the Virtual Private Gateway.
+                    description: ID of the Virtual Private Gateway.
                     type: string
                 type: object
               conditions:

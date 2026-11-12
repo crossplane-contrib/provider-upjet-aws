@@ -74,19 +74,18 @@ spec:
               forProvider:
                 properties:
                   deviceName:
-                    description: |-
-                      The device name to expose to the instance (for
-                      example, /dev/sdh or xvdh).  See Device Naming on Linux Instances and Device Naming on Windows Instances for more information.
+                    description: Device name to expose to the instance (for example,
+                      /dev/sdh or xvdh). See Device Naming on Linux Instances and
+                      Device Naming on Windows Instances for more information.
                     type: string
                   forceDetach:
-                    description: |-
-                      Set to true if you want to force the
-                      volume to detach. Useful if previous attempts failed, but use this option only
-                      as a last resort, as this can result in data loss. See
-                      Detaching an Amazon EBS Volume from an Instance for more information.
+                    description: Whether to force the volume to detach. Useful if
+                      previous attempts failed, but use this option only as a last
+                      resort, as this can result in data loss. See Detaching an Amazon
+                      EBS Volume from an Instance for more information.
                     type: boolean
                   instanceId:
-                    description: ID of the Instance to attach to
+                    description: ID of the Instance to attach to.
                     type: string
                   instanceIdRef:
                     description: Reference to a Instance in ec2 to populate instanceId.
@@ -168,18 +167,16 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   skipDestroy:
-                    description: |-
-                      This is
-                      useful when destroying an instance which has volumes created by some other
-                      means attached.
+                    description: This is useful when destroying an instance which
+                      has volumes created by some other means attached.
                     type: boolean
                   stopInstanceBeforeDetaching:
-                    description: |-
-                      Set this to true to ensure that the target instance is stopped
-                      before trying to detach the volume. Stops the instance, if it is not already stopped.
+                    description: Whether to ensure that the target instance is stopped
+                      before trying to detach the volume. Stops the instance, if it
+                      is not already stopped.
                     type: boolean
                   volumeId:
-                    description: ID of the Volume to be attached
+                    description: ID of the Volume to be attached.
                     type: string
                   volumeIdRef:
                     description: Reference to a EBSVolume in ec2 to populate volumeId.
@@ -272,19 +269,18 @@ spec:
                   autoscaler.
                 properties:
                   deviceName:
-                    description: |-
-                      The device name to expose to the instance (for
-                      example, /dev/sdh or xvdh).  See Device Naming on Linux Instances and Device Naming on Windows Instances for more information.
+                    description: Device name to expose to the instance (for example,
+                      /dev/sdh or xvdh). See Device Naming on Linux Instances and
+                      Device Naming on Windows Instances for more information.
                     type: string
                   forceDetach:
-                    description: |-
-                      Set to true if you want to force the
-                      volume to detach. Useful if previous attempts failed, but use this option only
-                      as a last resort, as this can result in data loss. See
-                      Detaching an Amazon EBS Volume from an Instance for more information.
+                    description: Whether to force the volume to detach. Useful if
+                      previous attempts failed, but use this option only as a last
+                      resort, as this can result in data loss. See Detaching an Amazon
+                      EBS Volume from an Instance for more information.
                     type: boolean
                   instanceId:
-                    description: ID of the Instance to attach to
+                    description: ID of the Instance to attach to.
                     type: string
                   instanceIdRef:
                     description: Reference to a Instance in ec2 to populate instanceId.
@@ -361,18 +357,16 @@ spec:
                         type: object
                     type: object
                   skipDestroy:
-                    description: |-
-                      This is
-                      useful when destroying an instance which has volumes created by some other
-                      means attached.
+                    description: This is useful when destroying an instance which
+                      has volumes created by some other means attached.
                     type: boolean
                   stopInstanceBeforeDetaching:
-                    description: |-
-                      Set this to true to ensure that the target instance is stopped
-                      before trying to detach the volume. Stops the instance, if it is not already stopped.
+                    description: Whether to ensure that the target instance is stopped
+                      before trying to detach the volume. Stops the instance, if it
+                      is not already stopped.
                     type: boolean
                   volumeId:
-                    description: ID of the Volume to be attached
+                    description: ID of the Volume to be attached.
                     type: string
                   volumeIdRef:
                     description: Reference to a EBSVolume in ec2 to populate volumeId.
@@ -546,21 +540,20 @@ spec:
               atProvider:
                 properties:
                   deviceName:
-                    description: |-
-                      The device name to expose to the instance (for
-                      example, /dev/sdh or xvdh).  See Device Naming on Linux Instances and Device Naming on Windows Instances for more information.
+                    description: Device name to expose to the instance (for example,
+                      /dev/sdh or xvdh). See Device Naming on Linux Instances and
+                      Device Naming on Windows Instances for more information.
                     type: string
                   forceDetach:
-                    description: |-
-                      Set to true if you want to force the
-                      volume to detach. Useful if previous attempts failed, but use this option only
-                      as a last resort, as this can result in data loss. See
-                      Detaching an Amazon EBS Volume from an Instance for more information.
+                    description: Whether to force the volume to detach. Useful if
+                      previous attempts failed, but use this option only as a last
+                      resort, as this can result in data loss. See Detaching an Amazon
+                      EBS Volume from an Instance for more information.
                     type: boolean
                   id:
                     type: string
                   instanceId:
-                    description: ID of the Instance to attach to
+                    description: ID of the Instance to attach to.
                     type: string
                   region:
                     description: |-
@@ -568,18 +561,16 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   skipDestroy:
-                    description: |-
-                      This is
-                      useful when destroying an instance which has volumes created by some other
-                      means attached.
+                    description: This is useful when destroying an instance which
+                      has volumes created by some other means attached.
                     type: boolean
                   stopInstanceBeforeDetaching:
-                    description: |-
-                      Set this to true to ensure that the target instance is stopped
-                      before trying to detach the volume. Stops the instance, if it is not already stopped.
+                    description: Whether to ensure that the target instance is stopped
+                      before trying to detach the volume. Stops the instance, if it
+                      is not already stopped.
                     type: boolean
                   volumeId:
-                    description: ID of the Volume to be attached
+                    description: ID of the Volume to be attached.
                     type: string
                 type: object
               conditions:

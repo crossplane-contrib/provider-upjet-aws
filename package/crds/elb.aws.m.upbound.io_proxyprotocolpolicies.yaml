@@ -61,17 +61,15 @@ spec:
               forProvider:
                 properties:
                   instancePorts:
-                    description: |-
-                      List of instance ports to which the policy
-                      should be applied. This can be specified if the protocol is SSL or TCP.
+                    description: List of instance ports to which the policy should
+                      be applied. This can be specified if the protocol is SSL or
+                      TCP.
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
                   loadBalancer:
-                    description: |-
-                      The load balancer to which the policy
-                      should be attached.
+                    description: Load balancer to which the policy should be attached.
                     type: string
                   loadBalancerRef:
                     description: Reference to a ELB in elb to populate loadBalancer.
@@ -175,17 +173,15 @@ spec:
                   autoscaler.
                 properties:
                   instancePorts:
-                    description: |-
-                      List of instance ports to which the policy
-                      should be applied. This can be specified if the protocol is SSL or TCP.
+                    description: List of instance ports to which the policy should
+                      be applied. This can be specified if the protocol is SSL or
+                      TCP.
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
                   loadBalancer:
-                    description: |-
-                      The load balancer to which the policy
-                      should be attached.
+                    description: Load balancer to which the policy should be attached.
                     type: string
                   loadBalancerRef:
                     description: Reference to a ELB in elb to populate loadBalancer.
@@ -337,20 +333,18 @@ spec:
               atProvider:
                 properties:
                   id:
-                    description: The ID of the policy.
+                    description: ID of the policy.
                     type: string
                   instancePorts:
-                    description: |-
-                      List of instance ports to which the policy
-                      should be applied. This can be specified if the protocol is SSL or TCP.
+                    description: List of instance ports to which the policy should
+                      be applied. This can be specified if the protocol is SSL or
+                      TCP.
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
                   loadBalancer:
-                    description: |-
-                      The load balancer to which the policy
-                      should be attached.
+                    description: Load balancer to which the policy should be attached.
                     type: string
                   region:
                     description: |-

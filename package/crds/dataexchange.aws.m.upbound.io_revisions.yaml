@@ -63,7 +63,7 @@ spec:
                     description: An optional comment about the revision.
                     type: string
                   dataSetId:
-                    description: The dataset id.
+                    description: The dataset ID.
                     type: string
                   dataSetIdRef:
                     description: Reference to a DataSet in dataexchange to populate
@@ -178,7 +178,7 @@ spec:
                     description: An optional comment about the revision.
                     type: string
                   dataSetId:
-                    description: The dataset id.
+                    description: The dataset ID.
                     type: string
                   dataSetIdRef:
                     description: Reference to a DataSet in dataexchange to populate
@@ -339,10 +339,10 @@ spec:
                     description: An optional comment about the revision.
                     type: string
                   dataSetId:
-                    description: The dataset id.
+                    description: The dataset ID.
                     type: string
                   id:
-                    description: The Id of the data set.
+                    description: The ID of the data set.
                     type: string
                   region:
                     description: |-
@@ -350,7 +350,7 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   revisionId:
-                    description: The Id of the revision.
+                    description: The ID of the revision.
                     type: string
                   tags:
                     additionalProperties:

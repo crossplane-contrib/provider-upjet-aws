@@ -21,7 +21,7 @@ type LBTrustStoreInitParameters struct {
 	// S3 object key holding the client certificate CA bundle.
 	CACertificatesBundleS3Key *string `json:"caCertificatesBundleS3Key,omitempty" tf:"ca_certificates_bundle_s3_key,omitempty"`
 
-	// Version Id of CA bundle S3 bucket object, if versioned, defaults to latest if omitted.
+	// Version ID of CA bundle S3 bucket object, if versioned, defaults to latest if omitted.
 	CACertificatesBundleS3ObjectVersion *string `json:"caCertificatesBundleS3ObjectVersion,omitempty" tf:"ca_certificates_bundle_s3_object_version,omitempty"`
 
 	// Name of the Trust Store. This name must be unique per region per account, can have a maximum of 32 characters, must contain only alphanumeric characters or hyphens, and must not begin or end with a hyphen.
@@ -46,7 +46,7 @@ type LBTrustStoreObservation struct {
 	// S3 object key holding the client certificate CA bundle.
 	CACertificatesBundleS3Key *string `json:"caCertificatesBundleS3Key,omitempty" tf:"ca_certificates_bundle_s3_key,omitempty"`
 
-	// Version Id of CA bundle S3 bucket object, if versioned, defaults to latest if omitted.
+	// Version ID of CA bundle S3 bucket object, if versioned, defaults to latest if omitted.
 	CACertificatesBundleS3ObjectVersion *string `json:"caCertificatesBundleS3ObjectVersion,omitempty" tf:"ca_certificates_bundle_s3_object_version,omitempty"`
 
 	// ARN of the Trust Store (matches arn).
@@ -78,7 +78,7 @@ type LBTrustStoreParameters struct {
 	// +kubebuilder:validation:Optional
 	CACertificatesBundleS3Key *string `json:"caCertificatesBundleS3Key,omitempty" tf:"ca_certificates_bundle_s3_key,omitempty"`
 
-	// Version Id of CA bundle S3 bucket object, if versioned, defaults to latest if omitted.
+	// Version ID of CA bundle S3 bucket object, if versioned, defaults to latest if omitted.
 	// +kubebuilder:validation:Optional
 	CACertificatesBundleS3ObjectVersion *string `json:"caCertificatesBundleS3ObjectVersion,omitempty" tf:"ca_certificates_bundle_s3_object_version,omitempty"`
 

@@ -60,7 +60,7 @@ spec:
               forProvider:
                 properties:
                   backupVaultEvents:
-                    description: An array of events that indicate the status of jobs
+                    description: Array of events that indicate the status of jobs
                       to back up resources to the backup vault.
                     items:
                       type: string
@@ -255,7 +255,7 @@ spec:
                   autoscaler.
                 properties:
                   backupVaultEvents:
-                    description: An array of events that indicate the status of jobs
+                    description: Array of events that indicate the status of jobs
                       to back up resources to the backup vault.
                     items:
                       type: string
@@ -498,10 +498,10 @@ spec:
               atProvider:
                 properties:
                   backupVaultArn:
-                    description: The ARN of the vault.
+                    description: ARN of the vault.
                     type: string
                   backupVaultEvents:
-                    description: An array of events that indicate the status of jobs
+                    description: Array of events that indicate the status of jobs
                       to back up resources to the backup vault.
                     items:
                       type: string
@@ -511,7 +511,7 @@ spec:
                     description: Name of the backup vault to add notifications for.
                     type: string
                   id:
-                    description: The name of the vault.
+                    description: Name of the vault.
                     type: string
                   region:
                     description: |-

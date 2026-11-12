@@ -27,7 +27,7 @@ type UserInitParameters struct {
 	// Identity type that your Amazon QuickSight account uses to manage the identity of users. Valid values: IAM, QUICKSIGHT, IAM_IDENTITY_CENTER.
 	IdentityType *string `json:"identityType,omitempty" tf:"identity_type,omitempty"`
 
-	// The Amazon Quicksight namespace to create the user in. Defaults to default.
+	// Amazon QuickSight namespace to create the user in. Defaults to default.
 	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
 
 	// Name of the IAM session to use when assuming roles that can embed QuickSight dashboards. Only valid for registering users using an assumed IAM role. Additionally, if registering multiple users using the same IAM role, each user needs to have a unique session name.
@@ -60,7 +60,7 @@ type UserObservation struct {
 	// Identity type that your Amazon QuickSight account uses to manage the identity of users. Valid values: IAM, QUICKSIGHT, IAM_IDENTITY_CENTER.
 	IdentityType *string `json:"identityType,omitempty" tf:"identity_type,omitempty"`
 
-	// The Amazon Quicksight namespace to create the user in. Defaults to default.
+	// Amazon QuickSight namespace to create the user in. Defaults to default.
 	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -98,7 +98,7 @@ type UserParameters struct {
 	// +kubebuilder:validation:Optional
 	IdentityType *string `json:"identityType,omitempty" tf:"identity_type,omitempty"`
 
-	// The Amazon Quicksight namespace to create the user in. Defaults to default.
+	// Amazon QuickSight namespace to create the user in. Defaults to default.
 	// +kubebuilder:validation:Optional
 	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
 

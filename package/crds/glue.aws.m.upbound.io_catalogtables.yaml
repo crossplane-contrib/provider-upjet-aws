@@ -1607,7 +1607,7 @@ spec:
                           description: Name of the partition index.
                           type: string
                         indexStatus:
-                          description: Status of the partition index.
+                          description: (Read-Only) Status of the partition index.
                           type: string
                         keys:
                           description: Keys for the partition index.

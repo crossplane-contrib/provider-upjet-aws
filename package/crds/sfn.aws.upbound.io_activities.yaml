@@ -76,7 +76,7 @@ spec:
                   encryptionConfiguration:
                     description: Defines what encryption configuration is used to
                       encrypt data in the Activity. For more information see the section
-                      Data at rest encyption in the AWS Step Functions User Guide.
+                      Data at rest encryption in the AWS Step Functions User Guide.
                     properties:
                       kmsDataKeyReusePeriodSeconds:
                         description: Maximum duration for which Activities will reuse
@@ -200,7 +200,7 @@ spec:
                   encryptionConfiguration:
                     description: Defines what encryption configuration is used to
                       encrypt data in the Activity. For more information see the section
-                      Data at rest encyption in the AWS Step Functions User Guide.
+                      Data at rest encryption in the AWS Step Functions User Guide.
                     properties:
                       kmsDataKeyReusePeriodSeconds:
                         description: Maximum duration for which Activities will reuse
@@ -401,7 +401,7 @@ spec:
                   encryptionConfiguration:
                     description: Defines what encryption configuration is used to
                       encrypt data in the Activity. For more information see the section
-                      Data at rest encyption in the AWS Step Functions User Guide.
+                      Data at rest encryption in the AWS Step Functions User Guide.
                     properties:
                       kmsDataKeyReusePeriodSeconds:
                         description: Maximum duration for which Activities will reuse

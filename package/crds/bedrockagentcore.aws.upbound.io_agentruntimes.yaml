@@ -74,7 +74,8 @@ spec:
               forProvider:
                 properties:
                   agentRuntimeArtifact:
-                    description: Container artifact configuration. See agent_runtime_artifact
+                    description: Artifact configuration for the agent runtime, either
+                      a container image or code stored in Amazon S3. See agent_runtime_artifact
                       below.
                     properties:
                       codeConfiguration:
@@ -119,7 +120,7 @@ spec:
                           runtime:
                             description: 'Runtime environment used to execute the
                               code. Valid values: PYTHON_3_10, PYTHON_3_11, PYTHON_3_12,
-                              PYTHON_3_13.'
+                              PYTHON_3_13, PYTHON_3_14, NODE_22.'
                             type: string
                         type: object
                       containerConfiguration:
@@ -604,6 +605,17 @@ spec:
                             x-kubernetes-list-type: set
                         type: object
                     type: object
+                  platformVersion:
+                    description: 'Platform version that controls how the agent runtime
+                      starts your agent. Valid values: V1, V2. When omitted, a new
+                      agent runtime uses V1 and an existing agent runtime keeps its
+                      current platform version. V2 restores each instance from a prepared
+                      snapshot, which keeps cold starts consistent regardless of image
+                      size. On V2, creates and updates take minutes rather than seconds,
+                      environment_variables has a smaller total size limit, and availability
+                      is limited to a subset of Regions. See Platform versions for
+                      details.'
+                    type: string
                   protocolConfiguration:
                     description: Protocol configuration for the agent runtime. See
                       protocol_configuration below.
@@ -624,7 +636,7 @@ spec:
                       below.
                     properties:
                       requestHeaderAllowlist:
-                        description: A list of HTTP request headers that are allowed
+                        description: List of HTTP request headers that are allowed
                           to be passed through to the runtime.
                         items:
                           type: string
@@ -732,7 +744,8 @@ spec:
                   autoscaler.
                 properties:
                   agentRuntimeArtifact:
-                    description: Container artifact configuration. See agent_runtime_artifact
+                    description: Artifact configuration for the agent runtime, either
+                      a container image or code stored in Amazon S3. See agent_runtime_artifact
                       below.
                     properties:
                       codeConfiguration:
@@ -777,7 +790,7 @@ spec:
                           runtime:
                             description: 'Runtime environment used to execute the
                               code. Valid values: PYTHON_3_10, PYTHON_3_11, PYTHON_3_12,
-                              PYTHON_3_13.'
+                              PYTHON_3_13, PYTHON_3_14, NODE_22.'
                             type: string
                         type: object
                       containerConfiguration:
@@ -1262,6 +1275,17 @@ spec:
                             x-kubernetes-list-type: set
                         type: object
                     type: object
+                  platformVersion:
+                    description: 'Platform version that controls how the agent runtime
+                      starts your agent. Valid values: V1, V2. When omitted, a new
+                      agent runtime uses V1 and an existing agent runtime keeps its
+                      current platform version. V2 restores each instance from a prepared
+                      snapshot, which keeps cold starts consistent regardless of image
+                      size. On V2, creates and updates take minutes rather than seconds,
+                      environment_variables has a smaller total size limit, and availability
+                      is limited to a subset of Regions. See Platform versions for
+                      details.'
+                    type: string
                   protocolConfiguration:
                     description: Protocol configuration for the agent runtime. See
                       protocol_configuration below.
@@ -1277,7 +1301,7 @@ spec:
                       below.
                     properties:
                       requestHeaderAllowlist:
-                        description: A list of HTTP request headers that are allowed
+                        description: List of HTTP request headers that are allowed
                           to be passed through to the runtime.
                         items:
                           type: string
@@ -1469,7 +1493,8 @@ spec:
                     description: ARN of the Agent Runtime.
                     type: string
                   agentRuntimeArtifact:
-                    description: Container artifact configuration. See agent_runtime_artifact
+                    description: Artifact configuration for the agent runtime, either
+                      a container image or code stored in Amazon S3. See agent_runtime_artifact
                       below.
                     properties:
                       codeConfiguration:
@@ -1514,7 +1539,7 @@ spec:
                           runtime:
                             description: 'Runtime environment used to execute the
                               code. Valid values: PYTHON_3_10, PYTHON_3_11, PYTHON_3_12,
-                              PYTHON_3_13.'
+                              PYTHON_3_13, PYTHON_3_14, NODE_22.'
                             type: string
                         type: object
                       containerConfiguration:
@@ -1842,13 +1867,11 @@ spec:
                           below.
                         properties:
                           requireServiceS3Endpoint:
-                            description: '(Read-only) Whether a service-managed Amazon
-                              S3 gateway endpoint is provisioned in the VPC for the
-                              agent runtime. This value is managed by the service
-                              and cannot be set: it is rejected on both create and
-                              update. Agent runtimes created on or after the May 5,
-                              2026 rollout do not include a service-managed Amazon
-                              S3 gateway.'
+                            description: Whether a service-managed Amazon S3 gateway
+                              endpoint is provisioned in the VPC for the agent runtime.
+                              This value is managed by the service. Agent runtimes
+                              created on or after the May 5, 2026 rollout do not include
+                              a service-managed Amazon S3 gateway.
                             type: boolean
                           securityGroups:
                             description: Security groups associated with the VPC configuration.
@@ -1864,6 +1887,17 @@ spec:
                             x-kubernetes-list-type: set
                         type: object
                     type: object
+                  platformVersion:
+                    description: 'Platform version that controls how the agent runtime
+                      starts your agent. Valid values: V1, V2. When omitted, a new
+                      agent runtime uses V1 and an existing agent runtime keeps its
+                      current platform version. V2 restores each instance from a prepared
+                      snapshot, which keeps cold starts consistent regardless of image
+                      size. On V2, creates and updates take minutes rather than seconds,
+                      environment_variables has a smaller total size limit, and availability
+                      is limited to a subset of Regions. See Platform versions for
+                      details.'
+                    type: string
                   protocolConfiguration:
                     description: Protocol configuration for the agent runtime. See
                       protocol_configuration below.
@@ -1884,7 +1918,7 @@ spec:
                       below.
                     properties:
                       requestHeaderAllowlist:
-                        description: A list of HTTP request headers that are allowed
+                        description: List of HTTP request headers that are allowed
                           to be passed through to the runtime.
                         items:
                           type: string
@@ -1904,9 +1938,8 @@ spec:
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                     x-kubernetes-map-type: granular
                   workloadIdentityDetails:

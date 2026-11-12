@@ -18,13 +18,13 @@ type GroupInitParameters struct {
 	// AWS account ID.
 	AwsAccountID *string `json:"awsAccountId,omitempty" tf:"aws_account_id,omitempty"`
 
-	// A description for the group.
+	// Description for the group.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// A name for the group.
+	// Name for the group.
 	GroupName *string `json:"groupName,omitempty" tf:"group_name,omitempty"`
 
-	// The namespace. Currently, you should set this to default.
+	// Namespace. Currently, you should set this to default.
 	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
 }
 
@@ -36,15 +36,15 @@ type GroupObservation struct {
 	// AWS account ID.
 	AwsAccountID *string `json:"awsAccountId,omitempty" tf:"aws_account_id,omitempty"`
 
-	// A description for the group.
+	// Description for the group.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// A name for the group.
+	// Name for the group.
 	GroupName *string `json:"groupName,omitempty" tf:"group_name,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The namespace. Currently, you should set this to default.
+	// Namespace. Currently, you should set this to default.
 	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -58,15 +58,15 @@ type GroupParameters struct {
 	// +kubebuilder:validation:Optional
 	AwsAccountID *string `json:"awsAccountId,omitempty" tf:"aws_account_id,omitempty"`
 
-	// A description for the group.
+	// Description for the group.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// A name for the group.
+	// Name for the group.
 	// +kubebuilder:validation:Optional
 	GroupName *string `json:"groupName,omitempty" tf:"group_name,omitempty"`
 
-	// The namespace. Currently, you should set this to default.
+	// Namespace. Currently, you should set this to default.
 	// +kubebuilder:validation:Optional
 	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
 

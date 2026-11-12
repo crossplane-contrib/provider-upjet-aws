@@ -15,29 +15,29 @@ import (
 
 type LoggingConfigurationInitParameters struct {
 
-	// The ARN of the CloudWatch log group to which the vended log data will be published. This log group must exist. The ARN must end with :*
+	// ARN of the CloudWatch log group to which the vended log data will be published. This log group must exist. The ARN must end with :*
 	LogGroupArn *string `json:"logGroupArn,omitempty" tf:"log_group_arn,omitempty"`
 }
 
 type LoggingConfigurationObservation struct {
 
-	// The ARN of the CloudWatch log group to which the vended log data will be published. This log group must exist. The ARN must end with :*
+	// ARN of the CloudWatch log group to which the vended log data will be published. This log group must exist. The ARN must end with :*
 	LogGroupArn *string `json:"logGroupArn,omitempty" tf:"log_group_arn,omitempty"`
 }
 
 type LoggingConfigurationParameters struct {
 
-	// The ARN of the CloudWatch log group to which the vended log data will be published. This log group must exist. The ARN must end with :*
+	// ARN of the CloudWatch log group to which the vended log data will be published. This log group must exist. The ARN must end with :*
 	// +kubebuilder:validation:Optional
 	LogGroupArn *string `json:"logGroupArn" tf:"log_group_arn,omitempty"`
 }
 
 type WorkspaceInitParameters struct {
 
-	// The alias of the prometheus workspace. See more in AWS Docs.
+	// Alias of the prometheus workspace. See more in AWS Docs.
 	Alias *string `json:"alias,omitempty" tf:"alias,omitempty"`
 
-	// The ARN for the KMS encryption key. If this argument is not provided, then the AWS owned encryption key will be used to encrypt the data in the workspace. See more in AWS Docs
+	// ARN for the KMS encryption key. If this argument is not provided, then the AWS owned encryption key will be used to encrypt the data in the workspace. See more in AWS Docs
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kms/v1beta1.Key
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 
@@ -49,7 +49,7 @@ type WorkspaceInitParameters struct {
 	// +kubebuilder:validation:Optional
 	KMSKeyArnSelector *v2.NamespacedSelector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
 
-	// Logging configuration for the workspace. See Logging Configuration below for details.
+	// Logging configuration for the workspace. See logging_configuration Block below for details.
 	LoggingConfiguration *LoggingConfigurationInitParameters `json:"loggingConfiguration,omitempty" tf:"logging_configuration,omitempty"`
 
 	// Key-value map of resource tags.
@@ -59,7 +59,7 @@ type WorkspaceInitParameters struct {
 
 type WorkspaceObservation struct {
 
-	// The alias of the prometheus workspace. See more in AWS Docs.
+	// Alias of the prometheus workspace. See more in AWS Docs.
 	Alias *string `json:"alias,omitempty" tf:"alias,omitempty"`
 
 	// ARN of the workspace.
@@ -68,10 +68,10 @@ type WorkspaceObservation struct {
 	// Identifier of the workspace
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The ARN for the KMS encryption key. If this argument is not provided, then the AWS owned encryption key will be used to encrypt the data in the workspace. See more in AWS Docs
+	// ARN for the KMS encryption key. If this argument is not provided, then the AWS owned encryption key will be used to encrypt the data in the workspace. See more in AWS Docs
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 
-	// Logging configuration for the workspace. See Logging Configuration below for details.
+	// Logging configuration for the workspace. See logging_configuration Block below for details.
 	LoggingConfiguration *LoggingConfigurationObservation `json:"loggingConfiguration,omitempty" tf:"logging_configuration,omitempty"`
 
 	// Prometheus endpoint available for this workspace.
@@ -85,18 +85,18 @@ type WorkspaceObservation struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type WorkspaceParameters struct {
 
-	// The alias of the prometheus workspace. See more in AWS Docs.
+	// Alias of the prometheus workspace. See more in AWS Docs.
 	// +kubebuilder:validation:Optional
 	Alias *string `json:"alias,omitempty" tf:"alias,omitempty"`
 
-	// The ARN for the KMS encryption key. If this argument is not provided, then the AWS owned encryption key will be used to encrypt the data in the workspace. See more in AWS Docs
+	// ARN for the KMS encryption key. If this argument is not provided, then the AWS owned encryption key will be used to encrypt the data in the workspace. See more in AWS Docs
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kms/v1beta1.Key
 	// +kubebuilder:validation:Optional
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
@@ -109,7 +109,7 @@ type WorkspaceParameters struct {
 	// +kubebuilder:validation:Optional
 	KMSKeyArnSelector *v2.NamespacedSelector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
 
-	// Logging configuration for the workspace. See Logging Configuration below for details.
+	// Logging configuration for the workspace. See logging_configuration Block below for details.
 	// +kubebuilder:validation:Optional
 	LoggingConfiguration *LoggingConfigurationParameters `json:"loggingConfiguration,omitempty" tf:"logging_configuration,omitempty"`
 

@@ -757,7 +757,7 @@ spec:
                       for fqdn will be passed in the Host header.
                     type: string
                   id:
-                    description: The id of the health check
+                    description: The ID of the health check
                     type: string
                   insufficientDataHealthStatus:
                     description: The status of the health check when CloudWatch has

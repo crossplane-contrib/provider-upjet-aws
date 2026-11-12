@@ -44,7 +44,7 @@ type VPCEndpointRouteTableAssociationInitParameters struct {
 
 type VPCEndpointRouteTableAssociationObservation struct {
 
-	// A hash of the EC2 Route Table and VPC Endpoint identifiers.
+	// Hash of the EC2 Route Table and VPC Endpoint identifiers.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.

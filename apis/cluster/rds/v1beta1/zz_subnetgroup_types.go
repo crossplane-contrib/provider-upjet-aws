@@ -40,7 +40,7 @@ type SubnetGroupInitParameters struct {
 
 type SubnetGroupObservation struct {
 
-	// ARN of the db subnet group.
+	// ARN of the DB subnet group.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Description of the DB subnet group.
@@ -57,7 +57,7 @@ type SubnetGroupObservation struct {
 	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
-	// Network type of the db subnet group.
+	// Network type of the DB subnet group.
 	// +listType=set
 	SupportedNetworkTypes []*string `json:"supportedNetworkTypes,omitempty" tf:"supported_network_types,omitempty"`
 

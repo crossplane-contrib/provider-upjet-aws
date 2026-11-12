@@ -60,7 +60,7 @@ spec:
               forProvider:
                 properties:
                   groupNames:
-                    description: List of AutoScaling Group Names
+                    description: List of Auto Scaling group Names
                     items:
                       type: string
                     type: array
@@ -263,7 +263,7 @@ spec:
                   autoscaler.
                 properties:
                   groupNames:
-                    description: List of AutoScaling Group Names
+                    description: List of Auto Scaling group Names
                     items:
                       type: string
                     type: array
@@ -514,7 +514,7 @@ spec:
               atProvider:
                 properties:
                   groupNames:
-                    description: List of AutoScaling Group Names
+                    description: List of Auto Scaling group Names
                     items:
                       type: string
                     type: array

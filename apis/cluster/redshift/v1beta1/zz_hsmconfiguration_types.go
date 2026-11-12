@@ -37,7 +37,7 @@ type HSMConfigurationInitParameters struct {
 
 type HSMConfigurationObservation struct {
 
-	// ARN of the Hsm Client Certificate.
+	// ARN of the HSM Client Certificate.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// A text description of the HSM configuration to be created.

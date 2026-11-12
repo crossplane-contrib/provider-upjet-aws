@@ -1065,7 +1065,7 @@ spec:
                       ttlDuration:
                         description: Time to live duration, where the record is hard
                           deleted after the expiration time is reached; ExpiresAt
-                          = EventTime + TtlDuration.. See TTl Duration Below.
+                          = EventTime + TtlDuration.. See TTL Duration Below.
                         properties:
                           unit:
                             description: TtlDuration time unit. Valid values are Seconds,
@@ -1295,7 +1295,7 @@ spec:
                       ttlDuration:
                         description: Time to live duration, where the record is hard
                           deleted after the expiration time is reached; ExpiresAt
-                          = EventTime + TtlDuration.. See TTl Duration Below.
+                          = EventTime + TtlDuration.. See TTL Duration Below.
                         properties:
                           unit:
                             description: TtlDuration time unit. Valid values are Seconds,
@@ -1615,7 +1615,7 @@ spec:
                       ttlDuration:
                         description: Time to live duration, where the record is hard
                           deleted after the expiration time is reached; ExpiresAt
-                          = EventTime + TtlDuration.. See TTl Duration Below.
+                          = EventTime + TtlDuration.. See TTL Duration Below.
                         properties:
                           unit:
                             description: TtlDuration time unit. Valid values are Seconds,

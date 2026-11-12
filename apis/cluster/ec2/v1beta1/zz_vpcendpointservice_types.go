@@ -21,7 +21,7 @@ type PrivateDNSNameConfigurationObservation struct {
 	// Name of the record subdomain the service provider needs to create.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The state of the VPC endpoint service.
+	// Verification state of the VPC endpoint service. Consumers of the endpoint service can use the private name only when the state is verified.
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 
 	// Endpoint service verification type, for example TXT.
@@ -67,14 +67,14 @@ type VPCEndpointServiceInitParameters struct {
 	// +kubebuilder:validation:Optional
 	NetworkLoadBalancerArnsSelector *v2.Selector `json:"networkLoadBalancerArnsSelector,omitempty" tf:"-"`
 
-	// The private DNS name for the service.
+	// Private DNS name for the service.
 	PrivateDNSName *string `json:"privateDnsName,omitempty" tf:"private_dns_name,omitempty"`
 
-	// The supported IP address types. The possible values are ipv4 and ipv6.
+	// Supported IP address types. The possible values are ipv4 and ipv6.
 	// +listType=set
 	SupportedIPAddressTypes []*string `json:"supportedIpAddressTypes,omitempty" tf:"supported_ip_address_types,omitempty"`
 
-	// The set of regions from which service consumers can access the service.
+	// Set of regions from which service consumers can access the service.
 	// +listType=set
 	SupportedRegions []*string `json:"supportedRegions,omitempty" tf:"supported_regions,omitempty"`
 
@@ -88,18 +88,18 @@ type VPCEndpointServiceObservation struct {
 	// Whether or not VPC endpoint connection requests to the service must be accepted by the service owner - true or false.
 	AcceptanceRequired *bool `json:"acceptanceRequired,omitempty" tf:"acceptance_required,omitempty"`
 
-	// The ARNs of one or more principals allowed to discover the endpoint service.
+	// ARNs of one or more principals allowed to discover the endpoint service.
 	// +listType=set
 	AllowedPrincipals []*string `json:"allowedPrincipals,omitempty" tf:"allowed_principals,omitempty"`
 
 	// ARN of the VPC endpoint service.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// A set of Availability Zones in which the service is available.
+	// Set of Availability Zones in which the service is available.
 	// +listType=set
 	AvailabilityZones []*string `json:"availabilityZones,omitempty" tf:"availability_zones,omitempty"`
 
-	// A set of DNS names for the service.
+	// Set of DNS names for the service.
 	// +listType=set
 	BaseEndpointDNSNames []*string `json:"baseEndpointDnsNames,omitempty" tf:"base_endpoint_dns_names,omitempty"`
 
@@ -107,7 +107,7 @@ type VPCEndpointServiceObservation struct {
 	// +listType=set
 	GatewayLoadBalancerArns []*string `json:"gatewayLoadBalancerArns,omitempty" tf:"gateway_load_balancer_arns,omitempty"`
 
-	// The ID of the VPC endpoint service.
+	// ID of the VPC endpoint service.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Whether or not the service manages its VPC endpoints - true or false.
@@ -117,7 +117,7 @@ type VPCEndpointServiceObservation struct {
 	// +listType=set
 	NetworkLoadBalancerArns []*string `json:"networkLoadBalancerArns,omitempty" tf:"network_load_balancer_arns,omitempty"`
 
-	// The private DNS name for the service.
+	// Private DNS name for the service.
 	PrivateDNSName *string `json:"privateDnsName,omitempty" tf:"private_dns_name,omitempty"`
 
 	// List of objects containing information about the endpoint service private DNS name configuration.
@@ -127,20 +127,20 @@ type VPCEndpointServiceObservation struct {
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The service name.
+	// Service name.
 	ServiceName *string `json:"serviceName,omitempty" tf:"service_name,omitempty"`
 
-	// The service type, Gateway or Interface.
+	// Service type, Gateway or Interface.
 	ServiceType *string `json:"serviceType,omitempty" tf:"service_type,omitempty"`
 
-	// The state of the VPC endpoint service.
+	// Verification state of the VPC endpoint service. Consumers of the endpoint service can use the private name only when the state is verified.
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 
-	// The supported IP address types. The possible values are ipv4 and ipv6.
+	// Supported IP address types. The possible values are ipv4 and ipv6.
 	// +listType=set
 	SupportedIPAddressTypes []*string `json:"supportedIpAddressTypes,omitempty" tf:"supported_ip_address_types,omitempty"`
 
-	// The set of regions from which service consumers can access the service.
+	// Set of regions from which service consumers can access the service.
 	// +listType=set
 	SupportedRegions []*string `json:"supportedRegions,omitempty" tf:"supported_regions,omitempty"`
 
@@ -148,7 +148,7 @@ type VPCEndpointServiceObservation struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
@@ -189,7 +189,7 @@ type VPCEndpointServiceParameters struct {
 	// +kubebuilder:validation:Optional
 	NetworkLoadBalancerArnsSelector *v2.Selector `json:"networkLoadBalancerArnsSelector,omitempty" tf:"-"`
 
-	// The private DNS name for the service.
+	// Private DNS name for the service.
 	// +kubebuilder:validation:Optional
 	PrivateDNSName *string `json:"privateDnsName,omitempty" tf:"private_dns_name,omitempty"`
 
@@ -198,12 +198,12 @@ type VPCEndpointServiceParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// The supported IP address types. The possible values are ipv4 and ipv6.
+	// Supported IP address types. The possible values are ipv4 and ipv6.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	SupportedIPAddressTypes []*string `json:"supportedIpAddressTypes,omitempty" tf:"supported_ip_address_types,omitempty"`
 
-	// The set of regions from which service consumers can access the service.
+	// Set of regions from which service consumers can access the service.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	SupportedRegions []*string `json:"supportedRegions,omitempty" tf:"supported_regions,omitempty"`

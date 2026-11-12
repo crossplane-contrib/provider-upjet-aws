@@ -15,41 +15,34 @@ import (
 
 type KeyInitParameters struct {
 
-	// A flag to indicate whether to bypass the key policy lockout safety check.
-	// Setting this value to true increases the risk that the KMS key becomes unmanageable. Do not set this value to true indiscriminately.
-	// For more information, refer to the scenario in the Default Key Policy section in the AWS KMS Developer Guide.
-	// The default value is false.
+	// Whether to bypass the key policy lockout safety check. Setting this value to true increases the risk that the KMS key becomes unmanageable. Do not set this value to true indiscriminately. For more information, refer to the scenario in the Default Key Policy section in the AWS KMS Developer Guide. The default value is false.
 	BypassPolicyLockoutSafetyCheck *bool `json:"bypassPolicyLockoutSafetyCheck,omitempty" tf:"bypass_policy_lockout_safety_check,omitempty"`
 
 	// ID of the KMS Custom Key Store where the key will be stored instead of KMS (eg CloudHSM).
 	CustomKeyStoreID *string `json:"customKeyStoreId,omitempty" tf:"custom_key_store_id,omitempty"`
 
-	// Specifies whether the key contains a symmetric key or an asymmetric key pair and the encryption algorithms or signing algorithms that the key supports.
-	// Valid values: SYMMETRIC_DEFAULT, RSA_2048, RSA_3072, RSA_4096, HMAC_224, HMAC_256, HMAC_384, HMAC_512, ECC_NIST_P256, ECC_NIST_P384, ECC_NIST_P521, ECC_SECG_P256K1, ML_DSA_44, ML_DSA_65, ML_DSA_87, SM2 (China Regions only), or ECC_NIST_EDWARDS25519. Defaults to SYMMETRIC_DEFAULT. For help with choosing a key spec, see the AWS KMS Developer Guide.
+	// Whether the key contains a symmetric key or an asymmetric key pair and the encryption algorithms or signing algorithms that the key supports. Valid values: SYMMETRIC_DEFAULT, RSA_2048, RSA_3072, RSA_4096, HMAC_224, HMAC_256, HMAC_384, HMAC_512, ECC_NIST_P256, ECC_NIST_P384, ECC_NIST_P521, ECC_SECG_P256K1, ML_DSA_44, ML_DSA_65, ML_DSA_87, SM2 (China Regions only), or ECC_NIST_EDWARDS25519. Defaults to SYMMETRIC_DEFAULT. For help with choosing a key spec, see the AWS KMS Developer Guide.
 	CustomerMasterKeySpec *string `json:"customerMasterKeySpec,omitempty" tf:"customer_master_key_spec,omitempty"`
 
-	// The waiting period, specified in number of days. After the waiting period ends, AWS KMS deletes the KMS key.
-	// If you specify a value, it must be between 7 and 30, inclusive. If you do not specify a value, it defaults to 30.
-	// If the KMS key is a multi-Region primary key with replicas, the waiting period begins when the last of its replica keys is deleted. Otherwise, the waiting period begins immediately.
+	// Waiting period, specified in number of days. After the waiting period ends, AWS KMS deletes the KMS key. If you specify a value, it must be between 7 and 30, inclusive. If you do not specify a value, it defaults to 30. If the KMS key is a multi-Region primary key with replicas, the waiting period begins when the last of its replica keys is deleted. Otherwise, the waiting period begins immediately.
 	DeletionWindowInDays *float64 `json:"deletionWindowInDays,omitempty" tf:"deletion_window_in_days,omitempty"`
 
-	// The description of the key as viewed in AWS console.
+	// Description of the key as viewed in AWS console.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Specifies whether key rotation is enabled. Defaults to false.
+	// Whether key rotation is enabled. Defaults to false.
 	EnableKeyRotation *bool `json:"enableKeyRotation,omitempty" tf:"enable_key_rotation,omitempty"`
 
-	// Specifies whether the key is enabled. Defaults to true.
+	// Whether the key is enabled. Defaults to true.
 	IsEnabled *bool `json:"isEnabled,omitempty" tf:"is_enabled,omitempty"`
 
-	// Specifies the intended use of the key. Valid values: ENCRYPT_DECRYPT, SIGN_VERIFY, or GENERATE_VERIFY_MAC.
-	// Defaults to ENCRYPT_DECRYPT.
+	// Intended use of the key. Valid values: ENCRYPT_DECRYPT, SIGN_VERIFY, or GENERATE_VERIFY_MAC. Defaults to ENCRYPT_DECRYPT.
 	KeyUsage *string `json:"keyUsage,omitempty" tf:"key_usage,omitempty"`
 
-	// Indicates whether the KMS key is a multi-Region (true) or regional (false) key. Defaults to false.
+	// Whether the KMS key is a multi-Region (true) or regional (false) key. Defaults to false.
 	MultiRegion *bool `json:"multiRegion,omitempty" tf:"multi_region,omitempty"`
 
-	// A valid policy JSON document. Although this is a key policy, not an IAM policy, an aws_iam_policy_document, in the form that designates a principal, can be used.
+	// Valid policy JSON document. Although this is a key policy, not an IAM policy, an aws_iam_policy_document, in the form that designates a principal, can be used.
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
 	// Custom period of time between each rotation date. Must be a number between 90 and 2560 (inclusive).
@@ -59,7 +52,7 @@ type KeyInitParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Identifies the external key that serves as key material for the KMS key in an external key store.
+	// External key that serves as key material for the KMS key in an external key store.
 	XksKeyID *string `json:"xksKeyId,omitempty" tf:"xks_key_id,omitempty"`
 }
 
@@ -68,47 +61,40 @@ type KeyObservation struct {
 	// ARN of the key.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// A flag to indicate whether to bypass the key policy lockout safety check.
-	// Setting this value to true increases the risk that the KMS key becomes unmanageable. Do not set this value to true indiscriminately.
-	// For more information, refer to the scenario in the Default Key Policy section in the AWS KMS Developer Guide.
-	// The default value is false.
+	// Whether to bypass the key policy lockout safety check. Setting this value to true increases the risk that the KMS key becomes unmanageable. Do not set this value to true indiscriminately. For more information, refer to the scenario in the Default Key Policy section in the AWS KMS Developer Guide. The default value is false.
 	BypassPolicyLockoutSafetyCheck *bool `json:"bypassPolicyLockoutSafetyCheck,omitempty" tf:"bypass_policy_lockout_safety_check,omitempty"`
 
 	// ID of the KMS Custom Key Store where the key will be stored instead of KMS (eg CloudHSM).
 	CustomKeyStoreID *string `json:"customKeyStoreId,omitempty" tf:"custom_key_store_id,omitempty"`
 
-	// Specifies whether the key contains a symmetric key or an asymmetric key pair and the encryption algorithms or signing algorithms that the key supports.
-	// Valid values: SYMMETRIC_DEFAULT, RSA_2048, RSA_3072, RSA_4096, HMAC_224, HMAC_256, HMAC_384, HMAC_512, ECC_NIST_P256, ECC_NIST_P384, ECC_NIST_P521, ECC_SECG_P256K1, ML_DSA_44, ML_DSA_65, ML_DSA_87, SM2 (China Regions only), or ECC_NIST_EDWARDS25519. Defaults to SYMMETRIC_DEFAULT. For help with choosing a key spec, see the AWS KMS Developer Guide.
+	// Whether the key contains a symmetric key or an asymmetric key pair and the encryption algorithms or signing algorithms that the key supports. Valid values: SYMMETRIC_DEFAULT, RSA_2048, RSA_3072, RSA_4096, HMAC_224, HMAC_256, HMAC_384, HMAC_512, ECC_NIST_P256, ECC_NIST_P384, ECC_NIST_P521, ECC_SECG_P256K1, ML_DSA_44, ML_DSA_65, ML_DSA_87, SM2 (China Regions only), or ECC_NIST_EDWARDS25519. Defaults to SYMMETRIC_DEFAULT. For help with choosing a key spec, see the AWS KMS Developer Guide.
 	CustomerMasterKeySpec *string `json:"customerMasterKeySpec,omitempty" tf:"customer_master_key_spec,omitempty"`
 
-	// The waiting period, specified in number of days. After the waiting period ends, AWS KMS deletes the KMS key.
-	// If you specify a value, it must be between 7 and 30, inclusive. If you do not specify a value, it defaults to 30.
-	// If the KMS key is a multi-Region primary key with replicas, the waiting period begins when the last of its replica keys is deleted. Otherwise, the waiting period begins immediately.
+	// Waiting period, specified in number of days. After the waiting period ends, AWS KMS deletes the KMS key. If you specify a value, it must be between 7 and 30, inclusive. If you do not specify a value, it defaults to 30. If the KMS key is a multi-Region primary key with replicas, the waiting period begins when the last of its replica keys is deleted. Otherwise, the waiting period begins immediately.
 	DeletionWindowInDays *float64 `json:"deletionWindowInDays,omitempty" tf:"deletion_window_in_days,omitempty"`
 
-	// The description of the key as viewed in AWS console.
+	// Description of the key as viewed in AWS console.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Specifies whether key rotation is enabled. Defaults to false.
+	// Whether key rotation is enabled. Defaults to false.
 	EnableKeyRotation *bool `json:"enableKeyRotation,omitempty" tf:"enable_key_rotation,omitempty"`
 
 	// (String) ID of the KMS key.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Specifies whether the key is enabled. Defaults to true.
+	// Whether the key is enabled. Defaults to true.
 	IsEnabled *bool `json:"isEnabled,omitempty" tf:"is_enabled,omitempty"`
 
-	// The globally unique identifier for the key.
+	// Globally unique identifier for the key.
 	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
 
-	// Specifies the intended use of the key. Valid values: ENCRYPT_DECRYPT, SIGN_VERIFY, or GENERATE_VERIFY_MAC.
-	// Defaults to ENCRYPT_DECRYPT.
+	// Intended use of the key. Valid values: ENCRYPT_DECRYPT, SIGN_VERIFY, or GENERATE_VERIFY_MAC. Defaults to ENCRYPT_DECRYPT.
 	KeyUsage *string `json:"keyUsage,omitempty" tf:"key_usage,omitempty"`
 
-	// Indicates whether the KMS key is a multi-Region (true) or regional (false) key. Defaults to false.
+	// Whether the KMS key is a multi-Region (true) or regional (false) key. Defaults to false.
 	MultiRegion *bool `json:"multiRegion,omitempty" tf:"multi_region,omitempty"`
 
-	// A valid policy JSON document. Although this is a key policy, not an IAM policy, an aws_iam_policy_document, in the form that designates a principal, can be used.
+	// Valid policy JSON document. Although this is a key policy, not an IAM policy, an aws_iam_policy_document, in the form that designates a principal, can be used.
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -122,20 +108,17 @@ type KeyObservation struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// Identifies the external key that serves as key material for the KMS key in an external key store.
+	// External key that serves as key material for the KMS key in an external key store.
 	XksKeyID *string `json:"xksKeyId,omitempty" tf:"xks_key_id,omitempty"`
 }
 
 type KeyParameters struct {
 
-	// A flag to indicate whether to bypass the key policy lockout safety check.
-	// Setting this value to true increases the risk that the KMS key becomes unmanageable. Do not set this value to true indiscriminately.
-	// For more information, refer to the scenario in the Default Key Policy section in the AWS KMS Developer Guide.
-	// The default value is false.
+	// Whether to bypass the key policy lockout safety check. Setting this value to true increases the risk that the KMS key becomes unmanageable. Do not set this value to true indiscriminately. For more information, refer to the scenario in the Default Key Policy section in the AWS KMS Developer Guide. The default value is false.
 	// +kubebuilder:validation:Optional
 	BypassPolicyLockoutSafetyCheck *bool `json:"bypassPolicyLockoutSafetyCheck,omitempty" tf:"bypass_policy_lockout_safety_check,omitempty"`
 
@@ -143,39 +126,35 @@ type KeyParameters struct {
 	// +kubebuilder:validation:Optional
 	CustomKeyStoreID *string `json:"customKeyStoreId,omitempty" tf:"custom_key_store_id,omitempty"`
 
-	// Specifies whether the key contains a symmetric key or an asymmetric key pair and the encryption algorithms or signing algorithms that the key supports.
-	// Valid values: SYMMETRIC_DEFAULT, RSA_2048, RSA_3072, RSA_4096, HMAC_224, HMAC_256, HMAC_384, HMAC_512, ECC_NIST_P256, ECC_NIST_P384, ECC_NIST_P521, ECC_SECG_P256K1, ML_DSA_44, ML_DSA_65, ML_DSA_87, SM2 (China Regions only), or ECC_NIST_EDWARDS25519. Defaults to SYMMETRIC_DEFAULT. For help with choosing a key spec, see the AWS KMS Developer Guide.
+	// Whether the key contains a symmetric key or an asymmetric key pair and the encryption algorithms or signing algorithms that the key supports. Valid values: SYMMETRIC_DEFAULT, RSA_2048, RSA_3072, RSA_4096, HMAC_224, HMAC_256, HMAC_384, HMAC_512, ECC_NIST_P256, ECC_NIST_P384, ECC_NIST_P521, ECC_SECG_P256K1, ML_DSA_44, ML_DSA_65, ML_DSA_87, SM2 (China Regions only), or ECC_NIST_EDWARDS25519. Defaults to SYMMETRIC_DEFAULT. For help with choosing a key spec, see the AWS KMS Developer Guide.
 	// +kubebuilder:validation:Optional
 	CustomerMasterKeySpec *string `json:"customerMasterKeySpec,omitempty" tf:"customer_master_key_spec,omitempty"`
 
-	// The waiting period, specified in number of days. After the waiting period ends, AWS KMS deletes the KMS key.
-	// If you specify a value, it must be between 7 and 30, inclusive. If you do not specify a value, it defaults to 30.
-	// If the KMS key is a multi-Region primary key with replicas, the waiting period begins when the last of its replica keys is deleted. Otherwise, the waiting period begins immediately.
+	// Waiting period, specified in number of days. After the waiting period ends, AWS KMS deletes the KMS key. If you specify a value, it must be between 7 and 30, inclusive. If you do not specify a value, it defaults to 30. If the KMS key is a multi-Region primary key with replicas, the waiting period begins when the last of its replica keys is deleted. Otherwise, the waiting period begins immediately.
 	// +kubebuilder:validation:Optional
 	DeletionWindowInDays *float64 `json:"deletionWindowInDays,omitempty" tf:"deletion_window_in_days,omitempty"`
 
-	// The description of the key as viewed in AWS console.
+	// Description of the key as viewed in AWS console.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Specifies whether key rotation is enabled. Defaults to false.
+	// Whether key rotation is enabled. Defaults to false.
 	// +kubebuilder:validation:Optional
 	EnableKeyRotation *bool `json:"enableKeyRotation,omitempty" tf:"enable_key_rotation,omitempty"`
 
-	// Specifies whether the key is enabled. Defaults to true.
+	// Whether the key is enabled. Defaults to true.
 	// +kubebuilder:validation:Optional
 	IsEnabled *bool `json:"isEnabled,omitempty" tf:"is_enabled,omitempty"`
 
-	// Specifies the intended use of the key. Valid values: ENCRYPT_DECRYPT, SIGN_VERIFY, or GENERATE_VERIFY_MAC.
-	// Defaults to ENCRYPT_DECRYPT.
+	// Intended use of the key. Valid values: ENCRYPT_DECRYPT, SIGN_VERIFY, or GENERATE_VERIFY_MAC. Defaults to ENCRYPT_DECRYPT.
 	// +kubebuilder:validation:Optional
 	KeyUsage *string `json:"keyUsage,omitempty" tf:"key_usage,omitempty"`
 
-	// Indicates whether the KMS key is a multi-Region (true) or regional (false) key. Defaults to false.
+	// Whether the KMS key is a multi-Region (true) or regional (false) key. Defaults to false.
 	// +kubebuilder:validation:Optional
 	MultiRegion *bool `json:"multiRegion,omitempty" tf:"multi_region,omitempty"`
 
-	// A valid policy JSON document. Although this is a key policy, not an IAM policy, an aws_iam_policy_document, in the form that designates a principal, can be used.
+	// Valid policy JSON document. Although this is a key policy, not an IAM policy, an aws_iam_policy_document, in the form that designates a principal, can be used.
 	// +kubebuilder:validation:Optional
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
@@ -193,7 +172,7 @@ type KeyParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Identifies the external key that serves as key material for the KMS key in an external key store.
+	// External key that serves as key material for the KMS key in an external key store.
 	// +kubebuilder:validation:Optional
 	XksKeyID *string `json:"xksKeyId,omitempty" tf:"xks_key_id,omitempty"`
 }

@@ -15,7 +15,7 @@ import (
 
 type GroupTagInitParameters struct {
 
-	// Name of the Autoscaling Group to apply the tag to.
+	// Name of the Auto Scaling group to apply the tag to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/autoscaling/v1beta1.AutoscalingGroup
 	AutoscalingGroupName *string `json:"autoscalingGroupName,omitempty" tf:"autoscaling_group_name,omitempty"`
 
@@ -33,7 +33,7 @@ type GroupTagInitParameters struct {
 
 type GroupTagObservation struct {
 
-	// Name of the Autoscaling Group to apply the tag to.
+	// Name of the Auto Scaling group to apply the tag to.
 	AutoscalingGroupName *string `json:"autoscalingGroupName,omitempty" tf:"autoscaling_group_name,omitempty"`
 
 	// ASG name and key, separated by a comma (,)
@@ -49,7 +49,7 @@ type GroupTagObservation struct {
 
 type GroupTagParameters struct {
 
-	// Name of the Autoscaling Group to apply the tag to.
+	// Name of the Auto Scaling group to apply the tag to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/autoscaling/v1beta1.AutoscalingGroup
 	// +kubebuilder:validation:Optional
 	AutoscalingGroupName *string `json:"autoscalingGroupName,omitempty" tf:"autoscaling_group_name,omitempty"`

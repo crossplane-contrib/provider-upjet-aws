@@ -21,7 +21,7 @@ type FleetStackAssociationObservation struct {
 	// Name of the fleet.
 	FleetName *string `json:"fleetName,omitempty" tf:"fleet_name,omitempty"`
 
-	// Unique ID of the appstream stack fleet association, composed of the fleet_name and stack_name separated by a slash (/).
+	// Unique ID of the AppStream stack fleet association, composed of the fleet_name and stack_name separated by a slash (/).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.

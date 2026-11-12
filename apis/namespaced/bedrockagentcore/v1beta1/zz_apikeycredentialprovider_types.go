@@ -14,17 +14,20 @@ import (
 )
 
 type APIKeyCredentialProviderInitParameters struct {
+
+	// Reference to a customer-managed AWS Secrets Manager secret that stores the API key. Requires api_key_secret_source = "EXTERNAL". See below.
 	APIKeySecretConfig *APIKeySecretConfigInitParameters `json:"apiKeySecretConfig,omitempty" tf:"api_key_secret_config,omitempty"`
 
-	// API key value. Conflicts with api_key_wo.
+	// API key value. Exactly one of api_key, api_key_secret_config, or api_key_wo must be set.
 	APIKeySecretRef *v2.LocalSecretKeySelector `json:"apiKeySecretRef,omitempty" tf:"-"`
 
+	// Source of the secret backing the credential provider. Valid values are MANAGED (AgentCore creates and manages the secret from the supplied api_key) and EXTERNAL (the provider references a customer-managed AWS Secrets Manager secret via api_key_secret_config). Changing between MANAGED and EXTERNAL forces replacement of the resource.
 	APIKeySecretSource *string `json:"apiKeySecretSource,omitempty" tf:"api_key_secret_source,omitempty"`
 
-	// Write-only API key value. Conflicts with api_key. If set, requires api_key_wo_version to be set.
+	// Write-only API key value. Conflicts with api_key and api_key_secret_config. If set, requires api_key_wo_version to be set.
 	APIKeyWoSecretRef *v2.LocalSecretKeySelector `json:"apiKeyWoSecretRef,omitempty" tf:"-"`
 
-	// Required when api_key_wo is set. Changing this value triggers an update to api_key_wo.
+	// Version used together with the write-only API key. Required when api_key_wo is set. Changing this value triggers an update to api_key_wo.
 	APIKeyWoVersion *float64 `json:"apiKeyWoVersion,omitempty" tf:"api_key_wo_version,omitempty"`
 
 	// Key-value map of resource tags.
@@ -37,11 +40,13 @@ type APIKeyCredentialProviderObservation struct {
 	// ARN of the AWS Secrets Manager secret containing the API key.
 	APIKeySecretArn *APIKeySecretArnObservation `json:"apiKeySecretArn,omitempty" tf:"api_key_secret_arn,omitempty"`
 
+	// Reference to a customer-managed AWS Secrets Manager secret that stores the API key. Requires api_key_secret_source = "EXTERNAL". See below.
 	APIKeySecretConfig *APIKeySecretConfigObservation `json:"apiKeySecretConfig,omitempty" tf:"api_key_secret_config,omitempty"`
 
+	// Source of the secret backing the credential provider. Valid values are MANAGED (AgentCore creates and manages the secret from the supplied api_key) and EXTERNAL (the provider references a customer-managed AWS Secrets Manager secret via api_key_secret_config). Changing between MANAGED and EXTERNAL forces replacement of the resource.
 	APIKeySecretSource *string `json:"apiKeySecretSource,omitempty" tf:"api_key_secret_source,omitempty"`
 
-	// Required when api_key_wo is set. Changing this value triggers an update to api_key_wo.
+	// Version used together with the write-only API key. Required when api_key_wo is set. Changing this value triggers an update to api_key_wo.
 	APIKeyWoVersion *float64 `json:"apiKeyWoVersion,omitempty" tf:"api_key_wo_version,omitempty"`
 
 	// ARN of the API Key credential provider.
@@ -60,28 +65,30 @@ type APIKeyCredentialProviderObservation struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type APIKeyCredentialProviderParameters struct {
 
+	// Reference to a customer-managed AWS Secrets Manager secret that stores the API key. Requires api_key_secret_source = "EXTERNAL". See below.
 	// +kubebuilder:validation:Optional
 	APIKeySecretConfig *APIKeySecretConfigParameters `json:"apiKeySecretConfig,omitempty" tf:"api_key_secret_config,omitempty"`
 
-	// API key value. Conflicts with api_key_wo.
+	// API key value. Exactly one of api_key, api_key_secret_config, or api_key_wo must be set.
 	// +kubebuilder:validation:Optional
 	APIKeySecretRef *v2.LocalSecretKeySelector `json:"apiKeySecretRef,omitempty" tf:"-"`
 
+	// Source of the secret backing the credential provider. Valid values are MANAGED (AgentCore creates and manages the secret from the supplied api_key) and EXTERNAL (the provider references a customer-managed AWS Secrets Manager secret via api_key_secret_config). Changing between MANAGED and EXTERNAL forces replacement of the resource.
 	// +kubebuilder:validation:Optional
 	APIKeySecretSource *string `json:"apiKeySecretSource,omitempty" tf:"api_key_secret_source,omitempty"`
 
-	// Write-only API key value. Conflicts with api_key. If set, requires api_key_wo_version to be set.
+	// Write-only API key value. Conflicts with api_key and api_key_secret_config. If set, requires api_key_wo_version to be set.
 	// +kubebuilder:validation:Optional
 	APIKeyWoSecretRef *v2.LocalSecretKeySelector `json:"apiKeyWoSecretRef,omitempty" tf:"-"`
 
-	// Required when api_key_wo is set. Changing this value triggers an update to api_key_wo.
+	// Version used together with the write-only API key. Required when api_key_wo is set. Changing this value triggers an update to api_key_wo.
 	// +kubebuilder:validation:Optional
 	APIKeyWoVersion *float64 `json:"apiKeyWoVersion,omitempty" tf:"api_key_wo_version,omitempty"`
 
@@ -109,8 +116,11 @@ type APIKeySecretArnParameters struct {
 }
 
 type APIKeySecretConfigInitParameters struct {
+
+	// JSON key used to extract the secret value from the AWS Secrets Manager secret.
 	JSONKey *string `json:"jsonKey,omitempty" tf:"json_key,omitempty"`
 
+	// ID of the AWS Secrets Manager secret that stores the secret value.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/secretsmanager/v1beta1.Secret
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	SecretID *string `json:"secretId,omitempty" tf:"secret_id,omitempty"`
@@ -125,16 +135,21 @@ type APIKeySecretConfigInitParameters struct {
 }
 
 type APIKeySecretConfigObservation struct {
+
+	// JSON key used to extract the secret value from the AWS Secrets Manager secret.
 	JSONKey *string `json:"jsonKey,omitempty" tf:"json_key,omitempty"`
 
+	// ID of the AWS Secrets Manager secret that stores the secret value.
 	SecretID *string `json:"secretId,omitempty" tf:"secret_id,omitempty"`
 }
 
 type APIKeySecretConfigParameters struct {
 
+	// JSON key used to extract the secret value from the AWS Secrets Manager secret.
 	// +kubebuilder:validation:Optional
 	JSONKey *string `json:"jsonKey" tf:"json_key,omitempty"`
 
+	// ID of the AWS Secrets Manager secret that stores the secret value.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/secretsmanager/v1beta1.Secret
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	// +kubebuilder:validation:Optional

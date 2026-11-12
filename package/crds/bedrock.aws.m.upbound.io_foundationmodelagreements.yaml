@@ -68,7 +68,7 @@ spec:
                     type: string
                   region:
                     description: |-
-                      Region where this action should be run. Defaults to the Region set in the provider configuration.
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
                       Region is the region you'd like your resource to be created in.
                     type: string
                 required:
@@ -177,7 +177,7 @@ spec:
                     type: string
                   region:
                     description: |-
-                      Region where this action should be run. Defaults to the Region set in the provider configuration.
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
                       Region is the region you'd like your resource to be created in.
                     type: string
                 type: object

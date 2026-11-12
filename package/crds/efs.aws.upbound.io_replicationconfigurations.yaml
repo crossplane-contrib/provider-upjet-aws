@@ -928,6 +928,7 @@ spec:
                         type: string
                     type: object
                   id:
+                    description: (String) ID of the file system.
                     type: string
                   originalSourceFileSystemArn:
                     description: ARN of the original source Amazon EFS file system

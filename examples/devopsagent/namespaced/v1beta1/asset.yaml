@@ -1,0 +1,42 @@
+# SPDX-FileCopyrightText: 2026 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: devopsagent.aws.m.upbound.io/v1beta1
+kind: Asset
+metadata:
+  annotations:
+    meta.upbound.io/example-id: devopsagent/v1beta1/asset
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    agentSpaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    assetType: agents_md
+    content:
+      file:
+        body:
+          text: Follow the operational runbook.
+        path: AGENTS.md
+    metadata: '{"agent_type":"GENERIC"}'
+    region: us-west-2
+
+---
+
+apiVersion: devopsagent.aws.m.upbound.io/v1beta1
+kind: AgentSpace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: devopsagent/v1beta1/asset
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    name: example
+    region: us-west-2

@@ -173,7 +173,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: ARN of the appstream user.
+                    description: ARN of the AppStream user.
                     type: string
                   authenticationType:
                     description: 'Authentication type for the user. You must specify
@@ -190,7 +190,7 @@ spec:
                     description: First name, or given name, of the user.
                     type: string
                   id:
-                    description: Unique ID of the appstream user.
+                    description: Unique ID of the AppStream user.
                     type: string
                   lastName:
                     description: Last name, or surname, of the user.

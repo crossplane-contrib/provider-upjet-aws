@@ -509,10 +509,10 @@ type FiltersInitParameters struct {
 	// The destination domain of network-related information about a finding. See String Filter below for more details.
 	NetworkDestinationDomain []NetworkDestinationDomainInitParameters `json:"networkDestinationDomain,omitempty" tf:"network_destination_domain,omitempty"`
 
-	// The destination IPv4 address of network-related information about a finding. See Ip Filter below for more details.
+	// The destination IPv4 address of network-related information about a finding. See IP Filter below for more details.
 	NetworkDestinationIPv4 []NetworkDestinationIPv4InitParameters `json:"networkDestinationIpv4,omitempty" tf:"network_destination_ipv4,omitempty"`
 
-	// The destination IPv6 address of network-related information about a finding. See Ip Filter below for more details.
+	// The destination IPv6 address of network-related information about a finding. See IP Filter below for more details.
 	NetworkDestinationIPv6 []NetworkDestinationIPv6InitParameters `json:"networkDestinationIpv6,omitempty" tf:"network_destination_ipv6,omitempty"`
 
 	// The destination port of network-related information about a finding. See Number Filter below for more details.
@@ -527,10 +527,10 @@ type FiltersInitParameters struct {
 	// The source domain of network-related information about a finding. See String Filter below for more details.
 	NetworkSourceDomain []NetworkSourceDomainInitParameters `json:"networkSourceDomain,omitempty" tf:"network_source_domain,omitempty"`
 
-	// The source IPv4 address of network-related information about a finding. See Ip Filter below for more details.
+	// The source IPv4 address of network-related information about a finding. See IP Filter below for more details.
 	NetworkSourceIPv4 []NetworkSourceIPv4InitParameters `json:"networkSourceIpv4,omitempty" tf:"network_source_ipv4,omitempty"`
 
-	// The source IPv6 address of network-related information about a finding. See Ip Filter below for more details.
+	// The source IPv6 address of network-related information about a finding. See IP Filter below for more details.
 	NetworkSourceIPv6 []NetworkSourceIPv6InitParameters `json:"networkSourceIpv6,omitempty" tf:"network_source_ipv6,omitempty"`
 
 	// The source media access control (MAC) address of network-related information about a finding. See String Filter below for more details.
@@ -590,10 +590,10 @@ type FiltersInitParameters struct {
 	// The IAM profile ARN of the instance. See String Filter below for more details.
 	ResourceAwsEC2InstanceIAMInstanceProfileArn []ResourceAwsEC2InstanceIAMInstanceProfileArnInitParameters `json:"resourceAwsEc2InstanceIamInstanceProfileArn,omitempty" tf:"resource_aws_ec2_instance_iam_instance_profile_arn,omitempty"`
 
-	// The IPv4 addresses associated with the instance. See Ip Filter below for more details.
+	// The IPv4 addresses associated with the instance. See IP Filter below for more details.
 	ResourceAwsEC2InstanceIPv4Addresses []ResourceAwsEC2InstanceIPv4AddressesInitParameters `json:"resourceAwsEc2InstanceIpv4Addresses,omitempty" tf:"resource_aws_ec2_instance_ipv4_addresses,omitempty"`
 
-	// The IPv6 addresses associated with the instance. See Ip Filter below for more details.
+	// The IPv6 addresses associated with the instance. See IP Filter below for more details.
 	ResourceAwsEC2InstanceIPv6Addresses []ResourceAwsEC2InstanceIPv6AddressesInitParameters `json:"resourceAwsEc2InstanceIpv6Addresses,omitempty" tf:"resource_aws_ec2_instance_ipv6_addresses,omitempty"`
 
 	// AMI ID of the instance. See String Filter below for more details.
@@ -791,10 +791,10 @@ type FiltersObservation struct {
 	// The destination domain of network-related information about a finding. See String Filter below for more details.
 	NetworkDestinationDomain []NetworkDestinationDomainObservation `json:"networkDestinationDomain,omitempty" tf:"network_destination_domain,omitempty"`
 
-	// The destination IPv4 address of network-related information about a finding. See Ip Filter below for more details.
+	// The destination IPv4 address of network-related information about a finding. See IP Filter below for more details.
 	NetworkDestinationIPv4 []NetworkDestinationIPv4Observation `json:"networkDestinationIpv4,omitempty" tf:"network_destination_ipv4,omitempty"`
 
-	// The destination IPv6 address of network-related information about a finding. See Ip Filter below for more details.
+	// The destination IPv6 address of network-related information about a finding. See IP Filter below for more details.
 	NetworkDestinationIPv6 []NetworkDestinationIPv6Observation `json:"networkDestinationIpv6,omitempty" tf:"network_destination_ipv6,omitempty"`
 
 	// The destination port of network-related information about a finding. See Number Filter below for more details.
@@ -809,10 +809,10 @@ type FiltersObservation struct {
 	// The source domain of network-related information about a finding. See String Filter below for more details.
 	NetworkSourceDomain []NetworkSourceDomainObservation `json:"networkSourceDomain,omitempty" tf:"network_source_domain,omitempty"`
 
-	// The source IPv4 address of network-related information about a finding. See Ip Filter below for more details.
+	// The source IPv4 address of network-related information about a finding. See IP Filter below for more details.
 	NetworkSourceIPv4 []NetworkSourceIPv4Observation `json:"networkSourceIpv4,omitempty" tf:"network_source_ipv4,omitempty"`
 
-	// The source IPv6 address of network-related information about a finding. See Ip Filter below for more details.
+	// The source IPv6 address of network-related information about a finding. See IP Filter below for more details.
 	NetworkSourceIPv6 []NetworkSourceIPv6Observation `json:"networkSourceIpv6,omitempty" tf:"network_source_ipv6,omitempty"`
 
 	// The source media access control (MAC) address of network-related information about a finding. See String Filter below for more details.
@@ -872,10 +872,10 @@ type FiltersObservation struct {
 	// The IAM profile ARN of the instance. See String Filter below for more details.
 	ResourceAwsEC2InstanceIAMInstanceProfileArn []ResourceAwsEC2InstanceIAMInstanceProfileArnObservation `json:"resourceAwsEc2InstanceIamInstanceProfileArn,omitempty" tf:"resource_aws_ec2_instance_iam_instance_profile_arn,omitempty"`
 
-	// The IPv4 addresses associated with the instance. See Ip Filter below for more details.
+	// The IPv4 addresses associated with the instance. See IP Filter below for more details.
 	ResourceAwsEC2InstanceIPv4Addresses []ResourceAwsEC2InstanceIPv4AddressesObservation `json:"resourceAwsEc2InstanceIpv4Addresses,omitempty" tf:"resource_aws_ec2_instance_ipv4_addresses,omitempty"`
 
-	// The IPv6 addresses associated with the instance. See Ip Filter below for more details.
+	// The IPv6 addresses associated with the instance. See IP Filter below for more details.
 	ResourceAwsEC2InstanceIPv6Addresses []ResourceAwsEC2InstanceIPv6AddressesObservation `json:"resourceAwsEc2InstanceIpv6Addresses,omitempty" tf:"resource_aws_ec2_instance_ipv6_addresses,omitempty"`
 
 	// AMI ID of the instance. See String Filter below for more details.
@@ -1102,11 +1102,11 @@ type FiltersParameters struct {
 	// +kubebuilder:validation:Optional
 	NetworkDestinationDomain []NetworkDestinationDomainParameters `json:"networkDestinationDomain,omitempty" tf:"network_destination_domain,omitempty"`
 
-	// The destination IPv4 address of network-related information about a finding. See Ip Filter below for more details.
+	// The destination IPv4 address of network-related information about a finding. See IP Filter below for more details.
 	// +kubebuilder:validation:Optional
 	NetworkDestinationIPv4 []NetworkDestinationIPv4Parameters `json:"networkDestinationIpv4,omitempty" tf:"network_destination_ipv4,omitempty"`
 
-	// The destination IPv6 address of network-related information about a finding. See Ip Filter below for more details.
+	// The destination IPv6 address of network-related information about a finding. See IP Filter below for more details.
 	// +kubebuilder:validation:Optional
 	NetworkDestinationIPv6 []NetworkDestinationIPv6Parameters `json:"networkDestinationIpv6,omitempty" tf:"network_destination_ipv6,omitempty"`
 
@@ -1126,11 +1126,11 @@ type FiltersParameters struct {
 	// +kubebuilder:validation:Optional
 	NetworkSourceDomain []NetworkSourceDomainParameters `json:"networkSourceDomain,omitempty" tf:"network_source_domain,omitempty"`
 
-	// The source IPv4 address of network-related information about a finding. See Ip Filter below for more details.
+	// The source IPv4 address of network-related information about a finding. See IP Filter below for more details.
 	// +kubebuilder:validation:Optional
 	NetworkSourceIPv4 []NetworkSourceIPv4Parameters `json:"networkSourceIpv4,omitempty" tf:"network_source_ipv4,omitempty"`
 
-	// The source IPv6 address of network-related information about a finding. See Ip Filter below for more details.
+	// The source IPv6 address of network-related information about a finding. See IP Filter below for more details.
 	// +kubebuilder:validation:Optional
 	NetworkSourceIPv6 []NetworkSourceIPv6Parameters `json:"networkSourceIpv6,omitempty" tf:"network_source_ipv6,omitempty"`
 
@@ -1210,11 +1210,11 @@ type FiltersParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceAwsEC2InstanceIAMInstanceProfileArn []ResourceAwsEC2InstanceIAMInstanceProfileArnParameters `json:"resourceAwsEc2InstanceIamInstanceProfileArn,omitempty" tf:"resource_aws_ec2_instance_iam_instance_profile_arn,omitempty"`
 
-	// The IPv4 addresses associated with the instance. See Ip Filter below for more details.
+	// The IPv4 addresses associated with the instance. See IP Filter below for more details.
 	// +kubebuilder:validation:Optional
 	ResourceAwsEC2InstanceIPv4Addresses []ResourceAwsEC2InstanceIPv4AddressesParameters `json:"resourceAwsEc2InstanceIpv4Addresses,omitempty" tf:"resource_aws_ec2_instance_ipv4_addresses,omitempty"`
 
-	// The IPv6 addresses associated with the instance. See Ip Filter below for more details.
+	// The IPv6 addresses associated with the instance. See IP Filter below for more details.
 	// +kubebuilder:validation:Optional
 	ResourceAwsEC2InstanceIPv6Addresses []ResourceAwsEC2InstanceIPv6AddressesParameters `json:"resourceAwsEc2InstanceIpv6Addresses,omitempty" tf:"resource_aws_ec2_instance_ipv6_addresses,omitempty"`
 

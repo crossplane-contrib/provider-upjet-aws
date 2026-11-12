@@ -408,7 +408,7 @@ spec:
                                 with id.
                               type: string
                             version:
-                              description: Template version. Unlike the autoscaling
+                              description: Template version. Unlike the AutoScaling
                                 equivalent, does not support $Latest or $Default,
                                 so use the launch_template resource's attribute, e.g.,
                                 "${aws_launch_template.foo.latest_version}". It will
@@ -531,7 +531,7 @@ spec:
                                     x-kubernetes-list-type: set
                                   acceleratorNames:
                                     description: List of accelerator names. Default
-                                      is any acclerator.
+                                      is any accelerator.
                                     items:
                                       type: string
                                     type: array
@@ -576,7 +576,7 @@ spec:
                                     type: array
                                     x-kubernetes-list-type: set
                                   bareMetal:
-                                    description: Indicate whether bare metal instace
+                                    description: Indicate whether bare metal instance
                                       types should be included, excluded, or required.
                                       Default is excluded.
                                     type: string
@@ -1235,7 +1235,7 @@ spec:
                                 with id.
                               type: string
                             version:
-                              description: Template version. Unlike the autoscaling
+                              description: Template version. Unlike the AutoScaling
                                 equivalent, does not support $Latest or $Default,
                                 so use the launch_template resource's attribute, e.g.,
                                 "${aws_launch_template.foo.latest_version}". It will
@@ -1358,7 +1358,7 @@ spec:
                                     x-kubernetes-list-type: set
                                   acceleratorNames:
                                     description: List of accelerator names. Default
-                                      is any acclerator.
+                                      is any accelerator.
                                     items:
                                       type: string
                                     type: array
@@ -1403,7 +1403,7 @@ spec:
                                     type: array
                                     x-kubernetes-list-type: set
                                   bareMetal:
-                                    description: Indicate whether bare metal instace
+                                    description: Indicate whether bare metal instance
                                       types should be included, excluded, or required.
                                       Default is excluded.
                                     type: string
@@ -1955,7 +1955,7 @@ spec:
                                 with id.
                               type: string
                             version:
-                              description: Template version. Unlike the autoscaling
+                              description: Template version. Unlike the AutoScaling
                                 equivalent, does not support $Latest or $Default,
                                 so use the launch_template resource's attribute, e.g.,
                                 "${aws_launch_template.foo.latest_version}". It will
@@ -1996,7 +1996,7 @@ spec:
                                     x-kubernetes-list-type: set
                                   acceleratorNames:
                                     description: List of accelerator names. Default
-                                      is any acclerator.
+                                      is any accelerator.
                                     items:
                                       type: string
                                     type: array
@@ -2041,7 +2041,7 @@ spec:
                                     type: array
                                     x-kubernetes-list-type: set
                                   bareMetal:
-                                    description: Indicate whether bare metal instace
+                                    description: Indicate whether bare metal instance
                                       types should be included, excluded, or required.
                                       Default is excluded.
                                     type: string

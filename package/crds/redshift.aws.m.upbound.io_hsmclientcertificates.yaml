@@ -160,7 +160,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: ARN of the Hsm Client Certificate.
+                    description: ARN of the HSM Client Certificate.
                     type: string
                   hsmClientCertificatePublicKey:
                     description: The public key that the Amazon Redshift cluster will

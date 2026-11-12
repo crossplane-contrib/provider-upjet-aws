@@ -15,19 +15,19 @@ import (
 
 type InvitationAccepterInitParameters struct {
 
-	// The AWS account ID for the account that sent the invitation.
+	// AWS account ID for the account that sent the invitation.
 	AdministratorAccountID *string `json:"administratorAccountId,omitempty" tf:"administrator_account_id,omitempty"`
 }
 
 type InvitationAccepterObservation struct {
 
-	// The AWS account ID for the account that sent the invitation.
+	// AWS account ID for the account that sent the invitation.
 	AdministratorAccountID *string `json:"administratorAccountId,omitempty" tf:"administrator_account_id,omitempty"`
 
-	// The unique identifier (ID) of the macie invitation accepter.
+	// Unique identifier (ID) of the Macie invitation accepter.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The unique identifier for the invitation.
+	// Unique identifier for the invitation.
 	InvitationID *string `json:"invitationId,omitempty" tf:"invitation_id,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -37,7 +37,7 @@ type InvitationAccepterObservation struct {
 
 type InvitationAccepterParameters struct {
 
-	// The AWS account ID for the account that sent the invitation.
+	// AWS account ID for the account that sent the invitation.
 	// +kubebuilder:validation:Optional
 	AdministratorAccountID *string `json:"administratorAccountId,omitempty" tf:"administrator_account_id,omitempty"`
 

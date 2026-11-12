@@ -105,6 +105,7 @@ import (
 	v1beta1detective "github.com/upbound/provider-aws/v2/apis/cluster/detective/v1beta1"
 	v1beta1devicefarm "github.com/upbound/provider-aws/v2/apis/cluster/devicefarm/v1beta1"
 	v1beta2devicefarm "github.com/upbound/provider-aws/v2/apis/cluster/devicefarm/v1beta2"
+	v1beta1devopsagent "github.com/upbound/provider-aws/v2/apis/cluster/devopsagent/v1beta1"
 	v1beta1directconnect "github.com/upbound/provider-aws/v2/apis/cluster/directconnect/v1beta1"
 	v1beta1dlm "github.com/upbound/provider-aws/v2/apis/cluster/dlm/v1beta1"
 	v1beta2dlm "github.com/upbound/provider-aws/v2/apis/cluster/dlm/v1beta2"
@@ -263,6 +264,7 @@ import (
 	v1beta1s3control "github.com/upbound/provider-aws/v2/apis/cluster/s3control/v1beta1"
 	v1beta2s3control "github.com/upbound/provider-aws/v2/apis/cluster/s3control/v1beta2"
 	v1beta1s3files "github.com/upbound/provider-aws/v2/apis/cluster/s3files/v1beta1"
+	v1beta1s3tables "github.com/upbound/provider-aws/v2/apis/cluster/s3tables/v1beta1"
 	v1beta1s3vectors "github.com/upbound/provider-aws/v2/apis/cluster/s3vectors/v1beta1"
 	v1beta1sagemaker "github.com/upbound/provider-aws/v2/apis/cluster/sagemaker/v1beta1"
 	v1beta2sagemaker "github.com/upbound/provider-aws/v2/apis/cluster/sagemaker/v1beta2"
@@ -416,6 +418,7 @@ func init() {
 		v1beta1detective.SchemeBuilder.AddToScheme,
 		v1beta1devicefarm.SchemeBuilder.AddToScheme,
 		v1beta2devicefarm.SchemeBuilder.AddToScheme,
+		v1beta1devopsagent.SchemeBuilder.AddToScheme,
 		v1beta1directconnect.SchemeBuilder.AddToScheme,
 		v1beta1dlm.SchemeBuilder.AddToScheme,
 		v1beta2dlm.SchemeBuilder.AddToScheme,
@@ -574,6 +577,7 @@ func init() {
 		v1beta1s3control.SchemeBuilder.AddToScheme,
 		v1beta2s3control.SchemeBuilder.AddToScheme,
 		v1beta1s3files.SchemeBuilder.AddToScheme,
+		v1beta1s3tables.SchemeBuilder.AddToScheme,
 		v1beta1s3vectors.SchemeBuilder.AddToScheme,
 		v1beta1sagemaker.SchemeBuilder.AddToScheme,
 		v1beta2sagemaker.SchemeBuilder.AddToScheme,

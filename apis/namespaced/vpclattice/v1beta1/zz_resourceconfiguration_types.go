@@ -52,6 +52,28 @@ type ArnResourceParameters struct {
 	ArnSelector *v2.NamespacedSelector `json:"arnSelector,omitempty" tf:"-"`
 }
 
+type CidrResourceInitParameters struct {
+
+	// Set of 1 to 10 IPv4 and/or IPv6 CIDR ranges (prefix length required), for example 10.0.0.0/16. 0.0.0.0/0 and ::/0 are only allowed as the sole range. Reserved ranges such as 169.254.0.0/16, 100.64.0.0/10, 224.0.0.0/4, fe80::/10 and ff00::/8 are rejected by AWS.
+	// +listType=set
+	CidrRanges []*string `json:"cidrRanges,omitempty" tf:"cidr_ranges,omitempty"`
+}
+
+type CidrResourceObservation struct {
+
+	// Set of 1 to 10 IPv4 and/or IPv6 CIDR ranges (prefix length required), for example 10.0.0.0/16. 0.0.0.0/0 and ::/0 are only allowed as the sole range. Reserved ranges such as 169.254.0.0/16, 100.64.0.0/10, 224.0.0.0/4, fe80::/10 and ff00::/8 are rejected by AWS.
+	// +listType=set
+	CidrRanges []*string `json:"cidrRanges,omitempty" tf:"cidr_ranges,omitempty"`
+}
+
+type CidrResourceParameters struct {
+
+	// Set of 1 to 10 IPv4 and/or IPv6 CIDR ranges (prefix length required), for example 10.0.0.0/16. 0.0.0.0/0 and ::/0 are only allowed as the sole range. Reserved ranges such as 169.254.0.0/16, 100.64.0.0/10, 224.0.0.0/4, fe80::/10 and ff00::/8 are rejected by AWS.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	CidrRanges []*string `json:"cidrRanges" tf:"cidr_ranges,omitempty"`
+}
+
 type DNSResourceInitParameters struct {
 
 	// Hostname of the Resource for this configuration.
@@ -105,6 +127,9 @@ type ResourceConfigurationDefinitionInitParameters struct {
 	// Resource DNS Configuration. See arn_resource Block for details.
 	ArnResource []ArnResourceInitParameters `json:"arnResource,omitempty" tf:"arn_resource,omitempty"`
 
+	// Resource CIDR configuration. Only valid when type is CIDR. See cidr_resource Block for details.
+	CidrResource []CidrResourceInitParameters `json:"cidrResource,omitempty" tf:"cidr_resource,omitempty"`
+
 	// Resource DNS Configuration. See dns_resource Block for details.
 	DNSResource []DNSResourceInitParameters `json:"dnsResource,omitempty" tf:"dns_resource,omitempty"`
 
@@ -116,6 +141,9 @@ type ResourceConfigurationDefinitionObservation struct {
 
 	// Resource DNS Configuration. See arn_resource Block for details.
 	ArnResource []ArnResourceObservation `json:"arnResource,omitempty" tf:"arn_resource,omitempty"`
+
+	// Resource CIDR configuration. Only valid when type is CIDR. See cidr_resource Block for details.
+	CidrResource []CidrResourceObservation `json:"cidrResource,omitempty" tf:"cidr_resource,omitempty"`
 
 	// Resource DNS Configuration. See dns_resource Block for details.
 	DNSResource []DNSResourceObservation `json:"dnsResource,omitempty" tf:"dns_resource,omitempty"`
@@ -129,6 +157,10 @@ type ResourceConfigurationDefinitionParameters struct {
 	// Resource DNS Configuration. See arn_resource Block for details.
 	// +kubebuilder:validation:Optional
 	ArnResource []ArnResourceParameters `json:"arnResource,omitempty" tf:"arn_resource,omitempty"`
+
+	// Resource CIDR configuration. Only valid when type is CIDR. See cidr_resource Block for details.
+	// +kubebuilder:validation:Optional
+	CidrResource []CidrResourceParameters `json:"cidrResource,omitempty" tf:"cidr_resource,omitempty"`
 
 	// Resource DNS Configuration. See dns_resource Block for details.
 	// +kubebuilder:validation:Optional
@@ -153,11 +185,11 @@ type ResourceConfigurationInitParameters struct {
 	// Name for the Resource Configuration.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Port ranges to access the Resource either single port 80 or range 80-81 range.
+	// Port ranges to access the Resource either single port 80 or range 80-81 range. For CIDR resource configurations, include port 53 to allow DNS.
 	// +listType=set
 	PortRanges []*string `json:"portRanges,omitempty" tf:"port_ranges,omitempty"`
 
-	// Protocol for the Resource TCP is currently the only supported value.  MUST be specified if resource_configuration_group_id is not.
+	// Protocol for the Resource. Valid values are TCP and TCP_UDP. TCP_UDP is only supported when type is CIDR (UDP is only supported for DNS). MUST be specified if resource_configuration_group_id is not.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
 	// Details of the Resource Configuration. See resource_configuration_definition Block for details.
@@ -183,7 +215,7 @@ type ResourceConfigurationInitParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Type of Resource Configuration. Must be one of GROUP, CHILD, SINGLE, ARN.
+	// Type of Resource Configuration. Must be one of GROUP, CHILD, SINGLE, ARN, CIDR. Use CIDR with a cidr_resource block.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -213,11 +245,11 @@ type ResourceConfigurationObservation struct {
 	// Name for the Resource Configuration.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Port ranges to access the Resource either single port 80 or range 80-81 range.
+	// Port ranges to access the Resource either single port 80 or range 80-81 range. For CIDR resource configurations, include port 53 to allow DNS.
 	// +listType=set
 	PortRanges []*string `json:"portRanges,omitempty" tf:"port_ranges,omitempty"`
 
-	// Protocol for the Resource TCP is currently the only supported value.  MUST be specified if resource_configuration_group_id is not.
+	// Protocol for the Resource. Valid values are TCP and TCP_UDP. TCP_UDP is only supported when type is CIDR (UDP is only supported for DNS). MUST be specified if resource_configuration_group_id is not.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -241,7 +273,7 @@ type ResourceConfigurationObservation struct {
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// Type of Resource Configuration. Must be one of GROUP, CHILD, SINGLE, ARN.
+	// Type of Resource Configuration. Must be one of GROUP, CHILD, SINGLE, ARN, CIDR. Use CIDR with a cidr_resource block.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -263,12 +295,12 @@ type ResourceConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Port ranges to access the Resource either single port 80 or range 80-81 range.
+	// Port ranges to access the Resource either single port 80 or range 80-81 range. For CIDR resource configurations, include port 53 to allow DNS.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	PortRanges []*string `json:"portRanges,omitempty" tf:"port_ranges,omitempty"`
 
-	// Protocol for the Resource TCP is currently the only supported value.  MUST be specified if resource_configuration_group_id is not.
+	// Protocol for the Resource. Valid values are TCP and TCP_UDP. TCP_UDP is only supported when type is CIDR (UDP is only supported for DNS). MUST be specified if resource_configuration_group_id is not.
 	// +kubebuilder:validation:Optional
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
@@ -304,7 +336,7 @@ type ResourceConfigurationParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Type of Resource Configuration. Must be one of GROUP, CHILD, SINGLE, ARN.
+	// Type of Resource Configuration. Must be one of GROUP, CHILD, SINGLE, ARN, CIDR. Use CIDR with a cidr_resource block.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }

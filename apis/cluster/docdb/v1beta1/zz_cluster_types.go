@@ -25,6 +25,8 @@ type ClusterInitParameters struct {
 
 	// A list of EC2 Availability Zones that instances in the DB cluster can be created in.
 	// We recommend specifying 3 AZs or using the  if necessary.
+	// At most 3 AZs can be configured.
+	// Note: Do not set availability_zones to the output of a data source such as aws_availability_zones, as this may be subject to change (for example, when a new AZ is added to a Region). Because changing availability_zones forces replacement, any change to the set of values will plan to destroy and recreate the cluster. Always use an explicit, static list of AZs.
 	// +listType=set
 	AvailabilityZones []*string `json:"availabilityZones,omitempty" tf:"availability_zones,omitempty"`
 
@@ -49,7 +51,7 @@ type ClusterInitParameters struct {
 	// A boolean value that indicates whether the DB cluster has deletion protection enabled. The database can't be deleted when deletion protection is enabled. Defaults to false.
 	DeletionProtection *bool `json:"deletionProtection,omitempty" tf:"deletion_protection,omitempty"`
 
-	// List of log types to export to cloudwatch. If omitted, no logs will be exported.
+	// List of log types to export to CloudWatch. If omitted, no logs will be exported.
 	// The following log types are supported: audit, profiler.
 	EnabledCloudwatchLogsExports []*string `json:"enabledCloudwatchLogsExports,omitempty" tf:"enabled_cloudwatch_logs_exports,omitempty"`
 
@@ -160,6 +162,8 @@ type ClusterObservation struct {
 
 	// A list of EC2 Availability Zones that instances in the DB cluster can be created in.
 	// We recommend specifying 3 AZs or using the  if necessary.
+	// At most 3 AZs can be configured.
+	// Note: Do not set availability_zones to the output of a data source such as aws_availability_zones, as this may be subject to change (for example, when a new AZ is added to a Region). Because changing availability_zones forces replacement, any change to the set of values will plan to destroy and recreate the cluster. Always use an explicit, static list of AZs.
 	// +listType=set
 	AvailabilityZones []*string `json:"availabilityZones,omitempty" tf:"availability_zones,omitempty"`
 
@@ -182,7 +186,7 @@ type ClusterObservation struct {
 	// A boolean value that indicates whether the DB cluster has deletion protection enabled. The database can't be deleted when deletion protection is enabled. Defaults to false.
 	DeletionProtection *bool `json:"deletionProtection,omitempty" tf:"deletion_protection,omitempty"`
 
-	// List of log types to export to cloudwatch. If omitted, no logs will be exported.
+	// List of log types to export to CloudWatch. If omitted, no logs will be exported.
 	// The following log types are supported: audit, profiler.
 	EnabledCloudwatchLogsExports []*string `json:"enabledCloudwatchLogsExports,omitempty" tf:"enabled_cloudwatch_logs_exports,omitempty"`
 
@@ -295,6 +299,8 @@ type ClusterParameters struct {
 
 	// A list of EC2 Availability Zones that instances in the DB cluster can be created in.
 	// We recommend specifying 3 AZs or using the  if necessary.
+	// At most 3 AZs can be configured.
+	// Note: Do not set availability_zones to the output of a data source such as aws_availability_zones, as this may be subject to change (for example, when a new AZ is added to a Region). Because changing availability_zones forces replacement, any change to the set of values will plan to destroy and recreate the cluster. Always use an explicit, static list of AZs.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	AvailabilityZones []*string `json:"availabilityZones,omitempty" tf:"availability_zones,omitempty"`
@@ -324,7 +330,7 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	DeletionProtection *bool `json:"deletionProtection,omitempty" tf:"deletion_protection,omitempty"`
 
-	// List of log types to export to cloudwatch. If omitted, no logs will be exported.
+	// List of log types to export to CloudWatch. If omitted, no logs will be exported.
 	// The following log types are supported: audit, profiler.
 	// +kubebuilder:validation:Optional
 	EnabledCloudwatchLogsExports []*string `json:"enabledCloudwatchLogsExports,omitempty" tf:"enabled_cloudwatch_logs_exports,omitempty"`

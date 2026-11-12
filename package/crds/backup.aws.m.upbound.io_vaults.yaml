@@ -60,12 +60,12 @@ spec:
               forProvider:
                 properties:
                   forceDestroy:
-                    description: A boolean that indicates that all recovery points
-                      stored in the vault are deleted so that the vault can be destroyed
-                      without error.
+                    description: 'Whether to delete all recovery points stored in
+                      the vault so that the vault can be destroyed without error.
+                      Default value: false.'
                     type: boolean
                   kmsKeyArn:
-                    description: The server-side encryption key that is used to protect
+                    description: Server-side encryption key that is used to protect
                       your backups.
                     type: string
                   kmsKeyArnRef:
@@ -176,12 +176,12 @@ spec:
                   autoscaler.
                 properties:
                   forceDestroy:
-                    description: A boolean that indicates that all recovery points
-                      stored in the vault are deleted so that the vault can be destroyed
-                      without error.
+                    description: 'Whether to delete all recovery points stored in
+                      the vault so that the vault can be destroyed without error.
+                      Default value: false.'
                     type: boolean
                   kmsKeyArn:
-                    description: The server-side encryption key that is used to protect
+                    description: Server-side encryption key that is used to protect
                       your backups.
                     type: string
                   kmsKeyArnRef:
@@ -335,23 +335,23 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The ARN of the vault.
+                    description: ARN of the vault.
                     type: string
                   forceDestroy:
-                    description: A boolean that indicates that all recovery points
-                      stored in the vault are deleted so that the vault can be destroyed
-                      without error.
+                    description: 'Whether to delete all recovery points stored in
+                      the vault so that the vault can be destroyed without error.
+                      Default value: false.'
                     type: boolean
                   id:
-                    description: The name of the vault.
+                    description: Name of the vault.
                     type: string
                   kmsKeyArn:
-                    description: The server-side encryption key that is used to protect
+                    description: Server-side encryption key that is used to protect
                       your backups.
                     type: string
                   recoveryPoints:
-                    description: The number of recovery points that are stored in
-                      a backup vault.
+                    description: Number of recovery points that are stored in a backup
+                      vault.
                     type: number
                   region:
                     description: |-
@@ -367,9 +367,8 @@ spec:
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                     x-kubernetes-map-type: granular
                 type: object

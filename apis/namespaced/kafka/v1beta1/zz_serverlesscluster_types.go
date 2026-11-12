@@ -34,70 +34,70 @@ type IAMParameters struct {
 
 type ServerlessClusterClientAuthenticationInitParameters struct {
 
-	// Details for client authentication using SASL. See below.
+	// Details for client authentication using SASL. See sasl Block below.
 	Sasl *ServerlessClusterClientAuthenticationSaslInitParameters `json:"sasl,omitempty" tf:"sasl,omitempty"`
 }
 
 type ServerlessClusterClientAuthenticationObservation struct {
 
-	// Details for client authentication using SASL. See below.
+	// Details for client authentication using SASL. See sasl Block below.
 	Sasl *ServerlessClusterClientAuthenticationSaslObservation `json:"sasl,omitempty" tf:"sasl,omitempty"`
 }
 
 type ServerlessClusterClientAuthenticationParameters struct {
 
-	// Details for client authentication using SASL. See below.
+	// Details for client authentication using SASL. See sasl Block below.
 	// +kubebuilder:validation:Optional
 	Sasl *ServerlessClusterClientAuthenticationSaslParameters `json:"sasl" tf:"sasl,omitempty"`
 }
 
 type ServerlessClusterClientAuthenticationSaslInitParameters struct {
 
-	// Details for client authentication using IAM. See below.
+	// Details for client authentication using IAM. See iam Block below.
 	IAM *IAMInitParameters `json:"iam,omitempty" tf:"iam,omitempty"`
 }
 
 type ServerlessClusterClientAuthenticationSaslObservation struct {
 
-	// Details for client authentication using IAM. See below.
+	// Details for client authentication using IAM. See iam Block below.
 	IAM *IAMObservation `json:"iam,omitempty" tf:"iam,omitempty"`
 }
 
 type ServerlessClusterClientAuthenticationSaslParameters struct {
 
-	// Details for client authentication using IAM. See below.
+	// Details for client authentication using IAM. See iam Block below.
 	// +kubebuilder:validation:Optional
 	IAM *IAMParameters `json:"iam" tf:"iam,omitempty"`
 }
 
 type ServerlessClusterInitParameters struct {
 
-	// Specifies client authentication information for the serverless cluster. See below.
+	// Client authentication information for the serverless cluster. See client_authentication Block below.
 	ClientAuthentication *ServerlessClusterClientAuthenticationInitParameters `json:"clientAuthentication,omitempty" tf:"client_authentication,omitempty"`
 
-	// The name of the serverless cluster.
+	// Name of the serverless cluster.
 	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// VPC configuration information. See below.
+	// VPC configuration information. See vpc_config Block below.
 	VPCConfig []ServerlessClusterVPCConfigInitParameters `json:"vpcConfig,omitempty" tf:"vpc_config,omitempty"`
 }
 
 type ServerlessClusterObservation struct {
 
-	// The ARN of the serverless cluster.
+	// ARN of the serverless cluster.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// One or more DNS names (or IP addresses) and SASL IAM port pairs. For example, boot-abcdefg.c2.kafka-serverless.eu-central-1.amazonaws.com:9098. The resource sorts the list alphabetically. AWS may not always return all endpoints so the values may not be stable across applies.
 	BootstrapBrokersSaslIAM *string `json:"bootstrapBrokersSaslIam,omitempty" tf:"bootstrap_brokers_sasl_iam,omitempty"`
 
-	// Specifies client authentication information for the serverless cluster. See below.
+	// Client authentication information for the serverless cluster. See client_authentication Block below.
 	ClientAuthentication *ServerlessClusterClientAuthenticationObservation `json:"clientAuthentication,omitempty" tf:"client_authentication,omitempty"`
 
-	// The name of the serverless cluster.
+	// Name of the serverless cluster.
 	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
 
 	// UUID of the serverless cluster, for use in IAM policies.
@@ -113,21 +113,21 @@ type ServerlessClusterObservation struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// VPC configuration information. See below.
+	// VPC configuration information. See vpc_config Block below.
 	VPCConfig []ServerlessClusterVPCConfigObservation `json:"vpcConfig,omitempty" tf:"vpc_config,omitempty"`
 }
 
 type ServerlessClusterParameters struct {
 
-	// Specifies client authentication information for the serverless cluster. See below.
+	// Client authentication information for the serverless cluster. See client_authentication Block below.
 	// +kubebuilder:validation:Optional
 	ClientAuthentication *ServerlessClusterClientAuthenticationParameters `json:"clientAuthentication,omitempty" tf:"client_authentication,omitempty"`
 
-	// The name of the serverless cluster.
+	// Name of the serverless cluster.
 	// +kubebuilder:validation:Optional
 	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
 
@@ -141,7 +141,7 @@ type ServerlessClusterParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// VPC configuration information. See below.
+	// VPC configuration information. See vpc_config Block below.
 	// +kubebuilder:validation:Optional
 	VPCConfig []ServerlessClusterVPCConfigParameters `json:"vpcConfig,omitempty" tf:"vpc_config,omitempty"`
 }
@@ -156,7 +156,7 @@ type ServerlessClusterVPCConfigInitParameters struct {
 	// +kubebuilder:validation:Optional
 	SecurityGroupIDSelector *v2.NamespacedSelector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 
-	// Specifies up to five security groups that control inbound and outbound traffic for the serverless cluster.
+	// Up to five security groups that control inbound and outbound traffic for the serverless cluster.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=SecurityGroupIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SecurityGroupIDSelector
@@ -171,7 +171,7 @@ type ServerlessClusterVPCConfigInitParameters struct {
 	// +kubebuilder:validation:Optional
 	SubnetIDSelector *v2.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 
-	// A list of subnets in at least two different Availability Zones that host your client applications.
+	// List of subnets in at least two different Availability Zones that host your client applications.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Subnet
 	// +crossplane:generate:reference:refFieldName=SubnetIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SubnetIDSelector
@@ -181,11 +181,11 @@ type ServerlessClusterVPCConfigInitParameters struct {
 
 type ServerlessClusterVPCConfigObservation struct {
 
-	// Specifies up to five security groups that control inbound and outbound traffic for the serverless cluster.
+	// Up to five security groups that control inbound and outbound traffic for the serverless cluster.
 	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
-	// A list of subnets in at least two different Availability Zones that host your client applications.
+	// List of subnets in at least two different Availability Zones that host your client applications.
 	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 }
@@ -200,7 +200,7 @@ type ServerlessClusterVPCConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	SecurityGroupIDSelector *v2.NamespacedSelector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 
-	// Specifies up to five security groups that control inbound and outbound traffic for the serverless cluster.
+	// Up to five security groups that control inbound and outbound traffic for the serverless cluster.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=SecurityGroupIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SecurityGroupIDSelector
@@ -216,7 +216,7 @@ type ServerlessClusterVPCConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	SubnetIDSelector *v2.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 
-	// A list of subnets in at least two different Availability Zones that host your client applications.
+	// List of subnets in at least two different Availability Zones that host your client applications.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Subnet
 	// +crossplane:generate:reference:refFieldName=SubnetIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SubnetIDSelector

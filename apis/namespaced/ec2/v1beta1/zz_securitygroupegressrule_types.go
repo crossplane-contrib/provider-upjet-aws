@@ -15,22 +15,22 @@ import (
 
 type SecurityGroupEgressRuleInitParameters struct {
 
-	// The destination IPv4 CIDR range.
+	// Destination IPv4 CIDR range.
 	CidrIPv4 *string `json:"cidrIpv4,omitempty" tf:"cidr_ipv4,omitempty"`
 
-	// The destination IPv6 CIDR range.
+	// Destination IPv6 CIDR range.
 	CidrIPv6 *string `json:"cidrIpv6,omitempty" tf:"cidr_ipv6,omitempty"`
 
-	// The security group rule description.
+	// Security group rule description.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The start of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 type.
+	// Start of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 type.
 	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
 
-	// The IP protocol name or number. Use -1 to specify all protocols. Note that if ip_protocol is set to -1, it translates to all protocols, all port ranges, and from_port and to_port values should not be defined.
+	// IP protocol name or number. Use -1 to specify all protocols. Note that if ip_protocol is set to -1, it translates to all protocols, all port ranges, and from_port and to_port values should not be defined.
 	IPProtocol *string `json:"ipProtocol,omitempty" tf:"ip_protocol,omitempty"`
 
-	// The ID of the destination prefix list.
+	// ID of the destination prefix list.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.ManagedPrefixList
 	PrefixListID *string `json:"prefixListId,omitempty" tf:"prefix_list_id,omitempty"`
 
@@ -42,7 +42,7 @@ type SecurityGroupEgressRuleInitParameters struct {
 	// +kubebuilder:validation:Optional
 	PrefixListIDSelector *v2.NamespacedSelector `json:"prefixListIdSelector,omitempty" tf:"-"`
 
-	// The destination security group that is referenced in the rule.
+	// Destination security group that is referenced in the rule.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
 	ReferencedSecurityGroupID *string `json:"referencedSecurityGroupId,omitempty" tf:"referenced_security_group_id,omitempty"`
 
@@ -54,7 +54,7 @@ type SecurityGroupEgressRuleInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ReferencedSecurityGroupIDSelector *v2.NamespacedSelector `json:"referencedSecurityGroupIdSelector,omitempty" tf:"-"`
 
-	// The ID of the security group.
+	// ID of the security group.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
 	SecurityGroupID *string `json:"securityGroupId,omitempty" tf:"security_group_id,omitempty"`
 
@@ -70,7 +70,7 @@ type SecurityGroupEgressRuleInitParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The end of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 code.
+	// End of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 code.
 	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
 }
 
@@ -79,75 +79,75 @@ type SecurityGroupEgressRuleObservation struct {
 	// ARN of the security group rule.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The destination IPv4 CIDR range.
+	// Destination IPv4 CIDR range.
 	CidrIPv4 *string `json:"cidrIpv4,omitempty" tf:"cidr_ipv4,omitempty"`
 
-	// The destination IPv6 CIDR range.
+	// Destination IPv6 CIDR range.
 	CidrIPv6 *string `json:"cidrIpv6,omitempty" tf:"cidr_ipv6,omitempty"`
 
-	// The security group rule description.
+	// Security group rule description.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The start of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 type.
+	// Start of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 type.
 	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
 
 	// (String) ID of the security group rule.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The IP protocol name or number. Use -1 to specify all protocols. Note that if ip_protocol is set to -1, it translates to all protocols, all port ranges, and from_port and to_port values should not be defined.
+	// IP protocol name or number. Use -1 to specify all protocols. Note that if ip_protocol is set to -1, it translates to all protocols, all port ranges, and from_port and to_port values should not be defined.
 	IPProtocol *string `json:"ipProtocol,omitempty" tf:"ip_protocol,omitempty"`
 
-	// The ID of the destination prefix list.
+	// ID of the destination prefix list.
 	PrefixListID *string `json:"prefixListId,omitempty" tf:"prefix_list_id,omitempty"`
 
-	// The destination security group that is referenced in the rule.
+	// Destination security group that is referenced in the rule.
 	ReferencedSecurityGroupID *string `json:"referencedSecurityGroupId,omitempty" tf:"referenced_security_group_id,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The ID of the security group.
+	// ID of the security group.
 	SecurityGroupID *string `json:"securityGroupId,omitempty" tf:"security_group_id,omitempty"`
 
-	// The ID of the security group rule.
+	// ID of the security group rule.
 	SecurityGroupRuleID *string `json:"securityGroupRuleId,omitempty" tf:"security_group_rule_id,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// The end of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 code.
+	// End of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 code.
 	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
 }
 
 type SecurityGroupEgressRuleParameters struct {
 
-	// The destination IPv4 CIDR range.
+	// Destination IPv4 CIDR range.
 	// +kubebuilder:validation:Optional
 	CidrIPv4 *string `json:"cidrIpv4,omitempty" tf:"cidr_ipv4,omitempty"`
 
-	// The destination IPv6 CIDR range.
+	// Destination IPv6 CIDR range.
 	// +kubebuilder:validation:Optional
 	CidrIPv6 *string `json:"cidrIpv6,omitempty" tf:"cidr_ipv6,omitempty"`
 
-	// The security group rule description.
+	// Security group rule description.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The start of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 type.
+	// Start of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 type.
 	// +kubebuilder:validation:Optional
 	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
 
-	// The IP protocol name or number. Use -1 to specify all protocols. Note that if ip_protocol is set to -1, it translates to all protocols, all port ranges, and from_port and to_port values should not be defined.
+	// IP protocol name or number. Use -1 to specify all protocols. Note that if ip_protocol is set to -1, it translates to all protocols, all port ranges, and from_port and to_port values should not be defined.
 	// +kubebuilder:validation:Optional
 	IPProtocol *string `json:"ipProtocol,omitempty" tf:"ip_protocol,omitempty"`
 
-	// The ID of the destination prefix list.
+	// ID of the destination prefix list.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.ManagedPrefixList
 	// +kubebuilder:validation:Optional
 	PrefixListID *string `json:"prefixListId,omitempty" tf:"prefix_list_id,omitempty"`
@@ -160,7 +160,7 @@ type SecurityGroupEgressRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	PrefixListIDSelector *v2.NamespacedSelector `json:"prefixListIdSelector,omitempty" tf:"-"`
 
-	// The destination security group that is referenced in the rule.
+	// Destination security group that is referenced in the rule.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
 	// +kubebuilder:validation:Optional
 	ReferencedSecurityGroupID *string `json:"referencedSecurityGroupId,omitempty" tf:"referenced_security_group_id,omitempty"`
@@ -178,7 +178,7 @@ type SecurityGroupEgressRuleParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// The ID of the security group.
+	// ID of the security group.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
 	// +kubebuilder:validation:Optional
 	SecurityGroupID *string `json:"securityGroupId,omitempty" tf:"security_group_id,omitempty"`
@@ -196,7 +196,7 @@ type SecurityGroupEgressRuleParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The end of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 code.
+	// End of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 code.
 	// +kubebuilder:validation:Optional
 	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
 }

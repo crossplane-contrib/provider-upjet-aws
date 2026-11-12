@@ -300,7 +300,7 @@ type DatasetMetricConfigInitParameters struct {
 	// Names of the metrics to use for the evaluation job.
 	MetricNames []*string `json:"metricNames,omitempty" tf:"metric_names,omitempty"`
 
-	// Type of task to evaluate. Common values are Summarization, Classification, QuestionAndAnswer, Generation, and Custom. Use General for automated evaluation jobs that use a judge model (evaluator_model_config).
+	// Type of task to evaluate. Valid values: Summarization, Classification, QuestionAndAnswer, Generation, Custom.
 	TaskType *string `json:"taskType,omitempty" tf:"task_type,omitempty"`
 }
 
@@ -312,7 +312,7 @@ type DatasetMetricConfigObservation struct {
 	// Names of the metrics to use for the evaluation job.
 	MetricNames []*string `json:"metricNames,omitempty" tf:"metric_names,omitempty"`
 
-	// Type of task to evaluate. Common values are Summarization, Classification, QuestionAndAnswer, Generation, and Custom. Use General for automated evaluation jobs that use a judge model (evaluator_model_config).
+	// Type of task to evaluate. Valid values: Summarization, Classification, QuestionAndAnswer, Generation, Custom.
 	TaskType *string `json:"taskType,omitempty" tf:"task_type,omitempty"`
 }
 
@@ -326,7 +326,7 @@ type DatasetMetricConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	MetricNames []*string `json:"metricNames" tf:"metric_names,omitempty"`
 
-	// Type of task to evaluate. Common values are Summarization, Classification, QuestionAndAnswer, Generation, and Custom. Use General for automated evaluation jobs that use a judge model (evaluator_model_config).
+	// Type of task to evaluate. Valid values: Summarization, Classification, QuestionAndAnswer, Generation, Custom.
 	// +kubebuilder:validation:Optional
 	TaskType *string `json:"taskType" tf:"task_type,omitempty"`
 }
@@ -491,6 +491,7 @@ type EvaluationJobObservation struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
@@ -668,7 +669,7 @@ type HumanDatasetMetricConfigInitParameters struct {
 	// Names of the metrics to use for the evaluation job.
 	MetricNames []*string `json:"metricNames,omitempty" tf:"metric_names,omitempty"`
 
-	// Type of task to evaluate. Common values are Summarization, Classification, QuestionAndAnswer, Generation, and Custom. Use General for automated evaluation jobs that use a judge model (evaluator_model_config).
+	// Type of task to evaluate. Valid values: Summarization, Classification, QuestionAndAnswer, Generation, Custom.
 	TaskType *string `json:"taskType,omitempty" tf:"task_type,omitempty"`
 }
 
@@ -680,7 +681,7 @@ type HumanDatasetMetricConfigObservation struct {
 	// Names of the metrics to use for the evaluation job.
 	MetricNames []*string `json:"metricNames,omitempty" tf:"metric_names,omitempty"`
 
-	// Type of task to evaluate. Common values are Summarization, Classification, QuestionAndAnswer, Generation, and Custom. Use General for automated evaluation jobs that use a judge model (evaluator_model_config).
+	// Type of task to evaluate. Valid values: Summarization, Classification, QuestionAndAnswer, Generation, Custom.
 	TaskType *string `json:"taskType,omitempty" tf:"task_type,omitempty"`
 }
 
@@ -694,7 +695,7 @@ type HumanDatasetMetricConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	MetricNames []*string `json:"metricNames" tf:"metric_names,omitempty"`
 
-	// Type of task to evaluate. Common values are Summarization, Classification, QuestionAndAnswer, Generation, and Custom. Use General for automated evaluation jobs that use a judge model (evaluator_model_config).
+	// Type of task to evaluate. Valid values: Summarization, Classification, QuestionAndAnswer, Generation, Custom.
 	// +kubebuilder:validation:Optional
 	TaskType *string `json:"taskType" tf:"task_type,omitempty"`
 }

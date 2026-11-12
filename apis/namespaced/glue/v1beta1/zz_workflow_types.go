@@ -15,7 +15,7 @@ import (
 
 type WorkflowInitParameters struct {
 
-	// A map of default run properties for this workflow. These properties are passed to all jobs associated to the workflow.
+	// Map of default run properties for this workflow. These properties are passed to all jobs associated to the workflow.
 	// +mapType=granular
 	DefaultRunProperties map[string]*string `json:"defaultRunProperties,omitempty" tf:"default_run_properties,omitempty"`
 
@@ -35,7 +35,7 @@ type WorkflowObservation struct {
 	// ARN of Glue Workflow
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// A map of default run properties for this workflow. These properties are passed to all jobs associated to the workflow.
+	// Map of default run properties for this workflow. These properties are passed to all jobs associated to the workflow.
 	// +mapType=granular
 	DefaultRunProperties map[string]*string `json:"defaultRunProperties,omitempty" tf:"default_run_properties,omitempty"`
 
@@ -56,14 +56,14 @@ type WorkflowObservation struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type WorkflowParameters struct {
 
-	// A map of default run properties for this workflow. These properties are passed to all jobs associated to the workflow.
+	// Map of default run properties for this workflow. These properties are passed to all jobs associated to the workflow.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	DefaultRunProperties map[string]*string `json:"defaultRunProperties,omitempty" tf:"default_run_properties,omitempty"`

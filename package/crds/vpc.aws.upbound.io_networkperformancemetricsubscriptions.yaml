@@ -75,11 +75,11 @@ spec:
               forProvider:
                 properties:
                   destination:
-                    description: The target Region or Availability Zone that the metric
+                    description: Target Region or Availability Zone that the metric
                       subscription is enabled for. For example, eu-west-1.
                     type: string
                   metric:
-                    description: 'The metric used for the enabled subscription. Valid
+                    description: 'Metric used for the enabled subscription. Valid
                       values: aggregate-latency. Default: aggregate-latency.'
                     type: string
                   region:
@@ -88,12 +88,12 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   source:
-                    description: The source Region or Availability Zone that the metric
+                    description: Source Region or Availability Zone that the metric
                       subscription is enabled for. For example, us-east-1.
                     type: string
                   statistic:
-                    description: 'The statistic used for the enabled subscription.
-                      Valid values: p50. Default: p50.'
+                    description: 'Statistic used for the enabled subscription. Valid
+                      values: p50. Default: p50.'
                     type: string
                 required:
                 - region
@@ -112,20 +112,20 @@ spec:
                   autoscaler.
                 properties:
                   destination:
-                    description: The target Region or Availability Zone that the metric
+                    description: Target Region or Availability Zone that the metric
                       subscription is enabled for. For example, eu-west-1.
                     type: string
                   metric:
-                    description: 'The metric used for the enabled subscription. Valid
+                    description: 'Metric used for the enabled subscription. Valid
                       values: aggregate-latency. Default: aggregate-latency.'
                     type: string
                   source:
-                    description: The source Region or Availability Zone that the metric
+                    description: Source Region or Availability Zone that the metric
                       subscription is enabled for. For example, us-east-1.
                     type: string
                   statistic:
-                    description: 'The statistic used for the enabled subscription.
-                      Valid values: p50. Default: p50.'
+                    description: 'Statistic used for the enabled subscription. Valid
+                      values: p50. Default: p50.'
                     type: string
                 type: object
               managementPolicies:
@@ -230,17 +230,17 @@ spec:
               atProvider:
                 properties:
                   destination:
-                    description: The target Region or Availability Zone that the metric
+                    description: Target Region or Availability Zone that the metric
                       subscription is enabled for. For example, eu-west-1.
                     type: string
                   id:
                     type: string
                   metric:
-                    description: 'The metric used for the enabled subscription. Valid
+                    description: 'Metric used for the enabled subscription. Valid
                       values: aggregate-latency. Default: aggregate-latency.'
                     type: string
                   period:
-                    description: The data aggregation time for the subscription.
+                    description: Data aggregation time for the subscription.
                     type: string
                   region:
                     description: |-
@@ -248,12 +248,12 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   source:
-                    description: The source Region or Availability Zone that the metric
+                    description: Source Region or Availability Zone that the metric
                       subscription is enabled for. For example, us-east-1.
                     type: string
                   statistic:
-                    description: 'The statistic used for the enabled subscription.
-                      Valid values: p50. Default: p50.'
+                    description: 'Statistic used for the enabled subscription. Valid
+                      values: p50. Default: p50.'
                     type: string
                 type: object
               conditions:

@@ -238,10 +238,10 @@ type DefaultCacheBehaviorInitParameters struct {
 	// The forwarded values configuration that specifies how CloudFront handles query strings, cookies and headers (maximum one).
 	ForwardedValues *ForwardedValuesInitParameters `json:"forwardedValues,omitempty" tf:"forwarded_values,omitempty"`
 
-	// A config block that triggers a cloudfront function with specific actions (maximum 2).
+	// A config block that triggers a CloudFront function with specific actions (maximum 2).
 	FunctionAssociation []FunctionAssociationInitParameters `json:"functionAssociation,omitempty" tf:"function_association,omitempty"`
 
-	// A config block that sets the grpc config.
+	// A config block that sets the gRPC config.
 	GRPCConfig *GRPCConfigInitParameters `json:"grpcConfig,omitempty" tf:"grpc_config,omitempty"`
 
 	// A config block that triggers a lambda function with specific actions (maximum 4).
@@ -303,10 +303,10 @@ type DefaultCacheBehaviorObservation struct {
 	// The forwarded values configuration that specifies how CloudFront handles query strings, cookies and headers (maximum one).
 	ForwardedValues *ForwardedValuesObservation `json:"forwardedValues,omitempty" tf:"forwarded_values,omitempty"`
 
-	// A config block that triggers a cloudfront function with specific actions (maximum 2).
+	// A config block that triggers a CloudFront function with specific actions (maximum 2).
 	FunctionAssociation []FunctionAssociationObservation `json:"functionAssociation,omitempty" tf:"function_association,omitempty"`
 
-	// A config block that sets the grpc config.
+	// A config block that sets the gRPC config.
 	GRPCConfig *GRPCConfigObservation `json:"grpcConfig,omitempty" tf:"grpc_config,omitempty"`
 
 	// A config block that triggers a lambda function with specific actions (maximum 4).
@@ -375,11 +375,11 @@ type DefaultCacheBehaviorParameters struct {
 	// +kubebuilder:validation:Optional
 	ForwardedValues *ForwardedValuesParameters `json:"forwardedValues,omitempty" tf:"forwarded_values,omitempty"`
 
-	// A config block that triggers a cloudfront function with specific actions (maximum 2).
+	// A config block that triggers a CloudFront function with specific actions (maximum 2).
 	// +kubebuilder:validation:Optional
 	FunctionAssociation []FunctionAssociationParameters `json:"functionAssociation,omitempty" tf:"function_association,omitempty"`
 
-	// A config block that sets the grpc config.
+	// A config block that sets the gRPC config.
 	// +kubebuilder:validation:Optional
 	GRPCConfig *GRPCConfigParameters `json:"grpcConfig,omitempty" tf:"grpc_config,omitempty"`
 
@@ -1209,10 +1209,10 @@ type OrderedCacheBehaviorInitParameters struct {
 	// The forwarded values configuration that specifies how CloudFront handles query strings, cookies and headers (maximum one).
 	ForwardedValues *OrderedCacheBehaviorForwardedValuesInitParameters `json:"forwardedValues,omitempty" tf:"forwarded_values,omitempty"`
 
-	// A config block that triggers a cloudfront function with specific actions (maximum 2).
+	// A config block that triggers a CloudFront function with specific actions (maximum 2).
 	FunctionAssociation []OrderedCacheBehaviorFunctionAssociationInitParameters `json:"functionAssociation,omitempty" tf:"function_association,omitempty"`
 
-	// A config block that sets the grpc config.
+	// A config block that sets the gRPC config.
 	GRPCConfig *OrderedCacheBehaviorGRPCConfigInitParameters `json:"grpcConfig,omitempty" tf:"grpc_config,omitempty"`
 
 	// A config block that triggers a lambda function with specific actions (maximum 4).
@@ -1336,10 +1336,10 @@ type OrderedCacheBehaviorObservation struct {
 	// The forwarded values configuration that specifies how CloudFront handles query strings, cookies and headers (maximum one).
 	ForwardedValues *OrderedCacheBehaviorForwardedValuesObservation `json:"forwardedValues,omitempty" tf:"forwarded_values,omitempty"`
 
-	// A config block that triggers a cloudfront function with specific actions (maximum 2).
+	// A config block that triggers a CloudFront function with specific actions (maximum 2).
 	FunctionAssociation []OrderedCacheBehaviorFunctionAssociationObservation `json:"functionAssociation,omitempty" tf:"function_association,omitempty"`
 
-	// A config block that sets the grpc config.
+	// A config block that sets the gRPC config.
 	GRPCConfig *OrderedCacheBehaviorGRPCConfigObservation `json:"grpcConfig,omitempty" tf:"grpc_config,omitempty"`
 
 	// A config block that triggers a lambda function with specific actions (maximum 4).
@@ -1411,11 +1411,11 @@ type OrderedCacheBehaviorParameters struct {
 	// +kubebuilder:validation:Optional
 	ForwardedValues *OrderedCacheBehaviorForwardedValuesParameters `json:"forwardedValues,omitempty" tf:"forwarded_values,omitempty"`
 
-	// A config block that triggers a cloudfront function with specific actions (maximum 2).
+	// A config block that triggers a CloudFront function with specific actions (maximum 2).
 	// +kubebuilder:validation:Optional
 	FunctionAssociation []OrderedCacheBehaviorFunctionAssociationParameters `json:"functionAssociation,omitempty" tf:"function_association,omitempty"`
 
-	// A config block that sets the grpc config.
+	// A config block that sets the gRPC config.
 	// +kubebuilder:validation:Optional
 	GRPCConfig *OrderedCacheBehaviorGRPCConfigParameters `json:"grpcConfig,omitempty" tf:"grpc_config,omitempty"`
 

@@ -547,7 +547,7 @@ spec:
                     description: current user status.
                     type: string
                   sub:
-                    description: unique user id that is never reassignable to another
+                    description: unique user ID that is never reassignable to another
                       user.
                     type: string
                   userPoolId:

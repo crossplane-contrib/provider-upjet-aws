@@ -1,0 +1,234 @@
+# SPDX-FileCopyrightText: 2026 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+#
+# This example shows how to run a CatalogTableOptimizer inside a VPC via
+# configuration.vpcConfiguration.glueConnectionName. This is required when the
+# table's underlying S3 bucket only allows access through a VPC endpoint.
+apiVersion: glue.aws.upbound.io/v1beta1
+kind: CatalogTableOptimizer
+metadata:
+  annotations:
+    meta.upbound.io/example-id: glue/v1beta1/catalogtableoptimizer-vpc-configuration
+  labels:
+    testing.upbound.io/example-name: example-glue-cto-vpc
+  name: example-glue-cto-vpc
+spec:
+  forProvider:
+    catalogId: "153891904029"
+    configuration:
+    - enabled: true
+      roleArn: "arn:aws:iam::153891904029:role/example-glue-cto-vpc"
+      vpcConfiguration:
+      - glueConnectionName: example-glue-cto-vpc
+    databaseNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-glue-cto-vpc
+    region: us-east-1
+    tableName: example-glue-cto-vpc
+    type: compaction
+---
+apiVersion: glue.aws.upbound.io/v1beta1
+kind: Connection
+metadata:
+  annotations:
+    meta.upbound.io/example-id: glue/v1beta1/catalogtableoptimizer-vpc-configuration
+  labels:
+    testing.upbound.io/example-name: example-glue-cto-vpc
+  name: example-glue-cto-vpc
+spec:
+  forProvider:
+    catalogId: "153891904029"
+    connectionType: NETWORK
+    physicalConnectionRequirements:
+    - availabilityZone: us-east-1a
+      securityGroupIdList:
+        - sg-01f4d4ba969ce0db5
+      subnetId: subnet-06f80de71fd1421b5
+    region: us-east-1
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: SecurityGroupRule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: glue/v1beta1/catalogtableoptimizer-vpc-configuration
+  labels:
+    testing.upbound.io/example-name: example-glue-cto-vpc
+  name: example-glue-cto-vpc
+spec:
+  forProvider:
+    region: us-east-1
+    type: ingress
+    fromPort: 1
+    toPort: 65535
+    protocol: tcp
+    self: true
+    securityGroupId: sg-01f4d4ba969ce0db5
+---
+apiVersion: glue.aws.upbound.io/v1beta1
+kind: CatalogDatabase
+metadata:
+  annotations:
+    meta.upbound.io/example-id: glue/v1beta1/catalogtableoptimizer-vpc-configuration
+  labels:
+    testing.upbound.io/example-name: example-glue-cto-vpc
+  name: example-glue-cto-vpc
+spec:
+  forProvider:
+    region: us-east-1
+    catalogId: "153891904029"
+---
+apiVersion: glue.aws.upbound.io/v1beta1
+kind: CatalogTable
+metadata:
+  annotations:
+    meta.upbound.io/example-id: glue/v1beta1/catalogtableoptimizer-vpc-configuration
+  name: example-glue-cto-vpc
+spec:
+  forProvider:
+    catalogId: "153891904029"
+    databaseNameRef:
+      name: example-glue-cto-vpc
+    openTableFormatInput:
+    - icebergInput:
+      - metadataOperation: "CREATE"
+    parameters:
+      classification: "csv"
+    region: us-east-1
+    storageDescriptor:
+    - columns:
+      - name: year
+        type: bigint
+      - name: quarter
+        type: bigint
+      - name: month
+        type: bigint
+      - name: day_of_month
+        type: bigint
+      inputFormat: "org.apache.hadoop.mapred.TextInputFormat"
+      location: s3://example-glue-cto-vpc/flight/2016/csv
+      outputFormat: "org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat"
+      serDeInfo:
+      - serializationLibrary: "org.apache.hadoop.hive.serde2.OpenCSVSerde"
+        parameters:
+          field.delim: ','
+    tableType: EXTERNAL_TABLE
+---
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: glue/v1beta1/catalogtableoptimizer-vpc-configuration
+  labels:
+    testing.upbound.io/example-name: example-glue-cto-vpc
+  name: example-glue-cto-vpc
+spec:
+  forProvider:
+    assumeRolePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Action": ["sts:AssumeRole"],
+            "Effect": "allow",
+            "Principal": {
+              "Service": ["glue.amazonaws.com"]
+            }
+          }
+        ]
+      }
+---
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: RolePolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: glue/v1beta1/catalogtableoptimizer-vpc-configuration
+  labels:
+    testing.upbound.io/example-name: example-glue-cto-vpc
+  name: example-glue-cto-vpc
+spec:
+  forProvider:
+    policy: |
+      {
+          "Version": "2012-10-17",
+          "Statement": [
+              {
+                  "Effect": "Allow",
+                  "Action": [
+                      "s3:PutObject",
+                      "s3:GetObject",
+                      "s3:DeleteObject"
+                  ],
+                  "Resource": [
+                      "arn:aws:s3:::example-glue-cto-vpc/*"
+                  ]
+              },
+              {
+                  "Effect": "Allow",
+                  "Action": [
+                      "s3:ListBucket"
+                  ],
+                  "Resource": [
+                      "arn:aws:s3:::example-glue-cto-vpc"
+                  ]
+              },
+              {
+                  "Effect": "Allow",
+                  "Action": [
+                      "glue:UpdateTable",
+                      "glue:GetTable"
+                  ],
+                  "Resource": [
+                      "arn:aws:glue:us-east-1:153891904029:table/example-glue-cto-vpc/example-glue-cto-vpc",
+                      "arn:aws:glue:us-east-1:153891904029:database/example-glue-cto-vpc",
+                      "arn:aws:glue:us-east-1:153891904029:catalog"
+                  ]
+              },
+              {
+                  "Effect": "Allow",
+                  "Action": [
+                      "ec2:*"
+                  ],
+                  "Resource": "*"
+              },
+              {
+                  "Effect": "Allow",
+                  "Action": [
+                      "ec2:CreateTags"
+                  ],
+                  "Resource": "arn:aws:ec2:*:*:network-interface/*"
+              }
+          ]
+      }
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-glue-cto-vpc
+---
+apiVersion: s3.aws.upbound.io/v1beta1
+kind: Bucket
+metadata:
+  annotations:
+    meta.upbound.io/example-id: glue/v1beta1/catalogtableoptimizer-vpc-configuration
+  labels:
+    testing.upbound.io/example-name: example_glue_cto_vpc
+  name: example-glue-cto-vpc
+spec:
+  forProvider:
+    forceDestroy: true
+    region: us-east-1
+---
+apiVersion: s3.aws.upbound.io/v1beta1
+kind: ObjectCopy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: glue/v1beta1/catalogtableoptimizer-vpc-configuration
+  labels:
+    testing.upbound.io/example-name: example_glue_cto_vpc
+  name: example-glue-cto-vpc
+spec:
+  forProvider:
+    bucket: example-glue-cto-vpc
+    forceDestroy: true
+    key: flight/2016/csv/mon=10/October2016.csv
+    region: us-east-1
+    source: crawler-public-us-east-1/flight/2016/csv/mon=10/October2016.csv

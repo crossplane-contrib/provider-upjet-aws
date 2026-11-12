@@ -264,7 +264,7 @@ spec:
                       a specific throughput level for the specified model.
                     type: number
                   provisionedModelArn:
-                    description: The ARN of the Provisioned Throughput.
+                    description: ARN of the Provisioned Throughput.
                     type: string
                   provisionedModelName:
                     description: Unique name for this Provisioned Throughput.

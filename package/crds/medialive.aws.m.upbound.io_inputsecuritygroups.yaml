@@ -71,11 +71,12 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   whitelistRules:
-                    description: Whitelist rules. See Whitelist Rules for more details.
+                    description: Whitelist rules. See whitelist_rules Block for more
+                      details.
                     items:
                       properties:
                         cidr:
-                          description: The IPv4 CIDR that's whitelisted.
+                          description: IPv4 CIDR that's whitelisted.
                           type: string
                       type: object
                     type: array
@@ -102,11 +103,12 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   whitelistRules:
-                    description: Whitelist rules. See Whitelist Rules for more details.
+                    description: Whitelist rules. See whitelist_rules Block for more
+                      details.
                     items:
                       properties:
                         cidr:
-                          description: The IPv4 CIDR that's whitelisted.
+                          description: IPv4 CIDR that's whitelisted.
                           type: string
                       type: object
                     type: array
@@ -183,10 +185,10 @@ spec:
                     description: ARN of the InputSecurityGroup.
                     type: string
                   id:
-                    description: InputSecurityGroup Id.
+                    description: InputSecurityGroup ID.
                     type: string
                   inputs:
-                    description: The list of inputs currently using this InputSecurityGroup.
+                    description: List of inputs currently using this InputSecurityGroup.
                     items:
                       type: string
                     type: array
@@ -207,11 +209,12 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   whitelistRules:
-                    description: Whitelist rules. See Whitelist Rules for more details.
+                    description: Whitelist rules. See whitelist_rules Block for more
+                      details.
                     items:
                       properties:
                         cidr:
-                          description: The IPv4 CIDR that's whitelisted.
+                          description: IPv4 CIDR that's whitelisted.
                           type: string
                       type: object
                     type: array

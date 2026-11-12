@@ -15,16 +15,16 @@ import (
 
 type WorkspaceAPIKeyInitParameters struct {
 
-	// Specifies the name of the API key. Key names must be unique to the workspace.
+	// Name of the API key. Key names must be unique to the workspace.
 	KeyName *string `json:"keyName,omitempty" tf:"key_name,omitempty"`
 
-	// Specifies the permission level of the API key. Valid values are VIEWER, EDITOR, or ADMIN.
+	// Permission level of the API key. Valid values are VIEWER, EDITOR, or ADMIN.
 	KeyRole *string `json:"keyRole,omitempty" tf:"key_role,omitempty"`
 
-	// Specifies the time in seconds until the API key expires. Keys can be valid for up to 30 days.
+	// Time in seconds until the API key expires. Keys can be valid for up to 30 days.
 	SecondsToLive *float64 `json:"secondsToLive,omitempty" tf:"seconds_to_live,omitempty"`
 
-	// The ID of the workspace that the API key is valid for.
+	// ID of the workspace that the API key is valid for.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/grafana/v1beta2.Workspace
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`
@@ -41,30 +41,30 @@ type WorkspaceAPIKeyInitParameters struct {
 type WorkspaceAPIKeyObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Specifies the name of the API key. Key names must be unique to the workspace.
+	// Name of the API key. Key names must be unique to the workspace.
 	KeyName *string `json:"keyName,omitempty" tf:"key_name,omitempty"`
 
-	// Specifies the permission level of the API key. Valid values are VIEWER, EDITOR, or ADMIN.
+	// Permission level of the API key. Valid values are VIEWER, EDITOR, or ADMIN.
 	KeyRole *string `json:"keyRole,omitempty" tf:"key_role,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// Specifies the time in seconds until the API key expires. Keys can be valid for up to 30 days.
+	// Time in seconds until the API key expires. Keys can be valid for up to 30 days.
 	SecondsToLive *float64 `json:"secondsToLive,omitempty" tf:"seconds_to_live,omitempty"`
 
-	// The ID of the workspace that the API key is valid for.
+	// ID of the workspace that the API key is valid for.
 	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`
 }
 
 type WorkspaceAPIKeyParameters struct {
 
-	// Specifies the name of the API key. Key names must be unique to the workspace.
+	// Name of the API key. Key names must be unique to the workspace.
 	// +kubebuilder:validation:Optional
 	KeyName *string `json:"keyName,omitempty" tf:"key_name,omitempty"`
 
-	// Specifies the permission level of the API key. Valid values are VIEWER, EDITOR, or ADMIN.
+	// Permission level of the API key. Valid values are VIEWER, EDITOR, or ADMIN.
 	// +kubebuilder:validation:Optional
 	KeyRole *string `json:"keyRole,omitempty" tf:"key_role,omitempty"`
 
@@ -73,11 +73,11 @@ type WorkspaceAPIKeyParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// Specifies the time in seconds until the API key expires. Keys can be valid for up to 30 days.
+	// Time in seconds until the API key expires. Keys can be valid for up to 30 days.
 	// +kubebuilder:validation:Optional
 	SecondsToLive *float64 `json:"secondsToLive,omitempty" tf:"seconds_to_live,omitempty"`
 
-	// The ID of the workspace that the API key is valid for.
+	// ID of the workspace that the API key is valid for.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/grafana/v1beta2.Workspace
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional

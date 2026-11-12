@@ -21,7 +21,7 @@ type DNSTargetResourceInitParameters struct {
 	// Hosted Zone ARN that contains the DNS record with the provided name of target resource.
 	HostedZoneArn *string `json:"hostedZoneArn,omitempty" tf:"hosted_zone_arn,omitempty"`
 
-	// Route53 record set id to uniquely identify a record given a domain_name and a record_type.
+	// Route53 record set ID to uniquely identify a record given a domain_name and a record_type.
 	RecordSetID *string `json:"recordSetId,omitempty" tf:"record_set_id,omitempty"`
 
 	// Type of DNS Record of target resource.
@@ -39,7 +39,7 @@ type DNSTargetResourceObservation struct {
 	// Hosted Zone ARN that contains the DNS record with the provided name of target resource.
 	HostedZoneArn *string `json:"hostedZoneArn,omitempty" tf:"hosted_zone_arn,omitempty"`
 
-	// Route53 record set id to uniquely identify a record given a domain_name and a record_type.
+	// Route53 record set ID to uniquely identify a record given a domain_name and a record_type.
 	RecordSetID *string `json:"recordSetId,omitempty" tf:"record_set_id,omitempty"`
 
 	// Type of DNS Record of target resource.
@@ -59,7 +59,7 @@ type DNSTargetResourceParameters struct {
 	// +kubebuilder:validation:Optional
 	HostedZoneArn *string `json:"hostedZoneArn,omitempty" tf:"hosted_zone_arn,omitempty"`
 
-	// Route53 record set id to uniquely identify a record given a domain_name and a record_type.
+	// Route53 record set ID to uniquely identify a record given a domain_name and a record_type.
 	// +kubebuilder:validation:Optional
 	RecordSetID *string `json:"recordSetId,omitempty" tf:"record_set_id,omitempty"`
 

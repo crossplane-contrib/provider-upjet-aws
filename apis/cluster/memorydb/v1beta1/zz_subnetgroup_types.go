@@ -40,13 +40,13 @@ type SubnetGroupInitParameters struct {
 
 type SubnetGroupObservation struct {
 
-	// The ARN of the subnet group.
+	// ARN of the subnet group.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Description for the subnet group.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The name of the subnet group.
+	// Name of the subnet group.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -61,11 +61,11 @@ type SubnetGroupObservation struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// The VPC in which the subnet group exists.
+	// VPC in which the subnet group exists.
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 }
 

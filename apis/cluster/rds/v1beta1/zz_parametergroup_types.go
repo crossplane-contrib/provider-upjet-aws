@@ -33,7 +33,7 @@ type ParameterGroupInitParameters struct {
 
 type ParameterGroupObservation struct {
 
-	// ARN of the db parameter group.
+	// ARN of the DB parameter group.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Description of the DB parameter group.

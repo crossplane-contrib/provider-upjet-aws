@@ -15,13 +15,13 @@ import (
 
 type InstanceInitParameters struct {
 
-	// The custom subdomain for the CIDR endpoints.
+	// Custom subdomain for the CIDR endpoints.
 	CidrEndpointsCustomSubdomain *string `json:"cidrEndpointsCustomSubdomain,omitempty" tf:"cidr_endpoints_custom_subdomain,omitempty"`
 
-	// A description for the AWS Verified Access Instance.
+	// Description for the AWS Verified Access Instance.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Enable or disable support for Federal Information Processing Standards (FIPS) on the AWS Verified Access Instance.
+	// Whether to enable support for Federal Information Processing Standards (FIPS) on the AWS Verified Access Instance.
 	FipsEnabled *bool `json:"fipsEnabled,omitempty" tf:"fips_enabled,omitempty"`
 
 	// Key-value map of resource tags.
@@ -31,24 +31,25 @@ type InstanceInitParameters struct {
 
 type InstanceObservation struct {
 
-	// The custom subdomain for the CIDR endpoints.
+	// Custom subdomain for the CIDR endpoints.
 	CidrEndpointsCustomSubdomain *string `json:"cidrEndpointsCustomSubdomain,omitempty" tf:"cidr_endpoints_custom_subdomain,omitempty"`
 
-	// The time that the Verified Access Instance was created.
+	// Time that the Verified Access Instance was created.
 	CreationTime *string `json:"creationTime,omitempty" tf:"creation_time,omitempty"`
 
-	// A description for the AWS Verified Access Instance.
+	// Description for the AWS Verified Access Instance.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Enable or disable support for Federal Information Processing Standards (FIPS) on the AWS Verified Access Instance.
+	// Whether to enable support for Federal Information Processing Standards (FIPS) on the AWS Verified Access Instance.
 	FipsEnabled *bool `json:"fipsEnabled,omitempty" tf:"fips_enabled,omitempty"`
 
-	// The ID of the AWS Verified Access Instance.
+	// ID of the AWS Verified Access Instance.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The time that the Verified Access Instance was last updated.
+	// Time that the Verified Access Instance was last updated.
 	LastUpdatedTime *string `json:"lastUpdatedTime,omitempty" tf:"last_updated_time,omitempty"`
 
+	// List of DNS names servers that clients can use to connect to the Verified Access Instance.
 	// +listType=set
 	NameServers []*string `json:"nameServers,omitempty" tf:"name_servers,omitempty"`
 
@@ -63,21 +64,21 @@ type InstanceObservation struct {
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// One or more blocks of providing information about the AWS Verified Access Trust Providers. See verified_access_trust_providers below for details.One or more blocks
+	// One or more blocks providing information about the AWS Verified Access Trust Providers. See verified_access_trust_providers below for details.
 	VerifiedAccessTrustProviders []VerifiedAccessTrustProvidersObservation `json:"verifiedAccessTrustProviders,omitempty" tf:"verified_access_trust_providers,omitempty"`
 }
 
 type InstanceParameters struct {
 
-	// The custom subdomain for the CIDR endpoints.
+	// Custom subdomain for the CIDR endpoints.
 	// +kubebuilder:validation:Optional
 	CidrEndpointsCustomSubdomain *string `json:"cidrEndpointsCustomSubdomain,omitempty" tf:"cidr_endpoints_custom_subdomain,omitempty"`
 
-	// A description for the AWS Verified Access Instance.
+	// Description for the AWS Verified Access Instance.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Enable or disable support for Federal Information Processing Standards (FIPS) on the AWS Verified Access Instance.
+	// Whether to enable support for Federal Information Processing Standards (FIPS) on the AWS Verified Access Instance.
 	// +kubebuilder:validation:Optional
 	FipsEnabled *bool `json:"fipsEnabled,omitempty" tf:"fips_enabled,omitempty"`
 
@@ -97,19 +98,19 @@ type VerifiedAccessTrustProvidersInitParameters struct {
 
 type VerifiedAccessTrustProvidersObservation struct {
 
-	// The description of trust provider.
+	// Description of trust provider.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The type of device-based trust provider.
+	// Type of device-based trust provider.
 	DeviceTrustProviderType *string `json:"deviceTrustProviderType,omitempty" tf:"device_trust_provider_type,omitempty"`
 
-	// The type of trust provider (user- or device-based).
+	// Type of trust provider (user- or device-based).
 	TrustProviderType *string `json:"trustProviderType,omitempty" tf:"trust_provider_type,omitempty"`
 
-	// The type of user-based trust provider.
+	// Type of user-based trust provider.
 	UserTrustProviderType *string `json:"userTrustProviderType,omitempty" tf:"user_trust_provider_type,omitempty"`
 
-	// The ID of the trust provider.
+	// ID of the trust provider.
 	VerifiedAccessTrustProviderID *string `json:"verifiedAccessTrustProviderId,omitempty" tf:"verified_access_trust_provider_id,omitempty"`
 }
 

@@ -81,8 +81,7 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   subnetId:
-                    description: The ID of the subnet to be associated with the VPC
-                      endpoint.
+                    description: ID of the subnet to be associated with the VPC endpoint.
                     type: string
                   subnetIdRef:
                     description: Reference to a Subnet in ec2 to populate subnetId.
@@ -159,8 +158,8 @@ spec:
                         type: object
                     type: object
                   vpcEndpointId:
-                    description: The ID of the VPC endpoint with which the subnet
-                      will be associated.
+                    description: ID of the VPC endpoint with which the subnet will
+                      be associated.
                     type: string
                   vpcEndpointIdRef:
                     description: Reference to a VPCEndpoint in ec2 to populate vpcEndpointId.
@@ -253,8 +252,7 @@ spec:
                   autoscaler.
                 properties:
                   subnetId:
-                    description: The ID of the subnet to be associated with the VPC
-                      endpoint.
+                    description: ID of the subnet to be associated with the VPC endpoint.
                     type: string
                   subnetIdRef:
                     description: Reference to a Subnet in ec2 to populate subnetId.
@@ -331,8 +329,8 @@ spec:
                         type: object
                     type: object
                   vpcEndpointId:
-                    description: The ID of the VPC endpoint with which the subnet
-                      will be associated.
+                    description: ID of the VPC endpoint with which the subnet will
+                      be associated.
                     type: string
                   vpcEndpointIdRef:
                     description: Reference to a VPCEndpoint in ec2 to populate vpcEndpointId.
@@ -502,7 +500,7 @@ spec:
               atProvider:
                 properties:
                   id:
-                    description: The ID of the association.
+                    description: ID of the association.
                     type: string
                   region:
                     description: |-
@@ -510,12 +508,11 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   subnetId:
-                    description: The ID of the subnet to be associated with the VPC
-                      endpoint.
+                    description: ID of the subnet to be associated with the VPC endpoint.
                     type: string
                   vpcEndpointId:
-                    description: The ID of the VPC endpoint with which the subnet
-                      will be associated.
+                    description: ID of the VPC endpoint with which the subnet will
+                      be associated.
                     type: string
                 type: object
               conditions:

@@ -15,13 +15,13 @@ import (
 
 type LicenseAssociationInitParameters struct {
 
-	// A token from Grafana Labs that ties your AWS account with a Grafana Labs account.
+	// Token from Grafana Labs that ties your AWS account with a Grafana Labs account.
 	GrafanaToken *string `json:"grafanaToken,omitempty" tf:"grafana_token,omitempty"`
 
-	// The type of license for the workspace license association. Valid values are ENTERPRISE and ENTERPRISE_FREE_TRIAL.
+	// Type of license for the workspace license association. Valid values are ENTERPRISE and ENTERPRISE_FREE_TRIAL.
 	LicenseType *string `json:"licenseType,omitempty" tf:"license_type,omitempty"`
 
-	// The workspace id.
+	// Workspace ID.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/grafana/v1beta2.Workspace
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`
@@ -40,7 +40,7 @@ type LicenseAssociationObservation struct {
 	// If license_type is set to ENTERPRISE_FREE_TRIAL, this is the expiration date of the free trial.
 	FreeTrialExpiration *string `json:"freeTrialExpiration,omitempty" tf:"free_trial_expiration,omitempty"`
 
-	// A token from Grafana Labs that ties your AWS account with a Grafana Labs account.
+	// Token from Grafana Labs that ties your AWS account with a Grafana Labs account.
 	GrafanaToken *string `json:"grafanaToken,omitempty" tf:"grafana_token,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -48,24 +48,24 @@ type LicenseAssociationObservation struct {
 	// If license_type is set to ENTERPRISE, this is the expiration date of the enterprise license.
 	LicenseExpiration *string `json:"licenseExpiration,omitempty" tf:"license_expiration,omitempty"`
 
-	// The type of license for the workspace license association. Valid values are ENTERPRISE and ENTERPRISE_FREE_TRIAL.
+	// Type of license for the workspace license association. Valid values are ENTERPRISE and ENTERPRISE_FREE_TRIAL.
 	LicenseType *string `json:"licenseType,omitempty" tf:"license_type,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The workspace id.
+	// Workspace ID.
 	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`
 }
 
 type LicenseAssociationParameters struct {
 
-	// A token from Grafana Labs that ties your AWS account with a Grafana Labs account.
+	// Token from Grafana Labs that ties your AWS account with a Grafana Labs account.
 	// +kubebuilder:validation:Optional
 	GrafanaToken *string `json:"grafanaToken,omitempty" tf:"grafana_token,omitempty"`
 
-	// The type of license for the workspace license association. Valid values are ENTERPRISE and ENTERPRISE_FREE_TRIAL.
+	// Type of license for the workspace license association. Valid values are ENTERPRISE and ENTERPRISE_FREE_TRIAL.
 	// +kubebuilder:validation:Optional
 	LicenseType *string `json:"licenseType,omitempty" tf:"license_type,omitempty"`
 
@@ -74,7 +74,7 @@ type LicenseAssociationParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// The workspace id.
+	// Workspace ID.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/grafana/v1beta2.Workspace
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional

@@ -1489,7 +1489,7 @@ spec:
                       image builder.
                     type: string
                   arn:
-                    description: ARN of the appstream image builder.
+                    description: ARN of the AppStream image builder.
                     type: string
                   createdTime:
                     description: Date and time, in UTC and extended RFC 3339 format,

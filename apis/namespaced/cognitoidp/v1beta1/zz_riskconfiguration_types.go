@@ -444,7 +444,7 @@ type RiskConfigurationObservation struct {
 	// The compromised credentials risk configuration. See details below.
 	CompromisedCredentialsRiskConfiguration *CompromisedCredentialsRiskConfigurationObservation `json:"compromisedCredentialsRiskConfiguration,omitempty" tf:"compromised_credentials_risk_configuration,omitempty"`
 
-	// The user pool ID or the user pool ID and Client Id separated by a : if the configuration is client specific.
+	// The user pool ID or the user pool ID and Client ID separated by a : if the configuration is client specific.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.

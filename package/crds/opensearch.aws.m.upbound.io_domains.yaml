@@ -294,9 +294,8 @@ spec:
                         type: boolean
                       warmType:
                         description: Instance type for the OpenSearch cluster's warm
-                          nodes. Valid values are ultrawarm1.medium.search, ultrawarm1.large.search
-                          and ultrawarm1.xlarge.search. warm_type can be only and
-                          must be set when warm_enabled is set to true.
+                          nodes. warm_type can be only and must be set when warm_enabled
+                          is set to true.
                         type: string
                       zoneAwarenessConfig:
                         description: Configuration block containing zone awareness
@@ -531,7 +530,7 @@ spec:
                     items:
                       properties:
                         cloudwatchLogGroupArn:
-                          description: ARN of the Cloudwatch log group to which log
+                          description: ARN of the CloudWatch log group to which log
                             needs to be published.
                           type: string
                         cloudwatchLogGroupArnRef:
@@ -1135,9 +1134,8 @@ spec:
                         type: boolean
                       warmType:
                         description: Instance type for the OpenSearch cluster's warm
-                          nodes. Valid values are ultrawarm1.medium.search, ultrawarm1.large.search
-                          and ultrawarm1.xlarge.search. warm_type can be only and
-                          must be set when warm_enabled is set to true.
+                          nodes. warm_type can be only and must be set when warm_enabled
+                          is set to true.
                         type: string
                       zoneAwarenessConfig:
                         description: Configuration block containing zone awareness
@@ -1372,7 +1370,7 @@ spec:
                     items:
                       properties:
                         cloudwatchLogGroupArn:
-                          description: ARN of the Cloudwatch log group to which log
+                          description: ARN of the CloudWatch log group to which log
                             needs to be published.
                           type: string
                         cloudwatchLogGroupArnRef:
@@ -2016,9 +2014,8 @@ spec:
                         type: boolean
                       warmType:
                         description: Instance type for the OpenSearch cluster's warm
-                          nodes. Valid values are ultrawarm1.medium.search, ultrawarm1.large.search
-                          and ultrawarm1.xlarge.search. warm_type can be only and
-                          must be set when warm_enabled is set to true.
+                          nodes. warm_type can be only and must be set when warm_enabled
+                          is set to true.
                         type: string
                       zoneAwarenessConfig:
                         description: Configuration block containing zone awareness
@@ -2057,12 +2054,12 @@ spec:
                         type: string
                     type: object
                   dashboardEndpoint:
-                    description: Domain-specific endpoint for Dashboard without https
+                    description: Domain-specific endpoint for Dashboard without HTTPS
                       scheme.
                     type: string
                   dashboardEndpointV2:
                     description: V2 domain endpoint for Dashboard that works with
-                      both IPv4 and IPv6 addresses, without https scheme.
+                      both IPv4 and IPv6 addresses, without HTTPS scheme.
                     type: string
                   deploymentStrategyOptions:
                     description: Configuration block for the deployment strategy options
@@ -2198,7 +2195,7 @@ spec:
                     items:
                       properties:
                         cloudwatchLogGroupArn:
-                          description: ARN of the Cloudwatch log group to which log
+                          description: ARN of the CloudWatch log group to which log
                             needs to be published.
                           type: string
                         enabled:

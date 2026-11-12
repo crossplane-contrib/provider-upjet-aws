@@ -15,97 +15,97 @@ import (
 
 type CriterionInitParameters struct {
 
-	// The value for the property matches (equals) the specified value. If you specify multiple values, Amazon Macie uses OR logic to join the values.
+	// Value for the property matches (equals) the specified value. If you specify multiple values, Amazon Macie uses OR logic to join the values.
 	// +listType=set
 	Eq []*string `json:"eq,omitempty" tf:"eq,omitempty"`
 
-	// The value for the property exclusively matches (equals an exact match for) all the specified values. If you specify multiple values, Amazon Macie uses AND logic to join the values.
+	// Value for the property exclusively matches (equals an exact match for) all the specified values. If you specify multiple values, Amazon Macie uses AND logic to join the values.
 	// +listType=set
 	EqExactMatch []*string `json:"eqExactMatch,omitempty" tf:"eq_exact_match,omitempty"`
 
-	// The name of the field to be evaluated.
+	// Name of the field to be evaluated.
 	Field *string `json:"field,omitempty" tf:"field,omitempty"`
 
-	// The value for the property is greater than the specified value.
+	// Value for the property is greater than the specified value.
 	Gt *string `json:"gt,omitempty" tf:"gt,omitempty"`
 
-	// The value for the property is greater than or equal to the specified value.
+	// Value for the property is greater than or equal to the specified value.
 	Gte *string `json:"gte,omitempty" tf:"gte,omitempty"`
 
-	// The value for the property is less than the specified value.
+	// Value for the property is less than the specified value.
 	Lt *string `json:"lt,omitempty" tf:"lt,omitempty"`
 
-	// The value for the property is less than or equal to the specified value.
+	// Value for the property is less than or equal to the specified value.
 	Lte *string `json:"lte,omitempty" tf:"lte,omitempty"`
 
-	// The value for the property doesn't match (doesn't equal) the specified value. If you specify multiple values, Amazon Macie uses OR logic to join the values.
+	// Value for the property doesn't match (doesn't equal) the specified value. If you specify multiple values, Amazon Macie uses OR logic to join the values.
 	// +listType=set
 	Neq []*string `json:"neq,omitempty" tf:"neq,omitempty"`
 }
 
 type CriterionObservation struct {
 
-	// The value for the property matches (equals) the specified value. If you specify multiple values, Amazon Macie uses OR logic to join the values.
+	// Value for the property matches (equals) the specified value. If you specify multiple values, Amazon Macie uses OR logic to join the values.
 	// +listType=set
 	Eq []*string `json:"eq,omitempty" tf:"eq,omitempty"`
 
-	// The value for the property exclusively matches (equals an exact match for) all the specified values. If you specify multiple values, Amazon Macie uses AND logic to join the values.
+	// Value for the property exclusively matches (equals an exact match for) all the specified values. If you specify multiple values, Amazon Macie uses AND logic to join the values.
 	// +listType=set
 	EqExactMatch []*string `json:"eqExactMatch,omitempty" tf:"eq_exact_match,omitempty"`
 
-	// The name of the field to be evaluated.
+	// Name of the field to be evaluated.
 	Field *string `json:"field,omitempty" tf:"field,omitempty"`
 
-	// The value for the property is greater than the specified value.
+	// Value for the property is greater than the specified value.
 	Gt *string `json:"gt,omitempty" tf:"gt,omitempty"`
 
-	// The value for the property is greater than or equal to the specified value.
+	// Value for the property is greater than or equal to the specified value.
 	Gte *string `json:"gte,omitempty" tf:"gte,omitempty"`
 
-	// The value for the property is less than the specified value.
+	// Value for the property is less than the specified value.
 	Lt *string `json:"lt,omitempty" tf:"lt,omitempty"`
 
-	// The value for the property is less than or equal to the specified value.
+	// Value for the property is less than or equal to the specified value.
 	Lte *string `json:"lte,omitempty" tf:"lte,omitempty"`
 
-	// The value for the property doesn't match (doesn't equal) the specified value. If you specify multiple values, Amazon Macie uses OR logic to join the values.
+	// Value for the property doesn't match (doesn't equal) the specified value. If you specify multiple values, Amazon Macie uses OR logic to join the values.
 	// +listType=set
 	Neq []*string `json:"neq,omitempty" tf:"neq,omitempty"`
 }
 
 type CriterionParameters struct {
 
-	// The value for the property matches (equals) the specified value. If you specify multiple values, Amazon Macie uses OR logic to join the values.
+	// Value for the property matches (equals) the specified value. If you specify multiple values, Amazon Macie uses OR logic to join the values.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	Eq []*string `json:"eq,omitempty" tf:"eq,omitempty"`
 
-	// The value for the property exclusively matches (equals an exact match for) all the specified values. If you specify multiple values, Amazon Macie uses AND logic to join the values.
+	// Value for the property exclusively matches (equals an exact match for) all the specified values. If you specify multiple values, Amazon Macie uses AND logic to join the values.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	EqExactMatch []*string `json:"eqExactMatch,omitempty" tf:"eq_exact_match,omitempty"`
 
-	// The name of the field to be evaluated.
+	// Name of the field to be evaluated.
 	// +kubebuilder:validation:Optional
 	Field *string `json:"field" tf:"field,omitempty"`
 
-	// The value for the property is greater than the specified value.
+	// Value for the property is greater than the specified value.
 	// +kubebuilder:validation:Optional
 	Gt *string `json:"gt,omitempty" tf:"gt,omitempty"`
 
-	// The value for the property is greater than or equal to the specified value.
+	// Value for the property is greater than or equal to the specified value.
 	// +kubebuilder:validation:Optional
 	Gte *string `json:"gte,omitempty" tf:"gte,omitempty"`
 
-	// The value for the property is less than the specified value.
+	// Value for the property is less than the specified value.
 	// +kubebuilder:validation:Optional
 	Lt *string `json:"lt,omitempty" tf:"lt,omitempty"`
 
-	// The value for the property is less than or equal to the specified value.
+	// Value for the property is less than or equal to the specified value.
 	// +kubebuilder:validation:Optional
 	Lte *string `json:"lte,omitempty" tf:"lte,omitempty"`
 
-	// The value for the property doesn't match (doesn't equal) the specified value. If you specify multiple values, Amazon Macie uses OR logic to join the values.
+	// Value for the property doesn't match (doesn't equal) the specified value. If you specify multiple values, Amazon Macie uses OR logic to join the values.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	Neq []*string `json:"neq,omitempty" tf:"neq,omitempty"`
@@ -113,38 +113,38 @@ type CriterionParameters struct {
 
 type FindingCriteriaInitParameters struct {
 
-	// A condition that specifies the property, operator, and one or more values to use to filter the results.  (documented below)
+	// Condition that specifies the property, operator, and one or more values to use to filter the results. See criterion Block for details.
 	Criterion []CriterionInitParameters `json:"criterion,omitempty" tf:"criterion,omitempty"`
 }
 
 type FindingCriteriaObservation struct {
 
-	// A condition that specifies the property, operator, and one or more values to use to filter the results.  (documented below)
+	// Condition that specifies the property, operator, and one or more values to use to filter the results. See criterion Block for details.
 	Criterion []CriterionObservation `json:"criterion,omitempty" tf:"criterion,omitempty"`
 }
 
 type FindingCriteriaParameters struct {
 
-	// A condition that specifies the property, operator, and one or more values to use to filter the results.  (documented below)
+	// Condition that specifies the property, operator, and one or more values to use to filter the results. See criterion Block for details.
 	// +kubebuilder:validation:Optional
 	Criterion []CriterionParameters `json:"criterion,omitempty" tf:"criterion,omitempty"`
 }
 
 type FindingsFilterInitParameters struct {
 
-	// The action to perform on findings that meet the filter criteria (finding_criteria). Valid values are: ARCHIVE, suppress (automatically archive) the findings; and, NOOP, don't perform any action on the findings.
+	// Action to perform on findings that meet the filter criteria (finding_criteria). Valid values are ARCHIVE, to suppress (automatically archive) the findings, and NOOP, to not perform any action on the findings.
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
-	// A custom description of the filter. The description can contain as many as 512 characters.
+	// Custom description of the filter. Can contain as many as 512 characters.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The criteria to use to filter findings.
+	// Criteria to use to filter findings. See finding_criteria Block for details.
 	FindingCriteria *FindingCriteriaInitParameters `json:"findingCriteria,omitempty" tf:"finding_criteria,omitempty"`
 
-	// A custom name for the filter. The name must contain at least 3 characters and can contain as many as 64 characters. Conflicts with name_prefix.
+	// Custom name for the filter. Must contain at least 3 characters and can contain as many as 64 characters. Conflicts with name_prefix.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The position of the filter in the list of saved filters on the Amazon Macie console. This value also determines the order in which the filter is applied to findings, relative to other filters that are also applied to the findings.
+	// Position of the filter in the list of saved filters on the Amazon Macie console. This value also determines the order in which the filter is applied to findings, relative to other filters that are also applied to the findings.
 	Position *float64 `json:"position,omitempty" tf:"position,omitempty"`
 
 	// Key-value map of resource tags.
@@ -154,25 +154,25 @@ type FindingsFilterInitParameters struct {
 
 type FindingsFilterObservation struct {
 
-	// The action to perform on findings that meet the filter criteria (finding_criteria). Valid values are: ARCHIVE, suppress (automatically archive) the findings; and, NOOP, don't perform any action on the findings.
+	// Action to perform on findings that meet the filter criteria (finding_criteria). Valid values are ARCHIVE, to suppress (automatically archive) the findings, and NOOP, to not perform any action on the findings.
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
 	// ARN of the Findings Filter.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// A custom description of the filter. The description can contain as many as 512 characters.
+	// Custom description of the filter. Can contain as many as 512 characters.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The criteria to use to filter findings.
+	// Criteria to use to filter findings. See finding_criteria Block for details.
 	FindingCriteria *FindingCriteriaObservation `json:"findingCriteria,omitempty" tf:"finding_criteria,omitempty"`
 
-	// The unique identifier (ID) of the macie Findings Filter.
+	// Unique identifier (ID) of the Macie Findings Filter.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// A custom name for the filter. The name must contain at least 3 characters and can contain as many as 64 characters. Conflicts with name_prefix.
+	// Custom name for the filter. Must contain at least 3 characters and can contain as many as 64 characters. Conflicts with name_prefix.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The position of the filter in the list of saved filters on the Amazon Macie console. This value also determines the order in which the filter is applied to findings, relative to other filters that are also applied to the findings.
+	// Position of the filter in the list of saved filters on the Amazon Macie console. This value also determines the order in which the filter is applied to findings, relative to other filters that are also applied to the findings.
 	Position *float64 `json:"position,omitempty" tf:"position,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -183,30 +183,30 @@ type FindingsFilterObservation struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type FindingsFilterParameters struct {
 
-	// The action to perform on findings that meet the filter criteria (finding_criteria). Valid values are: ARCHIVE, suppress (automatically archive) the findings; and, NOOP, don't perform any action on the findings.
+	// Action to perform on findings that meet the filter criteria (finding_criteria). Valid values are ARCHIVE, to suppress (automatically archive) the findings, and NOOP, to not perform any action on the findings.
 	// +kubebuilder:validation:Optional
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
-	// A custom description of the filter. The description can contain as many as 512 characters.
+	// Custom description of the filter. Can contain as many as 512 characters.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The criteria to use to filter findings.
+	// Criteria to use to filter findings. See finding_criteria Block for details.
 	// +kubebuilder:validation:Optional
 	FindingCriteria *FindingCriteriaParameters `json:"findingCriteria,omitempty" tf:"finding_criteria,omitempty"`
 
-	// A custom name for the filter. The name must contain at least 3 characters and can contain as many as 64 characters. Conflicts with name_prefix.
+	// Custom name for the filter. Must contain at least 3 characters and can contain as many as 64 characters. Conflicts with name_prefix.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The position of the filter in the list of saved filters on the Amazon Macie console. This value also determines the order in which the filter is applied to findings, relative to other filters that are also applied to the findings.
+	// Position of the filter in the list of saved filters on the Amazon Macie console. This value also determines the order in which the filter is applied to findings, relative to other filters that are also applied to the findings.
 	// +kubebuilder:validation:Optional
 	Position *float64 `json:"position,omitempty" tf:"position,omitempty"`
 

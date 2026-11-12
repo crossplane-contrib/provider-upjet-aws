@@ -35,6 +35,7 @@ import (
 	"github.com/upbound/provider-aws/v2/config/cluster/datasync"
 	"github.com/upbound/provider-aws/v2/config/cluster/dax"
 	"github.com/upbound/provider-aws/v2/config/cluster/devicefarm"
+	"github.com/upbound/provider-aws/v2/config/cluster/devopsagent"
 	"github.com/upbound/provider-aws/v2/config/cluster/directconnect"
 	"github.com/upbound/provider-aws/v2/config/cluster/dms"
 	"github.com/upbound/provider-aws/v2/config/cluster/docdb"
@@ -97,6 +98,7 @@ import (
 	"github.com/upbound/provider-aws/v2/config/cluster/route53resolver"
 	"github.com/upbound/provider-aws/v2/config/cluster/s3"
 	"github.com/upbound/provider-aws/v2/config/cluster/s3files"
+	"github.com/upbound/provider-aws/v2/config/cluster/s3tables"
 	"github.com/upbound/provider-aws/v2/config/cluster/s3vectors"
 	"github.com/upbound/provider-aws/v2/config/cluster/sagemaker"
 	"github.com/upbound/provider-aws/v2/config/cluster/secretsmanager"
@@ -222,4 +224,6 @@ func init() {
 	ProviderConfiguration.AddConfig(verifiedaccess.Configure)
 	ProviderConfiguration.AddConfig(vpclattice.Configure)
 	ProviderConfiguration.AddConfig(timestreaminfluxdb.Configure)
+	ProviderConfiguration.AddConfig(s3tables.Configure)
+	ProviderConfiguration.AddConfig(devopsagent.Configure)
 }

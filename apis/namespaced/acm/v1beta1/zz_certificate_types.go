@@ -266,7 +266,7 @@ type DomainValidationOptionsParameters struct {
 
 type OptionsInitParameters struct {
 
-	// Whether certificate details should be added to a certificate transparency log. Valid values are ENABLED or DISABLED. See https://docs.aws.amazon.com/acm/latest/userguide/acm-concepts.html#concept-transparency for more details.
+	// Whether certificate details should be added to a certificate transparency log. Valid values are ENABLED or DISABLED. See https://docs.aws.amazon.com/acm/latest/userguide/acm-concepts.html#concept-transparency for more details. This argument applies to Amazon-issued and private CA certificates. It conflicts with private_key / private_key_wo, so it cannot be set on imported certificates. Imported certificates are not managed by ACM issuance, so ACM does not control their certificate transparency logging.
 	CertificateTransparencyLoggingPreference *string `json:"certificateTransparencyLoggingPreference,omitempty" tf:"certificate_transparency_logging_preference,omitempty"`
 
 	// Whether the certificate can be exported. Valid values are ENABLED or DISABLED (default). Note Issuing an exportable certificate is subject to additional charges. See AWS Certificate Manager pricing for more details.
@@ -275,7 +275,7 @@ type OptionsInitParameters struct {
 
 type OptionsObservation struct {
 
-	// Whether certificate details should be added to a certificate transparency log. Valid values are ENABLED or DISABLED. See https://docs.aws.amazon.com/acm/latest/userguide/acm-concepts.html#concept-transparency for more details.
+	// Whether certificate details should be added to a certificate transparency log. Valid values are ENABLED or DISABLED. See https://docs.aws.amazon.com/acm/latest/userguide/acm-concepts.html#concept-transparency for more details. This argument applies to Amazon-issued and private CA certificates. It conflicts with private_key / private_key_wo, so it cannot be set on imported certificates. Imported certificates are not managed by ACM issuance, so ACM does not control their certificate transparency logging.
 	CertificateTransparencyLoggingPreference *string `json:"certificateTransparencyLoggingPreference,omitempty" tf:"certificate_transparency_logging_preference,omitempty"`
 
 	// Whether the certificate can be exported. Valid values are ENABLED or DISABLED (default). Note Issuing an exportable certificate is subject to additional charges. See AWS Certificate Manager pricing for more details.
@@ -284,7 +284,7 @@ type OptionsObservation struct {
 
 type OptionsParameters struct {
 
-	// Whether certificate details should be added to a certificate transparency log. Valid values are ENABLED or DISABLED. See https://docs.aws.amazon.com/acm/latest/userguide/acm-concepts.html#concept-transparency for more details.
+	// Whether certificate details should be added to a certificate transparency log. Valid values are ENABLED or DISABLED. See https://docs.aws.amazon.com/acm/latest/userguide/acm-concepts.html#concept-transparency for more details. This argument applies to Amazon-issued and private CA certificates. It conflicts with private_key / private_key_wo, so it cannot be set on imported certificates. Imported certificates are not managed by ACM issuance, so ACM does not control their certificate transparency logging.
 	// +kubebuilder:validation:Optional
 	CertificateTransparencyLoggingPreference *string `json:"certificateTransparencyLoggingPreference,omitempty" tf:"certificate_transparency_logging_preference,omitempty"`
 

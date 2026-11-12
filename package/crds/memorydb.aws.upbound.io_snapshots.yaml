@@ -509,10 +509,10 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The ARN of the snapshot.
+                    description: ARN of the snapshot.
                     type: string
                   clusterConfiguration:
-                    description: The configuration of the cluster from which the snapshot
+                    description: Configuration of the cluster from which the snapshot
                       was taken.
                     items:
                       properties:
@@ -520,13 +520,13 @@ spec:
                           description: Description for the cluster.
                           type: string
                         engine:
-                          description: The engine that will run on cluster nodes.
+                          description: Engine that will run on cluster nodes.
                           type: string
                         engineVersion:
                           description: Version number of the engine used by the cluster.
                           type: string
                         maintenanceWindow:
-                          description: The weekly time range during which maintenance
+                          description: Weekly time range during which maintenance
                             on the cluster is performed.
                           type: string
                         name:
@@ -551,8 +551,8 @@ spec:
                             snapshots before deleting them.
                           type: number
                         snapshotWindow:
-                          description: The daily time range (in UTC) during which
-                            MemoryDB begins taking a daily snapshot of the shard.
+                          description: Daily time range (in UTC) during which MemoryDB
+                            begins taking a daily snapshot of the shard.
                           type: string
                         subnetGroupName:
                           description: Name of the subnet group used by the cluster.
@@ -562,7 +562,7 @@ spec:
                             are sent.
                           type: string
                         vpcId:
-                          description: The VPC in which the cluster exists.
+                          description: VPC in which the cluster exists.
                           type: string
                       type: object
                     type: array
@@ -570,7 +570,7 @@ spec:
                     description: Name of the MemoryDB cluster to take a snapshot of.
                     type: string
                   id:
-                    description: The name of the snapshot.
+                    description: Name of the snapshot.
                     type: string
                   kmsKeyArn:
                     description: ARN of the KMS key used to encrypt the snapshot at
@@ -582,8 +582,8 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   source:
-                    description: Indicates whether the snapshot is from an automatic
-                      backup (automated) or was created manually (manual).
+                    description: Whether the snapshot is from an automatic backup
+                      (automated) or was created manually (manual).
                     type: string
                   tags:
                     additionalProperties:
@@ -594,9 +594,8 @@ spec:
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                     x-kubernetes-map-type: granular
                 type: object

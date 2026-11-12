@@ -499,7 +499,7 @@ spec:
                       creation.
                     type: string
                   dhcpOptionsId:
-                    description: DHCP options id of the desired VPC.
+                    description: DHCP options ID of the desired VPC.
                     type: string
                   enableDnsHostnames:
                     description: Whether to enable DNS hostnames in the VPC. Defaults

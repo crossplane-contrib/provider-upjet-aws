@@ -15,7 +15,7 @@ import (
 
 type VPCEndpointSubnetAssociationInitParameters struct {
 
-	// The ID of the subnet to be associated with the VPC endpoint.
+	// ID of the subnet to be associated with the VPC endpoint.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Subnet
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
@@ -27,7 +27,7 @@ type VPCEndpointSubnetAssociationInitParameters struct {
 	// +kubebuilder:validation:Optional
 	SubnetIDSelector *v2.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 
-	// The ID of the VPC endpoint with which the subnet will be associated.
+	// ID of the VPC endpoint with which the subnet will be associated.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.VPCEndpoint
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	VPCEndpointID *string `json:"vpcEndpointId,omitempty" tf:"vpc_endpoint_id,omitempty"`
@@ -43,17 +43,17 @@ type VPCEndpointSubnetAssociationInitParameters struct {
 
 type VPCEndpointSubnetAssociationObservation struct {
 
-	// The ID of the association.
+	// ID of the association.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The ID of the subnet to be associated with the VPC endpoint.
+	// ID of the subnet to be associated with the VPC endpoint.
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
-	// The ID of the VPC endpoint with which the subnet will be associated.
+	// ID of the VPC endpoint with which the subnet will be associated.
 	VPCEndpointID *string `json:"vpcEndpointId,omitempty" tf:"vpc_endpoint_id,omitempty"`
 }
 
@@ -64,7 +64,7 @@ type VPCEndpointSubnetAssociationParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// The ID of the subnet to be associated with the VPC endpoint.
+	// ID of the subnet to be associated with the VPC endpoint.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Subnet
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
@@ -77,7 +77,7 @@ type VPCEndpointSubnetAssociationParameters struct {
 	// +kubebuilder:validation:Optional
 	SubnetIDSelector *v2.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 
-	// The ID of the VPC endpoint with which the subnet will be associated.
+	// ID of the VPC endpoint with which the subnet will be associated.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.VPCEndpoint
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional

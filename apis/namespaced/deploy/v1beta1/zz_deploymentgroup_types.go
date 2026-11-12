@@ -134,7 +134,7 @@ type DeploymentGroupInitParameters struct {
 	// Configuration block of the automatic rollback configuration associated with the deployment group (documented below).
 	AutoRollbackConfiguration *AutoRollbackConfigurationInitParameters `json:"autoRollbackConfiguration,omitempty" tf:"auto_rollback_configuration,omitempty"`
 
-	// Autoscaling groups associated with the deployment group.
+	// Auto Scaling groups associated with the deployment group.
 	// +listType=set
 	AutoscalingGroups []*string `json:"autoscalingGroups,omitempty" tf:"autoscaling_groups,omitempty"`
 
@@ -203,7 +203,7 @@ type DeploymentGroupObservation struct {
 	// Configuration block of the automatic rollback configuration associated with the deployment group (documented below).
 	AutoRollbackConfiguration *AutoRollbackConfigurationObservation `json:"autoRollbackConfiguration,omitempty" tf:"auto_rollback_configuration,omitempty"`
 
-	// Autoscaling groups associated with the deployment group.
+	// Auto Scaling groups associated with the deployment group.
 	// +listType=set
 	AutoscalingGroups []*string `json:"autoscalingGroups,omitempty" tf:"autoscaling_groups,omitempty"`
 
@@ -288,7 +288,7 @@ type DeploymentGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	AutoRollbackConfiguration *AutoRollbackConfigurationParameters `json:"autoRollbackConfiguration,omitempty" tf:"auto_rollback_configuration,omitempty"`
 
-	// Autoscaling groups associated with the deployment group.
+	// Auto Scaling groups associated with the deployment group.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	AutoscalingGroups []*string `json:"autoscalingGroups,omitempty" tf:"autoscaling_groups,omitempty"`

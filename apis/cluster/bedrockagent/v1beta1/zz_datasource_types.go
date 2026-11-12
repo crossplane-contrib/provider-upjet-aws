@@ -34,203 +34,222 @@ type AudioExtractionConfigurationParameters struct {
 
 type BedrockDataAutomationConfigurationInitParameters struct {
 
-	// Specifies whether to enable parsing of multimodal data, including both text and images. Valid value: MULTIMODAL.
+	// Whether to enable parsing of multimodal data, including both text and images. Valid value: MULTIMODAL.
 	ParsingModality *string `json:"parsingModality,omitempty" tf:"parsing_modality,omitempty"`
 }
 
 type BedrockDataAutomationConfigurationObservation struct {
 
-	// Specifies whether to enable parsing of multimodal data, including both text and images. Valid value: MULTIMODAL.
+	// Whether to enable parsing of multimodal data, including both text and images. Valid value: MULTIMODAL.
 	ParsingModality *string `json:"parsingModality,omitempty" tf:"parsing_modality,omitempty"`
 }
 
 type BedrockDataAutomationConfigurationParameters struct {
 
-	// Specifies whether to enable parsing of multimodal data, including both text and images. Valid value: MULTIMODAL.
+	// Whether to enable parsing of multimodal data, including both text and images. Valid value: MULTIMODAL.
 	// +kubebuilder:validation:Optional
 	ParsingModality *string `json:"parsingModality,omitempty" tf:"parsing_modality,omitempty"`
 }
 
 type BedrockFoundationModelConfigurationInitParameters struct {
 
-	// The ARN of the model used to parse documents
+	// Strategy used to enrich the context of data source documents. See context_enrichment_configuration.bedrock_foundation_model_configuration.enrichment_strategy_configuration Block for details.
+	EnrichmentStrategyConfiguration []EnrichmentStrategyConfigurationInitParameters `json:"enrichmentStrategyConfiguration,omitempty" tf:"enrichment_strategy_configuration,omitempty"`
+
+	// ARN of the cross-Region inference profile used for context enrichment.
 	ModelArn *string `json:"modelArn,omitempty" tf:"model_arn,omitempty"`
-
-	// Specifies whether to enable parsing of multimodal data, including both text and images. Valid value: MULTIMODAL.
-	ParsingModality *string `json:"parsingModality,omitempty" tf:"parsing_modality,omitempty"`
-
-	// Instructions for interpreting the contents of the document. See parsing_prompt block for details.
-	ParsingPrompt *ParsingPromptInitParameters `json:"parsingPrompt,omitempty" tf:"parsing_prompt,omitempty"`
 }
 
 type BedrockFoundationModelConfigurationObservation struct {
 
-	// The ARN of the model used to parse documents
+	// Strategy used to enrich the context of data source documents. See context_enrichment_configuration.bedrock_foundation_model_configuration.enrichment_strategy_configuration Block for details.
+	EnrichmentStrategyConfiguration []EnrichmentStrategyConfigurationObservation `json:"enrichmentStrategyConfiguration,omitempty" tf:"enrichment_strategy_configuration,omitempty"`
+
+	// ARN of the cross-Region inference profile used for context enrichment.
 	ModelArn *string `json:"modelArn,omitempty" tf:"model_arn,omitempty"`
-
-	// Specifies whether to enable parsing of multimodal data, including both text and images. Valid value: MULTIMODAL.
-	ParsingModality *string `json:"parsingModality,omitempty" tf:"parsing_modality,omitempty"`
-
-	// Instructions for interpreting the contents of the document. See parsing_prompt block for details.
-	ParsingPrompt *ParsingPromptObservation `json:"parsingPrompt,omitempty" tf:"parsing_prompt,omitempty"`
 }
 
 type BedrockFoundationModelConfigurationParameters struct {
 
-	// The ARN of the model used to parse documents
+	// Strategy used to enrich the context of data source documents. See context_enrichment_configuration.bedrock_foundation_model_configuration.enrichment_strategy_configuration Block for details.
+	// +kubebuilder:validation:Optional
+	EnrichmentStrategyConfiguration []EnrichmentStrategyConfigurationParameters `json:"enrichmentStrategyConfiguration,omitempty" tf:"enrichment_strategy_configuration,omitempty"`
+
+	// ARN of the cross-Region inference profile used for context enrichment.
 	// +kubebuilder:validation:Optional
 	ModelArn *string `json:"modelArn" tf:"model_arn,omitempty"`
-
-	// Specifies whether to enable parsing of multimodal data, including both text and images. Valid value: MULTIMODAL.
-	// +kubebuilder:validation:Optional
-	ParsingModality *string `json:"parsingModality,omitempty" tf:"parsing_modality,omitempty"`
-
-	// Instructions for interpreting the contents of the document. See parsing_prompt block for details.
-	// +kubebuilder:validation:Optional
-	ParsingPrompt *ParsingPromptParameters `json:"parsingPrompt,omitempty" tf:"parsing_prompt,omitempty"`
 }
 
 type ChunkingConfigurationInitParameters struct {
 
-	// Option for chunking your source data, either in fixed-sized chunks or as one chunk. Valid values: FIXED_SIZE, HIERARCHICAL, SEMANTIC, NONE.
+	// Option for chunking your source data. Valid values: FIXED_SIZE, HIERARCHICAL, SEMANTIC, NONE.
 	ChunkingStrategy *string `json:"chunkingStrategy,omitempty" tf:"chunking_strategy,omitempty"`
 
-	// Configurations for when you choose fixed-size chunking. Requires chunking_strategy as FIXED_SIZE. See fixed_size_chunking_configuration for details.
+	// Configurations for when you choose fixed-size chunking. Requires chunking_strategy as FIXED_SIZE. See fixed_size_chunking_configuration Block for details.
 	FixedSizeChunkingConfiguration *FixedSizeChunkingConfigurationInitParameters `json:"fixedSizeChunkingConfiguration,omitempty" tf:"fixed_size_chunking_configuration,omitempty"`
 
-	// Configurations for when you choose hierarchical chunking. Requires chunking_strategy as HIERARCHICAL. See hierarchical_chunking_configuration for details.
+	// Configurations for when you choose hierarchical chunking. Requires chunking_strategy as HIERARCHICAL. See hierarchical_chunking_configuration Block for details.
 	HierarchicalChunkingConfiguration *HierarchicalChunkingConfigurationInitParameters `json:"hierarchicalChunkingConfiguration,omitempty" tf:"hierarchical_chunking_configuration,omitempty"`
 
-	// Configurations for when you choose semantic chunking. Requires chunking_strategy as SEMANTIC. See semantic_chunking_configuration for details.
+	// Configurations for when you choose semantic chunking. Requires chunking_strategy as SEMANTIC. See semantic_chunking_configuration Block for details.
 	SemanticChunkingConfiguration *SemanticChunkingConfigurationInitParameters `json:"semanticChunkingConfiguration,omitempty" tf:"semantic_chunking_configuration,omitempty"`
 }
 
 type ChunkingConfigurationObservation struct {
 
-	// Option for chunking your source data, either in fixed-sized chunks or as one chunk. Valid values: FIXED_SIZE, HIERARCHICAL, SEMANTIC, NONE.
+	// Option for chunking your source data. Valid values: FIXED_SIZE, HIERARCHICAL, SEMANTIC, NONE.
 	ChunkingStrategy *string `json:"chunkingStrategy,omitempty" tf:"chunking_strategy,omitempty"`
 
-	// Configurations for when you choose fixed-size chunking. Requires chunking_strategy as FIXED_SIZE. See fixed_size_chunking_configuration for details.
+	// Configurations for when you choose fixed-size chunking. Requires chunking_strategy as FIXED_SIZE. See fixed_size_chunking_configuration Block for details.
 	FixedSizeChunkingConfiguration *FixedSizeChunkingConfigurationObservation `json:"fixedSizeChunkingConfiguration,omitempty" tf:"fixed_size_chunking_configuration,omitempty"`
 
-	// Configurations for when you choose hierarchical chunking. Requires chunking_strategy as HIERARCHICAL. See hierarchical_chunking_configuration for details.
+	// Configurations for when you choose hierarchical chunking. Requires chunking_strategy as HIERARCHICAL. See hierarchical_chunking_configuration Block for details.
 	HierarchicalChunkingConfiguration *HierarchicalChunkingConfigurationObservation `json:"hierarchicalChunkingConfiguration,omitempty" tf:"hierarchical_chunking_configuration,omitempty"`
 
-	// Configurations for when you choose semantic chunking. Requires chunking_strategy as SEMANTIC. See semantic_chunking_configuration for details.
+	// Configurations for when you choose semantic chunking. Requires chunking_strategy as SEMANTIC. See semantic_chunking_configuration Block for details.
 	SemanticChunkingConfiguration *SemanticChunkingConfigurationObservation `json:"semanticChunkingConfiguration,omitempty" tf:"semantic_chunking_configuration,omitempty"`
 }
 
 type ChunkingConfigurationParameters struct {
 
-	// Option for chunking your source data, either in fixed-sized chunks or as one chunk. Valid values: FIXED_SIZE, HIERARCHICAL, SEMANTIC, NONE.
+	// Option for chunking your source data. Valid values: FIXED_SIZE, HIERARCHICAL, SEMANTIC, NONE.
 	// +kubebuilder:validation:Optional
 	ChunkingStrategy *string `json:"chunkingStrategy" tf:"chunking_strategy,omitempty"`
 
-	// Configurations for when you choose fixed-size chunking. Requires chunking_strategy as FIXED_SIZE. See fixed_size_chunking_configuration for details.
+	// Configurations for when you choose fixed-size chunking. Requires chunking_strategy as FIXED_SIZE. See fixed_size_chunking_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	FixedSizeChunkingConfiguration *FixedSizeChunkingConfigurationParameters `json:"fixedSizeChunkingConfiguration,omitempty" tf:"fixed_size_chunking_configuration,omitempty"`
 
-	// Configurations for when you choose hierarchical chunking. Requires chunking_strategy as HIERARCHICAL. See hierarchical_chunking_configuration for details.
+	// Configurations for when you choose hierarchical chunking. Requires chunking_strategy as HIERARCHICAL. See hierarchical_chunking_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	HierarchicalChunkingConfiguration *HierarchicalChunkingConfigurationParameters `json:"hierarchicalChunkingConfiguration,omitempty" tf:"hierarchical_chunking_configuration,omitempty"`
 
-	// Configurations for when you choose semantic chunking. Requires chunking_strategy as SEMANTIC. See semantic_chunking_configuration for details.
+	// Configurations for when you choose semantic chunking. Requires chunking_strategy as SEMANTIC. See semantic_chunking_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	SemanticChunkingConfiguration *SemanticChunkingConfigurationParameters `json:"semanticChunkingConfiguration,omitempty" tf:"semantic_chunking_configuration,omitempty"`
 }
 
 type ConfluenceConfigurationInitParameters struct {
 
-	// Configuration for web content. See crawler_configuration block for details.
+	// Configuration for Confluence content. See data_source_configuration.confluence_configuration.crawler_configuration Block for details.
 	CrawlerConfiguration *CrawlerConfigurationInitParameters `json:"crawlerConfiguration,omitempty" tf:"crawler_configuration,omitempty"`
 
-	// Endpoint information to connect to your web data source. See source_configuration block for details.
+	// Endpoint information to connect to your Confluence data source. See data_source_configuration.confluence_configuration.source_configuration Block for details.
 	SourceConfiguration *SourceConfigurationInitParameters `json:"sourceConfiguration,omitempty" tf:"source_configuration,omitempty"`
 }
 
 type ConfluenceConfigurationObservation struct {
 
-	// Configuration for web content. See crawler_configuration block for details.
+	// Configuration for Confluence content. See data_source_configuration.confluence_configuration.crawler_configuration Block for details.
 	CrawlerConfiguration *CrawlerConfigurationObservation `json:"crawlerConfiguration,omitempty" tf:"crawler_configuration,omitempty"`
 
-	// Endpoint information to connect to your web data source. See source_configuration block for details.
+	// Endpoint information to connect to your Confluence data source. See data_source_configuration.confluence_configuration.source_configuration Block for details.
 	SourceConfiguration *SourceConfigurationObservation `json:"sourceConfiguration,omitempty" tf:"source_configuration,omitempty"`
 }
 
 type ConfluenceConfigurationParameters struct {
 
-	// Configuration for web content. See crawler_configuration block for details.
+	// Configuration for Confluence content. See data_source_configuration.confluence_configuration.crawler_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	CrawlerConfiguration *CrawlerConfigurationParameters `json:"crawlerConfiguration,omitempty" tf:"crawler_configuration,omitempty"`
 
-	// Endpoint information to connect to your web data source. See source_configuration block for details.
+	// Endpoint information to connect to your Confluence data source. See data_source_configuration.confluence_configuration.source_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	SourceConfiguration *SourceConfigurationParameters `json:"sourceConfiguration,omitempty" tf:"source_configuration,omitempty"`
 }
 
+type ContextEnrichmentConfigurationInitParameters struct {
+
+	// Settings for a foundation model used to parse documents in a data source. See bedrock_foundation_model_configuration Block for details.
+	BedrockFoundationModelConfiguration *BedrockFoundationModelConfigurationInitParameters `json:"bedrockFoundationModelConfiguration,omitempty" tf:"bedrock_foundation_model_configuration,omitempty"`
+
+	// Type of filtering to apply to objects or content of the data source. For example, the PATTERN type uses regular expression patterns to filter content.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type ContextEnrichmentConfigurationObservation struct {
+
+	// Settings for a foundation model used to parse documents in a data source. See bedrock_foundation_model_configuration Block for details.
+	BedrockFoundationModelConfiguration *BedrockFoundationModelConfigurationObservation `json:"bedrockFoundationModelConfiguration,omitempty" tf:"bedrock_foundation_model_configuration,omitempty"`
+
+	// Type of filtering to apply to objects or content of the data source. For example, the PATTERN type uses regular expression patterns to filter content.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type ContextEnrichmentConfigurationParameters struct {
+
+	// Settings for a foundation model used to parse documents in a data source. See bedrock_foundation_model_configuration Block for details.
+	// +kubebuilder:validation:Optional
+	BedrockFoundationModelConfiguration *BedrockFoundationModelConfigurationParameters `json:"bedrockFoundationModelConfiguration,omitempty" tf:"bedrock_foundation_model_configuration,omitempty"`
+
+	// Type of filtering to apply to objects or content of the data source. For example, the PATTERN type uses regular expression patterns to filter content.
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type" tf:"type,omitempty"`
+}
+
 type CrawlerConfigurationFilterConfigurationInitParameters struct {
 
-	// The configuration of filtering certain objects or content types of the data source. See pattern_object_filter block for details.
+	// Configuration for filtering objects or content types of the data source. See data_source_configuration.share_point_configuration.crawler_configuration.filter_configuration.pattern_object_filter Block for details.
 	PatternObjectFilter []FilterConfigurationPatternObjectFilterInitParameters `json:"patternObjectFilter,omitempty" tf:"pattern_object_filter,omitempty"`
 
-	// Type of storage for the data source. Valid values: S3, WEB, CONFLUENCE, SALESFORCE, SHAREPOINT, CUSTOM, REDSHIFT_METADATA, MANAGED_KNOWLEDGE_BASE_CONNECTOR.
+	// Type of filtering to apply to objects or content of the data source. For example, the PATTERN type uses regular expression patterns to filter content.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type CrawlerConfigurationFilterConfigurationObservation struct {
 
-	// The configuration of filtering certain objects or content types of the data source. See pattern_object_filter block for details.
+	// Configuration for filtering objects or content types of the data source. See data_source_configuration.share_point_configuration.crawler_configuration.filter_configuration.pattern_object_filter Block for details.
 	PatternObjectFilter []FilterConfigurationPatternObjectFilterObservation `json:"patternObjectFilter,omitempty" tf:"pattern_object_filter,omitempty"`
 
-	// Type of storage for the data source. Valid values: S3, WEB, CONFLUENCE, SALESFORCE, SHAREPOINT, CUSTOM, REDSHIFT_METADATA, MANAGED_KNOWLEDGE_BASE_CONNECTOR.
+	// Type of filtering to apply to objects or content of the data source. For example, the PATTERN type uses regular expression patterns to filter content.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type CrawlerConfigurationFilterConfigurationParameters struct {
 
-	// The configuration of filtering certain objects or content types of the data source. See pattern_object_filter block for details.
+	// Configuration for filtering objects or content types of the data source. See data_source_configuration.share_point_configuration.crawler_configuration.filter_configuration.pattern_object_filter Block for details.
 	// +kubebuilder:validation:Optional
 	PatternObjectFilter []FilterConfigurationPatternObjectFilterParameters `json:"patternObjectFilter,omitempty" tf:"pattern_object_filter,omitempty"`
 
-	// Type of storage for the data source. Valid values: S3, WEB, CONFLUENCE, SALESFORCE, SHAREPOINT, CUSTOM, REDSHIFT_METADATA, MANAGED_KNOWLEDGE_BASE_CONNECTOR.
+	// Type of filtering to apply to objects or content of the data source. For example, the PATTERN type uses regular expression patterns to filter content.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type CrawlerConfigurationFilterConfigurationPatternObjectFilterInitParameters struct {
 
-	// The configuration of specific filters applied to your data source content. Minimum of 1 filter and maximum of 25 filters.
+	// Filters applied to your data source content. Minimum of 1 filter and maximum of 25 filters. See data_source_configuration.share_point_configuration.crawler_configuration.filter_configuration.pattern_object_filter.filters Block for details.
 	Filters []FilterConfigurationPatternObjectFilterFiltersInitParameters `json:"filters,omitempty" tf:"filters,omitempty"`
 }
 
 type CrawlerConfigurationFilterConfigurationPatternObjectFilterObservation struct {
 
-	// The configuration of specific filters applied to your data source content. Minimum of 1 filter and maximum of 25 filters.
+	// Filters applied to your data source content. Minimum of 1 filter and maximum of 25 filters. See data_source_configuration.share_point_configuration.crawler_configuration.filter_configuration.pattern_object_filter.filters Block for details.
 	Filters []FilterConfigurationPatternObjectFilterFiltersObservation `json:"filters,omitempty" tf:"filters,omitempty"`
 }
 
 type CrawlerConfigurationFilterConfigurationPatternObjectFilterParameters struct {
 
-	// The configuration of specific filters applied to your data source content. Minimum of 1 filter and maximum of 25 filters.
+	// Filters applied to your data source content. Minimum of 1 filter and maximum of 25 filters. See data_source_configuration.share_point_configuration.crawler_configuration.filter_configuration.pattern_object_filter.filters Block for details.
 	// +kubebuilder:validation:Optional
 	Filters []FilterConfigurationPatternObjectFilterFiltersParameters `json:"filters,omitempty" tf:"filters,omitempty"`
 }
 
 type CrawlerConfigurationInitParameters struct {
 
-	// The Salesforce standard object configuration. See filter_configuration block for details.
+	// Object configuration used to filter crawled content. See data_source_configuration.confluence_configuration.crawler_configuration.filter_configuration Block for details.
 	FilterConfiguration *FilterConfigurationInitParameters `json:"filterConfiguration,omitempty" tf:"filter_configuration,omitempty"`
 }
 
 type CrawlerConfigurationObservation struct {
 
-	// The Salesforce standard object configuration. See filter_configuration block for details.
+	// Object configuration used to filter crawled content. See data_source_configuration.confluence_configuration.crawler_configuration.filter_configuration Block for details.
 	FilterConfiguration *FilterConfigurationObservation `json:"filterConfiguration,omitempty" tf:"filter_configuration,omitempty"`
 }
 
 type CrawlerConfigurationParameters struct {
 
-	// The Salesforce standard object configuration. See filter_configuration block for details.
+	// Object configuration used to filter crawled content. See data_source_configuration.confluence_configuration.crawler_configuration.filter_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	FilterConfiguration *FilterConfigurationParameters `json:"filterConfiguration,omitempty" tf:"filter_configuration,omitempty"`
 }
@@ -266,100 +285,109 @@ type CrawlerLimitsParameters struct {
 
 type CustomTransformationConfigurationInitParameters struct {
 
-	// The intermediate storage for custom transformation.
+	// Intermediate storage for custom transformation. See intermediate_storage Block for details.
 	IntermediateStorage *IntermediateStorageInitParameters `json:"intermediateStorage,omitempty" tf:"intermediate_storage,omitempty"`
 
-	// A custom processing step for documents moving through the data source ingestion pipeline.
+	// Custom processing step for documents moving through the data source ingestion pipeline. See transformation Block for details.
 	Transformation *TransformationInitParameters `json:"transformation,omitempty" tf:"transformation,omitempty"`
 }
 
 type CustomTransformationConfigurationObservation struct {
 
-	// The intermediate storage for custom transformation.
+	// Intermediate storage for custom transformation. See intermediate_storage Block for details.
 	IntermediateStorage *IntermediateStorageObservation `json:"intermediateStorage,omitempty" tf:"intermediate_storage,omitempty"`
 
-	// A custom processing step for documents moving through the data source ingestion pipeline.
+	// Custom processing step for documents moving through the data source ingestion pipeline. See transformation Block for details.
 	Transformation *TransformationObservation `json:"transformation,omitempty" tf:"transformation,omitempty"`
 }
 
 type CustomTransformationConfigurationParameters struct {
 
-	// The intermediate storage for custom transformation.
+	// Intermediate storage for custom transformation. See intermediate_storage Block for details.
 	// +kubebuilder:validation:Optional
 	IntermediateStorage *IntermediateStorageParameters `json:"intermediateStorage,omitempty" tf:"intermediate_storage,omitempty"`
 
-	// A custom processing step for documents moving through the data source ingestion pipeline.
+	// Custom processing step for documents moving through the data source ingestion pipeline. See transformation Block for details.
 	// +kubebuilder:validation:Optional
 	Transformation *TransformationParameters `json:"transformation,omitempty" tf:"transformation,omitempty"`
 }
 
+type DailyInitParameters struct {
+}
+
+type DailyObservation struct {
+}
+
+type DailyParameters struct {
+}
+
 type DataSourceConfigurationInitParameters struct {
 
-	// Details about the configuration of the Confluence data source. See confluence_data_source_configuration block for details.
+	// Configuration details for the Confluence data source. See data_source_configuration.confluence_configuration Block for details.
 	ConfluenceConfiguration *ConfluenceConfigurationInitParameters `json:"confluenceConfiguration,omitempty" tf:"confluence_configuration,omitempty"`
 
-	// Details about the configuration of a Managed Knowledge Base connector data source. See managed_knowledge_base_connector_configuration block for details.
+	// Configuration details for a Managed Knowledge Base connector data source. See managed_knowledge_base_connector_configuration Block for details.
 	ManagedKnowledgeBaseConnectorConfiguration *ManagedKnowledgeBaseConnectorConfigurationInitParameters `json:"managedKnowledgeBaseConnectorConfiguration,omitempty" tf:"managed_knowledge_base_connector_configuration,omitempty"`
 
-	// Details about the configuration of the S3 object containing the data source. See s3_data_source_configuration block for details.
+	// Configuration details for the S3 object that contains the data source. See s3_configuration Block for details.
 	S3Configuration *S3ConfigurationInitParameters `json:"s3Configuration,omitempty" tf:"s3_configuration,omitempty"`
 
-	// Details about the configuration of the Salesforce data source. See salesforce_data_source_configuration block for details.
+	// Configuration details for the Salesforce data source. See data_source_configuration.salesforce_configuration Block for details.
 	SalesforceConfiguration *SalesforceConfigurationInitParameters `json:"salesforceConfiguration,omitempty" tf:"salesforce_configuration,omitempty"`
 
-	// Details about the configuration of the SharePoint data source. See share_point_data_source_configuration block for details.
+	// Configuration details for the SharePoint data source. See data_source_configuration.share_point_configuration Block for details.
 	SharePointConfiguration *SharePointConfigurationInitParameters `json:"sharePointConfiguration,omitempty" tf:"share_point_configuration,omitempty"`
 
 	// Type of storage for the data source. Valid values: S3, WEB, CONFLUENCE, SALESFORCE, SHAREPOINT, CUSTOM, REDSHIFT_METADATA, MANAGED_KNOWLEDGE_BASE_CONNECTOR.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
-	// Details about the configuration of the web data source. See web_data_source_configuration block for details.
+	// Configuration details for the web data source. See data_source_configuration.web_configuration Block for details.
 	WebConfiguration *WebConfigurationInitParameters `json:"webConfiguration,omitempty" tf:"web_configuration,omitempty"`
 }
 
 type DataSourceConfigurationObservation struct {
 
-	// Details about the configuration of the Confluence data source. See confluence_data_source_configuration block for details.
+	// Configuration details for the Confluence data source. See data_source_configuration.confluence_configuration Block for details.
 	ConfluenceConfiguration *ConfluenceConfigurationObservation `json:"confluenceConfiguration,omitempty" tf:"confluence_configuration,omitempty"`
 
-	// Details about the configuration of a Managed Knowledge Base connector data source. See managed_knowledge_base_connector_configuration block for details.
+	// Configuration details for a Managed Knowledge Base connector data source. See managed_knowledge_base_connector_configuration Block for details.
 	ManagedKnowledgeBaseConnectorConfiguration *ManagedKnowledgeBaseConnectorConfigurationObservation `json:"managedKnowledgeBaseConnectorConfiguration,omitempty" tf:"managed_knowledge_base_connector_configuration,omitempty"`
 
-	// Details about the configuration of the S3 object containing the data source. See s3_data_source_configuration block for details.
+	// Configuration details for the S3 object that contains the data source. See s3_configuration Block for details.
 	S3Configuration *S3ConfigurationObservation `json:"s3Configuration,omitempty" tf:"s3_configuration,omitempty"`
 
-	// Details about the configuration of the Salesforce data source. See salesforce_data_source_configuration block for details.
+	// Configuration details for the Salesforce data source. See data_source_configuration.salesforce_configuration Block for details.
 	SalesforceConfiguration *SalesforceConfigurationObservation `json:"salesforceConfiguration,omitempty" tf:"salesforce_configuration,omitempty"`
 
-	// Details about the configuration of the SharePoint data source. See share_point_data_source_configuration block for details.
+	// Configuration details for the SharePoint data source. See data_source_configuration.share_point_configuration Block for details.
 	SharePointConfiguration *SharePointConfigurationObservation `json:"sharePointConfiguration,omitempty" tf:"share_point_configuration,omitempty"`
 
 	// Type of storage for the data source. Valid values: S3, WEB, CONFLUENCE, SALESFORCE, SHAREPOINT, CUSTOM, REDSHIFT_METADATA, MANAGED_KNOWLEDGE_BASE_CONNECTOR.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
-	// Details about the configuration of the web data source. See web_data_source_configuration block for details.
+	// Configuration details for the web data source. See data_source_configuration.web_configuration Block for details.
 	WebConfiguration *WebConfigurationObservation `json:"webConfiguration,omitempty" tf:"web_configuration,omitempty"`
 }
 
 type DataSourceConfigurationParameters struct {
 
-	// Details about the configuration of the Confluence data source. See confluence_data_source_configuration block for details.
+	// Configuration details for the Confluence data source. See data_source_configuration.confluence_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	ConfluenceConfiguration *ConfluenceConfigurationParameters `json:"confluenceConfiguration,omitempty" tf:"confluence_configuration,omitempty"`
 
-	// Details about the configuration of a Managed Knowledge Base connector data source. See managed_knowledge_base_connector_configuration block for details.
+	// Configuration details for a Managed Knowledge Base connector data source. See managed_knowledge_base_connector_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	ManagedKnowledgeBaseConnectorConfiguration *ManagedKnowledgeBaseConnectorConfigurationParameters `json:"managedKnowledgeBaseConnectorConfiguration,omitempty" tf:"managed_knowledge_base_connector_configuration,omitempty"`
 
-	// Details about the configuration of the S3 object containing the data source. See s3_data_source_configuration block for details.
+	// Configuration details for the S3 object that contains the data source. See s3_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	S3Configuration *S3ConfigurationParameters `json:"s3Configuration,omitempty" tf:"s3_configuration,omitempty"`
 
-	// Details about the configuration of the Salesforce data source. See salesforce_data_source_configuration block for details.
+	// Configuration details for the Salesforce data source. See data_source_configuration.salesforce_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	SalesforceConfiguration *SalesforceConfigurationParameters `json:"salesforceConfiguration,omitempty" tf:"salesforce_configuration,omitempty"`
 
-	// Details about the configuration of the SharePoint data source. See share_point_data_source_configuration block for details.
+	// Configuration details for the SharePoint data source. See data_source_configuration.share_point_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	SharePointConfiguration *SharePointConfigurationParameters `json:"sharePointConfiguration,omitempty" tf:"share_point_configuration,omitempty"`
 
@@ -367,7 +395,7 @@ type DataSourceConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
 
-	// Details about the configuration of the web data source. See web_data_source_configuration block for details.
+	// Configuration details for the web data source. See data_source_configuration.web_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	WebConfiguration *WebConfigurationParameters `json:"webConfiguration,omitempty" tf:"web_configuration,omitempty"`
 }
@@ -377,7 +405,7 @@ type DataSourceInitParameters struct {
 	// Data deletion policy for a data source. Valid values: RETAIN, DELETE.
 	DataDeletionPolicy *string `json:"dataDeletionPolicy,omitempty" tf:"data_deletion_policy,omitempty"`
 
-	// Details about how the data source is stored. See data_source_configuration block for details.
+	// Details about how the data source is stored. See data_source_configuration Block for details.
 	DataSourceConfiguration *DataSourceConfigurationInitParameters `json:"dataSourceConfiguration,omitempty" tf:"data_source_configuration,omitempty"`
 
 	// Description of the data source.
@@ -386,10 +414,10 @@ type DataSourceInitParameters struct {
 	// Name of the data source.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Details about the configuration of the server-side encryption. See server_side_encryption_configuration block for details.
+	// Details about the configuration of the server-side encryption. See server_side_encryption_configuration Block for details.
 	ServerSideEncryptionConfiguration *ServerSideEncryptionConfigurationInitParameters `json:"serverSideEncryptionConfiguration,omitempty" tf:"server_side_encryption_configuration,omitempty"`
 
-	// Details about the configuration of the server-side encryption. See vector_ingestion_configuration block for details.
+	// Details about how to ingest the documents in the data source. See vector_ingestion_configuration Block for details.
 	VectorIngestionConfiguration *VectorIngestionConfigurationInitParameters `json:"vectorIngestionConfiguration,omitempty" tf:"vector_ingestion_configuration,omitempty"`
 }
 
@@ -398,7 +426,7 @@ type DataSourceObservation struct {
 	// Data deletion policy for a data source. Valid values: RETAIN, DELETE.
 	DataDeletionPolicy *string `json:"dataDeletionPolicy,omitempty" tf:"data_deletion_policy,omitempty"`
 
-	// Details about how the data source is stored. See data_source_configuration block for details.
+	// Details about how the data source is stored. See data_source_configuration Block for details.
 	DataSourceConfiguration *DataSourceConfigurationObservation `json:"dataSourceConfiguration,omitempty" tf:"data_source_configuration,omitempty"`
 
 	// Unique identifier of the data source.
@@ -420,10 +448,10 @@ type DataSourceObservation struct {
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// Details about the configuration of the server-side encryption. See server_side_encryption_configuration block for details.
+	// Details about the configuration of the server-side encryption. See server_side_encryption_configuration Block for details.
 	ServerSideEncryptionConfiguration *ServerSideEncryptionConfigurationObservation `json:"serverSideEncryptionConfiguration,omitempty" tf:"server_side_encryption_configuration,omitempty"`
 
-	// Details about the configuration of the server-side encryption. See vector_ingestion_configuration block for details.
+	// Details about how to ingest the documents in the data source. See vector_ingestion_configuration Block for details.
 	VectorIngestionConfiguration *VectorIngestionConfigurationObservation `json:"vectorIngestionConfiguration,omitempty" tf:"vector_ingestion_configuration,omitempty"`
 }
 
@@ -433,7 +461,7 @@ type DataSourceParameters struct {
 	// +kubebuilder:validation:Optional
 	DataDeletionPolicy *string `json:"dataDeletionPolicy,omitempty" tf:"data_deletion_policy,omitempty"`
 
-	// Details about how the data source is stored. See data_source_configuration block for details.
+	// Details about how the data source is stored. See data_source_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	DataSourceConfiguration *DataSourceConfigurationParameters `json:"dataSourceConfiguration,omitempty" tf:"data_source_configuration,omitempty"`
 
@@ -463,13 +491,42 @@ type DataSourceParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// Details about the configuration of the server-side encryption. See server_side_encryption_configuration block for details.
+	// Details about the configuration of the server-side encryption. See server_side_encryption_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	ServerSideEncryptionConfiguration *ServerSideEncryptionConfigurationParameters `json:"serverSideEncryptionConfiguration,omitempty" tf:"server_side_encryption_configuration,omitempty"`
 
-	// Details about the configuration of the server-side encryption. See vector_ingestion_configuration block for details.
+	// Details about how to ingest the documents in the data source. See vector_ingestion_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	VectorIngestionConfiguration *VectorIngestionConfigurationParameters `json:"vectorIngestionConfiguration,omitempty" tf:"vector_ingestion_configuration,omitempty"`
+}
+
+type DayOfMonthInitParameters struct {
+
+	// Specific day of the month, from 1 to 28.
+	DayNumber *float64 `json:"dayNumber,omitempty" tf:"day_number,omitempty"`
+
+	// Configure this option to run the monthly sync on the last calendar day of each month. See last_day_of_month Block for details.
+	LastDayOfMonth *LastDayOfMonthInitParameters `json:"lastDayOfMonth,omitempty" tf:"last_day_of_month,omitempty"`
+}
+
+type DayOfMonthObservation struct {
+
+	// Specific day of the month, from 1 to 28.
+	DayNumber *float64 `json:"dayNumber,omitempty" tf:"day_number,omitempty"`
+
+	// Configure this option to run the monthly sync on the last calendar day of each month. See last_day_of_month Block for details.
+	LastDayOfMonth *LastDayOfMonthParameters `json:"lastDayOfMonth,omitempty" tf:"last_day_of_month,omitempty"`
+}
+
+type DayOfMonthParameters struct {
+
+	// Specific day of the month, from 1 to 28.
+	// +kubebuilder:validation:Optional
+	DayNumber *float64 `json:"dayNumber,omitempty" tf:"day_number,omitempty"`
+
+	// Configure this option to run the monthly sync on the last calendar day of each month. See last_day_of_month Block for details.
+	// +kubebuilder:validation:Optional
+	LastDayOfMonth *LastDayOfMonthParameters `json:"lastDayOfMonth,omitempty" tf:"last_day_of_month,omitempty"`
 }
 
 type DeletionProtectionConfigurationInitParameters struct {
@@ -501,140 +558,159 @@ type DeletionProtectionConfigurationParameters struct {
 	DeletionProtectionThreshold *float64 `json:"deletionProtectionThreshold,omitempty" tf:"deletion_protection_threshold,omitempty"`
 }
 
+type EnrichmentStrategyConfigurationInitParameters struct {
+
+	// Method used to enrich the context of data source documents. Valid value: CHUNK_ENTITY_EXTRACTION.
+	Method *string `json:"method,omitempty" tf:"method,omitempty"`
+}
+
+type EnrichmentStrategyConfigurationObservation struct {
+
+	// Method used to enrich the context of data source documents. Valid value: CHUNK_ENTITY_EXTRACTION.
+	Method *string `json:"method,omitempty" tf:"method,omitempty"`
+}
+
+type EnrichmentStrategyConfigurationParameters struct {
+
+	// Method used to enrich the context of data source documents. Valid value: CHUNK_ENTITY_EXTRACTION.
+	// +kubebuilder:validation:Optional
+	Method *string `json:"method" tf:"method,omitempty"`
+}
+
 type FilterConfigurationInitParameters struct {
 
-	// The configuration of filtering certain objects or content types of the data source. See pattern_object_filter block for details.
+	// Configuration for filtering objects or content types of the data source. See data_source_configuration.confluence_configuration.crawler_configuration.filter_configuration.pattern_object_filter Block for details.
 	PatternObjectFilter []PatternObjectFilterInitParameters `json:"patternObjectFilter,omitempty" tf:"pattern_object_filter,omitempty"`
 
-	// Type of storage for the data source. Valid values: S3, WEB, CONFLUENCE, SALESFORCE, SHAREPOINT, CUSTOM, REDSHIFT_METADATA, MANAGED_KNOWLEDGE_BASE_CONNECTOR.
+	// Type of filtering to apply to objects or content of the data source. For example, the PATTERN type uses regular expression patterns to filter content.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type FilterConfigurationObservation struct {
 
-	// The configuration of filtering certain objects or content types of the data source. See pattern_object_filter block for details.
+	// Configuration for filtering objects or content types of the data source. See data_source_configuration.confluence_configuration.crawler_configuration.filter_configuration.pattern_object_filter Block for details.
 	PatternObjectFilter []PatternObjectFilterObservation `json:"patternObjectFilter,omitempty" tf:"pattern_object_filter,omitempty"`
 
-	// Type of storage for the data source. Valid values: S3, WEB, CONFLUENCE, SALESFORCE, SHAREPOINT, CUSTOM, REDSHIFT_METADATA, MANAGED_KNOWLEDGE_BASE_CONNECTOR.
+	// Type of filtering to apply to objects or content of the data source. For example, the PATTERN type uses regular expression patterns to filter content.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type FilterConfigurationParameters struct {
 
-	// The configuration of filtering certain objects or content types of the data source. See pattern_object_filter block for details.
+	// Configuration for filtering objects or content types of the data source. See data_source_configuration.confluence_configuration.crawler_configuration.filter_configuration.pattern_object_filter Block for details.
 	// +kubebuilder:validation:Optional
 	PatternObjectFilter []PatternObjectFilterParameters `json:"patternObjectFilter,omitempty" tf:"pattern_object_filter,omitempty"`
 
-	// Type of storage for the data source. Valid values: S3, WEB, CONFLUENCE, SALESFORCE, SHAREPOINT, CUSTOM, REDSHIFT_METADATA, MANAGED_KNOWLEDGE_BASE_CONNECTOR.
+	// Type of filtering to apply to objects or content of the data source. For example, the PATTERN type uses regular expression patterns to filter content.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type FilterConfigurationPatternObjectFilterFiltersInitParameters struct {
 
-	// A list of one or more exclusion regular expression patterns to exclude certain object types that adhere to the pattern.
+	// List of one or more exclusion regular expression patterns to exclude URLs that match the pattern.
 	// +listType=set
 	ExclusionFilters []*string `json:"exclusionFilters,omitempty" tf:"exclusion_filters,omitempty"`
 
-	// List of one or more inclusion regular expression patterns to include certain object types that adhere to the pattern.
+	// List of one or more inclusion regular expression patterns to include URLs that match the pattern.
 	// +listType=set
 	InclusionFilters []*string `json:"inclusionFilters,omitempty" tf:"inclusion_filters,omitempty"`
 
-	// The supported object type or content type of the data source.
+	// Object type or content type of the data source.
 	ObjectType *string `json:"objectType,omitempty" tf:"object_type,omitempty"`
 }
 
 type FilterConfigurationPatternObjectFilterFiltersObservation struct {
 
-	// A list of one or more exclusion regular expression patterns to exclude certain object types that adhere to the pattern.
+	// List of one or more exclusion regular expression patterns to exclude URLs that match the pattern.
 	// +listType=set
 	ExclusionFilters []*string `json:"exclusionFilters,omitempty" tf:"exclusion_filters,omitempty"`
 
-	// List of one or more inclusion regular expression patterns to include certain object types that adhere to the pattern.
+	// List of one or more inclusion regular expression patterns to include URLs that match the pattern.
 	// +listType=set
 	InclusionFilters []*string `json:"inclusionFilters,omitempty" tf:"inclusion_filters,omitempty"`
 
-	// The supported object type or content type of the data source.
+	// Object type or content type of the data source.
 	ObjectType *string `json:"objectType,omitempty" tf:"object_type,omitempty"`
 }
 
 type FilterConfigurationPatternObjectFilterFiltersParameters struct {
 
-	// A list of one or more exclusion regular expression patterns to exclude certain object types that adhere to the pattern.
+	// List of one or more exclusion regular expression patterns to exclude URLs that match the pattern.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	ExclusionFilters []*string `json:"exclusionFilters,omitempty" tf:"exclusion_filters,omitempty"`
 
-	// List of one or more inclusion regular expression patterns to include certain object types that adhere to the pattern.
+	// List of one or more inclusion regular expression patterns to include URLs that match the pattern.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	InclusionFilters []*string `json:"inclusionFilters,omitempty" tf:"inclusion_filters,omitempty"`
 
-	// The supported object type or content type of the data source.
+	// Object type or content type of the data source.
 	// +kubebuilder:validation:Optional
 	ObjectType *string `json:"objectType" tf:"object_type,omitempty"`
 }
 
 type FilterConfigurationPatternObjectFilterInitParameters struct {
 
-	// The configuration of specific filters applied to your data source content. Minimum of 1 filter and maximum of 25 filters.
+	// Filters applied to your data source content. Minimum of 1 filter and maximum of 25 filters. See data_source_configuration.share_point_configuration.crawler_configuration.filter_configuration.pattern_object_filter.filters Block for details.
 	Filters []PatternObjectFilterFiltersInitParameters `json:"filters,omitempty" tf:"filters,omitempty"`
 }
 
 type FilterConfigurationPatternObjectFilterObservation struct {
 
-	// The configuration of specific filters applied to your data source content. Minimum of 1 filter and maximum of 25 filters.
+	// Filters applied to your data source content. Minimum of 1 filter and maximum of 25 filters. See data_source_configuration.share_point_configuration.crawler_configuration.filter_configuration.pattern_object_filter.filters Block for details.
 	Filters []PatternObjectFilterFiltersObservation `json:"filters,omitempty" tf:"filters,omitempty"`
 }
 
 type FilterConfigurationPatternObjectFilterParameters struct {
 
-	// The configuration of specific filters applied to your data source content. Minimum of 1 filter and maximum of 25 filters.
+	// Filters applied to your data source content. Minimum of 1 filter and maximum of 25 filters. See data_source_configuration.share_point_configuration.crawler_configuration.filter_configuration.pattern_object_filter.filters Block for details.
 	// +kubebuilder:validation:Optional
 	Filters []PatternObjectFilterFiltersParameters `json:"filters,omitempty" tf:"filters,omitempty"`
 }
 
 type FiltersInitParameters struct {
 
-	// A list of one or more exclusion regular expression patterns to exclude certain object types that adhere to the pattern.
+	// One or more exclusion regular expression patterns to exclude object types that match the pattern.
 	// +listType=set
 	ExclusionFilters []*string `json:"exclusionFilters,omitempty" tf:"exclusion_filters,omitempty"`
 
-	// List of one or more inclusion regular expression patterns to include certain object types that adhere to the pattern.
+	// One or more inclusion regular expression patterns to include object types that match the pattern.
 	// +listType=set
 	InclusionFilters []*string `json:"inclusionFilters,omitempty" tf:"inclusion_filters,omitempty"`
 
-	// The supported object type or content type of the data source.
+	// Object type or content type of the data source.
 	ObjectType *string `json:"objectType,omitempty" tf:"object_type,omitempty"`
 }
 
 type FiltersObservation struct {
 
-	// A list of one or more exclusion regular expression patterns to exclude certain object types that adhere to the pattern.
+	// One or more exclusion regular expression patterns to exclude object types that match the pattern.
 	// +listType=set
 	ExclusionFilters []*string `json:"exclusionFilters,omitempty" tf:"exclusion_filters,omitempty"`
 
-	// List of one or more inclusion regular expression patterns to include certain object types that adhere to the pattern.
+	// One or more inclusion regular expression patterns to include object types that match the pattern.
 	// +listType=set
 	InclusionFilters []*string `json:"inclusionFilters,omitempty" tf:"inclusion_filters,omitempty"`
 
-	// The supported object type or content type of the data source.
+	// Object type or content type of the data source.
 	ObjectType *string `json:"objectType,omitempty" tf:"object_type,omitempty"`
 }
 
 type FiltersParameters struct {
 
-	// A list of one or more exclusion regular expression patterns to exclude certain object types that adhere to the pattern.
+	// One or more exclusion regular expression patterns to exclude object types that match the pattern.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	ExclusionFilters []*string `json:"exclusionFilters,omitempty" tf:"exclusion_filters,omitempty"`
 
-	// List of one or more inclusion regular expression patterns to include certain object types that adhere to the pattern.
+	// One or more inclusion regular expression patterns to include object types that match the pattern.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	InclusionFilters []*string `json:"inclusionFilters,omitempty" tf:"inclusion_filters,omitempty"`
 
-	// The supported object type or content type of the data source.
+	// Object type or content type of the data source.
 	// +kubebuilder:validation:Optional
 	ObjectType *string `json:"objectType" tf:"object_type,omitempty"`
 }
@@ -670,29 +746,29 @@ type FixedSizeChunkingConfigurationParameters struct {
 
 type HierarchicalChunkingConfigurationInitParameters struct {
 
-	// Maximum number of tokens to include in a chunk. Must contain two level_configurations. See level_configurations for details.
+	// Token settings for each layer. Must contain two level_configuration blocks. See level_configuration Block for details.
 	LevelConfiguration []LevelConfigurationInitParameters `json:"levelConfiguration,omitempty" tf:"level_configuration,omitempty"`
 
-	// The number of tokens to repeat across chunks in the same layer.
+	// Number of tokens to repeat across chunks in the same layer.
 	OverlapTokens *float64 `json:"overlapTokens,omitempty" tf:"overlap_tokens,omitempty"`
 }
 
 type HierarchicalChunkingConfigurationObservation struct {
 
-	// Maximum number of tokens to include in a chunk. Must contain two level_configurations. See level_configurations for details.
+	// Token settings for each layer. Must contain two level_configuration blocks. See level_configuration Block for details.
 	LevelConfiguration []LevelConfigurationObservation `json:"levelConfiguration,omitempty" tf:"level_configuration,omitempty"`
 
-	// The number of tokens to repeat across chunks in the same layer.
+	// Number of tokens to repeat across chunks in the same layer.
 	OverlapTokens *float64 `json:"overlapTokens,omitempty" tf:"overlap_tokens,omitempty"`
 }
 
 type HierarchicalChunkingConfigurationParameters struct {
 
-	// Maximum number of tokens to include in a chunk. Must contain two level_configurations. See level_configurations for details.
+	// Token settings for each layer. Must contain two level_configuration blocks. See level_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	LevelConfiguration []LevelConfigurationParameters `json:"levelConfiguration,omitempty" tf:"level_configuration,omitempty"`
 
-	// The number of tokens to repeat across chunks in the same layer.
+	// Number of tokens to repeat across chunks in the same layer.
 	// +kubebuilder:validation:Optional
 	OverlapTokens *float64 `json:"overlapTokens" tf:"overlap_tokens,omitempty"`
 }
@@ -718,21 +794,30 @@ type ImageExtractionConfigurationParameters struct {
 
 type IntermediateStorageInitParameters struct {
 
-	// Configuration block for intermedia S3 storage.
+	// Configuration block for intermediate S3 storage. See s3_location Block for details.
 	S3Location *S3LocationInitParameters `json:"s3Location,omitempty" tf:"s3_location,omitempty"`
 }
 
 type IntermediateStorageObservation struct {
 
-	// Configuration block for intermedia S3 storage.
+	// Configuration block for intermediate S3 storage. See s3_location Block for details.
 	S3Location *S3LocationObservation `json:"s3Location,omitempty" tf:"s3_location,omitempty"`
 }
 
 type IntermediateStorageParameters struct {
 
-	// Configuration block for intermedia S3 storage.
+	// Configuration block for intermediate S3 storage. See s3_location Block for details.
 	// +kubebuilder:validation:Optional
 	S3Location *S3LocationParameters `json:"s3Location,omitempty" tf:"s3_location,omitempty"`
+}
+
+type LastDayOfMonthInitParameters struct {
+}
+
+type LastDayOfMonthObservation struct {
+}
+
+type LastDayOfMonthParameters struct {
 }
 
 type LevelConfigurationInitParameters struct {
@@ -759,11 +844,14 @@ type ManagedKnowledgeBaseConnectorConfigurationInitParameters struct {
 	// JSON-encoded string containing the connector-specific parameters. The structure depends on the connector type (S3, SharePoint, Google Drive, etc.). See Managed Knowledge Base connector parameters for details on each connector type.
 	ConnectorParameters *string `json:"connectorParameters,omitempty" tf:"connector_parameters,omitempty"`
 
-	// Configuration for deletion protection on the data source. See deletion_protection_configuration block for details.
+	// Configuration for deletion protection on the data source. See deletion_protection_configuration Block for details.
 	DeletionProtectionConfiguration *DeletionProtectionConfigurationInitParameters `json:"deletionProtectionConfiguration,omitempty" tf:"deletion_protection_configuration,omitempty"`
 
-	// Configuration for extracting media content (images, audio, video) from documents. See media_extraction_configuration block for details.
+	// Configuration for extracting media content (images, audio, video) from documents. See media_extraction_configuration Block for details.
 	MediaExtractionConfiguration *MediaExtractionConfigurationInitParameters `json:"mediaExtractionConfiguration,omitempty" tf:"media_extraction_configuration,omitempty"`
+
+	// Recurring schedule on which the connector automatically syncs this data source. See sync_schedule Block for details.
+	SyncSchedule *SyncScheduleInitParameters `json:"syncSchedule,omitempty" tf:"sync_schedule,omitempty"`
 }
 
 type ManagedKnowledgeBaseConnectorConfigurationObservation struct {
@@ -771,11 +859,14 @@ type ManagedKnowledgeBaseConnectorConfigurationObservation struct {
 	// JSON-encoded string containing the connector-specific parameters. The structure depends on the connector type (S3, SharePoint, Google Drive, etc.). See Managed Knowledge Base connector parameters for details on each connector type.
 	ConnectorParameters *string `json:"connectorParameters,omitempty" tf:"connector_parameters,omitempty"`
 
-	// Configuration for deletion protection on the data source. See deletion_protection_configuration block for details.
+	// Configuration for deletion protection on the data source. See deletion_protection_configuration Block for details.
 	DeletionProtectionConfiguration *DeletionProtectionConfigurationObservation `json:"deletionProtectionConfiguration,omitempty" tf:"deletion_protection_configuration,omitempty"`
 
-	// Configuration for extracting media content (images, audio, video) from documents. See media_extraction_configuration block for details.
+	// Configuration for extracting media content (images, audio, video) from documents. See media_extraction_configuration Block for details.
 	MediaExtractionConfiguration *MediaExtractionConfigurationObservation `json:"mediaExtractionConfiguration,omitempty" tf:"media_extraction_configuration,omitempty"`
+
+	// Recurring schedule on which the connector automatically syncs this data source. See sync_schedule Block for details.
+	SyncSchedule *SyncScheduleObservation `json:"syncSchedule,omitempty" tf:"sync_schedule,omitempty"`
 }
 
 type ManagedKnowledgeBaseConnectorConfigurationParameters struct {
@@ -784,89 +875,151 @@ type ManagedKnowledgeBaseConnectorConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	ConnectorParameters *string `json:"connectorParameters,omitempty" tf:"connector_parameters,omitempty"`
 
-	// Configuration for deletion protection on the data source. See deletion_protection_configuration block for details.
+	// Configuration for deletion protection on the data source. See deletion_protection_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	DeletionProtectionConfiguration *DeletionProtectionConfigurationParameters `json:"deletionProtectionConfiguration,omitempty" tf:"deletion_protection_configuration,omitempty"`
 
-	// Configuration for extracting media content (images, audio, video) from documents. See media_extraction_configuration block for details.
+	// Configuration for extracting media content (images, audio, video) from documents. See media_extraction_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	MediaExtractionConfiguration *MediaExtractionConfigurationParameters `json:"mediaExtractionConfiguration,omitempty" tf:"media_extraction_configuration,omitempty"`
+
+	// Recurring schedule on which the connector automatically syncs this data source. See sync_schedule Block for details.
+	// +kubebuilder:validation:Optional
+	SyncSchedule *SyncScheduleParameters `json:"syncSchedule,omitempty" tf:"sync_schedule,omitempty"`
 }
 
 type MediaExtractionConfigurationInitParameters struct {
 
-	// Configuration for extracting audio content. See audio_extraction_configuration block for details.
+	// Configuration for extracting audio content. See audio_extraction_configuration Block for details.
 	AudioExtractionConfiguration *AudioExtractionConfigurationInitParameters `json:"audioExtractionConfiguration,omitempty" tf:"audio_extraction_configuration,omitempty"`
 
-	// Configuration for extracting image content. See image_extraction_configuration block for details.
+	// Configuration for extracting image content. See image_extraction_configuration Block for details.
 	ImageExtractionConfiguration *ImageExtractionConfigurationInitParameters `json:"imageExtractionConfiguration,omitempty" tf:"image_extraction_configuration,omitempty"`
 
-	// Configuration for extracting video content. See video_extraction_configuration block for details.
+	// Configuration for extracting video content. See video_extraction_configuration Block for details.
 	VideoExtractionConfiguration *VideoExtractionConfigurationInitParameters `json:"videoExtractionConfiguration,omitempty" tf:"video_extraction_configuration,omitempty"`
 }
 
 type MediaExtractionConfigurationObservation struct {
 
-	// Configuration for extracting audio content. See audio_extraction_configuration block for details.
+	// Configuration for extracting audio content. See audio_extraction_configuration Block for details.
 	AudioExtractionConfiguration *AudioExtractionConfigurationObservation `json:"audioExtractionConfiguration,omitempty" tf:"audio_extraction_configuration,omitempty"`
 
-	// Configuration for extracting image content. See image_extraction_configuration block for details.
+	// Configuration for extracting image content. See image_extraction_configuration Block for details.
 	ImageExtractionConfiguration *ImageExtractionConfigurationObservation `json:"imageExtractionConfiguration,omitempty" tf:"image_extraction_configuration,omitempty"`
 
-	// Configuration for extracting video content. See video_extraction_configuration block for details.
+	// Configuration for extracting video content. See video_extraction_configuration Block for details.
 	VideoExtractionConfiguration *VideoExtractionConfigurationObservation `json:"videoExtractionConfiguration,omitempty" tf:"video_extraction_configuration,omitempty"`
 }
 
 type MediaExtractionConfigurationParameters struct {
 
-	// Configuration for extracting audio content. See audio_extraction_configuration block for details.
+	// Configuration for extracting audio content. See audio_extraction_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	AudioExtractionConfiguration *AudioExtractionConfigurationParameters `json:"audioExtractionConfiguration,omitempty" tf:"audio_extraction_configuration,omitempty"`
 
-	// Configuration for extracting image content. See image_extraction_configuration block for details.
+	// Configuration for extracting image content. See image_extraction_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	ImageExtractionConfiguration *ImageExtractionConfigurationParameters `json:"imageExtractionConfiguration,omitempty" tf:"image_extraction_configuration,omitempty"`
 
-	// Configuration for extracting video content. See video_extraction_configuration block for details.
+	// Configuration for extracting video content. See video_extraction_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	VideoExtractionConfiguration *VideoExtractionConfigurationParameters `json:"videoExtractionConfiguration,omitempty" tf:"video_extraction_configuration,omitempty"`
 }
 
+type MonthlyInitParameters struct {
+
+	// Day of the month on which the monthly sync runs. See day_of_month Block for details.
+	DayOfMonth *DayOfMonthInitParameters `json:"dayOfMonth,omitempty" tf:"day_of_month,omitempty"`
+}
+
+type MonthlyObservation struct {
+
+	// Day of the month on which the monthly sync runs. See day_of_month Block for details.
+	DayOfMonth *DayOfMonthObservation `json:"dayOfMonth,omitempty" tf:"day_of_month,omitempty"`
+}
+
+type MonthlyParameters struct {
+
+	// Day of the month on which the monthly sync runs. See day_of_month Block for details.
+	// +kubebuilder:validation:Optional
+	DayOfMonth *DayOfMonthParameters `json:"dayOfMonth,omitempty" tf:"day_of_month,omitempty"`
+}
+
+type ParsingConfigurationBedrockFoundationModelConfigurationInitParameters struct {
+
+	// ARN of the cross-Region inference profile used for context enrichment.
+	ModelArn *string `json:"modelArn,omitempty" tf:"model_arn,omitempty"`
+
+	// Whether to enable parsing of multimodal data, including both text and images. Valid value: MULTIMODAL.
+	ParsingModality *string `json:"parsingModality,omitempty" tf:"parsing_modality,omitempty"`
+
+	// Instructions for interpreting the contents of the document. See parsing_prompt Block for details.
+	ParsingPrompt *ParsingPromptInitParameters `json:"parsingPrompt,omitempty" tf:"parsing_prompt,omitempty"`
+}
+
+type ParsingConfigurationBedrockFoundationModelConfigurationObservation struct {
+
+	// ARN of the cross-Region inference profile used for context enrichment.
+	ModelArn *string `json:"modelArn,omitempty" tf:"model_arn,omitempty"`
+
+	// Whether to enable parsing of multimodal data, including both text and images. Valid value: MULTIMODAL.
+	ParsingModality *string `json:"parsingModality,omitempty" tf:"parsing_modality,omitempty"`
+
+	// Instructions for interpreting the contents of the document. See parsing_prompt Block for details.
+	ParsingPrompt *ParsingPromptObservation `json:"parsingPrompt,omitempty" tf:"parsing_prompt,omitempty"`
+}
+
+type ParsingConfigurationBedrockFoundationModelConfigurationParameters struct {
+
+	// ARN of the cross-Region inference profile used for context enrichment.
+	// +kubebuilder:validation:Optional
+	ModelArn *string `json:"modelArn" tf:"model_arn,omitempty"`
+
+	// Whether to enable parsing of multimodal data, including both text and images. Valid value: MULTIMODAL.
+	// +kubebuilder:validation:Optional
+	ParsingModality *string `json:"parsingModality,omitempty" tf:"parsing_modality,omitempty"`
+
+	// Instructions for interpreting the contents of the document. See parsing_prompt Block for details.
+	// +kubebuilder:validation:Optional
+	ParsingPrompt *ParsingPromptParameters `json:"parsingPrompt,omitempty" tf:"parsing_prompt,omitempty"`
+}
+
 type ParsingConfigurationInitParameters struct {
 
-	// Settings for using Amazon Bedrock Data Automation to parse documents. See bedrock_data_automation_configuration block for details.
+	// Settings for using Amazon Bedrock Data Automation to parse documents. See bedrock_data_automation_configuration Block for details.
 	BedrockDataAutomationConfiguration *BedrockDataAutomationConfigurationInitParameters `json:"bedrockDataAutomationConfiguration,omitempty" tf:"bedrock_data_automation_configuration,omitempty"`
 
-	// Settings for a foundation model used to parse documents in a data source. See bedrock_foundation_model_configuration block for details.
-	BedrockFoundationModelConfiguration *BedrockFoundationModelConfigurationInitParameters `json:"bedrockFoundationModelConfiguration,omitempty" tf:"bedrock_foundation_model_configuration,omitempty"`
+	// Settings for a foundation model used to parse documents in a data source. See bedrock_foundation_model_configuration Block for details.
+	BedrockFoundationModelConfiguration *ParsingConfigurationBedrockFoundationModelConfigurationInitParameters `json:"bedrockFoundationModelConfiguration,omitempty" tf:"bedrock_foundation_model_configuration,omitempty"`
 
-	// The parsing strategy to use. Valid values: BEDROCK_FOUNDATION_MODEL, BEDROCK_DATA_AUTOMATION.
+	// Parsing strategy to use. Valid values: BEDROCK_FOUNDATION_MODEL, BEDROCK_DATA_AUTOMATION, SMART_PARSING, MULTI_MODAL_EMBEDDINGS.
 	ParsingStrategy *string `json:"parsingStrategy,omitempty" tf:"parsing_strategy,omitempty"`
 }
 
 type ParsingConfigurationObservation struct {
 
-	// Settings for using Amazon Bedrock Data Automation to parse documents. See bedrock_data_automation_configuration block for details.
+	// Settings for using Amazon Bedrock Data Automation to parse documents. See bedrock_data_automation_configuration Block for details.
 	BedrockDataAutomationConfiguration *BedrockDataAutomationConfigurationObservation `json:"bedrockDataAutomationConfiguration,omitempty" tf:"bedrock_data_automation_configuration,omitempty"`
 
-	// Settings for a foundation model used to parse documents in a data source. See bedrock_foundation_model_configuration block for details.
-	BedrockFoundationModelConfiguration *BedrockFoundationModelConfigurationObservation `json:"bedrockFoundationModelConfiguration,omitempty" tf:"bedrock_foundation_model_configuration,omitempty"`
+	// Settings for a foundation model used to parse documents in a data source. See bedrock_foundation_model_configuration Block for details.
+	BedrockFoundationModelConfiguration *ParsingConfigurationBedrockFoundationModelConfigurationObservation `json:"bedrockFoundationModelConfiguration,omitempty" tf:"bedrock_foundation_model_configuration,omitempty"`
 
-	// The parsing strategy to use. Valid values: BEDROCK_FOUNDATION_MODEL, BEDROCK_DATA_AUTOMATION.
+	// Parsing strategy to use. Valid values: BEDROCK_FOUNDATION_MODEL, BEDROCK_DATA_AUTOMATION, SMART_PARSING, MULTI_MODAL_EMBEDDINGS.
 	ParsingStrategy *string `json:"parsingStrategy,omitempty" tf:"parsing_strategy,omitempty"`
 }
 
 type ParsingConfigurationParameters struct {
 
-	// Settings for using Amazon Bedrock Data Automation to parse documents. See bedrock_data_automation_configuration block for details.
+	// Settings for using Amazon Bedrock Data Automation to parse documents. See bedrock_data_automation_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	BedrockDataAutomationConfiguration *BedrockDataAutomationConfigurationParameters `json:"bedrockDataAutomationConfiguration,omitempty" tf:"bedrock_data_automation_configuration,omitempty"`
 
-	// Settings for a foundation model used to parse documents in a data source. See bedrock_foundation_model_configuration block for details.
+	// Settings for a foundation model used to parse documents in a data source. See bedrock_foundation_model_configuration Block for details.
 	// +kubebuilder:validation:Optional
-	BedrockFoundationModelConfiguration *BedrockFoundationModelConfigurationParameters `json:"bedrockFoundationModelConfiguration,omitempty" tf:"bedrock_foundation_model_configuration,omitempty"`
+	BedrockFoundationModelConfiguration *ParsingConfigurationBedrockFoundationModelConfigurationParameters `json:"bedrockFoundationModelConfiguration,omitempty" tf:"bedrock_foundation_model_configuration,omitempty"`
 
-	// The parsing strategy to use. Valid values: BEDROCK_FOUNDATION_MODEL, BEDROCK_DATA_AUTOMATION.
+	// Parsing strategy to use. Valid values: BEDROCK_FOUNDATION_MODEL, BEDROCK_DATA_AUTOMATION, SMART_PARSING, MULTI_MODAL_EMBEDDINGS.
 	// +kubebuilder:validation:Optional
 	ParsingStrategy *string `json:"parsingStrategy" tf:"parsing_strategy,omitempty"`
 }
@@ -892,64 +1045,64 @@ type ParsingPromptParameters struct {
 
 type PatternObjectFilterFiltersInitParameters struct {
 
-	// A list of one or more exclusion regular expression patterns to exclude certain object types that adhere to the pattern.
+	// List of one or more exclusion regular expression patterns to exclude URLs that match the pattern.
 	// +listType=set
 	ExclusionFilters []*string `json:"exclusionFilters,omitempty" tf:"exclusion_filters,omitempty"`
 
-	// List of one or more inclusion regular expression patterns to include certain object types that adhere to the pattern.
+	// List of one or more inclusion regular expression patterns to include URLs that match the pattern.
 	// +listType=set
 	InclusionFilters []*string `json:"inclusionFilters,omitempty" tf:"inclusion_filters,omitempty"`
 
-	// The supported object type or content type of the data source.
+	// Object type or content type of the data source.
 	ObjectType *string `json:"objectType,omitempty" tf:"object_type,omitempty"`
 }
 
 type PatternObjectFilterFiltersObservation struct {
 
-	// A list of one or more exclusion regular expression patterns to exclude certain object types that adhere to the pattern.
+	// List of one or more exclusion regular expression patterns to exclude URLs that match the pattern.
 	// +listType=set
 	ExclusionFilters []*string `json:"exclusionFilters,omitempty" tf:"exclusion_filters,omitempty"`
 
-	// List of one or more inclusion regular expression patterns to include certain object types that adhere to the pattern.
+	// List of one or more inclusion regular expression patterns to include URLs that match the pattern.
 	// +listType=set
 	InclusionFilters []*string `json:"inclusionFilters,omitempty" tf:"inclusion_filters,omitempty"`
 
-	// The supported object type or content type of the data source.
+	// Object type or content type of the data source.
 	ObjectType *string `json:"objectType,omitempty" tf:"object_type,omitempty"`
 }
 
 type PatternObjectFilterFiltersParameters struct {
 
-	// A list of one or more exclusion regular expression patterns to exclude certain object types that adhere to the pattern.
+	// List of one or more exclusion regular expression patterns to exclude URLs that match the pattern.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	ExclusionFilters []*string `json:"exclusionFilters,omitempty" tf:"exclusion_filters,omitempty"`
 
-	// List of one or more inclusion regular expression patterns to include certain object types that adhere to the pattern.
+	// List of one or more inclusion regular expression patterns to include URLs that match the pattern.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	InclusionFilters []*string `json:"inclusionFilters,omitempty" tf:"inclusion_filters,omitempty"`
 
-	// The supported object type or content type of the data source.
+	// Object type or content type of the data source.
 	// +kubebuilder:validation:Optional
 	ObjectType *string `json:"objectType" tf:"object_type,omitempty"`
 }
 
 type PatternObjectFilterInitParameters struct {
 
-	// The configuration of specific filters applied to your data source content. Minimum of 1 filter and maximum of 25 filters.
+	// Filters applied to your data source content. Minimum of 1 filter and maximum of 25 filters. See data_source_configuration.confluence_configuration.crawler_configuration.filter_configuration.pattern_object_filter.filters Block for details.
 	Filters []FiltersInitParameters `json:"filters,omitempty" tf:"filters,omitempty"`
 }
 
 type PatternObjectFilterObservation struct {
 
-	// The configuration of specific filters applied to your data source content. Minimum of 1 filter and maximum of 25 filters.
+	// Filters applied to your data source content. Minimum of 1 filter and maximum of 25 filters. See data_source_configuration.confluence_configuration.crawler_configuration.filter_configuration.pattern_object_filter.filters Block for details.
 	Filters []FiltersObservation `json:"filters,omitempty" tf:"filters,omitempty"`
 }
 
 type PatternObjectFilterParameters struct {
 
-	// The configuration of specific filters applied to your data source content. Minimum of 1 filter and maximum of 25 filters.
+	// Filters applied to your data source content. Minimum of 1 filter and maximum of 25 filters. See data_source_configuration.confluence_configuration.crawler_configuration.filter_configuration.pattern_object_filter.filters Block for details.
 	// +kubebuilder:validation:Optional
 	Filters []FiltersParameters `json:"filters,omitempty" tf:"filters,omitempty"`
 }
@@ -1037,58 +1190,58 @@ type S3LocationParameters struct {
 
 type SalesforceConfigurationCrawlerConfigurationInitParameters struct {
 
-	// The Salesforce standard object configuration. See filter_configuration block for details.
+	// Object configuration used to filter crawled content. See data_source_configuration.share_point_configuration.crawler_configuration.filter_configuration Block for details.
 	FilterConfiguration *CrawlerConfigurationFilterConfigurationInitParameters `json:"filterConfiguration,omitempty" tf:"filter_configuration,omitempty"`
 }
 
 type SalesforceConfigurationCrawlerConfigurationObservation struct {
 
-	// The Salesforce standard object configuration. See filter_configuration block for details.
+	// Object configuration used to filter crawled content. See data_source_configuration.share_point_configuration.crawler_configuration.filter_configuration Block for details.
 	FilterConfiguration *CrawlerConfigurationFilterConfigurationObservation `json:"filterConfiguration,omitempty" tf:"filter_configuration,omitempty"`
 }
 
 type SalesforceConfigurationCrawlerConfigurationParameters struct {
 
-	// The Salesforce standard object configuration. See filter_configuration block for details.
+	// Object configuration used to filter crawled content. See data_source_configuration.share_point_configuration.crawler_configuration.filter_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	FilterConfiguration *CrawlerConfigurationFilterConfigurationParameters `json:"filterConfiguration,omitempty" tf:"filter_configuration,omitempty"`
 }
 
 type SalesforceConfigurationInitParameters struct {
 
-	// Configuration for web content. See crawler_configuration block for details.
+	// Configuration for web content. See data_source_configuration.web_configuration.crawler_configuration Block for details.
 	CrawlerConfiguration *SalesforceConfigurationCrawlerConfigurationInitParameters `json:"crawlerConfiguration,omitempty" tf:"crawler_configuration,omitempty"`
 
-	// Endpoint information to connect to your web data source. See source_configuration block for details.
+	// Endpoint information to connect to your web data source. See data_source_configuration.web_configuration.source_configuration Block for details.
 	SourceConfiguration *SalesforceConfigurationSourceConfigurationInitParameters `json:"sourceConfiguration,omitempty" tf:"source_configuration,omitempty"`
 }
 
 type SalesforceConfigurationObservation struct {
 
-	// Configuration for web content. See crawler_configuration block for details.
+	// Configuration for web content. See data_source_configuration.web_configuration.crawler_configuration Block for details.
 	CrawlerConfiguration *SalesforceConfigurationCrawlerConfigurationObservation `json:"crawlerConfiguration,omitempty" tf:"crawler_configuration,omitempty"`
 
-	// Endpoint information to connect to your web data source. See source_configuration block for details.
+	// Endpoint information to connect to your web data source. See data_source_configuration.web_configuration.source_configuration Block for details.
 	SourceConfiguration *SalesforceConfigurationSourceConfigurationObservation `json:"sourceConfiguration,omitempty" tf:"source_configuration,omitempty"`
 }
 
 type SalesforceConfigurationParameters struct {
 
-	// Configuration for web content. See crawler_configuration block for details.
+	// Configuration for web content. See data_source_configuration.web_configuration.crawler_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	CrawlerConfiguration *SalesforceConfigurationCrawlerConfigurationParameters `json:"crawlerConfiguration,omitempty" tf:"crawler_configuration,omitempty"`
 
-	// Endpoint information to connect to your web data source. See source_configuration block for details.
+	// Endpoint information to connect to your web data source. See data_source_configuration.web_configuration.source_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	SourceConfiguration *SalesforceConfigurationSourceConfigurationParameters `json:"sourceConfiguration,omitempty" tf:"source_configuration,omitempty"`
 }
 
 type SalesforceConfigurationSourceConfigurationInitParameters struct {
 
-	// The supported authentication type to authenticate and connect to your SharePoint site. Valid values: OAUTH2_CLIENT_CREDENTIALS, OAUTH2_SHAREPOINT_APP_ONLY_CLIENT_CREDENTIALS.
+	// Supported authentication type to authenticate and connect to your Confluence instance. Valid values: BASIC, OAUTH2_CLIENT_CREDENTIALS.
 	AuthType *string `json:"authType,omitempty" tf:"auth_type,omitempty"`
 
-	// ARN of an AWS Secrets Manager secret that stores your authentication credentials for your SharePoint site. For more information on the key-value pairs that must be included in your secret, depending on your authentication type, see SharePoint connection configuration. Pattern: ^arn:aws(|-cn|-us-gov):secretsmanager:[a-z0-9-]{1,20}:([0-9]{12}|):secret:[a-zA-Z0-9!/_+=.@-]{1,512}$.
+	// ARN of an AWS Secrets Manager secret that stores your authentication credentials for your Confluence instance URL. For more information on the key-value pairs that must be included in your secret, depending on your authentication type, see Confluence connection configuration. Pattern: ^arn:aws(|-cn|-us-gov):secretsmanager:[a-z0-9-]{1,20}:([0-9]{12}|):secret:[a-zA-Z0-9!/_+=.@-]{1,512}$.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/secretsmanager/v1beta1.Secret
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	CredentialsSecretArn *string `json:"credentialsSecretArn,omitempty" tf:"credentials_secret_arn,omitempty"`
@@ -1101,29 +1254,29 @@ type SalesforceConfigurationSourceConfigurationInitParameters struct {
 	// +kubebuilder:validation:Optional
 	CredentialsSecretArnSelector *v2.Selector `json:"credentialsSecretArnSelector,omitempty" tf:"-"`
 
-	// The Salesforce host URL or instance URL. Pattern: ^https://[A-Za-z0-9][^\s]*$.
+	// Confluence host URL or instance URL. Pattern: ^https://[A-Za-z0-9][^\s]*$.
 	HostURL *string `json:"hostUrl,omitempty" tf:"host_url,omitempty"`
 }
 
 type SalesforceConfigurationSourceConfigurationObservation struct {
 
-	// The supported authentication type to authenticate and connect to your SharePoint site. Valid values: OAUTH2_CLIENT_CREDENTIALS, OAUTH2_SHAREPOINT_APP_ONLY_CLIENT_CREDENTIALS.
+	// Supported authentication type to authenticate and connect to your Confluence instance. Valid values: BASIC, OAUTH2_CLIENT_CREDENTIALS.
 	AuthType *string `json:"authType,omitempty" tf:"auth_type,omitempty"`
 
-	// ARN of an AWS Secrets Manager secret that stores your authentication credentials for your SharePoint site. For more information on the key-value pairs that must be included in your secret, depending on your authentication type, see SharePoint connection configuration. Pattern: ^arn:aws(|-cn|-us-gov):secretsmanager:[a-z0-9-]{1,20}:([0-9]{12}|):secret:[a-zA-Z0-9!/_+=.@-]{1,512}$.
+	// ARN of an AWS Secrets Manager secret that stores your authentication credentials for your Confluence instance URL. For more information on the key-value pairs that must be included in your secret, depending on your authentication type, see Confluence connection configuration. Pattern: ^arn:aws(|-cn|-us-gov):secretsmanager:[a-z0-9-]{1,20}:([0-9]{12}|):secret:[a-zA-Z0-9!/_+=.@-]{1,512}$.
 	CredentialsSecretArn *string `json:"credentialsSecretArn,omitempty" tf:"credentials_secret_arn,omitempty"`
 
-	// The Salesforce host URL or instance URL. Pattern: ^https://[A-Za-z0-9][^\s]*$.
+	// Confluence host URL or instance URL. Pattern: ^https://[A-Za-z0-9][^\s]*$.
 	HostURL *string `json:"hostUrl,omitempty" tf:"host_url,omitempty"`
 }
 
 type SalesforceConfigurationSourceConfigurationParameters struct {
 
-	// The supported authentication type to authenticate and connect to your SharePoint site. Valid values: OAUTH2_CLIENT_CREDENTIALS, OAUTH2_SHAREPOINT_APP_ONLY_CLIENT_CREDENTIALS.
+	// Supported authentication type to authenticate and connect to your Confluence instance. Valid values: BASIC, OAUTH2_CLIENT_CREDENTIALS.
 	// +kubebuilder:validation:Optional
 	AuthType *string `json:"authType" tf:"auth_type,omitempty"`
 
-	// ARN of an AWS Secrets Manager secret that stores your authentication credentials for your SharePoint site. For more information on the key-value pairs that must be included in your secret, depending on your authentication type, see SharePoint connection configuration. Pattern: ^arn:aws(|-cn|-us-gov):secretsmanager:[a-z0-9-]{1,20}:([0-9]{12}|):secret:[a-zA-Z0-9!/_+=.@-]{1,512}$.
+	// ARN of an AWS Secrets Manager secret that stores your authentication credentials for your Confluence instance URL. For more information on the key-value pairs that must be included in your secret, depending on your authentication type, see Confluence connection configuration. Pattern: ^arn:aws(|-cn|-us-gov):secretsmanager:[a-z0-9-]{1,20}:([0-9]{12}|):secret:[a-zA-Z0-9!/_+=.@-]{1,512}$.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/secretsmanager/v1beta1.Secret
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -1137,7 +1290,7 @@ type SalesforceConfigurationSourceConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	CredentialsSecretArnSelector *v2.Selector `json:"credentialsSecretArnSelector,omitempty" tf:"-"`
 
-	// The Salesforce host URL or instance URL. Pattern: ^https://[A-Za-z0-9][^\s]*$.
+	// Confluence host URL or instance URL. Pattern: ^https://[A-Za-z0-9][^\s]*$.
 	// +kubebuilder:validation:Optional
 	HostURL *string `json:"hostUrl" tf:"host_url,omitempty"`
 }
@@ -1163,39 +1316,39 @@ type SeedUrlsParameters struct {
 
 type SemanticChunkingConfigurationInitParameters struct {
 
-	// The dissimilarity threshold for splitting chunks.
+	// Dissimilarity threshold for splitting chunks.
 	BreakpointPercentileThreshold *float64 `json:"breakpointPercentileThreshold,omitempty" tf:"breakpoint_percentile_threshold,omitempty"`
 
-	// The buffer size.
+	// Buffer size.
 	BufferSize *float64 `json:"bufferSize,omitempty" tf:"buffer_size,omitempty"`
 
-	// The maximum number of tokens a chunk can contain.
+	// Maximum number of tokens a chunk can contain.
 	MaxToken *float64 `json:"maxToken,omitempty" tf:"max_token,omitempty"`
 }
 
 type SemanticChunkingConfigurationObservation struct {
 
-	// The dissimilarity threshold for splitting chunks.
+	// Dissimilarity threshold for splitting chunks.
 	BreakpointPercentileThreshold *float64 `json:"breakpointPercentileThreshold,omitempty" tf:"breakpoint_percentile_threshold,omitempty"`
 
-	// The buffer size.
+	// Buffer size.
 	BufferSize *float64 `json:"bufferSize,omitempty" tf:"buffer_size,omitempty"`
 
-	// The maximum number of tokens a chunk can contain.
+	// Maximum number of tokens a chunk can contain.
 	MaxToken *float64 `json:"maxToken,omitempty" tf:"max_token,omitempty"`
 }
 
 type SemanticChunkingConfigurationParameters struct {
 
-	// The dissimilarity threshold for splitting chunks.
+	// Dissimilarity threshold for splitting chunks.
 	// +kubebuilder:validation:Optional
 	BreakpointPercentileThreshold *float64 `json:"breakpointPercentileThreshold" tf:"breakpoint_percentile_threshold,omitempty"`
 
-	// The buffer size.
+	// Buffer size.
 	// +kubebuilder:validation:Optional
 	BufferSize *float64 `json:"bufferSize" tf:"buffer_size,omitempty"`
 
-	// The maximum number of tokens a chunk can contain.
+	// Maximum number of tokens a chunk can contain.
 	// +kubebuilder:validation:Optional
 	MaxToken *float64 `json:"maxToken" tf:"max_token,omitempty"`
 }
@@ -1241,87 +1394,87 @@ type ServerSideEncryptionConfigurationParameters struct {
 
 type SharePointConfigurationCrawlerConfigurationFilterConfigurationInitParameters struct {
 
-	// The configuration of filtering certain objects or content types of the data source. See pattern_object_filter block for details.
+	// Configuration for filtering objects or content types of the data source. See data_source_configuration.share_point_configuration.crawler_configuration.filter_configuration.pattern_object_filter Block for details.
 	PatternObjectFilter []CrawlerConfigurationFilterConfigurationPatternObjectFilterInitParameters `json:"patternObjectFilter,omitempty" tf:"pattern_object_filter,omitempty"`
 
-	// Type of storage for the data source. Valid values: S3, WEB, CONFLUENCE, SALESFORCE, SHAREPOINT, CUSTOM, REDSHIFT_METADATA, MANAGED_KNOWLEDGE_BASE_CONNECTOR.
+	// Type of filtering to apply to objects or content of the data source. For example, the PATTERN type uses regular expression patterns to filter content.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type SharePointConfigurationCrawlerConfigurationFilterConfigurationObservation struct {
 
-	// The configuration of filtering certain objects or content types of the data source. See pattern_object_filter block for details.
+	// Configuration for filtering objects or content types of the data source. See data_source_configuration.share_point_configuration.crawler_configuration.filter_configuration.pattern_object_filter Block for details.
 	PatternObjectFilter []CrawlerConfigurationFilterConfigurationPatternObjectFilterObservation `json:"patternObjectFilter,omitempty" tf:"pattern_object_filter,omitempty"`
 
-	// Type of storage for the data source. Valid values: S3, WEB, CONFLUENCE, SALESFORCE, SHAREPOINT, CUSTOM, REDSHIFT_METADATA, MANAGED_KNOWLEDGE_BASE_CONNECTOR.
+	// Type of filtering to apply to objects or content of the data source. For example, the PATTERN type uses regular expression patterns to filter content.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type SharePointConfigurationCrawlerConfigurationFilterConfigurationParameters struct {
 
-	// The configuration of filtering certain objects or content types of the data source. See pattern_object_filter block for details.
+	// Configuration for filtering objects or content types of the data source. See data_source_configuration.share_point_configuration.crawler_configuration.filter_configuration.pattern_object_filter Block for details.
 	// +kubebuilder:validation:Optional
 	PatternObjectFilter []CrawlerConfigurationFilterConfigurationPatternObjectFilterParameters `json:"patternObjectFilter,omitempty" tf:"pattern_object_filter,omitempty"`
 
-	// Type of storage for the data source. Valid values: S3, WEB, CONFLUENCE, SALESFORCE, SHAREPOINT, CUSTOM, REDSHIFT_METADATA, MANAGED_KNOWLEDGE_BASE_CONNECTOR.
+	// Type of filtering to apply to objects or content of the data source. For example, the PATTERN type uses regular expression patterns to filter content.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type SharePointConfigurationCrawlerConfigurationInitParameters struct {
 
-	// The Salesforce standard object configuration. See filter_configuration block for details.
+	// Object configuration used to filter crawled content. See data_source_configuration.share_point_configuration.crawler_configuration.filter_configuration Block for details.
 	FilterConfiguration *SharePointConfigurationCrawlerConfigurationFilterConfigurationInitParameters `json:"filterConfiguration,omitempty" tf:"filter_configuration,omitempty"`
 }
 
 type SharePointConfigurationCrawlerConfigurationObservation struct {
 
-	// The Salesforce standard object configuration. See filter_configuration block for details.
+	// Object configuration used to filter crawled content. See data_source_configuration.share_point_configuration.crawler_configuration.filter_configuration Block for details.
 	FilterConfiguration *SharePointConfigurationCrawlerConfigurationFilterConfigurationObservation `json:"filterConfiguration,omitempty" tf:"filter_configuration,omitempty"`
 }
 
 type SharePointConfigurationCrawlerConfigurationParameters struct {
 
-	// The Salesforce standard object configuration. See filter_configuration block for details.
+	// Object configuration used to filter crawled content. See data_source_configuration.share_point_configuration.crawler_configuration.filter_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	FilterConfiguration *SharePointConfigurationCrawlerConfigurationFilterConfigurationParameters `json:"filterConfiguration,omitempty" tf:"filter_configuration,omitempty"`
 }
 
 type SharePointConfigurationInitParameters struct {
 
-	// Configuration for web content. See crawler_configuration block for details.
+	// Configuration for web content. See data_source_configuration.web_configuration.crawler_configuration Block for details.
 	CrawlerConfiguration *SharePointConfigurationCrawlerConfigurationInitParameters `json:"crawlerConfiguration,omitempty" tf:"crawler_configuration,omitempty"`
 
-	// Endpoint information to connect to your web data source. See source_configuration block for details.
+	// Endpoint information to connect to your web data source. See data_source_configuration.web_configuration.source_configuration Block for details.
 	SourceConfiguration *SharePointConfigurationSourceConfigurationInitParameters `json:"sourceConfiguration,omitempty" tf:"source_configuration,omitempty"`
 }
 
 type SharePointConfigurationObservation struct {
 
-	// Configuration for web content. See crawler_configuration block for details.
+	// Configuration for web content. See data_source_configuration.web_configuration.crawler_configuration Block for details.
 	CrawlerConfiguration *SharePointConfigurationCrawlerConfigurationObservation `json:"crawlerConfiguration,omitempty" tf:"crawler_configuration,omitempty"`
 
-	// Endpoint information to connect to your web data source. See source_configuration block for details.
+	// Endpoint information to connect to your web data source. See data_source_configuration.web_configuration.source_configuration Block for details.
 	SourceConfiguration *SharePointConfigurationSourceConfigurationObservation `json:"sourceConfiguration,omitempty" tf:"source_configuration,omitempty"`
 }
 
 type SharePointConfigurationParameters struct {
 
-	// Configuration for web content. See crawler_configuration block for details.
+	// Configuration for web content. See data_source_configuration.web_configuration.crawler_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	CrawlerConfiguration *SharePointConfigurationCrawlerConfigurationParameters `json:"crawlerConfiguration,omitempty" tf:"crawler_configuration,omitempty"`
 
-	// Endpoint information to connect to your web data source. See source_configuration block for details.
+	// Endpoint information to connect to your web data source. See data_source_configuration.web_configuration.source_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	SourceConfiguration *SharePointConfigurationSourceConfigurationParameters `json:"sourceConfiguration,omitempty" tf:"source_configuration,omitempty"`
 }
 
 type SharePointConfigurationSourceConfigurationInitParameters struct {
 
-	// The supported authentication type to authenticate and connect to your SharePoint site. Valid values: OAUTH2_CLIENT_CREDENTIALS, OAUTH2_SHAREPOINT_APP_ONLY_CLIENT_CREDENTIALS.
+	// Supported authentication type to authenticate and connect to your Confluence instance. Valid values: BASIC, OAUTH2_CLIENT_CREDENTIALS.
 	AuthType *string `json:"authType,omitempty" tf:"auth_type,omitempty"`
 
-	// ARN of an AWS Secrets Manager secret that stores your authentication credentials for your SharePoint site. For more information on the key-value pairs that must be included in your secret, depending on your authentication type, see SharePoint connection configuration. Pattern: ^arn:aws(|-cn|-us-gov):secretsmanager:[a-z0-9-]{1,20}:([0-9]{12}|):secret:[a-zA-Z0-9!/_+=.@-]{1,512}$.
+	// ARN of an AWS Secrets Manager secret that stores your authentication credentials for your Confluence instance URL. For more information on the key-value pairs that must be included in your secret, depending on your authentication type, see Confluence connection configuration. Pattern: ^arn:aws(|-cn|-us-gov):secretsmanager:[a-z0-9-]{1,20}:([0-9]{12}|):secret:[a-zA-Z0-9!/_+=.@-]{1,512}$.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/secretsmanager/v1beta1.Secret
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	CredentialsSecretArn *string `json:"credentialsSecretArn,omitempty" tf:"credentials_secret_arn,omitempty"`
@@ -1334,49 +1487,49 @@ type SharePointConfigurationSourceConfigurationInitParameters struct {
 	// +kubebuilder:validation:Optional
 	CredentialsSecretArnSelector *v2.Selector `json:"credentialsSecretArnSelector,omitempty" tf:"-"`
 
-	// The domain of your SharePoint instance or site URL/URLs.
+	// Domain of your SharePoint instance or site URL/URLs.
 	Domain *string `json:"domain,omitempty" tf:"domain,omitempty"`
 
-	// The supported host type, whether online/cloud or server/on-premises. Valid values: ONLINE.
+	// Supported host type, whether online/cloud or server/on-premises. Valid values: SAAS.
 	HostType *string `json:"hostType,omitempty" tf:"host_type,omitempty"`
 
-	// A list of one or more SharePoint site URLs.
+	// One or more SharePoint site URLs.
 	// +listType=set
 	SiteUrls []*string `json:"siteUrls,omitempty" tf:"site_urls,omitempty"`
 
-	// The identifier of your Microsoft 365 tenant.
+	// Identifier of your Microsoft 365 tenant.
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
 }
 
 type SharePointConfigurationSourceConfigurationObservation struct {
 
-	// The supported authentication type to authenticate and connect to your SharePoint site. Valid values: OAUTH2_CLIENT_CREDENTIALS, OAUTH2_SHAREPOINT_APP_ONLY_CLIENT_CREDENTIALS.
+	// Supported authentication type to authenticate and connect to your Confluence instance. Valid values: BASIC, OAUTH2_CLIENT_CREDENTIALS.
 	AuthType *string `json:"authType,omitempty" tf:"auth_type,omitempty"`
 
-	// ARN of an AWS Secrets Manager secret that stores your authentication credentials for your SharePoint site. For more information on the key-value pairs that must be included in your secret, depending on your authentication type, see SharePoint connection configuration. Pattern: ^arn:aws(|-cn|-us-gov):secretsmanager:[a-z0-9-]{1,20}:([0-9]{12}|):secret:[a-zA-Z0-9!/_+=.@-]{1,512}$.
+	// ARN of an AWS Secrets Manager secret that stores your authentication credentials for your Confluence instance URL. For more information on the key-value pairs that must be included in your secret, depending on your authentication type, see Confluence connection configuration. Pattern: ^arn:aws(|-cn|-us-gov):secretsmanager:[a-z0-9-]{1,20}:([0-9]{12}|):secret:[a-zA-Z0-9!/_+=.@-]{1,512}$.
 	CredentialsSecretArn *string `json:"credentialsSecretArn,omitempty" tf:"credentials_secret_arn,omitempty"`
 
-	// The domain of your SharePoint instance or site URL/URLs.
+	// Domain of your SharePoint instance or site URL/URLs.
 	Domain *string `json:"domain,omitempty" tf:"domain,omitempty"`
 
-	// The supported host type, whether online/cloud or server/on-premises. Valid values: ONLINE.
+	// Supported host type, whether online/cloud or server/on-premises. Valid values: SAAS.
 	HostType *string `json:"hostType,omitempty" tf:"host_type,omitempty"`
 
-	// A list of one or more SharePoint site URLs.
+	// One or more SharePoint site URLs.
 	// +listType=set
 	SiteUrls []*string `json:"siteUrls,omitempty" tf:"site_urls,omitempty"`
 
-	// The identifier of your Microsoft 365 tenant.
+	// Identifier of your Microsoft 365 tenant.
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
 }
 
 type SharePointConfigurationSourceConfigurationParameters struct {
 
-	// The supported authentication type to authenticate and connect to your SharePoint site. Valid values: OAUTH2_CLIENT_CREDENTIALS, OAUTH2_SHAREPOINT_APP_ONLY_CLIENT_CREDENTIALS.
+	// Supported authentication type to authenticate and connect to your Confluence instance. Valid values: BASIC, OAUTH2_CLIENT_CREDENTIALS.
 	// +kubebuilder:validation:Optional
 	AuthType *string `json:"authType" tf:"auth_type,omitempty"`
 
-	// ARN of an AWS Secrets Manager secret that stores your authentication credentials for your SharePoint site. For more information on the key-value pairs that must be included in your secret, depending on your authentication type, see SharePoint connection configuration. Pattern: ^arn:aws(|-cn|-us-gov):secretsmanager:[a-z0-9-]{1,20}:([0-9]{12}|):secret:[a-zA-Z0-9!/_+=.@-]{1,512}$.
+	// ARN of an AWS Secrets Manager secret that stores your authentication credentials for your Confluence instance URL. For more information on the key-value pairs that must be included in your secret, depending on your authentication type, see Confluence connection configuration. Pattern: ^arn:aws(|-cn|-us-gov):secretsmanager:[a-z0-9-]{1,20}:([0-9]{12}|):secret:[a-zA-Z0-9!/_+=.@-]{1,512}$.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/secretsmanager/v1beta1.Secret
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -1390,30 +1543,30 @@ type SharePointConfigurationSourceConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	CredentialsSecretArnSelector *v2.Selector `json:"credentialsSecretArnSelector,omitempty" tf:"-"`
 
-	// The domain of your SharePoint instance or site URL/URLs.
+	// Domain of your SharePoint instance or site URL/URLs.
 	// +kubebuilder:validation:Optional
 	Domain *string `json:"domain" tf:"domain,omitempty"`
 
-	// The supported host type, whether online/cloud or server/on-premises. Valid values: ONLINE.
+	// Supported host type, whether online/cloud or server/on-premises. Valid values: SAAS.
 	// +kubebuilder:validation:Optional
 	HostType *string `json:"hostType" tf:"host_type,omitempty"`
 
-	// A list of one or more SharePoint site URLs.
+	// One or more SharePoint site URLs.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	SiteUrls []*string `json:"siteUrls" tf:"site_urls,omitempty"`
 
-	// The identifier of your Microsoft 365 tenant.
+	// Identifier of your Microsoft 365 tenant.
 	// +kubebuilder:validation:Optional
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
 }
 
 type SourceConfigurationInitParameters struct {
 
-	// The supported authentication type to authenticate and connect to your SharePoint site. Valid values: OAUTH2_CLIENT_CREDENTIALS, OAUTH2_SHAREPOINT_APP_ONLY_CLIENT_CREDENTIALS.
+	// Supported authentication type to authenticate and connect to your Confluence instance. Valid values: BASIC, OAUTH2_CLIENT_CREDENTIALS.
 	AuthType *string `json:"authType,omitempty" tf:"auth_type,omitempty"`
 
-	// ARN of an AWS Secrets Manager secret that stores your authentication credentials for your SharePoint site. For more information on the key-value pairs that must be included in your secret, depending on your authentication type, see SharePoint connection configuration. Pattern: ^arn:aws(|-cn|-us-gov):secretsmanager:[a-z0-9-]{1,20}:([0-9]{12}|):secret:[a-zA-Z0-9!/_+=.@-]{1,512}$.
+	// ARN of an AWS Secrets Manager secret that stores your authentication credentials for your Confluence instance URL. For more information on the key-value pairs that must be included in your secret, depending on your authentication type, see Confluence connection configuration. Pattern: ^arn:aws(|-cn|-us-gov):secretsmanager:[a-z0-9-]{1,20}:([0-9]{12}|):secret:[a-zA-Z0-9!/_+=.@-]{1,512}$.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/secretsmanager/v1beta1.Secret
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	CredentialsSecretArn *string `json:"credentialsSecretArn,omitempty" tf:"credentials_secret_arn,omitempty"`
@@ -1426,35 +1579,35 @@ type SourceConfigurationInitParameters struct {
 	// +kubebuilder:validation:Optional
 	CredentialsSecretArnSelector *v2.Selector `json:"credentialsSecretArnSelector,omitempty" tf:"-"`
 
-	// The supported host type, whether online/cloud or server/on-premises. Valid values: ONLINE.
+	// Supported host type, whether online/cloud or server/on-premises. Valid values: SAAS.
 	HostType *string `json:"hostType,omitempty" tf:"host_type,omitempty"`
 
-	// The Salesforce host URL or instance URL. Pattern: ^https://[A-Za-z0-9][^\s]*$.
+	// Confluence host URL or instance URL. Pattern: ^https://[A-Za-z0-9][^\s]*$.
 	HostURL *string `json:"hostUrl,omitempty" tf:"host_url,omitempty"`
 }
 
 type SourceConfigurationObservation struct {
 
-	// The supported authentication type to authenticate and connect to your SharePoint site. Valid values: OAUTH2_CLIENT_CREDENTIALS, OAUTH2_SHAREPOINT_APP_ONLY_CLIENT_CREDENTIALS.
+	// Supported authentication type to authenticate and connect to your Confluence instance. Valid values: BASIC, OAUTH2_CLIENT_CREDENTIALS.
 	AuthType *string `json:"authType,omitempty" tf:"auth_type,omitempty"`
 
-	// ARN of an AWS Secrets Manager secret that stores your authentication credentials for your SharePoint site. For more information on the key-value pairs that must be included in your secret, depending on your authentication type, see SharePoint connection configuration. Pattern: ^arn:aws(|-cn|-us-gov):secretsmanager:[a-z0-9-]{1,20}:([0-9]{12}|):secret:[a-zA-Z0-9!/_+=.@-]{1,512}$.
+	// ARN of an AWS Secrets Manager secret that stores your authentication credentials for your Confluence instance URL. For more information on the key-value pairs that must be included in your secret, depending on your authentication type, see Confluence connection configuration. Pattern: ^arn:aws(|-cn|-us-gov):secretsmanager:[a-z0-9-]{1,20}:([0-9]{12}|):secret:[a-zA-Z0-9!/_+=.@-]{1,512}$.
 	CredentialsSecretArn *string `json:"credentialsSecretArn,omitempty" tf:"credentials_secret_arn,omitempty"`
 
-	// The supported host type, whether online/cloud or server/on-premises. Valid values: ONLINE.
+	// Supported host type, whether online/cloud or server/on-premises. Valid values: SAAS.
 	HostType *string `json:"hostType,omitempty" tf:"host_type,omitempty"`
 
-	// The Salesforce host URL or instance URL. Pattern: ^https://[A-Za-z0-9][^\s]*$.
+	// Confluence host URL or instance URL. Pattern: ^https://[A-Za-z0-9][^\s]*$.
 	HostURL *string `json:"hostUrl,omitempty" tf:"host_url,omitempty"`
 }
 
 type SourceConfigurationParameters struct {
 
-	// The supported authentication type to authenticate and connect to your SharePoint site. Valid values: OAUTH2_CLIENT_CREDENTIALS, OAUTH2_SHAREPOINT_APP_ONLY_CLIENT_CREDENTIALS.
+	// Supported authentication type to authenticate and connect to your Confluence instance. Valid values: BASIC, OAUTH2_CLIENT_CREDENTIALS.
 	// +kubebuilder:validation:Optional
 	AuthType *string `json:"authType" tf:"auth_type,omitempty"`
 
-	// ARN of an AWS Secrets Manager secret that stores your authentication credentials for your SharePoint site. For more information on the key-value pairs that must be included in your secret, depending on your authentication type, see SharePoint connection configuration. Pattern: ^arn:aws(|-cn|-us-gov):secretsmanager:[a-z0-9-]{1,20}:([0-9]{12}|):secret:[a-zA-Z0-9!/_+=.@-]{1,512}$.
+	// ARN of an AWS Secrets Manager secret that stores your authentication credentials for your Confluence instance URL. For more information on the key-value pairs that must be included in your secret, depending on your authentication type, see Confluence connection configuration. Pattern: ^arn:aws(|-cn|-us-gov):secretsmanager:[a-z0-9-]{1,20}:([0-9]{12}|):secret:[a-zA-Z0-9!/_+=.@-]{1,512}$.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/secretsmanager/v1beta1.Secret
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -1468,30 +1621,69 @@ type SourceConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	CredentialsSecretArnSelector *v2.Selector `json:"credentialsSecretArnSelector,omitempty" tf:"-"`
 
-	// The supported host type, whether online/cloud or server/on-premises. Valid values: ONLINE.
+	// Supported host type, whether online/cloud or server/on-premises. Valid values: SAAS.
 	// +kubebuilder:validation:Optional
 	HostType *string `json:"hostType" tf:"host_type,omitempty"`
 
-	// The Salesforce host URL or instance URL. Pattern: ^https://[A-Za-z0-9][^\s]*$.
+	// Confluence host URL or instance URL. Pattern: ^https://[A-Za-z0-9][^\s]*$.
 	// +kubebuilder:validation:Optional
 	HostURL *string `json:"hostUrl" tf:"host_url,omitempty"`
 }
 
+type SyncScheduleInitParameters struct {
+
+	// Daily sync that runs once a day at a system-chosen off-peak time. The run time is not configurable. See daily Block for details.
+	Daily *DailyInitParameters `json:"daily,omitempty" tf:"daily,omitempty"`
+
+	// Monthly sync that runs once a month on the specified day of the month. See monthly Block for details.
+	Monthly *MonthlyInitParameters `json:"monthly,omitempty" tf:"monthly,omitempty"`
+
+	// Weekly sync that runs once a week on the specified day of the week. See weekly Block for details.
+	Weekly *WeeklyInitParameters `json:"weekly,omitempty" tf:"weekly,omitempty"`
+}
+
+type SyncScheduleObservation struct {
+
+	// Daily sync that runs once a day at a system-chosen off-peak time. The run time is not configurable. See daily Block for details.
+	Daily *DailyParameters `json:"daily,omitempty" tf:"daily,omitempty"`
+
+	// Monthly sync that runs once a month on the specified day of the month. See monthly Block for details.
+	Monthly *MonthlyObservation `json:"monthly,omitempty" tf:"monthly,omitempty"`
+
+	// Weekly sync that runs once a week on the specified day of the week. See weekly Block for details.
+	Weekly *WeeklyObservation `json:"weekly,omitempty" tf:"weekly,omitempty"`
+}
+
+type SyncScheduleParameters struct {
+
+	// Daily sync that runs once a day at a system-chosen off-peak time. The run time is not configurable. See daily Block for details.
+	// +kubebuilder:validation:Optional
+	Daily *DailyParameters `json:"daily,omitempty" tf:"daily,omitempty"`
+
+	// Monthly sync that runs once a month on the specified day of the month. See monthly Block for details.
+	// +kubebuilder:validation:Optional
+	Monthly *MonthlyParameters `json:"monthly,omitempty" tf:"monthly,omitempty"`
+
+	// Weekly sync that runs once a week on the specified day of the week. See weekly Block for details.
+	// +kubebuilder:validation:Optional
+	Weekly *WeeklyParameters `json:"weekly,omitempty" tf:"weekly,omitempty"`
+}
+
 type TransformationFunctionInitParameters struct {
 
-	// The configuration of the lambda function.
+	// Configuration of the Lambda function. See transformation_lambda_configuration Block for details.
 	TransformationLambdaConfiguration *TransformationLambdaConfigurationInitParameters `json:"transformationLambdaConfiguration,omitempty" tf:"transformation_lambda_configuration,omitempty"`
 }
 
 type TransformationFunctionObservation struct {
 
-	// The configuration of the lambda function.
+	// Configuration of the Lambda function. See transformation_lambda_configuration Block for details.
 	TransformationLambdaConfiguration *TransformationLambdaConfigurationObservation `json:"transformationLambdaConfiguration,omitempty" tf:"transformation_lambda_configuration,omitempty"`
 }
 
 type TransformationFunctionParameters struct {
 
-	// The configuration of the lambda function.
+	// Configuration of the Lambda function. See transformation_lambda_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	TransformationLambdaConfiguration *TransformationLambdaConfigurationParameters `json:"transformationLambdaConfiguration,omitempty" tf:"transformation_lambda_configuration,omitempty"`
 }
@@ -1501,13 +1693,13 @@ type TransformationInitParameters struct {
 	// When the service applies the transformation. Currently only POST_CHUNKING is supported.
 	StepToApply *string `json:"stepToApply,omitempty" tf:"step_to_apply,omitempty"`
 
-	// The lambda function that processes documents.
+	// Lambda function that processes documents. See transformation_function Block for details.
 	TransformationFunction *TransformationFunctionInitParameters `json:"transformationFunction,omitempty" tf:"transformation_function,omitempty"`
 }
 
 type TransformationLambdaConfigurationInitParameters struct {
 
-	// The ARN of the lambda to use for custom transformation.
+	// ARN of the Lambda to use for custom transformation.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/lambda/v1beta2.Function
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	LambdaArn *string `json:"lambdaArn,omitempty" tf:"lambda_arn,omitempty"`
@@ -1523,13 +1715,13 @@ type TransformationLambdaConfigurationInitParameters struct {
 
 type TransformationLambdaConfigurationObservation struct {
 
-	// The ARN of the lambda to use for custom transformation.
+	// ARN of the Lambda to use for custom transformation.
 	LambdaArn *string `json:"lambdaArn,omitempty" tf:"lambda_arn,omitempty"`
 }
 
 type TransformationLambdaConfigurationParameters struct {
 
-	// The ARN of the lambda to use for custom transformation.
+	// ARN of the Lambda to use for custom transformation.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/lambda/v1beta2.Function
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -1549,7 +1741,7 @@ type TransformationObservation struct {
 	// When the service applies the transformation. Currently only POST_CHUNKING is supported.
 	StepToApply *string `json:"stepToApply,omitempty" tf:"step_to_apply,omitempty"`
 
-	// The lambda function that processes documents.
+	// Lambda function that processes documents. See transformation_function Block for details.
 	TransformationFunction *TransformationFunctionObservation `json:"transformationFunction,omitempty" tf:"transformation_function,omitempty"`
 }
 
@@ -1559,65 +1751,75 @@ type TransformationParameters struct {
 	// +kubebuilder:validation:Optional
 	StepToApply *string `json:"stepToApply" tf:"step_to_apply,omitempty"`
 
-	// The lambda function that processes documents.
+	// Lambda function that processes documents. See transformation_function Block for details.
 	// +kubebuilder:validation:Optional
 	TransformationFunction *TransformationFunctionParameters `json:"transformationFunction,omitempty" tf:"transformation_function,omitempty"`
 }
 
 type URLConfigurationInitParameters struct {
 
-	// List of one or more seed URLs to crawl. See seed_urls block for details.
+	// List of one or more seed URLs to crawl. See seed_urls Block for details.
 	SeedUrls []SeedUrlsInitParameters `json:"seedUrls,omitempty" tf:"seed_urls,omitempty"`
 }
 
 type URLConfigurationObservation struct {
 
-	// List of one or more seed URLs to crawl. See seed_urls block for details.
+	// List of one or more seed URLs to crawl. See seed_urls Block for details.
 	SeedUrls []SeedUrlsObservation `json:"seedUrls,omitempty" tf:"seed_urls,omitempty"`
 }
 
 type URLConfigurationParameters struct {
 
-	// List of one or more seed URLs to crawl. See seed_urls block for details.
+	// List of one or more seed URLs to crawl. See seed_urls Block for details.
 	// +kubebuilder:validation:Optional
 	SeedUrls []SeedUrlsParameters `json:"seedUrls,omitempty" tf:"seed_urls,omitempty"`
 }
 
 type VectorIngestionConfigurationInitParameters struct {
 
-	// Details about how to chunk the documents in the data source. A chunk refers to an excerpt from a data source that is returned when the knowledge base that it belongs to is queried. See chunking_configuration block for details.
+	// Details about how to chunk the documents in the data source. A chunk refers to an excerpt from a data source that is returned when the knowledge base that it belongs to is queried. See chunking_configuration Block for details.
 	ChunkingConfiguration *ChunkingConfigurationInitParameters `json:"chunkingConfiguration,omitempty" tf:"chunking_configuration,omitempty"`
 
-	// Configuration for custom transformation of data source documents.
+	// Context enrichment configuration used to provide additional context to the RAG application. Required when the knowledge base uses Amazon Neptune Analytics (GraphRAG) storage. See context_enrichment_configuration Block for details.
+	ContextEnrichmentConfiguration *ContextEnrichmentConfigurationInitParameters `json:"contextEnrichmentConfiguration,omitempty" tf:"context_enrichment_configuration,omitempty"`
+
+	// Configuration for custom transformation of data source documents. See custom_transformation_configuration Block for details.
 	CustomTransformationConfiguration *CustomTransformationConfigurationInitParameters `json:"customTransformationConfiguration,omitempty" tf:"custom_transformation_configuration,omitempty"`
 
-	// Configuration for custom parsing of data source documents. See parsing_configuration block for details.
+	// Configuration for custom parsing of data source documents. See parsing_configuration Block for details.
 	ParsingConfiguration *ParsingConfigurationInitParameters `json:"parsingConfiguration,omitempty" tf:"parsing_configuration,omitempty"`
 }
 
 type VectorIngestionConfigurationObservation struct {
 
-	// Details about how to chunk the documents in the data source. A chunk refers to an excerpt from a data source that is returned when the knowledge base that it belongs to is queried. See chunking_configuration block for details.
+	// Details about how to chunk the documents in the data source. A chunk refers to an excerpt from a data source that is returned when the knowledge base that it belongs to is queried. See chunking_configuration Block for details.
 	ChunkingConfiguration *ChunkingConfigurationObservation `json:"chunkingConfiguration,omitempty" tf:"chunking_configuration,omitempty"`
 
-	// Configuration for custom transformation of data source documents.
+	// Context enrichment configuration used to provide additional context to the RAG application. Required when the knowledge base uses Amazon Neptune Analytics (GraphRAG) storage. See context_enrichment_configuration Block for details.
+	ContextEnrichmentConfiguration *ContextEnrichmentConfigurationObservation `json:"contextEnrichmentConfiguration,omitempty" tf:"context_enrichment_configuration,omitempty"`
+
+	// Configuration for custom transformation of data source documents. See custom_transformation_configuration Block for details.
 	CustomTransformationConfiguration *CustomTransformationConfigurationObservation `json:"customTransformationConfiguration,omitempty" tf:"custom_transformation_configuration,omitempty"`
 
-	// Configuration for custom parsing of data source documents. See parsing_configuration block for details.
+	// Configuration for custom parsing of data source documents. See parsing_configuration Block for details.
 	ParsingConfiguration *ParsingConfigurationObservation `json:"parsingConfiguration,omitempty" tf:"parsing_configuration,omitempty"`
 }
 
 type VectorIngestionConfigurationParameters struct {
 
-	// Details about how to chunk the documents in the data source. A chunk refers to an excerpt from a data source that is returned when the knowledge base that it belongs to is queried. See chunking_configuration block for details.
+	// Details about how to chunk the documents in the data source. A chunk refers to an excerpt from a data source that is returned when the knowledge base that it belongs to is queried. See chunking_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	ChunkingConfiguration *ChunkingConfigurationParameters `json:"chunkingConfiguration,omitempty" tf:"chunking_configuration,omitempty"`
 
-	// Configuration for custom transformation of data source documents.
+	// Context enrichment configuration used to provide additional context to the RAG application. Required when the knowledge base uses Amazon Neptune Analytics (GraphRAG) storage. See context_enrichment_configuration Block for details.
+	// +kubebuilder:validation:Optional
+	ContextEnrichmentConfiguration *ContextEnrichmentConfigurationParameters `json:"contextEnrichmentConfiguration,omitempty" tf:"context_enrichment_configuration,omitempty"`
+
+	// Configuration for custom transformation of data source documents. See custom_transformation_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	CustomTransformationConfiguration *CustomTransformationConfigurationParameters `json:"customTransformationConfiguration,omitempty" tf:"custom_transformation_configuration,omitempty"`
 
-	// Configuration for custom parsing of data source documents. See parsing_configuration block for details.
+	// Configuration for custom parsing of data source documents. See parsing_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	ParsingConfiguration *ParsingConfigurationParameters `json:"parsingConfiguration,omitempty" tf:"parsing_configuration,omitempty"`
 }
@@ -1643,56 +1845,56 @@ type VideoExtractionConfigurationParameters struct {
 
 type WebConfigurationCrawlerConfigurationInitParameters struct {
 
-	// Configuration of crawl limits for the web URLs. See crawler_limits block for details.
+	// Configuration of crawl limits for the web URLs. See crawler_limits Block for details.
 	CrawlerLimits *CrawlerLimitsInitParameters `json:"crawlerLimits,omitempty" tf:"crawler_limits,omitempty"`
 
-	// A list of one or more exclusion regular expression patterns to exclude certain object types that adhere to the pattern.
+	// List of one or more exclusion regular expression patterns to exclude URLs that match the pattern.
 	// +listType=set
 	ExclusionFilters []*string `json:"exclusionFilters,omitempty" tf:"exclusion_filters,omitempty"`
 
-	// List of one or more inclusion regular expression patterns to include certain object types that adhere to the pattern.
+	// List of one or more inclusion regular expression patterns to include URLs that match the pattern.
 	// +listType=set
 	InclusionFilters []*string `json:"inclusionFilters,omitempty" tf:"inclusion_filters,omitempty"`
 
 	// Scope of what is crawled for your URLs.
 	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
 
-	// String used for identifying the crawler or a bot when it accesses a web server. Default value is bedrockbot_UUID.
+	// Custom suffix appended to the bedrockbot_UUID user agent header that the crawler uses when it accesses a web server. Must be between 15 and 40 characters.
 	UserAgent *string `json:"userAgent,omitempty" tf:"user_agent,omitempty"`
 }
 
 type WebConfigurationCrawlerConfigurationObservation struct {
 
-	// Configuration of crawl limits for the web URLs. See crawler_limits block for details.
+	// Configuration of crawl limits for the web URLs. See crawler_limits Block for details.
 	CrawlerLimits *CrawlerLimitsObservation `json:"crawlerLimits,omitempty" tf:"crawler_limits,omitempty"`
 
-	// A list of one or more exclusion regular expression patterns to exclude certain object types that adhere to the pattern.
+	// List of one or more exclusion regular expression patterns to exclude URLs that match the pattern.
 	// +listType=set
 	ExclusionFilters []*string `json:"exclusionFilters,omitempty" tf:"exclusion_filters,omitempty"`
 
-	// List of one or more inclusion regular expression patterns to include certain object types that adhere to the pattern.
+	// List of one or more inclusion regular expression patterns to include URLs that match the pattern.
 	// +listType=set
 	InclusionFilters []*string `json:"inclusionFilters,omitempty" tf:"inclusion_filters,omitempty"`
 
 	// Scope of what is crawled for your URLs.
 	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
 
-	// String used for identifying the crawler or a bot when it accesses a web server. Default value is bedrockbot_UUID.
+	// Custom suffix appended to the bedrockbot_UUID user agent header that the crawler uses when it accesses a web server. Must be between 15 and 40 characters.
 	UserAgent *string `json:"userAgent,omitempty" tf:"user_agent,omitempty"`
 }
 
 type WebConfigurationCrawlerConfigurationParameters struct {
 
-	// Configuration of crawl limits for the web URLs. See crawler_limits block for details.
+	// Configuration of crawl limits for the web URLs. See crawler_limits Block for details.
 	// +kubebuilder:validation:Optional
 	CrawlerLimits *CrawlerLimitsParameters `json:"crawlerLimits,omitempty" tf:"crawler_limits,omitempty"`
 
-	// A list of one or more exclusion regular expression patterns to exclude certain object types that adhere to the pattern.
+	// List of one or more exclusion regular expression patterns to exclude URLs that match the pattern.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	ExclusionFilters []*string `json:"exclusionFilters,omitempty" tf:"exclusion_filters,omitempty"`
 
-	// List of one or more inclusion regular expression patterns to include certain object types that adhere to the pattern.
+	// List of one or more inclusion regular expression patterns to include URLs that match the pattern.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	InclusionFilters []*string `json:"inclusionFilters,omitempty" tf:"inclusion_filters,omitempty"`
@@ -1701,57 +1903,76 @@ type WebConfigurationCrawlerConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
 
-	// String used for identifying the crawler or a bot when it accesses a web server. Default value is bedrockbot_UUID.
+	// Custom suffix appended to the bedrockbot_UUID user agent header that the crawler uses when it accesses a web server. Must be between 15 and 40 characters.
 	// +kubebuilder:validation:Optional
 	UserAgent *string `json:"userAgent,omitempty" tf:"user_agent,omitempty"`
 }
 
 type WebConfigurationInitParameters struct {
 
-	// Configuration for web content. See crawler_configuration block for details.
+	// Configuration for web content. See data_source_configuration.web_configuration.crawler_configuration Block for details.
 	CrawlerConfiguration *WebConfigurationCrawlerConfigurationInitParameters `json:"crawlerConfiguration,omitempty" tf:"crawler_configuration,omitempty"`
 
-	// Endpoint information to connect to your web data source. See source_configuration block for details.
+	// Endpoint information to connect to your web data source. See data_source_configuration.web_configuration.source_configuration Block for details.
 	SourceConfiguration *WebConfigurationSourceConfigurationInitParameters `json:"sourceConfiguration,omitempty" tf:"source_configuration,omitempty"`
 }
 
 type WebConfigurationObservation struct {
 
-	// Configuration for web content. See crawler_configuration block for details.
+	// Configuration for web content. See data_source_configuration.web_configuration.crawler_configuration Block for details.
 	CrawlerConfiguration *WebConfigurationCrawlerConfigurationObservation `json:"crawlerConfiguration,omitempty" tf:"crawler_configuration,omitempty"`
 
-	// Endpoint information to connect to your web data source. See source_configuration block for details.
+	// Endpoint information to connect to your web data source. See data_source_configuration.web_configuration.source_configuration Block for details.
 	SourceConfiguration *WebConfigurationSourceConfigurationObservation `json:"sourceConfiguration,omitempty" tf:"source_configuration,omitempty"`
 }
 
 type WebConfigurationParameters struct {
 
-	// Configuration for web content. See crawler_configuration block for details.
+	// Configuration for web content. See data_source_configuration.web_configuration.crawler_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	CrawlerConfiguration *WebConfigurationCrawlerConfigurationParameters `json:"crawlerConfiguration,omitempty" tf:"crawler_configuration,omitempty"`
 
-	// Endpoint information to connect to your web data source. See source_configuration block for details.
+	// Endpoint information to connect to your web data source. See data_source_configuration.web_configuration.source_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	SourceConfiguration *WebConfigurationSourceConfigurationParameters `json:"sourceConfiguration,omitempty" tf:"source_configuration,omitempty"`
 }
 
 type WebConfigurationSourceConfigurationInitParameters struct {
 
-	// The URL configuration of your web data source. See url_configuration block for details.
+	// URL configuration of your web data source. See url_configuration Block for details.
 	URLConfiguration *URLConfigurationInitParameters `json:"urlConfiguration,omitempty" tf:"url_configuration,omitempty"`
 }
 
 type WebConfigurationSourceConfigurationObservation struct {
 
-	// The URL configuration of your web data source. See url_configuration block for details.
+	// URL configuration of your web data source. See url_configuration Block for details.
 	URLConfiguration *URLConfigurationObservation `json:"urlConfiguration,omitempty" tf:"url_configuration,omitempty"`
 }
 
 type WebConfigurationSourceConfigurationParameters struct {
 
-	// The URL configuration of your web data source. See url_configuration block for details.
+	// URL configuration of your web data source. See url_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	URLConfiguration *URLConfigurationParameters `json:"urlConfiguration,omitempty" tf:"url_configuration,omitempty"`
+}
+
+type WeeklyInitParameters struct {
+
+	// Day of the week on which the weekly sync runs. Valid values: SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY.
+	DayOfWeek *string `json:"dayOfWeek,omitempty" tf:"day_of_week,omitempty"`
+}
+
+type WeeklyObservation struct {
+
+	// Day of the week on which the weekly sync runs. Valid values: SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY.
+	DayOfWeek *string `json:"dayOfWeek,omitempty" tf:"day_of_week,omitempty"`
+}
+
+type WeeklyParameters struct {
+
+	// Day of the week on which the weekly sync runs. Valid values: SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY.
+	// +kubebuilder:validation:Optional
+	DayOfWeek *string `json:"dayOfWeek" tf:"day_of_week,omitempty"`
 }
 
 // DataSourceSpec defines the desired state of DataSource
@@ -1781,7 +2002,7 @@ type DataSourceStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// DataSource is the Schema for the DataSources API.
+// DataSource is the Schema for the DataSources API. Manages an AWS Agents for Amazon Bedrock Data Source.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

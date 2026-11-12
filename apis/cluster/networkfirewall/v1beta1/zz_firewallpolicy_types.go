@@ -116,6 +116,9 @@ type FirewallPolicyFirewallPolicyInitParameters struct {
 
 	// The (ARN) of the TLS Inspection policy to attach to the FW Policy.  This must be added at creation of the resource per AWS documentation. "You can only add a TLS inspection configuration to a new policy, not to an existing policy."  This cannot be removed from a FW Policy.
 	TLSInspectionConfigurationArn *string `json:"tlsInspectionConfigurationArn,omitempty" tf:"tls_inspection_configuration_arn,omitempty"`
+
+	// Resolved IP validation settings, which check that a connection's destination IP address was returned by the Route 53 Resolver in a VPC associated with a DNS Firewall rule group. See Route 53 Resolved IP Validation below for details.
+	Route53ResolvedIPValidation []Route53ResolvedIPValidationInitParameters `json:"route53ResolvedIpValidation,omitempty" tf:"route53_resolved_ip_validation,omitempty"`
 }
 
 type FirewallPolicyFirewallPolicyObservation struct {
@@ -154,6 +157,9 @@ type FirewallPolicyFirewallPolicyObservation struct {
 
 	// The (ARN) of the TLS Inspection policy to attach to the FW Policy.  This must be added at creation of the resource per AWS documentation. "You can only add a TLS inspection configuration to a new policy, not to an existing policy."  This cannot be removed from a FW Policy.
 	TLSInspectionConfigurationArn *string `json:"tlsInspectionConfigurationArn,omitempty" tf:"tls_inspection_configuration_arn,omitempty"`
+
+	// Resolved IP validation settings, which check that a connection's destination IP address was returned by the Route 53 Resolver in a VPC associated with a DNS Firewall rule group. See Route 53 Resolved IP Validation below for details.
+	Route53ResolvedIPValidation []Route53ResolvedIPValidationObservation `json:"route53ResolvedIpValidation,omitempty" tf:"route53_resolved_ip_validation,omitempty"`
 }
 
 type FirewallPolicyFirewallPolicyParameters struct {
@@ -202,6 +208,10 @@ type FirewallPolicyFirewallPolicyParameters struct {
 	// The (ARN) of the TLS Inspection policy to attach to the FW Policy.  This must be added at creation of the resource per AWS documentation. "You can only add a TLS inspection configuration to a new policy, not to an existing policy."  This cannot be removed from a FW Policy.
 	// +kubebuilder:validation:Optional
 	TLSInspectionConfigurationArn *string `json:"tlsInspectionConfigurationArn,omitempty" tf:"tls_inspection_configuration_arn,omitempty"`
+
+	// Resolved IP validation settings, which check that a connection's destination IP address was returned by the Route 53 Resolver in a VPC associated with a DNS Firewall rule group. See Route 53 Resolved IP Validation below for details.
+	// +kubebuilder:validation:Optional
+	Route53ResolvedIPValidation []Route53ResolvedIPValidationParameters `json:"route53ResolvedIpValidation,omitempty" tf:"route53_resolved_ip_validation,omitempty"`
 }
 
 type FirewallPolicyInitParameters struct {
@@ -647,4 +657,69 @@ var (
 
 func init() {
 	SchemeBuilder.Register(&FirewallPolicy{}, &FirewallPolicyList{})
+}
+
+type Route53ResolvedIPValidationInitParameters struct {
+
+	// Action to take on connections that fail validation. Allowed values are: ALERT, DROP, and REJECT. ALERT requires firewall logging. REJECT sends a TCP reset; Network Firewall drops non-TCP traffic.
+	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+
+	// Set of destination IPv4 or IPv6 CIDR blocks that are exempt from the policy-level check. Use /32 or /128 for a single address. Valid number of entries is between 1 and 100. Doesn't affect rules that use the AWS_ROUTE_53_RESOLVED_DOMAIN target type.
+	// +listType=set
+	BypassDestinationValidationIPRanges []*string `json:"bypassDestinationValidationIpRanges,omitempty" tf:"bypass_destination_validation_ip_ranges,omitempty"`
+
+	// Action to take when the recorded DNS resolution has expired from the resolved IP cache but traffic continues. Allowed values are: CONTINUE, DROP, and REJECT. CONTINUE treats the expired resolution as valid.
+	DNSExpiryExceptionPolicy *string `json:"dnsExpiryExceptionPolicy,omitempty" tf:"dns_expiry_exception_policy,omitempty"`
+
+	// ID of the Route 53 Resolver DNS Firewall rule group, such as aws_route53_resolver_firewall_rule_group.example.id. DNS responses from the Route 53 Resolver in VPCs associated with this rule group are used for validation. Changing this value swaps the managed association asynchronously; the provider waits for the policy to return to ACTIVE.
+	DNSFirewallRuleGroupID *string `json:"dnsFirewallRuleGroupId,omitempty" tf:"dns_firewall_rule_group_id,omitempty"`
+
+	// Set of client source IPv4 or IPv6 CIDR blocks whose connections are subject to the policy-level validation check. Use /32 or /128 for a single address. Valid number of entries is between 1 and 100. If omitted, validation applies to the CIDR ranges of the firewall's VPC and of any additional VPCs attached to the firewall. Doesn't affect stateful rules that use the AWS_ROUTE_53_RESOLVED_DOMAIN target type or aws_route_53_resolved_domain rule keyword; those rules still evaluate traffic regardless of these source ranges.
+	// +listType=set
+	SourceIPRanges []*string `json:"sourceIpRanges,omitempty" tf:"source_ip_ranges,omitempty"`
+}
+
+type Route53ResolvedIPValidationObservation struct {
+
+	// Action to take on connections that fail validation. Allowed values are: ALERT, DROP, and REJECT. ALERT requires firewall logging. REJECT sends a TCP reset; Network Firewall drops non-TCP traffic.
+	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+
+	// Set of destination IPv4 or IPv6 CIDR blocks that are exempt from the policy-level check. Use /32 or /128 for a single address. Valid number of entries is between 1 and 100. Doesn't affect rules that use the AWS_ROUTE_53_RESOLVED_DOMAIN target type.
+	// +listType=set
+	BypassDestinationValidationIPRanges []*string `json:"bypassDestinationValidationIpRanges,omitempty" tf:"bypass_destination_validation_ip_ranges,omitempty"`
+
+	// Action to take when the recorded DNS resolution has expired from the resolved IP cache but traffic continues. Allowed values are: CONTINUE, DROP, and REJECT. CONTINUE treats the expired resolution as valid.
+	DNSExpiryExceptionPolicy *string `json:"dnsExpiryExceptionPolicy,omitempty" tf:"dns_expiry_exception_policy,omitempty"`
+
+	// ID of the Route 53 Resolver DNS Firewall rule group, such as aws_route53_resolver_firewall_rule_group.example.id. DNS responses from the Route 53 Resolver in VPCs associated with this rule group are used for validation. Changing this value swaps the managed association asynchronously; the provider waits for the policy to return to ACTIVE.
+	DNSFirewallRuleGroupID *string `json:"dnsFirewallRuleGroupId,omitempty" tf:"dns_firewall_rule_group_id,omitempty"`
+
+	// Set of client source IPv4 or IPv6 CIDR blocks whose connections are subject to the policy-level validation check. Use /32 or /128 for a single address. Valid number of entries is between 1 and 100. If omitted, validation applies to the CIDR ranges of the firewall's VPC and of any additional VPCs attached to the firewall. Doesn't affect stateful rules that use the AWS_ROUTE_53_RESOLVED_DOMAIN target type or aws_route_53_resolved_domain rule keyword; those rules still evaluate traffic regardless of these source ranges.
+	// +listType=set
+	SourceIPRanges []*string `json:"sourceIpRanges,omitempty" tf:"source_ip_ranges,omitempty"`
+}
+
+type Route53ResolvedIPValidationParameters struct {
+
+	// Action to take on connections that fail validation. Allowed values are: ALERT, DROP, and REJECT. ALERT requires firewall logging. REJECT sends a TCP reset; Network Firewall drops non-TCP traffic.
+	// +kubebuilder:validation:Optional
+	Action *string `json:"action" tf:"action,omitempty"`
+
+	// Set of destination IPv4 or IPv6 CIDR blocks that are exempt from the policy-level check. Use /32 or /128 for a single address. Valid number of entries is between 1 and 100. Doesn't affect rules that use the AWS_ROUTE_53_RESOLVED_DOMAIN target type.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	BypassDestinationValidationIPRanges []*string `json:"bypassDestinationValidationIpRanges,omitempty" tf:"bypass_destination_validation_ip_ranges,omitempty"`
+
+	// Action to take when the recorded DNS resolution has expired from the resolved IP cache but traffic continues. Allowed values are: CONTINUE, DROP, and REJECT. CONTINUE treats the expired resolution as valid.
+	// +kubebuilder:validation:Optional
+	DNSExpiryExceptionPolicy *string `json:"dnsExpiryExceptionPolicy" tf:"dns_expiry_exception_policy,omitempty"`
+
+	// ID of the Route 53 Resolver DNS Firewall rule group, such as aws_route53_resolver_firewall_rule_group.example.id. DNS responses from the Route 53 Resolver in VPCs associated with this rule group are used for validation. Changing this value swaps the managed association asynchronously; the provider waits for the policy to return to ACTIVE.
+	// +kubebuilder:validation:Optional
+	DNSFirewallRuleGroupID *string `json:"dnsFirewallRuleGroupId" tf:"dns_firewall_rule_group_id,omitempty"`
+
+	// Set of client source IPv4 or IPv6 CIDR blocks whose connections are subject to the policy-level validation check. Use /32 or /128 for a single address. Valid number of entries is between 1 and 100. If omitted, validation applies to the CIDR ranges of the firewall's VPC and of any additional VPCs attached to the firewall. Doesn't affect stateful rules that use the AWS_ROUTE_53_RESOLVED_DOMAIN target type or aws_route_53_resolved_domain rule keyword; those rules still evaluate traffic regardless of these source ranges.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	SourceIPRanges []*string `json:"sourceIpRanges,omitempty" tf:"source_ip_ranges,omitempty"`
 }

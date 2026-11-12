@@ -15,7 +15,7 @@ import (
 
 type ContainerPolicyInitParameters struct {
 
-	// The name of the container.
+	// Name of the container.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/mediastore/v1beta1.Container
 	ContainerName *string `json:"containerName,omitempty" tf:"container_name,omitempty"`
 
@@ -27,18 +27,18 @@ type ContainerPolicyInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ContainerNameSelector *v2.Selector `json:"containerNameSelector,omitempty" tf:"-"`
 
-	// The contents of the policy.
+	// Contents of the policy.
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 }
 
 type ContainerPolicyObservation struct {
 
-	// The name of the container.
+	// Name of the container.
 	ContainerName *string `json:"containerName,omitempty" tf:"container_name,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The contents of the policy.
+	// Contents of the policy.
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -48,7 +48,7 @@ type ContainerPolicyObservation struct {
 
 type ContainerPolicyParameters struct {
 
-	// The name of the container.
+	// Name of the container.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/mediastore/v1beta1.Container
 	// +kubebuilder:validation:Optional
 	ContainerName *string `json:"containerName,omitempty" tf:"container_name,omitempty"`
@@ -61,7 +61,7 @@ type ContainerPolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	ContainerNameSelector *v2.Selector `json:"containerNameSelector,omitempty" tf:"-"`
 
-	// The contents of the policy.
+	// Contents of the policy.
 	// +kubebuilder:validation:Optional
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 

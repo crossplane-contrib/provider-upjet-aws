@@ -191,7 +191,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: ARN of the SecurityHub Hub created in the account.
+                    description: ARN of the Security Hub Hub created in the account.
                     type: string
                   autoEnableControls:
                     description: Whether to automatically enable new controls when

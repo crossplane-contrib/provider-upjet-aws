@@ -15,115 +15,118 @@ import (
 
 type MultiRegionClusterInitParameters struct {
 
-	// description for the multi-region cluster.
+	// Description for the multi-region cluster.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The name of the engine to be used for the multi-region cluster. Valid values are redis and valkey.
+	// Name of the engine to be used for the multi-region cluster. Valid values are redis and valkey.
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
 
-	// The version of the engine to be used for the multi-region cluster. Downgrades are not supported.
+	// Version of the engine to be used for the multi-region cluster. Downgrades are not supported.
 	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
 
-	// A suffix to be added to the multi-region cluster name. An AWS generated prefix is automatically applied to the multi-region cluster name when it is created.
+	// Suffix to be added to the multi-region cluster name. An AWS generated prefix is automatically applied to the multi-region cluster name when it is created.
 	MultiRegionClusterNameSuffix *string `json:"multiRegionClusterNameSuffix,omitempty" tf:"multi_region_cluster_name_suffix,omitempty"`
 
-	// The name of the multi-region parameter group to be associated with the cluster.
+	// Name of the multi-region parameter group to be associated with the cluster.
 	MultiRegionParameterGroupName *string `json:"multiRegionParameterGroupName,omitempty" tf:"multi_region_parameter_group_name,omitempty"`
 
-	// The node type to be used for the multi-region cluster.
+	// Node type to be used for the multi-region cluster.
 	NodeType *string `json:"nodeType,omitempty" tf:"node_type,omitempty"`
 
-	// The number of shards for the multi-region cluster.
+	// Number of shards for the multi-region cluster.
 	NumShards *float64 `json:"numShards,omitempty" tf:"num_shards,omitempty"`
 
-	// A flag to enable in-transit encryption on the cluster.
+	// Whether to enable in-transit encryption on the cluster.
 	TLSEnabled *bool `json:"tlsEnabled,omitempty" tf:"tls_enabled,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// Strategy to use for the multi-region cluster update. Valid values are coordinated and uncoordinated.
 	UpdateStrategy *string `json:"updateStrategy,omitempty" tf:"update_strategy,omitempty"`
 }
 
 type MultiRegionClusterObservation struct {
 
-	// The ARN of the multi-region cluster.
+	// ARN of the multi-region cluster.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// description for the multi-region cluster.
+	// Description for the multi-region cluster.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The name of the engine to be used for the multi-region cluster. Valid values are redis and valkey.
+	// Name of the engine to be used for the multi-region cluster. Valid values are redis and valkey.
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
 
-	// The version of the engine to be used for the multi-region cluster. Downgrades are not supported.
+	// Version of the engine to be used for the multi-region cluster. Downgrades are not supported.
 	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The name of the multi-region cluster.
+	// Name of the multi-region cluster.
 	MultiRegionClusterName *string `json:"multiRegionClusterName,omitempty" tf:"multi_region_cluster_name,omitempty"`
 
-	// A suffix to be added to the multi-region cluster name. An AWS generated prefix is automatically applied to the multi-region cluster name when it is created.
+	// Suffix to be added to the multi-region cluster name. An AWS generated prefix is automatically applied to the multi-region cluster name when it is created.
 	MultiRegionClusterNameSuffix *string `json:"multiRegionClusterNameSuffix,omitempty" tf:"multi_region_cluster_name_suffix,omitempty"`
 
-	// The name of the multi-region parameter group to be associated with the cluster.
+	// Name of the multi-region parameter group to be associated with the cluster.
 	MultiRegionParameterGroupName *string `json:"multiRegionParameterGroupName,omitempty" tf:"multi_region_parameter_group_name,omitempty"`
 
-	// The node type to be used for the multi-region cluster.
+	// Node type to be used for the multi-region cluster.
 	NodeType *string `json:"nodeType,omitempty" tf:"node_type,omitempty"`
 
-	// The number of shards for the multi-region cluster.
+	// Number of shards for the multi-region cluster.
 	NumShards *float64 `json:"numShards,omitempty" tf:"num_shards,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
+	// Status of the multi-region cluster.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
-	// A flag to enable in-transit encryption on the cluster.
+	// Whether to enable in-transit encryption on the cluster.
 	TLSEnabled *bool `json:"tlsEnabled,omitempty" tf:"tls_enabled,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
+	// Strategy to use for the multi-region cluster update. Valid values are coordinated and uncoordinated.
 	UpdateStrategy *string `json:"updateStrategy,omitempty" tf:"update_strategy,omitempty"`
 }
 
 type MultiRegionClusterParameters struct {
 
-	// description for the multi-region cluster.
+	// Description for the multi-region cluster.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The name of the engine to be used for the multi-region cluster. Valid values are redis and valkey.
+	// Name of the engine to be used for the multi-region cluster. Valid values are redis and valkey.
 	// +kubebuilder:validation:Optional
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
 
-	// The version of the engine to be used for the multi-region cluster. Downgrades are not supported.
+	// Version of the engine to be used for the multi-region cluster. Downgrades are not supported.
 	// +kubebuilder:validation:Optional
 	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
 
-	// A suffix to be added to the multi-region cluster name. An AWS generated prefix is automatically applied to the multi-region cluster name when it is created.
+	// Suffix to be added to the multi-region cluster name. An AWS generated prefix is automatically applied to the multi-region cluster name when it is created.
 	// +kubebuilder:validation:Optional
 	MultiRegionClusterNameSuffix *string `json:"multiRegionClusterNameSuffix,omitempty" tf:"multi_region_cluster_name_suffix,omitempty"`
 
-	// The name of the multi-region parameter group to be associated with the cluster.
+	// Name of the multi-region parameter group to be associated with the cluster.
 	// +kubebuilder:validation:Optional
 	MultiRegionParameterGroupName *string `json:"multiRegionParameterGroupName,omitempty" tf:"multi_region_parameter_group_name,omitempty"`
 
-	// The node type to be used for the multi-region cluster.
+	// Node type to be used for the multi-region cluster.
 	// +kubebuilder:validation:Optional
 	NodeType *string `json:"nodeType,omitempty" tf:"node_type,omitempty"`
 
-	// The number of shards for the multi-region cluster.
+	// Number of shards for the multi-region cluster.
 	// +kubebuilder:validation:Optional
 	NumShards *float64 `json:"numShards,omitempty" tf:"num_shards,omitempty"`
 
@@ -132,7 +135,7 @@ type MultiRegionClusterParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// A flag to enable in-transit encryption on the cluster.
+	// Whether to enable in-transit encryption on the cluster.
 	// +kubebuilder:validation:Optional
 	TLSEnabled *bool `json:"tlsEnabled,omitempty" tf:"tls_enabled,omitempty"`
 
@@ -141,6 +144,7 @@ type MultiRegionClusterParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// Strategy to use for the multi-region cluster update. Valid values are coordinated and uncoordinated.
 	// +kubebuilder:validation:Optional
 	UpdateStrategy *string `json:"updateStrategy,omitempty" tf:"update_strategy,omitempty"`
 }

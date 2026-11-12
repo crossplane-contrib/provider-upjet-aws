@@ -45,7 +45,7 @@ type ProvisionedModelThroughputObservation struct {
 	// Number of model units to allocate. A model unit delivers a specific throughput level for the specified model.
 	ModelUnits *float64 `json:"modelUnits,omitempty" tf:"model_units,omitempty"`
 
-	// The ARN of the Provisioned Throughput.
+	// ARN of the Provisioned Throughput.
 	ProvisionedModelArn *string `json:"provisionedModelArn,omitempty" tf:"provisioned_model_arn,omitempty"`
 
 	// Unique name for this Provisioned Throughput.

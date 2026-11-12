@@ -15,16 +15,16 @@ import (
 
 type AtlassianOauth2ProviderConfigInitParameters struct {
 
-	// Required when client_id_wo and client_secret_wo are set. Changing this value triggers an update to client_id_wo and client_secret_wo.
+	// Version used together with the write-only credentials. Required when client_id_wo and client_secret_wo are set. Changing this value triggers an update to client_id_wo and client_secret_wo.
 	ClientCredentialsWoVersion *float64 `json:"clientCredentialsWoVersion,omitempty" tf:"client_credentials_wo_version,omitempty"`
 
-	// OAuth2 client ID. Conflicts with client_id_wo. Must be used together with client_secret.
+	// OAuth2 client ID. Conflicts with client_id_wo. Must be used together with client_secret unless client_secret_source is EXTERNAL.
 	ClientIDSecretRef *v2.SecretKeySelector `json:"clientIdSecretRef,omitempty" tf:"-"`
 
 	// Write-only OAuth2 client ID. Conflicts with client_id. If set, requires client_secret_wo and client_credentials_wo_version to be set.
 	ClientIDWoSecretRef *v2.SecretKeySelector `json:"clientIdWoSecretRef,omitempty" tf:"-"`
 
-	// Reference to an AWS Secrets Manager secret that stores the client secret. Required when client_secret_source is EXTERNAL. See client_secret_config below.
+	// Reference to an AWS Secrets Manager secret that stores the client secret. Required when client_secret_source is EXTERNAL. See client_secret_config Block below.
 	ClientSecretConfig *ClientSecretConfigInitParameters `json:"clientSecretConfig,omitempty" tf:"client_secret_config,omitempty"`
 
 	// OAuth2 client secret. Conflicts with client_secret_wo. Must be used together with client_id.
@@ -39,26 +39,26 @@ type AtlassianOauth2ProviderConfigInitParameters struct {
 
 type AtlassianOauth2ProviderConfigObservation struct {
 
-	// Required when client_id_wo and client_secret_wo are set. Changing this value triggers an update to client_id_wo and client_secret_wo.
+	// Version used together with the write-only credentials. Required when client_id_wo and client_secret_wo are set. Changing this value triggers an update to client_id_wo and client_secret_wo.
 	ClientCredentialsWoVersion *float64 `json:"clientCredentialsWoVersion,omitempty" tf:"client_credentials_wo_version,omitempty"`
 
-	// Reference to an AWS Secrets Manager secret that stores the client secret. Required when client_secret_source is EXTERNAL. See client_secret_config below.
+	// Reference to an AWS Secrets Manager secret that stores the client secret. Required when client_secret_source is EXTERNAL. See client_secret_config Block below.
 	ClientSecretConfig *ClientSecretConfigObservation `json:"clientSecretConfig,omitempty" tf:"client_secret_config,omitempty"`
 
 	// Source type of the client secret. Valid values: MANAGED (the service manages the secret) or EXTERNAL (you manage the secret in AWS Secrets Manager). Use EXTERNAL together with client_secret_config.
 	ClientSecretSource *string `json:"clientSecretSource,omitempty" tf:"client_secret_source,omitempty"`
 
-	// OAuth discovery configuration. See oauth_discovery below.
+	// OAuth discovery configuration resolved by the service. See oauth2_provider_config.atlassian_oauth2_provider_config.oauth_discovery Block below.
 	OauthDiscovery []OauthDiscoveryObservation `json:"oauthDiscovery,omitempty" tf:"oauth_discovery,omitempty"`
 }
 
 type AtlassianOauth2ProviderConfigParameters struct {
 
-	// Required when client_id_wo and client_secret_wo are set. Changing this value triggers an update to client_id_wo and client_secret_wo.
+	// Version used together with the write-only credentials. Required when client_id_wo and client_secret_wo are set. Changing this value triggers an update to client_id_wo and client_secret_wo.
 	// +kubebuilder:validation:Optional
 	ClientCredentialsWoVersion *float64 `json:"clientCredentialsWoVersion,omitempty" tf:"client_credentials_wo_version,omitempty"`
 
-	// OAuth2 client ID. Conflicts with client_id_wo. Must be used together with client_secret.
+	// OAuth2 client ID. Conflicts with client_id_wo. Must be used together with client_secret unless client_secret_source is EXTERNAL.
 	// +kubebuilder:validation:Optional
 	ClientIDSecretRef *v2.SecretKeySelector `json:"clientIdSecretRef,omitempty" tf:"-"`
 
@@ -66,7 +66,7 @@ type AtlassianOauth2ProviderConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	ClientIDWoSecretRef *v2.SecretKeySelector `json:"clientIdWoSecretRef,omitempty" tf:"-"`
 
-	// Reference to an AWS Secrets Manager secret that stores the client secret. Required when client_secret_source is EXTERNAL. See client_secret_config below.
+	// Reference to an AWS Secrets Manager secret that stores the client secret. Required when client_secret_source is EXTERNAL. See client_secret_config Block below.
 	// +kubebuilder:validation:Optional
 	ClientSecretConfig *ClientSecretConfigParameters `json:"clientSecretConfig,omitempty" tf:"client_secret_config,omitempty"`
 
@@ -220,19 +220,19 @@ type CustomOauth2ProviderConfigClientSecretConfigParameters struct {
 
 type CustomOauth2ProviderConfigInitParameters struct {
 
-	// Client authentication method used with the token endpoint. Valid values: CLIENT_SECRET_BASIC, CLIENT_SECRET_POST, AWS_IAM_ID_TOKEN_JWT.
+	// Client authentication method used with the token endpoint. Valid values: CLIENT_SECRET_BASIC, CLIENT_SECRET_POST, AWS_IAM_ID_TOKEN_JWT, PRIVATE_KEY_JWT.
 	ClientAuthenticationMethod *string `json:"clientAuthenticationMethod,omitempty" tf:"client_authentication_method,omitempty"`
 
-	// Required when client_id_wo and client_secret_wo are set. Changing this value triggers an update to client_id_wo and client_secret_wo.
+	// Version used together with the write-only credentials. Required when client_id_wo and client_secret_wo are set. Changing this value triggers an update to client_id_wo and client_secret_wo.
 	ClientCredentialsWoVersion *float64 `json:"clientCredentialsWoVersion,omitempty" tf:"client_credentials_wo_version,omitempty"`
 
-	// OAuth2 client ID. Conflicts with client_id_wo. Must be used together with client_secret.
+	// OAuth2 client ID. Conflicts with client_id_wo. Must be used together with client_secret unless client_secret_source is EXTERNAL.
 	ClientIDSecretRef *v2.SecretKeySelector `json:"clientIdSecretRef,omitempty" tf:"-"`
 
 	// Write-only OAuth2 client ID. Conflicts with client_id. If set, requires client_secret_wo and client_credentials_wo_version to be set.
 	ClientIDWoSecretRef *v2.SecretKeySelector `json:"clientIdWoSecretRef,omitempty" tf:"-"`
 
-	// Reference to an AWS Secrets Manager secret that stores the client secret. Required when client_secret_source is EXTERNAL. See client_secret_config below.
+	// Reference to an AWS Secrets Manager secret that stores the client secret. Required when client_secret_source is EXTERNAL. See client_secret_config Block below.
 	ClientSecretConfig *CustomOauth2ProviderConfigClientSecretConfigInitParameters `json:"clientSecretConfig,omitempty" tf:"client_secret_config,omitempty"`
 
 	// OAuth2 client secret. Conflicts with client_secret_wo. Must be used together with client_id.
@@ -244,24 +244,25 @@ type CustomOauth2ProviderConfigInitParameters struct {
 	// Write-only OAuth2 client secret. Conflicts with client_secret. If set, requires client_id_wo and client_credentials_wo_version to be set.
 	ClientSecretWoSecretRef *v2.SecretKeySelector `json:"clientSecretWoSecretRef,omitempty" tf:"-"`
 
-	// OAuth discovery configuration. See oauth_discovery below.
+	// OAuth discovery configuration resolved by the service. See oauth2_provider_config.atlassian_oauth2_provider_config.oauth_discovery Block below.
 	OauthDiscovery *CustomOauth2ProviderConfigOauthDiscoveryInitParameters `json:"oauthDiscovery,omitempty" tf:"oauth_discovery,omitempty"`
 
-	// On-behalf-of token exchange configuration, enabling RFC 8693 token exchange or RFC 7523 JWT authorization grant flows. See on_behalf_of_token_exchange_config below.
+	// On-behalf-of token exchange configuration, enabling RFC 8693 token exchange or RFC 7523 JWT authorization grant flows. See on_behalf_of_token_exchange_config Block below.
 	OnBehalfOfTokenExchangeConfig *OnBehalfOfTokenExchangeConfigInitParameters `json:"onBehalfOfTokenExchangeConfig,omitempty" tf:"on_behalf_of_token_exchange_config,omitempty"`
 
-	// Private endpoint configuration for the domain. See private_endpoint above.
+	// Private endpoint configuration for the domain. See private_endpoint Block above.
 	PrivateEndpoint *CustomOauth2ProviderConfigPrivateEndpointInitParameters `json:"privateEndpoint,omitempty" tf:"private_endpoint,omitempty"`
 
-	// Private endpoint overrides for the custom OAuth2 provider configuration. See private_endpoint_override below.
+	// Private endpoint overrides for the custom OAuth2 provider configuration. See private_endpoint_override Block below.
 	PrivateEndpointOverride []PrivateEndpointOverrideInitParameters `json:"privateEndpointOverride,omitempty" tf:"private_endpoint_override,omitempty"`
 
+	// Private key JWT client authentication configuration used when signing client assertions. See private_key_jwt_config Block below.
 	PrivateKeyJwtConfig *PrivateKeyJwtConfigInitParameters `json:"privateKeyJwtConfig,omitempty" tf:"private_key_jwt_config,omitempty"`
 }
 
 type CustomOauth2ProviderConfigOauthDiscoveryInitParameters struct {
 
-	// Manual OAuth2 authorization server metadata configuration. Cannot be used together with discovery_url. See authorization_server_metadata below.
+	// Manual OAuth2 authorization server metadata configuration. Cannot be used together with discovery_url. See oauth2_provider_config.custom_oauth2_provider_config.oauth_discovery.authorization_server_metadata Block below.
 	AuthorizationServerMetadata *OauthDiscoveryAuthorizationServerMetadataInitParameters `json:"authorizationServerMetadata,omitempty" tf:"authorization_server_metadata,omitempty"`
 
 	// OpenID Connect discovery URL (e.g., https://provider.com/.well-known/openid-configuration). Cannot be used together with authorization_server_metadata.
@@ -270,7 +271,7 @@ type CustomOauth2ProviderConfigOauthDiscoveryInitParameters struct {
 
 type CustomOauth2ProviderConfigOauthDiscoveryObservation struct {
 
-	// Manual OAuth2 authorization server metadata configuration. Cannot be used together with discovery_url. See authorization_server_metadata below.
+	// Manual OAuth2 authorization server metadata configuration. Cannot be used together with discovery_url. See oauth2_provider_config.custom_oauth2_provider_config.oauth_discovery.authorization_server_metadata Block below.
 	AuthorizationServerMetadata *OauthDiscoveryAuthorizationServerMetadataObservation `json:"authorizationServerMetadata,omitempty" tf:"authorization_server_metadata,omitempty"`
 
 	// OpenID Connect discovery URL (e.g., https://provider.com/.well-known/openid-configuration). Cannot be used together with authorization_server_metadata.
@@ -279,7 +280,7 @@ type CustomOauth2ProviderConfigOauthDiscoveryObservation struct {
 
 type CustomOauth2ProviderConfigOauthDiscoveryParameters struct {
 
-	// Manual OAuth2 authorization server metadata configuration. Cannot be used together with discovery_url. See authorization_server_metadata below.
+	// Manual OAuth2 authorization server metadata configuration. Cannot be used together with discovery_url. See oauth2_provider_config.custom_oauth2_provider_config.oauth_discovery.authorization_server_metadata Block below.
 	// +kubebuilder:validation:Optional
 	AuthorizationServerMetadata *OauthDiscoveryAuthorizationServerMetadataParameters `json:"authorizationServerMetadata,omitempty" tf:"authorization_server_metadata,omitempty"`
 
@@ -290,44 +291,45 @@ type CustomOauth2ProviderConfigOauthDiscoveryParameters struct {
 
 type CustomOauth2ProviderConfigObservation struct {
 
-	// Client authentication method used with the token endpoint. Valid values: CLIENT_SECRET_BASIC, CLIENT_SECRET_POST, AWS_IAM_ID_TOKEN_JWT.
+	// Client authentication method used with the token endpoint. Valid values: CLIENT_SECRET_BASIC, CLIENT_SECRET_POST, AWS_IAM_ID_TOKEN_JWT, PRIVATE_KEY_JWT.
 	ClientAuthenticationMethod *string `json:"clientAuthenticationMethod,omitempty" tf:"client_authentication_method,omitempty"`
 
-	// Required when client_id_wo and client_secret_wo are set. Changing this value triggers an update to client_id_wo and client_secret_wo.
+	// Version used together with the write-only credentials. Required when client_id_wo and client_secret_wo are set. Changing this value triggers an update to client_id_wo and client_secret_wo.
 	ClientCredentialsWoVersion *float64 `json:"clientCredentialsWoVersion,omitempty" tf:"client_credentials_wo_version,omitempty"`
 
-	// Reference to an AWS Secrets Manager secret that stores the client secret. Required when client_secret_source is EXTERNAL. See client_secret_config below.
+	// Reference to an AWS Secrets Manager secret that stores the client secret. Required when client_secret_source is EXTERNAL. See client_secret_config Block below.
 	ClientSecretConfig *CustomOauth2ProviderConfigClientSecretConfigObservation `json:"clientSecretConfig,omitempty" tf:"client_secret_config,omitempty"`
 
 	// Source type of the client secret. Valid values: MANAGED (the service manages the secret) or EXTERNAL (you manage the secret in AWS Secrets Manager). Use EXTERNAL together with client_secret_config.
 	ClientSecretSource *string `json:"clientSecretSource,omitempty" tf:"client_secret_source,omitempty"`
 
-	// OAuth discovery configuration. See oauth_discovery below.
+	// OAuth discovery configuration resolved by the service. See oauth2_provider_config.atlassian_oauth2_provider_config.oauth_discovery Block below.
 	OauthDiscovery *CustomOauth2ProviderConfigOauthDiscoveryObservation `json:"oauthDiscovery,omitempty" tf:"oauth_discovery,omitempty"`
 
-	// On-behalf-of token exchange configuration, enabling RFC 8693 token exchange or RFC 7523 JWT authorization grant flows. See on_behalf_of_token_exchange_config below.
+	// On-behalf-of token exchange configuration, enabling RFC 8693 token exchange or RFC 7523 JWT authorization grant flows. See on_behalf_of_token_exchange_config Block below.
 	OnBehalfOfTokenExchangeConfig *OnBehalfOfTokenExchangeConfigObservation `json:"onBehalfOfTokenExchangeConfig,omitempty" tf:"on_behalf_of_token_exchange_config,omitempty"`
 
-	// Private endpoint configuration for the domain. See private_endpoint above.
+	// Private endpoint configuration for the domain. See private_endpoint Block above.
 	PrivateEndpoint *CustomOauth2ProviderConfigPrivateEndpointObservation `json:"privateEndpoint,omitempty" tf:"private_endpoint,omitempty"`
 
-	// Private endpoint overrides for the custom OAuth2 provider configuration. See private_endpoint_override below.
+	// Private endpoint overrides for the custom OAuth2 provider configuration. See private_endpoint_override Block below.
 	PrivateEndpointOverride []PrivateEndpointOverrideObservation `json:"privateEndpointOverride,omitempty" tf:"private_endpoint_override,omitempty"`
 
+	// Private key JWT client authentication configuration used when signing client assertions. See private_key_jwt_config Block below.
 	PrivateKeyJwtConfig *PrivateKeyJwtConfigObservation `json:"privateKeyJwtConfig,omitempty" tf:"private_key_jwt_config,omitempty"`
 }
 
 type CustomOauth2ProviderConfigParameters struct {
 
-	// Client authentication method used with the token endpoint. Valid values: CLIENT_SECRET_BASIC, CLIENT_SECRET_POST, AWS_IAM_ID_TOKEN_JWT.
+	// Client authentication method used with the token endpoint. Valid values: CLIENT_SECRET_BASIC, CLIENT_SECRET_POST, AWS_IAM_ID_TOKEN_JWT, PRIVATE_KEY_JWT.
 	// +kubebuilder:validation:Optional
 	ClientAuthenticationMethod *string `json:"clientAuthenticationMethod,omitempty" tf:"client_authentication_method,omitempty"`
 
-	// Required when client_id_wo and client_secret_wo are set. Changing this value triggers an update to client_id_wo and client_secret_wo.
+	// Version used together with the write-only credentials. Required when client_id_wo and client_secret_wo are set. Changing this value triggers an update to client_id_wo and client_secret_wo.
 	// +kubebuilder:validation:Optional
 	ClientCredentialsWoVersion *float64 `json:"clientCredentialsWoVersion,omitempty" tf:"client_credentials_wo_version,omitempty"`
 
-	// OAuth2 client ID. Conflicts with client_id_wo. Must be used together with client_secret.
+	// OAuth2 client ID. Conflicts with client_id_wo. Must be used together with client_secret unless client_secret_source is EXTERNAL.
 	// +kubebuilder:validation:Optional
 	ClientIDSecretRef *v2.SecretKeySelector `json:"clientIdSecretRef,omitempty" tf:"-"`
 
@@ -335,7 +337,7 @@ type CustomOauth2ProviderConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	ClientIDWoSecretRef *v2.SecretKeySelector `json:"clientIdWoSecretRef,omitempty" tf:"-"`
 
-	// Reference to an AWS Secrets Manager secret that stores the client secret. Required when client_secret_source is EXTERNAL. See client_secret_config below.
+	// Reference to an AWS Secrets Manager secret that stores the client secret. Required when client_secret_source is EXTERNAL. See client_secret_config Block below.
 	// +kubebuilder:validation:Optional
 	ClientSecretConfig *CustomOauth2ProviderConfigClientSecretConfigParameters `json:"clientSecretConfig,omitempty" tf:"client_secret_config,omitempty"`
 
@@ -351,38 +353,39 @@ type CustomOauth2ProviderConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	ClientSecretWoSecretRef *v2.SecretKeySelector `json:"clientSecretWoSecretRef,omitempty" tf:"-"`
 
-	// OAuth discovery configuration. See oauth_discovery below.
+	// OAuth discovery configuration resolved by the service. See oauth2_provider_config.atlassian_oauth2_provider_config.oauth_discovery Block below.
 	// +kubebuilder:validation:Optional
 	OauthDiscovery *CustomOauth2ProviderConfigOauthDiscoveryParameters `json:"oauthDiscovery,omitempty" tf:"oauth_discovery,omitempty"`
 
-	// On-behalf-of token exchange configuration, enabling RFC 8693 token exchange or RFC 7523 JWT authorization grant flows. See on_behalf_of_token_exchange_config below.
+	// On-behalf-of token exchange configuration, enabling RFC 8693 token exchange or RFC 7523 JWT authorization grant flows. See on_behalf_of_token_exchange_config Block below.
 	// +kubebuilder:validation:Optional
 	OnBehalfOfTokenExchangeConfig *OnBehalfOfTokenExchangeConfigParameters `json:"onBehalfOfTokenExchangeConfig,omitempty" tf:"on_behalf_of_token_exchange_config,omitempty"`
 
-	// Private endpoint configuration for the domain. See private_endpoint above.
+	// Private endpoint configuration for the domain. See private_endpoint Block above.
 	// +kubebuilder:validation:Optional
 	PrivateEndpoint *CustomOauth2ProviderConfigPrivateEndpointParameters `json:"privateEndpoint,omitempty" tf:"private_endpoint,omitempty"`
 
-	// Private endpoint overrides for the custom OAuth2 provider configuration. See private_endpoint_override below.
+	// Private endpoint overrides for the custom OAuth2 provider configuration. See private_endpoint_override Block below.
 	// +kubebuilder:validation:Optional
 	PrivateEndpointOverride []PrivateEndpointOverrideParameters `json:"privateEndpointOverride,omitempty" tf:"private_endpoint_override,omitempty"`
 
+	// Private key JWT client authentication configuration used when signing client assertions. See private_key_jwt_config Block below.
 	// +kubebuilder:validation:Optional
 	PrivateKeyJwtConfig *PrivateKeyJwtConfigParameters `json:"privateKeyJwtConfig,omitempty" tf:"private_key_jwt_config,omitempty"`
 }
 
 type CustomOauth2ProviderConfigPrivateEndpointInitParameters struct {
 
-	// Service-managed VPC resource configuration. See managed_vpc_resource below.
+	// Service-managed VPC resource configuration. See managed_vpc_resource Block below.
 	ManagedVPCResource *CustomOauth2ProviderConfigPrivateEndpointManagedVPCResourceInitParameters `json:"managedVpcResource,omitempty" tf:"managed_vpc_resource,omitempty"`
 
-	// Self-managed VPC Lattice resource configuration. See self_managed_lattice_resource below.
+	// Self-managed VPC Lattice resource configuration. See self_managed_lattice_resource Block below.
 	SelfManagedLatticeResource *CustomOauth2ProviderConfigPrivateEndpointSelfManagedLatticeResourceInitParameters `json:"selfManagedLatticeResource,omitempty" tf:"self_managed_lattice_resource,omitempty"`
 }
 
 type CustomOauth2ProviderConfigPrivateEndpointManagedVPCResourceInitParameters struct {
 
-	// IP address type for the endpoint. Valid values: IPV4, DUALSTACK.
+	// IP address type for the endpoint. Valid values: IPV4, IPV6.
 	EndpointIPAddressType *string `json:"endpointIpAddressType,omitempty" tf:"endpoint_ip_address_type,omitempty"`
 
 	// Routing domain for the managed VPC resource.
@@ -406,7 +409,7 @@ type CustomOauth2ProviderConfigPrivateEndpointManagedVPCResourceInitParameters s
 
 type CustomOauth2ProviderConfigPrivateEndpointManagedVPCResourceObservation struct {
 
-	// IP address type for the endpoint. Valid values: IPV4, DUALSTACK.
+	// IP address type for the endpoint. Valid values: IPV4, IPV6.
 	EndpointIPAddressType *string `json:"endpointIpAddressType,omitempty" tf:"endpoint_ip_address_type,omitempty"`
 
 	// Routing domain for the managed VPC resource.
@@ -430,7 +433,7 @@ type CustomOauth2ProviderConfigPrivateEndpointManagedVPCResourceObservation stru
 
 type CustomOauth2ProviderConfigPrivateEndpointManagedVPCResourceParameters struct {
 
-	// IP address type for the endpoint. Valid values: IPV4, DUALSTACK.
+	// IP address type for the endpoint. Valid values: IPV4, IPV6.
 	// +kubebuilder:validation:Optional
 	EndpointIPAddressType *string `json:"endpointIpAddressType" tf:"endpoint_ip_address_type,omitempty"`
 
@@ -460,20 +463,20 @@ type CustomOauth2ProviderConfigPrivateEndpointManagedVPCResourceParameters struc
 
 type CustomOauth2ProviderConfigPrivateEndpointObservation struct {
 
-	// Service-managed VPC resource configuration. See managed_vpc_resource below.
+	// Service-managed VPC resource configuration. See managed_vpc_resource Block below.
 	ManagedVPCResource *CustomOauth2ProviderConfigPrivateEndpointManagedVPCResourceObservation `json:"managedVpcResource,omitempty" tf:"managed_vpc_resource,omitempty"`
 
-	// Self-managed VPC Lattice resource configuration. See self_managed_lattice_resource below.
+	// Self-managed VPC Lattice resource configuration. See self_managed_lattice_resource Block below.
 	SelfManagedLatticeResource *CustomOauth2ProviderConfigPrivateEndpointSelfManagedLatticeResourceObservation `json:"selfManagedLatticeResource,omitempty" tf:"self_managed_lattice_resource,omitempty"`
 }
 
 type CustomOauth2ProviderConfigPrivateEndpointParameters struct {
 
-	// Service-managed VPC resource configuration. See managed_vpc_resource below.
+	// Service-managed VPC resource configuration. See managed_vpc_resource Block below.
 	// +kubebuilder:validation:Optional
 	ManagedVPCResource *CustomOauth2ProviderConfigPrivateEndpointManagedVPCResourceParameters `json:"managedVpcResource,omitempty" tf:"managed_vpc_resource,omitempty"`
 
-	// Self-managed VPC Lattice resource configuration. See self_managed_lattice_resource below.
+	// Self-managed VPC Lattice resource configuration. See self_managed_lattice_resource Block below.
 	// +kubebuilder:validation:Optional
 	SelfManagedLatticeResource *CustomOauth2ProviderConfigPrivateEndpointSelfManagedLatticeResourceParameters `json:"selfManagedLatticeResource,omitempty" tf:"self_managed_lattice_resource,omitempty"`
 }
@@ -548,16 +551,16 @@ type GithubOauth2ProviderConfigClientSecretConfigParameters struct {
 
 type GithubOauth2ProviderConfigInitParameters struct {
 
-	// Required when client_id_wo and client_secret_wo are set. Changing this value triggers an update to client_id_wo and client_secret_wo.
+	// Version used together with the write-only credentials. Required when client_id_wo and client_secret_wo are set. Changing this value triggers an update to client_id_wo and client_secret_wo.
 	ClientCredentialsWoVersion *float64 `json:"clientCredentialsWoVersion,omitempty" tf:"client_credentials_wo_version,omitempty"`
 
-	// OAuth2 client ID. Conflicts with client_id_wo. Must be used together with client_secret.
+	// OAuth2 client ID. Conflicts with client_id_wo. Must be used together with client_secret unless client_secret_source is EXTERNAL.
 	ClientIDSecretRef *v2.SecretKeySelector `json:"clientIdSecretRef,omitempty" tf:"-"`
 
 	// Write-only OAuth2 client ID. Conflicts with client_id. If set, requires client_secret_wo and client_credentials_wo_version to be set.
 	ClientIDWoSecretRef *v2.SecretKeySelector `json:"clientIdWoSecretRef,omitempty" tf:"-"`
 
-	// Reference to an AWS Secrets Manager secret that stores the client secret. Required when client_secret_source is EXTERNAL. See client_secret_config below.
+	// Reference to an AWS Secrets Manager secret that stores the client secret. Required when client_secret_source is EXTERNAL. See client_secret_config Block below.
 	ClientSecretConfig *GithubOauth2ProviderConfigClientSecretConfigInitParameters `json:"clientSecretConfig,omitempty" tf:"client_secret_config,omitempty"`
 
 	// OAuth2 client secret. Conflicts with client_secret_wo. Must be used together with client_id.
@@ -600,7 +603,7 @@ type GithubOauth2ProviderConfigOauthDiscoveryInitParameters struct {
 
 type GithubOauth2ProviderConfigOauthDiscoveryObservation struct {
 
-	// Manual OAuth2 authorization server metadata configuration. Cannot be used together with discovery_url. See authorization_server_metadata below.
+	// Manual OAuth2 authorization server metadata configuration. Cannot be used together with discovery_url. See oauth2_provider_config.custom_oauth2_provider_config.oauth_discovery.authorization_server_metadata Block below.
 	AuthorizationServerMetadata []GithubOauth2ProviderConfigOauthDiscoveryAuthorizationServerMetadataObservation `json:"authorizationServerMetadata,omitempty" tf:"authorization_server_metadata,omitempty"`
 
 	// OpenID Connect discovery URL (e.g., https://provider.com/.well-known/openid-configuration). Cannot be used together with authorization_server_metadata.
@@ -612,26 +615,26 @@ type GithubOauth2ProviderConfigOauthDiscoveryParameters struct {
 
 type GithubOauth2ProviderConfigObservation struct {
 
-	// Required when client_id_wo and client_secret_wo are set. Changing this value triggers an update to client_id_wo and client_secret_wo.
+	// Version used together with the write-only credentials. Required when client_id_wo and client_secret_wo are set. Changing this value triggers an update to client_id_wo and client_secret_wo.
 	ClientCredentialsWoVersion *float64 `json:"clientCredentialsWoVersion,omitempty" tf:"client_credentials_wo_version,omitempty"`
 
-	// Reference to an AWS Secrets Manager secret that stores the client secret. Required when client_secret_source is EXTERNAL. See client_secret_config below.
+	// Reference to an AWS Secrets Manager secret that stores the client secret. Required when client_secret_source is EXTERNAL. See client_secret_config Block below.
 	ClientSecretConfig *GithubOauth2ProviderConfigClientSecretConfigObservation `json:"clientSecretConfig,omitempty" tf:"client_secret_config,omitempty"`
 
 	// Source type of the client secret. Valid values: MANAGED (the service manages the secret) or EXTERNAL (you manage the secret in AWS Secrets Manager). Use EXTERNAL together with client_secret_config.
 	ClientSecretSource *string `json:"clientSecretSource,omitempty" tf:"client_secret_source,omitempty"`
 
-	// OAuth discovery configuration. See oauth_discovery below.
+	// OAuth discovery configuration resolved by the service. See oauth2_provider_config.atlassian_oauth2_provider_config.oauth_discovery Block below.
 	OauthDiscovery []GithubOauth2ProviderConfigOauthDiscoveryObservation `json:"oauthDiscovery,omitempty" tf:"oauth_discovery,omitempty"`
 }
 
 type GithubOauth2ProviderConfigParameters struct {
 
-	// Required when client_id_wo and client_secret_wo are set. Changing this value triggers an update to client_id_wo and client_secret_wo.
+	// Version used together with the write-only credentials. Required when client_id_wo and client_secret_wo are set. Changing this value triggers an update to client_id_wo and client_secret_wo.
 	// +kubebuilder:validation:Optional
 	ClientCredentialsWoVersion *float64 `json:"clientCredentialsWoVersion,omitempty" tf:"client_credentials_wo_version,omitempty"`
 
-	// OAuth2 client ID. Conflicts with client_id_wo. Must be used together with client_secret.
+	// OAuth2 client ID. Conflicts with client_id_wo. Must be used together with client_secret unless client_secret_source is EXTERNAL.
 	// +kubebuilder:validation:Optional
 	ClientIDSecretRef *v2.SecretKeySelector `json:"clientIdSecretRef,omitempty" tf:"-"`
 
@@ -639,7 +642,7 @@ type GithubOauth2ProviderConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	ClientIDWoSecretRef *v2.SecretKeySelector `json:"clientIdWoSecretRef,omitempty" tf:"-"`
 
-	// Reference to an AWS Secrets Manager secret that stores the client secret. Required when client_secret_source is EXTERNAL. See client_secret_config below.
+	// Reference to an AWS Secrets Manager secret that stores the client secret. Required when client_secret_source is EXTERNAL. See client_secret_config Block below.
 	// +kubebuilder:validation:Optional
 	ClientSecretConfig *GithubOauth2ProviderConfigClientSecretConfigParameters `json:"clientSecretConfig,omitempty" tf:"client_secret_config,omitempty"`
 
@@ -707,16 +710,16 @@ type GoogleOauth2ProviderConfigClientSecretConfigParameters struct {
 
 type GoogleOauth2ProviderConfigInitParameters struct {
 
-	// Required when client_id_wo and client_secret_wo are set. Changing this value triggers an update to client_id_wo and client_secret_wo.
+	// Version used together with the write-only credentials. Required when client_id_wo and client_secret_wo are set. Changing this value triggers an update to client_id_wo and client_secret_wo.
 	ClientCredentialsWoVersion *float64 `json:"clientCredentialsWoVersion,omitempty" tf:"client_credentials_wo_version,omitempty"`
 
-	// OAuth2 client ID. Conflicts with client_id_wo. Must be used together with client_secret.
+	// OAuth2 client ID. Conflicts with client_id_wo. Must be used together with client_secret unless client_secret_source is EXTERNAL.
 	ClientIDSecretRef *v2.SecretKeySelector `json:"clientIdSecretRef,omitempty" tf:"-"`
 
 	// Write-only OAuth2 client ID. Conflicts with client_id. If set, requires client_secret_wo and client_credentials_wo_version to be set.
 	ClientIDWoSecretRef *v2.SecretKeySelector `json:"clientIdWoSecretRef,omitempty" tf:"-"`
 
-	// Reference to an AWS Secrets Manager secret that stores the client secret. Required when client_secret_source is EXTERNAL. See client_secret_config below.
+	// Reference to an AWS Secrets Manager secret that stores the client secret. Required when client_secret_source is EXTERNAL. See client_secret_config Block below.
 	ClientSecretConfig *GoogleOauth2ProviderConfigClientSecretConfigInitParameters `json:"clientSecretConfig,omitempty" tf:"client_secret_config,omitempty"`
 
 	// OAuth2 client secret. Conflicts with client_secret_wo. Must be used together with client_id.
@@ -759,7 +762,7 @@ type GoogleOauth2ProviderConfigOauthDiscoveryInitParameters struct {
 
 type GoogleOauth2ProviderConfigOauthDiscoveryObservation struct {
 
-	// Manual OAuth2 authorization server metadata configuration. Cannot be used together with discovery_url. See authorization_server_metadata below.
+	// Manual OAuth2 authorization server metadata configuration. Cannot be used together with discovery_url. See oauth2_provider_config.custom_oauth2_provider_config.oauth_discovery.authorization_server_metadata Block below.
 	AuthorizationServerMetadata []GoogleOauth2ProviderConfigOauthDiscoveryAuthorizationServerMetadataObservation `json:"authorizationServerMetadata,omitempty" tf:"authorization_server_metadata,omitempty"`
 
 	// OpenID Connect discovery URL (e.g., https://provider.com/.well-known/openid-configuration). Cannot be used together with authorization_server_metadata.
@@ -771,26 +774,26 @@ type GoogleOauth2ProviderConfigOauthDiscoveryParameters struct {
 
 type GoogleOauth2ProviderConfigObservation struct {
 
-	// Required when client_id_wo and client_secret_wo are set. Changing this value triggers an update to client_id_wo and client_secret_wo.
+	// Version used together with the write-only credentials. Required when client_id_wo and client_secret_wo are set. Changing this value triggers an update to client_id_wo and client_secret_wo.
 	ClientCredentialsWoVersion *float64 `json:"clientCredentialsWoVersion,omitempty" tf:"client_credentials_wo_version,omitempty"`
 
-	// Reference to an AWS Secrets Manager secret that stores the client secret. Required when client_secret_source is EXTERNAL. See client_secret_config below.
+	// Reference to an AWS Secrets Manager secret that stores the client secret. Required when client_secret_source is EXTERNAL. See client_secret_config Block below.
 	ClientSecretConfig *GoogleOauth2ProviderConfigClientSecretConfigObservation `json:"clientSecretConfig,omitempty" tf:"client_secret_config,omitempty"`
 
 	// Source type of the client secret. Valid values: MANAGED (the service manages the secret) or EXTERNAL (you manage the secret in AWS Secrets Manager). Use EXTERNAL together with client_secret_config.
 	ClientSecretSource *string `json:"clientSecretSource,omitempty" tf:"client_secret_source,omitempty"`
 
-	// OAuth discovery configuration. See oauth_discovery below.
+	// OAuth discovery configuration resolved by the service. See oauth2_provider_config.atlassian_oauth2_provider_config.oauth_discovery Block below.
 	OauthDiscovery []GoogleOauth2ProviderConfigOauthDiscoveryObservation `json:"oauthDiscovery,omitempty" tf:"oauth_discovery,omitempty"`
 }
 
 type GoogleOauth2ProviderConfigParameters struct {
 
-	// Required when client_id_wo and client_secret_wo are set. Changing this value triggers an update to client_id_wo and client_secret_wo.
+	// Version used together with the write-only credentials. Required when client_id_wo and client_secret_wo are set. Changing this value triggers an update to client_id_wo and client_secret_wo.
 	// +kubebuilder:validation:Optional
 	ClientCredentialsWoVersion *float64 `json:"clientCredentialsWoVersion,omitempty" tf:"client_credentials_wo_version,omitempty"`
 
-	// OAuth2 client ID. Conflicts with client_id_wo. Must be used together with client_secret.
+	// OAuth2 client ID. Conflicts with client_id_wo. Must be used together with client_secret unless client_secret_source is EXTERNAL.
 	// +kubebuilder:validation:Optional
 	ClientIDSecretRef *v2.SecretKeySelector `json:"clientIdSecretRef,omitempty" tf:"-"`
 
@@ -798,7 +801,7 @@ type GoogleOauth2ProviderConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	ClientIDWoSecretRef *v2.SecretKeySelector `json:"clientIdWoSecretRef,omitempty" tf:"-"`
 
-	// Reference to an AWS Secrets Manager secret that stores the client secret. Required when client_secret_source is EXTERNAL. See client_secret_config below.
+	// Reference to an AWS Secrets Manager secret that stores the client secret. Required when client_secret_source is EXTERNAL. See client_secret_config Block below.
 	// +kubebuilder:validation:Optional
 	ClientSecretConfig *GoogleOauth2ProviderConfigClientSecretConfigParameters `json:"clientSecretConfig,omitempty" tf:"client_secret_config,omitempty"`
 
@@ -869,16 +872,16 @@ type IncludedOauth2ProviderConfigInitParameters struct {
 	// OAuth2 authorization endpoint URL.
 	AuthorizationEndpoint *string `json:"authorizationEndpoint,omitempty" tf:"authorization_endpoint,omitempty"`
 
-	// Required when client_id_wo and client_secret_wo are set. Changing this value triggers an update to client_id_wo and client_secret_wo.
+	// Version used together with the write-only credentials. Required when client_id_wo and client_secret_wo are set. Changing this value triggers an update to client_id_wo and client_secret_wo.
 	ClientCredentialsWoVersion *float64 `json:"clientCredentialsWoVersion,omitempty" tf:"client_credentials_wo_version,omitempty"`
 
-	// OAuth2 client ID. Conflicts with client_id_wo. Must be used together with client_secret.
+	// OAuth2 client ID. Conflicts with client_id_wo. Must be used together with client_secret unless client_secret_source is EXTERNAL.
 	ClientIDSecretRef *v2.SecretKeySelector `json:"clientIdSecretRef,omitempty" tf:"-"`
 
 	// Write-only OAuth2 client ID. Conflicts with client_id. If set, requires client_secret_wo and client_credentials_wo_version to be set.
 	ClientIDWoSecretRef *v2.SecretKeySelector `json:"clientIdWoSecretRef,omitempty" tf:"-"`
 
-	// Reference to an AWS Secrets Manager secret that stores the client secret. Required when client_secret_source is EXTERNAL. See client_secret_config below.
+	// Reference to an AWS Secrets Manager secret that stores the client secret. Required when client_secret_source is EXTERNAL. See client_secret_config Block below.
 	ClientSecretConfig *IncludedOauth2ProviderConfigClientSecretConfigInitParameters `json:"clientSecretConfig,omitempty" tf:"client_secret_config,omitempty"`
 
 	// OAuth2 client secret. Conflicts with client_secret_wo. Must be used together with client_id.
@@ -927,7 +930,7 @@ type IncludedOauth2ProviderConfigOauthDiscoveryInitParameters struct {
 
 type IncludedOauth2ProviderConfigOauthDiscoveryObservation struct {
 
-	// Manual OAuth2 authorization server metadata configuration. Cannot be used together with discovery_url. See authorization_server_metadata below.
+	// Manual OAuth2 authorization server metadata configuration. Cannot be used together with discovery_url. See oauth2_provider_config.custom_oauth2_provider_config.oauth_discovery.authorization_server_metadata Block below.
 	AuthorizationServerMetadata []IncludedOauth2ProviderConfigOauthDiscoveryAuthorizationServerMetadataObservation `json:"authorizationServerMetadata,omitempty" tf:"authorization_server_metadata,omitempty"`
 
 	// OpenID Connect discovery URL (e.g., https://provider.com/.well-known/openid-configuration). Cannot be used together with authorization_server_metadata.
@@ -942,10 +945,10 @@ type IncludedOauth2ProviderConfigObservation struct {
 	// OAuth2 authorization endpoint URL.
 	AuthorizationEndpoint *string `json:"authorizationEndpoint,omitempty" tf:"authorization_endpoint,omitempty"`
 
-	// Required when client_id_wo and client_secret_wo are set. Changing this value triggers an update to client_id_wo and client_secret_wo.
+	// Version used together with the write-only credentials. Required when client_id_wo and client_secret_wo are set. Changing this value triggers an update to client_id_wo and client_secret_wo.
 	ClientCredentialsWoVersion *float64 `json:"clientCredentialsWoVersion,omitempty" tf:"client_credentials_wo_version,omitempty"`
 
-	// Reference to an AWS Secrets Manager secret that stores the client secret. Required when client_secret_source is EXTERNAL. See client_secret_config below.
+	// Reference to an AWS Secrets Manager secret that stores the client secret. Required when client_secret_source is EXTERNAL. See client_secret_config Block below.
 	ClientSecretConfig *IncludedOauth2ProviderConfigClientSecretConfigObservation `json:"clientSecretConfig,omitempty" tf:"client_secret_config,omitempty"`
 
 	// Source type of the client secret. Valid values: MANAGED (the service manages the secret) or EXTERNAL (you manage the secret in AWS Secrets Manager). Use EXTERNAL together with client_secret_config.
@@ -954,7 +957,7 @@ type IncludedOauth2ProviderConfigObservation struct {
 	// OAuth2 authorization server issuer identifier.
 	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
 
-	// OAuth discovery configuration. See oauth_discovery below.
+	// OAuth discovery configuration resolved by the service. See oauth2_provider_config.atlassian_oauth2_provider_config.oauth_discovery Block below.
 	OauthDiscovery []IncludedOauth2ProviderConfigOauthDiscoveryObservation `json:"oauthDiscovery,omitempty" tf:"oauth_discovery,omitempty"`
 
 	// OAuth2 token endpoint URL.
@@ -967,11 +970,11 @@ type IncludedOauth2ProviderConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	AuthorizationEndpoint *string `json:"authorizationEndpoint,omitempty" tf:"authorization_endpoint,omitempty"`
 
-	// Required when client_id_wo and client_secret_wo are set. Changing this value triggers an update to client_id_wo and client_secret_wo.
+	// Version used together with the write-only credentials. Required when client_id_wo and client_secret_wo are set. Changing this value triggers an update to client_id_wo and client_secret_wo.
 	// +kubebuilder:validation:Optional
 	ClientCredentialsWoVersion *float64 `json:"clientCredentialsWoVersion,omitempty" tf:"client_credentials_wo_version,omitempty"`
 
-	// OAuth2 client ID. Conflicts with client_id_wo. Must be used together with client_secret.
+	// OAuth2 client ID. Conflicts with client_id_wo. Must be used together with client_secret unless client_secret_source is EXTERNAL.
 	// +kubebuilder:validation:Optional
 	ClientIDSecretRef *v2.SecretKeySelector `json:"clientIdSecretRef,omitempty" tf:"-"`
 
@@ -979,7 +982,7 @@ type IncludedOauth2ProviderConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	ClientIDWoSecretRef *v2.SecretKeySelector `json:"clientIdWoSecretRef,omitempty" tf:"-"`
 
-	// Reference to an AWS Secrets Manager secret that stores the client secret. Required when client_secret_source is EXTERNAL. See client_secret_config below.
+	// Reference to an AWS Secrets Manager secret that stores the client secret. Required when client_secret_source is EXTERNAL. See client_secret_config Block below.
 	// +kubebuilder:validation:Optional
 	ClientSecretConfig *IncludedOauth2ProviderConfigClientSecretConfigParameters `json:"clientSecretConfig,omitempty" tf:"client_secret_config,omitempty"`
 
@@ -1005,15 +1008,20 @@ type IncludedOauth2ProviderConfigParameters struct {
 }
 
 type KMSKeySourceInitParameters struct {
+
+	// ARN of the AWS KMS key used to sign the JWT.
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 }
 
 type KMSKeySourceObservation struct {
+
+	// ARN of the AWS KMS key used to sign the JWT.
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 }
 
 type KMSKeySourceParameters struct {
 
+	// ARN of the AWS KMS key used to sign the JWT.
 	// +kubebuilder:validation:Optional
 	KMSKeyArn *string `json:"kmsKeyArn" tf:"kms_key_arn,omitempty"`
 }
@@ -1069,16 +1077,16 @@ type LinkedinOauth2ProviderConfigClientSecretConfigParameters struct {
 
 type LinkedinOauth2ProviderConfigInitParameters struct {
 
-	// Required when client_id_wo and client_secret_wo are set. Changing this value triggers an update to client_id_wo and client_secret_wo.
+	// Version used together with the write-only credentials. Required when client_id_wo and client_secret_wo are set. Changing this value triggers an update to client_id_wo and client_secret_wo.
 	ClientCredentialsWoVersion *float64 `json:"clientCredentialsWoVersion,omitempty" tf:"client_credentials_wo_version,omitempty"`
 
-	// OAuth2 client ID. Conflicts with client_id_wo. Must be used together with client_secret.
+	// OAuth2 client ID. Conflicts with client_id_wo. Must be used together with client_secret unless client_secret_source is EXTERNAL.
 	ClientIDSecretRef *v2.SecretKeySelector `json:"clientIdSecretRef,omitempty" tf:"-"`
 
 	// Write-only OAuth2 client ID. Conflicts with client_id. If set, requires client_secret_wo and client_credentials_wo_version to be set.
 	ClientIDWoSecretRef *v2.SecretKeySelector `json:"clientIdWoSecretRef,omitempty" tf:"-"`
 
-	// Reference to an AWS Secrets Manager secret that stores the client secret. Required when client_secret_source is EXTERNAL. See client_secret_config below.
+	// Reference to an AWS Secrets Manager secret that stores the client secret. Required when client_secret_source is EXTERNAL. See client_secret_config Block below.
 	ClientSecretConfig *LinkedinOauth2ProviderConfigClientSecretConfigInitParameters `json:"clientSecretConfig,omitempty" tf:"client_secret_config,omitempty"`
 
 	// OAuth2 client secret. Conflicts with client_secret_wo. Must be used together with client_id.
@@ -1121,7 +1129,7 @@ type LinkedinOauth2ProviderConfigOauthDiscoveryInitParameters struct {
 
 type LinkedinOauth2ProviderConfigOauthDiscoveryObservation struct {
 
-	// Manual OAuth2 authorization server metadata configuration. Cannot be used together with discovery_url. See authorization_server_metadata below.
+	// Manual OAuth2 authorization server metadata configuration. Cannot be used together with discovery_url. See oauth2_provider_config.custom_oauth2_provider_config.oauth_discovery.authorization_server_metadata Block below.
 	AuthorizationServerMetadata []LinkedinOauth2ProviderConfigOauthDiscoveryAuthorizationServerMetadataObservation `json:"authorizationServerMetadata,omitempty" tf:"authorization_server_metadata,omitempty"`
 
 	// OpenID Connect discovery URL (e.g., https://provider.com/.well-known/openid-configuration). Cannot be used together with authorization_server_metadata.
@@ -1133,26 +1141,26 @@ type LinkedinOauth2ProviderConfigOauthDiscoveryParameters struct {
 
 type LinkedinOauth2ProviderConfigObservation struct {
 
-	// Required when client_id_wo and client_secret_wo are set. Changing this value triggers an update to client_id_wo and client_secret_wo.
+	// Version used together with the write-only credentials. Required when client_id_wo and client_secret_wo are set. Changing this value triggers an update to client_id_wo and client_secret_wo.
 	ClientCredentialsWoVersion *float64 `json:"clientCredentialsWoVersion,omitempty" tf:"client_credentials_wo_version,omitempty"`
 
-	// Reference to an AWS Secrets Manager secret that stores the client secret. Required when client_secret_source is EXTERNAL. See client_secret_config below.
+	// Reference to an AWS Secrets Manager secret that stores the client secret. Required when client_secret_source is EXTERNAL. See client_secret_config Block below.
 	ClientSecretConfig *LinkedinOauth2ProviderConfigClientSecretConfigObservation `json:"clientSecretConfig,omitempty" tf:"client_secret_config,omitempty"`
 
 	// Source type of the client secret. Valid values: MANAGED (the service manages the secret) or EXTERNAL (you manage the secret in AWS Secrets Manager). Use EXTERNAL together with client_secret_config.
 	ClientSecretSource *string `json:"clientSecretSource,omitempty" tf:"client_secret_source,omitempty"`
 
-	// OAuth discovery configuration. See oauth_discovery below.
+	// OAuth discovery configuration resolved by the service. See oauth2_provider_config.atlassian_oauth2_provider_config.oauth_discovery Block below.
 	OauthDiscovery []LinkedinOauth2ProviderConfigOauthDiscoveryObservation `json:"oauthDiscovery,omitempty" tf:"oauth_discovery,omitempty"`
 }
 
 type LinkedinOauth2ProviderConfigParameters struct {
 
-	// Required when client_id_wo and client_secret_wo are set. Changing this value triggers an update to client_id_wo and client_secret_wo.
+	// Version used together with the write-only credentials. Required when client_id_wo and client_secret_wo are set. Changing this value triggers an update to client_id_wo and client_secret_wo.
 	// +kubebuilder:validation:Optional
 	ClientCredentialsWoVersion *float64 `json:"clientCredentialsWoVersion,omitempty" tf:"client_credentials_wo_version,omitempty"`
 
-	// OAuth2 client ID. Conflicts with client_id_wo. Must be used together with client_secret.
+	// OAuth2 client ID. Conflicts with client_id_wo. Must be used together with client_secret unless client_secret_source is EXTERNAL.
 	// +kubebuilder:validation:Optional
 	ClientIDSecretRef *v2.SecretKeySelector `json:"clientIdSecretRef,omitempty" tf:"-"`
 
@@ -1160,7 +1168,7 @@ type LinkedinOauth2ProviderConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	ClientIDWoSecretRef *v2.SecretKeySelector `json:"clientIdWoSecretRef,omitempty" tf:"-"`
 
-	// Reference to an AWS Secrets Manager secret that stores the client secret. Required when client_secret_source is EXTERNAL. See client_secret_config below.
+	// Reference to an AWS Secrets Manager secret that stores the client secret. Required when client_secret_source is EXTERNAL. See client_secret_config Block below.
 	// +kubebuilder:validation:Optional
 	ClientSecretConfig *LinkedinOauth2ProviderConfigClientSecretConfigParameters `json:"clientSecretConfig,omitempty" tf:"client_secret_config,omitempty"`
 
@@ -1228,16 +1236,16 @@ type MicrosoftOauth2ProviderConfigClientSecretConfigParameters struct {
 
 type MicrosoftOauth2ProviderConfigInitParameters struct {
 
-	// Required when client_id_wo and client_secret_wo are set. Changing this value triggers an update to client_id_wo and client_secret_wo.
+	// Version used together with the write-only credentials. Required when client_id_wo and client_secret_wo are set. Changing this value triggers an update to client_id_wo and client_secret_wo.
 	ClientCredentialsWoVersion *float64 `json:"clientCredentialsWoVersion,omitempty" tf:"client_credentials_wo_version,omitempty"`
 
-	// OAuth2 client ID. Conflicts with client_id_wo. Must be used together with client_secret.
+	// OAuth2 client ID. Conflicts with client_id_wo. Must be used together with client_secret unless client_secret_source is EXTERNAL.
 	ClientIDSecretRef *v2.SecretKeySelector `json:"clientIdSecretRef,omitempty" tf:"-"`
 
 	// Write-only OAuth2 client ID. Conflicts with client_id. If set, requires client_secret_wo and client_credentials_wo_version to be set.
 	ClientIDWoSecretRef *v2.SecretKeySelector `json:"clientIdWoSecretRef,omitempty" tf:"-"`
 
-	// Reference to an AWS Secrets Manager secret that stores the client secret. Required when client_secret_source is EXTERNAL. See client_secret_config below.
+	// Reference to an AWS Secrets Manager secret that stores the client secret. Required when client_secret_source is EXTERNAL. See client_secret_config Block below.
 	ClientSecretConfig *MicrosoftOauth2ProviderConfigClientSecretConfigInitParameters `json:"clientSecretConfig,omitempty" tf:"client_secret_config,omitempty"`
 
 	// OAuth2 client secret. Conflicts with client_secret_wo. Must be used together with client_id.
@@ -1249,13 +1257,13 @@ type MicrosoftOauth2ProviderConfigInitParameters struct {
 	// Write-only OAuth2 client secret. Conflicts with client_secret. If set, requires client_id_wo and client_credentials_wo_version to be set.
 	ClientSecretWoSecretRef *v2.SecretKeySelector `json:"clientSecretWoSecretRef,omitempty" tf:"-"`
 
-	// Microsoft Entra (Azure AD) tenant ID. Cannot be used with tenant_id_wo.
+	// Microsoft Entra (Azure AD) tenant ID. Conflicts with tenant_id_wo.
 	TenantIDSecretRef *v2.SecretKeySelector `json:"tenantIdSecretRef,omitempty" tf:"-"`
 
-	// Write-only Microsoft Entra (Azure AD) tenant ID. Cannot be used with tenant_id. Must be used together with tenant_id_wo_version.
+	// Write-only Microsoft Entra (Azure AD) tenant ID. Conflicts with tenant_id. Must be used together with tenant_id_wo_version.
 	TenantIDWoSecretRef *v2.SecretKeySelector `json:"tenantIdWoSecretRef,omitempty" tf:"-"`
 
-	// Used together with write-only tenant ID to trigger an update. Increment this value when an update to tenant_id_wo is required.
+	// Version paired with the write-only tenant ID. Increment this value to trigger an update to tenant_id_wo.
 	TenantIDWoVersion *float64 `json:"tenantIdWoVersion,omitempty" tf:"tenant_id_wo_version,omitempty"`
 }
 
@@ -1289,7 +1297,7 @@ type MicrosoftOauth2ProviderConfigOauthDiscoveryInitParameters struct {
 
 type MicrosoftOauth2ProviderConfigOauthDiscoveryObservation struct {
 
-	// Manual OAuth2 authorization server metadata configuration. Cannot be used together with discovery_url. See authorization_server_metadata below.
+	// Manual OAuth2 authorization server metadata configuration. Cannot be used together with discovery_url. See oauth2_provider_config.custom_oauth2_provider_config.oauth_discovery.authorization_server_metadata Block below.
 	AuthorizationServerMetadata []MicrosoftOauth2ProviderConfigOauthDiscoveryAuthorizationServerMetadataObservation `json:"authorizationServerMetadata,omitempty" tf:"authorization_server_metadata,omitempty"`
 
 	// OpenID Connect discovery URL (e.g., https://provider.com/.well-known/openid-configuration). Cannot be used together with authorization_server_metadata.
@@ -1301,29 +1309,29 @@ type MicrosoftOauth2ProviderConfigOauthDiscoveryParameters struct {
 
 type MicrosoftOauth2ProviderConfigObservation struct {
 
-	// Required when client_id_wo and client_secret_wo are set. Changing this value triggers an update to client_id_wo and client_secret_wo.
+	// Version used together with the write-only credentials. Required when client_id_wo and client_secret_wo are set. Changing this value triggers an update to client_id_wo and client_secret_wo.
 	ClientCredentialsWoVersion *float64 `json:"clientCredentialsWoVersion,omitempty" tf:"client_credentials_wo_version,omitempty"`
 
-	// Reference to an AWS Secrets Manager secret that stores the client secret. Required when client_secret_source is EXTERNAL. See client_secret_config below.
+	// Reference to an AWS Secrets Manager secret that stores the client secret. Required when client_secret_source is EXTERNAL. See client_secret_config Block below.
 	ClientSecretConfig *MicrosoftOauth2ProviderConfigClientSecretConfigObservation `json:"clientSecretConfig,omitempty" tf:"client_secret_config,omitempty"`
 
 	// Source type of the client secret. Valid values: MANAGED (the service manages the secret) or EXTERNAL (you manage the secret in AWS Secrets Manager). Use EXTERNAL together with client_secret_config.
 	ClientSecretSource *string `json:"clientSecretSource,omitempty" tf:"client_secret_source,omitempty"`
 
-	// OAuth discovery configuration. See oauth_discovery below.
+	// OAuth discovery configuration resolved by the service. See oauth2_provider_config.atlassian_oauth2_provider_config.oauth_discovery Block below.
 	OauthDiscovery []MicrosoftOauth2ProviderConfigOauthDiscoveryObservation `json:"oauthDiscovery,omitempty" tf:"oauth_discovery,omitempty"`
 
-	// Used together with write-only tenant ID to trigger an update. Increment this value when an update to tenant_id_wo is required.
+	// Version paired with the write-only tenant ID. Increment this value to trigger an update to tenant_id_wo.
 	TenantIDWoVersion *float64 `json:"tenantIdWoVersion,omitempty" tf:"tenant_id_wo_version,omitempty"`
 }
 
 type MicrosoftOauth2ProviderConfigParameters struct {
 
-	// Required when client_id_wo and client_secret_wo are set. Changing this value triggers an update to client_id_wo and client_secret_wo.
+	// Version used together with the write-only credentials. Required when client_id_wo and client_secret_wo are set. Changing this value triggers an update to client_id_wo and client_secret_wo.
 	// +kubebuilder:validation:Optional
 	ClientCredentialsWoVersion *float64 `json:"clientCredentialsWoVersion,omitempty" tf:"client_credentials_wo_version,omitempty"`
 
-	// OAuth2 client ID. Conflicts with client_id_wo. Must be used together with client_secret.
+	// OAuth2 client ID. Conflicts with client_id_wo. Must be used together with client_secret unless client_secret_source is EXTERNAL.
 	// +kubebuilder:validation:Optional
 	ClientIDSecretRef *v2.SecretKeySelector `json:"clientIdSecretRef,omitempty" tf:"-"`
 
@@ -1331,7 +1339,7 @@ type MicrosoftOauth2ProviderConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	ClientIDWoSecretRef *v2.SecretKeySelector `json:"clientIdWoSecretRef,omitempty" tf:"-"`
 
-	// Reference to an AWS Secrets Manager secret that stores the client secret. Required when client_secret_source is EXTERNAL. See client_secret_config below.
+	// Reference to an AWS Secrets Manager secret that stores the client secret. Required when client_secret_source is EXTERNAL. See client_secret_config Block below.
 	// +kubebuilder:validation:Optional
 	ClientSecretConfig *MicrosoftOauth2ProviderConfigClientSecretConfigParameters `json:"clientSecretConfig,omitempty" tf:"client_secret_config,omitempty"`
 
@@ -1347,25 +1355,25 @@ type MicrosoftOauth2ProviderConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	ClientSecretWoSecretRef *v2.SecretKeySelector `json:"clientSecretWoSecretRef,omitempty" tf:"-"`
 
-	// Microsoft Entra (Azure AD) tenant ID. Cannot be used with tenant_id_wo.
+	// Microsoft Entra (Azure AD) tenant ID. Conflicts with tenant_id_wo.
 	// +kubebuilder:validation:Optional
 	TenantIDSecretRef *v2.SecretKeySelector `json:"tenantIdSecretRef,omitempty" tf:"-"`
 
-	// Write-only Microsoft Entra (Azure AD) tenant ID. Cannot be used with tenant_id. Must be used together with tenant_id_wo_version.
+	// Write-only Microsoft Entra (Azure AD) tenant ID. Conflicts with tenant_id. Must be used together with tenant_id_wo_version.
 	// +kubebuilder:validation:Optional
 	TenantIDWoSecretRef *v2.SecretKeySelector `json:"tenantIdWoSecretRef,omitempty" tf:"-"`
 
-	// Used together with write-only tenant ID to trigger an update. Increment this value when an update to tenant_id_wo is required.
+	// Version paired with the write-only tenant ID. Increment this value to trigger an update to tenant_id_wo.
 	// +kubebuilder:validation:Optional
 	TenantIDWoVersion *float64 `json:"tenantIdWoVersion,omitempty" tf:"tenant_id_wo_version,omitempty"`
 }
 
 type Oauth2CredentialProviderInitParameters struct {
 
-	// Vendor of the OAuth2 credential provider. Valid values include CustomOauth2, GithubOauth2, GoogleOauth2, MicrosoftOauth2, SalesforceOauth2, SlackOauth2, AtlassianOauth2, LinkedinOauth2, and a number of additional supported vendors (e.g. XOauth2, FacebookOauth2, SpotifyOauth2) configured via included_oauth2_provider_config. Refer to the AWS API for the full, current list. See the note under included_oauth2_provider_config for vendors that are not yet supported.
+	// Vendor of the OAuth2 credential provider. Valid values include CustomOauth2, GithubOauth2, GoogleOauth2, MicrosoftOauth2, SalesforceOauth2, SlackOauth2, AtlassianOauth2, LinkedinOauth2, and a number of additional supported vendors (e.g. XOauth2, FacebookOauth2, SpotifyOauth2) configured via included_oauth2_provider_config. Refer to the AWS API for the full, current list.
 	CredentialProviderVendor *string `json:"credentialProviderVendor,omitempty" tf:"credential_provider_vendor,omitempty"`
 
-	// OAuth2 provider configuration. Must contain exactly one provider type. See oauth2_provider_config below.
+	// OAuth2 provider configuration. Must contain exactly one provider type. See oauth2_provider_config Block below.
 	Oauth2ProviderConfig *Oauth2ProviderConfigInitParameters `json:"oauth2ProviderConfig,omitempty" tf:"oauth2_provider_config,omitempty"`
 
 	// Key-value map of resource tags.
@@ -1378,13 +1386,13 @@ type Oauth2CredentialProviderObservation struct {
 	// Callback URL to register on the OAuth2 credential provider as an allowed callback URL. This URL is where the OAuth2 authorization server redirects users after they complete the authorization flow.
 	CallbackURL *string `json:"callbackUrl,omitempty" tf:"callback_url,omitempty"`
 
-	// ARN of the AWS Secrets Manager secret containing the client secret.
+	// ARN of the AWS Secrets Manager secret containing the client secret. See client_secret_arn Block below.
 	ClientSecretArn []ClientSecretArnObservation `json:"clientSecretArn,omitempty" tf:"client_secret_arn,omitempty"`
 
 	// ARN of the OAuth2 credential provider.
 	CredentialProviderArn *string `json:"credentialProviderArn,omitempty" tf:"credential_provider_arn,omitempty"`
 
-	// Vendor of the OAuth2 credential provider. Valid values include CustomOauth2, GithubOauth2, GoogleOauth2, MicrosoftOauth2, SalesforceOauth2, SlackOauth2, AtlassianOauth2, LinkedinOauth2, and a number of additional supported vendors (e.g. XOauth2, FacebookOauth2, SpotifyOauth2) configured via included_oauth2_provider_config. Refer to the AWS API for the full, current list. See the note under included_oauth2_provider_config for vendors that are not yet supported.
+	// Vendor of the OAuth2 credential provider. Valid values include CustomOauth2, GithubOauth2, GoogleOauth2, MicrosoftOauth2, SalesforceOauth2, SlackOauth2, AtlassianOauth2, LinkedinOauth2, and a number of additional supported vendors (e.g. XOauth2, FacebookOauth2, SpotifyOauth2) configured via included_oauth2_provider_config. Refer to the AWS API for the full, current list.
 	CredentialProviderVendor *string `json:"credentialProviderVendor,omitempty" tf:"credential_provider_vendor,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -1392,7 +1400,7 @@ type Oauth2CredentialProviderObservation struct {
 	// Name of the OAuth2 credential provider.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// OAuth2 provider configuration. Must contain exactly one provider type. See oauth2_provider_config below.
+	// OAuth2 provider configuration. Must contain exactly one provider type. See oauth2_provider_config Block below.
 	Oauth2ProviderConfig *Oauth2ProviderConfigObservation `json:"oauth2ProviderConfig,omitempty" tf:"oauth2_provider_config,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -1403,18 +1411,18 @@ type Oauth2CredentialProviderObservation struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type Oauth2CredentialProviderParameters struct {
 
-	// Vendor of the OAuth2 credential provider. Valid values include CustomOauth2, GithubOauth2, GoogleOauth2, MicrosoftOauth2, SalesforceOauth2, SlackOauth2, AtlassianOauth2, LinkedinOauth2, and a number of additional supported vendors (e.g. XOauth2, FacebookOauth2, SpotifyOauth2) configured via included_oauth2_provider_config. Refer to the AWS API for the full, current list. See the note under included_oauth2_provider_config for vendors that are not yet supported.
+	// Vendor of the OAuth2 credential provider. Valid values include CustomOauth2, GithubOauth2, GoogleOauth2, MicrosoftOauth2, SalesforceOauth2, SlackOauth2, AtlassianOauth2, LinkedinOauth2, and a number of additional supported vendors (e.g. XOauth2, FacebookOauth2, SpotifyOauth2) configured via included_oauth2_provider_config. Refer to the AWS API for the full, current list.
 	// +kubebuilder:validation:Optional
 	CredentialProviderVendor *string `json:"credentialProviderVendor,omitempty" tf:"credential_provider_vendor,omitempty"`
 
-	// OAuth2 provider configuration. Must contain exactly one provider type. See oauth2_provider_config below.
+	// OAuth2 provider configuration. Must contain exactly one provider type. See oauth2_provider_config Block below.
 	// +kubebuilder:validation:Optional
 	Oauth2ProviderConfig *Oauth2ProviderConfigParameters `json:"oauth2ProviderConfig,omitempty" tf:"oauth2_provider_config,omitempty"`
 
@@ -1431,99 +1439,99 @@ type Oauth2CredentialProviderParameters struct {
 
 type Oauth2ProviderConfigInitParameters struct {
 
-	// Atlassian OAuth provider configuration. See predefined providers below.
+	// Atlassian OAuth provider configuration. See atlassian_oauth2_provider_config Block below.
 	AtlassianOauth2ProviderConfig *AtlassianOauth2ProviderConfigInitParameters `json:"atlassianOauth2ProviderConfig,omitempty" tf:"atlassian_oauth2_provider_config,omitempty"`
 
-	// Custom OAuth2 provider configuration. See custom below.
+	// Custom OAuth2 provider configuration. See custom_oauth2_provider_config Block below.
 	CustomOauth2ProviderConfig *CustomOauth2ProviderConfigInitParameters `json:"customOauth2ProviderConfig,omitempty" tf:"custom_oauth2_provider_config,omitempty"`
 
-	// GitHub OAuth provider configuration. See predefined providers below.
+	// GitHub OAuth provider configuration. See github_oauth2_provider_config Block below.
 	GithubOauth2ProviderConfig *GithubOauth2ProviderConfigInitParameters `json:"githubOauth2ProviderConfig,omitempty" tf:"github_oauth2_provider_config,omitempty"`
 
-	// Google OAuth provider configuration. See predefined providers below.
+	// Google OAuth provider configuration. See google_oauth2_provider_config Block below.
 	GoogleOauth2ProviderConfig *GoogleOauth2ProviderConfigInitParameters `json:"googleOauth2ProviderConfig,omitempty" tf:"google_oauth2_provider_config,omitempty"`
 
-	// Configuration for an included (vendor-supported) OAuth2 provider, used for the additional supported vendors. See predefined providers below.
+	// Configuration for an included (vendor-supported) OAuth2 provider, used for the additional supported vendors. See included_oauth2_provider_config Block below.
 	IncludedOauth2ProviderConfig *IncludedOauth2ProviderConfigInitParameters `json:"includedOauth2ProviderConfig,omitempty" tf:"included_oauth2_provider_config,omitempty"`
 
-	// LinkedIn OAuth provider configuration. See predefined providers below.
+	// LinkedIn OAuth provider configuration. See linkedin_oauth2_provider_config Block below.
 	LinkedinOauth2ProviderConfig *LinkedinOauth2ProviderConfigInitParameters `json:"linkedinOauth2ProviderConfig,omitempty" tf:"linkedin_oauth2_provider_config,omitempty"`
 
-	// Microsoft OAuth provider configuration. See predefined providers below.
+	// Microsoft OAuth provider configuration. See microsoft_oauth2_provider_config Block below.
 	MicrosoftOauth2ProviderConfig *MicrosoftOauth2ProviderConfigInitParameters `json:"microsoftOauth2ProviderConfig,omitempty" tf:"microsoft_oauth2_provider_config,omitempty"`
 
-	// Salesforce OAuth provider configuration. See predefined providers below.
+	// Salesforce OAuth provider configuration. See salesforce_oauth2_provider_config Block below.
 	SalesforceOauth2ProviderConfig *SalesforceOauth2ProviderConfigInitParameters `json:"salesforceOauth2ProviderConfig,omitempty" tf:"salesforce_oauth2_provider_config,omitempty"`
 
-	// Slack OAuth provider configuration. See predefined providers below.
+	// Slack OAuth provider configuration. See slack_oauth2_provider_config Block below.
 	SlackOauth2ProviderConfig *SlackOauth2ProviderConfigInitParameters `json:"slackOauth2ProviderConfig,omitempty" tf:"slack_oauth2_provider_config,omitempty"`
 }
 
 type Oauth2ProviderConfigObservation struct {
 
-	// Atlassian OAuth provider configuration. See predefined providers below.
+	// Atlassian OAuth provider configuration. See atlassian_oauth2_provider_config Block below.
 	AtlassianOauth2ProviderConfig *AtlassianOauth2ProviderConfigObservation `json:"atlassianOauth2ProviderConfig,omitempty" tf:"atlassian_oauth2_provider_config,omitempty"`
 
-	// Custom OAuth2 provider configuration. See custom below.
+	// Custom OAuth2 provider configuration. See custom_oauth2_provider_config Block below.
 	CustomOauth2ProviderConfig *CustomOauth2ProviderConfigObservation `json:"customOauth2ProviderConfig,omitempty" tf:"custom_oauth2_provider_config,omitempty"`
 
-	// GitHub OAuth provider configuration. See predefined providers below.
+	// GitHub OAuth provider configuration. See github_oauth2_provider_config Block below.
 	GithubOauth2ProviderConfig *GithubOauth2ProviderConfigObservation `json:"githubOauth2ProviderConfig,omitempty" tf:"github_oauth2_provider_config,omitempty"`
 
-	// Google OAuth provider configuration. See predefined providers below.
+	// Google OAuth provider configuration. See google_oauth2_provider_config Block below.
 	GoogleOauth2ProviderConfig *GoogleOauth2ProviderConfigObservation `json:"googleOauth2ProviderConfig,omitempty" tf:"google_oauth2_provider_config,omitempty"`
 
-	// Configuration for an included (vendor-supported) OAuth2 provider, used for the additional supported vendors. See predefined providers below.
+	// Configuration for an included (vendor-supported) OAuth2 provider, used for the additional supported vendors. See included_oauth2_provider_config Block below.
 	IncludedOauth2ProviderConfig *IncludedOauth2ProviderConfigObservation `json:"includedOauth2ProviderConfig,omitempty" tf:"included_oauth2_provider_config,omitempty"`
 
-	// LinkedIn OAuth provider configuration. See predefined providers below.
+	// LinkedIn OAuth provider configuration. See linkedin_oauth2_provider_config Block below.
 	LinkedinOauth2ProviderConfig *LinkedinOauth2ProviderConfigObservation `json:"linkedinOauth2ProviderConfig,omitempty" tf:"linkedin_oauth2_provider_config,omitempty"`
 
-	// Microsoft OAuth provider configuration. See predefined providers below.
+	// Microsoft OAuth provider configuration. See microsoft_oauth2_provider_config Block below.
 	MicrosoftOauth2ProviderConfig *MicrosoftOauth2ProviderConfigObservation `json:"microsoftOauth2ProviderConfig,omitempty" tf:"microsoft_oauth2_provider_config,omitempty"`
 
-	// Salesforce OAuth provider configuration. See predefined providers below.
+	// Salesforce OAuth provider configuration. See salesforce_oauth2_provider_config Block below.
 	SalesforceOauth2ProviderConfig *SalesforceOauth2ProviderConfigObservation `json:"salesforceOauth2ProviderConfig,omitempty" tf:"salesforce_oauth2_provider_config,omitempty"`
 
-	// Slack OAuth provider configuration. See predefined providers below.
+	// Slack OAuth provider configuration. See slack_oauth2_provider_config Block below.
 	SlackOauth2ProviderConfig *SlackOauth2ProviderConfigObservation `json:"slackOauth2ProviderConfig,omitempty" tf:"slack_oauth2_provider_config,omitempty"`
 }
 
 type Oauth2ProviderConfigParameters struct {
 
-	// Atlassian OAuth provider configuration. See predefined providers below.
+	// Atlassian OAuth provider configuration. See atlassian_oauth2_provider_config Block below.
 	// +kubebuilder:validation:Optional
 	AtlassianOauth2ProviderConfig *AtlassianOauth2ProviderConfigParameters `json:"atlassianOauth2ProviderConfig,omitempty" tf:"atlassian_oauth2_provider_config,omitempty"`
 
-	// Custom OAuth2 provider configuration. See custom below.
+	// Custom OAuth2 provider configuration. See custom_oauth2_provider_config Block below.
 	// +kubebuilder:validation:Optional
 	CustomOauth2ProviderConfig *CustomOauth2ProviderConfigParameters `json:"customOauth2ProviderConfig,omitempty" tf:"custom_oauth2_provider_config,omitempty"`
 
-	// GitHub OAuth provider configuration. See predefined providers below.
+	// GitHub OAuth provider configuration. See github_oauth2_provider_config Block below.
 	// +kubebuilder:validation:Optional
 	GithubOauth2ProviderConfig *GithubOauth2ProviderConfigParameters `json:"githubOauth2ProviderConfig,omitempty" tf:"github_oauth2_provider_config,omitempty"`
 
-	// Google OAuth provider configuration. See predefined providers below.
+	// Google OAuth provider configuration. See google_oauth2_provider_config Block below.
 	// +kubebuilder:validation:Optional
 	GoogleOauth2ProviderConfig *GoogleOauth2ProviderConfigParameters `json:"googleOauth2ProviderConfig,omitempty" tf:"google_oauth2_provider_config,omitempty"`
 
-	// Configuration for an included (vendor-supported) OAuth2 provider, used for the additional supported vendors. See predefined providers below.
+	// Configuration for an included (vendor-supported) OAuth2 provider, used for the additional supported vendors. See included_oauth2_provider_config Block below.
 	// +kubebuilder:validation:Optional
 	IncludedOauth2ProviderConfig *IncludedOauth2ProviderConfigParameters `json:"includedOauth2ProviderConfig,omitempty" tf:"included_oauth2_provider_config,omitempty"`
 
-	// LinkedIn OAuth provider configuration. See predefined providers below.
+	// LinkedIn OAuth provider configuration. See linkedin_oauth2_provider_config Block below.
 	// +kubebuilder:validation:Optional
 	LinkedinOauth2ProviderConfig *LinkedinOauth2ProviderConfigParameters `json:"linkedinOauth2ProviderConfig,omitempty" tf:"linkedin_oauth2_provider_config,omitempty"`
 
-	// Microsoft OAuth provider configuration. See predefined providers below.
+	// Microsoft OAuth provider configuration. See microsoft_oauth2_provider_config Block below.
 	// +kubebuilder:validation:Optional
 	MicrosoftOauth2ProviderConfig *MicrosoftOauth2ProviderConfigParameters `json:"microsoftOauth2ProviderConfig,omitempty" tf:"microsoft_oauth2_provider_config,omitempty"`
 
-	// Salesforce OAuth provider configuration. See predefined providers below.
+	// Salesforce OAuth provider configuration. See salesforce_oauth2_provider_config Block below.
 	// +kubebuilder:validation:Optional
 	SalesforceOauth2ProviderConfig *SalesforceOauth2ProviderConfigParameters `json:"salesforceOauth2ProviderConfig,omitempty" tf:"salesforce_oauth2_provider_config,omitempty"`
 
-	// Slack OAuth provider configuration. See predefined providers below.
+	// Slack OAuth provider configuration. See slack_oauth2_provider_config Block below.
 	// +kubebuilder:validation:Optional
 	SlackOauth2ProviderConfig *SlackOauth2ProviderConfigParameters `json:"slackOauth2ProviderConfig,omitempty" tf:"slack_oauth2_provider_config,omitempty"`
 }
@@ -1595,7 +1603,7 @@ type OauthDiscoveryInitParameters struct {
 
 type OauthDiscoveryObservation struct {
 
-	// Manual OAuth2 authorization server metadata configuration. Cannot be used together with discovery_url. See authorization_server_metadata below.
+	// Manual OAuth2 authorization server metadata configuration. Cannot be used together with discovery_url. See oauth2_provider_config.custom_oauth2_provider_config.oauth_discovery.authorization_server_metadata Block below.
 	AuthorizationServerMetadata []AuthorizationServerMetadataObservation `json:"authorizationServerMetadata,omitempty" tf:"authorization_server_metadata,omitempty"`
 
 	// OpenID Connect discovery URL (e.g., https://provider.com/.well-known/openid-configuration). Cannot be used together with authorization_server_metadata.
@@ -1610,7 +1618,7 @@ type OnBehalfOfTokenExchangeConfigInitParameters struct {
 	// Grant type for the on-behalf-of token exchange. Valid values: TOKEN_EXCHANGE, JWT_AUTHORIZATION_GRANT.
 	GrantType *string `json:"grantType,omitempty" tf:"grant_type,omitempty"`
 
-	// Configuration specific to the TOKEN_EXCHANGE grant type (RFC 8693). See token_exchange_grant_type_config below.
+	// Configuration specific to the TOKEN_EXCHANGE grant type (RFC 8693). See token_exchange_grant_type_config Block below.
 	TokenExchangeGrantTypeConfig *TokenExchangeGrantTypeConfigInitParameters `json:"tokenExchangeGrantTypeConfig,omitempty" tf:"token_exchange_grant_type_config,omitempty"`
 }
 
@@ -1619,7 +1627,7 @@ type OnBehalfOfTokenExchangeConfigObservation struct {
 	// Grant type for the on-behalf-of token exchange. Valid values: TOKEN_EXCHANGE, JWT_AUTHORIZATION_GRANT.
 	GrantType *string `json:"grantType,omitempty" tf:"grant_type,omitempty"`
 
-	// Configuration specific to the TOKEN_EXCHANGE grant type (RFC 8693). See token_exchange_grant_type_config below.
+	// Configuration specific to the TOKEN_EXCHANGE grant type (RFC 8693). See token_exchange_grant_type_config Block below.
 	TokenExchangeGrantTypeConfig *TokenExchangeGrantTypeConfigObservation `json:"tokenExchangeGrantTypeConfig,omitempty" tf:"token_exchange_grant_type_config,omitempty"`
 }
 
@@ -1629,7 +1637,7 @@ type OnBehalfOfTokenExchangeConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	GrantType *string `json:"grantType" tf:"grant_type,omitempty"`
 
-	// Configuration specific to the TOKEN_EXCHANGE grant type (RFC 8693). See token_exchange_grant_type_config below.
+	// Configuration specific to the TOKEN_EXCHANGE grant type (RFC 8693). See token_exchange_grant_type_config Block below.
 	// +kubebuilder:validation:Optional
 	TokenExchangeGrantTypeConfig *TokenExchangeGrantTypeConfigParameters `json:"tokenExchangeGrantTypeConfig,omitempty" tf:"token_exchange_grant_type_config,omitempty"`
 }
@@ -1639,7 +1647,7 @@ type PrivateEndpointOverrideInitParameters struct {
 	// Domain the private endpoint override applies to.
 	Domain *string `json:"domain,omitempty" tf:"domain,omitempty"`
 
-	// Private endpoint configuration for the domain. See private_endpoint above.
+	// Private endpoint configuration for the domain. See private_endpoint Block above.
 	PrivateEndpoint *PrivateEndpointOverridePrivateEndpointInitParameters `json:"privateEndpoint,omitempty" tf:"private_endpoint,omitempty"`
 }
 
@@ -1648,7 +1656,7 @@ type PrivateEndpointOverrideObservation struct {
 	// Domain the private endpoint override applies to.
 	Domain *string `json:"domain,omitempty" tf:"domain,omitempty"`
 
-	// Private endpoint configuration for the domain. See private_endpoint above.
+	// Private endpoint configuration for the domain. See private_endpoint Block above.
 	PrivateEndpoint *PrivateEndpointOverridePrivateEndpointObservation `json:"privateEndpoint,omitempty" tf:"private_endpoint,omitempty"`
 }
 
@@ -1658,23 +1666,23 @@ type PrivateEndpointOverrideParameters struct {
 	// +kubebuilder:validation:Optional
 	Domain *string `json:"domain" tf:"domain,omitempty"`
 
-	// Private endpoint configuration for the domain. See private_endpoint above.
+	// Private endpoint configuration for the domain. See private_endpoint Block above.
 	// +kubebuilder:validation:Optional
 	PrivateEndpoint *PrivateEndpointOverridePrivateEndpointParameters `json:"privateEndpoint,omitempty" tf:"private_endpoint,omitempty"`
 }
 
 type PrivateEndpointOverridePrivateEndpointInitParameters struct {
 
-	// Service-managed VPC resource configuration. See managed_vpc_resource below.
+	// Service-managed VPC resource configuration. See managed_vpc_resource Block below.
 	ManagedVPCResource *PrivateEndpointOverridePrivateEndpointManagedVPCResourceInitParameters `json:"managedVpcResource,omitempty" tf:"managed_vpc_resource,omitempty"`
 
-	// Self-managed VPC Lattice resource configuration. See self_managed_lattice_resource below.
+	// Self-managed VPC Lattice resource configuration. See self_managed_lattice_resource Block below.
 	SelfManagedLatticeResource *PrivateEndpointOverridePrivateEndpointSelfManagedLatticeResourceInitParameters `json:"selfManagedLatticeResource,omitempty" tf:"self_managed_lattice_resource,omitempty"`
 }
 
 type PrivateEndpointOverridePrivateEndpointManagedVPCResourceInitParameters struct {
 
-	// IP address type for the endpoint. Valid values: IPV4, DUALSTACK.
+	// IP address type for the endpoint. Valid values: IPV4, IPV6.
 	EndpointIPAddressType *string `json:"endpointIpAddressType,omitempty" tf:"endpoint_ip_address_type,omitempty"`
 
 	// Routing domain for the managed VPC resource.
@@ -1698,7 +1706,7 @@ type PrivateEndpointOverridePrivateEndpointManagedVPCResourceInitParameters stru
 
 type PrivateEndpointOverridePrivateEndpointManagedVPCResourceObservation struct {
 
-	// IP address type for the endpoint. Valid values: IPV4, DUALSTACK.
+	// IP address type for the endpoint. Valid values: IPV4, IPV6.
 	EndpointIPAddressType *string `json:"endpointIpAddressType,omitempty" tf:"endpoint_ip_address_type,omitempty"`
 
 	// Routing domain for the managed VPC resource.
@@ -1722,7 +1730,7 @@ type PrivateEndpointOverridePrivateEndpointManagedVPCResourceObservation struct 
 
 type PrivateEndpointOverridePrivateEndpointManagedVPCResourceParameters struct {
 
-	// IP address type for the endpoint. Valid values: IPV4, DUALSTACK.
+	// IP address type for the endpoint. Valid values: IPV4, IPV6.
 	// +kubebuilder:validation:Optional
 	EndpointIPAddressType *string `json:"endpointIpAddressType" tf:"endpoint_ip_address_type,omitempty"`
 
@@ -1752,20 +1760,20 @@ type PrivateEndpointOverridePrivateEndpointManagedVPCResourceParameters struct {
 
 type PrivateEndpointOverridePrivateEndpointObservation struct {
 
-	// Service-managed VPC resource configuration. See managed_vpc_resource below.
+	// Service-managed VPC resource configuration. See managed_vpc_resource Block below.
 	ManagedVPCResource *PrivateEndpointOverridePrivateEndpointManagedVPCResourceObservation `json:"managedVpcResource,omitempty" tf:"managed_vpc_resource,omitempty"`
 
-	// Self-managed VPC Lattice resource configuration. See self_managed_lattice_resource below.
+	// Self-managed VPC Lattice resource configuration. See self_managed_lattice_resource Block below.
 	SelfManagedLatticeResource *PrivateEndpointOverridePrivateEndpointSelfManagedLatticeResourceObservation `json:"selfManagedLatticeResource,omitempty" tf:"self_managed_lattice_resource,omitempty"`
 }
 
 type PrivateEndpointOverridePrivateEndpointParameters struct {
 
-	// Service-managed VPC resource configuration. See managed_vpc_resource below.
+	// Service-managed VPC resource configuration. See managed_vpc_resource Block below.
 	// +kubebuilder:validation:Optional
 	ManagedVPCResource *PrivateEndpointOverridePrivateEndpointManagedVPCResourceParameters `json:"managedVpcResource,omitempty" tf:"managed_vpc_resource,omitempty"`
 
-	// Self-managed VPC Lattice resource configuration. See self_managed_lattice_resource below.
+	// Self-managed VPC Lattice resource configuration. See self_managed_lattice_resource Block below.
 	// +kubebuilder:validation:Optional
 	SelfManagedLatticeResource *PrivateEndpointOverridePrivateEndpointSelfManagedLatticeResourceParameters `json:"selfManagedLatticeResource,omitempty" tf:"self_managed_lattice_resource,omitempty"`
 }
@@ -1791,57 +1799,74 @@ type PrivateEndpointOverridePrivateEndpointSelfManagedLatticeResourceParameters 
 
 type PrivateKeyJwtConfigInitParameters struct {
 
+	// Key-value map of additional claims to include in the JWT header.
 	// +mapType=granular
 	AdditionalHeaderClaims map[string]*string `json:"additionalHeaderClaims,omitempty" tf:"additional_header_claims,omitempty"`
 
+	// Key-value map of additional claims to include in the JWT payload.
 	// +mapType=granular
 	AdditionalPayloadClaims map[string]*string `json:"additionalPayloadClaims,omitempty" tf:"additional_payload_claims,omitempty"`
 
+	// Source of the private key used to sign the JWT. See private_key_source Block below.
 	PrivateKeySource *PrivateKeySourceInitParameters `json:"privateKeySource,omitempty" tf:"private_key_source,omitempty"`
 
+	// Algorithm used to sign the JWT.
 	SigningAlgorithm *string `json:"signingAlgorithm,omitempty" tf:"signing_algorithm,omitempty"`
 }
 
 type PrivateKeyJwtConfigObservation struct {
 
+	// Key-value map of additional claims to include in the JWT header.
 	// +mapType=granular
 	AdditionalHeaderClaims map[string]*string `json:"additionalHeaderClaims,omitempty" tf:"additional_header_claims,omitempty"`
 
+	// Key-value map of additional claims to include in the JWT payload.
 	// +mapType=granular
 	AdditionalPayloadClaims map[string]*string `json:"additionalPayloadClaims,omitempty" tf:"additional_payload_claims,omitempty"`
 
+	// Source of the private key used to sign the JWT. See private_key_source Block below.
 	PrivateKeySource *PrivateKeySourceObservation `json:"privateKeySource,omitempty" tf:"private_key_source,omitempty"`
 
+	// Algorithm used to sign the JWT.
 	SigningAlgorithm *string `json:"signingAlgorithm,omitempty" tf:"signing_algorithm,omitempty"`
 }
 
 type PrivateKeyJwtConfigParameters struct {
 
+	// Key-value map of additional claims to include in the JWT header.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	AdditionalHeaderClaims map[string]*string `json:"additionalHeaderClaims,omitempty" tf:"additional_header_claims,omitempty"`
 
+	// Key-value map of additional claims to include in the JWT payload.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	AdditionalPayloadClaims map[string]*string `json:"additionalPayloadClaims,omitempty" tf:"additional_payload_claims,omitempty"`
 
+	// Source of the private key used to sign the JWT. See private_key_source Block below.
 	// +kubebuilder:validation:Optional
 	PrivateKeySource *PrivateKeySourceParameters `json:"privateKeySource,omitempty" tf:"private_key_source,omitempty"`
 
+	// Algorithm used to sign the JWT.
 	// +kubebuilder:validation:Optional
 	SigningAlgorithm *string `json:"signingAlgorithm,omitempty" tf:"signing_algorithm,omitempty"`
 }
 
 type PrivateKeySourceInitParameters struct {
+
+	// AWS KMS key source configuration for the signing key. See kms_key_source Block below.
 	KMSKeySource *KMSKeySourceInitParameters `json:"kmsKeySource,omitempty" tf:"kms_key_source,omitempty"`
 }
 
 type PrivateKeySourceObservation struct {
+
+	// AWS KMS key source configuration for the signing key. See kms_key_source Block below.
 	KMSKeySource *KMSKeySourceObservation `json:"kmsKeySource,omitempty" tf:"kms_key_source,omitempty"`
 }
 
 type PrivateKeySourceParameters struct {
 
+	// AWS KMS key source configuration for the signing key. See kms_key_source Block below.
 	// +kubebuilder:validation:Optional
 	KMSKeySource *KMSKeySourceParameters `json:"kmsKeySource,omitempty" tf:"kms_key_source,omitempty"`
 }
@@ -1897,16 +1922,16 @@ type SalesforceOauth2ProviderConfigClientSecretConfigParameters struct {
 
 type SalesforceOauth2ProviderConfigInitParameters struct {
 
-	// Required when client_id_wo and client_secret_wo are set. Changing this value triggers an update to client_id_wo and client_secret_wo.
+	// Version used together with the write-only credentials. Required when client_id_wo and client_secret_wo are set. Changing this value triggers an update to client_id_wo and client_secret_wo.
 	ClientCredentialsWoVersion *float64 `json:"clientCredentialsWoVersion,omitempty" tf:"client_credentials_wo_version,omitempty"`
 
-	// OAuth2 client ID. Conflicts with client_id_wo. Must be used together with client_secret.
+	// OAuth2 client ID. Conflicts with client_id_wo. Must be used together with client_secret unless client_secret_source is EXTERNAL.
 	ClientIDSecretRef *v2.SecretKeySelector `json:"clientIdSecretRef,omitempty" tf:"-"`
 
 	// Write-only OAuth2 client ID. Conflicts with client_id. If set, requires client_secret_wo and client_credentials_wo_version to be set.
 	ClientIDWoSecretRef *v2.SecretKeySelector `json:"clientIdWoSecretRef,omitempty" tf:"-"`
 
-	// Reference to an AWS Secrets Manager secret that stores the client secret. Required when client_secret_source is EXTERNAL. See client_secret_config below.
+	// Reference to an AWS Secrets Manager secret that stores the client secret. Required when client_secret_source is EXTERNAL. See client_secret_config Block below.
 	ClientSecretConfig *SalesforceOauth2ProviderConfigClientSecretConfigInitParameters `json:"clientSecretConfig,omitempty" tf:"client_secret_config,omitempty"`
 
 	// OAuth2 client secret. Conflicts with client_secret_wo. Must be used together with client_id.
@@ -1949,7 +1974,7 @@ type SalesforceOauth2ProviderConfigOauthDiscoveryInitParameters struct {
 
 type SalesforceOauth2ProviderConfigOauthDiscoveryObservation struct {
 
-	// Manual OAuth2 authorization server metadata configuration. Cannot be used together with discovery_url. See authorization_server_metadata below.
+	// Manual OAuth2 authorization server metadata configuration. Cannot be used together with discovery_url. See oauth2_provider_config.custom_oauth2_provider_config.oauth_discovery.authorization_server_metadata Block below.
 	AuthorizationServerMetadata []SalesforceOauth2ProviderConfigOauthDiscoveryAuthorizationServerMetadataObservation `json:"authorizationServerMetadata,omitempty" tf:"authorization_server_metadata,omitempty"`
 
 	// OpenID Connect discovery URL (e.g., https://provider.com/.well-known/openid-configuration). Cannot be used together with authorization_server_metadata.
@@ -1961,26 +1986,26 @@ type SalesforceOauth2ProviderConfigOauthDiscoveryParameters struct {
 
 type SalesforceOauth2ProviderConfigObservation struct {
 
-	// Required when client_id_wo and client_secret_wo are set. Changing this value triggers an update to client_id_wo and client_secret_wo.
+	// Version used together with the write-only credentials. Required when client_id_wo and client_secret_wo are set. Changing this value triggers an update to client_id_wo and client_secret_wo.
 	ClientCredentialsWoVersion *float64 `json:"clientCredentialsWoVersion,omitempty" tf:"client_credentials_wo_version,omitempty"`
 
-	// Reference to an AWS Secrets Manager secret that stores the client secret. Required when client_secret_source is EXTERNAL. See client_secret_config below.
+	// Reference to an AWS Secrets Manager secret that stores the client secret. Required when client_secret_source is EXTERNAL. See client_secret_config Block below.
 	ClientSecretConfig *SalesforceOauth2ProviderConfigClientSecretConfigObservation `json:"clientSecretConfig,omitempty" tf:"client_secret_config,omitempty"`
 
 	// Source type of the client secret. Valid values: MANAGED (the service manages the secret) or EXTERNAL (you manage the secret in AWS Secrets Manager). Use EXTERNAL together with client_secret_config.
 	ClientSecretSource *string `json:"clientSecretSource,omitempty" tf:"client_secret_source,omitempty"`
 
-	// OAuth discovery configuration. See oauth_discovery below.
+	// OAuth discovery configuration resolved by the service. See oauth2_provider_config.atlassian_oauth2_provider_config.oauth_discovery Block below.
 	OauthDiscovery []SalesforceOauth2ProviderConfigOauthDiscoveryObservation `json:"oauthDiscovery,omitempty" tf:"oauth_discovery,omitempty"`
 }
 
 type SalesforceOauth2ProviderConfigParameters struct {
 
-	// Required when client_id_wo and client_secret_wo are set. Changing this value triggers an update to client_id_wo and client_secret_wo.
+	// Version used together with the write-only credentials. Required when client_id_wo and client_secret_wo are set. Changing this value triggers an update to client_id_wo and client_secret_wo.
 	// +kubebuilder:validation:Optional
 	ClientCredentialsWoVersion *float64 `json:"clientCredentialsWoVersion,omitempty" tf:"client_credentials_wo_version,omitempty"`
 
-	// OAuth2 client ID. Conflicts with client_id_wo. Must be used together with client_secret.
+	// OAuth2 client ID. Conflicts with client_id_wo. Must be used together with client_secret unless client_secret_source is EXTERNAL.
 	// +kubebuilder:validation:Optional
 	ClientIDSecretRef *v2.SecretKeySelector `json:"clientIdSecretRef,omitempty" tf:"-"`
 
@@ -1988,7 +2013,7 @@ type SalesforceOauth2ProviderConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	ClientIDWoSecretRef *v2.SecretKeySelector `json:"clientIdWoSecretRef,omitempty" tf:"-"`
 
-	// Reference to an AWS Secrets Manager secret that stores the client secret. Required when client_secret_source is EXTERNAL. See client_secret_config below.
+	// Reference to an AWS Secrets Manager secret that stores the client secret. Required when client_secret_source is EXTERNAL. See client_secret_config Block below.
 	// +kubebuilder:validation:Optional
 	ClientSecretConfig *SalesforceOauth2ProviderConfigClientSecretConfigParameters `json:"clientSecretConfig,omitempty" tf:"client_secret_config,omitempty"`
 
@@ -2056,16 +2081,16 @@ type SlackOauth2ProviderConfigClientSecretConfigParameters struct {
 
 type SlackOauth2ProviderConfigInitParameters struct {
 
-	// Required when client_id_wo and client_secret_wo are set. Changing this value triggers an update to client_id_wo and client_secret_wo.
+	// Version used together with the write-only credentials. Required when client_id_wo and client_secret_wo are set. Changing this value triggers an update to client_id_wo and client_secret_wo.
 	ClientCredentialsWoVersion *float64 `json:"clientCredentialsWoVersion,omitempty" tf:"client_credentials_wo_version,omitempty"`
 
-	// OAuth2 client ID. Conflicts with client_id_wo. Must be used together with client_secret.
+	// OAuth2 client ID. Conflicts with client_id_wo. Must be used together with client_secret unless client_secret_source is EXTERNAL.
 	ClientIDSecretRef *v2.SecretKeySelector `json:"clientIdSecretRef,omitempty" tf:"-"`
 
 	// Write-only OAuth2 client ID. Conflicts with client_id. If set, requires client_secret_wo and client_credentials_wo_version to be set.
 	ClientIDWoSecretRef *v2.SecretKeySelector `json:"clientIdWoSecretRef,omitempty" tf:"-"`
 
-	// Reference to an AWS Secrets Manager secret that stores the client secret. Required when client_secret_source is EXTERNAL. See client_secret_config below.
+	// Reference to an AWS Secrets Manager secret that stores the client secret. Required when client_secret_source is EXTERNAL. See client_secret_config Block below.
 	ClientSecretConfig *SlackOauth2ProviderConfigClientSecretConfigInitParameters `json:"clientSecretConfig,omitempty" tf:"client_secret_config,omitempty"`
 
 	// OAuth2 client secret. Conflicts with client_secret_wo. Must be used together with client_id.
@@ -2108,7 +2133,7 @@ type SlackOauth2ProviderConfigOauthDiscoveryInitParameters struct {
 
 type SlackOauth2ProviderConfigOauthDiscoveryObservation struct {
 
-	// Manual OAuth2 authorization server metadata configuration. Cannot be used together with discovery_url. See authorization_server_metadata below.
+	// Manual OAuth2 authorization server metadata configuration. Cannot be used together with discovery_url. See oauth2_provider_config.custom_oauth2_provider_config.oauth_discovery.authorization_server_metadata Block below.
 	AuthorizationServerMetadata []SlackOauth2ProviderConfigOauthDiscoveryAuthorizationServerMetadataObservation `json:"authorizationServerMetadata,omitempty" tf:"authorization_server_metadata,omitempty"`
 
 	// OpenID Connect discovery URL (e.g., https://provider.com/.well-known/openid-configuration). Cannot be used together with authorization_server_metadata.
@@ -2120,26 +2145,26 @@ type SlackOauth2ProviderConfigOauthDiscoveryParameters struct {
 
 type SlackOauth2ProviderConfigObservation struct {
 
-	// Required when client_id_wo and client_secret_wo are set. Changing this value triggers an update to client_id_wo and client_secret_wo.
+	// Version used together with the write-only credentials. Required when client_id_wo and client_secret_wo are set. Changing this value triggers an update to client_id_wo and client_secret_wo.
 	ClientCredentialsWoVersion *float64 `json:"clientCredentialsWoVersion,omitempty" tf:"client_credentials_wo_version,omitempty"`
 
-	// Reference to an AWS Secrets Manager secret that stores the client secret. Required when client_secret_source is EXTERNAL. See client_secret_config below.
+	// Reference to an AWS Secrets Manager secret that stores the client secret. Required when client_secret_source is EXTERNAL. See client_secret_config Block below.
 	ClientSecretConfig *SlackOauth2ProviderConfigClientSecretConfigObservation `json:"clientSecretConfig,omitempty" tf:"client_secret_config,omitempty"`
 
 	// Source type of the client secret. Valid values: MANAGED (the service manages the secret) or EXTERNAL (you manage the secret in AWS Secrets Manager). Use EXTERNAL together with client_secret_config.
 	ClientSecretSource *string `json:"clientSecretSource,omitempty" tf:"client_secret_source,omitempty"`
 
-	// OAuth discovery configuration. See oauth_discovery below.
+	// OAuth discovery configuration resolved by the service. See oauth2_provider_config.atlassian_oauth2_provider_config.oauth_discovery Block below.
 	OauthDiscovery []SlackOauth2ProviderConfigOauthDiscoveryObservation `json:"oauthDiscovery,omitempty" tf:"oauth_discovery,omitempty"`
 }
 
 type SlackOauth2ProviderConfigParameters struct {
 
-	// Required when client_id_wo and client_secret_wo are set. Changing this value triggers an update to client_id_wo and client_secret_wo.
+	// Version used together with the write-only credentials. Required when client_id_wo and client_secret_wo are set. Changing this value triggers an update to client_id_wo and client_secret_wo.
 	// +kubebuilder:validation:Optional
 	ClientCredentialsWoVersion *float64 `json:"clientCredentialsWoVersion,omitempty" tf:"client_credentials_wo_version,omitempty"`
 
-	// OAuth2 client ID. Conflicts with client_id_wo. Must be used together with client_secret.
+	// OAuth2 client ID. Conflicts with client_id_wo. Must be used together with client_secret unless client_secret_source is EXTERNAL.
 	// +kubebuilder:validation:Optional
 	ClientIDSecretRef *v2.SecretKeySelector `json:"clientIdSecretRef,omitempty" tf:"-"`
 
@@ -2147,7 +2172,7 @@ type SlackOauth2ProviderConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	ClientIDWoSecretRef *v2.SecretKeySelector `json:"clientIdWoSecretRef,omitempty" tf:"-"`
 
-	// Reference to an AWS Secrets Manager secret that stores the client secret. Required when client_secret_source is EXTERNAL. See client_secret_config below.
+	// Reference to an AWS Secrets Manager secret that stores the client secret. Required when client_secret_source is EXTERNAL. See client_secret_config Block below.
 	// +kubebuilder:validation:Optional
 	ClientSecretConfig *SlackOauth2ProviderConfigClientSecretConfigParameters `json:"clientSecretConfig,omitempty" tf:"client_secret_config,omitempty"`
 

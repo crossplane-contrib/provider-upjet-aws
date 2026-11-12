@@ -60,13 +60,13 @@ spec:
               forProvider:
                 properties:
                   dataRetentionInHours:
-                    description: The number of hours that you want to retain the data
+                    description: Number of hours that you want to retain the data
                       in the stream. Kinesis Video Streams retains the data in a data
                       store that is associated with the stream. The default value
                       is 0, indicating that the stream does not persist data.
                     type: number
                   deviceName:
-                    description: The name of the device that is writing to the stream.
+                    description: Name of the device that is writing to the stream.
                       In the current implementation, Kinesis Video Streams does not
                       use this name.
                     type: string
@@ -156,15 +156,14 @@ spec:
                         type: object
                     type: object
                   mediaType:
-                    description: The media type of the stream. Consumers of the stream
+                    description: Media type of the stream. Consumers of the stream
                       can use this information when processing the stream. For more
                       information about media types, see Media Types. If you choose
                       to specify the MediaType, see Naming Requirements for guidelines.
                     type: string
                   name:
-                    description: |-
-                      A name to identify the stream. This is unique to the
-                      AWS account and region the Stream is created in.
+                    description: Name to identify the stream. Unique to the AWS account
+                      and region the stream is created in.
                     type: string
                   region:
                     description: |-
@@ -194,13 +193,13 @@ spec:
                   autoscaler.
                 properties:
                   dataRetentionInHours:
-                    description: The number of hours that you want to retain the data
+                    description: Number of hours that you want to retain the data
                       in the stream. Kinesis Video Streams retains the data in a data
                       store that is associated with the stream. The default value
                       is 0, indicating that the stream does not persist data.
                     type: number
                   deviceName:
-                    description: The name of the device that is writing to the stream.
+                    description: Name of the device that is writing to the stream.
                       In the current implementation, Kinesis Video Streams does not
                       use this name.
                     type: string
@@ -290,15 +289,14 @@ spec:
                         type: object
                     type: object
                   mediaType:
-                    description: The media type of the stream. Consumers of the stream
+                    description: Media type of the stream. Consumers of the stream
                       can use this information when processing the stream. For more
                       information about media types, see Media Types. If you choose
                       to specify the MediaType, see Naming Requirements for guidelines.
                     type: string
                   name:
-                    description: |-
-                      A name to identify the stream. This is unique to the
-                      AWS account and region the Stream is created in.
+                    description: Name to identify the stream. Unique to the AWS account
+                      and region the stream is created in.
                     type: string
                   tags:
                     additionalProperties:
@@ -376,24 +374,24 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: ARN specifying the Stream (same as id)
+                    description: ARN specifying the Stream (same as id).
                     type: string
                   creationTime:
-                    description: A time stamp that indicates when the stream was created.
+                    description: Time stamp that indicates when the stream was created.
                     type: string
                   dataRetentionInHours:
-                    description: The number of hours that you want to retain the data
+                    description: Number of hours that you want to retain the data
                       in the stream. Kinesis Video Streams retains the data in a data
                       store that is associated with the stream. The default value
                       is 0, indicating that the stream does not persist data.
                     type: number
                   deviceName:
-                    description: The name of the device that is writing to the stream.
+                    description: Name of the device that is writing to the stream.
                       In the current implementation, Kinesis Video Streams does not
                       use this name.
                     type: string
                   id:
-                    description: The unique Stream id
+                    description: Unique Stream ID.
                     type: string
                   kmsKeyId:
                     description: ID of the KMS key that you want Kinesis Video Streams
@@ -401,15 +399,14 @@ spec:
                       default, Kinesis Video-managed key (aws/kinesisvideo) is used.
                     type: string
                   mediaType:
-                    description: The media type of the stream. Consumers of the stream
+                    description: Media type of the stream. Consumers of the stream
                       can use this information when processing the stream. For more
                       information about media types, see Media Types. If you choose
                       to specify the MediaType, see Naming Requirements for guidelines.
                     type: string
                   name:
-                    description: |-
-                      A name to identify the stream. This is unique to the
-                      AWS account and region the Stream is created in.
+                    description: Name to identify the stream. Unique to the AWS account
+                      and region the stream is created in.
                     type: string
                   region:
                     description: |-
@@ -425,13 +422,12 @@ spec:
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                     x-kubernetes-map-type: granular
                   version:
-                    description: The version of the stream.
+                    description: Version of the stream.
                     type: string
                 type: object
               conditions:

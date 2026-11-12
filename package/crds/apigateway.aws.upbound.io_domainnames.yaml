@@ -1775,7 +1775,7 @@ spec:
                     description: Upload date associated with the domain certificate.
                     type: string
                   cloudfrontDomainName:
-                    description: Hostname created by Cloudfront to represent the distribution
+                    description: Hostname created by CloudFront to represent the distribution
                       that implements this domain name mapping.
                     type: string
                   cloudfrontZoneId:

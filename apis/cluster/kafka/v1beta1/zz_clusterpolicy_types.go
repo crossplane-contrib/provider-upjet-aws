@@ -24,6 +24,7 @@ type ClusterPolicyObservation struct {
 	// ARN that uniquely identifies the cluster.
 	ClusterArn *string `json:"clusterArn,omitempty" tf:"cluster_arn,omitempty"`
 
+	// Current version of the policy.
 	CurrentVersion *string `json:"currentVersion,omitempty" tf:"current_version,omitempty"`
 
 	// Same as cluster_arn.

@@ -103,7 +103,7 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   userPoolId:
-                    description: The user pool id
+                    description: The user pool ID
                     type: string
                   userPoolIdRef:
                     description: Reference to a UserPool in cognitoidp to populate
@@ -222,7 +222,7 @@ spec:
                     description: The provider type.  See AWS API for valid values
                     type: string
                   userPoolId:
-                    description: The user pool id
+                    description: The user pool ID
                     type: string
                   userPoolIdRef:
                     description: Reference to a UserPool in cognitoidp to populate
@@ -437,7 +437,7 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   userPoolId:
-                    description: The user pool id
+                    description: The user pool ID
                     type: string
                 type: object
               conditions:

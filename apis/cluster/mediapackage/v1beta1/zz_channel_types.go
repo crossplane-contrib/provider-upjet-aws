@@ -15,10 +15,10 @@ import (
 
 type ChannelInitParameters struct {
 
-	// A unique identifier describing the channel
+	// Unique identifier describing the channel
 	ChannelID *string `json:"channelId,omitempty" tf:"channel_id,omitempty"`
 
-	// A description of the channel
+	// Description of the channel
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Key-value map of resource tags.
@@ -28,19 +28,19 @@ type ChannelInitParameters struct {
 
 type ChannelObservation struct {
 
-	// The ARN of the channel
+	// ARN of the channel
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// A unique identifier describing the channel
+	// Unique identifier describing the channel
 	ChannelID *string `json:"channelId,omitempty" tf:"channel_id,omitempty"`
 
-	// A description of the channel
+	// Description of the channel
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// A single item list of HLS ingest information
+	// Single item list of HLS ingest information
 	HlsIngest []HlsIngestObservation `json:"hlsIngest,omitempty" tf:"hls_ingest,omitempty"`
 
-	// The same as channel_id
+	// Same as channel_id
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -51,18 +51,18 @@ type ChannelObservation struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type ChannelParameters struct {
 
-	// A unique identifier describing the channel
+	// Unique identifier describing the channel
 	// +kubebuilder:validation:Optional
 	ChannelID *string `json:"channelId,omitempty" tf:"channel_id,omitempty"`
 
-	// A description of the channel
+	// Description of the channel
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
@@ -82,7 +82,7 @@ type HlsIngestInitParameters struct {
 
 type HlsIngestObservation struct {
 
-	// A list of the ingest endpoints
+	// List of the ingest endpoints
 	IngestEndpoints []IngestEndpointsObservation `json:"ingestEndpoints,omitempty" tf:"ingest_endpoints,omitempty"`
 }
 
@@ -94,13 +94,13 @@ type IngestEndpointsInitParameters struct {
 
 type IngestEndpointsObservation struct {
 
-	// The password
+	// Password
 	Password *string `json:"password,omitempty" tf:"password,omitempty"`
 
-	// The URL
+	// URL
 	URL *string `json:"url,omitempty" tf:"url,omitempty"`
 
-	// The username
+	// Username
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 

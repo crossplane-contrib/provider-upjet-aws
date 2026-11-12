@@ -73,31 +73,32 @@ spec:
               forProvider:
                 properties:
                   description:
-                    description: A description for the AWS Verified Access trust provider.
+                    description: Description for the AWS Verified Access trust provider.
                     type: string
                   deviceOptions:
-                    description: A block of options for device identity based trust
-                      providers.
+                    description: Block of options for device identity based trust
+                      providers. See below.
                     properties:
                       tenantId:
-                        description: The ID of the AWS Verified Access trust provider.
+                        description: ID of the tenant application with the device-identity
+                          provider.
                         type: string
                     type: object
                   deviceTrustProviderType:
-                    description: based trust provider.
+                    description: Type of device-based trust provider.
                     type: string
                   nativeApplicationOidcOptions:
-                    description: The OpenID Connect details for an Native Application
-                      OIDC, user-identity based trust provider.
+                    description: OpenID Connect details for a Native Application OIDC,
+                      user-identity based trust provider. See below.
                     properties:
                       authorizationEndpoint:
+                        description: OIDC authorization endpoint.
                         type: string
                       clientId:
-                        description: The ID of the AWS Verified Access trust provider.
+                        description: OAuth 2.0 client identifier.
                         type: string
                       clientSecretSecretRef:
-                        description: A SecretKeySelector is a reference to a secret
-                          key in an arbitrary namespace.
+                        description: OAuth 2.0 client secret.
                         properties:
                           key:
                             description: The key to select.
@@ -114,28 +115,33 @@ spec:
                         - namespace
                         type: object
                       issuer:
+                        description: OIDC issuer identifier of the IdP.
                         type: string
                       publicSigningKeyEndpoint:
+                        description: OIDC public signing key endpoint.
                         type: string
                       scope:
+                        description: OpenID Connect (OIDC) scope specified.
                         type: string
                       tokenEndpoint:
+                        description: OIDC token endpoint.
                         type: string
                       userInfoEndpoint:
+                        description: OIDC user info endpoint.
                         type: string
                     type: object
                   oidcOptions:
-                    description: The OpenID Connect details for an oidc-type, user-identity
-                      based trust provider.
+                    description: OpenID Connect details for an oidc-type, user-identity
+                      based trust provider. See below.
                     properties:
                       authorizationEndpoint:
+                        description: OIDC authorization endpoint.
                         type: string
                       clientId:
-                        description: The ID of the AWS Verified Access trust provider.
+                        description: OAuth 2.0 client identifier.
                         type: string
                       clientSecretSecretRef:
-                        description: A SecretKeySelector is a reference to a secret
-                          key in an arbitrary namespace.
+                        description: OAuth 2.0 client secret.
                         properties:
                           key:
                             description: The key to select.
@@ -152,17 +158,20 @@ spec:
                         - namespace
                         type: object
                       issuer:
+                        description: OIDC issuer identifier of the IdP.
                         type: string
                       scope:
+                        description: OpenID Connect (OIDC) scope specified.
                         type: string
                       tokenEndpoint:
+                        description: OIDC token endpoint.
                         type: string
                       userInfoEndpoint:
+                        description: OIDC user info endpoint.
                         type: string
                     type: object
                   policyReferenceName:
-                    description: The identifier to be used when working with policy
-                      rules.
+                    description: Identifier to be used when working with policy rules.
                     type: string
                   region:
                     description: |-
@@ -170,10 +179,14 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   sseSpecification:
+                    description: Block of options in use for server side encryption.
+                      See below.
                     properties:
                       customerManagedKeyEnabled:
+                        description: Whether a customer managed key is in use.
                         type: boolean
                       kmsKeyArn:
+                        description: ARN of the KMS key.
                         type: string
                     type: object
                   tags:
@@ -183,11 +196,10 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   trustProviderType:
-                    description: The type of trust provider can be either user or
-                      device-based.
+                    description: Type of trust provider can be either user or device-based.
                     type: string
                   userTrustProviderType:
-                    description: The type of user-based trust provider.
+                    description: Type of user-based trust provider.
                     type: string
                 required:
                 - region
@@ -206,31 +218,32 @@ spec:
                   autoscaler.
                 properties:
                   description:
-                    description: A description for the AWS Verified Access trust provider.
+                    description: Description for the AWS Verified Access trust provider.
                     type: string
                   deviceOptions:
-                    description: A block of options for device identity based trust
-                      providers.
+                    description: Block of options for device identity based trust
+                      providers. See below.
                     properties:
                       tenantId:
-                        description: The ID of the AWS Verified Access trust provider.
+                        description: ID of the tenant application with the device-identity
+                          provider.
                         type: string
                     type: object
                   deviceTrustProviderType:
-                    description: based trust provider.
+                    description: Type of device-based trust provider.
                     type: string
                   nativeApplicationOidcOptions:
-                    description: The OpenID Connect details for an Native Application
-                      OIDC, user-identity based trust provider.
+                    description: OpenID Connect details for a Native Application OIDC,
+                      user-identity based trust provider. See below.
                     properties:
                       authorizationEndpoint:
+                        description: OIDC authorization endpoint.
                         type: string
                       clientId:
-                        description: The ID of the AWS Verified Access trust provider.
+                        description: OAuth 2.0 client identifier.
                         type: string
                       clientSecretSecretRef:
-                        description: A SecretKeySelector is a reference to a secret
-                          key in an arbitrary namespace.
+                        description: OAuth 2.0 client secret.
                         properties:
                           key:
                             description: The key to select.
@@ -247,30 +260,35 @@ spec:
                         - namespace
                         type: object
                       issuer:
+                        description: OIDC issuer identifier of the IdP.
                         type: string
                       publicSigningKeyEndpoint:
+                        description: OIDC public signing key endpoint.
                         type: string
                       scope:
+                        description: OpenID Connect (OIDC) scope specified.
                         type: string
                       tokenEndpoint:
+                        description: OIDC token endpoint.
                         type: string
                       userInfoEndpoint:
+                        description: OIDC user info endpoint.
                         type: string
                     required:
                     - clientSecretSecretRef
                     type: object
                   oidcOptions:
-                    description: The OpenID Connect details for an oidc-type, user-identity
-                      based trust provider.
+                    description: OpenID Connect details for an oidc-type, user-identity
+                      based trust provider. See below.
                     properties:
                       authorizationEndpoint:
+                        description: OIDC authorization endpoint.
                         type: string
                       clientId:
-                        description: The ID of the AWS Verified Access trust provider.
+                        description: OAuth 2.0 client identifier.
                         type: string
                       clientSecretSecretRef:
-                        description: A SecretKeySelector is a reference to a secret
-                          key in an arbitrary namespace.
+                        description: OAuth 2.0 client secret.
                         properties:
                           key:
                             description: The key to select.
@@ -287,25 +305,32 @@ spec:
                         - namespace
                         type: object
                       issuer:
+                        description: OIDC issuer identifier of the IdP.
                         type: string
                       scope:
+                        description: OpenID Connect (OIDC) scope specified.
                         type: string
                       tokenEndpoint:
+                        description: OIDC token endpoint.
                         type: string
                       userInfoEndpoint:
+                        description: OIDC user info endpoint.
                         type: string
                     required:
                     - clientSecretSecretRef
                     type: object
                   policyReferenceName:
-                    description: The identifier to be used when working with policy
-                      rules.
+                    description: Identifier to be used when working with policy rules.
                     type: string
                   sseSpecification:
+                    description: Block of options in use for server side encryption.
+                      See below.
                     properties:
                       customerManagedKeyEnabled:
+                        description: Whether a customer managed key is in use.
                         type: boolean
                       kmsKeyArn:
+                        description: ARN of the KMS key.
                         type: string
                     type: object
                   tags:
@@ -315,11 +340,10 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   trustProviderType:
-                    description: The type of trust provider can be either user or
-                      device-based.
+                    description: Type of trust provider can be either user or device-based.
                     type: string
                   userTrustProviderType:
-                    description: The type of user-based trust provider.
+                    description: Type of user-based trust provider.
                     type: string
                 type: object
               managementPolicies:
@@ -423,63 +447,74 @@ spec:
               atProvider:
                 properties:
                   description:
-                    description: A description for the AWS Verified Access trust provider.
+                    description: Description for the AWS Verified Access trust provider.
                     type: string
                   deviceOptions:
-                    description: A block of options for device identity based trust
-                      providers.
+                    description: Block of options for device identity based trust
+                      providers. See below.
                     properties:
                       tenantId:
-                        description: The ID of the AWS Verified Access trust provider.
+                        description: ID of the tenant application with the device-identity
+                          provider.
                         type: string
                     type: object
                   deviceTrustProviderType:
-                    description: based trust provider.
+                    description: Type of device-based trust provider.
                     type: string
                   id:
-                    description: The ID of the AWS Verified Access trust provider.
+                    description: ID of the AWS Verified Access trust provider.
                     type: string
                   nativeApplicationOidcOptions:
-                    description: The OpenID Connect details for an Native Application
-                      OIDC, user-identity based trust provider.
+                    description: OpenID Connect details for a Native Application OIDC,
+                      user-identity based trust provider. See below.
                     properties:
                       authorizationEndpoint:
+                        description: OIDC authorization endpoint.
                         type: string
                       clientId:
-                        description: The ID of the AWS Verified Access trust provider.
+                        description: OAuth 2.0 client identifier.
                         type: string
                       issuer:
+                        description: OIDC issuer identifier of the IdP.
                         type: string
                       publicSigningKeyEndpoint:
+                        description: OIDC public signing key endpoint.
                         type: string
                       scope:
+                        description: OpenID Connect (OIDC) scope specified.
                         type: string
                       tokenEndpoint:
+                        description: OIDC token endpoint.
                         type: string
                       userInfoEndpoint:
+                        description: OIDC user info endpoint.
                         type: string
                     type: object
                   oidcOptions:
-                    description: The OpenID Connect details for an oidc-type, user-identity
-                      based trust provider.
+                    description: OpenID Connect details for an oidc-type, user-identity
+                      based trust provider. See below.
                     properties:
                       authorizationEndpoint:
+                        description: OIDC authorization endpoint.
                         type: string
                       clientId:
-                        description: The ID of the AWS Verified Access trust provider.
+                        description: OAuth 2.0 client identifier.
                         type: string
                       issuer:
+                        description: OIDC issuer identifier of the IdP.
                         type: string
                       scope:
+                        description: OpenID Connect (OIDC) scope specified.
                         type: string
                       tokenEndpoint:
+                        description: OIDC token endpoint.
                         type: string
                       userInfoEndpoint:
+                        description: OIDC user info endpoint.
                         type: string
                     type: object
                   policyReferenceName:
-                    description: The identifier to be used when working with policy
-                      rules.
+                    description: Identifier to be used when working with policy rules.
                     type: string
                   region:
                     description: |-
@@ -487,10 +522,14 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   sseSpecification:
+                    description: Block of options in use for server side encryption.
+                      See below.
                     properties:
                       customerManagedKeyEnabled:
+                        description: Whether a customer managed key is in use.
                         type: boolean
                       kmsKeyArn:
+                        description: ARN of the KMS key.
                         type: string
                     type: object
                   tags:
@@ -505,11 +544,10 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   trustProviderType:
-                    description: The type of trust provider can be either user or
-                      device-based.
+                    description: Type of trust provider can be either user or device-based.
                     type: string
                   userTrustProviderType:
-                    description: The type of user-based trust provider.
+                    description: Type of user-based trust provider.
                     type: string
                 type: object
               conditions:

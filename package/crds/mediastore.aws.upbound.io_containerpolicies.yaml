@@ -74,7 +74,7 @@ spec:
               forProvider:
                 properties:
                   containerName:
-                    description: The name of the container.
+                    description: Name of the container.
                     type: string
                   containerNameRef:
                     description: Reference to a Container in mediastore to populate
@@ -153,7 +153,7 @@ spec:
                         type: object
                     type: object
                   policy:
-                    description: The contents of the policy.
+                    description: Contents of the policy.
                     type: string
                   region:
                     description: |-
@@ -177,7 +177,7 @@ spec:
                   autoscaler.
                 properties:
                   containerName:
-                    description: The name of the container.
+                    description: Name of the container.
                     type: string
                   containerNameRef:
                     description: Reference to a Container in mediastore to populate
@@ -256,7 +256,7 @@ spec:
                         type: object
                     type: object
                   policy:
-                    description: The contents of the policy.
+                    description: Contents of the policy.
                     type: string
                 type: object
               managementPolicies:
@@ -356,12 +356,12 @@ spec:
               atProvider:
                 properties:
                   containerName:
-                    description: The name of the container.
+                    description: Name of the container.
                     type: string
                   id:
                     type: string
                   policy:
-                    description: The contents of the policy.
+                    description: Contents of the policy.
                     type: string
                   region:
                     description: |-

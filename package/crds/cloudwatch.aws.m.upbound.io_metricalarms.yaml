@@ -219,6 +219,30 @@ spec:
                       to the specified threshold. Required for traditional metric
                       alarms.
                     type: number
+                  evaluationWindow:
+                    description: Configures the alarm to use a wall clock evaluation
+                      window instead of the default sliding window. Not supported
+                      for alarms that use evaluation_criteria. See evaluation_window
+                      below.
+                    properties:
+                      wallClockWindow:
+                        description: Aligns the evaluated range to fixed clock boundaries
+                          that match the alarm's period (for example the top of the
+                          hour, midnight, or the start of the calendar week), instead
+                          of the default rolling sliding window. Only alarms with
+                          a period of 60, 300, 3600, 86400, or 604800 seconds support
+                          a wall clock window. See wall_clock_window below.
+                        properties:
+                          timezone:
+                            description: Time zone to align the window to. Accepts
+                              an IANA time zone name (for example America/New_York),
+                              a fixed UTC offset (for example +05:30), or an offset-prefixed
+                              identifier (for example UTC+05:30). The offset must
+                              be a multiple of 5 minutes. Defaults to UTC. Only IANA
+                              time zone names observe daylight saving time.
+                            type: string
+                        type: object
+                    type: object
                   extendedStatistic:
                     description: The percentile statistic for the metric associated
                       with the alarm. Specify a value between p0.0 and p100.
@@ -645,6 +669,30 @@ spec:
                       to the specified threshold. Required for traditional metric
                       alarms.
                     type: number
+                  evaluationWindow:
+                    description: Configures the alarm to use a wall clock evaluation
+                      window instead of the default sliding window. Not supported
+                      for alarms that use evaluation_criteria. See evaluation_window
+                      below.
+                    properties:
+                      wallClockWindow:
+                        description: Aligns the evaluated range to fixed clock boundaries
+                          that match the alarm's period (for example the top of the
+                          hour, midnight, or the start of the calendar week), instead
+                          of the default rolling sliding window. Only alarms with
+                          a period of 60, 300, 3600, 86400, or 604800 seconds support
+                          a wall clock window. See wall_clock_window below.
+                        properties:
+                          timezone:
+                            description: Time zone to align the window to. Accepts
+                              an IANA time zone name (for example America/New_York),
+                              a fixed UTC offset (for example +05:30), or an offset-prefixed
+                              identifier (for example UTC+05:30). The offset must
+                              be a multiple of 5 minutes. Defaults to UTC. Only IANA
+                              time zone names observe daylight saving time.
+                            type: string
+                        type: object
+                    type: object
                   extendedStatistic:
                     description: The percentile statistic for the metric associated
                       with the alarm. Specify a value between p0.0 and p100.
@@ -1033,6 +1081,30 @@ spec:
                       to the specified threshold. Required for traditional metric
                       alarms.
                     type: number
+                  evaluationWindow:
+                    description: Configures the alarm to use a wall clock evaluation
+                      window instead of the default sliding window. Not supported
+                      for alarms that use evaluation_criteria. See evaluation_window
+                      below.
+                    properties:
+                      wallClockWindow:
+                        description: Aligns the evaluated range to fixed clock boundaries
+                          that match the alarm's period (for example the top of the
+                          hour, midnight, or the start of the calendar week), instead
+                          of the default rolling sliding window. Only alarms with
+                          a period of 60, 300, 3600, 86400, or 604800 seconds support
+                          a wall clock window. See wall_clock_window below.
+                        properties:
+                          timezone:
+                            description: Time zone to align the window to. Accepts
+                              an IANA time zone name (for example America/New_York),
+                              a fixed UTC offset (for example +05:30), or an offset-prefixed
+                              identifier (for example UTC+05:30). The offset must
+                              be a multiple of 5 minutes. Defaults to UTC. Only IANA
+                              time zone names observe daylight saving time.
+                            type: string
+                        type: object
+                    type: object
                   extendedStatistic:
                     description: The percentile statistic for the metric associated
                       with the alarm. Specify a value between p0.0 and p100.

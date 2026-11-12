@@ -18,7 +18,7 @@ type DataReadCacheConfigurationInitParameters struct {
 	// Size of the file system's SSD read cache, in gibibytes (GiB). Required when the sizing_mode is USER_PROVISIONED.
 	Size *float64 `json:"size,omitempty" tf:"size,omitempty"`
 
-	// Sizing mode for the cache. Valud values are NO_CACHE, USER_PROVISIONED, and PROPORTIONAL_TO_THROUGHPUT_CAPACITY.
+	// Sizing mode for the cache. Valid values are NO_CACHE, USER_PROVISIONED, and PROPORTIONAL_TO_THROUGHPUT_CAPACITY.
 	SizingMode *string `json:"sizingMode,omitempty" tf:"sizing_mode,omitempty"`
 }
 
@@ -27,7 +27,7 @@ type DataReadCacheConfigurationObservation struct {
 	// Size of the file system's SSD read cache, in gibibytes (GiB). Required when the sizing_mode is USER_PROVISIONED.
 	Size *float64 `json:"size,omitempty" tf:"size,omitempty"`
 
-	// Sizing mode for the cache. Valud values are NO_CACHE, USER_PROVISIONED, and PROPORTIONAL_TO_THROUGHPUT_CAPACITY.
+	// Sizing mode for the cache. Valid values are NO_CACHE, USER_PROVISIONED, and PROPORTIONAL_TO_THROUGHPUT_CAPACITY.
 	SizingMode *string `json:"sizingMode,omitempty" tf:"sizing_mode,omitempty"`
 }
 
@@ -37,7 +37,7 @@ type DataReadCacheConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	Size *float64 `json:"size,omitempty" tf:"size,omitempty"`
 
-	// Sizing mode for the cache. Valud values are NO_CACHE, USER_PROVISIONED, and PROPORTIONAL_TO_THROUGHPUT_CAPACITY.
+	// Sizing mode for the cache. Valid values are NO_CACHE, USER_PROVISIONED, and PROPORTIONAL_TO_THROUGHPUT_CAPACITY.
 	// +kubebuilder:validation:Optional
 	SizingMode *string `json:"sizingMode" tf:"sizing_mode,omitempty"`
 }
@@ -160,7 +160,7 @@ type LustreFileSystemInitParameters struct {
 	// When enabled, will skip the default final backup taken when the file system is deleted. This configuration must be applied separately before attempting to delete the resource to have the desired behavior. Defaults to true.
 	SkipFinalBackup *bool `json:"skipFinalBackup,omitempty" tf:"skip_final_backup,omitempty"`
 
-	// Storage capacity (GiB) of the file system. Minimum of 1200. See more details at Allowed values for Fsx storage capacity. Update is allowed only for SCRATCH_2, PERSISTENT_1 and PERSISTENT_2 deployment types, See more details at Fsx Storage Capacity Update. Required when not creating filesystem for a backup.
+	// Storage capacity (GiB) of the file system. Minimum of 1200. See more details at Allowed values for FSx storage capacity. Update is allowed only for SCRATCH_2, PERSISTENT_1 and PERSISTENT_2 deployment types, See more details at FSx Storage Capacity Update. Required when not creating filesystem for a backup.
 	StorageCapacity *float64 `json:"storageCapacity,omitempty" tf:"storage_capacity,omitempty"`
 
 	// Filesystem storage type. One of SSD, HDD or INTELLIGENT_TIERING, defaults to SSD. HDD is only supported on PERSISTENT_1 deployment types. INTELLIGENT_TIERING requires data_read_cache_configuration and metadata_configuration to be set and is only supported for PERSISTENT_2 deployment types.
@@ -282,7 +282,7 @@ type LustreFileSystemObservation struct {
 	// When enabled, will skip the default final backup taken when the file system is deleted. This configuration must be applied separately before attempting to delete the resource to have the desired behavior. Defaults to true.
 	SkipFinalBackup *bool `json:"skipFinalBackup,omitempty" tf:"skip_final_backup,omitempty"`
 
-	// Storage capacity (GiB) of the file system. Minimum of 1200. See more details at Allowed values for Fsx storage capacity. Update is allowed only for SCRATCH_2, PERSISTENT_1 and PERSISTENT_2 deployment types, See more details at Fsx Storage Capacity Update. Required when not creating filesystem for a backup.
+	// Storage capacity (GiB) of the file system. Minimum of 1200. See more details at Allowed values for FSx storage capacity. Update is allowed only for SCRATCH_2, PERSISTENT_1 and PERSISTENT_2 deployment types, See more details at FSx Storage Capacity Update. Required when not creating filesystem for a backup.
 	StorageCapacity *float64 `json:"storageCapacity,omitempty" tf:"storage_capacity,omitempty"`
 
 	// Filesystem storage type. One of SSD, HDD or INTELLIGENT_TIERING, defaults to SSD. HDD is only supported on PERSISTENT_1 deployment types. INTELLIGENT_TIERING requires data_read_cache_configuration and metadata_configuration to be set and is only supported for PERSISTENT_2 deployment types.
@@ -425,7 +425,7 @@ type LustreFileSystemParameters struct {
 	// +kubebuilder:validation:Optional
 	SkipFinalBackup *bool `json:"skipFinalBackup,omitempty" tf:"skip_final_backup,omitempty"`
 
-	// Storage capacity (GiB) of the file system. Minimum of 1200. See more details at Allowed values for Fsx storage capacity. Update is allowed only for SCRATCH_2, PERSISTENT_1 and PERSISTENT_2 deployment types, See more details at Fsx Storage Capacity Update. Required when not creating filesystem for a backup.
+	// Storage capacity (GiB) of the file system. Minimum of 1200. See more details at Allowed values for FSx storage capacity. Update is allowed only for SCRATCH_2, PERSISTENT_1 and PERSISTENT_2 deployment types, See more details at FSx Storage Capacity Update. Required when not creating filesystem for a backup.
 	// +kubebuilder:validation:Optional
 	StorageCapacity *float64 `json:"storageCapacity,omitempty" tf:"storage_capacity,omitempty"`
 

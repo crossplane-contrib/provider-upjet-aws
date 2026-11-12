@@ -741,7 +741,7 @@ spec:
                                 with the provided name of target resource.
                               type: string
                             recordSetId:
-                              description: Route53 record set id to uniquely identify
+                              description: Route53 record set ID to uniquely identify
                                 a record given a domain_name and a record_type.
                               type: string
                             recordType:
@@ -901,7 +901,7 @@ spec:
                                 with the provided name of target resource.
                               type: string
                             recordSetId:
-                              description: Route53 record set id to uniquely identify
+                              description: Route53 record set ID to uniquely identify
                                 a record given a domain_name and a record_type.
                               type: string
                             recordType:
@@ -1157,7 +1157,7 @@ spec:
                                 with the provided name of target resource.
                               type: string
                             recordSetId:
-                              description: Route53 record set id to uniquely identify
+                              description: Route53 record set ID to uniquely identify
                                 a record given a domain_name and a record_type.
                               type: string
                             recordType:

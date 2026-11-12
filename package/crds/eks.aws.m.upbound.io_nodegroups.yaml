@@ -687,7 +687,7 @@ spec:
                     properties:
                       maxGroupPreparedCapacity:
                         description: Maximum number of instances that are allowed
-                          to be in the warm pool combined with the Auto Scaling Group.
+                          to be in the warm pool combined with the Auto Scaling group.
                           Use -1 to specify an unlimited capacity.
                         type: number
                       minSize:
@@ -701,7 +701,7 @@ spec:
                         type: string
                       reuseOnScaleIn:
                         description: Whether to return instances in the Auto Scaling
-                          Group to the warm pool on scale in. Not supported on Bottlerocket.
+                          group to the warm pool on scale in. Not supported on Bottlerocket.
                           Defaults to false.
                         type: boolean
                     type: object
@@ -1261,7 +1261,7 @@ spec:
                     properties:
                       maxGroupPreparedCapacity:
                         description: Maximum number of instances that are allowed
-                          to be in the warm pool combined with the Auto Scaling Group.
+                          to be in the warm pool combined with the Auto Scaling group.
                           Use -1 to specify an unlimited capacity.
                         type: number
                       minSize:
@@ -1275,7 +1275,7 @@ spec:
                         type: string
                       reuseOnScaleIn:
                         description: Whether to return instances in the Auto Scaling
-                          Group to the warm pool on scale in. Not supported on Bottlerocket.
+                          group to the warm pool on scale in. Not supported on Bottlerocket.
                           Defaults to false.
                         type: boolean
                     type: object
@@ -1504,11 +1504,11 @@ spec:
                       properties:
                         autoscalingGroups:
                           description: List of objects containing information about
-                            AutoScaling Groups.
+                            Auto Scaling groups.
                           items:
                             properties:
                               name:
-                                description: Name of the AutoScaling Group.
+                                description: Name of the Auto Scaling group.
                                 type: string
                             type: object
                           type: array
@@ -1606,7 +1606,7 @@ spec:
                     properties:
                       maxGroupPreparedCapacity:
                         description: Maximum number of instances that are allowed
-                          to be in the warm pool combined with the Auto Scaling Group.
+                          to be in the warm pool combined with the Auto Scaling group.
                           Use -1 to specify an unlimited capacity.
                         type: number
                       minSize:
@@ -1620,7 +1620,7 @@ spec:
                         type: string
                       reuseOnScaleIn:
                         description: Whether to return instances in the Auto Scaling
-                          Group to the warm pool on scale in. Not supported on Bottlerocket.
+                          group to the warm pool on scale in. Not supported on Bottlerocket.
                           Defaults to false.
                         type: boolean
                     type: object

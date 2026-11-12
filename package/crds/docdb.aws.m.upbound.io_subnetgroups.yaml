@@ -60,7 +60,7 @@ spec:
               forProvider:
                 properties:
                   description:
-                    description: The description of the docDB subnet group.
+                    description: The description of the DocDB subnet group.
                     type: string
                   region:
                     description: |-
@@ -180,7 +180,7 @@ spec:
                   autoscaler.
                 properties:
                   description:
-                    description: The description of the docDB subnet group.
+                    description: The description of the DocDB subnet group.
                     type: string
                   subnetIds:
                     description: A list of VPC subnet IDs.
@@ -343,13 +343,13 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The ARN of the docDB subnet group.
+                    description: The ARN of the DocDB subnet group.
                     type: string
                   description:
-                    description: The description of the docDB subnet group.
+                    description: The description of the DocDB subnet group.
                     type: string
                   id:
-                    description: The docDB subnet group name.
+                    description: The DocDB subnet group name.
                     type: string
                   region:
                     description: |-
@@ -363,7 +363,7 @@ spec:
                     type: array
                     x-kubernetes-list-type: set
                   supportedNetworkTypes:
-                    description: The network type of the docDB subnet group (IPV4
+                    description: The network type of the DocDB subnet group (IPV4
                       or DUAL).
                     items:
                       type: string

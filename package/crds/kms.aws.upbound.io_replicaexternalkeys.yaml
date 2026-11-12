@@ -74,23 +74,25 @@ spec:
               forProvider:
                 properties:
                   bypassPolicyLockoutSafetyCheck:
-                    description: |-
-                      A flag to indicate whether to bypass the key policy lockout safety check.
-                      Setting this value to true increases the risk that the KMS key becomes unmanageable. Do not set this value to true indiscriminately.
-                      For more information, refer to the scenario in the Default Key Policy section in the AWS KMS Developer Guide.
-                      The default value is false.
+                    description: Whether to bypass the key policy lockout safety check.
+                      Setting this value to true increases the risk that the KMS key
+                      becomes unmanageable. Do not set this value to true indiscriminately.
+                      For more information, refer to the scenario in the Default Key
+                      Policy section in the AWS KMS Developer Guide. The default value
+                      is false.
                     type: boolean
                   deletionWindowInDays:
-                    description: |-
-                      The waiting period, specified in number of days. After the waiting period ends, AWS KMS deletes the KMS key.
-                      If you specify a value, it must be between 7 and 30, inclusive. If you do not specify a value, it defaults to 30.
+                    description: Waiting period, specified in number of days. After
+                      the waiting period ends, AWS KMS deletes the KMS key. If you
+                      specify a value, it must be between 7 and 30, inclusive. If
+                      you do not specify a value, it defaults to 30.
                     type: number
                   description:
-                    description: A description of the KMS key.
+                    description: Description of the KMS key.
                     type: string
                   enabled:
-                    description: Specifies whether the replica key is enabled. Disabled
-                      KMS keys cannot be used in cryptographic operations. Keys pending
+                    description: Whether the replica key is enabled. Disabled KMS
+                      keys cannot be used in cryptographic operations. Keys pending
                       import can only be false. Imported keys default to true unless
                       expired.
                     type: boolean
@@ -115,12 +117,12 @@ spec:
                     - namespace
                     type: object
                   policy:
-                    description: The key policy to attach to the KMS key. If you do
-                      not specify a key policy, AWS KMS attaches the default key policy
+                    description: Key policy to attach to the KMS key. If you do not
+                      specify a key policy, AWS KMS attaches the default key policy
                       to the KMS key.
                     type: string
                   primaryKeyArn:
-                    description: The ARN of the multi-Region primary key to replicate.
+                    description: ARN of the multi-Region primary key to replicate.
                       The primary key must be in a different AWS Region of the same
                       AWS Partition. You can create only one replica of a given primary
                       key in each AWS Region.
@@ -233,23 +235,25 @@ spec:
                   autoscaler.
                 properties:
                   bypassPolicyLockoutSafetyCheck:
-                    description: |-
-                      A flag to indicate whether to bypass the key policy lockout safety check.
-                      Setting this value to true increases the risk that the KMS key becomes unmanageable. Do not set this value to true indiscriminately.
-                      For more information, refer to the scenario in the Default Key Policy section in the AWS KMS Developer Guide.
-                      The default value is false.
+                    description: Whether to bypass the key policy lockout safety check.
+                      Setting this value to true increases the risk that the KMS key
+                      becomes unmanageable. Do not set this value to true indiscriminately.
+                      For more information, refer to the scenario in the Default Key
+                      Policy section in the AWS KMS Developer Guide. The default value
+                      is false.
                     type: boolean
                   deletionWindowInDays:
-                    description: |-
-                      The waiting period, specified in number of days. After the waiting period ends, AWS KMS deletes the KMS key.
-                      If you specify a value, it must be between 7 and 30, inclusive. If you do not specify a value, it defaults to 30.
+                    description: Waiting period, specified in number of days. After
+                      the waiting period ends, AWS KMS deletes the KMS key. If you
+                      specify a value, it must be between 7 and 30, inclusive. If
+                      you do not specify a value, it defaults to 30.
                     type: number
                   description:
-                    description: A description of the KMS key.
+                    description: Description of the KMS key.
                     type: string
                   enabled:
-                    description: Specifies whether the replica key is enabled. Disabled
-                      KMS keys cannot be used in cryptographic operations. Keys pending
+                    description: Whether the replica key is enabled. Disabled KMS
+                      keys cannot be used in cryptographic operations. Keys pending
                       import can only be false. Imported keys default to true unless
                       expired.
                     type: boolean
@@ -274,12 +278,12 @@ spec:
                     - namespace
                     type: object
                   policy:
-                    description: The key policy to attach to the KMS key. If you do
-                      not specify a key policy, AWS KMS attaches the default key policy
+                    description: Key policy to attach to the KMS key. If you do not
+                      specify a key policy, AWS KMS attaches the default key policy
                       to the KMS key.
                     type: string
                   primaryKeyArn:
-                    description: The ARN of the multi-Region primary key to replicate.
+                    description: ARN of the multi-Region primary key to replicate.
                       The primary key must be in a different AWS Region of the same
                       AWS Partition. You can create only one replica of a given primary
                       key in each AWS Region.
@@ -467,23 +471,25 @@ spec:
                       keys differ only in the Region value.
                     type: string
                   bypassPolicyLockoutSafetyCheck:
-                    description: |-
-                      A flag to indicate whether to bypass the key policy lockout safety check.
-                      Setting this value to true increases the risk that the KMS key becomes unmanageable. Do not set this value to true indiscriminately.
-                      For more information, refer to the scenario in the Default Key Policy section in the AWS KMS Developer Guide.
-                      The default value is false.
+                    description: Whether to bypass the key policy lockout safety check.
+                      Setting this value to true increases the risk that the KMS key
+                      becomes unmanageable. Do not set this value to true indiscriminately.
+                      For more information, refer to the scenario in the Default Key
+                      Policy section in the AWS KMS Developer Guide. The default value
+                      is false.
                     type: boolean
                   deletionWindowInDays:
-                    description: |-
-                      The waiting period, specified in number of days. After the waiting period ends, AWS KMS deletes the KMS key.
-                      If you specify a value, it must be between 7 and 30, inclusive. If you do not specify a value, it defaults to 30.
+                    description: Waiting period, specified in number of days. After
+                      the waiting period ends, AWS KMS deletes the KMS key. If you
+                      specify a value, it must be between 7 and 30, inclusive. If
+                      you do not specify a value, it defaults to 30.
                     type: number
                   description:
-                    description: A description of the KMS key.
+                    description: Description of the KMS key.
                     type: string
                   enabled:
-                    description: Specifies whether the replica key is enabled. Disabled
-                      KMS keys cannot be used in cryptographic operations. Keys pending
+                    description: Whether the replica key is enabled. Disabled KMS
+                      keys cannot be used in cryptographic operations. Keys pending
                       import can only be false. Imported keys default to true unless
                       expired.
                     type: boolean
@@ -494,23 +500,23 @@ spec:
                   id:
                     type: string
                   keyId:
-                    description: The key ID of the replica key. Related multi-Region
-                      keys have the same key ID.
+                    description: Key ID of the replica key. Related multi-Region keys
+                      have the same key ID.
                     type: string
                   keyState:
-                    description: The state of the replica key.
+                    description: State of the replica key.
                     type: string
                   keyUsage:
-                    description: The cryptographic operations for which you can use
-                      the KMS key. This is a shared property of multi-Region keys.
+                    description: Cryptographic operations for which you can use the
+                      KMS key. This is a shared property of multi-Region keys.
                     type: string
                   policy:
-                    description: The key policy to attach to the KMS key. If you do
-                      not specify a key policy, AWS KMS attaches the default key policy
+                    description: Key policy to attach to the KMS key. If you do not
+                      specify a key policy, AWS KMS attaches the default key policy
                       to the KMS key.
                     type: string
                   primaryKeyArn:
-                    description: The ARN of the multi-Region primary key to replicate.
+                    description: ARN of the multi-Region primary key to replicate.
                       The primary key must be in a different AWS Region of the same
                       AWS Partition. You can create only one replica of a given primary
                       key in each AWS Region.
@@ -529,9 +535,8 @@ spec:
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                     x-kubernetes-map-type: granular
                   validTo:

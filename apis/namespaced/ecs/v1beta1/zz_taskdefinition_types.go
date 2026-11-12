@@ -297,7 +297,7 @@ type ProxyConfigurationParameters struct {
 
 type RuntimePlatformInitParameters struct {
 
-	// Must be set to either X86_64 or ARM64; see cpu architecture
+	// Must be set to either X86_64 or ARM64; see CPU architecture
 	CPUArchitecture *string `json:"cpuArchitecture,omitempty" tf:"cpu_architecture,omitempty"`
 
 	// If the requires_compatibilities is FARGATE this field is required; must be set to a valid option from the operating system family in the runtime platform setting
@@ -306,7 +306,7 @@ type RuntimePlatformInitParameters struct {
 
 type RuntimePlatformObservation struct {
 
-	// Must be set to either X86_64 or ARM64; see cpu architecture
+	// Must be set to either X86_64 or ARM64; see CPU architecture
 	CPUArchitecture *string `json:"cpuArchitecture,omitempty" tf:"cpu_architecture,omitempty"`
 
 	// If the requires_compatibilities is FARGATE this field is required; must be set to a valid option from the operating system family in the runtime platform setting
@@ -315,7 +315,7 @@ type RuntimePlatformObservation struct {
 
 type RuntimePlatformParameters struct {
 
-	// Must be set to either X86_64 or ARM64; see cpu architecture
+	// Must be set to either X86_64 or ARM64; see CPU architecture
 	// +kubebuilder:validation:Optional
 	CPUArchitecture *string `json:"cpuArchitecture,omitempty" tf:"cpu_architecture,omitempty"`
 
@@ -375,7 +375,7 @@ type S3FilesVolumeConfigurationParameters struct {
 
 type TaskDefinitionInitParameters struct {
 
-	// Number of cpu units used by the task. If the requires_compatibilities is FARGATE this field is required.
+	// Number of CPU units used by the task. If the requires_compatibilities is FARGATE this field is required.
 	CPU *string `json:"cpu,omitempty" tf:"cpu,omitempty"`
 
 	// List of valid container definitions provided as a single valid JSON document. Please note that you should only provide values that are part of the container definition document. For a detailed description of what parameters are available, see the Task Definition Parameters section from the official Developer Guide.
@@ -453,7 +453,7 @@ type TaskDefinitionObservation struct {
 	// ARN of the Task Definition with the trailing revision removed. This may be useful for situations where the latest task definition is always desired. If a revision isn't specified, the latest ACTIVE revision is used. See the AWS documentation for details.
 	ArnWithoutRevision *string `json:"arnWithoutRevision,omitempty" tf:"arn_without_revision,omitempty"`
 
-	// Number of cpu units used by the task. If the requires_compatibilities is FARGATE this field is required.
+	// Number of CPU units used by the task. If the requires_compatibilities is FARGATE this field is required.
 	CPU *string `json:"cpu,omitempty" tf:"cpu,omitempty"`
 
 	// List of valid container definitions provided as a single valid JSON document. Please note that you should only provide values that are part of the container definition document. For a detailed description of what parameters are available, see the Task Definition Parameters section from the official Developer Guide.
@@ -528,7 +528,7 @@ type TaskDefinitionObservation struct {
 
 type TaskDefinitionParameters struct {
 
-	// Number of cpu units used by the task. If the requires_compatibilities is FARGATE this field is required.
+	// Number of CPU units used by the task. If the requires_compatibilities is FARGATE this field is required.
 	// +kubebuilder:validation:Optional
 	CPU *string `json:"cpu,omitempty" tf:"cpu,omitempty"`
 
@@ -662,7 +662,7 @@ type VolumeInitParameters struct {
 	// Configuration block for an EFS volume. Detailed below.
 	EFSVolumeConfiguration *EFSVolumeConfigurationInitParameters `json:"efsVolumeConfiguration,omitempty" tf:"efs_volume_configuration,omitempty"`
 
-	// Configuration block for an FSX Windows File Server volume. Detailed below.
+	// Configuration block for an FSx Windows File Server volume. Detailed below.
 	FSXWindowsFileServerVolumeConfiguration *FSXWindowsFileServerVolumeConfigurationInitParameters `json:"fsxWindowsFileServerVolumeConfiguration,omitempty" tf:"fsx_windows_file_server_volume_configuration,omitempty"`
 
 	// Path on the host container instance that is presented to the container. If not set, ECS will create a nonpersistent data volume that starts empty and is deleted after the task has finished.
@@ -686,7 +686,7 @@ type VolumeObservation struct {
 	// Configuration block for an EFS volume. Detailed below.
 	EFSVolumeConfiguration *EFSVolumeConfigurationObservation `json:"efsVolumeConfiguration,omitempty" tf:"efs_volume_configuration,omitempty"`
 
-	// Configuration block for an FSX Windows File Server volume. Detailed below.
+	// Configuration block for an FSx Windows File Server volume. Detailed below.
 	FSXWindowsFileServerVolumeConfiguration *FSXWindowsFileServerVolumeConfigurationObservation `json:"fsxWindowsFileServerVolumeConfiguration,omitempty" tf:"fsx_windows_file_server_volume_configuration,omitempty"`
 
 	// Path on the host container instance that is presented to the container. If not set, ECS will create a nonpersistent data volume that starts empty and is deleted after the task has finished.
@@ -713,7 +713,7 @@ type VolumeParameters struct {
 	// +kubebuilder:validation:Optional
 	EFSVolumeConfiguration *EFSVolumeConfigurationParameters `json:"efsVolumeConfiguration,omitempty" tf:"efs_volume_configuration,omitempty"`
 
-	// Configuration block for an FSX Windows File Server volume. Detailed below.
+	// Configuration block for an FSx Windows File Server volume. Detailed below.
 	// +kubebuilder:validation:Optional
 	FSXWindowsFileServerVolumeConfiguration *FSXWindowsFileServerVolumeConfigurationParameters `json:"fsxWindowsFileServerVolumeConfiguration,omitempty" tf:"fsx_windows_file_server_volume_configuration,omitempty"`
 

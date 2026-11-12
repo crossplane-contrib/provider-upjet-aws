@@ -18,7 +18,7 @@ type PolicyEngineInitParameters struct {
 	// Description of the policy engine.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// ARN of the KMS key used to encrypt the policy engine. If not set, AWS uses an AWS managed key.
+	// ARN of the KMS key used to encrypt the policy engine. If not set, the policy engine is encrypted with an AWS owned key.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kms/v1beta1.Key
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	EncryptionKeyArn *string `json:"encryptionKeyArn,omitempty" tf:"encryption_key_arn,omitempty"`
@@ -44,7 +44,7 @@ type PolicyEngineObservation struct {
 	// Description of the policy engine.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// ARN of the KMS key used to encrypt the policy engine. If not set, AWS uses an AWS managed key.
+	// ARN of the KMS key used to encrypt the policy engine. If not set, the policy engine is encrypted with an AWS owned key.
 	EncryptionKeyArn *string `json:"encryptionKeyArn,omitempty" tf:"encryption_key_arn,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -77,7 +77,7 @@ type PolicyEngineParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// ARN of the KMS key used to encrypt the policy engine. If not set, AWS uses an AWS managed key.
+	// ARN of the KMS key used to encrypt the policy engine. If not set, the policy engine is encrypted with an AWS owned key.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kms/v1beta1.Key
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional

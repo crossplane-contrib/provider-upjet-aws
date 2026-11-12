@@ -15,7 +15,7 @@ import (
 
 type VPCDHCPOptionsAssociationInitParameters struct {
 
-	// The ID of the DHCP Options Set to associate to the VPC.
+	// ID of the DHCP Options Set to associate to the VPC.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.VPCDHCPOptions
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DHCPOptionsID *string `json:"dhcpOptionsId,omitempty" tf:"dhcp_options_id,omitempty"`
@@ -28,7 +28,7 @@ type VPCDHCPOptionsAssociationInitParameters struct {
 	// +kubebuilder:validation:Optional
 	DHCPOptionsIDSelector *v2.Selector `json:"dhcpOptionsIdSelector,omitempty" tf:"-"`
 
-	// The ID of the VPC to which we would like to associate a DHCP Options Set.
+	// ID of the VPC to which we would like to associate a DHCP Options Set.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.VPC
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 
@@ -43,23 +43,23 @@ type VPCDHCPOptionsAssociationInitParameters struct {
 
 type VPCDHCPOptionsAssociationObservation struct {
 
-	// The ID of the DHCP Options Set to associate to the VPC.
+	// ID of the DHCP Options Set to associate to the VPC.
 	DHCPOptionsID *string `json:"dhcpOptionsId,omitempty" tf:"dhcp_options_id,omitempty"`
 
-	// The ID of the DHCP Options Set Association.
+	// ID of the DHCP Options Set Association.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The ID of the VPC to which we would like to associate a DHCP Options Set.
+	// ID of the VPC to which we would like to associate a DHCP Options Set.
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 }
 
 type VPCDHCPOptionsAssociationParameters struct {
 
-	// The ID of the DHCP Options Set to associate to the VPC.
+	// ID of the DHCP Options Set to associate to the VPC.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.VPCDHCPOptions
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -78,7 +78,7 @@ type VPCDHCPOptionsAssociationParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// The ID of the VPC to which we would like to associate a DHCP Options Set.
+	// ID of the VPC to which we would like to associate a DHCP Options Set.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.VPC
 	// +kubebuilder:validation:Optional
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`

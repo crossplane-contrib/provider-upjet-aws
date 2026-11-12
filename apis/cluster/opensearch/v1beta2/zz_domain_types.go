@@ -192,7 +192,7 @@ type ClusterConfigInitParameters struct {
 	// Whether to enable warm storage.
 	WarmEnabled *bool `json:"warmEnabled,omitempty" tf:"warm_enabled,omitempty"`
 
-	// Instance type for the OpenSearch cluster's warm nodes. Valid values are ultrawarm1.medium.search, ultrawarm1.large.search and ultrawarm1.xlarge.search. warm_type can be only and must be set when warm_enabled is set to true.
+	// Instance type for the OpenSearch cluster's warm nodes. warm_type can be only and must be set when warm_enabled is set to true.
 	WarmType *string `json:"warmType,omitempty" tf:"warm_type,omitempty"`
 
 	// Configuration block containing zone awareness settings. Detailed below.
@@ -234,7 +234,7 @@ type ClusterConfigObservation struct {
 	// Whether to enable warm storage.
 	WarmEnabled *bool `json:"warmEnabled,omitempty" tf:"warm_enabled,omitempty"`
 
-	// Instance type for the OpenSearch cluster's warm nodes. Valid values are ultrawarm1.medium.search, ultrawarm1.large.search and ultrawarm1.xlarge.search. warm_type can be only and must be set when warm_enabled is set to true.
+	// Instance type for the OpenSearch cluster's warm nodes. warm_type can be only and must be set when warm_enabled is set to true.
 	WarmType *string `json:"warmType,omitempty" tf:"warm_type,omitempty"`
 
 	// Configuration block containing zone awareness settings. Detailed below.
@@ -286,7 +286,7 @@ type ClusterConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	WarmEnabled *bool `json:"warmEnabled,omitempty" tf:"warm_enabled,omitempty"`
 
-	// Instance type for the OpenSearch cluster's warm nodes. Valid values are ultrawarm1.medium.search, ultrawarm1.large.search and ultrawarm1.xlarge.search. warm_type can be only and must be set when warm_enabled is set to true.
+	// Instance type for the OpenSearch cluster's warm nodes. warm_type can be only and must be set when warm_enabled is set to true.
 	// +kubebuilder:validation:Optional
 	WarmType *string `json:"warmType,omitempty" tf:"warm_type,omitempty"`
 
@@ -542,10 +542,10 @@ type DomainObservation struct {
 	// Configuration block for authenticating dashboard with Cognito. Detailed below.
 	CognitoOptions *CognitoOptionsObservation `json:"cognitoOptions,omitempty" tf:"cognito_options,omitempty"`
 
-	// Domain-specific endpoint for Dashboard without https scheme.
+	// Domain-specific endpoint for Dashboard without HTTPS scheme.
 	DashboardEndpoint *string `json:"dashboardEndpoint,omitempty" tf:"dashboard_endpoint,omitempty"`
 
-	// V2 domain endpoint for Dashboard that works with both IPv4 and IPv6 addresses, without https scheme.
+	// V2 domain endpoint for Dashboard that works with both IPv4 and IPv6 addresses, without HTTPS scheme.
 	DashboardEndpointV2 *string `json:"dashboardEndpointV2,omitempty" tf:"dashboard_endpoint_v2,omitempty"`
 
 	// Configuration block for the deployment strategy options of the domain. Detailed below.
@@ -962,7 +962,7 @@ type JwtOptionsParameters struct {
 
 type LogPublishingOptionsInitParameters struct {
 
-	// ARN of the Cloudwatch log group to which log needs to be published.
+	// ARN of the CloudWatch log group to which log needs to be published.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/cloudwatchlogs/v1beta1.Group
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	CloudwatchLogGroupArn *string `json:"cloudwatchLogGroupArn,omitempty" tf:"cloudwatch_log_group_arn,omitempty"`
@@ -984,7 +984,7 @@ type LogPublishingOptionsInitParameters struct {
 
 type LogPublishingOptionsObservation struct {
 
-	// ARN of the Cloudwatch log group to which log needs to be published.
+	// ARN of the CloudWatch log group to which log needs to be published.
 	CloudwatchLogGroupArn *string `json:"cloudwatchLogGroupArn,omitempty" tf:"cloudwatch_log_group_arn,omitempty"`
 
 	// Whether given log publishing option is enabled or not.
@@ -996,7 +996,7 @@ type LogPublishingOptionsObservation struct {
 
 type LogPublishingOptionsParameters struct {
 
-	// ARN of the Cloudwatch log group to which log needs to be published.
+	// ARN of the CloudWatch log group to which log needs to be published.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/cloudwatchlogs/v1beta1.Group
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional

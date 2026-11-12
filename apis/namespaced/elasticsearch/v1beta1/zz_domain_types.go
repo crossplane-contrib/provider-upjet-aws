@@ -431,7 +431,7 @@ type DomainObservation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Domain-specific endpoint for kibana without https scheme.
+	// Domain-specific endpoint for kibana without HTTPS scheme.
 	KibanaEndpoint *string `json:"kibanaEndpoint,omitempty" tf:"kibana_endpoint,omitempty"`
 
 	// Configuration block for publishing slow and application logs to CloudWatch Logs. This block can be declared multiple times, for each log_type, within the same resource. Detailed below.
@@ -648,7 +648,7 @@ type EncryptAtRestParameters struct {
 
 type LogPublishingOptionsInitParameters struct {
 
-	// ARN of the Cloudwatch log group to which log needs to be published.
+	// ARN of the CloudWatch log group to which log needs to be published.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/cloudwatchlogs/v1beta1.Group
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	CloudwatchLogGroupArn *string `json:"cloudwatchLogGroupArn,omitempty" tf:"cloudwatch_log_group_arn,omitempty"`
@@ -670,7 +670,7 @@ type LogPublishingOptionsInitParameters struct {
 
 type LogPublishingOptionsObservation struct {
 
-	// ARN of the Cloudwatch log group to which log needs to be published.
+	// ARN of the CloudWatch log group to which log needs to be published.
 	CloudwatchLogGroupArn *string `json:"cloudwatchLogGroupArn,omitempty" tf:"cloudwatch_log_group_arn,omitempty"`
 
 	// Whether given log publishing option is enabled or not.
@@ -682,7 +682,7 @@ type LogPublishingOptionsObservation struct {
 
 type LogPublishingOptionsParameters struct {
 
-	// ARN of the Cloudwatch log group to which log needs to be published.
+	// ARN of the CloudWatch log group to which log needs to be published.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/cloudwatchlogs/v1beta1.Group
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional

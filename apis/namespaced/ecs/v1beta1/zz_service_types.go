@@ -400,14 +400,20 @@ type LifecycleHookInitParameters struct {
 	// Custom parameters that Amazon ECS will pass to the hook target invocations (such as a Lambda function).
 	HookDetails *string `json:"hookDetails,omitempty" tf:"hook_details,omitempty"`
 
-	// ARN of the Lambda function to invoke for the lifecycle hook.
+	// ARN of the Lambda function to invoke for the lifecycle hook. Required when target_type is AWS_LAMBDA. Not used when target_type is PAUSE.
 	HookTargetArn *string `json:"hookTargetArn,omitempty" tf:"hook_target_arn,omitempty"`
 
 	// Stages during the deployment when the hook should be invoked. Valid values: RECONCILE_SERVICE, PRE_SCALE_UP, POST_SCALE_UP, TEST_TRAFFIC_SHIFT, POST_TEST_TRAFFIC_SHIFT, PRODUCTION_TRAFFIC_SHIFT, POST_PRODUCTION_TRAFFIC_SHIFT.
 	LifecycleStages []*string `json:"lifecycleStages,omitempty" tf:"lifecycle_stages,omitempty"`
 
-	// ARN of the IAM role that grants the service permission to invoke the Lambda function.
+	// ARN of the IAM role that grants the service permission to invoke the Lambda function. Required when target_type is AWS_LAMBDA. Not used when target_type is PAUSE.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Type of hook target. Valid values: AWS_LAMBDA, PAUSE. Default: AWS_LAMBDA. PAUSE hooks cannot use the TEST_TRAFFIC_SHIFT or PRODUCTION_TRAFFIC_SHIFT lifecycle stages.
+	TargetType *string `json:"targetType,omitempty" tf:"target_type,omitempty"`
+
+	// Configuration block defining the timeout behavior for a PAUSE hook. Only valid when target_type is PAUSE. See below.
+	TimeoutConfiguration *TimeoutConfigurationInitParameters `json:"timeoutConfiguration,omitempty" tf:"timeout_configuration,omitempty"`
 }
 
 type LifecycleHookObservation struct {
@@ -415,14 +421,20 @@ type LifecycleHookObservation struct {
 	// Custom parameters that Amazon ECS will pass to the hook target invocations (such as a Lambda function).
 	HookDetails *string `json:"hookDetails,omitempty" tf:"hook_details,omitempty"`
 
-	// ARN of the Lambda function to invoke for the lifecycle hook.
+	// ARN of the Lambda function to invoke for the lifecycle hook. Required when target_type is AWS_LAMBDA. Not used when target_type is PAUSE.
 	HookTargetArn *string `json:"hookTargetArn,omitempty" tf:"hook_target_arn,omitempty"`
 
 	// Stages during the deployment when the hook should be invoked. Valid values: RECONCILE_SERVICE, PRE_SCALE_UP, POST_SCALE_UP, TEST_TRAFFIC_SHIFT, POST_TEST_TRAFFIC_SHIFT, PRODUCTION_TRAFFIC_SHIFT, POST_PRODUCTION_TRAFFIC_SHIFT.
 	LifecycleStages []*string `json:"lifecycleStages,omitempty" tf:"lifecycle_stages,omitempty"`
 
-	// ARN of the IAM role that grants the service permission to invoke the Lambda function.
+	// ARN of the IAM role that grants the service permission to invoke the Lambda function. Required when target_type is AWS_LAMBDA. Not used when target_type is PAUSE.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Type of hook target. Valid values: AWS_LAMBDA, PAUSE. Default: AWS_LAMBDA. PAUSE hooks cannot use the TEST_TRAFFIC_SHIFT or PRODUCTION_TRAFFIC_SHIFT lifecycle stages.
+	TargetType *string `json:"targetType,omitempty" tf:"target_type,omitempty"`
+
+	// Configuration block defining the timeout behavior for a PAUSE hook. Only valid when target_type is PAUSE. See below.
+	TimeoutConfiguration *TimeoutConfigurationObservation `json:"timeoutConfiguration,omitempty" tf:"timeout_configuration,omitempty"`
 }
 
 type LifecycleHookParameters struct {
@@ -431,17 +443,25 @@ type LifecycleHookParameters struct {
 	// +kubebuilder:validation:Optional
 	HookDetails *string `json:"hookDetails,omitempty" tf:"hook_details,omitempty"`
 
-	// ARN of the Lambda function to invoke for the lifecycle hook.
+	// ARN of the Lambda function to invoke for the lifecycle hook. Required when target_type is AWS_LAMBDA. Not used when target_type is PAUSE.
 	// +kubebuilder:validation:Optional
-	HookTargetArn *string `json:"hookTargetArn" tf:"hook_target_arn,omitempty"`
+	HookTargetArn *string `json:"hookTargetArn,omitempty" tf:"hook_target_arn,omitempty"`
 
 	// Stages during the deployment when the hook should be invoked. Valid values: RECONCILE_SERVICE, PRE_SCALE_UP, POST_SCALE_UP, TEST_TRAFFIC_SHIFT, POST_TEST_TRAFFIC_SHIFT, PRODUCTION_TRAFFIC_SHIFT, POST_PRODUCTION_TRAFFIC_SHIFT.
 	// +kubebuilder:validation:Optional
 	LifecycleStages []*string `json:"lifecycleStages" tf:"lifecycle_stages,omitempty"`
 
-	// ARN of the IAM role that grants the service permission to invoke the Lambda function.
+	// ARN of the IAM role that grants the service permission to invoke the Lambda function. Required when target_type is AWS_LAMBDA. Not used when target_type is PAUSE.
 	// +kubebuilder:validation:Optional
-	RoleArn *string `json:"roleArn" tf:"role_arn,omitempty"`
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Type of hook target. Valid values: AWS_LAMBDA, PAUSE. Default: AWS_LAMBDA. PAUSE hooks cannot use the TEST_TRAFFIC_SHIFT or PRODUCTION_TRAFFIC_SHIFT lifecycle stages.
+	// +kubebuilder:validation:Optional
+	TargetType *string `json:"targetType,omitempty" tf:"target_type,omitempty"`
+
+	// Configuration block defining the timeout behavior for a PAUSE hook. Only valid when target_type is PAUSE. See below.
+	// +kubebuilder:validation:Optional
+	TimeoutConfiguration *TimeoutConfigurationParameters `json:"timeoutConfiguration,omitempty" tf:"timeout_configuration,omitempty"`
 }
 
 type LinearConfigurationInitParameters struct {
@@ -1571,6 +1591,35 @@ type TestTrafficRulesParameters struct {
 	// Configuration block for header-based routing rules. See below.
 	// +kubebuilder:validation:Optional
 	Header *HeaderParameters `json:"header,omitempty" tf:"header,omitempty"`
+}
+
+type TimeoutConfigurationInitParameters struct {
+
+	// Action ECS takes when the pause hook times out. Valid values: ROLLBACK, CONTINUE. Default: ROLLBACK.
+	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+
+	// Number of minutes to wait before executing the timeout action. Valid range: 1-20160 minutes. Default: 1440 (24 hours).
+	TimeoutInMinutes *string `json:"timeoutInMinutes,omitempty" tf:"timeout_in_minutes,omitempty"`
+}
+
+type TimeoutConfigurationObservation struct {
+
+	// Action ECS takes when the pause hook times out. Valid values: ROLLBACK, CONTINUE. Default: ROLLBACK.
+	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+
+	// Number of minutes to wait before executing the timeout action. Valid range: 1-20160 minutes. Default: 1440 (24 hours).
+	TimeoutInMinutes *string `json:"timeoutInMinutes,omitempty" tf:"timeout_in_minutes,omitempty"`
+}
+
+type TimeoutConfigurationParameters struct {
+
+	// Action ECS takes when the pause hook times out. Valid values: ROLLBACK, CONTINUE. Default: ROLLBACK.
+	// +kubebuilder:validation:Optional
+	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+
+	// Number of minutes to wait before executing the timeout action. Valid range: 1-20160 minutes. Default: 1440 (24 hours).
+	// +kubebuilder:validation:Optional
+	TimeoutInMinutes *string `json:"timeoutInMinutes,omitempty" tf:"timeout_in_minutes,omitempty"`
 }
 
 type TimeoutInitParameters struct {

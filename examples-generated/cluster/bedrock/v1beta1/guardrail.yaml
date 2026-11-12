@@ -21,7 +21,7 @@ spec:
         outputStrength: MEDIUM
         type: HATE
       tierConfig:
-        tierName: STANDARD
+        tierName: CLASSIC
     description: example
     name: example
     region: us-west-1

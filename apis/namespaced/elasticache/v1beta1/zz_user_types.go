@@ -64,7 +64,7 @@ type UserInitParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The username of the user.
+	// The username of the user. For IAM authentication, this value must match user_id.
 	UserName *string `json:"userName,omitempty" tf:"user_name,omitempty"`
 }
 
@@ -101,7 +101,7 @@ type UserObservation struct {
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// The username of the user.
+	// The username of the user. For IAM authentication, this value must match user_id.
 	UserName *string `json:"userName,omitempty" tf:"user_name,omitempty"`
 }
 
@@ -145,7 +145,7 @@ type UserParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The username of the user.
+	// The username of the user. For IAM authentication, this value must match user_id.
 	// +kubebuilder:validation:Optional
 	UserName *string `json:"userName,omitempty" tf:"user_name,omitempty"`
 }

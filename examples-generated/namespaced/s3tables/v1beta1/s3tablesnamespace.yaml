@@ -1,0 +1,37 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
+apiVersion: s3tables.aws.m.upbound.io/v1beta1
+kind: S3TablesNamespace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s3tables/v1beta1/s3tablesnamespace
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    namespace: example_namespace
+    region: us-west-1
+    tableBucketArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: s3tables.aws.m.upbound.io/v1beta1
+kind: TableBucket
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s3tables/v1beta1/s3tablesnamespace
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    name: example-bucket
+    region: us-west-1

@@ -18,10 +18,10 @@ type DNSEntryInitParameters struct {
 
 type DNSEntryObservation struct {
 
-	// The DNS name.
+	// DNS name.
 	DNSName *string `json:"dnsName,omitempty" tf:"dns_name,omitempty"`
 
-	// The ID of the private hosted zone.
+	// ID of the private hosted zone.
 	HostedZoneID *string `json:"hostedZoneId,omitempty" tf:"hosted_zone_id,omitempty"`
 }
 
@@ -30,10 +30,10 @@ type DNSEntryParameters struct {
 
 type DNSOptionsInitParameters struct {
 
-	// The DNS records created for the endpoint. Valid values are ipv4, dualstack, service-defined, and ipv6.
+	// DNS records created for the endpoint. Valid values are ipv4, dualstack, service-defined, and ipv6.
 	DNSRecordIPType *string `json:"dnsRecordIpType,omitempty" tf:"dns_record_ip_type,omitempty"`
 
-	// Boolean indicating whether to enable private DNS only for inbound endpoints. This option is available only for interface endpoints of services that support both gateway and interface endpoints. A gateway endpoint for the same service must be created before an interface endpoint is created. Traffic originating from the VPC is routed to the gateway endpoint, while traffic originating from on-premises is routed to the interface endpoint. Defaults to false. This argument can be specified only if private_dns_enabled is true.
+	// Whether to enable private DNS only for inbound endpoints. This option is available only for interface endpoints of services that support both gateway and interface endpoints. A gateway endpoint for the same service must be created before an interface endpoint is created. Traffic originating from the VPC is routed to the gateway endpoint, while traffic originating from on-premises is routed to the interface endpoint. Defaults to false. This argument can be specified only if private_dns_enabled is true.
 	PrivateDNSOnlyForInboundResolverEndpoint *bool `json:"privateDnsOnlyForInboundResolverEndpoint,omitempty" tf:"private_dns_only_for_inbound_resolver_endpoint,omitempty"`
 
 	// Preference for which private domains have a private hosted zone created for and associated with the specified VPC. Valid values are ALL_DOMAINS, VERIFIED_DOMAINS_ONLY, VERIFIED_DOMAINS_AND_SPECIFIED_DOMAINS, and SPECIFIED_DOMAINS_ONLY. Only supported when private_dns_enabled is true and when the vpc_endpoint_type is ServiceNetwork or Resource.
@@ -46,10 +46,10 @@ type DNSOptionsInitParameters struct {
 
 type DNSOptionsObservation struct {
 
-	// The DNS records created for the endpoint. Valid values are ipv4, dualstack, service-defined, and ipv6.
+	// DNS records created for the endpoint. Valid values are ipv4, dualstack, service-defined, and ipv6.
 	DNSRecordIPType *string `json:"dnsRecordIpType,omitempty" tf:"dns_record_ip_type,omitempty"`
 
-	// Boolean indicating whether to enable private DNS only for inbound endpoints. This option is available only for interface endpoints of services that support both gateway and interface endpoints. A gateway endpoint for the same service must be created before an interface endpoint is created. Traffic originating from the VPC is routed to the gateway endpoint, while traffic originating from on-premises is routed to the interface endpoint. Defaults to false. This argument can be specified only if private_dns_enabled is true.
+	// Whether to enable private DNS only for inbound endpoints. This option is available only for interface endpoints of services that support both gateway and interface endpoints. A gateway endpoint for the same service must be created before an interface endpoint is created. Traffic originating from the VPC is routed to the gateway endpoint, while traffic originating from on-premises is routed to the interface endpoint. Defaults to false. This argument can be specified only if private_dns_enabled is true.
 	PrivateDNSOnlyForInboundResolverEndpoint *bool `json:"privateDnsOnlyForInboundResolverEndpoint,omitempty" tf:"private_dns_only_for_inbound_resolver_endpoint,omitempty"`
 
 	// Preference for which private domains have a private hosted zone created for and associated with the specified VPC. Valid values are ALL_DOMAINS, VERIFIED_DOMAINS_ONLY, VERIFIED_DOMAINS_AND_SPECIFIED_DOMAINS, and SPECIFIED_DOMAINS_ONLY. Only supported when private_dns_enabled is true and when the vpc_endpoint_type is ServiceNetwork or Resource.
@@ -62,11 +62,11 @@ type DNSOptionsObservation struct {
 
 type DNSOptionsParameters struct {
 
-	// The DNS records created for the endpoint. Valid values are ipv4, dualstack, service-defined, and ipv6.
+	// DNS records created for the endpoint. Valid values are ipv4, dualstack, service-defined, and ipv6.
 	// +kubebuilder:validation:Optional
 	DNSRecordIPType *string `json:"dnsRecordIpType,omitempty" tf:"dns_record_ip_type,omitempty"`
 
-	// Boolean indicating whether to enable private DNS only for inbound endpoints. This option is available only for interface endpoints of services that support both gateway and interface endpoints. A gateway endpoint for the same service must be created before an interface endpoint is created. Traffic originating from the VPC is routed to the gateway endpoint, while traffic originating from on-premises is routed to the interface endpoint. Defaults to false. This argument can be specified only if private_dns_enabled is true.
+	// Whether to enable private DNS only for inbound endpoints. This option is available only for interface endpoints of services that support both gateway and interface endpoints. A gateway endpoint for the same service must be created before an interface endpoint is created. Traffic originating from the VPC is routed to the gateway endpoint, while traffic originating from on-premises is routed to the interface endpoint. Defaults to false. This argument can be specified only if private_dns_enabled is true.
 	// +kubebuilder:validation:Optional
 	PrivateDNSOnlyForInboundResolverEndpoint *bool `json:"privateDnsOnlyForInboundResolverEndpoint,omitempty" tf:"private_dns_only_for_inbound_resolver_endpoint,omitempty"`
 
@@ -82,13 +82,13 @@ type DNSOptionsParameters struct {
 
 type SubnetConfigurationInitParameters struct {
 
-	// The IPv4 address to assign to the endpoint network interface in the subnet. You must provide an IPv4 address if the VPC endpoint supports IPv4.
+	// IPv4 address to assign to the endpoint network interface in the subnet. You must provide an IPv4 address if the VPC endpoint supports IPv4.
 	IPv4 *string `json:"ipv4,omitempty" tf:"ipv4,omitempty"`
 
-	// The IPv6 address to assign to the endpoint network interface in the subnet. You must provide an IPv6 address if the VPC endpoint supports IPv6.
+	// IPv6 address to assign to the endpoint network interface in the subnet. You must provide an IPv6 address if the VPC endpoint supports IPv6.
 	IPv6 *string `json:"ipv6,omitempty" tf:"ipv6,omitempty"`
 
-	// The ID of the subnet. Must have a corresponding subnet in the subnet_ids argument.
+	// ID of the subnet. Must have a corresponding subnet in the subnet_ids argument.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
@@ -104,27 +104,27 @@ type SubnetConfigurationInitParameters struct {
 
 type SubnetConfigurationObservation struct {
 
-	// The IPv4 address to assign to the endpoint network interface in the subnet. You must provide an IPv4 address if the VPC endpoint supports IPv4.
+	// IPv4 address to assign to the endpoint network interface in the subnet. You must provide an IPv4 address if the VPC endpoint supports IPv4.
 	IPv4 *string `json:"ipv4,omitempty" tf:"ipv4,omitempty"`
 
-	// The IPv6 address to assign to the endpoint network interface in the subnet. You must provide an IPv6 address if the VPC endpoint supports IPv6.
+	// IPv6 address to assign to the endpoint network interface in the subnet. You must provide an IPv6 address if the VPC endpoint supports IPv6.
 	IPv6 *string `json:"ipv6,omitempty" tf:"ipv6,omitempty"`
 
-	// The ID of the subnet. Must have a corresponding subnet in the subnet_ids argument.
+	// ID of the subnet. Must have a corresponding subnet in the subnet_ids argument.
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 }
 
 type SubnetConfigurationParameters struct {
 
-	// The IPv4 address to assign to the endpoint network interface in the subnet. You must provide an IPv4 address if the VPC endpoint supports IPv4.
+	// IPv4 address to assign to the endpoint network interface in the subnet. You must provide an IPv4 address if the VPC endpoint supports IPv4.
 	// +kubebuilder:validation:Optional
 	IPv4 *string `json:"ipv4,omitempty" tf:"ipv4,omitempty"`
 
-	// The IPv6 address to assign to the endpoint network interface in the subnet. You must provide an IPv6 address if the VPC endpoint supports IPv6.
+	// IPv6 address to assign to the endpoint network interface in the subnet. You must provide an IPv6 address if the VPC endpoint supports IPv6.
 	// +kubebuilder:validation:Optional
 	IPv6 *string `json:"ipv6,omitempty" tf:"ipv6,omitempty"`
 
-	// The ID of the subnet. Must have a corresponding subnet in the subnet_ids argument.
+	// ID of the subnet. Must have a corresponding subnet in the subnet_ids argument.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -141,23 +141,22 @@ type SubnetConfigurationParameters struct {
 
 type VPCEndpointInitParameters_2 struct {
 
-	// Accept the VPC endpoint (the VPC endpoint and service need to be in the same AWS account).
+	// Whether to accept the VPC endpoint (the VPC endpoint and service need to be in the same AWS account).
 	AutoAccept *bool `json:"autoAccept,omitempty" tf:"auto_accept,omitempty"`
 
-	// The DNS options for the endpoint. See dns_options below.
+	// DNS options for the endpoint. See dns_options below.
 	DNSOptions *DNSOptionsInitParameters `json:"dnsOptions,omitempty" tf:"dns_options,omitempty"`
 
-	// The IP address type for the endpoint. Valid values are ipv4, dualstack, and ipv6.
+	// IP address type for the endpoint. Valid values are ipv4, dualstack, and ipv6.
 	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
 
-	// A policy to attach to the endpoint that controls access to the service. This is a JSON formatted string. Defaults to full access. All Gateway and some Interface endpoints support policies - see the relevant AWS documentation for more details.
+	// Policy to attach to the endpoint that controls access to the service. This is a JSON formatted string. Defaults to full access. All Gateway and some Interface endpoints support policies - see the relevant AWS documentation for more details.
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
-	// Whether or not to associate a private hosted zone with the specified VPC. Applicable for endpoints of type Interface. Most users will want this enabled to allow services within the VPC to automatically use the endpoint.
-	// Defaults to false. If vpc_endpoint_type is anything other than Interface, changing this value forces a new resource to be created.
+	// Whether to associate a private hosted zone with the specified VPC. Available for AWS services and AWS Marketplace partner services only. Applicable for endpoints of type Interface. Most users will want this enabled to allow services within the VPC to automatically use the endpoint. Defaults to false. If vpc_endpoint_type is anything other than Interface, changing this value forces a new resource to be created.
 	PrivateDNSEnabled *bool `json:"privateDnsEnabled,omitempty" tf:"private_dns_enabled,omitempty"`
 
-	// The ARN of a Resource Configuration to connect this VPC Endpoint to. Exactly one of resource_configuration_arn, service_name or service_network_arn is required.
+	// ARN of a Resource Configuration to connect this VPC Endpoint to. Exactly one of resource_configuration_arn, service_name or service_network_arn is required. Applicable for endpoints of type Resource and Tunnel. For Tunnel endpoints, the resource configuration must be of type CIDR.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/vpclattice/v1beta1.ResourceConfiguration
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	ResourceConfigurationArn *string `json:"resourceConfigurationArn,omitempty" tf:"resource_configuration_arn,omitempty"`
@@ -170,7 +169,7 @@ type VPCEndpointInitParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	ResourceConfigurationArnSelector *v2.NamespacedSelector `json:"resourceConfigurationArnSelector,omitempty" tf:"-"`
 
-	// The service name. For AWS services the service name is usually in the form com.amazonaws.<region>.<service> (the SageMaker AI Notebook service is an exception to this rule, the service name is in the form aws.sagemaker.<region>.notebook). Exactly one of resource_configuration_arn, service_name or service_network_arn is required.
+	// Service name. For AWS services the service name is usually in the form com.amazonaws.<region>.<service> (the SageMaker AI Notebook service is an exception to this rule, the service name is in the form aws.sagemaker.<region>.notebook). Exactly one of resource_configuration_arn, service_name or service_network_arn is required.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.VPCEndpointService
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("service_name",true)
 	ServiceName *string `json:"serviceName,omitempty" tf:"service_name,omitempty"`
@@ -183,7 +182,7 @@ type VPCEndpointInitParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	ServiceNameSelector *v2.NamespacedSelector `json:"serviceNameSelector,omitempty" tf:"-"`
 
-	// The ARN of a Service Network to connect this VPC Endpoint to. Exactly one of resource_configuration_arn, service_name or service_network_arn is required.
+	// ARN of a Service Network to connect this VPC Endpoint to. Exactly one of resource_configuration_arn, service_name or service_network_arn is required.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/vpclattice/v1beta1.ServiceNetwork
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	ServiceNetworkArn *string `json:"serviceNetworkArn,omitempty" tf:"service_network_arn,omitempty"`
@@ -196,7 +195,7 @@ type VPCEndpointInitParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	ServiceNetworkArnSelector *v2.NamespacedSelector `json:"serviceNetworkArnSelector,omitempty" tf:"-"`
 
-	// - The AWS region of the VPC Endpoint Service. If specified, the VPC endpoint will connect to the service in the provided region. Applicable for endpoints of type Interface.
+	// AWS region of the VPC Endpoint Service. If specified, the VPC endpoint will connect to the service in the provided region. Applicable for endpoints of type Interface.
 	ServiceRegion *string `json:"serviceRegion,omitempty" tf:"service_region,omitempty"`
 
 	// Subnet configuration for the endpoint, used to select specific IPv4 and/or IPv6 addresses to the endpoint. See subnet_configuration below.
@@ -206,10 +205,10 @@ type VPCEndpointInitParameters_2 struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The VPC endpoint type, Gateway, GatewayLoadBalancer,Interface, Resource or ServiceNetwork. Defaults to Gateway.
+	// VPC endpoint type, Gateway, GatewayLoadBalancer, Interface, Resource, ServiceNetwork or Tunnel. Defaults to Gateway.
 	VPCEndpointType *string `json:"vpcEndpointType,omitempty" tf:"vpc_endpoint_type,omitempty"`
 
-	// The ID of the VPC in which the endpoint will be used.
+	// ID of the VPC in which the endpoint will be used.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.VPC
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 
@@ -227,39 +226,38 @@ type VPCEndpointObservation_2 struct {
 	// ARN of the VPC endpoint.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// Accept the VPC endpoint (the VPC endpoint and service need to be in the same AWS account).
+	// Whether to accept the VPC endpoint (the VPC endpoint and service need to be in the same AWS account).
 	AutoAccept *bool `json:"autoAccept,omitempty" tf:"auto_accept,omitempty"`
 
-	// The list of CIDR blocks for the exposed AWS service. Applicable for endpoints of type Gateway.
+	// List of CIDR blocks for the exposed AWS service. Applicable for endpoints of type Gateway.
 	CidrBlocks []*string `json:"cidrBlocks,omitempty" tf:"cidr_blocks,omitempty"`
 
-	// The DNS entries for the VPC Endpoint. Applicable for endpoints of type Interface. DNS blocks are documented below.
+	// DNS entries for the VPC Endpoint. Applicable for endpoints of type Interface. See dns_entry below.
 	DNSEntry []DNSEntryObservation `json:"dnsEntry,omitempty" tf:"dns_entry,omitempty"`
 
-	// The DNS options for the endpoint. See dns_options below.
+	// DNS options for the endpoint. See dns_options below.
 	DNSOptions *DNSOptionsObservation `json:"dnsOptions,omitempty" tf:"dns_options,omitempty"`
 
-	// The ID of the VPC endpoint.
+	// ID of the VPC endpoint.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The IP address type for the endpoint. Valid values are ipv4, dualstack, and ipv6.
+	// IP address type for the endpoint. Valid values are ipv4, dualstack, and ipv6.
 	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
 
 	// One or more network interfaces for the VPC Endpoint. Applicable for endpoints of type Interface.
 	// +listType=set
 	NetworkInterfaceIds []*string `json:"networkInterfaceIds,omitempty" tf:"network_interface_ids,omitempty"`
 
-	// The ID of the AWS account that owns the VPC endpoint.
+	// ID of the AWS account that owns the VPC endpoint.
 	OwnerID *string `json:"ownerId,omitempty" tf:"owner_id,omitempty"`
 
-	// A policy to attach to the endpoint that controls access to the service. This is a JSON formatted string. Defaults to full access. All Gateway and some Interface endpoints support policies - see the relevant AWS documentation for more details.
+	// Policy to attach to the endpoint that controls access to the service. This is a JSON formatted string. Defaults to full access. All Gateway and some Interface endpoints support policies - see the relevant AWS documentation for more details.
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
-	// The prefix list ID of the exposed AWS service. Applicable for endpoints of type Gateway.
+	// Prefix list ID of the exposed AWS service. Applicable for endpoints of type Gateway.
 	PrefixListID *string `json:"prefixListId,omitempty" tf:"prefix_list_id,omitempty"`
 
-	// Whether or not to associate a private hosted zone with the specified VPC. Applicable for endpoints of type Interface. Most users will want this enabled to allow services within the VPC to automatically use the endpoint.
-	// Defaults to false. If vpc_endpoint_type is anything other than Interface, changing this value forces a new resource to be created.
+	// Whether to associate a private hosted zone with the specified VPC. Available for AWS services and AWS Marketplace partner services only. Applicable for endpoints of type Interface. Most users will want this enabled to allow services within the VPC to automatically use the endpoint. Defaults to false. If vpc_endpoint_type is anything other than Interface, changing this value forces a new resource to be created.
 	PrivateDNSEnabled *bool `json:"privateDnsEnabled,omitempty" tf:"private_dns_enabled,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -269,34 +267,33 @@ type VPCEndpointObservation_2 struct {
 	// Whether or not the VPC Endpoint is being managed by its service - true or false.
 	RequesterManaged *bool `json:"requesterManaged,omitempty" tf:"requester_managed,omitempty"`
 
-	// The ARN of a Resource Configuration to connect this VPC Endpoint to. Exactly one of resource_configuration_arn, service_name or service_network_arn is required.
+	// ARN of a Resource Configuration to connect this VPC Endpoint to. Exactly one of resource_configuration_arn, service_name or service_network_arn is required. Applicable for endpoints of type Resource and Tunnel. For Tunnel endpoints, the resource configuration must be of type CIDR.
 	ResourceConfigurationArn *string `json:"resourceConfigurationArn,omitempty" tf:"resource_configuration_arn,omitempty"`
 
 	// One or more route table IDs. Applicable for endpoints of type Gateway.
 	// +listType=set
 	RouteTableIds []*string `json:"routeTableIds,omitempty" tf:"route_table_ids,omitempty"`
 
-	// The ID of one or more security groups to associate with the network interface. Applicable for endpoints of type Interface.
-	// If no security groups are specified, the VPC's default security group is associated with the endpoint.
+	// ID of one or more security groups to associate with the network interface. Applicable for endpoints of type Interface, Resource, ServiceNetwork, and Tunnel. If no security groups are specified, the VPC's default security group is associated with the endpoint.
 	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
-	// The service name. For AWS services the service name is usually in the form com.amazonaws.<region>.<service> (the SageMaker AI Notebook service is an exception to this rule, the service name is in the form aws.sagemaker.<region>.notebook). Exactly one of resource_configuration_arn, service_name or service_network_arn is required.
+	// Service name. For AWS services the service name is usually in the form com.amazonaws.<region>.<service> (the SageMaker AI Notebook service is an exception to this rule, the service name is in the form aws.sagemaker.<region>.notebook). Exactly one of resource_configuration_arn, service_name or service_network_arn is required.
 	ServiceName *string `json:"serviceName,omitempty" tf:"service_name,omitempty"`
 
-	// The ARN of a Service Network to connect this VPC Endpoint to. Exactly one of resource_configuration_arn, service_name or service_network_arn is required.
+	// ARN of a Service Network to connect this VPC Endpoint to. Exactly one of resource_configuration_arn, service_name or service_network_arn is required.
 	ServiceNetworkArn *string `json:"serviceNetworkArn,omitempty" tf:"service_network_arn,omitempty"`
 
-	// - The AWS region of the VPC Endpoint Service. If specified, the VPC endpoint will connect to the service in the provided region. Applicable for endpoints of type Interface.
+	// AWS region of the VPC Endpoint Service. If specified, the VPC endpoint will connect to the service in the provided region. Applicable for endpoints of type Interface.
 	ServiceRegion *string `json:"serviceRegion,omitempty" tf:"service_region,omitempty"`
 
-	// The state of the VPC endpoint.
+	// State of the VPC endpoint.
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 
 	// Subnet configuration for the endpoint, used to select specific IPv4 and/or IPv6 addresses to the endpoint. See subnet_configuration below.
 	SubnetConfiguration []SubnetConfigurationObservation `json:"subnetConfiguration,omitempty" tf:"subnet_configuration,omitempty"`
 
-	// The ID of one or more subnets in which to create a network interface for the endpoint. Applicable for endpoints of type GatewayLoadBalancer and Interface. Interface type endpoints cannot function without being assigned to a subnet.
+	// ID of one or more subnets in which to create a network interface for the endpoint. Applicable for endpoints of type GatewayLoadBalancer, Interface, Resource, ServiceNetwork, and Tunnel. Interface type endpoints cannot function without being assigned to a subnet. For Tunnel endpoints, the subnets must be in the Availability Zones of the resource gateway associated with the resource configuration.
 	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
@@ -304,37 +301,36 @@ type VPCEndpointObservation_2 struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// The VPC endpoint type, Gateway, GatewayLoadBalancer,Interface, Resource or ServiceNetwork. Defaults to Gateway.
+	// VPC endpoint type, Gateway, GatewayLoadBalancer, Interface, Resource, ServiceNetwork or Tunnel. Defaults to Gateway.
 	VPCEndpointType *string `json:"vpcEndpointType,omitempty" tf:"vpc_endpoint_type,omitempty"`
 
-	// The ID of the VPC in which the endpoint will be used.
+	// ID of the VPC in which the endpoint will be used.
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 }
 
 type VPCEndpointParameters_2 struct {
 
-	// Accept the VPC endpoint (the VPC endpoint and service need to be in the same AWS account).
+	// Whether to accept the VPC endpoint (the VPC endpoint and service need to be in the same AWS account).
 	// +kubebuilder:validation:Optional
 	AutoAccept *bool `json:"autoAccept,omitempty" tf:"auto_accept,omitempty"`
 
-	// The DNS options for the endpoint. See dns_options below.
+	// DNS options for the endpoint. See dns_options below.
 	// +kubebuilder:validation:Optional
 	DNSOptions *DNSOptionsParameters `json:"dnsOptions,omitempty" tf:"dns_options,omitempty"`
 
-	// The IP address type for the endpoint. Valid values are ipv4, dualstack, and ipv6.
+	// IP address type for the endpoint. Valid values are ipv4, dualstack, and ipv6.
 	// +kubebuilder:validation:Optional
 	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
 
-	// A policy to attach to the endpoint that controls access to the service. This is a JSON formatted string. Defaults to full access. All Gateway and some Interface endpoints support policies - see the relevant AWS documentation for more details.
+	// Policy to attach to the endpoint that controls access to the service. This is a JSON formatted string. Defaults to full access. All Gateway and some Interface endpoints support policies - see the relevant AWS documentation for more details.
 	// +kubebuilder:validation:Optional
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
-	// Whether or not to associate a private hosted zone with the specified VPC. Applicable for endpoints of type Interface. Most users will want this enabled to allow services within the VPC to automatically use the endpoint.
-	// Defaults to false. If vpc_endpoint_type is anything other than Interface, changing this value forces a new resource to be created.
+	// Whether to associate a private hosted zone with the specified VPC. Available for AWS services and AWS Marketplace partner services only. Applicable for endpoints of type Interface. Most users will want this enabled to allow services within the VPC to automatically use the endpoint. Defaults to false. If vpc_endpoint_type is anything other than Interface, changing this value forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	PrivateDNSEnabled *bool `json:"privateDnsEnabled,omitempty" tf:"private_dns_enabled,omitempty"`
 
@@ -343,7 +339,7 @@ type VPCEndpointParameters_2 struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// The ARN of a Resource Configuration to connect this VPC Endpoint to. Exactly one of resource_configuration_arn, service_name or service_network_arn is required.
+	// ARN of a Resource Configuration to connect this VPC Endpoint to. Exactly one of resource_configuration_arn, service_name or service_network_arn is required. Applicable for endpoints of type Resource and Tunnel. For Tunnel endpoints, the resource configuration must be of type CIDR.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/vpclattice/v1beta1.ResourceConfiguration
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -357,7 +353,7 @@ type VPCEndpointParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	ResourceConfigurationArnSelector *v2.NamespacedSelector `json:"resourceConfigurationArnSelector,omitempty" tf:"-"`
 
-	// The service name. For AWS services the service name is usually in the form com.amazonaws.<region>.<service> (the SageMaker AI Notebook service is an exception to this rule, the service name is in the form aws.sagemaker.<region>.notebook). Exactly one of resource_configuration_arn, service_name or service_network_arn is required.
+	// Service name. For AWS services the service name is usually in the form com.amazonaws.<region>.<service> (the SageMaker AI Notebook service is an exception to this rule, the service name is in the form aws.sagemaker.<region>.notebook). Exactly one of resource_configuration_arn, service_name or service_network_arn is required.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.VPCEndpointService
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("service_name",true)
 	// +kubebuilder:validation:Optional
@@ -371,7 +367,7 @@ type VPCEndpointParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	ServiceNameSelector *v2.NamespacedSelector `json:"serviceNameSelector,omitempty" tf:"-"`
 
-	// The ARN of a Service Network to connect this VPC Endpoint to. Exactly one of resource_configuration_arn, service_name or service_network_arn is required.
+	// ARN of a Service Network to connect this VPC Endpoint to. Exactly one of resource_configuration_arn, service_name or service_network_arn is required.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/vpclattice/v1beta1.ServiceNetwork
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -385,7 +381,7 @@ type VPCEndpointParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	ServiceNetworkArnSelector *v2.NamespacedSelector `json:"serviceNetworkArnSelector,omitempty" tf:"-"`
 
-	// - The AWS region of the VPC Endpoint Service. If specified, the VPC endpoint will connect to the service in the provided region. Applicable for endpoints of type Interface.
+	// AWS region of the VPC Endpoint Service. If specified, the VPC endpoint will connect to the service in the provided region. Applicable for endpoints of type Interface.
 	// +kubebuilder:validation:Optional
 	ServiceRegion *string `json:"serviceRegion,omitempty" tf:"service_region,omitempty"`
 
@@ -398,11 +394,11 @@ type VPCEndpointParameters_2 struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The VPC endpoint type, Gateway, GatewayLoadBalancer,Interface, Resource or ServiceNetwork. Defaults to Gateway.
+	// VPC endpoint type, Gateway, GatewayLoadBalancer, Interface, Resource, ServiceNetwork or Tunnel. Defaults to Gateway.
 	// +kubebuilder:validation:Optional
 	VPCEndpointType *string `json:"vpcEndpointType,omitempty" tf:"vpc_endpoint_type,omitempty"`
 
-	// The ID of the VPC in which the endpoint will be used.
+	// ID of the VPC in which the endpoint will be used.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.VPC
 	// +kubebuilder:validation:Optional
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`

@@ -780,7 +780,7 @@ type RulesSourceListInitParameters struct {
 	// String value to specify whether domains in the target list are allowed or denied access. Valid values: ALLOWLIST, DENYLIST.
 	GeneratedRulesType *string `json:"generatedRulesType,omitempty" tf:"generated_rules_type,omitempty"`
 
-	// Set of types of domain specifications that are provided in the targets argument. Valid values: HTTP_HOST, TLS_SNI.
+	// Set of types of domain specifications that are provided in the targets argument. Valid values: AWS_ROUTE_53_RESOLVED_DOMAIN, HTTP_HOST, TLS_SNI. AWS_ROUTE_53_RESOLVED_DOMAIN takes effect only when the firewall policy that uses the rule group configures route53_resolved_ip_validation. For more information, see Route 53 resolved IP validation rules in the AWS Network Firewall Developer Guide.
 	// +listType=set
 	TargetTypes []*string `json:"targetTypes,omitempty" tf:"target_types,omitempty"`
 
@@ -794,7 +794,7 @@ type RulesSourceListObservation struct {
 	// String value to specify whether domains in the target list are allowed or denied access. Valid values: ALLOWLIST, DENYLIST.
 	GeneratedRulesType *string `json:"generatedRulesType,omitempty" tf:"generated_rules_type,omitempty"`
 
-	// Set of types of domain specifications that are provided in the targets argument. Valid values: HTTP_HOST, TLS_SNI.
+	// Set of types of domain specifications that are provided in the targets argument. Valid values: AWS_ROUTE_53_RESOLVED_DOMAIN, HTTP_HOST, TLS_SNI. AWS_ROUTE_53_RESOLVED_DOMAIN takes effect only when the firewall policy that uses the rule group configures route53_resolved_ip_validation. For more information, see Route 53 resolved IP validation rules in the AWS Network Firewall Developer Guide.
 	// +listType=set
 	TargetTypes []*string `json:"targetTypes,omitempty" tf:"target_types,omitempty"`
 
@@ -809,7 +809,7 @@ type RulesSourceListParameters struct {
 	// +kubebuilder:validation:Optional
 	GeneratedRulesType *string `json:"generatedRulesType" tf:"generated_rules_type,omitempty"`
 
-	// Set of types of domain specifications that are provided in the targets argument. Valid values: HTTP_HOST, TLS_SNI.
+	// Set of types of domain specifications that are provided in the targets argument. Valid values: AWS_ROUTE_53_RESOLVED_DOMAIN, HTTP_HOST, TLS_SNI. AWS_ROUTE_53_RESOLVED_DOMAIN takes effect only when the firewall policy that uses the rule group configures route53_resolved_ip_validation. For more information, see Route 53 resolved IP validation rules in the AWS Network Firewall Developer Guide.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	TargetTypes []*string `json:"targetTypes" tf:"target_types,omitempty"`

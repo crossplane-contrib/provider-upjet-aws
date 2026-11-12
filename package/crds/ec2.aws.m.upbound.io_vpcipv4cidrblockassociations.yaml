@@ -61,11 +61,11 @@ spec:
               forProvider:
                 properties:
                   cidrBlock:
-                    description: The IPv4 CIDR block for the VPC. CIDR can be explicitly
+                    description: IPv4 CIDR block for the VPC. CIDR can be explicitly
                       set or it can be derived from IPAM using ipv4_netmask_length.
                     type: string
                   ipv4IpamPoolId:
-                    description: The ID of an IPv4 IPAM pool you want to use for allocating
+                    description: ID of an IPv4 IPAM pool you want to use for allocating
                       this VPC's CIDR. IPAM is a VPC feature that you can use to automate
                       your IP address management workflows including assigning, tracking,
                       troubleshooting, and auditing IP addresses across AWS Regions
@@ -73,7 +73,7 @@ spec:
                       your AWS Organization.
                     type: string
                   ipv4NetmaskLength:
-                    description: The netmask length of the IPv4 CIDR you want to allocate
+                    description: Netmask length of the IPv4 CIDR you want to allocate
                       to this VPC. Requires specifying a ipv4_ipam_pool_id.
                     type: number
                   region:
@@ -82,7 +82,7 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   vpcId:
-                    description: The ID of the VPC to make the association with.
+                    description: ID of the VPC to make the association with.
                     type: string
                   vpcIdRef:
                     description: Reference to a VPC in ec2 to populate vpcId.
@@ -181,11 +181,11 @@ spec:
                   autoscaler.
                 properties:
                   cidrBlock:
-                    description: The IPv4 CIDR block for the VPC. CIDR can be explicitly
+                    description: IPv4 CIDR block for the VPC. CIDR can be explicitly
                       set or it can be derived from IPAM using ipv4_netmask_length.
                     type: string
                   ipv4IpamPoolId:
-                    description: The ID of an IPv4 IPAM pool you want to use for allocating
+                    description: ID of an IPv4 IPAM pool you want to use for allocating
                       this VPC's CIDR. IPAM is a VPC feature that you can use to automate
                       your IP address management workflows including assigning, tracking,
                       troubleshooting, and auditing IP addresses across AWS Regions
@@ -193,11 +193,11 @@ spec:
                       your AWS Organization.
                     type: string
                   ipv4NetmaskLength:
-                    description: The netmask length of the IPv4 CIDR you want to allocate
+                    description: Netmask length of the IPv4 CIDR you want to allocate
                       to this VPC. Requires specifying a ipv4_ipam_pool_id.
                     type: number
                   vpcId:
-                    description: The ID of the VPC to make the association with.
+                    description: ID of the VPC to make the association with.
                     type: string
                   vpcIdRef:
                     description: Reference to a VPC in ec2 to populate vpcId.
@@ -345,14 +345,14 @@ spec:
               atProvider:
                 properties:
                   cidrBlock:
-                    description: The IPv4 CIDR block for the VPC. CIDR can be explicitly
+                    description: IPv4 CIDR block for the VPC. CIDR can be explicitly
                       set or it can be derived from IPAM using ipv4_netmask_length.
                     type: string
                   id:
-                    description: The ID of the VPC CIDR association
+                    description: ID of the VPC CIDR association
                     type: string
                   ipv4IpamPoolId:
-                    description: The ID of an IPv4 IPAM pool you want to use for allocating
+                    description: ID of an IPv4 IPAM pool you want to use for allocating
                       this VPC's CIDR. IPAM is a VPC feature that you can use to automate
                       your IP address management workflows including assigning, tracking,
                       troubleshooting, and auditing IP addresses across AWS Regions
@@ -360,7 +360,7 @@ spec:
                       your AWS Organization.
                     type: string
                   ipv4NetmaskLength:
-                    description: The netmask length of the IPv4 CIDR you want to allocate
+                    description: Netmask length of the IPv4 CIDR you want to allocate
                       to this VPC. Requires specifying a ipv4_ipam_pool_id.
                     type: number
                   region:
@@ -369,7 +369,7 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   vpcId:
-                    description: The ID of the VPC to make the association with.
+                    description: ID of the VPC to make the association with.
                     type: string
                 type: object
               conditions:

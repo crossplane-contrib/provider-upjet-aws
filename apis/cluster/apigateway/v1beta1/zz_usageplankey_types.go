@@ -31,7 +31,7 @@ type UsagePlanKeyInitParameters struct {
 	// Type of the API key resource. Currently, the valid key type is API_KEY.
 	KeyType *string `json:"keyType,omitempty" tf:"key_type,omitempty"`
 
-	// Id of the usage plan resource representing to associate the key to.
+	// ID of the usage plan resource representing to associate the key to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/apigateway/v1beta2.UsagePlan
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	UsagePlanID *string `json:"usagePlanId,omitempty" tf:"usage_plan_id,omitempty"`
@@ -63,7 +63,7 @@ type UsagePlanKeyObservation struct {
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// Id of the usage plan resource representing to associate the key to.
+	// ID of the usage plan resource representing to associate the key to.
 	UsagePlanID *string `json:"usagePlanId,omitempty" tf:"usage_plan_id,omitempty"`
 
 	// Value of a usage plan key.
@@ -95,7 +95,7 @@ type UsagePlanKeyParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// Id of the usage plan resource representing to associate the key to.
+	// ID of the usage plan resource representing to associate the key to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/apigateway/v1beta2.UsagePlan
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional

@@ -62,7 +62,7 @@ type AgentInitParameters struct {
 	// Instructions that tell the agent what it should do and how it should interact with users. If prepare_agent is true this argument is required. The valid range is 40 - 20000 characters.
 	Instruction *string `json:"instruction,omitempty" tf:"instruction,omitempty"`
 
-	// Configurations for the agent's ability to retain the conversational context.
+	// Configurations for the agent's ability to retain the conversational context. See memory_configuration Block for details.
 	MemoryConfiguration []MemoryConfigurationInitParameters `json:"memoryConfiguration,omitempty" tf:"memory_configuration,omitempty"`
 
 	// Whether to prepare the agent after creation or modification. Defaults to true.
@@ -71,7 +71,7 @@ type AgentInitParameters struct {
 	// Configurations to override prompt templates in different parts of an agent sequence. For more information, see Advanced prompts. See prompt_override_configuration Block for details.
 	PromptOverrideConfiguration []PromptOverrideConfigurationInitParameters `json:"promptOverrideConfiguration,omitempty" tf:"prompt_override_configuration,omitempty"`
 
-	// Whether the in-use check is skipped when deleting the agent.
+	// Whether to skip the in-use check when deleting the agent. Defaults to false.
 	SkipResourceInUseCheck *bool `json:"skipResourceInUseCheck,omitempty" tf:"skip_resource_in_use_check,omitempty"`
 
 	// Key-value map of resource tags.
@@ -120,7 +120,7 @@ type AgentObservation struct {
 	// Instructions that tell the agent what it should do and how it should interact with users. If prepare_agent is true this argument is required. The valid range is 40 - 20000 characters.
 	Instruction *string `json:"instruction,omitempty" tf:"instruction,omitempty"`
 
-	// Configurations for the agent's ability to retain the conversational context.
+	// Configurations for the agent's ability to retain the conversational context. See memory_configuration Block for details.
 	MemoryConfiguration []MemoryConfigurationObservation `json:"memoryConfiguration,omitempty" tf:"memory_configuration,omitempty"`
 
 	// Whether to prepare the agent after creation or modification. Defaults to true.
@@ -136,7 +136,7 @@ type AgentObservation struct {
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// Whether the in-use check is skipped when deleting the agent.
+	// Whether to skip the in-use check when deleting the agent. Defaults to false.
 	SkipResourceInUseCheck *bool `json:"skipResourceInUseCheck,omitempty" tf:"skip_resource_in_use_check,omitempty"`
 
 	// Key-value map of resource tags.
@@ -206,7 +206,7 @@ type AgentParameters struct {
 	// +kubebuilder:validation:Optional
 	Instruction *string `json:"instruction,omitempty" tf:"instruction,omitempty"`
 
-	// Configurations for the agent's ability to retain the conversational context.
+	// Configurations for the agent's ability to retain the conversational context. See memory_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	MemoryConfiguration []MemoryConfigurationParameters `json:"memoryConfiguration,omitempty" tf:"memory_configuration,omitempty"`
 
@@ -223,7 +223,7 @@ type AgentParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// Whether the in-use check is skipped when deleting the agent.
+	// Whether to skip the in-use check when deleting the agent. Defaults to false.
 	// +kubebuilder:validation:Optional
 	SkipResourceInUseCheck *bool `json:"skipResourceInUseCheck,omitempty" tf:"skip_resource_in_use_check,omitempty"`
 
@@ -323,31 +323,31 @@ type InferenceConfigurationParameters struct {
 
 type MemoryConfigurationInitParameters struct {
 
-	// The type of memory being stored by the agent. See AWS API documentation for possible values.
+	// Type of memory being stored by the agent. See AWS API documentation for possible values.
 	EnabledMemoryTypes []*string `json:"enabledMemoryTypes,omitempty" tf:"enabled_memory_types"`
 
 	// Configuration block for SESSION_SUMMARY memory type enabled for the agent. See session_summary_configuration Block for details.
 	SessionSummaryConfiguration []SessionSummaryConfigurationInitParameters `json:"sessionSummaryConfiguration,omitempty" tf:"session_summary_configuration"`
 
-	// The number of days the agent is configured to retain the conversational context. Minimum value of 0, maximum value of 30.
+	// Number of days the agent is configured to retain the conversational context. Minimum value of 0, maximum value of 30.
 	StorageDays *float64 `json:"storageDays,omitempty" tf:"storage_days"`
 }
 
 type MemoryConfigurationObservation struct {
 
-	// The type of memory being stored by the agent. See AWS API documentation for possible values.
+	// Type of memory being stored by the agent. See AWS API documentation for possible values.
 	EnabledMemoryTypes []*string `json:"enabledMemoryTypes,omitempty" tf:"enabled_memory_types,omitempty"`
 
 	// Configuration block for SESSION_SUMMARY memory type enabled for the agent. See session_summary_configuration Block for details.
 	SessionSummaryConfiguration []SessionSummaryConfigurationObservation `json:"sessionSummaryConfiguration,omitempty" tf:"session_summary_configuration,omitempty"`
 
-	// The number of days the agent is configured to retain the conversational context. Minimum value of 0, maximum value of 30.
+	// Number of days the agent is configured to retain the conversational context. Minimum value of 0, maximum value of 30.
 	StorageDays *float64 `json:"storageDays,omitempty" tf:"storage_days,omitempty"`
 }
 
 type MemoryConfigurationParameters struct {
 
-	// The type of memory being stored by the agent. See AWS API documentation for possible values.
+	// Type of memory being stored by the agent. See AWS API documentation for possible values.
 	// +kubebuilder:validation:Optional
 	EnabledMemoryTypes []*string `json:"enabledMemoryTypes,omitempty" tf:"enabled_memory_types"`
 
@@ -355,14 +355,14 @@ type MemoryConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	SessionSummaryConfiguration []SessionSummaryConfigurationParameters `json:"sessionSummaryConfiguration,omitempty" tf:"session_summary_configuration"`
 
-	// The number of days the agent is configured to retain the conversational context. Minimum value of 0, maximum value of 30.
+	// Number of days the agent is configured to retain the conversational context. Minimum value of 0, maximum value of 30.
 	// +kubebuilder:validation:Optional
 	StorageDays *float64 `json:"storageDays,omitempty" tf:"storage_days"`
 }
 
 type PromptConfigurationsInitParameters struct {
 
-	// prompt template with which to replace the default prompt template. You can use placeholder variables in the base prompt template to customize the prompt. For more information, see Prompt template placeholder variables.
+	// Prompt template with which to replace the default prompt template. You can use placeholder variables in the base prompt template to customize the prompt. For more information, see Prompt template placeholder variables.
 	BasePromptTemplate *string `json:"basePromptTemplate,omitempty" tf:"base_prompt_template"`
 
 	// Inference parameters to use when the agent invokes a foundation model in the part of the agent sequence defined by the prompt_type. For more information, see Inference parameters for foundation models. See inference_configuration Block for details.
@@ -377,13 +377,13 @@ type PromptConfigurationsInitParameters struct {
 	// Whether to allow the agent to carry out the step specified in the prompt_type. If you set this argument to DISABLED, the agent skips that step. Valid Values: ENABLED, DISABLED.
 	PromptState *string `json:"promptState,omitempty" tf:"prompt_state"`
 
-	// Step in the agent sequence that this prompt configuration applies to. Valid values: PRE_PROCESSING, ORCHESTRATION, POST_PROCESSING, KNOWLEDGE_BASE_RESPONSE_GENERATION.
+	// Step in the agent sequence that this prompt configuration applies to. Valid values: PRE_PROCESSING, ORCHESTRATION, POST_PROCESSING, KNOWLEDGE_BASE_RESPONSE_GENERATION, MEMORY_SUMMARIZATION.
 	PromptType *string `json:"promptType,omitempty" tf:"prompt_type"`
 }
 
 type PromptConfigurationsObservation struct {
 
-	// prompt template with which to replace the default prompt template. You can use placeholder variables in the base prompt template to customize the prompt. For more information, see Prompt template placeholder variables.
+	// Prompt template with which to replace the default prompt template. You can use placeholder variables in the base prompt template to customize the prompt. For more information, see Prompt template placeholder variables.
 	BasePromptTemplate *string `json:"basePromptTemplate,omitempty" tf:"base_prompt_template,omitempty"`
 
 	// Inference parameters to use when the agent invokes a foundation model in the part of the agent sequence defined by the prompt_type. For more information, see Inference parameters for foundation models. See inference_configuration Block for details.
@@ -398,13 +398,13 @@ type PromptConfigurationsObservation struct {
 	// Whether to allow the agent to carry out the step specified in the prompt_type. If you set this argument to DISABLED, the agent skips that step. Valid Values: ENABLED, DISABLED.
 	PromptState *string `json:"promptState,omitempty" tf:"prompt_state,omitempty"`
 
-	// Step in the agent sequence that this prompt configuration applies to. Valid values: PRE_PROCESSING, ORCHESTRATION, POST_PROCESSING, KNOWLEDGE_BASE_RESPONSE_GENERATION.
+	// Step in the agent sequence that this prompt configuration applies to. Valid values: PRE_PROCESSING, ORCHESTRATION, POST_PROCESSING, KNOWLEDGE_BASE_RESPONSE_GENERATION, MEMORY_SUMMARIZATION.
 	PromptType *string `json:"promptType,omitempty" tf:"prompt_type,omitempty"`
 }
 
 type PromptConfigurationsParameters struct {
 
-	// prompt template with which to replace the default prompt template. You can use placeholder variables in the base prompt template to customize the prompt. For more information, see Prompt template placeholder variables.
+	// Prompt template with which to replace the default prompt template. You can use placeholder variables in the base prompt template to customize the prompt. For more information, see Prompt template placeholder variables.
 	// +kubebuilder:validation:Optional
 	BasePromptTemplate *string `json:"basePromptTemplate,omitempty" tf:"base_prompt_template"`
 
@@ -424,14 +424,14 @@ type PromptConfigurationsParameters struct {
 	// +kubebuilder:validation:Optional
 	PromptState *string `json:"promptState,omitempty" tf:"prompt_state"`
 
-	// Step in the agent sequence that this prompt configuration applies to. Valid values: PRE_PROCESSING, ORCHESTRATION, POST_PROCESSING, KNOWLEDGE_BASE_RESPONSE_GENERATION.
+	// Step in the agent sequence that this prompt configuration applies to. Valid values: PRE_PROCESSING, ORCHESTRATION, POST_PROCESSING, KNOWLEDGE_BASE_RESPONSE_GENERATION, MEMORY_SUMMARIZATION.
 	// +kubebuilder:validation:Optional
 	PromptType *string `json:"promptType,omitempty" tf:"prompt_type"`
 }
 
 type PromptOverrideConfigurationInitParameters struct {
 
-	// ARN of the Lambda function to use when parsing the raw foundation model output in parts of the agent sequence. If you specify this field, at least one of the prompt_configurations block must contain a parser_mode value that is set to OVERRIDDEN.
+	// ARN of the Lambda function to use when parsing the raw foundation model output in parts of the agent sequence. If you specify this field, at least one of the prompt_configurations blocks must contain a parser_mode value that is set to OVERRIDDEN.
 	OverrideLambda *string `json:"overrideLambda,omitempty" tf:"override_lambda"`
 
 	// Configurations to override a prompt template in one part of an agent sequence. See prompt_configurations Block for details.
@@ -440,7 +440,7 @@ type PromptOverrideConfigurationInitParameters struct {
 
 type PromptOverrideConfigurationObservation struct {
 
-	// ARN of the Lambda function to use when parsing the raw foundation model output in parts of the agent sequence. If you specify this field, at least one of the prompt_configurations block must contain a parser_mode value that is set to OVERRIDDEN.
+	// ARN of the Lambda function to use when parsing the raw foundation model output in parts of the agent sequence. If you specify this field, at least one of the prompt_configurations blocks must contain a parser_mode value that is set to OVERRIDDEN.
 	OverrideLambda *string `json:"overrideLambda,omitempty" tf:"override_lambda,omitempty"`
 
 	// Configurations to override a prompt template in one part of an agent sequence. See prompt_configurations Block for details.
@@ -449,7 +449,7 @@ type PromptOverrideConfigurationObservation struct {
 
 type PromptOverrideConfigurationParameters struct {
 
-	// ARN of the Lambda function to use when parsing the raw foundation model output in parts of the agent sequence. If you specify this field, at least one of the prompt_configurations block must contain a parser_mode value that is set to OVERRIDDEN.
+	// ARN of the Lambda function to use when parsing the raw foundation model output in parts of the agent sequence. If you specify this field, at least one of the prompt_configurations blocks must contain a parser_mode value that is set to OVERRIDDEN.
 	// +kubebuilder:validation:Optional
 	OverrideLambda *string `json:"overrideLambda,omitempty" tf:"override_lambda"`
 
@@ -504,7 +504,7 @@ type AgentStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// Agent is the Schema for the Agents API.
+// Agent is the Schema for the Agents API. Manages an AWS Agents for Amazon Bedrock Agent.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

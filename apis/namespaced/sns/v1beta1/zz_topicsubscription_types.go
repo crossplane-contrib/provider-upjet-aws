@@ -15,7 +15,7 @@ import (
 
 type TopicSubscriptionInitParameters struct {
 
-	// Integer indicating number of minutes to wait in retrying mode for fetching subscription arn before marking it as failure. Only applicable for http and https protocols. Default is 1.
+	// Integer indicating number of minutes to wait in retrying mode for fetching subscription ARN before marking it as failure. Only applicable for HTTP and HTTPS protocols. Default is 1.
 	ConfirmationTimeoutInMinutes *float64 `json:"confirmationTimeoutInMinutes,omitempty" tf:"confirmation_timeout_in_minutes,omitempty"`
 
 	// JSON String with the delivery policy (retries, backoff, etc.) that will be used in the subscription - this only applies to HTTP/S subscriptions. Refer to the SNS docs for more details.
@@ -87,7 +87,7 @@ type TopicSubscriptionObservation struct {
 	// ARN of the subscription.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// Integer indicating number of minutes to wait in retrying mode for fetching subscription arn before marking it as failure. Only applicable for http and https protocols. Default is 1.
+	// Integer indicating number of minutes to wait in retrying mode for fetching subscription ARN before marking it as failure. Only applicable for HTTP and HTTPS protocols. Default is 1.
 	ConfirmationTimeoutInMinutes *float64 `json:"confirmationTimeoutInMinutes,omitempty" tf:"confirmation_timeout_in_minutes,omitempty"`
 
 	// Whether the subscription confirmation request was authenticated.
@@ -142,7 +142,7 @@ type TopicSubscriptionObservation struct {
 
 type TopicSubscriptionParameters struct {
 
-	// Integer indicating number of minutes to wait in retrying mode for fetching subscription arn before marking it as failure. Only applicable for http and https protocols. Default is 1.
+	// Integer indicating number of minutes to wait in retrying mode for fetching subscription ARN before marking it as failure. Only applicable for HTTP and HTTPS protocols. Default is 1.
 	// +kubebuilder:validation:Optional
 	ConfirmationTimeoutInMinutes *float64 `json:"confirmationTimeoutInMinutes,omitempty" tf:"confirmation_timeout_in_minutes,omitempty"`
 

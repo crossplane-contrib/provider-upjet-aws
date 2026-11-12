@@ -162,7 +162,7 @@ type EphemeralBlockDeviceParameters struct {
 
 type LaunchConfigurationInitParameters struct {
 
-	// Associate a public ip address with an instance in a VPC.
+	// Associate a public IP address with an instance in a VPC.
 	AssociatePublicIPAddress *bool `json:"associatePublicIpAddress,omitempty" tf:"associate_public_ip_address,omitempty"`
 
 	// Additional EBS block devices to attach to the instance. See Block Devices below for details.
@@ -198,7 +198,7 @@ type LaunchConfigurationInitParameters struct {
 	// Customize details about the root block device of the instance. See Block Devices below for details.
 	RootBlockDevice *RootBlockDeviceInitParameters `json:"rootBlockDevice,omitempty" tf:"root_block_device,omitempty"`
 
-	// A list of associated security group IDS.
+	// A list of associated security group IDs.
 	// +listType=set
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
@@ -217,7 +217,7 @@ type LaunchConfigurationObservation struct {
 	// ARN of the launch configuration.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// Associate a public ip address with an instance in a VPC.
+	// Associate a public IP address with an instance in a VPC.
 	AssociatePublicIPAddress *bool `json:"associatePublicIpAddress,omitempty" tf:"associate_public_ip_address,omitempty"`
 
 	// Additional EBS block devices to attach to the instance. See Block Devices below for details.
@@ -260,7 +260,7 @@ type LaunchConfigurationObservation struct {
 	// Customize details about the root block device of the instance. See Block Devices below for details.
 	RootBlockDevice *RootBlockDeviceObservation `json:"rootBlockDevice,omitempty" tf:"root_block_device,omitempty"`
 
-	// A list of associated security group IDS.
+	// A list of associated security group IDs.
 	// +listType=set
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
@@ -276,7 +276,7 @@ type LaunchConfigurationObservation struct {
 
 type LaunchConfigurationParameters struct {
 
-	// Associate a public ip address with an instance in a VPC.
+	// Associate a public IP address with an instance in a VPC.
 	// +kubebuilder:validation:Optional
 	AssociatePublicIPAddress *bool `json:"associatePublicIpAddress,omitempty" tf:"associate_public_ip_address,omitempty"`
 
@@ -329,7 +329,7 @@ type LaunchConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	RootBlockDevice *RootBlockDeviceParameters `json:"rootBlockDevice,omitempty" tf:"root_block_device,omitempty"`
 
-	// A list of associated security group IDS.
+	// A list of associated security group IDs.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
@@ -482,7 +482,7 @@ type LaunchConfigurationStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// LaunchConfiguration is the Schema for the LaunchConfigurations API. Provides a resource to create a new launch configuration, used for autoscaling groups.
+// LaunchConfiguration is the Schema for the LaunchConfigurations API. Provides a resource to create a new launch configuration, used for Auto Scaling groups.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

@@ -1235,7 +1235,7 @@ spec:
                   waitForSuccessTimeoutSeconds:
                     description: The number of seconds to wait for the association
                       status to be Success. If Success status is not reached within
-                      the given time, create opration will fail.
+                      the given time, create operation will fail.
                     type: number
                 required:
                 - region
@@ -1512,7 +1512,7 @@ spec:
                   waitForSuccessTimeoutSeconds:
                     description: The number of seconds to wait for the association
                       status to be Success. If Success status is not reached within
-                      the given time, create opration will fail.
+                      the given time, create operation will fail.
                     type: number
                 type: object
               managementPolicies:
@@ -1734,7 +1734,7 @@ spec:
                   waitForSuccessTimeoutSeconds:
                     description: The number of seconds to wait for the association
                       status to be Success. If Success status is not reached within
-                      the given time, create opration will fail.
+                      the given time, create operation will fail.
                     type: number
                 type: object
               conditions:

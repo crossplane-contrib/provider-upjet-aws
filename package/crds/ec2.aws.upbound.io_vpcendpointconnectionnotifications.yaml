@@ -82,7 +82,7 @@ spec:
                     type: array
                     x-kubernetes-list-type: set
                   connectionNotificationArn:
-                    description: The ARN of the SNS topic for the notifications.
+                    description: ARN of the SNS topic for the notifications.
                     type: string
                   connectionNotificationArnRef:
                     description: Reference to a Topic in sns to populate connectionNotificationArn.
@@ -164,11 +164,10 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   vpcEndpointId:
-                    description: The ID of the VPC Endpoint to receive notifications
-                      for.
+                    description: ID of the VPC Endpoint to receive notifications for.
                     type: string
                   vpcEndpointServiceId:
-                    description: The ID of the VPC Endpoint Service to receive notifications
+                    description: ID of the VPC Endpoint Service to receive notifications
                       for.
                     type: string
                   vpcEndpointServiceIdRef:
@@ -271,7 +270,7 @@ spec:
                     type: array
                     x-kubernetes-list-type: set
                   connectionNotificationArn:
-                    description: The ARN of the SNS topic for the notifications.
+                    description: ARN of the SNS topic for the notifications.
                     type: string
                   connectionNotificationArnRef:
                     description: Reference to a Topic in sns to populate connectionNotificationArn.
@@ -348,11 +347,10 @@ spec:
                         type: object
                     type: object
                   vpcEndpointId:
-                    description: The ID of the VPC Endpoint to receive notifications
-                      for.
+                    description: ID of the VPC Endpoint to receive notifications for.
                     type: string
                   vpcEndpointServiceId:
-                    description: The ID of the VPC Endpoint Service to receive notifications
+                    description: ID of the VPC Endpoint Service to receive notifications
                       for.
                     type: string
                   vpcEndpointServiceIdRef:
@@ -537,13 +535,13 @@ spec:
                     type: array
                     x-kubernetes-list-type: set
                   connectionNotificationArn:
-                    description: The ARN of the SNS topic for the notifications.
+                    description: ARN of the SNS topic for the notifications.
                     type: string
                   id:
-                    description: The ID of the VPC connection notification.
+                    description: ID of the VPC connection notification.
                     type: string
                   notificationType:
-                    description: The type of notification.
+                    description: Type of notification.
                     type: string
                   region:
                     description: |-
@@ -551,14 +549,13 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   state:
-                    description: The state of the notification.
+                    description: State of the notification.
                     type: string
                   vpcEndpointId:
-                    description: The ID of the VPC Endpoint to receive notifications
-                      for.
+                    description: ID of the VPC Endpoint to receive notifications for.
                     type: string
                   vpcEndpointServiceId:
-                    description: The ID of the VPC Endpoint Service to receive notifications
+                    description: ID of the VPC Endpoint Service to receive notifications
                       for.
                     type: string
                 type: object

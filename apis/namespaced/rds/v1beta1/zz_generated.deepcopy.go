@@ -1247,6 +1247,11 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.PubliclyAccessible != nil {
+		in, out := &in.PubliclyAccessible, &out.PubliclyAccessible
+		*out = new(bool)
+		**out = **in
+	}
 	if in.ReplicationSourceIdentifier != nil {
 		in, out := &in.ReplicationSourceIdentifier, &out.ReplicationSourceIdentifier
 		*out = new(string)
@@ -2491,6 +2496,11 @@ func (in *ClusterObservation) DeepCopyInto(out *ClusterObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.PubliclyAccessible != nil {
+		in, out := &in.PubliclyAccessible, &out.PubliclyAccessible
+		*out = new(bool)
+		**out = **in
+	}
 	if in.ReaderEndpoint != nil {
 		in, out := &in.ReaderEndpoint, &out.ReaderEndpoint
 		*out = new(string)
@@ -3330,6 +3340,11 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 	if in.PreferredMaintenanceWindow != nil {
 		in, out := &in.PreferredMaintenanceWindow, &out.PreferredMaintenanceWindow
 		*out = new(string)
+		**out = **in
+	}
+	if in.PubliclyAccessible != nil {
+		in, out := &in.PubliclyAccessible, &out.PubliclyAccessible
+		*out = new(bool)
 		**out = **in
 	}
 	if in.Region != nil {
@@ -6373,6 +6388,11 @@ func (in *InstanceInitParameters) DeepCopyInto(out *InstanceInitParameters) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.MultiTenant != nil {
+		in, out := &in.MultiTenant, &out.MultiTenant
+		*out = new(bool)
+		**out = **in
+	}
 	if in.NcharCharacterSetName != nil {
 		in, out := &in.NcharCharacterSetName, &out.NcharCharacterSetName
 		*out = new(string)
@@ -6906,6 +6926,11 @@ func (in *InstanceObservation) DeepCopyInto(out *InstanceObservation) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.MultiTenant != nil {
+		in, out := &in.MultiTenant, &out.MultiTenant
+		*out = new(bool)
+		**out = **in
+	}
 	if in.NcharCharacterSetName != nil {
 		in, out := &in.NcharCharacterSetName, &out.NcharCharacterSetName
 		*out = new(string)
@@ -7395,6 +7420,11 @@ func (in *InstanceParameters) DeepCopyInto(out *InstanceParameters) {
 	}
 	if in.MultiAz != nil {
 		in, out := &in.MultiAz, &out.MultiAz
+		*out = new(bool)
+		**out = **in
+	}
+	if in.MultiTenant != nil {
+		in, out := &in.MultiTenant, &out.MultiTenant
 		*out = new(bool)
 		**out = **in
 	}

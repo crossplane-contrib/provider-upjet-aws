@@ -74,40 +74,37 @@ spec:
                           items:
                             properties:
                               name:
-                                description: The unique name of the framework. The
-                                  name must be between 1 and 256 characters, starting
-                                  with a letter, and consisting of letters, numbers,
-                                  and underscores.
+                                description: Unique name of the framework. The name
+                                  must be between 1 and 256 characters, starting with
+                                  a letter, and consisting of letters, numbers, and
+                                  underscores.
                                 type: string
                               value:
-                                description: The value of parameter, for example,
-                                  hourly.
+                                description: Value of parameter, for example, hourly.
                                 type: string
                             type: object
                           type: array
                         name:
-                          description: The unique name of the framework. The name
-                            must be between 1 and 256 characters, starting with a
-                            letter, and consisting of letters, numbers, and underscores.
+                          description: Name of a control. This name is between 1 and
+                            256 characters.
                           type: string
                         scope:
-                          description: 'The scope of a control. The control scope
-                            defines what the control will evaluate. Three examples
-                            of control scopes are: a specific backup plan, all backup
-                            plans with a specific tag, or all backup plans. Detailed
-                            below.'
+                          description: 'Scope of a control. The control scope defines
+                            what the control will evaluate. Three examples of control
+                            scopes are: a specific backup plan, all backup plans with
+                            a specific tag, or all backup plans. Detailed below.'
                           properties:
                             complianceResourceIds:
-                              description: The ID of the only AWS resource that you
-                                want your control scope to contain. Minimum number
-                                of 1 item. Maximum number of 100 items.
+                              description: ID of the only AWS resource that you want
+                                your control scope to contain. Minimum number of 1
+                                item. Maximum number of 100 items.
                               items:
                                 type: string
                               type: array
                               x-kubernetes-list-type: set
                             complianceResourceTypes:
-                              description: Describes whether the control scope includes
-                                one or more types of resources, such as EFS or RDS.
+                              description: Whether the control scope includes one
+                                or more types of resources, such as EFS or RDS.
                               items:
                                 type: string
                               type: array
@@ -122,12 +119,12 @@ spec:
                       type: object
                     type: array
                   description:
-                    description: The description of the framework with a maximum of
-                      1,024 characters
+                    description: Description of the framework with a maximum of 1,024
+                      characters
                     type: string
                   name:
-                    description: The unique name of the framework. The name must be
-                      between 1 and 256 characters, starting with a letter, and consisting
+                    description: Unique name of the framework. The name must be between
+                      1 and 256 characters, starting with a letter, and consisting
                       of letters, numbers, and underscores.
                     type: string
                   region:
@@ -172,40 +169,37 @@ spec:
                           items:
                             properties:
                               name:
-                                description: The unique name of the framework. The
-                                  name must be between 1 and 256 characters, starting
-                                  with a letter, and consisting of letters, numbers,
-                                  and underscores.
+                                description: Unique name of the framework. The name
+                                  must be between 1 and 256 characters, starting with
+                                  a letter, and consisting of letters, numbers, and
+                                  underscores.
                                 type: string
                               value:
-                                description: The value of parameter, for example,
-                                  hourly.
+                                description: Value of parameter, for example, hourly.
                                 type: string
                             type: object
                           type: array
                         name:
-                          description: The unique name of the framework. The name
-                            must be between 1 and 256 characters, starting with a
-                            letter, and consisting of letters, numbers, and underscores.
+                          description: Name of a control. This name is between 1 and
+                            256 characters.
                           type: string
                         scope:
-                          description: 'The scope of a control. The control scope
-                            defines what the control will evaluate. Three examples
-                            of control scopes are: a specific backup plan, all backup
-                            plans with a specific tag, or all backup plans. Detailed
-                            below.'
+                          description: 'Scope of a control. The control scope defines
+                            what the control will evaluate. Three examples of control
+                            scopes are: a specific backup plan, all backup plans with
+                            a specific tag, or all backup plans. Detailed below.'
                           properties:
                             complianceResourceIds:
-                              description: The ID of the only AWS resource that you
-                                want your control scope to contain. Minimum number
-                                of 1 item. Maximum number of 100 items.
+                              description: ID of the only AWS resource that you want
+                                your control scope to contain. Minimum number of 1
+                                item. Maximum number of 100 items.
                               items:
                                 type: string
                               type: array
                               x-kubernetes-list-type: set
                             complianceResourceTypes:
-                              description: Describes whether the control scope includes
-                                one or more types of resources, such as EFS or RDS.
+                              description: Whether the control scope includes one
+                                or more types of resources, such as EFS or RDS.
                               items:
                                 type: string
                               type: array
@@ -220,12 +214,12 @@ spec:
                       type: object
                     type: array
                   description:
-                    description: The description of the framework with a maximum of
-                      1,024 characters
+                    description: Description of the framework with a maximum of 1,024
+                      characters
                     type: string
                   name:
-                    description: The unique name of the framework. The name must be
-                      between 1 and 256 characters, starting with a letter, and consisting
+                    description: Unique name of the framework. The name must be between
+                      1 and 256 characters, starting with a letter, and consisting
                       of letters, numbers, and underscores.
                     type: string
                   tags:
@@ -308,7 +302,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The ARN of the backup framework.
+                    description: ARN of the backup framework.
                     type: string
                   control:
                     description: One or more control blocks that make up the framework.
@@ -325,40 +319,37 @@ spec:
                           items:
                             properties:
                               name:
-                                description: The unique name of the framework. The
-                                  name must be between 1 and 256 characters, starting
-                                  with a letter, and consisting of letters, numbers,
-                                  and underscores.
+                                description: Unique name of the framework. The name
+                                  must be between 1 and 256 characters, starting with
+                                  a letter, and consisting of letters, numbers, and
+                                  underscores.
                                 type: string
                               value:
-                                description: The value of parameter, for example,
-                                  hourly.
+                                description: Value of parameter, for example, hourly.
                                 type: string
                             type: object
                           type: array
                         name:
-                          description: The unique name of the framework. The name
-                            must be between 1 and 256 characters, starting with a
-                            letter, and consisting of letters, numbers, and underscores.
+                          description: Name of a control. This name is between 1 and
+                            256 characters.
                           type: string
                         scope:
-                          description: 'The scope of a control. The control scope
-                            defines what the control will evaluate. Three examples
-                            of control scopes are: a specific backup plan, all backup
-                            plans with a specific tag, or all backup plans. Detailed
-                            below.'
+                          description: 'Scope of a control. The control scope defines
+                            what the control will evaluate. Three examples of control
+                            scopes are: a specific backup plan, all backup plans with
+                            a specific tag, or all backup plans. Detailed below.'
                           properties:
                             complianceResourceIds:
-                              description: The ID of the only AWS resource that you
-                                want your control scope to contain. Minimum number
-                                of 1 item. Maximum number of 100 items.
+                              description: ID of the only AWS resource that you want
+                                your control scope to contain. Minimum number of 1
+                                item. Maximum number of 100 items.
                               items:
                                 type: string
                               type: array
                               x-kubernetes-list-type: set
                             complianceResourceTypes:
-                              description: Describes whether the control scope includes
-                                one or more types of resources, such as EFS or RDS.
+                              description: Whether the control scope includes one
+                                or more types of resources, such as EFS or RDS.
                               items:
                                 type: string
                               type: array
@@ -373,24 +364,24 @@ spec:
                       type: object
                     type: array
                   creationTime:
-                    description: The date and time that a framework is created, in
-                      Unix format and Coordinated Universal Time (UTC).
+                    description: Date and time that a framework is created, in Unix
+                      format and Coordinated Universal Time (UTC).
                     type: string
                   deploymentStatus:
-                    description: 'The deployment status of a framework. The statuses
-                      are: CREATE_IN_PROGRESS | UPDATE_IN_PROGRESS | DELETE_IN_PROGRESS
+                    description: 'Deployment status of a framework. The statuses are:
+                      CREATE_IN_PROGRESS | UPDATE_IN_PROGRESS | DELETE_IN_PROGRESS
                       | COMPLETED | FAILED.'
                     type: string
                   description:
-                    description: The description of the framework with a maximum of
-                      1,024 characters
+                    description: Description of the framework with a maximum of 1,024
+                      characters
                     type: string
                   id:
-                    description: The id of the backup framework.
+                    description: ID of the backup framework.
                     type: string
                   name:
-                    description: The unique name of the framework. The name must be
-                      between 1 and 256 characters, starting with a letter, and consisting
+                    description: Unique name of the framework. The name must be between
+                      1 and 256 characters, starting with a letter, and consisting
                       of letters, numbers, and underscores.
                     type: string
                   region:
@@ -399,7 +390,7 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   status:
-                    description: A framework consists of one or more controls. Each
+                    description: Framework consists of one or more controls. Each
                       control governs a resource, such as backup plans, backup selections,
                       backup vaults, or recovery points. You can also turn AWS Config
                       recording on or off for each resource. For more information
@@ -414,9 +405,8 @@ spec:
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                     x-kubernetes-map-type: granular
                 type: object

@@ -904,6 +904,13 @@ spec:
                     description: Weekly time range during which system maintenance
                       can occur, in (UTC) e.g., wed:04:00-wed:04:30
                     type: string
+                  publiclyAccessible:
+                    description: Whether the DB cluster is publicly accessible. Valid
+                      only for Multi-AZ DB clusters. If not specified, defaults to
+                      true when db_subnet_group_name is not set or is default, and
+                      false otherwise. If true, the VPC of the DB subnet group must
+                      have an internet gateway attached. Cannot be used with s3_import.
+                    type: boolean
                   region:
                     description: |-
                       Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -2169,6 +2176,13 @@ spec:
                     description: Weekly time range during which system maintenance
                       can occur, in (UTC) e.g., wed:04:00-wed:04:30
                     type: string
+                  publiclyAccessible:
+                    description: Whether the DB cluster is publicly accessible. Valid
+                      only for Multi-AZ DB clusters. If not specified, defaults to
+                      true when db_subnet_group_name is not set or is default, and
+                      false otherwise. If true, the VPC of the DB subnet group must
+                      have an internet gateway attached. Cannot be used with s3_import.
+                    type: boolean
                   replicationSourceIdentifier:
                     description: 'ARN of a source DB cluster or DB instance if this
                       DB cluster is to be created as a Read Replica. Note: Removing
@@ -2993,6 +3007,13 @@ spec:
                     description: Weekly time range during which system maintenance
                       can occur, in (UTC) e.g., wed:04:00-wed:04:30
                     type: string
+                  publiclyAccessible:
+                    description: Whether the DB cluster is publicly accessible. Valid
+                      only for Multi-AZ DB clusters. If not specified, defaults to
+                      true when db_subnet_group_name is not set or is default, and
+                      false otherwise. If true, the VPC of the DB subnet group must
+                      have an internet gateway attached. Cannot be used with s3_import.
+                    type: boolean
                   readerEndpoint:
                     description: |-
                       Read-only endpoint for the Aurora cluster, automatically
@@ -3363,7 +3384,12 @@ spec:
                       AZs can be configured. Note: Multi-AZ DB clusters require exactly
                       3 Availability Zones in the DB subnet group. Aurora DB clusters
                       can operate with fewer AZs, but RDS will still automatically
-                      assign 3 AZs as described above.'
+                      assign 3 AZs as described above. Note: Do not set availability_zones
+                      to the output of a data source such as aws_availability_zones,
+                      as this may be subject to change (for example, when a new AZ
+                      is added to a Region). Changing availability_zones forces a
+                      replacement, which will destroy and recreate the cluster. Always
+                      use an explicit, static list of AZs.'
                     items:
                       type: string
                     type: array
@@ -3695,7 +3721,7 @@ spec:
                       requires Aurora MySQL version 3.04 or higher.'
                     type: boolean
                   enabledCloudwatchLogsExports:
-                    description: 'Set of log types to export to cloudwatch. If omitted,
+                    description: 'Set of log types to export to CloudWatch. If omitted,
                       no logs will be exported. The following log types are supported:
                       audit, error, general, iam-db-auth-error, instance, postgresql
                       (PostgreSQL), slowquery.'
@@ -4157,6 +4183,13 @@ spec:
                     description: Weekly time range during which system maintenance
                       can occur, in (UTC) e.g., wed:04:00-wed:04:30
                     type: string
+                  publiclyAccessible:
+                    description: Whether the DB cluster is publicly accessible. Valid
+                      only for Multi-AZ DB clusters. If not specified, defaults to
+                      true when db_subnet_group_name is not set or is default, and
+                      false otherwise. If true, the VPC of the DB subnet group must
+                      have an internet gateway attached. Cannot be used with s3_import.
+                    type: boolean
                   region:
                     description: |-
                       Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -4611,7 +4644,12 @@ spec:
                       AZs can be configured. Note: Multi-AZ DB clusters require exactly
                       3 Availability Zones in the DB subnet group. Aurora DB clusters
                       can operate with fewer AZs, but RDS will still automatically
-                      assign 3 AZs as described above.'
+                      assign 3 AZs as described above. Note: Do not set availability_zones
+                      to the output of a data source such as aws_availability_zones,
+                      as this may be subject to change (for example, when a new AZ
+                      is added to a Region). Changing availability_zones forces a
+                      replacement, which will destroy and recreate the cluster. Always
+                      use an explicit, static list of AZs.'
                     items:
                       type: string
                     type: array
@@ -4943,7 +4981,7 @@ spec:
                       requires Aurora MySQL version 3.04 or higher.'
                     type: boolean
                   enabledCloudwatchLogsExports:
-                    description: 'Set of log types to export to cloudwatch. If omitted,
+                    description: 'Set of log types to export to CloudWatch. If omitted,
                       no logs will be exported. The following log types are supported:
                       audit, error, general, iam-db-auth-error, instance, postgresql
                       (PostgreSQL), slowquery.'
@@ -5405,6 +5443,13 @@ spec:
                     description: Weekly time range during which system maintenance
                       can occur, in (UTC) e.g., wed:04:00-wed:04:30
                     type: string
+                  publiclyAccessible:
+                    description: Whether the DB cluster is publicly accessible. Valid
+                      only for Multi-AZ DB clusters. If not specified, defaults to
+                      true when db_subnet_group_name is not set or is default, and
+                      false otherwise. If true, the VPC of the DB subnet group must
+                      have an internet gateway attached. Cannot be used with s3_import.
+                    type: boolean
                   replicationSourceIdentifier:
                     description: 'ARN of a source DB cluster or DB instance if this
                       DB cluster is to be created as a Read Replica. Note: Removing
@@ -5938,7 +5983,12 @@ spec:
                       AZs can be configured. Note: Multi-AZ DB clusters require exactly
                       3 Availability Zones in the DB subnet group. Aurora DB clusters
                       can operate with fewer AZs, but RDS will still automatically
-                      assign 3 AZs as described above.'
+                      assign 3 AZs as described above. Note: Do not set availability_zones
+                      to the output of a data source such as aws_availability_zones,
+                      as this may be subject to change (for example, when a new AZ
+                      is added to a Region). Changing availability_zones forces a
+                      replacement, which will destroy and recreate the cluster. Always
+                      use an explicit, static list of AZs.'
                     items:
                       type: string
                     type: array
@@ -6050,7 +6100,7 @@ spec:
                       requires Aurora MySQL version 3.04 or higher.'
                     type: boolean
                   enabledCloudwatchLogsExports:
-                    description: 'Set of log types to export to cloudwatch. If omitted,
+                    description: 'Set of log types to export to CloudWatch. If omitted,
                       no logs will be exported. The following log types are supported:
                       audit, error, general, iam-db-auth-error, instance, postgresql
                       (PostgreSQL), slowquery.'
@@ -6215,6 +6265,13 @@ spec:
                     description: Weekly time range during which system maintenance
                       can occur, in (UTC) e.g., wed:04:00-wed:04:30
                     type: string
+                  publiclyAccessible:
+                    description: Whether the DB cluster is publicly accessible. Valid
+                      only for Multi-AZ DB clusters. If not specified, defaults to
+                      true when db_subnet_group_name is not set or is default, and
+                      false otherwise. If true, the VPC of the DB subnet group must
+                      have an internet gateway attached. Cannot be used with s3_import.
+                    type: boolean
                   readerEndpoint:
                     description: Read-only endpoint for the Aurora cluster, automatically
                       load-balanced across replicas
