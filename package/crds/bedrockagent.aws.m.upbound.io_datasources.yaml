@@ -1134,14 +1134,12 @@ spec:
                                 description: Strategy used to enrich the context of
                                   data source documents. See context_enrichment_configuration.bedrock_foundation_model_configuration.enrichment_strategy_configuration
                                   Block for details.
-                                items:
-                                  properties:
-                                    method:
-                                      description: 'Method used to enrich the context
-                                        of data source documents. Valid value: CHUNK_ENTITY_EXTRACTION.'
-                                      type: string
-                                  type: object
-                                type: array
+                                properties:
+                                  method:
+                                    description: 'Method used to enrich the context
+                                      of data source documents. Valid value: CHUNK_ENTITY_EXTRACTION.'
+                                    type: string
+                                type: object
                               modelArn:
                                 description: ARN of the cross-Region inference profile
                                   used for context enrichment.
@@ -2325,14 +2323,12 @@ spec:
                                 description: Strategy used to enrich the context of
                                   data source documents. See context_enrichment_configuration.bedrock_foundation_model_configuration.enrichment_strategy_configuration
                                   Block for details.
-                                items:
-                                  properties:
-                                    method:
-                                      description: 'Method used to enrich the context
-                                        of data source documents. Valid value: CHUNK_ENTITY_EXTRACTION.'
-                                      type: string
-                                  type: object
-                                type: array
+                                properties:
+                                  method:
+                                    description: 'Method used to enrich the context
+                                      of data source documents. Valid value: CHUNK_ENTITY_EXTRACTION.'
+                                    type: string
+                                type: object
                               modelArn:
                                 description: ARN of the cross-Region inference profile
                                   used for context enrichment.
@@ -3179,14 +3175,12 @@ spec:
                                 description: Strategy used to enrich the context of
                                   data source documents. See context_enrichment_configuration.bedrock_foundation_model_configuration.enrichment_strategy_configuration
                                   Block for details.
-                                items:
-                                  properties:
-                                    method:
-                                      description: 'Method used to enrich the context
-                                        of data source documents. Valid value: CHUNK_ENTITY_EXTRACTION.'
-                                      type: string
-                                  type: object
-                                type: array
+                                properties:
+                                  method:
+                                    description: 'Method used to enrich the context
+                                      of data source documents. Valid value: CHUNK_ENTITY_EXTRACTION.'
+                                    type: string
+                                type: object
                               modelArn:
                                 description: ARN of the cross-Region inference profile
                                   used for context enrichment.

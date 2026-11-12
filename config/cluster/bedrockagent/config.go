@@ -94,6 +94,7 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 		r.AddSingletonListConversion("vector_ingestion_configuration", "vectorIngestionConfiguration")
 		r.AddSingletonListConversion("vector_ingestion_configuration[*].context_enrichment_configuration", "vectorIngestionConfiguration[*].contextEnrichmentConfiguration")
 		r.AddSingletonListConversion("vector_ingestion_configuration[*].context_enrichment_configuration[*].bedrock_foundation_model_configuration", "vectorIngestionConfiguration[*].contextEnrichmentConfiguration[*].bedrockFoundationModelConfiguration")
+		r.AddSingletonListConversion("vector_ingestion_configuration[*].context_enrichment_configuration[*].bedrock_foundation_model_configuration[*].enrichment_strategy_configuration", "vectorIngestionConfiguration[*].contextEnrichmentConfiguration[*].bedrockFoundationModelConfiguration[*].enrichmentStrategyConfiguration")
 		r.AddSingletonListConversion("vector_ingestion_configuration[*].chunking_configuration", "vectorIngestionConfiguration[*].chunkingConfiguration")
 		r.AddSingletonListConversion("vector_ingestion_configuration[*].chunking_configuration[*].fixed_size_chunking_configuration", "vectorIngestionConfiguration[*].chunkingConfiguration[*].fixedSizeChunkingConfiguration")
 		r.AddSingletonListConversion("vector_ingestion_configuration[*].chunking_configuration[*].hierarchical_chunking_configuration", "vectorIngestionConfiguration[*].chunkingConfiguration[*].hierarchicalChunkingConfiguration")
@@ -108,7 +109,6 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 		r.AddSingletonListConversion("vector_ingestion_configuration[*].parsing_configuration[*].bedrock_data_automation_configuration", "vectorIngestionConfiguration[*].parsingConfiguration[*].bedrockDataAutomationConfiguration")
 		r.AddSingletonListConversion("vector_ingestion_configuration[*].parsing_configuration[*].bedrock_foundation_model_configuration", "vectorIngestionConfiguration[*].parsingConfiguration[*].bedrockFoundationModelConfiguration")
 		r.AddSingletonListConversion("vector_ingestion_configuration[*].parsing_configuration[*].bedrock_foundation_model_configuration[*].parsing_prompt", "vectorIngestionConfiguration[*].parsingConfiguration[*].bedrockFoundationModelConfiguration[*].parsingPrompt")
-		r.AddSingletonListConversion("vector_ingestion_configuration[*].parsing_configuration[*].bedrock_foundation_model_configuration[*].enrichment_strategy_configuration", "vectorIngestionConfiguration[*].parsingConfiguration[*].bedrockFoundationModelConfiguration[*].enrichmentStrategyConfiguration")
 	})
 
 	p.AddResourceConfigurator("aws_bedrockagent_flow", func(r *config.Resource) {
