@@ -15,6 +15,8 @@ import (
 	emailidentity "github.com/upbound/provider-aws/v2/internal/controller/cluster/sesv2/emailidentity"
 	emailidentityfeedbackattributes "github.com/upbound/provider-aws/v2/internal/controller/cluster/sesv2/emailidentityfeedbackattributes"
 	emailidentitymailfromattributes "github.com/upbound/provider-aws/v2/internal/controller/cluster/sesv2/emailidentitymailfromattributes"
+	tenant "github.com/upbound/provider-aws/v2/internal/controller/cluster/sesv2/tenant"
+	tenantresourceassociation "github.com/upbound/provider-aws/v2/internal/controller/cluster/sesv2/tenantresourceassociation"
 )
 
 // Setup_sesv2 creates all controllers with the supplied logger and adds them to
@@ -27,6 +29,8 @@ func Setup_sesv2(mgr ctrl.Manager, o controller.Options) error {
 		emailidentity.Setup,
 		emailidentityfeedbackattributes.Setup,
 		emailidentitymailfromattributes.Setup,
+		tenant.Setup,
+		tenantresourceassociation.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err
@@ -45,6 +49,8 @@ func SetupGated_sesv2(mgr ctrl.Manager, o controller.Options) error {
 		emailidentity.SetupGated,
 		emailidentityfeedbackattributes.SetupGated,
 		emailidentitymailfromattributes.SetupGated,
+		tenant.SetupGated,
+		tenantresourceassociation.SetupGated,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err
@@ -62,6 +68,8 @@ func SetupWebhookWithManager_sesv2(mgr ctrl.Manager) error {
 		emailidentity.SetupWebhookWithManager,
 		emailidentityfeedbackattributes.SetupWebhookWithManager,
 		emailidentitymailfromattributes.SetupWebhookWithManager,
+		tenant.SetupWebhookWithManager,
+		tenantresourceassociation.SetupWebhookWithManager,
 	} {
 		if err := setup(mgr); err != nil {
 			return err

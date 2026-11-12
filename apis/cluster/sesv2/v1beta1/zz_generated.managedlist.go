@@ -60,3 +60,21 @@ func (l *EmailIdentityMailFromAttributesList) GetItems() []resource.Managed {
 	}
 	return items
 }
+
+// GetItems of this TenantList.
+func (l *TenantList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this TenantResourceAssociationList.
+func (l *TenantResourceAssociationList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
