@@ -14,3 +14,9 @@ func (tr *EmailIdentityFeedbackAttributes) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *EmailIdentityMailFromAttributes) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *Tenant) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *TenantResourceAssociation) Hub() {}

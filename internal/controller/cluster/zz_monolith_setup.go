@@ -988,6 +988,8 @@ import (
 	emailidentitysesv2 "github.com/upbound/provider-aws/v2/internal/controller/cluster/sesv2/emailidentity"
 	emailidentityfeedbackattributes "github.com/upbound/provider-aws/v2/internal/controller/cluster/sesv2/emailidentityfeedbackattributes"
 	emailidentitymailfromattributes "github.com/upbound/provider-aws/v2/internal/controller/cluster/sesv2/emailidentitymailfromattributes"
+	tenant "github.com/upbound/provider-aws/v2/internal/controller/cluster/sesv2/tenant"
+	tenantresourceassociation "github.com/upbound/provider-aws/v2/internal/controller/cluster/sesv2/tenantresourceassociation"
 	activity "github.com/upbound/provider-aws/v2/internal/controller/cluster/sfn/activity"
 	statemachine "github.com/upbound/provider-aws/v2/internal/controller/cluster/sfn/statemachine"
 	protection "github.com/upbound/provider-aws/v2/internal/controller/cluster/shield/protection"
@@ -2077,6 +2079,8 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		emailidentitysesv2.Setup,
 		emailidentityfeedbackattributes.Setup,
 		emailidentitymailfromattributes.Setup,
+		tenant.Setup,
+		tenantresourceassociation.Setup,
 		activity.Setup,
 		statemachine.Setup,
 		protection.Setup,
@@ -3172,6 +3176,8 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		emailidentitysesv2.SetupGated,
 		emailidentityfeedbackattributes.SetupGated,
 		emailidentitymailfromattributes.SetupGated,
+		tenant.SetupGated,
+		tenantresourceassociation.SetupGated,
 		activity.SetupGated,
 		statemachine.SetupGated,
 		protection.SetupGated,
@@ -4266,6 +4272,8 @@ func SetupWebhookWithManager_monolith(mgr ctrl.Manager) error {
 		emailidentitysesv2.SetupWebhookWithManager,
 		emailidentityfeedbackattributes.SetupWebhookWithManager,
 		emailidentitymailfromattributes.SetupWebhookWithManager,
+		tenant.SetupWebhookWithManager,
+		tenantresourceassociation.SetupWebhookWithManager,
 		activity.SetupWebhookWithManager,
 		statemachine.SetupWebhookWithManager,
 		protection.SetupWebhookWithManager,

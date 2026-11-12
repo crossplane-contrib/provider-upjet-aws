@@ -312,3 +312,55 @@ func (mg *EmailIdentity) ResolveReferences(ctx context.Context, c client.Reader)
 
 	return nil
 }
+
+// ResolveReferences of this TenantResourceAssociation.
+func (mg *TenantResourceAssociation) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPINamespacedResolver(c, mg)
+
+	var rsp reference.NamespacedResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("sesv2.aws.m.upbound.io", "v1beta1", "Tenant", "TenantList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TenantName),
+			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.TenantNameRef,
+			Selector:     mg.Spec.ForProvider.TenantNameSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.TenantName")
+	}
+	mg.Spec.ForProvider.TenantName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.TenantNameRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("sesv2.aws.m.upbound.io", "v1beta1", "Tenant", "TenantList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TenantName),
+			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.TenantNameRef,
+			Selector:     mg.Spec.InitProvider.TenantNameSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.TenantName")
+	}
+	mg.Spec.InitProvider.TenantName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.TenantNameRef = rsp.ResolvedReference
+
+	return nil
+}
