@@ -1,0 +1,17 @@
+# SPDX-FileCopyrightText: 2026 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: sesv2.aws.m.upbound.io/v1beta1
+kind: Tenant
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sesv2/v1beta1/tenant
+  labels:
+    testing.upbound.io/example-name: example-tenant
+  name: example-tenant
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-1
+    tenantName: example-tenant

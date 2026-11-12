@@ -104,6 +104,7 @@ import (
 	"github.com/upbound/provider-aws/v2/config/namespaced/secretsmanager"
 	"github.com/upbound/provider-aws/v2/config/namespaced/servicecatalog"
 	"github.com/upbound/provider-aws/v2/config/namespaced/servicediscovery"
+	"github.com/upbound/provider-aws/v2/config/namespaced/sesv2"
 	"github.com/upbound/provider-aws/v2/config/namespaced/sfn"
 	"github.com/upbound/provider-aws/v2/config/namespaced/shield"
 	"github.com/upbound/provider-aws/v2/config/namespaced/sns"
@@ -203,6 +204,7 @@ func init() {
 	ProviderConfiguration.AddConfig(sfn.Configure)
 	ProviderConfiguration.AddConfig(shield.Configure)
 	ProviderConfiguration.AddConfig(sns.Configure)
+	ProviderConfiguration.AddConfig(sesv2.Configure)
 	ProviderConfiguration.AddConfig(sqs.Configure)
 	ProviderConfiguration.AddConfig(transfer.Configure)
 	ProviderConfiguration.AddConfig(directconnect.Configure)

@@ -386,6 +386,14 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	// ComputedIdentifierAttributes, otherwise it gets removed from the config.
 	"aws_s3vectors_vector_bucket_policy": s3vectorsPolicyIdentifier(),
 
+	// sesv2
+	// SESv2 Tenant can be imported using the tenant_name.
+	// Import ID example: example-tenant
+	"aws_sesv2_tenant": frameworkParameterAsIdentifier("tenant_name"),
+	// SESv2 Tenant Resource Association can be imported using tenant_name|resource_arn.
+	// Import ID example: example-tenant|arn:aws:ses:us-west-1:123456789012:identity/example.com
+	"aws_sesv2_tenant_resource_association": sesv2TenantResourceAssociation(),
+
 	// timestreaminfluxdb
 	//
 	// Timestream for InfluxDB DB instances can be imported using the instance ID
@@ -3531,6 +3539,19 @@ func s3tablesPolicyIdentifier(identifier string) config.ExternalName {
 			return "", errors.Errorf("cannot find attribute %q in tfstate", identifier)
 		}),
 	)
+}
+
+func sesv2TenantResourceAssociation() config.ExternalName {
+	e := FormattedIdentifierFromProvider("|", "tenant_name", "resource_arn")
+	getID := e.GetIDFn
+	e.GetExternalNameFn = func(state map[string]any) (string, error) {
+		return getID(context.Background(), "", state, nil)
+	}
+	// The Framework schema has no id attribute to populate in Terraform state.
+	e.GetIDFn = func(_ context.Context, _ string, _ map[string]any, _ map[string]any) (string, error) {
+		return "", nil
+	}
+	return e
 }
 
 // frameworkParameterAsIdentifier handles Terraform Plugin Framework resources

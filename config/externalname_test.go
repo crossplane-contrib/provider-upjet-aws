@@ -9,6 +9,42 @@ import (
 	"testing"
 )
 
+func TestSESV2TenantImportID(t *testing.T) {
+	t.Parallel()
+	for _, tc := range []struct {
+		name       string
+		resource   string
+		parameters map[string]any
+		want       string
+	}{
+		{name: "tenant", resource: "aws_sesv2_tenant", parameters: map[string]any{}, want: "example-tenant"},
+		{name: "association", resource: "aws_sesv2_tenant_resource_association", parameters: map[string]any{"tenant_name": "example-tenant", "resource_arn": "arn:aws:ses:us-west-1:123456789012:identity/example.com"}, want: "example-tenant|arn:aws:ses:us-west-1:123456789012:identity/example.com"},
+	} {
+		t.Run(tc.name, func(t *testing.T) {
+			t.Parallel()
+			e, ok := TerraformPluginFrameworkExternalNameConfigs[tc.resource]
+			if !ok {
+				t.Fatalf("Framework external-name configuration for %s is missing", tc.resource)
+			}
+			e.SetIdentifierArgumentFn(tc.parameters, "example-tenant")
+			got, err := e.GetIDFn(context.Background(), "example-tenant", tc.parameters, nil)
+			if err != nil {
+				t.Fatal(err)
+			}
+			if got != "" {
+				t.Errorf("GetIDFn() = %q, want empty for a Framework schema without id", got)
+			}
+			got, err = e.GetExternalNameFn(tc.parameters)
+			if err != nil {
+				t.Fatal(err)
+			}
+			if got != tc.want {
+				t.Errorf("GetExternalNameFn() = %q, want %q", got, tc.want)
+			}
+		})
+	}
+}
+
 func TestSNSPlatformApplicationImportID(t *testing.T) {
 	externalName := TerraformPluginSDKExternalNameConfigs["aws_sns_platform_application"]
 	if len(externalName.IdentifierFields) != 0 {
