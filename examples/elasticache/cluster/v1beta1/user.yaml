@@ -7,6 +7,7 @@ kind: User
 metadata:
   annotations:
     upjet.upbound.io/manual-intervention: "This resource needs secrets that must contain valid credentials."
+    meta.upbound.io/example-id: elasticache/v1beta1/user
   name: sample-user
 spec:
   forProvider:

@@ -5,6 +5,8 @@
 apiVersion: s3.aws.upbound.io/v1beta1
 kind: BucketCorsConfiguration
 metadata:
+  annotations:
+    meta.upbound.io/example-id: s3/v1beta1/bucketcorsconfiguration
   name: example
 spec:
   forProvider:
@@ -27,3 +29,17 @@ spec:
       - GET
       allowedOrigins:
       - '*'
+
+---
+
+apiVersion: s3.aws.upbound.io/v1beta1
+kind: Bucket
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s3/v1beta1/bucketcorsconfiguration
+  labels:
+    testing.upbound.io/example-name: s3
+  name: s3-${Rand.RFC1123Subdomain}
+spec:
+  forProvider:
+    region: us-west-1

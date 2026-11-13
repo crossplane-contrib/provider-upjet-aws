@@ -11,6 +11,7 @@ metadata:
   name: example
   annotations:
     upjet.upbound.io/manual-intervention: "Creation of this resource costs over $100, so it is not suitable for continuous testing."
+    meta.upbound.io/example-id: acmpca/v1beta1/certificateauthority
 spec:
   writeConnectionSecretToRef:
     name: acmpca-ca

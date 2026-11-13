@@ -7,7 +7,7 @@ kind: QueuePolicy
 metadata:
   name: queue-policy
   annotations:
-    meta.upbound.io/example-id: sqs/v1beta1/queue-policy
+    meta.upbound.io/example-id: sqs/v1beta1/queuepolicy
   labels:
     testing.upbound.io/example-name: queue-policy
   namespace: upbound-system

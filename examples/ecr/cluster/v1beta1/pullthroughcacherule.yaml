@@ -5,6 +5,8 @@
 apiVersion: ecr.aws.upbound.io/v1beta1
 kind: PullThroughCacheRule
 metadata:
+  annotations:
+    meta.upbound.io/example-id: ecr/v1beta1/pullthroughcacherule
   name: example
 spec:
   forProvider:

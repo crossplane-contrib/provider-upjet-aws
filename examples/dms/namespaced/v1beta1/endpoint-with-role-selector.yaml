@@ -12,7 +12,6 @@ metadata:
   name: dms-endpoint-test
   namespace: upbound-system
 spec:
-  deletionPolicy: Delete
   forProvider:
     databaseName: test
     endpointType: target

@@ -5,6 +5,8 @@
 apiVersion: neptune.aws.upbound.io/v1beta1
 kind: ParameterGroup
 metadata:
+  annotations:
+    meta.upbound.io/example-id: neptune/v1beta1/parametergroup
   name: sample-param-group
 spec:
   forProvider:

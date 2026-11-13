@@ -5,6 +5,8 @@
 apiVersion: iot.aws.upbound.io/v1beta1
 kind: Policy
 metadata:
+  annotations:
+    meta.upbound.io/example-id: iot/v1beta1/policy
   name: example
 spec:
   forProvider:

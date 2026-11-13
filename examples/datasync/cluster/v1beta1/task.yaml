@@ -3,6 +3,37 @@
 # SPDX-License-Identifier: CC0-1.0
 
 apiVersion: datasync.aws.upbound.io/v1beta1
+kind: Task
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datasync/v1beta1/task
+  labels:
+    testing.upbound.io/example-name: datasync-task-example
+  name: datasync-task-example
+spec:
+  forProvider:
+    name: datasync-task-example
+    region: us-west-1
+    cloudwatchLogGroupArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: datasync-cloudwatchloggroup
+    sourceLocationArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: datasync-location-source
+    destinationLocationArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: datasync-location-destination
+    options:
+      - bytesPerSecond: -1
+        posixPermissions: "NONE"
+        gid: "NONE"
+        uid: "NONE"
+        preserveDeletedFiles: "REMOVE"
+        verifyMode: "ONLY_FILES_TRANSFERRED"
+
+---
+
+apiVersion: datasync.aws.upbound.io/v1beta1
 kind: LocationS3
 metadata:
   annotations:
@@ -46,36 +77,7 @@ spec:
 
 ---
 
-apiVersion: datasync.aws.upbound.io/v1beta1
-kind: Task
-metadata:
-  annotations:
-    meta.upbound.io/example-id: datasync/v1beta1/task
-  labels:
-    testing.upbound.io/example-name: datasync-task-example
-  name: datasync-task-example
-spec:
-  forProvider:
-    name: datasync-task-example
-    region: us-west-1
-    cloudwatchLogGroupArnSelector:
-      matchLabels:
-        testing.upbound.io/example-name: datasync-cloudwatchloggroup
-    sourceLocationArnSelector:
-      matchLabels:
-        testing.upbound.io/example-name: datasync-location-source
-    destinationLocationArnSelector:
-      matchLabels:
-        testing.upbound.io/example-name: datasync-location-destination
-    options:
-      - bytesPerSecond: -1
-        posixPermissions: "NONE"
-        gid: "NONE"
-        uid: "NONE"
-        preserveDeletedFiles: "REMOVE"
-        verifyMode: "ONLY_FILES_TRANSFERRED"
 
----
 
 apiVersion: cloudwatchlogs.aws.upbound.io/v1beta1
 kind: Group

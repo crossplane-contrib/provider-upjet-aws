@@ -5,6 +5,8 @@
 apiVersion: route53.aws.m.upbound.io/v1beta1
 kind: DelegationSet
 metadata:
+  annotations:
+    meta.upbound.io/example-id: route53/v1beta1/delegationset
   labels:
     testing.upbound.io/example-name: main
   name: main

@@ -45,7 +45,7 @@ kind: AutoscalingGroup
 metadata:
   annotations:
     upjet.upbound.io/manual-intervention: "This resource depends on LaunchConfiguration with manual intervention."
-    meta.upbound.io/example-id: ecs/v1beta1/capacityprovider
+    meta.upbound.io/example-id: autoscaling/v1beta1/notification
   labels:
     testing.upbound.io/example-name: bar
   name: bar
@@ -70,7 +70,7 @@ kind: AutoscalingGroup
 metadata:
   annotations:
     upjet.upbound.io/manual-intervention: "This resource depends on LaunchConfiguration with manual intervention."
-    meta.upbound.io/example-id: ecs/v1beta1/capacityprovider
+    meta.upbound.io/example-id: autoscaling/v1beta1/notification
   labels:
     testing.upbound.io/example-name: foo
   name: foo
@@ -95,7 +95,7 @@ kind: LaunchConfiguration
 metadata:
   annotations:
     upjet.upbound.io/manual-intervention: "This resource refers to an AMI ID."
-    meta.upbound.io/example-id: autoscaling/v1beta1/launchconfiguration
+    meta.upbound.io/example-id: autoscaling/v1beta1/notification
   labels:
     testing.upbound.io/example-name: as_conf
   name: as-conf

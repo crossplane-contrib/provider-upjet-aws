@@ -7,10 +7,13 @@ kind: EventSourceMapping
 metadata:
   annotations:
     meta.upbound.io/example-id: lambda/v1beta2/eventsourcemapping
+    upjet.upbound.io/manual-intervention: |
+      eventSourceArn does not support reference fields due to multiple
+      valid referenceable kinds. Needs to be manually set or through compositions.
   name: example
 spec:
   forProvider:
-    eventSourceArn: null
+    eventSourceArn: "###arn###"
     functionNameRef:
       name: example
     region: us-west-1

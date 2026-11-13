@@ -5,6 +5,8 @@
 apiVersion: iam.aws.m.upbound.io/v1beta1
 kind: AccountAlias
 metadata:
+  annotations:
+    meta.upbound.io/example-id: iam/v1beta1/accountalias
   name: official-providers-test
   namespace: upbound-system
 spec:

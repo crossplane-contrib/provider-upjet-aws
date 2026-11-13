@@ -7,6 +7,7 @@ kind: BasePathMapping
 metadata:
   annotations:
     upjet.upbound.io/manual-intervention: "The BasePathMapping resource needs a DomainName and DomainName resource needs valid certificates."
+    meta.upbound.io/example-id: apigateway/v1beta1/basepathmapping
   labels:
     testing.upbound.io/example-name: domainname
   name: example
@@ -29,6 +30,7 @@ kind: DomainName
 metadata:
   annotations:
     upjet.upbound.io/manual-intervention: "The DomainName resource needs valid certificates."
+    meta.upbound.io/example-id: apigateway/v1beta1/basepathmapping
   labels:
     testing.upbound.io/example-name: domainname
   name: example

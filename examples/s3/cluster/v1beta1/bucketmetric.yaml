@@ -5,6 +5,8 @@
 apiVersion: s3.aws.upbound.io/v1beta1
 kind: BucketMetric
 metadata:
+  annotations:
+    meta.upbound.io/example-id: s3/v1beta1/bucketmetric
   name: example
 spec:
   forProvider:
@@ -13,3 +15,17 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: s3
     name: EntireBucket
+
+---
+
+apiVersion: s3.aws.upbound.io/v1beta1
+kind: Bucket
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s3/v1beta1/bucketmetric
+  labels:
+    testing.upbound.io/example-name: s3
+  name: s3-${Rand.RFC1123Subdomain}
+spec:
+  forProvider:
+    region: us-west-1

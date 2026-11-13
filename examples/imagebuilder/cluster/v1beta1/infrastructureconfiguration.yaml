@@ -25,7 +25,7 @@ apiVersion: iam.aws.upbound.io/v1beta1
 kind: InstanceProfile
 metadata:
   annotations:
-    meta.upbound.io/example-id: iam/v1beta1/instanceprofile
+    meta.upbound.io/example-id: imagebuilder/v1beta1/infrastructureconfiguration
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -41,7 +41,7 @@ apiVersion: iam.aws.upbound.io/v1beta1
 kind: Role
 metadata:
   annotations:
-    meta.upbound.io/example-id: iam/v1beta1/instanceprofile
+    meta.upbound.io/example-id: imagebuilder/v1beta1/infrastructureconfiguration
   labels:
     testing.upbound.io/example-name: role
   name: role

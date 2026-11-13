@@ -27,7 +27,7 @@ apiVersion: devicefarm.aws.m.upbound.io/v1beta1
 kind: Project
 metadata:
   annotations:
-    meta.upbound.io/example-id: devicefarm/v1beta1/project
+    meta.upbound.io/example-id: devicefarm/v1beta1/devicepool
   labels:
     testing.upbound.io/example-name: example
   name: example

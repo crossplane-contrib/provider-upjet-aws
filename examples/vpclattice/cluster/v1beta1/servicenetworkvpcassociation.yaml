@@ -47,7 +47,7 @@ metadata:
 spec:
   forProvider:
     region: us-west-1
-    description: 
+    description: example security group
     name: example
     tags:
       Name: example

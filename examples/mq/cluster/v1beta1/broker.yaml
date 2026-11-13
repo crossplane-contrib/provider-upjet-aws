@@ -48,7 +48,7 @@ apiVersion: ec2.aws.upbound.io/v1beta1
 kind: SecurityGroup
 metadata:
   annotations:
-    meta.upbound.io/example-id: ec2/v1beta1/securitygroup
+    meta.upbound.io/example-id: mq/v1beta1/broker
   labels:
     testing.upbound.io/example-name: example
   name: example

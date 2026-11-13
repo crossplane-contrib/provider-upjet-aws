@@ -19,6 +19,8 @@
 apiVersion: neptune.aws.m.upbound.io/v1beta1
 kind: ClusterParameterGroup
 metadata:
+  annotations:
+    meta.upbound.io/example-id: neptune/v1beta1/clusterparametergroup
   name: o-neptune13-auditlog-immediate
   namespace: upbound-system
 spec:

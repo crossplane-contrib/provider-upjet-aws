@@ -56,7 +56,7 @@ apiVersion: lightsail.aws.m.upbound.io/v1beta1
 kind: KeyPair
 metadata:
   annotations:
-    meta.upbound.io/example-id: lightsail/v1beta1/keypair
+    meta.upbound.io/example-id: lightsail/v1beta1/staticipattachment
   labels:
     testing.upbound.io/example-name: lg_key_pair
   name: lg-key-pair

@@ -5,6 +5,8 @@
 apiVersion: sfn.aws.upbound.io/v1beta1
 kind: StateMachine
 metadata:
+  annotations:
+    meta.upbound.io/example-id: sfn/v1beta1/statemachine
   name: my-state-machine
 spec:
   forProvider:

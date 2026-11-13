@@ -7,6 +7,7 @@ kind: Tag
 metadata:
   annotations:
     upjet.upbound.io/manual-intervention: "Requires a valid resourceId as ARN."
+    meta.upbound.io/example-id: ec2/v1beta1/tag
   name: example
 spec:
   forProvider:

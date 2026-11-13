@@ -2,6 +2,24 @@
 #
 # SPDX-License-Identifier: CC0-1.0
 
+apiVersion: rds.aws.m.upbound.io/v1beta1
+kind: SubnetGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: rds/v1beta1/subnetgroup
+  labels:
+    testing.upbound.io/example-name: default
+  name: example-subnetgroup
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-1
+    subnetIdRefs:
+      - name: sample-db-subnet1
+      - name: sample-db-subnet2
+    tags:
+      Name: My DB subnet group
+---
 apiVersion: ec2.aws.m.upbound.io/v1beta1
 kind: VPC
 metadata:
@@ -51,21 +69,3 @@ spec:
     vpcIdRef:
       name: sample-db-vpc
     cidrBlock: 172.16.20.0/24
----
-apiVersion: rds.aws.m.upbound.io/v1beta1
-kind: SubnetGroup
-metadata:
-  annotations:
-    meta.upbound.io/example-id: rds/v1beta1/subnetgroup
-  labels:
-    testing.upbound.io/example-name: default
-  name: example-subnetgroup
-  namespace: upbound-system
-spec:
-  forProvider:
-    region: us-west-1
-    subnetIdRefs:
-      - name: sample-db-subnet1
-      - name: sample-db-subnet2
-    tags:
-      Name: My DB subnet group

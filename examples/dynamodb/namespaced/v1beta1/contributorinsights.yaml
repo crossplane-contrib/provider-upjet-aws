@@ -5,6 +5,8 @@
 apiVersion: dynamodb.aws.m.upbound.io/v1beta1
 kind: ContributorInsights
 metadata:
+  annotations:
+    meta.upbound.io/example-id: dynamodb/v1beta1/contributorinsights
   name: example
   namespace: upbound-system
 spec:
@@ -18,7 +20,7 @@ kind: Table
 metadata:
   name: example
   annotations:
-    meta.upbound.io/example-id: dynamodb/v1beta1/table
+    meta.upbound.io/example-id: dynamodb/v1beta1/contributorinsights
   namespace: upbound-system
 spec:
   forProvider:

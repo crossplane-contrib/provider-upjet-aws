@@ -7,6 +7,7 @@ kind: TransitGatewayMulticastDomain
 metadata:
   annotations:
     upjet.upbound.io/manual-intervention: "This resource requires manual intervention."
+    meta.upbound.io/example-id: ec2/v1beta1/transitgatewaymulticastdomain
   labels:
     testing.upbound.io/example-name: domain
   name: domain

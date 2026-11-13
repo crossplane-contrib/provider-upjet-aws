@@ -28,7 +28,7 @@ apiVersion: waf.aws.upbound.io/v1beta1
 kind: RegexPatternSet
 metadata:
   annotations:
-    meta.upbound.io/example-id: waf/v1beta1/regexpatternset
+    meta.upbound.io/example-id: waf/v1beta1/regexmatchset
   labels:
     testing.upbound.io/example-name: regex_pattern_set
   name: "regex-pattern-set"

@@ -5,6 +5,8 @@
 apiVersion: apigatewayv2.aws.m.upbound.io/v1beta1
 kind: API
 metadata:
+  annotations:
+    meta.upbound.io/example-id: apigatewayv2/v1beta1/api
   name: domainname-api
   labels:
     upjet.upbound.io/test-group: apigatewayv2-domainname

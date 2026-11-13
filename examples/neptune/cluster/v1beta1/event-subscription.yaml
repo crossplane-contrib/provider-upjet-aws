@@ -2,19 +2,11 @@
 #
 # SPDX-License-Identifier: CC0-1.0
 
-apiVersion: sns.aws.upbound.io/v1beta1
-kind: Topic
-metadata:
-  name: sample-neptune-topic
-spec:
-  forProvider:
-    region: eu-central-1
-
----
-
 apiVersion: neptune.aws.upbound.io/v1beta1
 kind: EventSubscription
 metadata:
+  annotations:
+    meta.upbound.io/example-id: neptune/v1beta1/eventsubscription
   name: sample-event-sub
 spec:
   forProvider:
@@ -23,3 +15,14 @@ spec:
       name: sample-neptune-topic
     tags:
       env: test
+---
+apiVersion: sns.aws.upbound.io/v1beta1
+kind: Topic
+metadata:
+  annotations:
+    crossplane.io/external-name: "sample-neptune-topic"
+    meta.upbound.io/example-id: neptune/v1beta1/eventsubscription
+  name: sample-neptune-topic
+spec:
+  forProvider:
+    region: eu-central-1

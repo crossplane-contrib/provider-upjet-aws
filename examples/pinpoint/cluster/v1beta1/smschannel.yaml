@@ -23,7 +23,7 @@ apiVersion: pinpoint.aws.upbound.io/v1beta1
 kind: App
 metadata:
   annotations:
-    meta.upbound.io/example-id: pinpoint/v1beta1/app
+    meta.upbound.io/example-id: pinpoint/v1beta1/smschannel
   labels:
     testing.upbound.io/example-name: example
   name: example

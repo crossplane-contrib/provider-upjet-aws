@@ -110,7 +110,7 @@ apiVersion: eks.aws.m.upbound.io/v1beta1
 kind: ClusterAuth
 metadata:
   annotations:
-    meta.upbound.io/example-id: eks/v1beta1/cluster
+    meta.upbound.io/example-id: eks/v1beta1/nodegroup
   name: auth
   namespace: upbound-system
 spec:

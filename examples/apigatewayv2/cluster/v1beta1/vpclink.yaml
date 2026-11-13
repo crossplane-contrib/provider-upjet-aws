@@ -5,6 +5,8 @@
 apiVersion: apigatewayv2.aws.upbound.io/v1beta1
 kind: VPCLink
 metadata:
+  annotations:
+    meta.upbound.io/example-id: apigatewayv2/v1beta1/vpclink
   name: example
   labels:
     upjet.upbound.io/test-group: apigatewayv2-vpclink

@@ -189,7 +189,7 @@ spec:
         testing.upbound.io/example-name: va-example
     region: us-west-1
     validationRecordFqdns:
-      - # TODO: _6a48817259ef461524224d64f7a209f4.example-dns.upbound-providers.io
+      - "_6a48817259ef461524224d64f7a209f4.example-dns.upbound-providers.io"
 
 ---
 
