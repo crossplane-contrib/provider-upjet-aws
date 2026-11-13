@@ -441,6 +441,7 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 		}
 		r.TerraformConfigurationInjector = func(jsonMap map[string]any, params map[string]any) error {
 			params["ebs_block_device"] = []any{}
+			params["ephemeral_block_device"] = []any{}
 			// TODO: Has better be implemented via defaulting.
 			if _, ok := jsonMap["encrypted"]; !ok {
 				params["encrypted"] = false
@@ -450,6 +451,9 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 		r.TerraformCustomDiff = func(diff *terraform.InstanceDiff, _ *terraform.InstanceState, _ *terraform.ResourceConfig) (*terraform.InstanceDiff, error) {
 			if diff != nil && diff.Attributes != nil {
 				delete(diff.Attributes, "ebs_block_device.#")
+			}
+			if diff != nil && diff.Attributes != nil {
+				delete(diff.Attributes, "ephemeral_block_device.#")
 			}
 			return diff, nil
 		}
