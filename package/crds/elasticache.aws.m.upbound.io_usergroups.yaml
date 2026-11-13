@@ -159,7 +159,12 @@ spec:
                         type: object
                     type: object
                   userIds:
-                    description: The list of user IDs that belong to the user group.
+                    description: 'The list of user IDs that belong to the user group.
+                      Important: leave this field unset when using UserGroupAssociation;
+                      put create-time seed users (for example the AWS built-in "default"
+                      user) in initProvider instead. Managing the same membership
+                      via forProvider.userIds and UserGroupAssociation causes a reconcile
+                      race.'
                     items:
                       type: string
                     type: array
@@ -275,7 +280,12 @@ spec:
                         type: object
                     type: object
                   userIds:
-                    description: The list of user IDs that belong to the user group.
+                    description: 'The list of user IDs that belong to the user group.
+                      Important: leave this field unset when using UserGroupAssociation;
+                      put create-time seed users (for example the AWS built-in "default"
+                      user) in initProvider instead. Managing the same membership
+                      via forProvider.userIds and UserGroupAssociation causes a reconcile
+                      race.'
                     items:
                       type: string
                     type: array
@@ -379,7 +389,12 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   userIds:
-                    description: The list of user IDs that belong to the user group.
+                    description: 'The list of user IDs that belong to the user group.
+                      Important: leave this field unset when using UserGroupAssociation;
+                      put create-time seed users (for example the AWS built-in "default"
+                      user) in initProvider instead. Managing the same membership
+                      via forProvider.userIds and UserGroupAssociation causes a reconcile
+                      race.'
                     items:
                       type: string
                     type: array

@@ -1,0 +1,61 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+# UserGroupAssociation manages membership independently of UserGroup.forProvider.userIds.
+# Seed the AWS built-in "default" user via initProvider (ignore_changes) so associations
+# can add users without a reconcile race against UserGroup.
+apiVersion: elasticache.aws.upbound.io/v1beta1
+kind: UserGroupAssociation
+metadata:
+  annotations:
+    meta.upbound.io/example-id: elasticache/v1beta1/usergroupassociation
+    uptest.upbound.io/post-assert-hook: testhooks/verify-usergroup-no-race.sh
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+    userGroupIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-group
+    userIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-user
+---
+apiVersion: elasticache.aws.upbound.io/v1beta1
+kind: User
+metadata:
+  annotations:
+    meta.upbound.io/example-id: elasticache/v1beta1/usergroupassociation
+    # AWS stores UserId as lowercase; camelCase breaks association Read after Create.
+    crossplane.io/external-name: exampleuserid
+  labels:
+    testing.upbound.io/example-name: example-user
+  name: example
+spec:
+  forProvider:
+    accessString: "on ~app::* -@all +@read +@hash +@bitmap +@geo -setbit -bitfield -hset -hsetnx -hmset -hincrby -hincrbyfloat -hdel -bitop -geoadd -georadius -georadiusbymember"
+    authenticationMode:
+    - type: iam
+    engine: REDIS
+    region: us-west-1
+    userName: exampleuserid
+---
+apiVersion: elasticache.aws.upbound.io/v1beta1
+kind: UserGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: elasticache/v1beta1/usergroupassociation
+  labels:
+    testing.upbound.io/example-name: example-group
+  name: example
+spec:
+  forProvider:
+    engine: REDIS
+    region: us-west-1
+  initProvider:
+    # AWS built-in default user id; required at create for Redis. Ignored after create.
+    userIds:
+    - default
