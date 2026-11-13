@@ -54,7 +54,7 @@ type BedrockDataAutomationConfigurationParameters struct {
 type BedrockFoundationModelConfigurationInitParameters struct {
 
 	// Strategy used to enrich the context of data source documents. See context_enrichment_configuration.bedrock_foundation_model_configuration.enrichment_strategy_configuration Block for details.
-	EnrichmentStrategyConfiguration []EnrichmentStrategyConfigurationInitParameters `json:"enrichmentStrategyConfiguration,omitempty" tf:"enrichment_strategy_configuration,omitempty"`
+	EnrichmentStrategyConfiguration *EnrichmentStrategyConfigurationInitParameters `json:"enrichmentStrategyConfiguration,omitempty" tf:"enrichment_strategy_configuration,omitempty"`
 
 	// ARN of the cross-Region inference profile used for context enrichment.
 	ModelArn *string `json:"modelArn,omitempty" tf:"model_arn,omitempty"`
@@ -63,7 +63,7 @@ type BedrockFoundationModelConfigurationInitParameters struct {
 type BedrockFoundationModelConfigurationObservation struct {
 
 	// Strategy used to enrich the context of data source documents. See context_enrichment_configuration.bedrock_foundation_model_configuration.enrichment_strategy_configuration Block for details.
-	EnrichmentStrategyConfiguration []EnrichmentStrategyConfigurationObservation `json:"enrichmentStrategyConfiguration,omitempty" tf:"enrichment_strategy_configuration,omitempty"`
+	EnrichmentStrategyConfiguration *EnrichmentStrategyConfigurationObservation `json:"enrichmentStrategyConfiguration,omitempty" tf:"enrichment_strategy_configuration,omitempty"`
 
 	// ARN of the cross-Region inference profile used for context enrichment.
 	ModelArn *string `json:"modelArn,omitempty" tf:"model_arn,omitempty"`
@@ -73,7 +73,7 @@ type BedrockFoundationModelConfigurationParameters struct {
 
 	// Strategy used to enrich the context of data source documents. See context_enrichment_configuration.bedrock_foundation_model_configuration.enrichment_strategy_configuration Block for details.
 	// +kubebuilder:validation:Optional
-	EnrichmentStrategyConfiguration []EnrichmentStrategyConfigurationParameters `json:"enrichmentStrategyConfiguration,omitempty" tf:"enrichment_strategy_configuration,omitempty"`
+	EnrichmentStrategyConfiguration *EnrichmentStrategyConfigurationParameters `json:"enrichmentStrategyConfiguration,omitempty" tf:"enrichment_strategy_configuration,omitempty"`
 
 	// ARN of the cross-Region inference profile used for context enrichment.
 	// +kubebuilder:validation:Optional

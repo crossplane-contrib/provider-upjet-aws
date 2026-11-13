@@ -1531,10 +1531,8 @@ func (in *BedrockFoundationModelConfigurationInitParameters) DeepCopyInto(out *B
 	*out = *in
 	if in.EnrichmentStrategyConfiguration != nil {
 		in, out := &in.EnrichmentStrategyConfiguration, &out.EnrichmentStrategyConfiguration
-		*out = make([]EnrichmentStrategyConfigurationInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(EnrichmentStrategyConfigurationInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ModelArn != nil {
 		in, out := &in.ModelArn, &out.ModelArn
@@ -1558,10 +1556,8 @@ func (in *BedrockFoundationModelConfigurationObservation) DeepCopyInto(out *Bedr
 	*out = *in
 	if in.EnrichmentStrategyConfiguration != nil {
 		in, out := &in.EnrichmentStrategyConfiguration, &out.EnrichmentStrategyConfiguration
-		*out = make([]EnrichmentStrategyConfigurationObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(EnrichmentStrategyConfigurationObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ModelArn != nil {
 		in, out := &in.ModelArn, &out.ModelArn
@@ -1585,10 +1581,8 @@ func (in *BedrockFoundationModelConfigurationParameters) DeepCopyInto(out *Bedro
 	*out = *in
 	if in.EnrichmentStrategyConfiguration != nil {
 		in, out := &in.EnrichmentStrategyConfiguration, &out.EnrichmentStrategyConfiguration
-		*out = make([]EnrichmentStrategyConfigurationParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(EnrichmentStrategyConfigurationParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ModelArn != nil {
 		in, out := &in.ModelArn, &out.ModelArn
