@@ -191,12 +191,18 @@ func getAWSConfig(ctx context.Context, c client.Client, obj runtime.Object, pc *
 		}
 	}
 
+	// The endpoint resolver must be in place before the role chain is built,
+	// so that the STS calls made for spec.assumeRoleChain honor spec.endpoint
+	// like every other client does.
+	cfg, err = SetResolver(pc, cfg)
+	if err != nil {
+		return nil, meta, err
+	}
 	cfg, err = GetRoleChainConfig(ctx, &pc.Spec, cfg)
 	if err != nil {
 		return nil, meta, errors.Wrap(err, "cannot get credentials")
 	}
-	cfg, err = SetResolver(pc, cfg)
-	return cfg, meta, err
+	return cfg, meta, nil
 }
 
 // GetAWSConfigWithTracking obtains the provider config referenced by the
@@ -379,6 +385,9 @@ func GetRoleChainConfig(ctx context.Context, pcs *v1beta1.ProviderConfigSpec, cf
 			userAgentV2,
 			config.WithRegion(cfg.Region),
 			config.WithCredentialsProvider(aws.NewCredentialsCache(stsAssume, withCredsExpiryWindow)),
+			// carry any custom endpoint resolver over to the next link of the
+			// chain and to the clients built from the resulting config.
+			config.WithEndpointResolverWithOptions(cfg.EndpointResolverWithOptions), //nolint:staticcheck
 		)
 		if err != nil {
 			return nil, errors.Wrap(err, errRoleChainConfig)
