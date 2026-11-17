@@ -226,58 +226,64 @@ func (a awsEndpointResolverAdaptorWithOptions) ResolveEndpoint(service, region s
 
 // SetResolver parses annotations from the managed resource
 // and returns a configuration accordingly.
-func SetResolver(pc *v1beta1.ClusterProviderConfig, cfg *aws.Config) (*aws.Config, error) { // nolint:gocyclo
-	if pc.Spec.Endpoint == nil {
+func SetResolver(pc *v1beta1.ClusterProviderConfig, cfg *aws.Config) (*aws.Config, error) {
+	return setEndpointResolver(pc.Spec.Endpoint, cfg)
+}
+
+// setEndpointResolver installs a resolver on cfg for the supplied endpoint
+// configuration, if any.
+func setEndpointResolver(endpoint *v1beta1.EndpointConfig, cfg *aws.Config) (*aws.Config, error) { // nolint:gocyclo
+	if endpoint == nil {
 		return cfg, nil
 	}
-	if pc.Spec.Endpoint.URL.Type == URLConfigTypeAuto {
-		if pc.Spec.Endpoint.PartitionID == nil || *pc.Spec.Endpoint.PartitionID == "" {
+	if endpoint.URL.Type == URLConfigTypeAuto {
+		if endpoint.PartitionID == nil || *endpoint.PartitionID == "" {
 			return nil, errors.Errorf("partitionId is required when the Endpoint URL type is %q", URLConfigTypeAuto)
 		}
 		return cfg, nil
 	}
 	cfg.EndpointResolverWithOptions = awsEndpointResolverAdaptorWithOptions(func(service, region string, options interface{}) (aws.Endpoint, error) { //nolint:staticcheck
 		fullURL := ""
-		switch pc.Spec.Endpoint.URL.Type {
+		switch endpoint.URL.Type {
 		case URLConfigTypeStatic:
-			if pc.Spec.Endpoint.URL.Static == nil {
+			if endpoint.URL.Static == nil {
 				return aws.Endpoint{}, errors.New("static type is chosen but static field does not have a value") // nolint: staticcheck
 			}
-			fullURL = aws.ToString(pc.Spec.Endpoint.URL.Static)
+			fullURL = aws.ToString(endpoint.URL.Static)
 		case URLConfigTypeDynamic:
-			if pc.Spec.Endpoint.URL.Dynamic == nil {
+			if endpoint.URL.Dynamic == nil {
 				return aws.Endpoint{}, errors.New("dynamic type is chosen but dynamic configuration is not given") // nolint: staticcheck
 			}
 			// NOTE(muvaf): IAM does not have any region.
 			if service == "IAM" {
-				fullURL = fmt.Sprintf("%s://%s.%s", pc.Spec.Endpoint.URL.Dynamic.Protocol, strings.ToLower(service), pc.Spec.Endpoint.URL.Dynamic.Host)
+				fullURL = fmt.Sprintf("%s://%s.%s", endpoint.URL.Dynamic.Protocol, strings.ToLower(service), endpoint.URL.Dynamic.Host)
 			} else {
-				fullURL = fmt.Sprintf("%s://%s.%s.%s", pc.Spec.Endpoint.URL.Dynamic.Protocol, strings.ToLower(service), region, pc.Spec.Endpoint.URL.Dynamic.Host)
+				fullURL = fmt.Sprintf("%s://%s.%s.%s", endpoint.URL.Dynamic.Protocol, strings.ToLower(service), region, endpoint.URL.Dynamic.Host)
 			}
 		default:
 			return aws.Endpoint{}, errors.New("unsupported url config type is chosen") // nolint: staticcheck
 		}
 		e := aws.Endpoint{ // nolint: staticcheck
 			URL:               fullURL,
-			HostnameImmutable: aws.ToBool(pc.Spec.Endpoint.HostnameImmutable),
-			PartitionID:       aws.ToString(pc.Spec.Endpoint.PartitionID),
-			SigningName:       aws.ToString(pc.Spec.Endpoint.SigningName),
-			SigningRegion:     aws.ToString(LateInitializeStringPtr(pc.Spec.Endpoint.SigningRegion, &region)),
-			SigningMethod:     aws.ToString(pc.Spec.Endpoint.SigningMethod),
+			HostnameImmutable: aws.ToBool(endpoint.HostnameImmutable),
+			PartitionID:       aws.ToString(endpoint.PartitionID),
+			SigningName:       aws.ToString(endpoint.SigningName),
+			SigningRegion:     aws.ToString(LateInitializeStringPtr(endpoint.SigningRegion, &region)),
+			SigningMethod:     aws.ToString(endpoint.SigningMethod),
 		}
 		// Only IAM does not have a region parameter and "aws-global" is used in
 		// SDK setup. However, signing region has to be us-east-1 and it needs
 		// to be set.
 		if region == "aws-global" {
-			switch aws.ToString(pc.Spec.Endpoint.PartitionID) {
+			switch aws.ToString(endpoint.PartitionID) {
 			case "aws-us-gov", "aws-cn", "aws-iso", "aws-iso-b":
-				e.SigningRegion = aws.ToString(LateInitializeStringPtr(pc.Spec.Endpoint.SigningRegion, &region))
+				e.SigningRegion = aws.ToString(LateInitializeStringPtr(endpoint.SigningRegion, &region))
 			default:
 				e.SigningRegion = "us-east-1"
 			}
 		}
-		if pc.Spec.Endpoint.Source != nil {
-			switch *pc.Spec.Endpoint.Source {
+		if endpoint.Source != nil {
+			switch *endpoint.Source {
 			case "ServiceMetadata":
 				e.Source = aws.EndpointSourceServiceMetadata
 			case "Custom":
@@ -411,6 +417,7 @@ func GetAssumeRoleWithWebIdentityConfigViaTokenRetriever(ctx context.Context, cf
 		ctx,
 		userAgentV2,
 		config.WithRegion(cfg.Region),
+		config.WithEndpointResolverWithOptions(cfg.EndpointResolverWithOptions), //nolint:staticcheck
 		config.WithCredentialsProvider(aws.NewCredentialsCache(
 			stscreds.NewWebIdentityRoleProvider(
 				stsclient,
@@ -597,6 +604,12 @@ func UseWebIdentityToken(ctx context.Context, region string, pcs *v1beta1.Provid
 	cfg, err := UseDefault(ctx, region)
 	if err != nil {
 		return nil, "", errors.Wrap(err, "failed to get default AWS config")
+	}
+	// the STS client for AssumeRoleWithWebIdentity is built from this config,
+	// so it needs the endpoint resolver for spec.endpoint to be honored.
+	cfg, err = setEndpointResolver(pcs.Endpoint, cfg)
+	if err != nil {
+		return nil, "", err
 	}
 	cfg, err = GetAssumeRoleWithWebIdentityConfigViaTokenRetriever(ctx, cfg, *pcs.Credentials.WebIdentity, tokenRetriever)
 	if err != nil {

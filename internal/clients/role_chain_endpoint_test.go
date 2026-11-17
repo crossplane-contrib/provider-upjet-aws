@@ -13,6 +13,7 @@ import (
 	"sync"
 	"testing"
 
+	"github.com/aws/aws-sdk-go-v2/aws"
 	xpv2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 	"k8s.io/apimachinery/pkg/apis/meta/v1/unstructured"
 	"k8s.io/utils/ptr"
@@ -32,8 +33,9 @@ func (f *fakeSTS) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
-	if r.Form.Get("Action") != "AssumeRole" {
-		http.Error(w, "unexpected action "+r.Form.Get("Action"), http.StatusBadRequest)
+	action := r.Form.Get("Action")
+	if action != "AssumeRole" && action != "AssumeRoleWithWebIdentity" {
+		http.Error(w, "unexpected action "+action, http.StatusBadRequest)
 		return
 	}
 	role := r.Form.Get("RoleArn")
@@ -41,21 +43,21 @@ func (f *fakeSTS) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	f.roles = append(f.roles, role)
 	f.mu.Unlock()
 	w.Header().Set("Content-Type", "text/xml")
-	fmt.Fprintf(w, `<AssumeRoleResponse xmlns="https://sts.amazonaws.com/doc/2011-06-15/">
-  <AssumeRoleResult>
+	fmt.Fprintf(w, `<%[3]sResponse xmlns="https://sts.amazonaws.com/doc/2011-06-15/">
+  <%[3]sResult>
     <Credentials>
-      <AccessKeyId>%s</AccessKeyId>
+      <AccessKeyId>%[1]s</AccessKeyId>
       <SecretAccessKey>secret</SecretAccessKey>
       <SessionToken>token</SessionToken>
       <Expiration>2099-01-01T00:00:00Z</Expiration>
     </Credentials>
     <AssumedRoleUser>
-      <Arn>%s/session</Arn>
+      <Arn>%[2]s/session</Arn>
       <AssumedRoleId>AROATEST:session</AssumedRoleId>
     </AssumedRoleUser>
-  </AssumeRoleResult>
+  </%[3]sResult>
   <ResponseMetadata><RequestId>00000000-0000-0000-0000-000000000000</RequestId></ResponseMetadata>
-</AssumeRoleResponse>`, akidFor(role), role)
+</%[3]sResponse>`, akidFor(role), role, action)
 }
 
 func (f *fakeSTS) seen() []string {
@@ -68,16 +70,34 @@ func akidFor(role string) string {
 	return "ASIA" + strings.ToUpper(role[strings.LastIndex(role, "/")+1:])
 }
 
+// blockEscapes makes any request to a non-loopback host (e.g. the public STS
+// endpoint) fail fast through a dead proxy instead of leaving the machine.
+// Loopback requests, such as those to the fake STS, are never proxied.
+func blockEscapes(t *testing.T) {
+	t.Helper()
+	t.Setenv("HTTPS_PROXY", "http://127.0.0.1:1")
+	t.Setenv("HTTP_PROXY", "http://127.0.0.1:1")
+}
+
+func staticEndpoint(url string) *v1beta1.EndpointConfig {
+	return &v1beta1.EndpointConfig{
+		URL:               v1beta1.URLConfig{Type: URLConfigTypeStatic, Static: ptr.To(url)},
+		HostnameImmutable: ptr.To(true),
+	}
+}
+
+func regionalMR() *unstructured.Unstructured {
+	return &unstructured.Unstructured{Object: map[string]any{
+		"spec": map[string]any{"forProvider": map[string]any{"region": "us-east-1"}},
+	}}
+}
+
 // TestRoleChainUsesCustomEndpoint checks that the STS calls made for
 // spec.assumeRoleChain go to spec.endpoint, for every link of the chain, like
 // every other client built from the ProviderConfig does.
 func TestRoleChainUsesCustomEndpoint(t *testing.T) {
 	isolateAWSEnv(t)
-	// Any request that escapes to a non-loopback host (e.g. the public STS
-	// endpoint) fails fast through a dead proxy instead of leaving the machine.
-	// Loopback requests, such as those to the fake STS below, are never proxied.
-	t.Setenv("HTTPS_PROXY", "http://127.0.0.1:1")
-	t.Setenv("HTTP_PROXY", "http://127.0.0.1:1")
+	blockEscapes(t)
 
 	sts := &fakeSTS{}
 	srv := httptest.NewServer(sts)
@@ -100,18 +120,11 @@ func TestRoleChainUsesCustomEndpoint(t *testing.T) {
 				{RoleARN: ptr.To(first)},
 				{RoleARN: ptr.To(second)},
 			},
-			Endpoint: &v1beta1.EndpointConfig{
-				URL:               v1beta1.URLConfig{Type: URLConfigTypeStatic, Static: ptr.To(srv.URL)},
-				HostnameImmutable: ptr.To(true),
-			},
+			Endpoint: staticEndpoint(srv.URL),
 		},
 	}
 	creds := []byte("[default]\naws_access_key_id = AKIDBASE\naws_secret_access_key = base\n")
-	mg := &unstructured.Unstructured{Object: map[string]any{
-		"spec": map[string]any{"forProvider": map[string]any{"region": "us-east-1"}},
-	}}
-
-	cfg, err := GetAWSConfigWithoutTracking(context.Background(), tokenServingClient(creds, "credentials"), mg, pc)
+	cfg, err := GetAWSConfigWithoutTracking(context.Background(), tokenServingClient(creds, "credentials"), regionalMR(), pc)
 	if err != nil {
 		t.Fatalf("GetAWSConfigWithoutTracking(...): unexpected error: %v", err)
 	}
@@ -124,5 +137,39 @@ func TestRoleChainUsesCustomEndpoint(t *testing.T) {
 	}
 	if want, seen := []string{first, second}, sts.seen(); strings.Join(seen, ",") != strings.Join(want, ",") {
 		t.Errorf("fake STS: want AssumeRole calls %v, got %v", want, seen)
+	}
+}
+
+// TestWebIdentityUsesCustomEndpoint checks that the AssumeRoleWithWebIdentity
+// call made for the WebIdentity credential source goes to spec.endpoint.
+func TestWebIdentityUsesCustomEndpoint(t *testing.T) {
+	isolateAWSEnv(t)
+	blockEscapes(t)
+
+	sts := &fakeSTS{}
+	srv := httptest.NewServer(sts)
+	t.Cleanup(srv.Close)
+
+	spec := webIdentitySpec(&v1beta1.WebIdentityTokenConfig{
+		Source: xpv2.CredentialsSourceFilesystem,
+		Fs:     &xpv2.FsSelector{Path: writeTokenFile(t, "a-web-identity-token")},
+	})
+	spec.Endpoint = staticEndpoint(srv.URL)
+	pc := &v1beta1.ClusterProviderConfig{Spec: *spec}
+	role := aws.ToString(spec.Credentials.WebIdentity.RoleARN)
+
+	cfg, err := GetAWSConfigWithoutTracking(context.Background(), nil, regionalMR(), pc)
+	if err != nil {
+		t.Fatalf("GetAWSConfigWithoutTracking(...): unexpected error: %v", err)
+	}
+	got, err := cfg.Credentials.Retrieve(context.Background())
+	if err != nil {
+		t.Fatalf("Credentials.Retrieve(...): unexpected error (AssumeRoleWithWebIdentity did not use spec.endpoint): %v", err)
+	}
+	if want := akidFor(role); got.AccessKeyID != want {
+		t.Errorf("Credentials.Retrieve(...): want access key %q, got %q", want, got.AccessKeyID)
+	}
+	if want, seen := []string{role}, sts.seen(); strings.Join(seen, ",") != strings.Join(want, ",") {
+		t.Errorf("fake STS: want calls for %v, got %v", want, seen)
 	}
 }
