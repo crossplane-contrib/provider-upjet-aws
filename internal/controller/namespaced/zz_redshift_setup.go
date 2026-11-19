@@ -16,6 +16,7 @@ import (
 	hsmclientcertificate "github.com/upbound/provider-aws/v2/internal/controller/namespaced/redshift/hsmclientcertificate"
 	hsmconfiguration "github.com/upbound/provider-aws/v2/internal/controller/namespaced/redshift/hsmconfiguration"
 	parametergroup "github.com/upbound/provider-aws/v2/internal/controller/namespaced/redshift/parametergroup"
+	resourcepolicy "github.com/upbound/provider-aws/v2/internal/controller/namespaced/redshift/resourcepolicy"
 	scheduledaction "github.com/upbound/provider-aws/v2/internal/controller/namespaced/redshift/scheduledaction"
 	snapshotcopygrant "github.com/upbound/provider-aws/v2/internal/controller/namespaced/redshift/snapshotcopygrant"
 	snapshotschedule "github.com/upbound/provider-aws/v2/internal/controller/namespaced/redshift/snapshotschedule"
@@ -35,6 +36,7 @@ func Setup_redshift(mgr ctrl.Manager, o controller.Options) error {
 		hsmclientcertificate.Setup,
 		hsmconfiguration.Setup,
 		parametergroup.Setup,
+		resourcepolicy.Setup,
 		scheduledaction.Setup,
 		snapshotcopygrant.Setup,
 		snapshotschedule.Setup,
@@ -60,6 +62,7 @@ func SetupGated_redshift(mgr ctrl.Manager, o controller.Options) error {
 		hsmclientcertificate.SetupGated,
 		hsmconfiguration.SetupGated,
 		parametergroup.SetupGated,
+		resourcepolicy.SetupGated,
 		scheduledaction.SetupGated,
 		snapshotcopygrant.SetupGated,
 		snapshotschedule.SetupGated,
@@ -84,6 +87,7 @@ func SetupWebhookWithManager_redshift(mgr ctrl.Manager) error {
 		hsmclientcertificate.SetupWebhookWithManager,
 		hsmconfiguration.SetupWebhookWithManager,
 		parametergroup.SetupWebhookWithManager,
+		resourcepolicy.SetupWebhookWithManager,
 		scheduledaction.SetupWebhookWithManager,
 		snapshotcopygrant.SetupWebhookWithManager,
 		snapshotschedule.SetupWebhookWithManager,

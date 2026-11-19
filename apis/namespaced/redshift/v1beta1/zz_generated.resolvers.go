@@ -13,6 +13,7 @@ import (
 	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	errors "github.com/pkg/errors"
 	common "github.com/upbound/provider-aws/v2/config/cluster/common"
+	common1 "github.com/upbound/provider-aws/v2/config/namespaced/common"
 	apisresolver "github.com/upbound/provider-aws/v2/internal/apis"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
@@ -412,6 +413,58 @@ func (mg *EventSubscription) ResolveReferences(ctx context.Context, c client.Rea
 	}
 	mg.Spec.InitProvider.SourceIds = reference.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.InitProvider.SourceIdsRefs = mrsp.ResolvedReferences
+
+	return nil
+}
+
+// ResolveReferences of this ResourcePolicy.
+func (mg *ResourcePolicy) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPINamespacedResolver(c, mg)
+
+	var rsp reference.NamespacedResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("redshiftserverless.aws.m.upbound.io", "v1beta1", "RedshiftServerlessNamespace", "RedshiftServerlessNamespaceList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceArn),
+			Extract:      common1.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.ResourceArnRef,
+			Selector:     mg.Spec.ForProvider.ResourceArnSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceArn")
+	}
+	mg.Spec.ForProvider.ResourceArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceArnRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("redshiftserverless.aws.m.upbound.io", "v1beta1", "RedshiftServerlessNamespace", "RedshiftServerlessNamespaceList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceArn),
+			Extract:      common1.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.ResourceArnRef,
+			Selector:     mg.Spec.InitProvider.ResourceArnSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ResourceArn")
+	}
+	mg.Spec.InitProvider.ResourceArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ResourceArnRef = rsp.ResolvedReference
 
 	return nil
 }
