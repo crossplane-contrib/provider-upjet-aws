@@ -29,3 +29,6 @@ func (tr *User) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *UserGroup) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *UserGroupAssociation) Hub() {}
