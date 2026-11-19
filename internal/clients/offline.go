@@ -133,7 +133,7 @@ func OfflineTerraformSetupBuilder(config *SetupConfig, accountID string) terrafo
 			AccessKeyID:     offlineAccessKeyID,
 			SecretAccessKey: offlineSecretAccessKey,
 		}
-		if err := configureNoForkAWSClient(ctx, &ps, config, region, creds, &offlinePC); err != nil {
+		if err := configureNoForkAWSClient(ctx, &ps, config, region, creds, nil, &offlinePC); err != nil {
 			return terraform.Setup{}, errors.Wrap(err, errOfflineConfigureClient)
 		}
 		if err := guardOutboundRequests(ps.Meta); err != nil {

@@ -163,7 +163,7 @@ func SelectTerraformSetup(config *SetupConfig) terraform.SetupFn { // nolint:goc
 		if config.TerraformProvider == nil {
 			return terraform.Setup{}, errors.New("terraform provider cannot be nil")
 		}
-		return ps, errors.Wrap(configureNoForkAWSClient(ctx, &ps, config, awsCfg.Region, credCache.creds, pc), "could not configure the no-fork AWS client")
+		return ps, errors.Wrap(configureNoForkAWSClient(ctx, &ps, config, awsCfg.Region, credCache.creds, credCache.provider, pc), "could not configure the no-fork AWS client")
 	}
 }
 
@@ -349,10 +349,13 @@ func withExternalAPICallCounter(stack *middleware.Stack) error {
 
 // configureNoForkAWSClient populates the supplied *terraform.Setup with
 // Terraform Plugin SDK style AWS client (Meta) and Terraform Plugin Framework
-// style FrameworkProvider
-func configureNoForkAWSClient(ctx context.Context, ps *terraform.Setup, config *SetupConfig, region string, creds aws.Credentials, pc *namespacedv1beta1.ClusterProviderConfig) error { //nolint:gocyclo
+// style FrameworkProvider. If non-nil, credsProvider (the provider creds were
+// retrieved from) supplies the credentials of the AWS API clients instead of
+// creds, so that long-running operations do not outlive them.
+func configureNoForkAWSClient(ctx context.Context, ps *terraform.Setup, config *SetupConfig, region string, creds aws.Credentials, credsProvider aws.CredentialsProvider, pc *namespacedv1beta1.ClusterProviderConfig) error { //nolint:gocyclo
 	tfAwsConnsCfg := xpprovider.AWSConfig{
 		AccessKey:               creds.AccessKeyID,
+		CredentialsProvider:     credsProvider,
 		Endpoints:               map[string]string{},
 		Region:                  region,
 		S3UsePathStyle:          pc.Spec.S3UsePathStyle,

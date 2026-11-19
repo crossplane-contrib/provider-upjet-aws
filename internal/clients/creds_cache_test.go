@@ -16,6 +16,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/google/go-cmp/cmp"
+	"github.com/google/go-cmp/cmp/cmpopts"
 	"github.com/pkg/errors"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/types"
@@ -50,6 +51,21 @@ func (p *countingCredentialsProvider) Retrieve(context.Context) (aws.Credentials
 func newCountingCredsCache(creds aws.Credentials) (*aws.CredentialsCache, *countingCredentialsProvider) {
 	p := &countingCredentialsProvider{creds: creds}
 	return aws.NewCredentialsCache(p), p
+}
+
+// credentialsValueCmpOpts compares Credentials by value, ignoring the provider,
+// which assertCredentialsProvider checks by identity.
+var credentialsValueCmpOpts = cmp.Options{
+	cmp.AllowUnexported(Credentials{}),
+	cmpopts.IgnoreFields(Credentials{}, "provider"),
+}
+
+// assertCredentialsProvider asserts that got carries exactly the want provider.
+func assertCredentialsProvider(t *testing.T, want aws.CredentialsProvider, got Credentials) {
+	t.Helper()
+	if got.provider != want {
+		t.Errorf("Credentials.provider: want %p, got %p", want, got.provider)
+	}
 }
 
 // cacheKeys returns the keys the supplied cache currently holds, sorted so
@@ -185,7 +201,7 @@ func TestRetrieveCredentialsStaticWithRoleChain(t *testing.T) {
 		if err != nil {
 			t.Fatalf("RetrieveCredentials(...): unexpected error: %v", err)
 		}
-		if diff := cmp.Diff(Credentials{creds: creds, accountID: "123456789012"}, got, cmp.AllowUnexported(Credentials{})); diff != "" {
+		if diff := cmp.Diff(Credentials{creds: creds, accountID: "123456789012"}, got, credentialsValueCmpOpts); diff != "" {
 			t.Errorf("RetrieveCredentials(...): -want, +got:\n%s", diff)
 		}
 		if diff := cmp.Diff(1, len(c.cache)); diff != "" {
@@ -197,6 +213,7 @@ func TestRetrieveCredentialsStaticWithRoleChain(t *testing.T) {
 		if diff := cmp.Diff(1, counter.calls); diff != "" {
 			t.Errorf("downstream Retrieve calls: -want, +got:\n%s", diff)
 		}
+		assertCredentialsProvider(t, provider, got)
 	})
 
 	t.Run("CacheHitDoesNotCallAWS", func(t *testing.T) {
@@ -220,7 +237,7 @@ func TestRetrieveCredentialsStaticWithRoleChain(t *testing.T) {
 		if err != nil {
 			t.Fatalf("RetrieveCredentials(...): unexpected error: %v", err)
 		}
-		if diff := cmp.Diff(Credentials{creds: creds, accountID: "123456789012"}, got, cmp.AllowUnexported(Credentials{})); diff != "" {
+		if diff := cmp.Diff(Credentials{creds: creds, accountID: "123456789012"}, got, credentialsValueCmpOpts); diff != "" {
 			t.Errorf("RetrieveCredentials(...): -want, +got:\n%s", diff)
 		}
 		if diff := cmp.Diff(1, len(c.cache)); diff != "" {
@@ -232,6 +249,8 @@ func TestRetrieveCredentialsStaticWithRoleChain(t *testing.T) {
 		if diff := cmp.Diff(0, freshCounter.calls); diff != "" {
 			t.Errorf("freshly built provider Retrieve calls: -want, +got:\n%s", diff)
 		}
+		// the cached provider is handed out, not the freshly built one.
+		assertCredentialsProvider(t, provider, got)
 		// the cached aws.CredentialsCache itself caches the credentials of its
 		// downstream provider until they expire, so the downstream provider is
 		// consulted only once.
@@ -257,7 +276,7 @@ func TestRetrieveCredentialsStaticWithRoleChain(t *testing.T) {
 		if err != nil {
 			t.Fatalf("RetrieveCredentials(...): unexpected error: %v", err)
 		}
-		if diff := cmp.Diff(Credentials{creds: rotatedCreds, accountID: "123456789012"}, got, cmp.AllowUnexported(Credentials{})); diff != "" {
+		if diff := cmp.Diff(Credentials{creds: rotatedCreds, accountID: "123456789012"}, got, credentialsValueCmpOpts); diff != "" {
 			t.Errorf("RetrieveCredentials(...): -want, +got:\n%s", diff)
 		}
 		// the rotated material takes the slot of the material it supersedes,
@@ -327,7 +346,7 @@ func TestRetrieveCredentialsStaticWithRoleChain(t *testing.T) {
 		if err != nil {
 			t.Fatalf("RetrieveCredentials(...): unexpected error: %v", err)
 		}
-		if diff := cmp.Diff(Credentials{creds: stragglerCreds, accountID: "123456789012"}, got, cmp.AllowUnexported(Credentials{})); diff != "" {
+		if diff := cmp.Diff(Credentials{creds: stragglerCreds, accountID: "123456789012"}, got, credentialsValueCmpOpts); diff != "" {
 			t.Errorf("RetrieveCredentials(...): -want, +got:\n%s", diff)
 		}
 		if diff := cmp.Diff(1, stragglerCounter.calls); diff != "" {
@@ -377,9 +396,10 @@ func TestRetrieveCredentialsStaticWithRoleChain(t *testing.T) {
 		}
 		// credentials are still returned, they are just not cached, and the
 		// account ID is left to the separate identity cache.
-		if diff := cmp.Diff(Credentials{creds: creds}, got, cmp.AllowUnexported(Credentials{})); diff != "" {
+		if diff := cmp.Diff(Credentials{creds: creds}, got, credentialsValueCmpOpts); diff != "" {
 			t.Errorf("RetrieveCredentials(...): -want, +got:\n%s", diff)
 		}
+		assertCredentialsProvider(t, provider, got)
 		if diff := cmp.Diff(0, len(c.cache)); diff != "" {
 			t.Errorf("cache size: -want, +got:\n%s", diff)
 		}
@@ -436,7 +456,7 @@ func TestRetrieveCredentialsUncached(t *testing.T) {
 			}
 			// the credentials are returned from the downstream provider, but
 			// the account ID is left to the separate identity cache.
-			if diff := cmp.Diff(Credentials{creds: creds}, got, cmp.AllowUnexported(Credentials{})); diff != "" {
+			if diff := cmp.Diff(Credentials{creds: creds}, got, credentialsValueCmpOpts); diff != "" {
 				t.Errorf("\n%s\nRetrieveCredentials(...): -want, +got:\n%s", tc.reason, diff)
 			}
 			if diff := cmp.Diff(0, len(c.cache)); diff != "" {
@@ -484,7 +504,7 @@ func TestRetrieveCredentialsIRSA(t *testing.T) {
 		if err != nil {
 			t.Fatalf("RetrieveCredentials(...): unexpected error: %v", err)
 		}
-		if diff := cmp.Diff(Credentials{creds: creds, accountID: "123456789012"}, got, cmp.AllowUnexported(Credentials{})); diff != "" {
+		if diff := cmp.Diff(Credentials{creds: creds, accountID: "123456789012"}, got, credentialsValueCmpOpts); diff != "" {
 			t.Errorf("RetrieveCredentials(...): -want, +got:\n%s", diff)
 		}
 	}
@@ -567,7 +587,7 @@ func TestRetrieveCredentialsWebIdentity(t *testing.T) {
 		if err != nil {
 			t.Fatalf("RetrieveCredentials(...): unexpected error: %v", err)
 		}
-		if diff := cmp.Diff(Credentials{creds: creds, accountID: "123456789012"}, got, cmp.AllowUnexported(Credentials{})); diff != "" {
+		if diff := cmp.Diff(Credentials{creds: creds, accountID: "123456789012"}, got, credentialsValueCmpOpts); diff != "" {
 			t.Errorf("RetrieveCredentials(...): -want, +got:\n%s", diff)
 		}
 		if diff := cmp.Diff(1, len(c.cache)); diff != "" {
@@ -608,7 +628,7 @@ func TestRetrieveCredentialsWebIdentity(t *testing.T) {
 		if err != nil {
 			t.Fatalf("RetrieveCredentials(...): unexpected error: %v", err)
 		}
-		if diff := cmp.Diff(Credentials{creds: rotatedCreds, accountID: "123456789012"}, got, cmp.AllowUnexported(Credentials{})); diff != "" {
+		if diff := cmp.Diff(Credentials{creds: rotatedCreds, accountID: "123456789012"}, got, credentialsValueCmpOpts); diff != "" {
 			t.Errorf("RetrieveCredentials(...): -want, +got:\n%s", diff)
 		}
 		// the rotated token takes the slot of the one it supersedes, which can
@@ -633,7 +653,7 @@ func TestRetrieveCredentialsWebIdentity(t *testing.T) {
 		if err != nil {
 			t.Fatalf("RetrieveCredentials(...): unexpected error: %v", err)
 		}
-		if diff := cmp.Diff(Credentials{creds: creds}, got, cmp.AllowUnexported(Credentials{})); diff != "" {
+		if diff := cmp.Diff(Credentials{creds: creds}, got, credentialsValueCmpOpts); diff != "" {
 			t.Errorf("RetrieveCredentials(...): -want, +got:\n%s", diff)
 		}
 		if diff := cmp.Diff(0, len(c.cache)); diff != "" {
@@ -724,7 +744,7 @@ func TestRetrieveCredentialsConcurrency(t *testing.T) {
 			if errs[i] != nil {
 				t.Fatalf("RetrieveCredentials(...): unexpected error: %v", errs[i])
 			}
-			if diff := cmp.Diff(want, got[i], cmp.AllowUnexported(Credentials{})); diff != "" {
+			if diff := cmp.Diff(want, got[i], credentialsValueCmpOpts); diff != "" {
 				t.Errorf("RetrieveCredentials(...): -want, +got:\n%s", diff)
 			}
 		}
@@ -792,7 +812,7 @@ func TestRetrieveCredentialsConcurrency(t *testing.T) {
 		if err != nil {
 			t.Fatalf("RetrieveCredentials(...): unexpected error: %v", err)
 		}
-		if diff := cmp.Diff(Credentials{creds: creds, accountID: "123456789012"}, got, cmp.AllowUnexported(Credentials{})); diff != "" {
+		if diff := cmp.Diff(Credentials{creds: creds, accountID: "123456789012"}, got, credentialsValueCmpOpts); diff != "" {
 			t.Errorf("RetrieveCredentials(...): -want, +got:\n%s", diff)
 		}
 		if diff := cmp.Diff(1, len(c.cache)); diff != "" {

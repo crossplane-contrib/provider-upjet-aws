@@ -186,13 +186,17 @@ func accountIDFromCacheEntry(e *awsCredentialsProviderCacheEntry) AccountIDFn {
 type Credentials struct {
 	creds     aws.Credentials
 	accountID string
+
+	// provider is the provider creds were retrieved from. Unlike creds, it
+	// refreshes the credentials when they expire.
+	provider aws.CredentialsProvider
 }
 
 // newCredentials returns the Credentials whose credentials are retrieved
 // using the given aws.CredentialsProvider and whose account ID is set using
 // the given AccountIDFn.
 func newCredentials(ctx context.Context, credsProvider aws.CredentialsProvider, accountIDFn AccountIDFn) (Credentials, error) {
-	var result Credentials
+	result := Credentials{provider: credsProvider}
 	// try to retrieve the credentials if a retriever has been supplied
 	if credsProvider != nil {
 		var err error
