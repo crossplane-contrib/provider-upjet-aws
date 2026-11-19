@@ -436,6 +436,9 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 	})
 
 	p.AddResourceConfigurator("aws_ami_copy", func(r *config.Resource) {
+		r.LateInitializer = config.LateInitializer{
+			IgnoredFields: []string{"ephemeral_block_device", "ebs_block_device"},
+		}
 		r.References["source_ami_id"] = config.Reference{
 			TerraformName: "aws_ami",
 		}
@@ -451,8 +454,6 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 		r.TerraformCustomDiff = func(diff *terraform.InstanceDiff, _ *terraform.InstanceState, _ *terraform.ResourceConfig) (*terraform.InstanceDiff, error) {
 			if diff != nil && diff.Attributes != nil {
 				delete(diff.Attributes, "ebs_block_device.#")
-			}
-			if diff != nil && diff.Attributes != nil {
 				delete(diff.Attributes, "ephemeral_block_device.#")
 			}
 			return diff, nil
