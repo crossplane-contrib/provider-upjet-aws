@@ -5,6 +5,8 @@
 apiVersion: ec2.aws.m.upbound.io/v1beta1
 kind: NetworkACL
 metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/networkacl
   name: example
   namespace: upbound-system
 spec:

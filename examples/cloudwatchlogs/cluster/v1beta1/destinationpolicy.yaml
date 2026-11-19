@@ -35,7 +35,7 @@ apiVersion: cloudwatchlogs.aws.upbound.io/v1beta1
 kind: Destination
 metadata:
   annotations:
-    meta.upbound.io/example-id: cloudwatchlogs/v1beta1/destination
+    meta.upbound.io/example-id: cloudwatchlogs/v1beta1/destinationpolicy
   labels:
     testing.upbound.io/example-name: destination
   name: destination
@@ -56,7 +56,7 @@ kind: Stream
 metadata:
   name: stream
   annotations:
-    meta.upbound.io/example-id: dynamodb/v1beta1/kinesisstreamingdestination
+    meta.upbound.io/example-id: cloudwatchlogs/v1beta1/destinationpolicy
   labels:
     testing.upbound.io/example-name: kinesis_for_cloudwatch
 spec:

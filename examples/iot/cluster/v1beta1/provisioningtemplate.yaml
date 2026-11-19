@@ -111,7 +111,7 @@ apiVersion: iot.aws.upbound.io/v1beta1
 kind: Certificate
 metadata:
   annotations:
-    meta.upbound.io/example-id: iot/v1beta1/certificate
+    meta.upbound.io/example-id: iot/v1beta1/provisioningtemplate
   labels:
     testing.upbound.io/example-name: cert
   name: cert

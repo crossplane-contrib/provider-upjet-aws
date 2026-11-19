@@ -5,6 +5,8 @@
 apiVersion: route53.aws.m.upbound.io/v1beta1
 kind: VPCAssociationAuthorization
 metadata:
+  annotations:
+    meta.upbound.io/example-id: route53/v1beta1/vpcassociationauthorization
   labels:
     testing.upbound.io/example-name: example
   name: example

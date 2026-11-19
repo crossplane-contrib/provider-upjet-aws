@@ -5,6 +5,8 @@
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: VPCIPv4CidrBlockAssociation
 metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/vpcipv4cidrblockassociation
   name: example
 spec:
   forProvider:
@@ -12,3 +14,18 @@ spec:
     cidrBlock: 172.2.0.0/16
     vpcIdRef:
       name: sample-vpc
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: VPC
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/vpcipv4cidrblockassociation
+  name: sample-vpc
+spec:
+  forProvider:
+    region: us-west-1
+    cidrBlock: 172.16.0.0/16
+    tags:
+      Name: DemoVpc

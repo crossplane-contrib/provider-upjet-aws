@@ -5,13 +5,39 @@
 apiVersion: lambda.aws.m.upbound.io/v1beta1
 kind: LayerVersionPermission
 metadata:
+  annotations:
+    meta.upbound.io/example-id: lambda/v1beta1/layerversionpermission
   name: example
   namespace: upbound-system
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-1
     action: lambda:GetLayerVersion
     principal: "*"
     statementId: dev-account
-    versionNumber: 1
-    layerName: ###arn###
+    layerNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    versionNumberSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: lambda.aws.m.upbound.io/v1beta1
+kind: LayerVersion
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lambda/v1beta1/layerversionpermission
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-east-1
+    compatibleRuntimes:
+    - python3.9
+    layerName: example-layer-permission
+    s3Bucket: official-provider-test-data
+    s3Key: hello-python.zip

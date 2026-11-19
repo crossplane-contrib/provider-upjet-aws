@@ -15,6 +15,8 @@ spec:
     accepter:
       allowRemoteVpcDnsResolution: true
     region: eu-west-1
+    requester:
+      allowRemoteVpcDnsResolution: true
     vpcPeeringConnectionIdSelector:
       matchLabels:
         testing.upbound.io/example-name: vpcpeerconnectionlabel

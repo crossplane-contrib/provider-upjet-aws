@@ -4,22 +4,6 @@
 
 
 apiVersion: oam.aws.m.upbound.io/v1beta1
-kind: Sink
-metadata:
-  annotations:
-    meta.upbound.io/example-id: oam/v1beta1/sinkpolicy
-  labels:
-    testing.upbound.io/example-name: example
-  name: example
-  namespace: upbound-system
-spec:
-  forProvider:
-    name: ExampleSink
-    region: us-west-1
-
----
-
-apiVersion: oam.aws.m.upbound.io/v1beta1
 kind: SinkPolicy
 metadata:
   annotations:
@@ -51,3 +35,20 @@ spec:
     sinkIdentifierSelector:
       matchLabels:
         testing.upbound.io/example-name: example
+
+---
+apiVersion: oam.aws.m.upbound.io/v1beta1
+kind: Sink
+metadata:
+  annotations:
+    meta.upbound.io/example-id: oam/v1beta1/sinkpolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    name: ExampleSink
+    region: us-west-1
+
+---

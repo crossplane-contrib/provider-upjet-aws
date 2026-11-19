@@ -26,7 +26,7 @@ apiVersion: appconfig.aws.upbound.io/v1beta1
 kind: Application
 metadata:
   annotations:
-    meta.upbound.io/example-id: appconfig/v1beta1/application
+    meta.upbound.io/example-id: appconfig/v1beta1/configurationprofile
   labels:
     testing.upbound.io/example-name: example
   name: example

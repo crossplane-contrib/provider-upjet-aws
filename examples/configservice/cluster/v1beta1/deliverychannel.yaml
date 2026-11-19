@@ -16,7 +16,6 @@ spec:
     s3BucketNameSelector:
       matchLabels:
         testing.upbound.io/example-name: b
-    s3BucketName: test-channel-bucket
 
 ---
 

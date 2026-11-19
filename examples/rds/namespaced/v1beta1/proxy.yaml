@@ -8,6 +8,7 @@ metadata:
   name: example
   annotations:
     upjet.upbound.io/manual-intervention: "This resource has a secret reference."
+    meta.upbound.io/example-id: rds/v1beta1/proxy
   namespace: upbound-system
 spec:
   forProvider:

@@ -5,11 +5,16 @@
 apiVersion: lambda.aws.upbound.io/v1beta1
 kind: LayerVersion
 metadata:
+  annotations:
+    meta.upbound.io/example-id: lambda/v1beta1/layerversion
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-1
     compatibleRuntimes:
-    - nodejs12.x
-    filename: example.zip
-    layerName: lambda_layer_name
+      - python3.9
+    layerName: example-layer-permission
+    s3Bucket: official-provider-test-data
+    s3Key: hello-python.zip

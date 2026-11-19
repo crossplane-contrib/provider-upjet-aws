@@ -8,6 +8,7 @@ metadata:
   name: example
   annotations:
     upjet.upbound.io/manual-intervention: "It depends on CertificateAuthority which is not suitable for continuous automated testing."
+    meta.upbound.io/example-id: acmpca/v1beta1/certificateauthoritycertificate
   namespace: upbound-system
 spec:
   forProvider:

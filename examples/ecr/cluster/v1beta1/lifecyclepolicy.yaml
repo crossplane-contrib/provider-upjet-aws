@@ -5,6 +5,8 @@
 apiVersion: ecr.aws.upbound.io/v1beta1
 kind: LifecyclePolicy
 metadata:
+  annotations:
+    meta.upbound.io/example-id: ecr/v1beta1/lifecyclepolicy
   name: example
 spec:
   forProvider:
