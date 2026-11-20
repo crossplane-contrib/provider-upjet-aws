@@ -548,3 +548,41 @@ providerconfig.aws.upbound.io/default   46s
 ```
 
 The official AWS provider-family now uses the `IRSA` role for authentication to AWS.
+
+## S3-compatible bucket tagging
+
+For S3-compatible endpoints that do not implement S3 Control, set
+`spec.forProvider.taggingAPI: S3` on each `Bucket` to use the standard S3
+`GetBucketTagging`, `PutBucketTagging`, and `DeleteBucketTagging` APIs directly.
+This applies to both cluster-scoped and namespaced Buckets.
+
+```yaml
+apiVersion: s3.aws.upbound.io/v1beta2
+kind: Bucket
+metadata:
+  name: compatible-bucket
+spec:
+  forProvider:
+    region: us-east-1
+    taggingAPI: S3
+    tags:
+      environment: development
+  providerConfigRef:
+    name: s3-compatible
+```
+
+Configure the endpoint and credentials in the referenced ProviderConfig as usual.
+The option accepts `Auto` and `S3`. When omitted, it behaves as `Auto`, following
+the embedded Terraform provider's API selection and fallback behavior.
+Selecting `S3` affects only this Bucket; other resources using
+the same ProviderConfig retain their existing behavior. It does not apply to
+DirectoryBuckets or separate bucket configuration resources, and does not skip
+credential validation or account discovery.
+
+Selecting `S3` leaves the embedded Terraform client's account ID empty for the
+Bucket. Account-regional namespace bucket names are therefore not supported with
+this option enabled. Use it for ordinary buckets on S3-compatible endpoints.
+
+The option is available in the cluster-scoped `v1beta2` and namespaced `v1beta1`
+Bucket APIs, only under `spec.forProvider`. It is not sent to Terraform or
+late-initialized from the external bucket.

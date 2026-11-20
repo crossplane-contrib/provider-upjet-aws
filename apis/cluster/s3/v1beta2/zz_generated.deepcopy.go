@@ -3825,6 +3825,11 @@ func (in *BucketParameters) DeepCopyInto(out *BucketParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.TaggingAPI != nil {
+		in, out := &in.TaggingAPI, &out.TaggingAPI
+		*out = new(string)
+		**out = **in
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))

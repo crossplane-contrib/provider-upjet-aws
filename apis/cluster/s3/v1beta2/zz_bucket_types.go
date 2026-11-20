@@ -162,6 +162,14 @@ type BucketParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
+	// Tagging API to use for this bucket. Auto follows the embedded provider's API selection and fallback behavior and is the default when omitted. S3 uses the standard S3 bucket tagging API directly for S3-compatible endpoints without S3 Control.
+	// Selecting S3 leaves this bucket's client account ID empty and does not support account-regional namespace bucket names.
+	// +kubebuilder:validation:Enum=Auto;S3
+	// +upjet:crd:field:TFTag=-
+	// +upjet:crd:field:JSONTag=taggingAPI,omitempty
+	// +kubebuilder:validation:Optional
+	TaggingAPI *string `json:"taggingAPI,omitempty" tf:"-"`
+
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular

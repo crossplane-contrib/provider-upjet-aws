@@ -7,12 +7,25 @@ package s3
 import (
 	"github.com/crossplane/upjet/v2/pkg/config"
 	"github.com/crossplane/upjet/v2/pkg/registry"
+	"github.com/crossplane/upjet/v2/pkg/types/comments"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
 )
 
 // Configure adds configurations for the s3 group.
 func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_s3_bucket", func(r *config.Resource) {
+		// This is a Crossplane-only option consumed by the Terraform SetupFn.
+		// It must never be serialized into Terraform configuration or state.
+		desc, _ := comments.New("Tagging API to use for this bucket. Auto follows the embedded provider's API selection and fallback behavior and is the default when omitted. S3 uses the standard S3 bucket tagging API directly for S3-compatible endpoints without S3 Control.\n"+
+			"Selecting S3 leaves this bucket's client account ID empty and does not support account-regional namespace bucket names.\n"+
+			"+kubebuilder:validation:Enum=Auto;S3\n"+
+			"+upjet:crd:field:JSONTag=taggingAPI,omitempty", comments.WithTFTag("-"))
+		r.TerraformResource.Schema["tagging_api"] = &schema.Schema{
+			Type:        schema.TypeString,
+			Optional:    true,
+			Description: desc.String(),
+		}
 		// Mutually exclusive with:
 		// aws_s3_bucket_accelerate_configuration
 		// aws_s3_bucket_acl

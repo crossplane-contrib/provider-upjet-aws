@@ -953,6 +953,14 @@ spec:
                       Region where this resource will be managed. Defaults to the Region set in the provider configuration.
                       Region is the region you'd like your resource to be created in.
                     type: string
+                  taggingAPI:
+                    description: |-
+                      Tagging API to use for this bucket. Auto follows the embedded provider's API selection and fallback behavior and is the default when omitted. S3 uses the standard S3 bucket tagging API directly for S3-compatible endpoints without S3 Control.
+                      Selecting S3 leaves this bucket's client account ID empty and does not support account-regional namespace bucket names.
+                    enum:
+                    - Auto
+                    - S3
+                    type: string
                   tags:
                     additionalProperties:
                       type: string
