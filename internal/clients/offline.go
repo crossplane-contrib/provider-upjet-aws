@@ -49,6 +49,7 @@ const (
 	errOfflineResolveProviderConfig = "cannot resolve the provider config"
 	errOfflineRegion                = "cannot get the region of the managed resource"
 	errOfflinePartition             = "cannot configure the AWS partition"
+	errOfflineTaggingAPI            = "cannot resolve the bucket tagging API"
 	errOfflineConfigureClient       = "cannot configure the AWS client"
 	errOfflineGuardOutbound         = "cannot install the offline egress guard: the Terraform setup's Meta is not an AWS client"
 
@@ -133,7 +134,11 @@ func OfflineTerraformSetupBuilder(config *SetupConfig, accountID string) terrafo
 			AccessKeyID:     offlineAccessKeyID,
 			SecretAccessKey: offlineSecretAccessKey,
 		}
-		if err := configureNoForkAWSClient(ctx, &ps, config, region, creds, &offlinePC); err != nil {
+		taggingAPI, err := bucketTaggingAPI(mg)
+		if err != nil {
+			return terraform.Setup{}, errors.Wrap(err, errOfflineTaggingAPI)
+		}
+		if err := configureNoForkAWSClient(ctx, &ps, config, region, creds, &offlinePC, taggingAPI); err != nil {
 			return terraform.Setup{}, errors.Wrap(err, errOfflineConfigureClient)
 		}
 		if err := guardOutboundRequests(ps.Meta); err != nil {
