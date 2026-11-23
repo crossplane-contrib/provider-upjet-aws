@@ -31,15 +31,15 @@ func TestBucketTaggingAPI(t *testing.T) {
 		want    string
 		wantErr bool
 	}{
-		"Absent":           {mg: &clusters3.Bucket{}, want: "Auto"},
-		"Auto":             {mg: &clusters3.Bucket{Spec: clusters3.BucketSpec{ForProvider: clusters3.BucketParameters{TaggingAPI: ptr.To("Auto")}}}, want: "Auto"},
-		"ClusterBucket":    {mg: &clusters3.Bucket{Spec: clusters3.BucketSpec{ForProvider: clusters3.BucketParameters{TaggingAPI: ptr.To("S3")}}}, want: "S3"},
+		"Absent":               {mg: &clusters3.Bucket{}, want: "Auto"},
+		"Auto":                 {mg: &clusters3.Bucket{Spec: clusters3.BucketSpec{ForProvider: clusters3.BucketParameters{TaggingAPI: ptr.To("Auto")}}}, want: "Auto"},
+		"ClusterBucket":        {mg: &clusters3.Bucket{Spec: clusters3.BucketSpec{ForProvider: clusters3.BucketParameters{TaggingAPI: ptr.To("S3")}}}, want: "S3"},
 		"ClusterBucketV1beta1": {mg: &clusters3v1beta1.Bucket{Spec: clusters3v1beta1.BucketSpec{ForProvider: clusters3v1beta1.BucketParameters{TaggingAPI: ptr.To("S3")}}}, want: "S3"},
-		"NamespacedBucket": {mg: &namespaceds3.Bucket{Spec: namespaceds3.BucketSpec{ForProvider: namespaceds3.BucketParameters{TaggingAPI: ptr.To("S3")}}}, want: "S3"},
-		"DirectoryBucket":  {mg: &namespaceds3.DirectoryBucket{}, want: "Auto"},
-		"BucketACL":        {mg: &clusters3.BucketACL{}, want: "Auto"},
-		"Empty":            {mg: &clusters3.Bucket{Spec: clusters3.BucketSpec{ForProvider: clusters3.BucketParameters{TaggingAPI: ptr.To("")}}}, wantErr: true},
-		"Unknown":          {mg: &clusters3.Bucket{Spec: clusters3.BucketSpec{ForProvider: clusters3.BucketParameters{TaggingAPI: ptr.To("S3Control")}}}, wantErr: true},
+		"NamespacedBucket":     {mg: &namespaceds3.Bucket{Spec: namespaceds3.BucketSpec{ForProvider: namespaceds3.BucketParameters{TaggingAPI: ptr.To("S3")}}}, want: "S3"},
+		"DirectoryBucket":      {mg: &namespaceds3.DirectoryBucket{}, want: "Auto"},
+		"BucketACL":            {mg: &clusters3.BucketACL{}, want: "Auto"},
+		"Empty":                {mg: &clusters3.Bucket{Spec: clusters3.BucketSpec{ForProvider: clusters3.BucketParameters{TaggingAPI: ptr.To("")}}}, wantErr: true},
+		"Unknown":              {mg: &clusters3.Bucket{Spec: clusters3.BucketSpec{ForProvider: clusters3.BucketParameters{TaggingAPI: ptr.To("S3Control")}}}, wantErr: true},
 	}
 	for name, tc := range cases {
 		t.Run(name, func(t *testing.T) {
