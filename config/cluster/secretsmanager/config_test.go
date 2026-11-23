@@ -245,6 +245,34 @@ func TestCustomizeReplicaDiff(t *testing.T) {
 				changes:  true,
 			},
 		},
+		"DuplicateEntriesUnchanged": {
+			reason: "A repeated entry in the desired replicas is the same replica, so nothing changes.",
+			args: args{
+				state:   []replica{{"us-west-2", kmsA}, {"eu-west-1", kmsC}},
+				desired: []replica{{region: "us-west-2"}, {region: "us-west-2"}, {region: "eu-west-1"}},
+			},
+			want: want{replicas: []string{"eu-west-1", "us-west-2"}},
+		},
+		"DuplicateExplicitEntriesUnchanged": {
+			reason: "A repeated entry with an explicit key is the same replica, so nothing changes.",
+			args: args{
+				state:   []replica{{"us-west-2", kmsA}, {"eu-west-1", kmsC}},
+				desired: []replica{{"us-west-2", kmsA}, {"us-west-2", kmsA}, {region: "eu-west-1"}},
+			},
+			want: want{replicas: []string{"eu-west-1", "us-west-2"}},
+		},
+		"DuplicateEntriesAddRegion": {
+			reason: "A repeated entry must not hide a region that is added.",
+			args: args{
+				state:   []replica{{"eu-west-1", kmsC}},
+				desired: []replica{{region: "eu-west-1"}, {region: "eu-west-1"}, {region: "us-west-2"}, {region: "us-west-2"}},
+			},
+			want: want{
+				replicas: []string{"eu-west-1", "us-west-2"},
+				added:    []string{"us-west-2"},
+				changes:  true,
+			},
+		},
 		"RemoveOneOfTwoKeysInRegion": {
 			reason: "Two replicas in a region, with a single region-only replica desired, removes only one of them.",
 			args: args{

@@ -138,6 +138,7 @@ func customizeReplicaDiff(secret *schema.Resource, diff *terraform.InstanceDiff,
 	// traverse the desired Replica list at resource config (params)
 	// we want to count the Replicas, that has only region specified (no explicit kms_key_id specified, kms_key_id is left to cloud API to be automatically selected)
 	// then record this per region
+	desiredReplicas := make(map[replica]struct{}, len(desiredReplicaList))
 	for _, v := range desiredReplicaList {
 		// v is an interface{} type, which is a replica
 		// marshal then unmarshal to convert it to the internal type replica for easier access to fields
@@ -149,6 +150,11 @@ func customizeReplicaDiff(secret *schema.Resource, diff *terraform.InstanceDiff,
 		if err := json.JSParser.Unmarshal(replicaBytes, dReplica); err != nil {
 			return nil, err
 		}
+		// the replicas are a set, so a repeated entry is the same replica
+		if _, ok := desiredReplicas[*dReplica]; ok {
+			continue
+		}
+		desiredReplicas[*dReplica] = struct{}{}
 
 		// count the region-only replicas (i.e. with automatically assigned KMS Key IDs) at parameters
 		if dReplica.KMSKeyID == "" {
@@ -230,7 +236,7 @@ func customizeReplicaDiff(secret *schema.Resource, diff *terraform.InstanceDiff,
 	// The SDK builds the new value of the replica set from the replica entries in the diff alone, and it
 	// only falls back to the state if there are none. So, if anything else changes in the set,
 	// the replicas that stay must be in the diff, otherwise the SDK removes them.
-	if replicaSetChanges(diff, len(desiredReplicaList), len(currentReplicaSet.List())) {
+	if replicaSetChanges(diff, len(desiredReplicas), len(currentReplicaSet.List())) {
 		for hash, region := range retainedRegionsByHash {
 			diff.Attributes[fmt.Sprintf("replica.%s.region", hash)] = &terraform.ResourceAttrDiff{
 				Old: region,
@@ -240,18 +246,18 @@ func customizeReplicaDiff(secret *schema.Resource, diff *terraform.InstanceDiff,
 	}
 	// compare the total desired Replica count and current Replica count
 	// adjust the diff for replica.#
-	if len(desiredReplicaList) == len(currentReplicaSet.List()) {
+	if len(desiredReplicas) == len(currentReplicaSet.List()) {
 		// no diff, therefore remove diff if exists
 		delete(diff.Attributes, "replica.#")
 	} else if replicaCount, ok := diff.Attributes["replica.#"]; ok {
 		// there is a diff in unmodified diff, make sure it is correct after modifications
 		replicaCount.Old = strconv.Itoa(len(currentReplicaSet.List()))
-		replicaCount.New = strconv.Itoa(len(desiredReplicaList))
+		replicaCount.New = strconv.Itoa(len(desiredReplicas))
 	} else {
 		// there was no diff in unmodified diff, but there is on the customized. Add this diff
 		diff.Attributes["replica.#"] = &terraform.ResourceAttrDiff{
 			Old: strconv.Itoa(len(currentReplicaSet.List())),
-			New: strconv.Itoa(len(desiredReplicaList)),
+			New: strconv.Itoa(len(desiredReplicas)),
 		}
 	}
 	return diff, nil
