@@ -5,15 +5,17 @@
 apiVersion: efs.aws.upbound.io/v1beta1
 kind: FileSystemPolicy
 metadata:
-  name: example
   annotations:
-    upjet.upbound.io/manual-intervention: "User needs to add the ARN of the FileSystem to the policy manually."
+    meta.upbound.io/example-id: efs/v1beta1/filesystempolicy
+  labels:
+    testing.upbound.io/example-name: filesystempolicy
+  name: filesystempolicy
 spec:
   forProvider:
     bypassPolicyLockoutSafetyCheck: true
     fileSystemIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: efs
+        testing.upbound.io/example-name: filesystempolicy
     policy: |
       {
           "Version": "2012-10-17",
@@ -25,7 +27,6 @@ spec:
                   "Principal": {
                       "AWS": "*"
                   },
-                  "Resource": "<file system ARN>",
                   "Action": [
                       "elasticfilesystem:ClientMount",
                       "elasticfilesystem:ClientWrite"
@@ -38,4 +39,17 @@ spec:
               }
           ]
       }
+    region: us-west-1
+---
+apiVersion: efs.aws.upbound.io/v1beta1
+kind: FileSystem
+metadata:
+  annotations:
+    meta.upbound.io/example-id: efs/v1beta1/filesystempolicy
+  labels:
+    testing.upbound.io/example-name: filesystempolicy
+  name: filesystempolicy
+spec:
+  forProvider:
+    creationToken: filesystempolicy
     region: us-west-1
