@@ -255,7 +255,6 @@ func customizeReplicaDiff(secret *schema.Resource, diff *terraform.InstanceDiff,
 		}
 	}
 	return diff, nil
-
 }
 
 // replicaSetChanges returns whether the replica set has replicas to add or remove,

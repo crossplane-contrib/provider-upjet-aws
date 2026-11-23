@@ -232,6 +232,19 @@ func TestCustomizeReplicaDiff(t *testing.T) {
 				changes:  true,
 			},
 		},
+		"ChangeExplicitKey": {
+			reason: "Changing the explicit key of a replica removes the replica with the old key and adds one with the new key.",
+			args: args{
+				state:   []replica{{"us-west-2", kmsA}},
+				desired: []replica{{"us-west-2", kmsB}},
+			},
+			want: want{
+				replicas: []string{"us-west-2"},
+				removed:  []string{"us-west-2"},
+				added:    []string{"us-west-2"},
+				changes:  true,
+			},
+		},
 		"RemoveOneOfTwoKeysInRegion": {
 			reason: "Two replicas in a region, with a single region-only replica desired, removes only one of them.",
 			args: args{
