@@ -19,6 +19,7 @@ import (
 	"github.com/hashicorp/terraform-provider-aws/xpprovider"
 	"k8s.io/utils/ptr"
 
+	clusters3v1beta1 "github.com/upbound/provider-aws/v2/apis/cluster/s3/v1beta1"
 	clusters3 "github.com/upbound/provider-aws/v2/apis/cluster/s3/v1beta2"
 	namespaceds3 "github.com/upbound/provider-aws/v2/apis/namespaced/s3/v1beta1"
 	pcv1beta1 "github.com/upbound/provider-aws/v2/apis/namespaced/v1beta1"
@@ -33,6 +34,7 @@ func TestBucketTaggingAPI(t *testing.T) {
 		"Absent":           {mg: &clusters3.Bucket{}, want: "Auto"},
 		"Auto":             {mg: &clusters3.Bucket{Spec: clusters3.BucketSpec{ForProvider: clusters3.BucketParameters{TaggingAPI: ptr.To("Auto")}}}, want: "Auto"},
 		"ClusterBucket":    {mg: &clusters3.Bucket{Spec: clusters3.BucketSpec{ForProvider: clusters3.BucketParameters{TaggingAPI: ptr.To("S3")}}}, want: "S3"},
+		"ClusterBucketV1beta1": {mg: &clusters3v1beta1.Bucket{Spec: clusters3v1beta1.BucketSpec{ForProvider: clusters3v1beta1.BucketParameters{TaggingAPI: ptr.To("S3")}}}, want: "S3"},
 		"NamespacedBucket": {mg: &namespaceds3.Bucket{Spec: namespaceds3.BucketSpec{ForProvider: namespaceds3.BucketParameters{TaggingAPI: ptr.To("S3")}}}, want: "S3"},
 		"DirectoryBucket":  {mg: &namespaceds3.DirectoryBucket{}, want: "Auto"},
 		"BucketACL":        {mg: &clusters3.BucketACL{}, want: "Auto"},

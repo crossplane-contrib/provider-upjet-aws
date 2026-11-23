@@ -583,6 +583,6 @@ Selecting `S3` leaves the embedded Terraform client's account ID empty for the
 Bucket. Account-regional namespace bucket names are therefore not supported with
 this option enabled. Use it for ordinary buckets on S3-compatible endpoints.
 
-The option is available in the cluster-scoped `v1beta2` and namespaced `v1beta1`
-Bucket APIs, only under `spec.forProvider`. It is not sent to Terraform or
+The option is available in the cluster-scoped `v1beta1` and `v1beta2` and the
+namespaced `v1beta1` Bucket APIs, only under `spec.forProvider`. It is not sent to Terraform or
 late-initialized from the external bucket.
