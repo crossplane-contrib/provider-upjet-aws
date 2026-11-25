@@ -1,0 +1,33 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
+apiVersion: redshift.aws.m.upbound.io/v1beta1
+kind: ResourcePolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: redshift/v1beta1/resourcepolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    policy: |-
+      ${jsonencode({
+          Version = "2012-10-17"
+          Statement = [{
+            Effect = "Allow"
+            Principal = {
+              AWS = "arn:aws:iam::12345678901:root"
+            }
+            Action   = "redshift:CreateInboundIntegration"
+            Resource = aws_redshift_cluster.example.cluster_namespace_arn
+            Sid      = ""
+          }]
+        })}
+    region: us-west-1
+    resourceArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
