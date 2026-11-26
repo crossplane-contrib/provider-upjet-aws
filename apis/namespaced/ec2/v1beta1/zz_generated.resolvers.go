@@ -6299,6 +6299,7 @@ func (mg *VPCEndpoint) ResolveReferences(ctx context.Context, c client.Reader) e
 	r := reference.NewAPINamespacedResolver(c, mg)
 
 	var rsp reference.NamespacedResolutionResponse
+	var mrsp reference.MultiNamespacedResolutionResponse
 	var err error
 	{
 		m, l, err = apisresolver.GetManagedResource("vpclattice.aws.m.upbound.io", "v1beta1", "ResourceConfiguration", "ResourceConfigurationList")
@@ -6320,6 +6321,26 @@ func (mg *VPCEndpoint) ResolveReferences(ctx context.Context, c client.Reader) e
 	}
 	mg.Spec.ForProvider.ResourceConfigurationArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceConfigurationArnRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("ec2.aws.m.upbound.io", "v1beta1", "SecurityGroup", "SecurityGroupList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiNamespacedResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.SecurityGroupIds),
+			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
+			References:    mg.Spec.ForProvider.SecurityGroupIDRefs,
+			Selector:      mg.Spec.ForProvider.SecurityGroupIDSelector,
+			To:            reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.SecurityGroupIds")
+	}
+	mg.Spec.ForProvider.SecurityGroupIds = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.ForProvider.SecurityGroupIDRefs = mrsp.ResolvedReferences
 	{
 		m, l, err = apisresolver.GetManagedResource("ec2.aws.m.upbound.io", "v1beta1", "VPCEndpointService", "VPCEndpointServiceList")
 		if err != nil {
@@ -6384,10 +6405,30 @@ func (mg *VPCEndpoint) ResolveReferences(ctx context.Context, c client.Reader) e
 
 	}
 	{
+		m, l, err = apisresolver.GetManagedResource("ec2.aws.m.upbound.io", "v1beta1", "Subnet", "SubnetList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiNamespacedResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.SubnetIds),
+			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
+			References:    mg.Spec.ForProvider.SubnetIDRefs,
+			Selector:      mg.Spec.ForProvider.SubnetIDSelector,
+			To:            reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.SubnetIds")
+	}
+	mg.Spec.ForProvider.SubnetIds = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.ForProvider.SubnetIDRefs = mrsp.ResolvedReferences
+	{
 		m, l, err = apisresolver.GetManagedResource("ec2.aws.m.upbound.io", "v1beta1", "VPC", "VPCList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
+
 		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VPCID),
 			Extract:      reference.ExternalName(),
@@ -6422,6 +6463,26 @@ func (mg *VPCEndpoint) ResolveReferences(ctx context.Context, c client.Reader) e
 	}
 	mg.Spec.InitProvider.ResourceConfigurationArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ResourceConfigurationArnRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("ec2.aws.m.upbound.io", "v1beta1", "SecurityGroup", "SecurityGroupList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiNamespacedResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.SecurityGroupIds),
+			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
+			References:    mg.Spec.InitProvider.SecurityGroupIDRefs,
+			Selector:      mg.Spec.InitProvider.SecurityGroupIDSelector,
+			To:            reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.SecurityGroupIds")
+	}
+	mg.Spec.InitProvider.SecurityGroupIds = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.InitProvider.SecurityGroupIDRefs = mrsp.ResolvedReferences
 	{
 		m, l, err = apisresolver.GetManagedResource("ec2.aws.m.upbound.io", "v1beta1", "VPCEndpointService", "VPCEndpointServiceList")
 		if err != nil {
@@ -6486,10 +6547,30 @@ func (mg *VPCEndpoint) ResolveReferences(ctx context.Context, c client.Reader) e
 
 	}
 	{
+		m, l, err = apisresolver.GetManagedResource("ec2.aws.m.upbound.io", "v1beta1", "Subnet", "SubnetList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiNamespacedResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.SubnetIds),
+			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
+			References:    mg.Spec.InitProvider.SubnetIDRefs,
+			Selector:      mg.Spec.InitProvider.SubnetIDSelector,
+			To:            reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.SubnetIds")
+	}
+	mg.Spec.InitProvider.SubnetIds = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.InitProvider.SubnetIDRefs = mrsp.ResolvedReferences
+	{
 		m, l, err = apisresolver.GetManagedResource("ec2.aws.m.upbound.io", "v1beta1", "VPC", "VPCList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
+
 		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VPCID),
 			Extract:      reference.ExternalName(),

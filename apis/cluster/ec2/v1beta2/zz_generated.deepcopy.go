@@ -17423,6 +17423,29 @@ func (in *VPCEndpointInitParameters) DeepCopyInto(out *VPCEndpointInitParameters
 		*out = new(v2.Selector)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.SecurityGroupIDRefs != nil {
+		in, out := &in.SecurityGroupIDRefs, &out.SecurityGroupIDRefs
+		*out = make([]v2.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.SecurityGroupIDSelector != nil {
+		in, out := &in.SecurityGroupIDSelector, &out.SecurityGroupIDSelector
+		*out = new(v2.Selector)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.SecurityGroupIds != nil {
+		in, out := &in.SecurityGroupIds, &out.SecurityGroupIds
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
 	if in.ServiceName != nil {
 		in, out := &in.ServiceName, &out.ServiceName
 		*out = new(string)
@@ -17463,6 +17486,29 @@ func (in *VPCEndpointInitParameters) DeepCopyInto(out *VPCEndpointInitParameters
 		*out = make([]SubnetConfigurationInitParameters, len(*in))
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.SubnetIDRefs != nil {
+		in, out := &in.SubnetIDRefs, &out.SubnetIDRefs
+		*out = make([]v2.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.SubnetIDSelector != nil {
+		in, out := &in.SubnetIDSelector, &out.SubnetIDSelector
+		*out = new(v2.Selector)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.SubnetIds != nil {
+		in, out := &in.SubnetIds, &out.SubnetIds
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
 		}
 	}
 	if in.Tags != nil {
@@ -17799,6 +17845,29 @@ func (in *VPCEndpointParameters) DeepCopyInto(out *VPCEndpointParameters) {
 		*out = new(v2.Selector)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.SecurityGroupIDRefs != nil {
+		in, out := &in.SecurityGroupIDRefs, &out.SecurityGroupIDRefs
+		*out = make([]v2.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.SecurityGroupIDSelector != nil {
+		in, out := &in.SecurityGroupIDSelector, &out.SecurityGroupIDSelector
+		*out = new(v2.Selector)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.SecurityGroupIds != nil {
+		in, out := &in.SecurityGroupIds, &out.SecurityGroupIds
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
 	if in.ServiceName != nil {
 		in, out := &in.ServiceName, &out.ServiceName
 		*out = new(string)
@@ -17839,6 +17908,29 @@ func (in *VPCEndpointParameters) DeepCopyInto(out *VPCEndpointParameters) {
 		*out = make([]SubnetConfigurationParameters, len(*in))
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.SubnetIDRefs != nil {
+		in, out := &in.SubnetIDRefs, &out.SubnetIDRefs
+		*out = make([]v2.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.SubnetIDSelector != nil {
+		in, out := &in.SubnetIDSelector, &out.SubnetIDSelector
+		*out = new(v2.Selector)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.SubnetIds != nil {
+		in, out := &in.SubnetIds, &out.SubnetIds
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
 		}
 	}
 	if in.Tags != nil {
