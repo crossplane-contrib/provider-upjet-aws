@@ -36,10 +36,10 @@ require (
 	golang.org/x/sync v0.25.0
 	google.golang.org/grpc v1.85.0-dev.0.20260825072537-93e31b48545e
 	gopkg.in/yaml.v3 v3.0.1
-	k8s.io/api v0.37.2
-	k8s.io/apiextensions-apiserver v0.37.2
-	k8s.io/apimachinery v0.37.2
-	k8s.io/client-go v0.37.2
+	k8s.io/api v0.37.3
+	k8s.io/apiextensions-apiserver v0.37.3
+	k8s.io/apimachinery v0.37.3
+	k8s.io/client-go v0.37.3
 	k8s.io/utils v0.0.0-20260707023825-cf1189d6abe3
 	sigs.k8s.io/controller-runtime v0.25.3
 	sigs.k8s.io/controller-tools v0.23.0
@@ -497,8 +497,8 @@ require (
 	gopkg.in/inf.v0 v0.9.1 // indirect
 	gopkg.in/ini.v1 v1.67.0 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
-	k8s.io/code-generator v0.37.2 // indirect
-	k8s.io/component-base v0.37.2 // indirect
+	k8s.io/code-generator v0.37.3 // indirect
+	k8s.io/component-base v0.37.3 // indirect
 	k8s.io/gengo/v2 v2.0.0-20260408192533-25e2208e0dc3 // indirect
 	k8s.io/klog/v2 v2.140.0 // indirect
 	k8s.io/kube-openapi v0.0.0-20260721132016-d427ff9ee9ad // indirect
