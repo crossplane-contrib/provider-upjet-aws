@@ -38,6 +38,8 @@ spec:
     privateDnsEnabled: false
     provider: ${aws.alternate}
     region: us-west-1
+    securityGroupIdRefs:
+    - name: test
     serviceNameSelector:
       matchLabels:
         testing.upbound.io/example-name: test

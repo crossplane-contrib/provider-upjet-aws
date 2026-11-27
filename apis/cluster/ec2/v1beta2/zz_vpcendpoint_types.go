@@ -169,6 +169,21 @@ type VPCEndpointInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceConfigurationArnSelector *v2.Selector `json:"resourceConfigurationArnSelector,omitempty" tf:"-"`
 
+	// References to SecurityGroup in ec2 to populate securityGroupIds.
+	// +kubebuilder:validation:Optional
+	SecurityGroupIDRefs []v2.Reference `json:"securityGroupIdRefs,omitempty" tf:"-"`
+
+	// Selector for a list of SecurityGroup in ec2 to populate securityGroupIds.
+	// +kubebuilder:validation:Optional
+	SecurityGroupIDSelector *v2.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
+
+	// ID of one or more security groups to associate with the network interface. Applicable for endpoints of type Interface, Resource, ServiceNetwork, and Tunnel. If no security groups are specified, the VPC's default security group is associated with the endpoint.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:refFieldName=SecurityGroupIDRefs
+	// +crossplane:generate:reference:selectorFieldName=SecurityGroupIDSelector
+	// +listType=set
+	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
+
 	// Service name. For AWS services the service name is usually in the form com.amazonaws.<region>.<service> (the SageMaker AI Notebook service is an exception to this rule, the service name is in the form aws.sagemaker.<region>.notebook). Exactly one of resource_configuration_arn, service_name or service_network_arn is required.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.VPCEndpointService
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("service_name",true)
@@ -200,6 +215,21 @@ type VPCEndpointInitParameters struct {
 
 	// Subnet configuration for the endpoint, used to select specific IPv4 and/or IPv6 addresses to the endpoint. See subnet_configuration below.
 	SubnetConfiguration []SubnetConfigurationInitParameters `json:"subnetConfiguration,omitempty" tf:"subnet_configuration,omitempty"`
+
+	// References to Subnet in ec2 to populate subnetIds.
+	// +kubebuilder:validation:Optional
+	SubnetIDRefs []v2.Reference `json:"subnetIdRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Subnet in ec2 to populate subnetIds.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v2.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+
+	// ID of one or more subnets in which to create a network interface for the endpoint. Applicable for endpoints of type GatewayLoadBalancer, Interface, Resource, ServiceNetwork, and Tunnel. Interface type endpoints cannot function without being assigned to a subnet. For Tunnel endpoints, the subnets must be in the Availability Zones of the resource gateway associated with the resource configuration.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:refFieldName=SubnetIDRefs
+	// +crossplane:generate:reference:selectorFieldName=SubnetIDSelector
+	// +listType=set
+	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -353,6 +383,22 @@ type VPCEndpointParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceConfigurationArnSelector *v2.Selector `json:"resourceConfigurationArnSelector,omitempty" tf:"-"`
 
+	// References to SecurityGroup in ec2 to populate securityGroupIds.
+	// +kubebuilder:validation:Optional
+	SecurityGroupIDRefs []v2.Reference `json:"securityGroupIdRefs,omitempty" tf:"-"`
+
+	// Selector for a list of SecurityGroup in ec2 to populate securityGroupIds.
+	// +kubebuilder:validation:Optional
+	SecurityGroupIDSelector *v2.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
+
+	// ID of one or more security groups to associate with the network interface. Applicable for endpoints of type Interface, Resource, ServiceNetwork, and Tunnel. If no security groups are specified, the VPC's default security group is associated with the endpoint.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:refFieldName=SecurityGroupIDRefs
+	// +crossplane:generate:reference:selectorFieldName=SecurityGroupIDSelector
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
+
 	// Service name. For AWS services the service name is usually in the form com.amazonaws.<region>.<service> (the SageMaker AI Notebook service is an exception to this rule, the service name is in the form aws.sagemaker.<region>.notebook). Exactly one of resource_configuration_arn, service_name or service_network_arn is required.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.VPCEndpointService
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("service_name",true)
@@ -388,6 +434,22 @@ type VPCEndpointParameters struct {
 	// Subnet configuration for the endpoint, used to select specific IPv4 and/or IPv6 addresses to the endpoint. See subnet_configuration below.
 	// +kubebuilder:validation:Optional
 	SubnetConfiguration []SubnetConfigurationParameters `json:"subnetConfiguration,omitempty" tf:"subnet_configuration,omitempty"`
+
+	// References to Subnet in ec2 to populate subnetIds.
+	// +kubebuilder:validation:Optional
+	SubnetIDRefs []v2.Reference `json:"subnetIdRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Subnet in ec2 to populate subnetIds.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v2.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+
+	// ID of one or more subnets in which to create a network interface for the endpoint. Applicable for endpoints of type GatewayLoadBalancer, Interface, Resource, ServiceNetwork, and Tunnel. Interface type endpoints cannot function without being assigned to a subnet. For Tunnel endpoints, the subnets must be in the Availability Zones of the resource gateway associated with the resource configuration.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:refFieldName=SubnetIDRefs
+	// +crossplane:generate:reference:selectorFieldName=SubnetIDSelector
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
